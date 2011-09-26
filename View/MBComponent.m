@@ -1,0 +1,260 @@
+//
+//  MBComponent.m
+//  Core
+//
+//  Created by Wido 5/21/10.
+//  Copyright 2010 Itude Mobile BV. All rights reserved.
+//
+
+#import "MBComponent.h"
+#import "MBValueChangeListenerProtocol.h"
+
+@implementation MBComponent
+
+@synthesize definition = _definition;
+@synthesize parent = _parent;
+@synthesize style = _style;
+@synthesize markedForDestruction = _markedForDestruction;
+@synthesize leftInset = _leftInset;
+@synthesize rightInset = _rightInset;
+@synthesize topInset = _topInset;
+@synthesize bottomInset = _bottomInset;
+
+-(id) initWithDefinition:(id)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent {
+
+	self = [super init];
+	if (self != nil) {
+		self.definition = definition;
+		self.parent = parent;
+        
+        // Not all definitions have a style attribute; if they do set it
+		if([definition respondsToSelector:@selector(style)]) {
+			 self.style = [definition performSelector: @selector(style)];
+		}
+		_viewData = nil;
+	}
+	return self;
+}
+
+- (void) dealloc
+{
+	[_style release];
+	[_viewData release];
+	[super dealloc];
+}
+
+- (void) buildViewStructure {
+  // No children so nothing to build here    
+}
+
+-(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
+	return nil;	
+}
+
+-(void) handleOutcome:(MBOutcome *)outcomeName {
+	[_parent handleOutcome:outcomeName];
+}
+
+-(void) handleOutcome:(NSString *)outcomeName withPathArgument:(NSString*) path {
+	[_parent handleOutcome:outcomeName withPathArgument: path];
+}
+
+-(NSString *) componentDataPath {
+  return @"";
+}
+
+-(NSString*) evaluateExpression:(NSString*) variableName {
+		
+	return [[self parent] evaluateExpression: variableName];
+}
+
+-(NSString*) substituteExpressions:(NSString*) expression {
+
+	if(expression == nil) return nil;
+	
+	if([expression rangeOfString:@"{"].length == 0) return expression;
+	
+	NSScanner *scanner = [NSScanner scannerWithString:expression];
+	NSString *subPart = @"";
+	NSString *singleExpression;
+	NSMutableString *result = [NSMutableString stringWithString:@""];
+	
+	BOOL evalToNil = FALSE;
+	while([scanner scanUpToString:@"${" intoString:&subPart] || ![scanner isAtEnd]) {
+		[result appendString:subPart];
+		[scanner scanString:@"${" intoString:&subPart];
+		BOOL hasExpression = [scanner scanUpToString:@"}" intoString:&singleExpression];
+		if(hasExpression) {
+			[scanner scanString:@"}" intoString:&subPart];
+			NSString *value = [self evaluateExpression: singleExpression];
+			if(value != nil) [result appendString:value];
+			else evalToNil = TRUE;
+		}
+		subPart = @"";
+	}
+	[result appendString:subPart];
+	if([result length] == 0 && evalToNil) result = nil;
+	return result;	
+}
+
+-(NSString *) absoluteDataPath {
+	
+	NSString *componentPath = [self componentDataPath];
+	
+	// If the path is not set (a field without a path pecified for instance) return nil; since it then also does not have an absolute path:
+    if(componentPath == nil) return nil;
+	
+	// Absolute path set for the component? (possibly using a doc:path expression) Than do not prefix with the parent path and return it:
+	if([componentPath hasPrefix:@"/"] || [componentPath rangeOfString:@":"].length>0) return componentPath;
+	
+	NSString *pathToMe = [_parent absoluteDataPath];
+	if(pathToMe != nil && ![pathToMe hasSuffix:@"/"]) pathToMe = [NSString stringWithFormat:@"%@/", pathToMe];
+	if(pathToMe == nil) pathToMe = @"";
+	
+	if(componentPath != nil) pathToMe = [NSString stringWithFormat:@"%@%@", pathToMe, componentPath];
+	return pathToMe;
+}
+
+-(MBPage*) page {
+	return [_parent page];	
+}
+
+-(MBDocument*) document {
+	return [[self page] document];	
+}
+
+-(BOOL) resignFirstResponder {
+// override in subclasses	
+	return FALSE;
+}
+
+-(BOOL) resignFirstResponder:(UIView*) view {
+	BOOL result = [view resignFirstResponder];
+	if([view subviews]) for(UIView* child in [view subviews]) result |= [self resignFirstResponder:child];
+	return result;
+}
+
+-(void) setViewData:(id) value forKey:(NSString*) key {
+	@synchronized(self) {
+		if(_viewData == nil) _viewData = [[NSMutableDictionary alloc] init];	
+	}
+	[_viewData setValue:value forKey:key];
+}
+
+-(id) viewDataForKey:(NSString*) key {
+	id result = nil;
+	@synchronized(self) {
+		result = [_viewData valueForKey:key];
+	}
+	return result;
+}
+
+-(void) setupKeyboardHiding:(UIView*) view {
+	UIButton *keyboardHidingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	keyboardHidingButton.frame = [UIScreen mainScreen].applicationFrame;
+	[keyboardHidingButton addTarget:[self page] action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
+	[view addSubview:keyboardHidingButton];
+	[view sendSubviewToBack:keyboardHidingButton];
+}
+
+-(NSString*) attributeAsXml:(NSString*)name withValue:(id) attrValue {
+	return attrValue == nil?@"": [NSString stringWithFormat:@" %@='%@'", name, attrValue];
+}
+
+- (NSString *) asXmlWithLevel:(int)level {
+	return @"";
+}
+
+- (NSString *) description {
+	return [self asXmlWithLevel: 0];
+}
+
+- (void) translatePath {
+}
+
+- (void) registerViewController:(UIViewController*) controller {
+    // Delegate to MBPage
+    [[self parent] registerViewController:controller];    
+}
+
+-(NSMutableArray*) filterSet:(NSMutableArray*) set usingSelector:(SEL) selector havingValue:(id) value {
+    NSMutableArray* result = [[NSMutableArray new] autorelease];
+    for(MBComponent *comp in set) {
+        if([comp respondsToSelector: selector] && [[comp performSelector: selector] isEqual: value]) {
+            [result addObject: comp];    
+        }
+    }
+    return result;
+}
+
+- (id) firstDescendantOfKind:(Class) clazz {
+    NSMutableArray *result = [self descendantsOfKind:clazz];
+	if([result count] == 0) return nil;
+	return [result objectAtIndex:0];
+}
+
+- (id) firstDescendantOfKind:(Class) clazz filterUsingSelector:(SEL) selector havingValue:(id) value {
+    NSMutableArray *result = [self descendantsOfKind:clazz filterUsingSelector:selector havingValue:value];
+	if([result count] == 0) return nil;
+	return [result objectAtIndex:0];
+}
+
+- (id) firstChildOfKind:(Class) clazz {
+    NSMutableArray *result = [self childrenOfKind:clazz];
+	if([result count] == 0) return nil;
+	return [result objectAtIndex:0];
+}
+
+- (id) firstChildOfKind:(Class) clazz filterUsingSelector:(SEL) selector havingValue:(id) value {
+    NSMutableArray *result = [self childrenOfKind:clazz filterUsingSelector:selector havingValue:value];
+	if([result count] == 0) return nil;
+	return [result objectAtIndex:0];
+}
+
+- (NSMutableArray*) descendantsOfKind:(Class) clazz {
+	// This method is overridden by the various subclasses; if this could be an abstract method it would be
+	return [NSMutableArray array];
+}
+
+- (NSMutableArray*) descendantsOfKind:(Class) clazz filterUsingSelector:(SEL) selector havingValue:(id) value {
+	NSMutableArray *descendants = [self descendantsOfKind: clazz];
+    return [self filterSet: descendants usingSelector: selector havingValue: value];
+}
+
+- (NSMutableArray*) childrenOfKind:(Class) clazz {
+	// This method is overridden by the various subclasses; if this could be an abstract method it would be
+	return [NSMutableArray array];
+}
+
+- (NSMutableArray*) childrenOfKind:(Class) clazz filterUsingSelector:(SEL) selector havingValue:(id) value {
+	NSMutableArray *children = [self childrenOfKind: clazz];
+    return [self filterSet: children usingSelector: selector havingValue: value];
+}
+
+// Listener logic is handled by the page; so delegate to parent until the page is reached:
+- (void) registerValueChangeListener:(id<MBValueChangeListenerProtocol>) listener forPath:(NSString*) path {
+	[[self parent] registerValueChangeListener: listener forPath:path];
+}
+
+- (void) unregisterValueChangeListener:(id<MBValueChangeListenerProtocol>) listener forPath:(NSString*) path {
+	[[self parent] unregisterValueChangeListener: listener forPath:path];
+}
+
+- (void) unregisterValueChangeListener:(id<MBValueChangeListenerProtocol>) listener {
+	[[self parent] unregisterValueChangeListener: listener];
+}
+
+- (BOOL) notifyValueWillChange:(NSString*) value originalValue:(NSString*) originalValue forPath:(NSString*) path {
+	
+	return [[self parent] notifyValueWillChange: value originalValue: originalValue forPath: path];
+}
+
+- (void) notifyValueChanged:(NSString*) value originalValue:(NSString*) originalValue forPath:(NSString*) path {
+	[[self parent] notifyValueChanged: value originalValue: originalValue forPath: path];	
+}
+
+- (NSString*) name {
+	return self.definition.name;	
+}
+
+@end

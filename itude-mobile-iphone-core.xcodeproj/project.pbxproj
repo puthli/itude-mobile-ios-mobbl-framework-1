@@ -1,0 +1,2002 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0371A54013C4984500315375 /* itude-mobile-ios-core-headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 0371A53F13C4984500315375 /* itude-mobile-ios-core-headers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0371A54113C4984500315375 /* itude-mobile-ios-core-headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 0371A53F13C4984500315375 /* itude-mobile-ios-core-headers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03AEA1A913C326C500F0248C /* itude-mobile-ios-core.h in Headers */ = {isa = PBXBuildFile; fileRef = 03AEA1A813C326C500F0248C /* itude-mobile-ios-core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03AEA1B313C3458D00F0248C /* itude-mobile-ios-core-i386.h in Headers */ = {isa = PBXBuildFile; fileRef = 03AEA1B213C3458D00F0248C /* itude-mobile-ios-core-i386.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8F31371990F00BD029A /* MBConditionalDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB53C1371990D00BD029A /* MBConditionalDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8F41371990F00BD029A /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB53D1371990D00BD029A /* MBConditionalDefinition.m */; };
+		03DFB8F51371990F00BD029A /* MBConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB53E1371990D00BD029A /* MBConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8F61371990F00BD029A /* MBConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB53F1371990D00BD029A /* MBConfigurationParser.m */; };
+		03DFB8F71371990F00BD029A /* MBConfigurationParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5401371990D00BD029A /* MBConfigurationParserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8F81371990F00BD029A /* MBDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5411371990D00BD029A /* MBDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8F91371990F00BD029A /* MBDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5421371990D00BD029A /* MBDefinition.m */; };
+		03DFB8FA1371990F00BD029A /* MBActionDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5441371990D00BD029A /* MBActionDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8FB1371990F00BD029A /* MBActionDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5451371990D00BD029A /* MBActionDefinition.m */; };
+		03DFB8FC1371990F00BD029A /* MBAttributeDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5461371990D00BD029A /* MBAttributeDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8FD1371990F00BD029A /* MBAttributeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5471371990D00BD029A /* MBAttributeDefinition.m */; };
+		03DFB8FE1371990F00BD029A /* MBConfigurationDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5481371990D00BD029A /* MBConfigurationDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB8FF1371990F00BD029A /* MBConfigurationDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5491371990D00BD029A /* MBConfigurationDefinition.m */; };
+		03DFB9001371990F00BD029A /* MBDialogDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB54A1371990D00BD029A /* MBDialogDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9011371990F00BD029A /* MBDialogDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB54B1371990D00BD029A /* MBDialogDefinition.m */; };
+		03DFB9021371990F00BD029A /* MBDialogGroupDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB54C1371990D00BD029A /* MBDialogGroupDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9031371990F00BD029A /* MBDialogGroupDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB54D1371990D00BD029A /* MBDialogGroupDefinition.m */; };
+		03DFB9041371990F00BD029A /* MBDocumentDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB54E1371990D00BD029A /* MBDocumentDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9051371990F00BD029A /* MBDocumentDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB54F1371990D00BD029A /* MBDocumentDefinition.m */; };
+		03DFB9061371990F00BD029A /* MBDomainDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5501371990D00BD029A /* MBDomainDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9071371990F00BD029A /* MBDomainDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5511371990D00BD029A /* MBDomainDefinition.m */; };
+		03DFB9081371990F00BD029A /* MBDomainValidatorDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5521371990D00BD029A /* MBDomainValidatorDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9091371990F00BD029A /* MBDomainValidatorDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5531371990D00BD029A /* MBDomainValidatorDefinition.m */; };
+		03DFB90A1371990F00BD029A /* MBElementDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5541371990D00BD029A /* MBElementDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB90B1371990F00BD029A /* MBElementDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5551371990D00BD029A /* MBElementDefinition.m */; };
+		03DFB90C1371990F00BD029A /* MBFieldDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5561371990D00BD029A /* MBFieldDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB90D1371990F00BD029A /* MBFieldDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5571371990D00BD029A /* MBFieldDefinition.m */; };
+		03DFB90E1371990F00BD029A /* MBForEachDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5581371990D00BD029A /* MBForEachDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB90F1371990F00BD029A /* MBForEachDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5591371990D00BD029A /* MBForEachDefinition.m */; };
+		03DFB9101371990F00BD029A /* MBMvcConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB55A1371990D00BD029A /* MBMvcConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9111371990F00BD029A /* MBMvcConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB55B1371990D00BD029A /* MBMvcConfigurationParser.m */; };
+		03DFB9121371990F00BD029A /* MBOutcomeDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB55C1371990D00BD029A /* MBOutcomeDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9131371990F00BD029A /* MBOutcomeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB55D1371990D00BD029A /* MBOutcomeDefinition.m */; };
+		03DFB9141371990F00BD029A /* MBPageDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB55E1371990D00BD029A /* MBPageDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9151371990F00BD029A /* MBPageDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB55F1371990D00BD029A /* MBPageDefinition.m */; };
+		03DFB9161371990F00BD029A /* MBPanelDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5601371990D00BD029A /* MBPanelDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9171371990F00BD029A /* MBPanelDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5611371990D00BD029A /* MBPanelDefinition.m */; };
+		03DFB9181371990F00BD029A /* MBVariableDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5621371990D00BD029A /* MBVariableDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9191371990F00BD029A /* MBVariableDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5631371990D00BD029A /* MBVariableDefinition.m */; };
+		03DFB91A1371990F00BD029A /* MBBundleDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5651371990D00BD029A /* MBBundleDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB91B1371990F00BD029A /* MBBundleDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5661371990D00BD029A /* MBBundleDefinition.m */; };
+		03DFB91C1371990F00BD029A /* MBResourceConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5671371990D00BD029A /* MBResourceConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB91D1371990F00BD029A /* MBResourceConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5681371990D00BD029A /* MBResourceConfiguration.m */; };
+		03DFB91E1371990F00BD029A /* MBResourceConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5691371990D00BD029A /* MBResourceConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB91F1371990F00BD029A /* MBResourceConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB56A1371990D00BD029A /* MBResourceConfigurationParser.m */; };
+		03DFB9201371990F00BD029A /* MBResourceDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB56B1371990D00BD029A /* MBResourceDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9211371990F00BD029A /* MBResourceDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB56C1371990D00BD029A /* MBResourceDefinition.m */; };
+		03DFB9221371990F00BD029A /* MBEndPointDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB56E1371990D00BD029A /* MBEndPointDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9231371990F00BD029A /* MBEndPointDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB56F1371990D00BD029A /* MBEndPointDefinition.m */; };
+		03DFB9241371990F00BD029A /* MBResultListenerDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5701371990D00BD029A /* MBResultListenerDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9251371990F00BD029A /* MBResultListenerDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5711371990D00BD029A /* MBResultListenerDefinition.m */; };
+		03DFB9261371990F00BD029A /* MBWebservicesConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5721371990D00BD029A /* MBWebservicesConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9271371990F00BD029A /* MBWebservicesConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5731371990D00BD029A /* MBWebservicesConfiguration.m */; };
+		03DFB9281371990F00BD029A /* MBWebservicesConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5741371990D00BD029A /* MBWebservicesConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9291371990F00BD029A /* MBWebservicesConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5751371990D00BD029A /* MBWebservicesConfigurationParser.m */; };
+		03DFB92A1371990F00BD029A /* MBAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5771371990D00BD029A /* MBAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB92B1371990F00BD029A /* MBApplicationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5781371990D00BD029A /* MBApplicationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB92C1371990F00BD029A /* MBApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5791371990D00BD029A /* MBApplicationController.m */; };
+		03DFB92D1371990F00BD029A /* MBApplicationFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB57A1371990D00BD029A /* MBApplicationFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB92E1371990F00BD029A /* MBApplicationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB57B1371990D00BD029A /* MBApplicationFactory.m */; };
+		03DFB92F1371990F00BD029A /* MBDialogController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB57C1371990D00BD029A /* MBDialogController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9301371990F00BD029A /* MBDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB57D1371990D00BD029A /* MBDialogController.m */; };
+		03DFB9311371990F00BD029A /* MBDialogGroupController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB57E1371990D00BD029A /* MBDialogGroupController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9321371990F00BD029A /* MBDialogGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB57F1371990D00BD029A /* MBDialogGroupController.m */; };
+		03DFB9331371990F00BD029A /* MBOutcome.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5801371990D00BD029A /* MBOutcome.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9341371990F00BD029A /* MBOutcome.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5811371990D00BD029A /* MBOutcome.m */; };
+		03DFB9351371990F00BD029A /* MBViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5821371990D00BD029A /* MBViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9361371990F00BD029A /* MBViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5831371990D00BD029A /* MBViewManager.m */; };
+		03DFB9371371990F00BD029A /* MBActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5851371990D00BD029A /* MBActivityIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9381371990F00BD029A /* MBActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5861371990D00BD029A /* MBActivityIndicator.m */; };
+		03DFB9391371990F00BD029A /* MBBasicViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5871371990D00BD029A /* MBBasicViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB93A1371990F00BD029A /* MBBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5881371990D00BD029A /* MBBasicViewController.m */; };
+		03DFB93B1371990F00BD029A /* MBFormSubmission.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5891371990D00BD029A /* MBFormSubmission.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB93C1371990F00BD029A /* MBFormSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB58A1371990D00BD029A /* MBFormSubmission.m */; };
+		03DFB93D1371990F00BD029A /* MBNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB58B1371990D00BD029A /* MBNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB93E1371990F00BD029A /* MBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB58C1371990D00BD029A /* MBNavigationController.m */; };
+		03DFB93F1371990F00BD029A /* MBSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB58D1371990D00BD029A /* MBSplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9401371990F00BD029A /* MBSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB58E1371990D00BD029A /* MBSplitViewController.m */; };
+		03DFB9411371990F00BD029A /* MBViewControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB58F1371990D00BD029A /* MBViewControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB9591371990F00BD029A /* MGSplitCornersView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5B61371990D00BD029A /* MGSplitCornersView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB95A1371990F00BD029A /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5B71371990D00BD029A /* MGSplitCornersView.m */; };
+		03DFB95B1371990F00BD029A /* MGSplitDividerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5B81371990D00BD029A /* MGSplitDividerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB95C1371990F00BD029A /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5B91371990D00BD029A /* MGSplitDividerView.m */; };
+		03DFB95D1371990F00BD029A /* MGSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5BA1371990D00BD029A /* MGSplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFB95E1371990F00BD029A /* MGSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5BB1371990D00BD029A /* MGSplitViewController.m */; };
+		03DFBAA81371990F00BD029A /* MBDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8461371990E00BD029A /* MBDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAA91371990F00BD029A /* MBDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8471371990E00BD029A /* MBDocument.m */; };
+		03DFBAAA1371990F00BD029A /* MBDocumentDiff.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8481371990E00BD029A /* MBDocumentDiff.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAAB1371990F00BD029A /* MBDocumentDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8491371990E00BD029A /* MBDocumentDiff.m */; };
+		03DFBAAC1371990F00BD029A /* MBDocumentFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84A1371990E00BD029A /* MBDocumentFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAAD1371990F00BD029A /* MBDocumentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB84B1371990E00BD029A /* MBDocumentFactory.m */; };
+		03DFBAAE1371990F00BD029A /* MBDocumentParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84C1371990E00BD029A /* MBDocumentParserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAAF1371990F00BD029A /* MBElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84D1371990E00BD029A /* MBElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAB01371990F00BD029A /* MBElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB84E1371990E00BD029A /* MBElement.m */; };
+		03DFBAB11371990F00BD029A /* MBElementContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84F1371990E00BD029A /* MBElementContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAB21371990F00BD029A /* MBElementContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8501371990E00BD029A /* MBElementContainer.m */; };
+		03DFBAB31371990F00BD029A /* MBJsonDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8511371990E00BD029A /* MBJsonDocumentParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAB41371990F00BD029A /* MBJsonDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8521371990E00BD029A /* MBJsonDocumentParser.m */; };
+		03DFBAB51371990F00BD029A /* MBMobbl1DocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8531371990E00BD029A /* MBMobbl1DocumentParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAB61371990F00BD029A /* MBMobbl1DocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8541371990E00BD029A /* MBMobbl1DocumentParser.m */; };
+		03DFBAB71371990F00BD029A /* MBSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8551371990E00BD029A /* MBSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAB81371990F00BD029A /* MBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8561371990E00BD029A /* MBSession.m */; };
+		03DFBAB91371990F00BD029A /* MBXmlDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8571371990E00BD029A /* MBXmlDocumentParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBABA1371990F00BD029A /* MBXmlDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8581371990E00BD029A /* MBXmlDocumentParser.m */; };
+		03DFBABB1371990F00BD029A /* MBDocumentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB85C1371990E00BD029A /* MBDocumentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBABC1371990F00BD029A /* MBDocumentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB85D1371990E00BD029A /* MBDocumentOperation.m */; };
+		03DFBABD1371990F00BD029A /* MBFileDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB85E1371990E00BD029A /* MBFileDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBABE1371990F00BD029A /* MBFileDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB85F1371990E00BD029A /* MBFileDataHandler.m */; };
+		03DFBABF1371990F00BD029A /* MBMemoryDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8601371990E00BD029A /* MBMemoryDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAC01371990F00BD029A /* MBMemoryDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8611371990E00BD029A /* MBMemoryDataHandler.m */; };
+		03DFBAC11371990F00BD029A /* MBMobbl1ServerDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8621371990E00BD029A /* MBMobbl1ServerDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAC21371990F00BD029A /* MBMobbl1ServerDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8631371990E00BD029A /* MBMobbl1ServerDataHandler.m */; };
+		03DFBAC31371990F00BD029A /* MBRESTServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8641371990E00BD029A /* MBRESTServiceDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAC41371990F00BD029A /* MBRESTServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8651371990E00BD029A /* MBRESTServiceDataHandler.m */; };
+		03DFBAC51371990F00BD029A /* MBSystemDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8661371990E00BD029A /* MBSystemDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAC61371990F00BD029A /* MBSystemDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8671371990E00BD029A /* MBSystemDataHandler.m */; };
+		03DFBAC71371990F00BD029A /* MBWebserviceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8681371990E00BD029A /* MBWebserviceDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAC81371990F00BD029A /* MBWebserviceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8691371990E00BD029A /* MBWebserviceDataHandler.m */; };
+		03DFBAC91371990F00BD029A /* MBDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB86A1371990E00BD029A /* MBDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBACA1371990F00BD029A /* MBDataHandlerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB86B1371990E00BD029A /* MBDataHandlerBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBACB1371990F00BD029A /* MBDataHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB86C1371990E00BD029A /* MBDataHandlerBase.m */; };
+		03DFBAD21371990F00BD029A /* MBDataManagerService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8741371990E00BD029A /* MBDataManagerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAD31371990F00BD029A /* MBDataManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8751371990E00BD029A /* MBDataManagerService.m */; };
+		03DFBAD41371990F00BD029A /* MBLocalizationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8761371990E00BD029A /* MBLocalizationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAD51371990F00BD029A /* MBLocalizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8771371990E00BD029A /* MBLocalizationService.m */; };
+		03DFBAD61371990F00BD029A /* MBMetadataService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8781371990E00BD029A /* MBMetadataService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAD71371990F00BD029A /* MBMetadataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8791371990E00BD029A /* MBMetadataService.m */; };
+		03DFBAD81371990F00BD029A /* MBResourceService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB87A1371990E00BD029A /* MBResourceService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAD91371990F00BD029A /* MBResourceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB87B1371990E00BD029A /* MBResourceService.m */; };
+		03DFBADA1371990F00BD029A /* MBResultListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB87C1371990E00BD029A /* MBResultListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBADB1371990F00BD029A /* MBScriptService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB87D1371990E00BD029A /* MBScriptService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBADC1371990F00BD029A /* MBScriptService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB87E1371990E00BD029A /* MBScriptService.m */; };
+		03DFBADD1371990F00BD029A /* BinckUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8801371990E00BD029A /* BinckUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBADE1371990F00BD029A /* BinckUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8811371990E00BD029A /* BinckUtilities.m */; };
+		03DFBADF1371990F00BD029A /* ColorUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8821371990E00BD029A /* ColorUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAE01371990F00BD029A /* ColorUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8831371990E00BD029A /* ColorUtilities.m */; };
+		03DFBAE11371990F00BD029A /* DataUtilites.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8841371990E00BD029A /* DataUtilites.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAE21371990F00BD029A /* DataUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8851371990E00BD029A /* DataUtilites.m */; };
+		03DFBAE31371990F00BD029A /* BuildInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8871371990E00BD029A /* BuildInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAE41371990F00BD029A /* MBMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8881371990E00BD029A /* MBMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAE51371990F00BD029A /* MBNotificationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8891371990E00BD029A /* MBNotificationTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAE61371990F00BD029A /* MBTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88A1371990E00BD029A /* MBTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAE71371990F00BD029A /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88B1371990E00BD029A /* GTMStackTrace.h */; settings = {ATTRIBUTES = (); }; };
+		03DFBAE81371990F00BD029A /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB88C1371990E00BD029A /* GTMStackTrace.m */; };
+		03DFBAE91371990F00BD029A /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88E1371990E00BD029A /* JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAEA1371990F00BD029A /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88F1371990E00BD029A /* NSObject+SBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAEB1371990F00BD029A /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8901371990E00BD029A /* NSString+SBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAEC1371990F00BD029A /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8911371990E00BD029A /* NSString+SBJSON.m */; };
+		03DFBAED1371990F00BD029A /* SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8921371990E00BD029A /* SBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAEE1371990F00BD029A /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8931371990E00BD029A /* SBJSON.m */; };
+		03DFBAEF1371990F00BD029A /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8941371990E00BD029A /* SBJsonBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAF01371990F00BD029A /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8951371990E00BD029A /* SBJsonBase.m */; };
+		03DFBAF11371990F00BD029A /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8961371990E00BD029A /* SBJsonParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAF21371990F00BD029A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8971371990E00BD029A /* SBJsonParser.m */; };
+		03DFBAF31371990F00BD029A /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8981371990E00BD029A /* SBJsonWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAF41371990F00BD029A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8991371990E00BD029A /* SBJsonWriter.m */; };
+		03DFBAF51371990F00BD029A /* LocaleUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB89A1371990E00BD029A /* LocaleUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAF61371990F00BD029A /* LocaleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB89B1371990E00BD029A /* LocaleUtilities.m */; };
+		03DFBAF71371990F00BD029A /* MBCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB89C1371990E00BD029A /* MBCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAF81371990F00BD029A /* MBCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB89D1371990E00BD029A /* MBCacheManager.m */; };
+		03DFBAF91371990F00BD029A /* MBCacheWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB89E1371990E00BD029A /* MBCacheWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAFA1371990F00BD029A /* MBCacheWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB89F1371990E00BD029A /* MBCacheWriter.m */; };
+		03DFBAFB1371990F00BD029A /* MBDeviceType.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A01371990E00BD029A /* MBDeviceType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAFC1371990F00BD029A /* MBDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A11371990E00BD029A /* MBDeviceType.m */; };
+		03DFBAFD1371990F00BD029A /* MBOrientationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A21371990E00BD029A /* MBOrientationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBAFE1371990F00BD029A /* MBOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A31371990E00BD029A /* MBOrientationManager.m */; };
+		03DFBAFF1371990F00BD029A /* MBProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A41371990E00BD029A /* MBProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB001371990F00BD029A /* MBProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A51371990E00BD029A /* MBProperties.m */; };
+		03DFBB011371990F00BD029A /* MBPropertiesConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A61371990E00BD029A /* MBPropertiesConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB021371990F00BD029A /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A71371990E00BD029A /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB031371990F00BD029A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A81371990E00BD029A /* NSData+Base64.m */; };
+		03DFBB041371990F00BD029A /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A91371990E00BD029A /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB051371990F00BD029A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8AA1371990E00BD029A /* Reachability.m */; };
+		03DFBB061371990F00BD029A /* StringUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8AB1371990E00BD029A /* StringUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB071371990F00BD029A /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8AC1371990E00BD029A /* StringUtilities.m */; };
+		03DFBB081371990F00BD029A /* StringUtilitiesHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8AD1371990E00BD029A /* StringUtilitiesHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB091371990F00BD029A /* StringUtilitiesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8AE1371990E00BD029A /* StringUtilitiesHelper.m */; };
+		03DFBB0A1371990F00BD029A /* UncaughtExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8AF1371990E00BD029A /* UncaughtExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB0B1371990F00BD029A /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B01371990E00BD029A /* UncaughtExceptionHandler.m */; };
+		03DFBB0C1371990F00BD029A /* ViewUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B11371990E00BD029A /* ViewUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB0D1371990F00BD029A /* ViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B21371990E00BD029A /* ViewUtilities.m */; };
+		03DFBB0E1371990F00BD029A /* MBFieldTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B51371990E00BD029A /* MBFieldTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB0F1371990F00BD029A /* MBFieldViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B61371990E00BD029A /* MBFieldViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB101371990F00BD029A /* MBFieldViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B71371990E00BD029A /* MBFieldViewBuilder.m */; };
+		03DFBB111371990F00BD029A /* MBForEachViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B81371990E00BD029A /* MBForEachViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB121371990F00BD029A /* MBForEachViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B91371990E00BD029A /* MBForEachViewBuilder.m */; };
+		03DFBB131371990F00BD029A /* MBMatrixViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8BA1371990E00BD029A /* MBMatrixViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB141371990F00BD029A /* MBMatrixViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8BB1371990E00BD029A /* MBMatrixViewBuilder.m */; };
+		03DFBB151371990F00BD029A /* MBPageViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8BC1371990E00BD029A /* MBPageViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB161371990F00BD029A /* MBPageViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8BD1371990E00BD029A /* MBPageViewBuilder.m */; };
+		03DFBB171371990F00BD029A /* MBPanelViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8BE1371990E00BD029A /* MBPanelViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB181371990F00BD029A /* MBPanelViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8BF1371990E00BD029A /* MBPanelViewBuilder.m */; };
+		03DFBB191371990F00BD029A /* MBRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C01371990E00BD029A /* MBRowViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB1A1371990F00BD029A /* MBRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C11371990E00BD029A /* MBRowViewBuilder.m */; };
+		03DFBB1B1371990F00BD029A /* MBStyleHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C21371990E00BD029A /* MBStyleHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB1C1371990F00BD029A /* MBStyleHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C31371990E00BD029A /* MBStyleHandler.m */; };
+		03DFBB1D1371990F00BD029A /* MBViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C41371990E00BD029A /* MBViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB1E1371990F00BD029A /* MBViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C51371990E00BD029A /* MBViewBuilder.m */; };
+		03DFBB1F1371990F00BD029A /* MBViewBuilderFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C61371990E00BD029A /* MBViewBuilderFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB201371990F00BD029A /* MBViewBuilderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C71371990E00BD029A /* MBViewBuilderFactory.m */; };
+		03DFBB211371990F00BD029A /* MBPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C91371990E00BD029A /* MBPickerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB221371990F00BD029A /* MBPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8CA1371990E00BD029A /* MBPickerController.m */; };
+		03DFBB231371990F00BD029A /* MBPickerPopoverController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8CB1371990E00BD029A /* MBPickerPopoverController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB241371990F00BD029A /* MBPickerPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8CC1371990E00BD029A /* MBPickerPopoverController.m */; };
+		03DFBB251371990F00BD029A /* MBSpinner.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8CD1371990E00BD029A /* MBSpinner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB261371990F00BD029A /* MBSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8CE1371990E00BD029A /* MBSpinner.m */; };
+		03DFBB271371990F00BD029A /* MBComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8CF1371990E00BD029A /* MBComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB281371990F00BD029A /* MBComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D01371990E00BD029A /* MBComponent.m */; };
+		03DFBB291371990F00BD029A /* MBComponentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D11371990E00BD029A /* MBComponentContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB2A1371990F00BD029A /* MBComponentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D21371990E00BD029A /* MBComponentContainer.m */; };
+		03DFBB2B1371990F00BD029A /* MBComponentFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D31371990E00BD029A /* MBComponentFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB2C1371990F00BD029A /* MBComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D41371990E00BD029A /* MBComponentFactory.m */; };
+		03DFBB2D1371990F00BD029A /* MBConditionalPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D51371990E00BD029A /* MBConditionalPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB2E1371990F00BD029A /* MBConditionalPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D61371990E00BD029A /* MBConditionalPage.m */; };
+		03DFBB2F1371990F00BD029A /* MBField.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D71371990E00BD029A /* MBField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB301371990F00BD029A /* MBField.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D81371990E00BD029A /* MBField.m */; };
+		03DFBB311371990F00BD029A /* MBForEach.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D91371990E00BD029A /* MBForEach.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB321371990F00BD029A /* MBForEach.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8DA1371990E00BD029A /* MBForEach.m */; };
+		03DFBB331371990F00BD029A /* MBOutcomeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8DB1371990E00BD029A /* MBOutcomeListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB341371990F00BD029A /* MBPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8DC1371990E00BD029A /* MBPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB351371990F00BD029A /* MBPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8DD1371990E00BD029A /* MBPage.m */; };
+		03DFBB361371990F00BD029A /* MBPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8DE1371990E00BD029A /* MBPanel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB371371990F00BD029A /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8DF1371990E00BD029A /* MBPanel.m */; };
+		03DFBB381371990F00BD029A /* MBRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E01371990E00BD029A /* MBRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB391371990F00BD029A /* MBRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E11371990E00BD029A /* MBRow.m */; };
+		03DFBB3A1371990F00BD029A /* MBValueChangeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E21371990E00BD029A /* MBValueChangeListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB3B1371990F00BD029A /* MBMatrixCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E41371990E00BD029A /* MBMatrixCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB3C1371990F00BD029A /* MBMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E51371990E00BD029A /* MBMatrixCell.m */; };
+		03DFBB3D1371990F00BD029A /* MBMatrixHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E61371990E00BD029A /* MBMatrixHeaderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB3E1371990F00BD029A /* MBMatrixHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E71371990E00BD029A /* MBMatrixHeaderView.m */; };
+		03DFBB3F1371990F00BD029A /* MBMatrixRowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E81371990E00BD029A /* MBMatrixRowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB401371990F00BD029A /* MBMatrixRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E91371990E00BD029A /* MBMatrixRowView.m */; };
+		03DFBB411371990F00BD029A /* MBMatrixViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8EA1371990E00BD029A /* MBMatrixViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB421371990F00BD029A /* MBMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8EB1371990E00BD029A /* MBMatrixViewController.m */; };
+		03DFBB431371990F00BD029A /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8ED1371990E00BD029A /* MBTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03DFBB441371990F00BD029A /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8EE1371990E00BD029A /* MBTableViewController.m */; };
+		BDE5372E13F275E700E52B1E /* MBDatePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE5372C13F275E700E52B1E /* MBDatePickerController.h */; };
+		BDE5372F13F275E700E52B1E /* MBDatePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE5372C13F275E700E52B1E /* MBDatePickerController.h */; };
+		BDE5373013F275E700E52B1E /* MBDatePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE5372D13F275E700E52B1E /* MBDatePickerController.m */; };
+		BDE5373113F275E700E52B1E /* MBDatePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE5372D13F275E700E52B1E /* MBDatePickerController.m */; };
+		DCDF99E013C1E9A900F927A3 /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB53D1371990D00BD029A /* MBConditionalDefinition.m */; };
+		DCDF99E113C1E9A900F927A3 /* MBConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB53F1371990D00BD029A /* MBConfigurationParser.m */; };
+		DCDF99E213C1E9A900F927A3 /* MBDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5421371990D00BD029A /* MBDefinition.m */; };
+		DCDF99E313C1E9A900F927A3 /* MBActionDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5451371990D00BD029A /* MBActionDefinition.m */; };
+		DCDF99E413C1E9A900F927A3 /* MBAttributeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5471371990D00BD029A /* MBAttributeDefinition.m */; };
+		DCDF99E513C1E9A900F927A3 /* MBConfigurationDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5491371990D00BD029A /* MBConfigurationDefinition.m */; };
+		DCDF99E613C1E9A900F927A3 /* MBDialogDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB54B1371990D00BD029A /* MBDialogDefinition.m */; };
+		DCDF99E713C1E9A900F927A3 /* MBDialogGroupDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB54D1371990D00BD029A /* MBDialogGroupDefinition.m */; };
+		DCDF99E813C1E9A900F927A3 /* MBDocumentDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB54F1371990D00BD029A /* MBDocumentDefinition.m */; };
+		DCDF99E913C1E9A900F927A3 /* MBDomainDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5511371990D00BD029A /* MBDomainDefinition.m */; };
+		DCDF99EA13C1E9A900F927A3 /* MBDomainValidatorDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5531371990D00BD029A /* MBDomainValidatorDefinition.m */; };
+		DCDF99EB13C1E9A900F927A3 /* MBElementDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5551371990D00BD029A /* MBElementDefinition.m */; };
+		DCDF99EC13C1E9A900F927A3 /* MBFieldDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5571371990D00BD029A /* MBFieldDefinition.m */; };
+		DCDF99ED13C1E9A900F927A3 /* MBForEachDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5591371990D00BD029A /* MBForEachDefinition.m */; };
+		DCDF99EE13C1E9A900F927A3 /* MBMvcConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB55B1371990D00BD029A /* MBMvcConfigurationParser.m */; };
+		DCDF99EF13C1E9A900F927A3 /* MBOutcomeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB55D1371990D00BD029A /* MBOutcomeDefinition.m */; };
+		DCDF99F013C1E9A900F927A3 /* MBPageDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB55F1371990D00BD029A /* MBPageDefinition.m */; };
+		DCDF99F113C1E9A900F927A3 /* MBPanelDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5611371990D00BD029A /* MBPanelDefinition.m */; };
+		DCDF99F213C1E9A900F927A3 /* MBVariableDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5631371990D00BD029A /* MBVariableDefinition.m */; };
+		DCDF99F313C1E9A900F927A3 /* MBBundleDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5661371990D00BD029A /* MBBundleDefinition.m */; };
+		DCDF99F413C1E9A900F927A3 /* MBResourceConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5681371990D00BD029A /* MBResourceConfiguration.m */; };
+		DCDF99F513C1E9A900F927A3 /* MBResourceConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB56A1371990D00BD029A /* MBResourceConfigurationParser.m */; };
+		DCDF99F613C1E9A900F927A3 /* MBResourceDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB56C1371990D00BD029A /* MBResourceDefinition.m */; };
+		DCDF99F713C1E9A900F927A3 /* MBEndPointDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB56F1371990D00BD029A /* MBEndPointDefinition.m */; };
+		DCDF99F813C1E9A900F927A3 /* MBResultListenerDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5711371990D00BD029A /* MBResultListenerDefinition.m */; };
+		DCDF99F913C1E9A900F927A3 /* MBWebservicesConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5731371990D00BD029A /* MBWebservicesConfiguration.m */; };
+		DCDF99FA13C1E9A900F927A3 /* MBWebservicesConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5751371990D00BD029A /* MBWebservicesConfigurationParser.m */; };
+		DCDF99FB13C1E9A900F927A3 /* MBApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5791371990D00BD029A /* MBApplicationController.m */; };
+		DCDF99FC13C1E9A900F927A3 /* MBApplicationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB57B1371990D00BD029A /* MBApplicationFactory.m */; };
+		DCDF99FD13C1E9A900F927A3 /* MBDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB57D1371990D00BD029A /* MBDialogController.m */; };
+		DCDF99FE13C1E9A900F927A3 /* MBDialogGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB57F1371990D00BD029A /* MBDialogGroupController.m */; };
+		DCDF99FF13C1E9A900F927A3 /* MBOutcome.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5811371990D00BD029A /* MBOutcome.m */; };
+		DCDF9A0013C1E9A900F927A3 /* MBViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5831371990D00BD029A /* MBViewManager.m */; };
+		DCDF9A0113C1E9A900F927A3 /* MBActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5861371990D00BD029A /* MBActivityIndicator.m */; };
+		DCDF9A0213C1E9A900F927A3 /* MBBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5881371990D00BD029A /* MBBasicViewController.m */; };
+		DCDF9A0313C1E9A900F927A3 /* MBFormSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB58A1371990D00BD029A /* MBFormSubmission.m */; };
+		DCDF9A0413C1E9A900F927A3 /* MBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB58C1371990D00BD029A /* MBNavigationController.m */; };
+		DCDF9A0513C1E9A900F927A3 /* MBSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB58E1371990D00BD029A /* MBSplitViewController.m */; };
+		DCDF9A0613C1E9A900F927A3 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5B71371990D00BD029A /* MGSplitCornersView.m */; };
+		DCDF9A0713C1E9A900F927A3 /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5B91371990D00BD029A /* MGSplitDividerView.m */; };
+		DCDF9A0813C1E9A900F927A3 /* MGSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB5BB1371990D00BD029A /* MGSplitViewController.m */; };
+		DCDF9A0913C1E9A900F927A3 /* MBDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8471371990E00BD029A /* MBDocument.m */; };
+		DCDF9A0A13C1E9A900F927A3 /* MBDocumentDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8491371990E00BD029A /* MBDocumentDiff.m */; };
+		DCDF9A0B13C1E9A900F927A3 /* MBDocumentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB84B1371990E00BD029A /* MBDocumentFactory.m */; };
+		DCDF9A0C13C1E9A900F927A3 /* MBElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB84E1371990E00BD029A /* MBElement.m */; };
+		DCDF9A0D13C1E9A900F927A3 /* MBElementContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8501371990E00BD029A /* MBElementContainer.m */; };
+		DCDF9A0E13C1E9A900F927A3 /* MBJsonDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8521371990E00BD029A /* MBJsonDocumentParser.m */; };
+		DCDF9A0F13C1E9A900F927A3 /* MBMobbl1DocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8541371990E00BD029A /* MBMobbl1DocumentParser.m */; };
+		DCDF9A1013C1E9A900F927A3 /* MBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8561371990E00BD029A /* MBSession.m */; };
+		DCDF9A1113C1E9A900F927A3 /* MBXmlDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8581371990E00BD029A /* MBXmlDocumentParser.m */; };
+		DCDF9A1213C1E9A900F927A3 /* MBDocumentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB85D1371990E00BD029A /* MBDocumentOperation.m */; };
+		DCDF9A1313C1E9A900F927A3 /* MBFileDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB85F1371990E00BD029A /* MBFileDataHandler.m */; };
+		DCDF9A1413C1E9A900F927A3 /* MBMemoryDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8611371990E00BD029A /* MBMemoryDataHandler.m */; };
+		DCDF9A1513C1E9A900F927A3 /* MBMobbl1ServerDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8631371990E00BD029A /* MBMobbl1ServerDataHandler.m */; };
+		DCDF9A1613C1E9A900F927A3 /* MBRESTServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8651371990E00BD029A /* MBRESTServiceDataHandler.m */; };
+		DCDF9A1713C1E9A900F927A3 /* MBSystemDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8671371990E00BD029A /* MBSystemDataHandler.m */; };
+		DCDF9A1813C1E9A900F927A3 /* MBWebserviceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8691371990E00BD029A /* MBWebserviceDataHandler.m */; };
+		DCDF9A1913C1E9A900F927A3 /* MBDataHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB86C1371990E00BD029A /* MBDataHandlerBase.m */; };
+		DCDF9A1A13C1E9A900F927A3 /* MBDataManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8751371990E00BD029A /* MBDataManagerService.m */; };
+		DCDF9A1B13C1E9A900F927A3 /* MBLocalizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8771371990E00BD029A /* MBLocalizationService.m */; };
+		DCDF9A1C13C1E9A900F927A3 /* MBMetadataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8791371990E00BD029A /* MBMetadataService.m */; };
+		DCDF9A1D13C1E9A900F927A3 /* MBResourceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB87B1371990E00BD029A /* MBResourceService.m */; };
+		DCDF9A1E13C1E9A900F927A3 /* MBScriptService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB87E1371990E00BD029A /* MBScriptService.m */; };
+		DCDF9A1F13C1E9A900F927A3 /* BinckUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8811371990E00BD029A /* BinckUtilities.m */; };
+		DCDF9A2013C1E9A900F927A3 /* ColorUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8831371990E00BD029A /* ColorUtilities.m */; };
+		DCDF9A2113C1E9A900F927A3 /* DataUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8851371990E00BD029A /* DataUtilites.m */; };
+		DCDF9A2213C1E9A900F927A3 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB88C1371990E00BD029A /* GTMStackTrace.m */; };
+		DCDF9A2313C1E9A900F927A3 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8911371990E00BD029A /* NSString+SBJSON.m */; };
+		DCDF9A2413C1E9A900F927A3 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8931371990E00BD029A /* SBJSON.m */; };
+		DCDF9A2513C1E9A900F927A3 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8951371990E00BD029A /* SBJsonBase.m */; };
+		DCDF9A2613C1E9A900F927A3 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8971371990E00BD029A /* SBJsonParser.m */; };
+		DCDF9A2713C1E9A900F927A3 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8991371990E00BD029A /* SBJsonWriter.m */; };
+		DCDF9A2813C1E9A900F927A3 /* LocaleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB89B1371990E00BD029A /* LocaleUtilities.m */; };
+		DCDF9A2913C1E9A900F927A3 /* MBCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB89D1371990E00BD029A /* MBCacheManager.m */; };
+		DCDF9A2A13C1E9A900F927A3 /* MBCacheWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB89F1371990E00BD029A /* MBCacheWriter.m */; };
+		DCDF9A2B13C1E9A900F927A3 /* MBDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A11371990E00BD029A /* MBDeviceType.m */; };
+		DCDF9A2C13C1E9A900F927A3 /* MBOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A31371990E00BD029A /* MBOrientationManager.m */; };
+		DCDF9A2D13C1E9A900F927A3 /* MBProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A51371990E00BD029A /* MBProperties.m */; };
+		DCDF9A2E13C1E9A900F927A3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8A81371990E00BD029A /* NSData+Base64.m */; };
+		DCDF9A2F13C1E9A900F927A3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8AA1371990E00BD029A /* Reachability.m */; };
+		DCDF9A3013C1E9A900F927A3 /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8AC1371990E00BD029A /* StringUtilities.m */; };
+		DCDF9A3113C1E9A900F927A3 /* StringUtilitiesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8AE1371990E00BD029A /* StringUtilitiesHelper.m */; };
+		DCDF9A3213C1E9A900F927A3 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B01371990E00BD029A /* UncaughtExceptionHandler.m */; };
+		DCDF9A3313C1E9A900F927A3 /* ViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B21371990E00BD029A /* ViewUtilities.m */; };
+		DCDF9A3413C1E9A900F927A3 /* MBFieldViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B71371990E00BD029A /* MBFieldViewBuilder.m */; };
+		DCDF9A3513C1E9A900F927A3 /* MBForEachViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8B91371990E00BD029A /* MBForEachViewBuilder.m */; };
+		DCDF9A3613C1E9A900F927A3 /* MBMatrixViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8BB1371990E00BD029A /* MBMatrixViewBuilder.m */; };
+		DCDF9A3713C1E9A900F927A3 /* MBPageViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8BD1371990E00BD029A /* MBPageViewBuilder.m */; };
+		DCDF9A3813C1E9A900F927A3 /* MBPanelViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8BF1371990E00BD029A /* MBPanelViewBuilder.m */; };
+		DCDF9A3913C1E9A900F927A3 /* MBRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C11371990E00BD029A /* MBRowViewBuilder.m */; };
+		DCDF9A3A13C1E9A900F927A3 /* MBStyleHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C31371990E00BD029A /* MBStyleHandler.m */; };
+		DCDF9A3B13C1E9A900F927A3 /* MBViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C51371990E00BD029A /* MBViewBuilder.m */; };
+		DCDF9A3C13C1E9A900F927A3 /* MBViewBuilderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8C71371990E00BD029A /* MBViewBuilderFactory.m */; };
+		DCDF9A3D13C1E9A900F927A3 /* MBPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8CA1371990E00BD029A /* MBPickerController.m */; };
+		DCDF9A3E13C1E9A900F927A3 /* MBPickerPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8CC1371990E00BD029A /* MBPickerPopoverController.m */; };
+		DCDF9A3F13C1E9A900F927A3 /* MBSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8CE1371990E00BD029A /* MBSpinner.m */; };
+		DCDF9A4013C1E9A900F927A3 /* MBComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D01371990E00BD029A /* MBComponent.m */; };
+		DCDF9A4113C1E9A900F927A3 /* MBComponentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D21371990E00BD029A /* MBComponentContainer.m */; };
+		DCDF9A4213C1E9A900F927A3 /* MBComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D41371990E00BD029A /* MBComponentFactory.m */; };
+		DCDF9A4313C1E9A900F927A3 /* MBConditionalPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D61371990E00BD029A /* MBConditionalPage.m */; };
+		DCDF9A4413C1E9A900F927A3 /* MBField.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8D81371990E00BD029A /* MBField.m */; };
+		DCDF9A4513C1E9A900F927A3 /* MBForEach.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8DA1371990E00BD029A /* MBForEach.m */; };
+		DCDF9A4613C1E9A900F927A3 /* MBPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8DD1371990E00BD029A /* MBPage.m */; };
+		DCDF9A4713C1E9A900F927A3 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8DF1371990E00BD029A /* MBPanel.m */; };
+		DCDF9A4813C1E9A900F927A3 /* MBRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E11371990E00BD029A /* MBRow.m */; };
+		DCDF9A4913C1E9A900F927A3 /* MBMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E51371990E00BD029A /* MBMatrixCell.m */; };
+		DCDF9A4A13C1E9A900F927A3 /* MBMatrixHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E71371990E00BD029A /* MBMatrixHeaderView.m */; };
+		DCDF9A4B13C1E9A900F927A3 /* MBMatrixRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8E91371990E00BD029A /* MBMatrixRowView.m */; };
+		DCDF9A4C13C1E9A900F927A3 /* MBMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8EB1371990E00BD029A /* MBMatrixViewController.m */; };
+		DCDF9A4D13C1E9A900F927A3 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DFB8EE1371990E00BD029A /* MBTableViewController.m */; };
+		DCDF9A5013C1E9A900F927A3 /* MBConditionalDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB53C1371990D00BD029A /* MBConditionalDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5113C1E9A900F927A3 /* MBConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB53E1371990D00BD029A /* MBConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5213C1E9A900F927A3 /* MBConfigurationParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5401371990D00BD029A /* MBConfigurationParserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5313C1E9A900F927A3 /* MBDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5411371990D00BD029A /* MBDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5413C1E9A900F927A3 /* MBActionDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5441371990D00BD029A /* MBActionDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5513C1E9A900F927A3 /* MBAttributeDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5461371990D00BD029A /* MBAttributeDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5613C1E9A900F927A3 /* MBConfigurationDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5481371990D00BD029A /* MBConfigurationDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5713C1E9A900F927A3 /* MBDialogDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB54A1371990D00BD029A /* MBDialogDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5813C1E9A900F927A3 /* MBDialogGroupDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB54C1371990D00BD029A /* MBDialogGroupDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5913C1E9A900F927A3 /* MBDocumentDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB54E1371990D00BD029A /* MBDocumentDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5A13C1E9A900F927A3 /* MBDomainDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5501371990D00BD029A /* MBDomainDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5B13C1E9A900F927A3 /* MBDomainValidatorDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5521371990D00BD029A /* MBDomainValidatorDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5C13C1E9A900F927A3 /* MBElementDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5541371990D00BD029A /* MBElementDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5D13C1E9A900F927A3 /* MBFieldDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5561371990D00BD029A /* MBFieldDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5E13C1E9A900F927A3 /* MBForEachDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5581371990D00BD029A /* MBForEachDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A5F13C1E9A900F927A3 /* MBMvcConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB55A1371990D00BD029A /* MBMvcConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6013C1E9A900F927A3 /* MBOutcomeDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB55C1371990D00BD029A /* MBOutcomeDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6113C1E9A900F927A3 /* MBPageDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB55E1371990D00BD029A /* MBPageDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6213C1E9A900F927A3 /* MBPanelDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5601371990D00BD029A /* MBPanelDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6313C1E9A900F927A3 /* MBVariableDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5621371990D00BD029A /* MBVariableDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6413C1E9A900F927A3 /* MBBundleDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5651371990D00BD029A /* MBBundleDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6513C1E9A900F927A3 /* MBResourceConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5671371990D00BD029A /* MBResourceConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6613C1E9A900F927A3 /* MBResourceConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5691371990D00BD029A /* MBResourceConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6713C1E9A900F927A3 /* MBResourceDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB56B1371990D00BD029A /* MBResourceDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6813C1E9A900F927A3 /* MBEndPointDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB56E1371990D00BD029A /* MBEndPointDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6913C1E9A900F927A3 /* MBResultListenerDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5701371990D00BD029A /* MBResultListenerDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6A13C1E9A900F927A3 /* MBWebservicesConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5721371990D00BD029A /* MBWebservicesConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6B13C1E9A900F927A3 /* MBWebservicesConfigurationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5741371990D00BD029A /* MBWebservicesConfigurationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6C13C1E9A900F927A3 /* MBAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5771371990D00BD029A /* MBAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6D13C1E9A900F927A3 /* MBApplicationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5781371990D00BD029A /* MBApplicationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6E13C1E9A900F927A3 /* MBApplicationFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB57A1371990D00BD029A /* MBApplicationFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A6F13C1E9A900F927A3 /* MBDialogController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB57C1371990D00BD029A /* MBDialogController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7013C1E9A900F927A3 /* MBDialogGroupController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB57E1371990D00BD029A /* MBDialogGroupController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7113C1E9A900F927A3 /* MBOutcome.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5801371990D00BD029A /* MBOutcome.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7213C1E9A900F927A3 /* MBViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5821371990D00BD029A /* MBViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7313C1E9A900F927A3 /* MBActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5851371990D00BD029A /* MBActivityIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7413C1E9A900F927A3 /* MBBasicViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5871371990D00BD029A /* MBBasicViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7513C1E9A900F927A3 /* MBFormSubmission.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5891371990D00BD029A /* MBFormSubmission.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7613C1E9A900F927A3 /* MBNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB58B1371990D00BD029A /* MBNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7713C1E9A900F927A3 /* MBSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB58D1371990D00BD029A /* MBSplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7813C1E9A900F927A3 /* MBViewControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB58F1371990D00BD029A /* MBViewControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7913C1E9A900F927A3 /* MGSplitCornersView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5B61371990D00BD029A /* MGSplitCornersView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7A13C1E9A900F927A3 /* MGSplitDividerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5B81371990D00BD029A /* MGSplitDividerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7B13C1E9A900F927A3 /* MGSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB5BA1371990D00BD029A /* MGSplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7C13C1E9A900F927A3 /* MBDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8461371990E00BD029A /* MBDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7D13C1E9A900F927A3 /* MBDocumentDiff.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8481371990E00BD029A /* MBDocumentDiff.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7E13C1E9A900F927A3 /* MBDocumentFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84A1371990E00BD029A /* MBDocumentFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A7F13C1E9A900F927A3 /* MBDocumentParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84C1371990E00BD029A /* MBDocumentParserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8013C1E9A900F927A3 /* MBElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84D1371990E00BD029A /* MBElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8113C1E9A900F927A3 /* MBElementContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB84F1371990E00BD029A /* MBElementContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8213C1E9A900F927A3 /* MBJsonDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8511371990E00BD029A /* MBJsonDocumentParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8313C1E9A900F927A3 /* MBMobbl1DocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8531371990E00BD029A /* MBMobbl1DocumentParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8413C1E9A900F927A3 /* MBSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8551371990E00BD029A /* MBSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8513C1E9A900F927A3 /* MBXmlDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8571371990E00BD029A /* MBXmlDocumentParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8613C1E9A900F927A3 /* MBDocumentOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB85C1371990E00BD029A /* MBDocumentOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8713C1E9A900F927A3 /* MBFileDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB85E1371990E00BD029A /* MBFileDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8813C1E9A900F927A3 /* MBMemoryDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8601371990E00BD029A /* MBMemoryDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8913C1E9A900F927A3 /* MBMobbl1ServerDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8621371990E00BD029A /* MBMobbl1ServerDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8A13C1E9A900F927A3 /* MBRESTServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8641371990E00BD029A /* MBRESTServiceDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8B13C1E9A900F927A3 /* MBSystemDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8661371990E00BD029A /* MBSystemDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8C13C1E9A900F927A3 /* MBWebserviceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8681371990E00BD029A /* MBWebserviceDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8D13C1E9A900F927A3 /* MBDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB86A1371990E00BD029A /* MBDataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8E13C1E9A900F927A3 /* MBDataHandlerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB86B1371990E00BD029A /* MBDataHandlerBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A8F13C1E9A900F927A3 /* MBDataManagerService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8741371990E00BD029A /* MBDataManagerService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9013C1E9A900F927A3 /* MBLocalizationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8761371990E00BD029A /* MBLocalizationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9113C1E9A900F927A3 /* MBMetadataService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8781371990E00BD029A /* MBMetadataService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9213C1E9A900F927A3 /* MBResourceService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB87A1371990E00BD029A /* MBResourceService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9313C1E9A900F927A3 /* MBResultListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB87C1371990E00BD029A /* MBResultListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9413C1E9A900F927A3 /* MBScriptService.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB87D1371990E00BD029A /* MBScriptService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9513C1E9A900F927A3 /* BinckUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8801371990E00BD029A /* BinckUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9613C1E9A900F927A3 /* ColorUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8821371990E00BD029A /* ColorUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9713C1E9A900F927A3 /* DataUtilites.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8841371990E00BD029A /* DataUtilites.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9813C1E9A900F927A3 /* BuildInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8871371990E00BD029A /* BuildInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9913C1E9A900F927A3 /* MBMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8881371990E00BD029A /* MBMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9A13C1E9A900F927A3 /* MBNotificationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8891371990E00BD029A /* MBNotificationTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9B13C1E9A900F927A3 /* MBTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88A1371990E00BD029A /* MBTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9C13C1E9A900F927A3 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88E1371990E00BD029A /* JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9D13C1E9A900F927A3 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88F1371990E00BD029A /* NSObject+SBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9E13C1E9A900F927A3 /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8901371990E00BD029A /* NSString+SBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9A9F13C1E9A900F927A3 /* SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8921371990E00BD029A /* SBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA013C1E9A900F927A3 /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8941371990E00BD029A /* SBJsonBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA113C1E9A900F927A3 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8961371990E00BD029A /* SBJsonParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA213C1E9A900F927A3 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8981371990E00BD029A /* SBJsonWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA313C1E9A900F927A3 /* LocaleUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB89A1371990E00BD029A /* LocaleUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA413C1E9A900F927A3 /* MBCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB89C1371990E00BD029A /* MBCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA513C1E9A900F927A3 /* MBCacheWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB89E1371990E00BD029A /* MBCacheWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA613C1E9A900F927A3 /* MBDeviceType.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A01371990E00BD029A /* MBDeviceType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA713C1E9A900F927A3 /* MBOrientationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A21371990E00BD029A /* MBOrientationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA813C1E9A900F927A3 /* MBProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A41371990E00BD029A /* MBProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AA913C1E9A900F927A3 /* MBPropertiesConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A61371990E00BD029A /* MBPropertiesConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AAA13C1E9A900F927A3 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A71371990E00BD029A /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AAB13C1E9A900F927A3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8A91371990E00BD029A /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AAC13C1E9A900F927A3 /* StringUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8AB1371990E00BD029A /* StringUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AAD13C1E9A900F927A3 /* StringUtilitiesHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8AD1371990E00BD029A /* StringUtilitiesHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AAE13C1E9A900F927A3 /* UncaughtExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8AF1371990E00BD029A /* UncaughtExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AAF13C1E9A900F927A3 /* ViewUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B11371990E00BD029A /* ViewUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB013C1E9A900F927A3 /* MBFieldTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B51371990E00BD029A /* MBFieldTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB113C1E9A900F927A3 /* MBFieldViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B61371990E00BD029A /* MBFieldViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB213C1E9A900F927A3 /* MBForEachViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8B81371990E00BD029A /* MBForEachViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB313C1E9A900F927A3 /* MBMatrixViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8BA1371990E00BD029A /* MBMatrixViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB413C1E9A900F927A3 /* MBPageViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8BC1371990E00BD029A /* MBPageViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB513C1E9A900F927A3 /* MBPanelViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8BE1371990E00BD029A /* MBPanelViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB613C1E9A900F927A3 /* MBRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C01371990E00BD029A /* MBRowViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB713C1E9A900F927A3 /* MBStyleHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C21371990E00BD029A /* MBStyleHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB813C1E9A900F927A3 /* MBViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C41371990E00BD029A /* MBViewBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AB913C1E9A900F927A3 /* MBViewBuilderFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C61371990E00BD029A /* MBViewBuilderFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ABA13C1E9A900F927A3 /* MBPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8C91371990E00BD029A /* MBPickerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ABB13C1E9A900F927A3 /* MBPickerPopoverController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8CB1371990E00BD029A /* MBPickerPopoverController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ABC13C1E9A900F927A3 /* MBSpinner.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8CD1371990E00BD029A /* MBSpinner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ABD13C1E9A900F927A3 /* MBComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8CF1371990E00BD029A /* MBComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ABE13C1E9A900F927A3 /* MBComponentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D11371990E00BD029A /* MBComponentContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ABF13C1E9A900F927A3 /* MBComponentFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D31371990E00BD029A /* MBComponentFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC013C1E9A900F927A3 /* MBConditionalPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D51371990E00BD029A /* MBConditionalPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC113C1E9A900F927A3 /* MBField.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D71371990E00BD029A /* MBField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC213C1E9A900F927A3 /* MBForEach.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8D91371990E00BD029A /* MBForEach.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC313C1E9A900F927A3 /* MBOutcomeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8DB1371990E00BD029A /* MBOutcomeListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC413C1E9A900F927A3 /* MBPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8DC1371990E00BD029A /* MBPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC513C1E9A900F927A3 /* MBPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8DE1371990E00BD029A /* MBPanel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC613C1E9A900F927A3 /* MBRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E01371990E00BD029A /* MBRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC713C1E9A900F927A3 /* MBValueChangeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E21371990E00BD029A /* MBValueChangeListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC813C1E9A900F927A3 /* MBMatrixCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E41371990E00BD029A /* MBMatrixCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9AC913C1E9A900F927A3 /* MBMatrixHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E61371990E00BD029A /* MBMatrixHeaderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ACA13C1E9A900F927A3 /* MBMatrixRowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8E81371990E00BD029A /* MBMatrixRowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ACB13C1E9A900F927A3 /* MBMatrixViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8EA1371990E00BD029A /* MBMatrixViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ACC13C1E9A900F927A3 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB8ED1371990E00BD029A /* MBTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDF9ACD13C1E9A900F927A3 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 03DFB88B1371990E00BD029A /* GTMStackTrace.h */; };
+		DCEAD30E13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
+		DCEAD30F13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0371A53F13C4984500315375 /* itude-mobile-ios-core-headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-ios-core-headers.h"; sourceTree = SOURCE_ROOT; };
+		03AEA1A813C326C500F0248C /* itude-mobile-ios-core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-ios-core.h"; sourceTree = SOURCE_ROOT; };
+		03AEA1B213C3458D00F0248C /* itude-mobile-ios-core-i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-ios-core-i386.h"; sourceTree = SOURCE_ROOT; };
+		03DA532D1371989F00BE1FDB /* itude-mobile-iphone-core.framework/itude-mobile-iphone-core */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "itude-mobile-iphone-core.framework/itude-mobile-iphone-core"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03DFB53C1371990D00BD029A /* MBConditionalDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConditionalDefinition.h; sourceTree = "<group>"; };
+		03DFB53D1371990D00BD029A /* MBConditionalDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBConditionalDefinition.m; sourceTree = "<group>"; };
+		03DFB53E1371990D00BD029A /* MBConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConfigurationParser.h; sourceTree = "<group>"; };
+		03DFB53F1371990D00BD029A /* MBConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBConfigurationParser.m; sourceTree = "<group>"; };
+		03DFB5401371990D00BD029A /* MBConfigurationParserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConfigurationParserProtocol.h; sourceTree = "<group>"; };
+		03DFB5411371990D00BD029A /* MBDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDefinition.h; sourceTree = "<group>"; };
+		03DFB5421371990D00BD029A /* MBDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDefinition.m; sourceTree = "<group>"; };
+		03DFB5441371990D00BD029A /* MBActionDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBActionDefinition.h; sourceTree = "<group>"; };
+		03DFB5451371990D00BD029A /* MBActionDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionDefinition.m; sourceTree = "<group>"; };
+		03DFB5461371990D00BD029A /* MBAttributeDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAttributeDefinition.h; sourceTree = "<group>"; };
+		03DFB5471371990D00BD029A /* MBAttributeDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAttributeDefinition.m; sourceTree = "<group>"; };
+		03DFB5481371990D00BD029A /* MBConfigurationDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConfigurationDefinition.h; sourceTree = "<group>"; };
+		03DFB5491371990D00BD029A /* MBConfigurationDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBConfigurationDefinition.m; sourceTree = "<group>"; };
+		03DFB54A1371990D00BD029A /* MBDialogDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogDefinition.h; sourceTree = "<group>"; };
+		03DFB54B1371990D00BD029A /* MBDialogDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDialogDefinition.m; sourceTree = "<group>"; };
+		03DFB54C1371990D00BD029A /* MBDialogGroupDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogGroupDefinition.h; sourceTree = "<group>"; };
+		03DFB54D1371990D00BD029A /* MBDialogGroupDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDialogGroupDefinition.m; sourceTree = "<group>"; };
+		03DFB54E1371990D00BD029A /* MBDocumentDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentDefinition.h; sourceTree = "<group>"; };
+		03DFB54F1371990D00BD029A /* MBDocumentDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocumentDefinition.m; sourceTree = "<group>"; };
+		03DFB5501371990D00BD029A /* MBDomainDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDomainDefinition.h; sourceTree = "<group>"; };
+		03DFB5511371990D00BD029A /* MBDomainDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDomainDefinition.m; sourceTree = "<group>"; };
+		03DFB5521371990D00BD029A /* MBDomainValidatorDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDomainValidatorDefinition.h; sourceTree = "<group>"; };
+		03DFB5531371990D00BD029A /* MBDomainValidatorDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDomainValidatorDefinition.m; sourceTree = "<group>"; };
+		03DFB5541371990D00BD029A /* MBElementDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBElementDefinition.h; sourceTree = "<group>"; };
+		03DFB5551371990D00BD029A /* MBElementDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBElementDefinition.m; sourceTree = "<group>"; };
+		03DFB5561371990D00BD029A /* MBFieldDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFieldDefinition.h; sourceTree = "<group>"; };
+		03DFB5571371990D00BD029A /* MBFieldDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFieldDefinition.m; sourceTree = "<group>"; };
+		03DFB5581371990D00BD029A /* MBForEachDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBForEachDefinition.h; sourceTree = "<group>"; };
+		03DFB5591371990D00BD029A /* MBForEachDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBForEachDefinition.m; sourceTree = "<group>"; };
+		03DFB55A1371990D00BD029A /* MBMvcConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMvcConfigurationParser.h; sourceTree = "<group>"; };
+		03DFB55B1371990D00BD029A /* MBMvcConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMvcConfigurationParser.m; sourceTree = "<group>"; };
+		03DFB55C1371990D00BD029A /* MBOutcomeDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOutcomeDefinition.h; sourceTree = "<group>"; };
+		03DFB55D1371990D00BD029A /* MBOutcomeDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOutcomeDefinition.m; sourceTree = "<group>"; };
+		03DFB55E1371990D00BD029A /* MBPageDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPageDefinition.h; sourceTree = "<group>"; };
+		03DFB55F1371990D00BD029A /* MBPageDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPageDefinition.m; sourceTree = "<group>"; };
+		03DFB5601371990D00BD029A /* MBPanelDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPanelDefinition.h; sourceTree = "<group>"; };
+		03DFB5611371990D00BD029A /* MBPanelDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPanelDefinition.m; sourceTree = "<group>"; };
+		03DFB5621371990D00BD029A /* MBVariableDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBVariableDefinition.h; sourceTree = "<group>"; };
+		03DFB5631371990D00BD029A /* MBVariableDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBVariableDefinition.m; sourceTree = "<group>"; };
+		03DFB5651371990D00BD029A /* MBBundleDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBundleDefinition.h; sourceTree = "<group>"; };
+		03DFB5661371990D00BD029A /* MBBundleDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBBundleDefinition.m; sourceTree = "<group>"; };
+		03DFB5671371990D00BD029A /* MBResourceConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResourceConfiguration.h; sourceTree = "<group>"; };
+		03DFB5681371990D00BD029A /* MBResourceConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBResourceConfiguration.m; sourceTree = "<group>"; };
+		03DFB5691371990D00BD029A /* MBResourceConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResourceConfigurationParser.h; sourceTree = "<group>"; };
+		03DFB56A1371990D00BD029A /* MBResourceConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBResourceConfigurationParser.m; sourceTree = "<group>"; };
+		03DFB56B1371990D00BD029A /* MBResourceDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResourceDefinition.h; sourceTree = "<group>"; };
+		03DFB56C1371990D00BD029A /* MBResourceDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBResourceDefinition.m; sourceTree = "<group>"; };
+		03DFB56E1371990D00BD029A /* MBEndPointDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEndPointDefinition.h; sourceTree = "<group>"; };
+		03DFB56F1371990D00BD029A /* MBEndPointDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEndPointDefinition.m; sourceTree = "<group>"; };
+		03DFB5701371990D00BD029A /* MBResultListenerDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResultListenerDefinition.h; sourceTree = "<group>"; };
+		03DFB5711371990D00BD029A /* MBResultListenerDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBResultListenerDefinition.m; sourceTree = "<group>"; };
+		03DFB5721371990D00BD029A /* MBWebservicesConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBWebservicesConfiguration.h; sourceTree = "<group>"; };
+		03DFB5731371990D00BD029A /* MBWebservicesConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBWebservicesConfiguration.m; sourceTree = "<group>"; };
+		03DFB5741371990D00BD029A /* MBWebservicesConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBWebservicesConfigurationParser.h; sourceTree = "<group>"; };
+		03DFB5751371990D00BD029A /* MBWebservicesConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBWebservicesConfigurationParser.m; sourceTree = "<group>"; };
+		03DFB5771371990D00BD029A /* MBAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAction.h; sourceTree = "<group>"; };
+		03DFB5781371990D00BD029A /* MBApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBApplicationController.h; sourceTree = "<group>"; };
+		03DFB5791371990D00BD029A /* MBApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBApplicationController.m; sourceTree = "<group>"; };
+		03DFB57A1371990D00BD029A /* MBApplicationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBApplicationFactory.h; sourceTree = "<group>"; };
+		03DFB57B1371990D00BD029A /* MBApplicationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBApplicationFactory.m; sourceTree = "<group>"; };
+		03DFB57C1371990D00BD029A /* MBDialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogController.h; sourceTree = "<group>"; };
+		03DFB57D1371990D00BD029A /* MBDialogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDialogController.m; sourceTree = "<group>"; };
+		03DFB57E1371990D00BD029A /* MBDialogGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogGroupController.h; sourceTree = "<group>"; };
+		03DFB57F1371990D00BD029A /* MBDialogGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDialogGroupController.m; sourceTree = "<group>"; };
+		03DFB5801371990D00BD029A /* MBOutcome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOutcome.h; sourceTree = "<group>"; };
+		03DFB5811371990D00BD029A /* MBOutcome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOutcome.m; sourceTree = "<group>"; };
+		03DFB5821371990D00BD029A /* MBViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBViewManager.h; sourceTree = "<group>"; };
+		03DFB5831371990D00BD029A /* MBViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBViewManager.m; sourceTree = "<group>"; };
+		03DFB5851371990D00BD029A /* MBActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBActivityIndicator.h; sourceTree = "<group>"; };
+		03DFB5861371990D00BD029A /* MBActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActivityIndicator.m; sourceTree = "<group>"; };
+		03DFB5871371990D00BD029A /* MBBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBasicViewController.h; sourceTree = "<group>"; };
+		03DFB5881371990D00BD029A /* MBBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBBasicViewController.m; sourceTree = "<group>"; };
+		03DFB5891371990D00BD029A /* MBFormSubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFormSubmission.h; sourceTree = "<group>"; };
+		03DFB58A1371990D00BD029A /* MBFormSubmission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFormSubmission.m; sourceTree = "<group>"; };
+		03DFB58B1371990D00BD029A /* MBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBNavigationController.h; sourceTree = "<group>"; };
+		03DFB58C1371990D00BD029A /* MBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBNavigationController.m; sourceTree = "<group>"; };
+		03DFB58D1371990D00BD029A /* MBSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSplitViewController.h; sourceTree = "<group>"; };
+		03DFB58E1371990D00BD029A /* MBSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSplitViewController.m; sourceTree = "<group>"; };
+		03DFB58F1371990D00BD029A /* MBViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBViewControllerProtocol.h; sourceTree = "<group>"; };
+		03DFB5B61371990D00BD029A /* MGSplitCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitCornersView.h; sourceTree = "<group>"; };
+		03DFB5B71371990D00BD029A /* MGSplitCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitCornersView.m; sourceTree = "<group>"; };
+		03DFB5B81371990D00BD029A /* MGSplitDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitDividerView.h; sourceTree = "<group>"; };
+		03DFB5B91371990D00BD029A /* MGSplitDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitDividerView.m; sourceTree = "<group>"; };
+		03DFB5BA1371990D00BD029A /* MGSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitViewController.h; sourceTree = "<group>"; };
+		03DFB5BB1371990D00BD029A /* MGSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitViewController.m; sourceTree = "<group>"; };
+		03DFB8461371990E00BD029A /* MBDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocument.h; sourceTree = "<group>"; };
+		03DFB8471371990E00BD029A /* MBDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocument.m; sourceTree = "<group>"; };
+		03DFB8481371990E00BD029A /* MBDocumentDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentDiff.h; sourceTree = "<group>"; };
+		03DFB8491371990E00BD029A /* MBDocumentDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocumentDiff.m; sourceTree = "<group>"; };
+		03DFB84A1371990E00BD029A /* MBDocumentFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentFactory.h; sourceTree = "<group>"; };
+		03DFB84B1371990E00BD029A /* MBDocumentFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocumentFactory.m; sourceTree = "<group>"; };
+		03DFB84C1371990E00BD029A /* MBDocumentParserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentParserProtocol.h; sourceTree = "<group>"; };
+		03DFB84D1371990E00BD029A /* MBElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBElement.h; sourceTree = "<group>"; };
+		03DFB84E1371990E00BD029A /* MBElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBElement.m; sourceTree = "<group>"; };
+		03DFB84F1371990E00BD029A /* MBElementContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBElementContainer.h; sourceTree = "<group>"; };
+		03DFB8501371990E00BD029A /* MBElementContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBElementContainer.m; sourceTree = "<group>"; };
+		03DFB8511371990E00BD029A /* MBJsonDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBJsonDocumentParser.h; sourceTree = "<group>"; };
+		03DFB8521371990E00BD029A /* MBJsonDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBJsonDocumentParser.m; sourceTree = "<group>"; };
+		03DFB8531371990E00BD029A /* MBMobbl1DocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMobbl1DocumentParser.h; sourceTree = "<group>"; };
+		03DFB8541371990E00BD029A /* MBMobbl1DocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMobbl1DocumentParser.m; sourceTree = "<group>"; };
+		03DFB8551371990E00BD029A /* MBSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSession.h; sourceTree = "<group>"; };
+		03DFB8561371990E00BD029A /* MBSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSession.m; sourceTree = "<group>"; };
+		03DFB8571371990E00BD029A /* MBXmlDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXmlDocumentParser.h; sourceTree = "<group>"; };
+		03DFB8581371990E00BD029A /* MBXmlDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXmlDocumentParser.m; sourceTree = "<group>"; };
+		03DFB85C1371990E00BD029A /* MBDocumentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentOperation.h; sourceTree = "<group>"; };
+		03DFB85D1371990E00BD029A /* MBDocumentOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocumentOperation.m; sourceTree = "<group>"; };
+		03DFB85E1371990E00BD029A /* MBFileDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFileDataHandler.h; sourceTree = "<group>"; };
+		03DFB85F1371990E00BD029A /* MBFileDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFileDataHandler.m; sourceTree = "<group>"; };
+		03DFB8601371990E00BD029A /* MBMemoryDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMemoryDataHandler.h; sourceTree = "<group>"; };
+		03DFB8611371990E00BD029A /* MBMemoryDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMemoryDataHandler.m; sourceTree = "<group>"; };
+		03DFB8621371990E00BD029A /* MBMobbl1ServerDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMobbl1ServerDataHandler.h; sourceTree = "<group>"; };
+		03DFB8631371990E00BD029A /* MBMobbl1ServerDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMobbl1ServerDataHandler.m; sourceTree = "<group>"; };
+		03DFB8641371990E00BD029A /* MBRESTServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRESTServiceDataHandler.h; sourceTree = "<group>"; };
+		03DFB8651371990E00BD029A /* MBRESTServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRESTServiceDataHandler.m; sourceTree = "<group>"; };
+		03DFB8661371990E00BD029A /* MBSystemDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSystemDataHandler.h; sourceTree = "<group>"; };
+		03DFB8671371990E00BD029A /* MBSystemDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSystemDataHandler.m; sourceTree = "<group>"; };
+		03DFB8681371990E00BD029A /* MBWebserviceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBWebserviceDataHandler.h; sourceTree = "<group>"; };
+		03DFB8691371990E00BD029A /* MBWebserviceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBWebserviceDataHandler.m; sourceTree = "<group>"; };
+		03DFB86A1371990E00BD029A /* MBDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDataHandler.h; sourceTree = "<group>"; };
+		03DFB86B1371990E00BD029A /* MBDataHandlerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDataHandlerBase.h; sourceTree = "<group>"; };
+		03DFB86C1371990E00BD029A /* MBDataHandlerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDataHandlerBase.m; sourceTree = "<group>"; };
+		03DFB8741371990E00BD029A /* MBDataManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDataManagerService.h; sourceTree = "<group>"; };
+		03DFB8751371990E00BD029A /* MBDataManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDataManagerService.m; sourceTree = "<group>"; };
+		03DFB8761371990E00BD029A /* MBLocalizationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLocalizationService.h; sourceTree = "<group>"; };
+		03DFB8771371990E00BD029A /* MBLocalizationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLocalizationService.m; sourceTree = "<group>"; };
+		03DFB8781371990E00BD029A /* MBMetadataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMetadataService.h; sourceTree = "<group>"; };
+		03DFB8791371990E00BD029A /* MBMetadataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMetadataService.m; sourceTree = "<group>"; };
+		03DFB87A1371990E00BD029A /* MBResourceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResourceService.h; sourceTree = "<group>"; };
+		03DFB87B1371990E00BD029A /* MBResourceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBResourceService.m; sourceTree = "<group>"; };
+		03DFB87C1371990E00BD029A /* MBResultListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResultListener.h; sourceTree = "<group>"; };
+		03DFB87D1371990E00BD029A /* MBScriptService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBScriptService.h; sourceTree = "<group>"; };
+		03DFB87E1371990E00BD029A /* MBScriptService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBScriptService.m; sourceTree = "<group>"; };
+		03DFB8801371990E00BD029A /* BinckUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinckUtilities.h; sourceTree = "<group>"; };
+		03DFB8811371990E00BD029A /* BinckUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinckUtilities.m; sourceTree = "<group>"; };
+		03DFB8821371990E00BD029A /* ColorUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtilities.h; sourceTree = "<group>"; };
+		03DFB8831371990E00BD029A /* ColorUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtilities.m; sourceTree = "<group>"; };
+		03DFB8841371990E00BD029A /* DataUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataUtilites.h; sourceTree = "<group>"; };
+		03DFB8851371990E00BD029A /* DataUtilites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataUtilites.m; sourceTree = "<group>"; };
+		03DFB8871371990E00BD029A /* BuildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildInfo.h; sourceTree = "<group>"; };
+		03DFB8881371990E00BD029A /* MBMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMacros.h; sourceTree = "<group>"; };
+		03DFB8891371990E00BD029A /* MBNotificationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBNotificationTypes.h; sourceTree = "<group>"; };
+		03DFB88A1371990E00BD029A /* MBTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTypes.h; sourceTree = "<group>"; };
+		03DFB88B1371990E00BD029A /* GTMStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStackTrace.h; sourceTree = "<group>"; };
+		03DFB88C1371990E00BD029A /* GTMStackTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStackTrace.m; sourceTree = "<group>"; };
+		03DFB88E1371990E00BD029A /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		03DFB88F1371990E00BD029A /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		03DFB8901371990E00BD029A /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		03DFB8911371990E00BD029A /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		03DFB8921371990E00BD029A /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		03DFB8931371990E00BD029A /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		03DFB8941371990E00BD029A /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		03DFB8951371990E00BD029A /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		03DFB8961371990E00BD029A /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		03DFB8971371990E00BD029A /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		03DFB8981371990E00BD029A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		03DFB8991371990E00BD029A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		03DFB89A1371990E00BD029A /* LocaleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaleUtilities.h; sourceTree = "<group>"; };
+		03DFB89B1371990E00BD029A /* LocaleUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaleUtilities.m; sourceTree = "<group>"; };
+		03DFB89C1371990E00BD029A /* MBCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCacheManager.h; sourceTree = "<group>"; };
+		03DFB89D1371990E00BD029A /* MBCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCacheManager.m; sourceTree = "<group>"; };
+		03DFB89E1371990E00BD029A /* MBCacheWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCacheWriter.h; sourceTree = "<group>"; };
+		03DFB89F1371990E00BD029A /* MBCacheWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCacheWriter.m; sourceTree = "<group>"; };
+		03DFB8A01371990E00BD029A /* MBDeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDeviceType.h; sourceTree = "<group>"; };
+		03DFB8A11371990E00BD029A /* MBDeviceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDeviceType.m; sourceTree = "<group>"; };
+		03DFB8A21371990E00BD029A /* MBOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOrientationManager.h; sourceTree = "<group>"; };
+		03DFB8A31371990E00BD029A /* MBOrientationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOrientationManager.m; sourceTree = "<group>"; };
+		03DFB8A41371990E00BD029A /* MBProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProperties.h; sourceTree = "<group>"; };
+		03DFB8A51371990E00BD029A /* MBProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProperties.m; sourceTree = "<group>"; };
+		03DFB8A61371990E00BD029A /* MBPropertiesConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPropertiesConstants.h; sourceTree = "<group>"; };
+		03DFB8A71371990E00BD029A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		03DFB8A81371990E00BD029A /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		03DFB8A91371990E00BD029A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		03DFB8AA1371990E00BD029A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		03DFB8AB1371990E00BD029A /* StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtilities.h; sourceTree = "<group>"; };
+		03DFB8AC1371990E00BD029A /* StringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtilities.m; sourceTree = "<group>"; };
+		03DFB8AD1371990E00BD029A /* StringUtilitiesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtilitiesHelper.h; sourceTree = "<group>"; };
+		03DFB8AE1371990E00BD029A /* StringUtilitiesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtilitiesHelper.m; sourceTree = "<group>"; };
+		03DFB8AF1371990E00BD029A /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		03DFB8B01371990E00BD029A /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		03DFB8B11371990E00BD029A /* ViewUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtilities.h; sourceTree = "<group>"; };
+		03DFB8B21371990E00BD029A /* ViewUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtilities.m; sourceTree = "<group>"; };
+		03DFB8B51371990E00BD029A /* MBFieldTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFieldTypes.h; sourceTree = "<group>"; };
+		03DFB8B61371990E00BD029A /* MBFieldViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFieldViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8B71371990E00BD029A /* MBFieldViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFieldViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8B81371990E00BD029A /* MBForEachViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBForEachViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8B91371990E00BD029A /* MBForEachViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBForEachViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8BA1371990E00BD029A /* MBMatrixViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMatrixViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8BB1371990E00BD029A /* MBMatrixViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMatrixViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8BC1371990E00BD029A /* MBPageViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPageViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8BD1371990E00BD029A /* MBPageViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPageViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8BE1371990E00BD029A /* MBPanelViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPanelViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8BF1371990E00BD029A /* MBPanelViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPanelViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8C01371990E00BD029A /* MBRowViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRowViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8C11371990E00BD029A /* MBRowViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRowViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8C21371990E00BD029A /* MBStyleHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBStyleHandler.h; sourceTree = "<group>"; };
+		03DFB8C31371990E00BD029A /* MBStyleHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBStyleHandler.m; sourceTree = "<group>"; };
+		03DFB8C41371990E00BD029A /* MBViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBViewBuilder.h; sourceTree = "<group>"; };
+		03DFB8C51371990E00BD029A /* MBViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBViewBuilder.m; sourceTree = "<group>"; };
+		03DFB8C61371990E00BD029A /* MBViewBuilderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBViewBuilderFactory.h; sourceTree = "<group>"; };
+		03DFB8C71371990E00BD029A /* MBViewBuilderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBViewBuilderFactory.m; sourceTree = "<group>"; };
+		03DFB8C91371990E00BD029A /* MBPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPickerController.h; sourceTree = "<group>"; };
+		03DFB8CA1371990E00BD029A /* MBPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPickerController.m; sourceTree = "<group>"; };
+		03DFB8CB1371990E00BD029A /* MBPickerPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPickerPopoverController.h; sourceTree = "<group>"; };
+		03DFB8CC1371990E00BD029A /* MBPickerPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPickerPopoverController.m; sourceTree = "<group>"; };
+		03DFB8CD1371990E00BD029A /* MBSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSpinner.h; sourceTree = "<group>"; };
+		03DFB8CE1371990E00BD029A /* MBSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSpinner.m; sourceTree = "<group>"; };
+		03DFB8CF1371990E00BD029A /* MBComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBComponent.h; sourceTree = "<group>"; };
+		03DFB8D01371990E00BD029A /* MBComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBComponent.m; sourceTree = "<group>"; };
+		03DFB8D11371990E00BD029A /* MBComponentContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBComponentContainer.h; sourceTree = "<group>"; };
+		03DFB8D21371990E00BD029A /* MBComponentContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBComponentContainer.m; sourceTree = "<group>"; };
+		03DFB8D31371990E00BD029A /* MBComponentFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBComponentFactory.h; sourceTree = "<group>"; };
+		03DFB8D41371990E00BD029A /* MBComponentFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBComponentFactory.m; sourceTree = "<group>"; };
+		03DFB8D51371990E00BD029A /* MBConditionalPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConditionalPage.h; sourceTree = "<group>"; };
+		03DFB8D61371990E00BD029A /* MBConditionalPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBConditionalPage.m; sourceTree = "<group>"; };
+		03DFB8D71371990E00BD029A /* MBField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBField.h; sourceTree = "<group>"; };
+		03DFB8D81371990E00BD029A /* MBField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBField.m; sourceTree = "<group>"; };
+		03DFB8D91371990E00BD029A /* MBForEach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBForEach.h; sourceTree = "<group>"; };
+		03DFB8DA1371990E00BD029A /* MBForEach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBForEach.m; sourceTree = "<group>"; };
+		03DFB8DB1371990E00BD029A /* MBOutcomeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOutcomeListenerProtocol.h; sourceTree = "<group>"; };
+		03DFB8DC1371990E00BD029A /* MBPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPage.h; sourceTree = "<group>"; };
+		03DFB8DD1371990E00BD029A /* MBPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPage.m; sourceTree = "<group>"; };
+		03DFB8DE1371990E00BD029A /* MBPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPanel.h; sourceTree = "<group>"; };
+		03DFB8DF1371990E00BD029A /* MBPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPanel.m; sourceTree = "<group>"; };
+		03DFB8E01371990E00BD029A /* MBRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRow.h; sourceTree = "<group>"; };
+		03DFB8E11371990E00BD029A /* MBRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRow.m; sourceTree = "<group>"; };
+		03DFB8E21371990E00BD029A /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
+		03DFB8E41371990E00BD029A /* MBMatrixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMatrixCell.h; sourceTree = "<group>"; };
+		03DFB8E51371990E00BD029A /* MBMatrixCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMatrixCell.m; sourceTree = "<group>"; };
+		03DFB8E61371990E00BD029A /* MBMatrixHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMatrixHeaderView.h; sourceTree = "<group>"; };
+		03DFB8E71371990E00BD029A /* MBMatrixHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMatrixHeaderView.m; sourceTree = "<group>"; };
+		03DFB8E81371990E00BD029A /* MBMatrixRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMatrixRowView.h; sourceTree = "<group>"; };
+		03DFB8E91371990E00BD029A /* MBMatrixRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMatrixRowView.m; sourceTree = "<group>"; };
+		03DFB8EA1371990E00BD029A /* MBMatrixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMatrixViewController.h; sourceTree = "<group>"; };
+		03DFB8EB1371990E00BD029A /* MBMatrixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMatrixViewController.m; sourceTree = "<group>"; };
+		03DFB8ED1371990E00BD029A /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
+		03DFB8EE1371990E00BD029A /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		1CF0C28A13EAFACA00AB54D8 /* MBPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MBPicker.xib; path = "itude-mobile-iphone-core/Resources/Xibs/MBPicker.xib"; sourceTree = "<group>"; };
+		BDC0A2E713EAE30400751439 /* MBDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MBDatePicker.xib; path = "itude-mobile-iphone-core/Resources/Xibs/MBDatePicker.xib"; sourceTree = "<group>"; };
+		BDE5372C13F275E700E52B1E /* MBDatePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDatePickerController.h; sourceTree = "<group>"; };
+		BDE5372D13F275E700E52B1E /* MBDatePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDatePickerController.m; sourceTree = "<group>"; };
+		DCDF99D213C1E17200F927A3 /* itude-mobile-iphone-core-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-core-Info.plist"; sourceTree = SOURCE_ROOT; };
+		DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-core-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03DA532A1371989F00BE1FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCDF9A4E13C1E9A900F927A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03DA53221371989E00BE1FDB = {
+			isa = PBXGroup;
+			children = (
+				03DA53321371989F00BE1FDB /* itude-mobile-iphone-core */,
+				03DA532E1371989F00BE1FDB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03DA532E1371989F00BE1FDB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03DA532D1371989F00BE1FDB /* itude-mobile-iphone-core.framework/itude-mobile-iphone-core */,
+				DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03DA53321371989F00BE1FDB /* itude-mobile-iphone-core */ = {
+			isa = PBXGroup;
+			children = (
+				BDCCF7B413EA936E0026FB6E /* Resources */,
+				03DFB53B1371990D00BD029A /* Configuration */,
+				03DFB5761371990D00BD029A /* Controller */,
+				03DFB5901371990D00BD029A /* External */,
+				03DFB8451371990E00BD029A /* Model */,
+				03DFB8591371990E00BD029A /* Services */,
+				03DFB87F1371990E00BD029A /* Util */,
+				03DFB8B31371990E00BD029A /* View */,
+				03DA53331371989F00BE1FDB /* Supporting Files */,
+			);
+			path = "itude-mobile-iphone-core";
+			sourceTree = "<group>";
+		};
+		03DA53331371989F00BE1FDB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03AEA1B213C3458D00F0248C /* itude-mobile-ios-core-i386.h */,
+				03AEA1A813C326C500F0248C /* itude-mobile-ios-core.h */,
+				DCDF99D213C1E17200F927A3 /* itude-mobile-iphone-core-Info.plist */,
+				DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */,
+				0371A53F13C4984500315375 /* itude-mobile-ios-core-headers.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03DFB53B1371990D00BD029A /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB53C1371990D00BD029A /* MBConditionalDefinition.h */,
+				03DFB53D1371990D00BD029A /* MBConditionalDefinition.m */,
+				03DFB53E1371990D00BD029A /* MBConfigurationParser.h */,
+				03DFB53F1371990D00BD029A /* MBConfigurationParser.m */,
+				03DFB5401371990D00BD029A /* MBConfigurationParserProtocol.h */,
+				03DFB5411371990D00BD029A /* MBDefinition.h */,
+				03DFB5421371990D00BD029A /* MBDefinition.m */,
+				03DFB5431371990D00BD029A /* MVC */,
+				03DFB5641371990D00BD029A /* Resources */,
+				03DFB56D1371990D00BD029A /* Webservices */,
+			);
+			path = Configuration;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB5431371990D00BD029A /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB5441371990D00BD029A /* MBActionDefinition.h */,
+				03DFB5451371990D00BD029A /* MBActionDefinition.m */,
+				03DFB5461371990D00BD029A /* MBAttributeDefinition.h */,
+				03DFB5471371990D00BD029A /* MBAttributeDefinition.m */,
+				03DFB5481371990D00BD029A /* MBConfigurationDefinition.h */,
+				03DFB5491371990D00BD029A /* MBConfigurationDefinition.m */,
+				03DFB54A1371990D00BD029A /* MBDialogDefinition.h */,
+				03DFB54B1371990D00BD029A /* MBDialogDefinition.m */,
+				03DFB54C1371990D00BD029A /* MBDialogGroupDefinition.h */,
+				03DFB54D1371990D00BD029A /* MBDialogGroupDefinition.m */,
+				03DFB54E1371990D00BD029A /* MBDocumentDefinition.h */,
+				03DFB54F1371990D00BD029A /* MBDocumentDefinition.m */,
+				03DFB5501371990D00BD029A /* MBDomainDefinition.h */,
+				03DFB5511371990D00BD029A /* MBDomainDefinition.m */,
+				03DFB5521371990D00BD029A /* MBDomainValidatorDefinition.h */,
+				03DFB5531371990D00BD029A /* MBDomainValidatorDefinition.m */,
+				03DFB5541371990D00BD029A /* MBElementDefinition.h */,
+				03DFB5551371990D00BD029A /* MBElementDefinition.m */,
+				03DFB5561371990D00BD029A /* MBFieldDefinition.h */,
+				03DFB5571371990D00BD029A /* MBFieldDefinition.m */,
+				03DFB5581371990D00BD029A /* MBForEachDefinition.h */,
+				03DFB5591371990D00BD029A /* MBForEachDefinition.m */,
+				03DFB55A1371990D00BD029A /* MBMvcConfigurationParser.h */,
+				03DFB55B1371990D00BD029A /* MBMvcConfigurationParser.m */,
+				03DFB55C1371990D00BD029A /* MBOutcomeDefinition.h */,
+				03DFB55D1371990D00BD029A /* MBOutcomeDefinition.m */,
+				03DFB55E1371990D00BD029A /* MBPageDefinition.h */,
+				03DFB55F1371990D00BD029A /* MBPageDefinition.m */,
+				03DFB5601371990D00BD029A /* MBPanelDefinition.h */,
+				03DFB5611371990D00BD029A /* MBPanelDefinition.m */,
+				03DFB5621371990D00BD029A /* MBVariableDefinition.h */,
+				03DFB5631371990D00BD029A /* MBVariableDefinition.m */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		03DFB5641371990D00BD029A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB5651371990D00BD029A /* MBBundleDefinition.h */,
+				03DFB5661371990D00BD029A /* MBBundleDefinition.m */,
+				03DFB5671371990D00BD029A /* MBResourceConfiguration.h */,
+				03DFB5681371990D00BD029A /* MBResourceConfiguration.m */,
+				03DFB5691371990D00BD029A /* MBResourceConfigurationParser.h */,
+				03DFB56A1371990D00BD029A /* MBResourceConfigurationParser.m */,
+				03DFB56B1371990D00BD029A /* MBResourceDefinition.h */,
+				03DFB56C1371990D00BD029A /* MBResourceDefinition.m */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		03DFB56D1371990D00BD029A /* Webservices */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB56E1371990D00BD029A /* MBEndPointDefinition.h */,
+				03DFB56F1371990D00BD029A /* MBEndPointDefinition.m */,
+				03DFB5701371990D00BD029A /* MBResultListenerDefinition.h */,
+				03DFB5711371990D00BD029A /* MBResultListenerDefinition.m */,
+				03DFB5721371990D00BD029A /* MBWebservicesConfiguration.h */,
+				03DFB5731371990D00BD029A /* MBWebservicesConfiguration.m */,
+				03DFB5741371990D00BD029A /* MBWebservicesConfigurationParser.h */,
+				03DFB5751371990D00BD029A /* MBWebservicesConfigurationParser.m */,
+			);
+			path = Webservices;
+			sourceTree = "<group>";
+		};
+		03DFB5761371990D00BD029A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB5771371990D00BD029A /* MBAction.h */,
+				03DFB5781371990D00BD029A /* MBApplicationController.h */,
+				03DFB5791371990D00BD029A /* MBApplicationController.m */,
+				03DFB57A1371990D00BD029A /* MBApplicationFactory.h */,
+				03DFB57B1371990D00BD029A /* MBApplicationFactory.m */,
+				03DFB57C1371990D00BD029A /* MBDialogController.h */,
+				03DFB57D1371990D00BD029A /* MBDialogController.m */,
+				03DFB57E1371990D00BD029A /* MBDialogGroupController.h */,
+				03DFB57F1371990D00BD029A /* MBDialogGroupController.m */,
+				03DFB5801371990D00BD029A /* MBOutcome.h */,
+				03DFB5811371990D00BD029A /* MBOutcome.m */,
+				03DFB5821371990D00BD029A /* MBViewManager.h */,
+				03DFB5831371990D00BD029A /* MBViewManager.m */,
+				03DFB5841371990D00BD029A /* Util */,
+			);
+			path = Controller;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB5841371990D00BD029A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB5851371990D00BD029A /* MBActivityIndicator.h */,
+				03DFB5861371990D00BD029A /* MBActivityIndicator.m */,
+				03DFB5871371990D00BD029A /* MBBasicViewController.h */,
+				03DFB5881371990D00BD029A /* MBBasicViewController.m */,
+				03DFB5891371990D00BD029A /* MBFormSubmission.h */,
+				03DFB58A1371990D00BD029A /* MBFormSubmission.m */,
+				03DFB58B1371990D00BD029A /* MBNavigationController.h */,
+				03DFB58C1371990D00BD029A /* MBNavigationController.m */,
+				03DFB58D1371990D00BD029A /* MBSplitViewController.h */,
+				03DFB58E1371990D00BD029A /* MBSplitViewController.m */,
+				03DFB58F1371990D00BD029A /* MBViewControllerProtocol.h */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		03DFB5901371990D00BD029A /* External */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB5B51371990D00BD029A /* MGSplitViewController */,
+			);
+			path = External;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB5B51371990D00BD029A /* MGSplitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB5B61371990D00BD029A /* MGSplitCornersView.h */,
+				03DFB5B71371990D00BD029A /* MGSplitCornersView.m */,
+				03DFB5B81371990D00BD029A /* MGSplitDividerView.h */,
+				03DFB5BA1371990D00BD029A /* MGSplitViewController.h */,
+				03DFB5BB1371990D00BD029A /* MGSplitViewController.m */,
+				03DFB5B91371990D00BD029A /* MGSplitDividerView.m */,
+			);
+			path = MGSplitViewController;
+			sourceTree = "<group>";
+		};
+		03DFB8451371990E00BD029A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8461371990E00BD029A /* MBDocument.h */,
+				03DFB8471371990E00BD029A /* MBDocument.m */,
+				03DFB8481371990E00BD029A /* MBDocumentDiff.h */,
+				03DFB8491371990E00BD029A /* MBDocumentDiff.m */,
+				03DFB84A1371990E00BD029A /* MBDocumentFactory.h */,
+				03DFB84B1371990E00BD029A /* MBDocumentFactory.m */,
+				03DFB84C1371990E00BD029A /* MBDocumentParserProtocol.h */,
+				03DFB84D1371990E00BD029A /* MBElement.h */,
+				03DFB84E1371990E00BD029A /* MBElement.m */,
+				03DFB84F1371990E00BD029A /* MBElementContainer.h */,
+				03DFB8501371990E00BD029A /* MBElementContainer.m */,
+				03DFB8511371990E00BD029A /* MBJsonDocumentParser.h */,
+				03DFB8521371990E00BD029A /* MBJsonDocumentParser.m */,
+				03DFB8531371990E00BD029A /* MBMobbl1DocumentParser.h */,
+				03DFB8541371990E00BD029A /* MBMobbl1DocumentParser.m */,
+				03DFB8551371990E00BD029A /* MBSession.h */,
+				03DFB8561371990E00BD029A /* MBSession.m */,
+				03DFB8571371990E00BD029A /* MBXmlDocumentParser.h */,
+				03DFB8581371990E00BD029A /* MBXmlDocumentParser.m */,
+			);
+			path = Model;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB8591371990E00BD029A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB85A1371990E00BD029A /* DataManagerImpl */,
+				03DFB8741371990E00BD029A /* MBDataManagerService.h */,
+				03DFB8751371990E00BD029A /* MBDataManagerService.m */,
+				03DFB8761371990E00BD029A /* MBLocalizationService.h */,
+				03DFB8771371990E00BD029A /* MBLocalizationService.m */,
+				03DFB8781371990E00BD029A /* MBMetadataService.h */,
+				03DFB8791371990E00BD029A /* MBMetadataService.m */,
+				03DFB87A1371990E00BD029A /* MBResourceService.h */,
+				03DFB87B1371990E00BD029A /* MBResourceService.m */,
+				03DFB87C1371990E00BD029A /* MBResultListener.h */,
+				03DFB87D1371990E00BD029A /* MBScriptService.h */,
+				03DFB87E1371990E00BD029A /* MBScriptService.m */,
+			);
+			path = Services;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB85A1371990E00BD029A /* DataManagerImpl */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB85B1371990E00BD029A /* Handlers */,
+				03DFB86A1371990E00BD029A /* MBDataHandler.h */,
+				03DFB86B1371990E00BD029A /* MBDataHandlerBase.h */,
+				03DFB86C1371990E00BD029A /* MBDataHandlerBase.m */,
+			);
+			path = DataManagerImpl;
+			sourceTree = "<group>";
+		};
+		03DFB85B1371990E00BD029A /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB85C1371990E00BD029A /* MBDocumentOperation.h */,
+				03DFB85D1371990E00BD029A /* MBDocumentOperation.m */,
+				03DFB85E1371990E00BD029A /* MBFileDataHandler.h */,
+				03DFB85F1371990E00BD029A /* MBFileDataHandler.m */,
+				03DFB8601371990E00BD029A /* MBMemoryDataHandler.h */,
+				03DFB8611371990E00BD029A /* MBMemoryDataHandler.m */,
+				03DFB8621371990E00BD029A /* MBMobbl1ServerDataHandler.h */,
+				03DFB8631371990E00BD029A /* MBMobbl1ServerDataHandler.m */,
+				03DFB8641371990E00BD029A /* MBRESTServiceDataHandler.h */,
+				03DFB8651371990E00BD029A /* MBRESTServiceDataHandler.m */,
+				03DFB8661371990E00BD029A /* MBSystemDataHandler.h */,
+				03DFB8671371990E00BD029A /* MBSystemDataHandler.m */,
+				03DFB8681371990E00BD029A /* MBWebserviceDataHandler.h */,
+				03DFB8691371990E00BD029A /* MBWebserviceDataHandler.m */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
+		03DFB87F1371990E00BD029A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8801371990E00BD029A /* BinckUtilities.h */,
+				03DFB8811371990E00BD029A /* BinckUtilities.m */,
+				03DFB8821371990E00BD029A /* ColorUtilities.h */,
+				03DFB8831371990E00BD029A /* ColorUtilities.m */,
+				03DFB8841371990E00BD029A /* DataUtilites.h */,
+				03DFB8851371990E00BD029A /* DataUtilites.m */,
+				03DFB8861371990E00BD029A /* Defines */,
+				03DFB88B1371990E00BD029A /* GTMStackTrace.h */,
+				03DFB88C1371990E00BD029A /* GTMStackTrace.m */,
+				03DFB88D1371990E00BD029A /* JSON */,
+				03DFB89A1371990E00BD029A /* LocaleUtilities.h */,
+				03DFB89B1371990E00BD029A /* LocaleUtilities.m */,
+				03DFB89C1371990E00BD029A /* MBCacheManager.h */,
+				03DFB89D1371990E00BD029A /* MBCacheManager.m */,
+				03DFB89E1371990E00BD029A /* MBCacheWriter.h */,
+				03DFB89F1371990E00BD029A /* MBCacheWriter.m */,
+				03DFB8A01371990E00BD029A /* MBDeviceType.h */,
+				03DFB8A11371990E00BD029A /* MBDeviceType.m */,
+				03DFB8A21371990E00BD029A /* MBOrientationManager.h */,
+				03DFB8A31371990E00BD029A /* MBOrientationManager.m */,
+				03DFB8A41371990E00BD029A /* MBProperties.h */,
+				03DFB8A51371990E00BD029A /* MBProperties.m */,
+				03DFB8A61371990E00BD029A /* MBPropertiesConstants.h */,
+				03DFB8A71371990E00BD029A /* NSData+Base64.h */,
+				03DFB8A81371990E00BD029A /* NSData+Base64.m */,
+				03DFB8A91371990E00BD029A /* Reachability.h */,
+				03DFB8AA1371990E00BD029A /* Reachability.m */,
+				03DFB8AB1371990E00BD029A /* StringUtilities.h */,
+				03DFB8AC1371990E00BD029A /* StringUtilities.m */,
+				03DFB8AD1371990E00BD029A /* StringUtilitiesHelper.h */,
+				03DFB8AE1371990E00BD029A /* StringUtilitiesHelper.m */,
+				03DFB8AF1371990E00BD029A /* UncaughtExceptionHandler.h */,
+				03DFB8B01371990E00BD029A /* UncaughtExceptionHandler.m */,
+				03DFB8B11371990E00BD029A /* ViewUtilities.h */,
+				03DFB8B21371990E00BD029A /* ViewUtilities.m */,
+			);
+			path = Util;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB8861371990E00BD029A /* Defines */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8871371990E00BD029A /* BuildInfo.h */,
+				03DFB8881371990E00BD029A /* MBMacros.h */,
+				03DFB8891371990E00BD029A /* MBNotificationTypes.h */,
+				03DFB88A1371990E00BD029A /* MBTypes.h */,
+			);
+			path = Defines;
+			sourceTree = "<group>";
+		};
+		03DFB88D1371990E00BD029A /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB88E1371990E00BD029A /* JSON.h */,
+				03DFB88F1371990E00BD029A /* NSObject+SBJSON.h */,
+				03DFB8901371990E00BD029A /* NSString+SBJSON.h */,
+				03DFB8911371990E00BD029A /* NSString+SBJSON.m */,
+				03DFB8921371990E00BD029A /* SBJSON.h */,
+				03DFB8931371990E00BD029A /* SBJSON.m */,
+				03DFB8941371990E00BD029A /* SBJsonBase.h */,
+				03DFB8951371990E00BD029A /* SBJsonBase.m */,
+				03DFB8961371990E00BD029A /* SBJsonParser.h */,
+				03DFB8971371990E00BD029A /* SBJsonParser.m */,
+				03DFB8981371990E00BD029A /* SBJsonWriter.h */,
+				03DFB8991371990E00BD029A /* SBJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		03DFB8B31371990E00BD029A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8B41371990E00BD029A /* Builders */,
+				03DFB8C81371990E00BD029A /* Helpers */,
+				03DFB8CF1371990E00BD029A /* MBComponent.h */,
+				03DFB8D01371990E00BD029A /* MBComponent.m */,
+				03DFB8D11371990E00BD029A /* MBComponentContainer.h */,
+				03DFB8D21371990E00BD029A /* MBComponentContainer.m */,
+				03DFB8D31371990E00BD029A /* MBComponentFactory.h */,
+				03DFB8D41371990E00BD029A /* MBComponentFactory.m */,
+				03DFB8D51371990E00BD029A /* MBConditionalPage.h */,
+				03DFB8D61371990E00BD029A /* MBConditionalPage.m */,
+				03DFB8D71371990E00BD029A /* MBField.h */,
+				03DFB8D81371990E00BD029A /* MBField.m */,
+				03DFB8D91371990E00BD029A /* MBForEach.h */,
+				03DFB8DA1371990E00BD029A /* MBForEach.m */,
+				03DFB8DB1371990E00BD029A /* MBOutcomeListenerProtocol.h */,
+				03DFB8DC1371990E00BD029A /* MBPage.h */,
+				03DFB8DD1371990E00BD029A /* MBPage.m */,
+				03DFB8DE1371990E00BD029A /* MBPanel.h */,
+				03DFB8DF1371990E00BD029A /* MBPanel.m */,
+				03DFB8E01371990E00BD029A /* MBRow.h */,
+				03DFB8E11371990E00BD029A /* MBRow.m */,
+				03DFB8E21371990E00BD029A /* MBValueChangeListenerProtocol.h */,
+				03DFB8E31371990E00BD029A /* Matrix */,
+				03DFB8EC1371990E00BD029A /* Tables */,
+			);
+			path = View;
+			sourceTree = SOURCE_ROOT;
+		};
+		03DFB8B41371990E00BD029A /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8B51371990E00BD029A /* MBFieldTypes.h */,
+				03DFB8B61371990E00BD029A /* MBFieldViewBuilder.h */,
+				03DFB8B71371990E00BD029A /* MBFieldViewBuilder.m */,
+				03DFB8B81371990E00BD029A /* MBForEachViewBuilder.h */,
+				03DFB8B91371990E00BD029A /* MBForEachViewBuilder.m */,
+				03DFB8BA1371990E00BD029A /* MBMatrixViewBuilder.h */,
+				03DFB8BB1371990E00BD029A /* MBMatrixViewBuilder.m */,
+				03DFB8BC1371990E00BD029A /* MBPageViewBuilder.h */,
+				03DFB8BD1371990E00BD029A /* MBPageViewBuilder.m */,
+				03DFB8BE1371990E00BD029A /* MBPanelViewBuilder.h */,
+				03DFB8BF1371990E00BD029A /* MBPanelViewBuilder.m */,
+				03DFB8C01371990E00BD029A /* MBRowViewBuilder.h */,
+				03DFB8C11371990E00BD029A /* MBRowViewBuilder.m */,
+				03DFB8C21371990E00BD029A /* MBStyleHandler.h */,
+				03DFB8C31371990E00BD029A /* MBStyleHandler.m */,
+				03DFB8C41371990E00BD029A /* MBViewBuilder.h */,
+				03DFB8C51371990E00BD029A /* MBViewBuilder.m */,
+				03DFB8C61371990E00BD029A /* MBViewBuilderFactory.h */,
+				03DFB8C71371990E00BD029A /* MBViewBuilderFactory.m */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		03DFB8C81371990E00BD029A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BDE5372C13F275E700E52B1E /* MBDatePickerController.h */,
+				BDE5372D13F275E700E52B1E /* MBDatePickerController.m */,
+				03DFB8C91371990E00BD029A /* MBPickerController.h */,
+				03DFB8CA1371990E00BD029A /* MBPickerController.m */,
+				03DFB8CB1371990E00BD029A /* MBPickerPopoverController.h */,
+				03DFB8CC1371990E00BD029A /* MBPickerPopoverController.m */,
+				03DFB8CD1371990E00BD029A /* MBSpinner.h */,
+				03DFB8CE1371990E00BD029A /* MBSpinner.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		03DFB8E31371990E00BD029A /* Matrix */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8E41371990E00BD029A /* MBMatrixCell.h */,
+				03DFB8E51371990E00BD029A /* MBMatrixCell.m */,
+				03DFB8E61371990E00BD029A /* MBMatrixHeaderView.h */,
+				03DFB8E71371990E00BD029A /* MBMatrixHeaderView.m */,
+				03DFB8E81371990E00BD029A /* MBMatrixRowView.h */,
+				03DFB8E91371990E00BD029A /* MBMatrixRowView.m */,
+				03DFB8EA1371990E00BD029A /* MBMatrixViewController.h */,
+				03DFB8EB1371990E00BD029A /* MBMatrixViewController.m */,
+			);
+			path = Matrix;
+			sourceTree = "<group>";
+		};
+		03DFB8EC1371990E00BD029A /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				03DFB8ED1371990E00BD029A /* MBTableViewController.h */,
+				03DFB8EE1371990E00BD029A /* MBTableViewController.m */,
+			);
+			path = Tables;
+			sourceTree = "<group>";
+		};
+		BDCCF7B413EA936E0026FB6E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDCCF7B613EA937A0026FB6E /* Xibs */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		BDCCF7B613EA937A0026FB6E /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				BDC0A2E713EAE30400751439 /* MBDatePicker.xib */,
+				1CF0C28A13EAFACA00AB54D8 /* MBPicker.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		03DA532B1371989F00BE1FDB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DFB8F31371990F00BD029A /* MBConditionalDefinition.h in Headers */,
+				03DFB8F51371990F00BD029A /* MBConfigurationParser.h in Headers */,
+				03DFB8F71371990F00BD029A /* MBConfigurationParserProtocol.h in Headers */,
+				03DFB8F81371990F00BD029A /* MBDefinition.h in Headers */,
+				03DFB8FA1371990F00BD029A /* MBActionDefinition.h in Headers */,
+				03DFB8FC1371990F00BD029A /* MBAttributeDefinition.h in Headers */,
+				03DFB8FE1371990F00BD029A /* MBConfigurationDefinition.h in Headers */,
+				03DFB9001371990F00BD029A /* MBDialogDefinition.h in Headers */,
+				03DFB9021371990F00BD029A /* MBDialogGroupDefinition.h in Headers */,
+				03DFB9041371990F00BD029A /* MBDocumentDefinition.h in Headers */,
+				03DFB9061371990F00BD029A /* MBDomainDefinition.h in Headers */,
+				03DFB9081371990F00BD029A /* MBDomainValidatorDefinition.h in Headers */,
+				03DFB90A1371990F00BD029A /* MBElementDefinition.h in Headers */,
+				03DFB90C1371990F00BD029A /* MBFieldDefinition.h in Headers */,
+				03DFB90E1371990F00BD029A /* MBForEachDefinition.h in Headers */,
+				03DFB9101371990F00BD029A /* MBMvcConfigurationParser.h in Headers */,
+				03DFB9121371990F00BD029A /* MBOutcomeDefinition.h in Headers */,
+				03DFB9141371990F00BD029A /* MBPageDefinition.h in Headers */,
+				03DFB9161371990F00BD029A /* MBPanelDefinition.h in Headers */,
+				03DFB9181371990F00BD029A /* MBVariableDefinition.h in Headers */,
+				03DFB91A1371990F00BD029A /* MBBundleDefinition.h in Headers */,
+				03DFB91C1371990F00BD029A /* MBResourceConfiguration.h in Headers */,
+				03DFB91E1371990F00BD029A /* MBResourceConfigurationParser.h in Headers */,
+				03DFB9201371990F00BD029A /* MBResourceDefinition.h in Headers */,
+				03DFB9221371990F00BD029A /* MBEndPointDefinition.h in Headers */,
+				03DFB9241371990F00BD029A /* MBResultListenerDefinition.h in Headers */,
+				03DFB9261371990F00BD029A /* MBWebservicesConfiguration.h in Headers */,
+				03DFB9281371990F00BD029A /* MBWebservicesConfigurationParser.h in Headers */,
+				03DFB92A1371990F00BD029A /* MBAction.h in Headers */,
+				03DFB92B1371990F00BD029A /* MBApplicationController.h in Headers */,
+				03DFB92D1371990F00BD029A /* MBApplicationFactory.h in Headers */,
+				03DFB92F1371990F00BD029A /* MBDialogController.h in Headers */,
+				03DFB9311371990F00BD029A /* MBDialogGroupController.h in Headers */,
+				03DFB9331371990F00BD029A /* MBOutcome.h in Headers */,
+				03DFB9351371990F00BD029A /* MBViewManager.h in Headers */,
+				03DFB9371371990F00BD029A /* MBActivityIndicator.h in Headers */,
+				03DFB9391371990F00BD029A /* MBBasicViewController.h in Headers */,
+				03DFB93B1371990F00BD029A /* MBFormSubmission.h in Headers */,
+				03DFB93D1371990F00BD029A /* MBNavigationController.h in Headers */,
+				03DFB93F1371990F00BD029A /* MBSplitViewController.h in Headers */,
+				03DFB9411371990F00BD029A /* MBViewControllerProtocol.h in Headers */,
+				03DFB9591371990F00BD029A /* MGSplitCornersView.h in Headers */,
+				03DFB95B1371990F00BD029A /* MGSplitDividerView.h in Headers */,
+				03DFB95D1371990F00BD029A /* MGSplitViewController.h in Headers */,
+				03DFBAA81371990F00BD029A /* MBDocument.h in Headers */,
+				03DFBAAA1371990F00BD029A /* MBDocumentDiff.h in Headers */,
+				03DFBAAC1371990F00BD029A /* MBDocumentFactory.h in Headers */,
+				03DFBAAE1371990F00BD029A /* MBDocumentParserProtocol.h in Headers */,
+				03DFBAAF1371990F00BD029A /* MBElement.h in Headers */,
+				03DFBAB11371990F00BD029A /* MBElementContainer.h in Headers */,
+				03DFBAB31371990F00BD029A /* MBJsonDocumentParser.h in Headers */,
+				03DFBAB51371990F00BD029A /* MBMobbl1DocumentParser.h in Headers */,
+				03DFBAB71371990F00BD029A /* MBSession.h in Headers */,
+				03DFBAB91371990F00BD029A /* MBXmlDocumentParser.h in Headers */,
+				03DFBABB1371990F00BD029A /* MBDocumentOperation.h in Headers */,
+				03DFBABD1371990F00BD029A /* MBFileDataHandler.h in Headers */,
+				03DFBABF1371990F00BD029A /* MBMemoryDataHandler.h in Headers */,
+				03DFBAC11371990F00BD029A /* MBMobbl1ServerDataHandler.h in Headers */,
+				03DFBAC31371990F00BD029A /* MBRESTServiceDataHandler.h in Headers */,
+				03DFBAC51371990F00BD029A /* MBSystemDataHandler.h in Headers */,
+				03DFBAC71371990F00BD029A /* MBWebserviceDataHandler.h in Headers */,
+				03DFBAC91371990F00BD029A /* MBDataHandler.h in Headers */,
+				03DFBACA1371990F00BD029A /* MBDataHandlerBase.h in Headers */,
+				03DFBAD21371990F00BD029A /* MBDataManagerService.h in Headers */,
+				03DFBAD41371990F00BD029A /* MBLocalizationService.h in Headers */,
+				03DFBAD61371990F00BD029A /* MBMetadataService.h in Headers */,
+				03DFBAD81371990F00BD029A /* MBResourceService.h in Headers */,
+				03DFBADA1371990F00BD029A /* MBResultListener.h in Headers */,
+				03DFBADB1371990F00BD029A /* MBScriptService.h in Headers */,
+				03DFBADD1371990F00BD029A /* BinckUtilities.h in Headers */,
+				03DFBADF1371990F00BD029A /* ColorUtilities.h in Headers */,
+				03DFBAE11371990F00BD029A /* DataUtilites.h in Headers */,
+				03DFBAE31371990F00BD029A /* BuildInfo.h in Headers */,
+				03DFBAE41371990F00BD029A /* MBMacros.h in Headers */,
+				03DFBAE51371990F00BD029A /* MBNotificationTypes.h in Headers */,
+				03DFBAE61371990F00BD029A /* MBTypes.h in Headers */,
+				03DFBAE91371990F00BD029A /* JSON.h in Headers */,
+				03DFBAEA1371990F00BD029A /* NSObject+SBJSON.h in Headers */,
+				03DFBAEB1371990F00BD029A /* NSString+SBJSON.h in Headers */,
+				03DFBAED1371990F00BD029A /* SBJSON.h in Headers */,
+				03DFBAEF1371990F00BD029A /* SBJsonBase.h in Headers */,
+				03DFBAF11371990F00BD029A /* SBJsonParser.h in Headers */,
+				03DFBAF31371990F00BD029A /* SBJsonWriter.h in Headers */,
+				03DFBAF51371990F00BD029A /* LocaleUtilities.h in Headers */,
+				03DFBAF71371990F00BD029A /* MBCacheManager.h in Headers */,
+				03DFBAF91371990F00BD029A /* MBCacheWriter.h in Headers */,
+				03DFBAFB1371990F00BD029A /* MBDeviceType.h in Headers */,
+				03DFBAFD1371990F00BD029A /* MBOrientationManager.h in Headers */,
+				03DFBAFF1371990F00BD029A /* MBProperties.h in Headers */,
+				03DFBB011371990F00BD029A /* MBPropertiesConstants.h in Headers */,
+				03DFBB021371990F00BD029A /* NSData+Base64.h in Headers */,
+				03DFBB041371990F00BD029A /* Reachability.h in Headers */,
+				03DFBB061371990F00BD029A /* StringUtilities.h in Headers */,
+				03DFBB081371990F00BD029A /* StringUtilitiesHelper.h in Headers */,
+				03DFBB0A1371990F00BD029A /* UncaughtExceptionHandler.h in Headers */,
+				03DFBB0C1371990F00BD029A /* ViewUtilities.h in Headers */,
+				03DFBB0E1371990F00BD029A /* MBFieldTypes.h in Headers */,
+				03DFBB0F1371990F00BD029A /* MBFieldViewBuilder.h in Headers */,
+				03DFBB111371990F00BD029A /* MBForEachViewBuilder.h in Headers */,
+				03DFBB131371990F00BD029A /* MBMatrixViewBuilder.h in Headers */,
+				03DFBB151371990F00BD029A /* MBPageViewBuilder.h in Headers */,
+				03DFBB171371990F00BD029A /* MBPanelViewBuilder.h in Headers */,
+				03DFBB191371990F00BD029A /* MBRowViewBuilder.h in Headers */,
+				03DFBB1B1371990F00BD029A /* MBStyleHandler.h in Headers */,
+				03DFBB1D1371990F00BD029A /* MBViewBuilder.h in Headers */,
+				03DFBB1F1371990F00BD029A /* MBViewBuilderFactory.h in Headers */,
+				03DFBB211371990F00BD029A /* MBPickerController.h in Headers */,
+				03DFBB231371990F00BD029A /* MBPickerPopoverController.h in Headers */,
+				03DFBB251371990F00BD029A /* MBSpinner.h in Headers */,
+				03DFBB271371990F00BD029A /* MBComponent.h in Headers */,
+				03DFBB291371990F00BD029A /* MBComponentContainer.h in Headers */,
+				03DFBB2B1371990F00BD029A /* MBComponentFactory.h in Headers */,
+				03DFBB2D1371990F00BD029A /* MBConditionalPage.h in Headers */,
+				03DFBB2F1371990F00BD029A /* MBField.h in Headers */,
+				03DFBB311371990F00BD029A /* MBForEach.h in Headers */,
+				03DFBB331371990F00BD029A /* MBOutcomeListenerProtocol.h in Headers */,
+				03DFBB341371990F00BD029A /* MBPage.h in Headers */,
+				03DFBB361371990F00BD029A /* MBPanel.h in Headers */,
+				03DFBB381371990F00BD029A /* MBRow.h in Headers */,
+				03DFBB3A1371990F00BD029A /* MBValueChangeListenerProtocol.h in Headers */,
+				03DFBB3B1371990F00BD029A /* MBMatrixCell.h in Headers */,
+				03DFBB3D1371990F00BD029A /* MBMatrixHeaderView.h in Headers */,
+				03DFBB3F1371990F00BD029A /* MBMatrixRowView.h in Headers */,
+				03DFBB411371990F00BD029A /* MBMatrixViewController.h in Headers */,
+				03DFBB431371990F00BD029A /* MBTableViewController.h in Headers */,
+				03AEA1A913C326C500F0248C /* itude-mobile-ios-core.h in Headers */,
+				0371A54013C4984500315375 /* itude-mobile-ios-core-headers.h in Headers */,
+				DCEAD30E13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */,
+				03DFBAE71371990F00BD029A /* GTMStackTrace.h in Headers */,
+				BDE5372E13F275E700E52B1E /* MBDatePickerController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCDF9A4F13C1E9A900F927A3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDF9A5013C1E9A900F927A3 /* MBConditionalDefinition.h in Headers */,
+				DCDF9A5113C1E9A900F927A3 /* MBConfigurationParser.h in Headers */,
+				DCDF9A5213C1E9A900F927A3 /* MBConfigurationParserProtocol.h in Headers */,
+				DCDF9A5313C1E9A900F927A3 /* MBDefinition.h in Headers */,
+				DCDF9A5413C1E9A900F927A3 /* MBActionDefinition.h in Headers */,
+				DCDF9A5513C1E9A900F927A3 /* MBAttributeDefinition.h in Headers */,
+				DCDF9A5613C1E9A900F927A3 /* MBConfigurationDefinition.h in Headers */,
+				DCDF9A5713C1E9A900F927A3 /* MBDialogDefinition.h in Headers */,
+				DCDF9A5813C1E9A900F927A3 /* MBDialogGroupDefinition.h in Headers */,
+				DCDF9A5913C1E9A900F927A3 /* MBDocumentDefinition.h in Headers */,
+				DCDF9A5A13C1E9A900F927A3 /* MBDomainDefinition.h in Headers */,
+				DCDF9A5B13C1E9A900F927A3 /* MBDomainValidatorDefinition.h in Headers */,
+				DCDF9A5C13C1E9A900F927A3 /* MBElementDefinition.h in Headers */,
+				DCDF9A5D13C1E9A900F927A3 /* MBFieldDefinition.h in Headers */,
+				DCDF9A5E13C1E9A900F927A3 /* MBForEachDefinition.h in Headers */,
+				DCDF9A5F13C1E9A900F927A3 /* MBMvcConfigurationParser.h in Headers */,
+				DCDF9A6013C1E9A900F927A3 /* MBOutcomeDefinition.h in Headers */,
+				DCDF9A6113C1E9A900F927A3 /* MBPageDefinition.h in Headers */,
+				DCDF9A6213C1E9A900F927A3 /* MBPanelDefinition.h in Headers */,
+				DCDF9A6313C1E9A900F927A3 /* MBVariableDefinition.h in Headers */,
+				DCDF9A6413C1E9A900F927A3 /* MBBundleDefinition.h in Headers */,
+				DCDF9A6513C1E9A900F927A3 /* MBResourceConfiguration.h in Headers */,
+				DCDF9A6613C1E9A900F927A3 /* MBResourceConfigurationParser.h in Headers */,
+				DCDF9A6713C1E9A900F927A3 /* MBResourceDefinition.h in Headers */,
+				DCDF9A6813C1E9A900F927A3 /* MBEndPointDefinition.h in Headers */,
+				DCDF9A6913C1E9A900F927A3 /* MBResultListenerDefinition.h in Headers */,
+				DCDF9A6A13C1E9A900F927A3 /* MBWebservicesConfiguration.h in Headers */,
+				DCDF9A6B13C1E9A900F927A3 /* MBWebservicesConfigurationParser.h in Headers */,
+				DCDF9A6C13C1E9A900F927A3 /* MBAction.h in Headers */,
+				DCDF9A6D13C1E9A900F927A3 /* MBApplicationController.h in Headers */,
+				DCDF9A6E13C1E9A900F927A3 /* MBApplicationFactory.h in Headers */,
+				DCDF9A6F13C1E9A900F927A3 /* MBDialogController.h in Headers */,
+				DCDF9A7013C1E9A900F927A3 /* MBDialogGroupController.h in Headers */,
+				DCDF9A7113C1E9A900F927A3 /* MBOutcome.h in Headers */,
+				DCDF9A7213C1E9A900F927A3 /* MBViewManager.h in Headers */,
+				DCDF9A7313C1E9A900F927A3 /* MBActivityIndicator.h in Headers */,
+				DCDF9A7413C1E9A900F927A3 /* MBBasicViewController.h in Headers */,
+				DCDF9A7513C1E9A900F927A3 /* MBFormSubmission.h in Headers */,
+				DCDF9A7613C1E9A900F927A3 /* MBNavigationController.h in Headers */,
+				DCDF9A7713C1E9A900F927A3 /* MBSplitViewController.h in Headers */,
+				DCDF9A7813C1E9A900F927A3 /* MBViewControllerProtocol.h in Headers */,
+				DCDF9A7913C1E9A900F927A3 /* MGSplitCornersView.h in Headers */,
+				DCDF9A7A13C1E9A900F927A3 /* MGSplitDividerView.h in Headers */,
+				DCDF9A7B13C1E9A900F927A3 /* MGSplitViewController.h in Headers */,
+				DCDF9A7C13C1E9A900F927A3 /* MBDocument.h in Headers */,
+				DCDF9A7D13C1E9A900F927A3 /* MBDocumentDiff.h in Headers */,
+				DCDF9A7E13C1E9A900F927A3 /* MBDocumentFactory.h in Headers */,
+				DCDF9A7F13C1E9A900F927A3 /* MBDocumentParserProtocol.h in Headers */,
+				DCDF9A8013C1E9A900F927A3 /* MBElement.h in Headers */,
+				DCDF9A8113C1E9A900F927A3 /* MBElementContainer.h in Headers */,
+				DCDF9A8213C1E9A900F927A3 /* MBJsonDocumentParser.h in Headers */,
+				DCDF9A8313C1E9A900F927A3 /* MBMobbl1DocumentParser.h in Headers */,
+				DCDF9A8413C1E9A900F927A3 /* MBSession.h in Headers */,
+				DCDF9A8513C1E9A900F927A3 /* MBXmlDocumentParser.h in Headers */,
+				DCDF9A8613C1E9A900F927A3 /* MBDocumentOperation.h in Headers */,
+				DCDF9A8713C1E9A900F927A3 /* MBFileDataHandler.h in Headers */,
+				DCDF9A8813C1E9A900F927A3 /* MBMemoryDataHandler.h in Headers */,
+				DCDF9A8913C1E9A900F927A3 /* MBMobbl1ServerDataHandler.h in Headers */,
+				DCDF9A8A13C1E9A900F927A3 /* MBRESTServiceDataHandler.h in Headers */,
+				DCDF9A8B13C1E9A900F927A3 /* MBSystemDataHandler.h in Headers */,
+				DCDF9A8C13C1E9A900F927A3 /* MBWebserviceDataHandler.h in Headers */,
+				DCDF9A8D13C1E9A900F927A3 /* MBDataHandler.h in Headers */,
+				DCDF9A8E13C1E9A900F927A3 /* MBDataHandlerBase.h in Headers */,
+				DCDF9A8F13C1E9A900F927A3 /* MBDataManagerService.h in Headers */,
+				DCDF9A9013C1E9A900F927A3 /* MBLocalizationService.h in Headers */,
+				DCDF9A9113C1E9A900F927A3 /* MBMetadataService.h in Headers */,
+				DCDF9A9213C1E9A900F927A3 /* MBResourceService.h in Headers */,
+				DCDF9A9313C1E9A900F927A3 /* MBResultListener.h in Headers */,
+				DCDF9A9413C1E9A900F927A3 /* MBScriptService.h in Headers */,
+				DCDF9A9513C1E9A900F927A3 /* BinckUtilities.h in Headers */,
+				DCDF9A9613C1E9A900F927A3 /* ColorUtilities.h in Headers */,
+				DCDF9A9713C1E9A900F927A3 /* DataUtilites.h in Headers */,
+				DCDF9A9813C1E9A900F927A3 /* BuildInfo.h in Headers */,
+				DCDF9A9913C1E9A900F927A3 /* MBMacros.h in Headers */,
+				DCDF9A9A13C1E9A900F927A3 /* MBNotificationTypes.h in Headers */,
+				DCDF9A9B13C1E9A900F927A3 /* MBTypes.h in Headers */,
+				DCDF9A9C13C1E9A900F927A3 /* JSON.h in Headers */,
+				DCDF9A9D13C1E9A900F927A3 /* NSObject+SBJSON.h in Headers */,
+				DCDF9A9E13C1E9A900F927A3 /* NSString+SBJSON.h in Headers */,
+				DCDF9A9F13C1E9A900F927A3 /* SBJSON.h in Headers */,
+				DCDF9AA013C1E9A900F927A3 /* SBJsonBase.h in Headers */,
+				DCDF9AA113C1E9A900F927A3 /* SBJsonParser.h in Headers */,
+				DCDF9AA213C1E9A900F927A3 /* SBJsonWriter.h in Headers */,
+				DCDF9AA313C1E9A900F927A3 /* LocaleUtilities.h in Headers */,
+				DCDF9AA413C1E9A900F927A3 /* MBCacheManager.h in Headers */,
+				DCDF9AA513C1E9A900F927A3 /* MBCacheWriter.h in Headers */,
+				DCDF9AA613C1E9A900F927A3 /* MBDeviceType.h in Headers */,
+				DCDF9AA713C1E9A900F927A3 /* MBOrientationManager.h in Headers */,
+				DCDF9AA813C1E9A900F927A3 /* MBProperties.h in Headers */,
+				DCDF9AA913C1E9A900F927A3 /* MBPropertiesConstants.h in Headers */,
+				DCDF9AAA13C1E9A900F927A3 /* NSData+Base64.h in Headers */,
+				DCDF9AAB13C1E9A900F927A3 /* Reachability.h in Headers */,
+				DCDF9AAC13C1E9A900F927A3 /* StringUtilities.h in Headers */,
+				DCDF9AAD13C1E9A900F927A3 /* StringUtilitiesHelper.h in Headers */,
+				DCDF9AAE13C1E9A900F927A3 /* UncaughtExceptionHandler.h in Headers */,
+				DCDF9AAF13C1E9A900F927A3 /* ViewUtilities.h in Headers */,
+				DCDF9AB013C1E9A900F927A3 /* MBFieldTypes.h in Headers */,
+				DCDF9AB113C1E9A900F927A3 /* MBFieldViewBuilder.h in Headers */,
+				DCDF9AB213C1E9A900F927A3 /* MBForEachViewBuilder.h in Headers */,
+				DCDF9AB313C1E9A900F927A3 /* MBMatrixViewBuilder.h in Headers */,
+				DCDF9AB413C1E9A900F927A3 /* MBPageViewBuilder.h in Headers */,
+				DCDF9AB513C1E9A900F927A3 /* MBPanelViewBuilder.h in Headers */,
+				DCDF9AB613C1E9A900F927A3 /* MBRowViewBuilder.h in Headers */,
+				DCDF9AB713C1E9A900F927A3 /* MBStyleHandler.h in Headers */,
+				DCDF9AB813C1E9A900F927A3 /* MBViewBuilder.h in Headers */,
+				DCDF9AB913C1E9A900F927A3 /* MBViewBuilderFactory.h in Headers */,
+				DCDF9ABA13C1E9A900F927A3 /* MBPickerController.h in Headers */,
+				DCDF9ABB13C1E9A900F927A3 /* MBPickerPopoverController.h in Headers */,
+				DCDF9ABC13C1E9A900F927A3 /* MBSpinner.h in Headers */,
+				DCDF9ABD13C1E9A900F927A3 /* MBComponent.h in Headers */,
+				DCDF9ABE13C1E9A900F927A3 /* MBComponentContainer.h in Headers */,
+				DCDF9ABF13C1E9A900F927A3 /* MBComponentFactory.h in Headers */,
+				DCDF9AC013C1E9A900F927A3 /* MBConditionalPage.h in Headers */,
+				DCDF9AC113C1E9A900F927A3 /* MBField.h in Headers */,
+				DCDF9AC213C1E9A900F927A3 /* MBForEach.h in Headers */,
+				DCDF9AC313C1E9A900F927A3 /* MBOutcomeListenerProtocol.h in Headers */,
+				DCDF9AC413C1E9A900F927A3 /* MBPage.h in Headers */,
+				DCDF9AC513C1E9A900F927A3 /* MBPanel.h in Headers */,
+				DCDF9AC613C1E9A900F927A3 /* MBRow.h in Headers */,
+				DCDF9AC713C1E9A900F927A3 /* MBValueChangeListenerProtocol.h in Headers */,
+				DCDF9AC813C1E9A900F927A3 /* MBMatrixCell.h in Headers */,
+				DCDF9AC913C1E9A900F927A3 /* MBMatrixHeaderView.h in Headers */,
+				DCDF9ACA13C1E9A900F927A3 /* MBMatrixRowView.h in Headers */,
+				DCDF9ACB13C1E9A900F927A3 /* MBMatrixViewController.h in Headers */,
+				DCDF9ACC13C1E9A900F927A3 /* MBTableViewController.h in Headers */,
+				03AEA1B313C3458D00F0248C /* itude-mobile-ios-core-i386.h in Headers */,
+				0371A54113C4984500315375 /* itude-mobile-ios-core-headers.h in Headers */,
+				DCDF9ACD13C1E9A900F927A3 /* GTMStackTrace.h in Headers */,
+				DCEAD30F13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */,
+				BDE5372F13F275E700E52B1E /* MBDatePickerController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		03DA532C1371989F00BE1FDB /* itude-mobile-iphone-core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03DA53371371989F00BE1FDB /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core" */;
+			buildPhases = (
+				03DA53291371989F00BE1FDB /* Sources */,
+				03DA532A1371989F00BE1FDB /* Frameworks */,
+				03DA532B1371989F00BE1FDB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "itude-mobile-iphone-core";
+			productName = "itude-mobile-iphone-core";
+			productReference = 03DA532D1371989F00BE1FDB /* itude-mobile-iphone-core.framework/itude-mobile-iphone-core */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DCDF99DE13C1E9A900F927A3 /* itude-mobile-iphone-core-i386 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCDF9ACE13C1E9A900F927A3 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core-i386" */;
+			buildPhases = (
+				DCDF99DF13C1E9A900F927A3 /* Sources */,
+				DCDF9A4E13C1E9A900F927A3 /* Frameworks */,
+				DCDF9A4F13C1E9A900F927A3 /* Headers */,
+				035E218713C5AD56005A6C7D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "itude-mobile-iphone-core-i386";
+			productName = "itude-mobile-iphone-core";
+			productReference = DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03DA53241371989E00BE1FDB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Itude Mobile";
+			};
+			buildConfigurationList = 03DA53271371989E00BE1FDB /* Build configuration list for PBXProject "itude-mobile-iphone-core" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				da,
+				de,
+				es,
+				fi,
+				fr,
+				it,
+				ja,
+				ko,
+				nl,
+				no,
+				pl,
+				pt,
+				ru,
+				sv,
+				zh_CN,
+				zh_TW,
+				English,
+			);
+			mainGroup = 03DA53221371989E00BE1FDB;
+			productRefGroup = 03DA532E1371989F00BE1FDB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03DA532C1371989F00BE1FDB /* itude-mobile-iphone-core */,
+				DCDF99DE13C1E9A900F927A3 /* itude-mobile-iphone-core-i386 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		035E218713C5AD56005A6C7D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03DA53291371989F00BE1FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DFB8F41371990F00BD029A /* MBConditionalDefinition.m in Sources */,
+				03DFB8F61371990F00BD029A /* MBConfigurationParser.m in Sources */,
+				03DFB8F91371990F00BD029A /* MBDefinition.m in Sources */,
+				03DFB8FB1371990F00BD029A /* MBActionDefinition.m in Sources */,
+				03DFB8FD1371990F00BD029A /* MBAttributeDefinition.m in Sources */,
+				03DFB8FF1371990F00BD029A /* MBConfigurationDefinition.m in Sources */,
+				03DFB9011371990F00BD029A /* MBDialogDefinition.m in Sources */,
+				03DFB9031371990F00BD029A /* MBDialogGroupDefinition.m in Sources */,
+				03DFB9051371990F00BD029A /* MBDocumentDefinition.m in Sources */,
+				03DFB9071371990F00BD029A /* MBDomainDefinition.m in Sources */,
+				03DFB9091371990F00BD029A /* MBDomainValidatorDefinition.m in Sources */,
+				03DFB90B1371990F00BD029A /* MBElementDefinition.m in Sources */,
+				03DFB90D1371990F00BD029A /* MBFieldDefinition.m in Sources */,
+				03DFB90F1371990F00BD029A /* MBForEachDefinition.m in Sources */,
+				03DFB9111371990F00BD029A /* MBMvcConfigurationParser.m in Sources */,
+				03DFB9131371990F00BD029A /* MBOutcomeDefinition.m in Sources */,
+				03DFB9151371990F00BD029A /* MBPageDefinition.m in Sources */,
+				03DFB9171371990F00BD029A /* MBPanelDefinition.m in Sources */,
+				03DFB9191371990F00BD029A /* MBVariableDefinition.m in Sources */,
+				03DFB91B1371990F00BD029A /* MBBundleDefinition.m in Sources */,
+				03DFB91D1371990F00BD029A /* MBResourceConfiguration.m in Sources */,
+				03DFB91F1371990F00BD029A /* MBResourceConfigurationParser.m in Sources */,
+				03DFB9211371990F00BD029A /* MBResourceDefinition.m in Sources */,
+				03DFB9231371990F00BD029A /* MBEndPointDefinition.m in Sources */,
+				03DFB9251371990F00BD029A /* MBResultListenerDefinition.m in Sources */,
+				03DFB9271371990F00BD029A /* MBWebservicesConfiguration.m in Sources */,
+				03DFB9291371990F00BD029A /* MBWebservicesConfigurationParser.m in Sources */,
+				03DFB92C1371990F00BD029A /* MBApplicationController.m in Sources */,
+				03DFB92E1371990F00BD029A /* MBApplicationFactory.m in Sources */,
+				03DFB9301371990F00BD029A /* MBDialogController.m in Sources */,
+				03DFB9321371990F00BD029A /* MBDialogGroupController.m in Sources */,
+				03DFB9341371990F00BD029A /* MBOutcome.m in Sources */,
+				03DFB9361371990F00BD029A /* MBViewManager.m in Sources */,
+				03DFB9381371990F00BD029A /* MBActivityIndicator.m in Sources */,
+				03DFB93A1371990F00BD029A /* MBBasicViewController.m in Sources */,
+				03DFB93C1371990F00BD029A /* MBFormSubmission.m in Sources */,
+				03DFB93E1371990F00BD029A /* MBNavigationController.m in Sources */,
+				03DFB9401371990F00BD029A /* MBSplitViewController.m in Sources */,
+				03DFB95A1371990F00BD029A /* MGSplitCornersView.m in Sources */,
+				03DFB95C1371990F00BD029A /* MGSplitDividerView.m in Sources */,
+				03DFB95E1371990F00BD029A /* MGSplitViewController.m in Sources */,
+				03DFBAA91371990F00BD029A /* MBDocument.m in Sources */,
+				03DFBAAB1371990F00BD029A /* MBDocumentDiff.m in Sources */,
+				03DFBAAD1371990F00BD029A /* MBDocumentFactory.m in Sources */,
+				03DFBAB01371990F00BD029A /* MBElement.m in Sources */,
+				03DFBAB21371990F00BD029A /* MBElementContainer.m in Sources */,
+				03DFBAB41371990F00BD029A /* MBJsonDocumentParser.m in Sources */,
+				03DFBAB61371990F00BD029A /* MBMobbl1DocumentParser.m in Sources */,
+				03DFBAB81371990F00BD029A /* MBSession.m in Sources */,
+				03DFBABA1371990F00BD029A /* MBXmlDocumentParser.m in Sources */,
+				03DFBABC1371990F00BD029A /* MBDocumentOperation.m in Sources */,
+				03DFBABE1371990F00BD029A /* MBFileDataHandler.m in Sources */,
+				03DFBAC01371990F00BD029A /* MBMemoryDataHandler.m in Sources */,
+				03DFBAC21371990F00BD029A /* MBMobbl1ServerDataHandler.m in Sources */,
+				03DFBAC41371990F00BD029A /* MBRESTServiceDataHandler.m in Sources */,
+				03DFBAC61371990F00BD029A /* MBSystemDataHandler.m in Sources */,
+				03DFBAC81371990F00BD029A /* MBWebserviceDataHandler.m in Sources */,
+				03DFBACB1371990F00BD029A /* MBDataHandlerBase.m in Sources */,
+				03DFBAD31371990F00BD029A /* MBDataManagerService.m in Sources */,
+				03DFBAD51371990F00BD029A /* MBLocalizationService.m in Sources */,
+				03DFBAD71371990F00BD029A /* MBMetadataService.m in Sources */,
+				03DFBAD91371990F00BD029A /* MBResourceService.m in Sources */,
+				03DFBADC1371990F00BD029A /* MBScriptService.m in Sources */,
+				03DFBADE1371990F00BD029A /* BinckUtilities.m in Sources */,
+				03DFBAE01371990F00BD029A /* ColorUtilities.m in Sources */,
+				03DFBAE21371990F00BD029A /* DataUtilites.m in Sources */,
+				03DFBAE81371990F00BD029A /* GTMStackTrace.m in Sources */,
+				03DFBAEC1371990F00BD029A /* NSString+SBJSON.m in Sources */,
+				03DFBAEE1371990F00BD029A /* SBJSON.m in Sources */,
+				03DFBAF01371990F00BD029A /* SBJsonBase.m in Sources */,
+				03DFBAF21371990F00BD029A /* SBJsonParser.m in Sources */,
+				03DFBAF41371990F00BD029A /* SBJsonWriter.m in Sources */,
+				03DFBAF61371990F00BD029A /* LocaleUtilities.m in Sources */,
+				03DFBAF81371990F00BD029A /* MBCacheManager.m in Sources */,
+				03DFBAFA1371990F00BD029A /* MBCacheWriter.m in Sources */,
+				03DFBAFC1371990F00BD029A /* MBDeviceType.m in Sources */,
+				03DFBAFE1371990F00BD029A /* MBOrientationManager.m in Sources */,
+				03DFBB001371990F00BD029A /* MBProperties.m in Sources */,
+				03DFBB031371990F00BD029A /* NSData+Base64.m in Sources */,
+				03DFBB051371990F00BD029A /* Reachability.m in Sources */,
+				03DFBB071371990F00BD029A /* StringUtilities.m in Sources */,
+				03DFBB091371990F00BD029A /* StringUtilitiesHelper.m in Sources */,
+				03DFBB0B1371990F00BD029A /* UncaughtExceptionHandler.m in Sources */,
+				03DFBB0D1371990F00BD029A /* ViewUtilities.m in Sources */,
+				03DFBB101371990F00BD029A /* MBFieldViewBuilder.m in Sources */,
+				03DFBB121371990F00BD029A /* MBForEachViewBuilder.m in Sources */,
+				03DFBB141371990F00BD029A /* MBMatrixViewBuilder.m in Sources */,
+				03DFBB161371990F00BD029A /* MBPageViewBuilder.m in Sources */,
+				03DFBB181371990F00BD029A /* MBPanelViewBuilder.m in Sources */,
+				03DFBB1A1371990F00BD029A /* MBRowViewBuilder.m in Sources */,
+				03DFBB1C1371990F00BD029A /* MBStyleHandler.m in Sources */,
+				03DFBB1E1371990F00BD029A /* MBViewBuilder.m in Sources */,
+				03DFBB201371990F00BD029A /* MBViewBuilderFactory.m in Sources */,
+				03DFBB221371990F00BD029A /* MBPickerController.m in Sources */,
+				03DFBB241371990F00BD029A /* MBPickerPopoverController.m in Sources */,
+				03DFBB261371990F00BD029A /* MBSpinner.m in Sources */,
+				03DFBB281371990F00BD029A /* MBComponent.m in Sources */,
+				03DFBB2A1371990F00BD029A /* MBComponentContainer.m in Sources */,
+				03DFBB2C1371990F00BD029A /* MBComponentFactory.m in Sources */,
+				03DFBB2E1371990F00BD029A /* MBConditionalPage.m in Sources */,
+				03DFBB301371990F00BD029A /* MBField.m in Sources */,
+				03DFBB321371990F00BD029A /* MBForEach.m in Sources */,
+				03DFBB351371990F00BD029A /* MBPage.m in Sources */,
+				03DFBB371371990F00BD029A /* MBPanel.m in Sources */,
+				03DFBB391371990F00BD029A /* MBRow.m in Sources */,
+				03DFBB3C1371990F00BD029A /* MBMatrixCell.m in Sources */,
+				03DFBB3E1371990F00BD029A /* MBMatrixHeaderView.m in Sources */,
+				03DFBB401371990F00BD029A /* MBMatrixRowView.m in Sources */,
+				03DFBB421371990F00BD029A /* MBMatrixViewController.m in Sources */,
+				03DFBB441371990F00BD029A /* MBTableViewController.m in Sources */,
+				BDE5373013F275E700E52B1E /* MBDatePickerController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCDF99DF13C1E9A900F927A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDF99E013C1E9A900F927A3 /* MBConditionalDefinition.m in Sources */,
+				DCDF99E113C1E9A900F927A3 /* MBConfigurationParser.m in Sources */,
+				DCDF99E213C1E9A900F927A3 /* MBDefinition.m in Sources */,
+				DCDF99E313C1E9A900F927A3 /* MBActionDefinition.m in Sources */,
+				DCDF99E413C1E9A900F927A3 /* MBAttributeDefinition.m in Sources */,
+				DCDF99E513C1E9A900F927A3 /* MBConfigurationDefinition.m in Sources */,
+				DCDF99E613C1E9A900F927A3 /* MBDialogDefinition.m in Sources */,
+				DCDF99E713C1E9A900F927A3 /* MBDialogGroupDefinition.m in Sources */,
+				DCDF99E813C1E9A900F927A3 /* MBDocumentDefinition.m in Sources */,
+				DCDF99E913C1E9A900F927A3 /* MBDomainDefinition.m in Sources */,
+				DCDF99EA13C1E9A900F927A3 /* MBDomainValidatorDefinition.m in Sources */,
+				DCDF99EB13C1E9A900F927A3 /* MBElementDefinition.m in Sources */,
+				DCDF99EC13C1E9A900F927A3 /* MBFieldDefinition.m in Sources */,
+				DCDF99ED13C1E9A900F927A3 /* MBForEachDefinition.m in Sources */,
+				DCDF99EE13C1E9A900F927A3 /* MBMvcConfigurationParser.m in Sources */,
+				DCDF99EF13C1E9A900F927A3 /* MBOutcomeDefinition.m in Sources */,
+				DCDF99F013C1E9A900F927A3 /* MBPageDefinition.m in Sources */,
+				DCDF99F113C1E9A900F927A3 /* MBPanelDefinition.m in Sources */,
+				DCDF99F213C1E9A900F927A3 /* MBVariableDefinition.m in Sources */,
+				DCDF99F313C1E9A900F927A3 /* MBBundleDefinition.m in Sources */,
+				DCDF99F413C1E9A900F927A3 /* MBResourceConfiguration.m in Sources */,
+				DCDF99F513C1E9A900F927A3 /* MBResourceConfigurationParser.m in Sources */,
+				DCDF99F613C1E9A900F927A3 /* MBResourceDefinition.m in Sources */,
+				DCDF99F713C1E9A900F927A3 /* MBEndPointDefinition.m in Sources */,
+				DCDF99F813C1E9A900F927A3 /* MBResultListenerDefinition.m in Sources */,
+				DCDF99F913C1E9A900F927A3 /* MBWebservicesConfiguration.m in Sources */,
+				DCDF99FA13C1E9A900F927A3 /* MBWebservicesConfigurationParser.m in Sources */,
+				DCDF99FB13C1E9A900F927A3 /* MBApplicationController.m in Sources */,
+				DCDF99FC13C1E9A900F927A3 /* MBApplicationFactory.m in Sources */,
+				DCDF99FD13C1E9A900F927A3 /* MBDialogController.m in Sources */,
+				DCDF99FE13C1E9A900F927A3 /* MBDialogGroupController.m in Sources */,
+				DCDF99FF13C1E9A900F927A3 /* MBOutcome.m in Sources */,
+				DCDF9A0013C1E9A900F927A3 /* MBViewManager.m in Sources */,
+				DCDF9A0113C1E9A900F927A3 /* MBActivityIndicator.m in Sources */,
+				DCDF9A0213C1E9A900F927A3 /* MBBasicViewController.m in Sources */,
+				DCDF9A0313C1E9A900F927A3 /* MBFormSubmission.m in Sources */,
+				DCDF9A0413C1E9A900F927A3 /* MBNavigationController.m in Sources */,
+				DCDF9A0513C1E9A900F927A3 /* MBSplitViewController.m in Sources */,
+				DCDF9A0613C1E9A900F927A3 /* MGSplitCornersView.m in Sources */,
+				DCDF9A0713C1E9A900F927A3 /* MGSplitDividerView.m in Sources */,
+				DCDF9A0813C1E9A900F927A3 /* MGSplitViewController.m in Sources */,
+				DCDF9A0913C1E9A900F927A3 /* MBDocument.m in Sources */,
+				DCDF9A0A13C1E9A900F927A3 /* MBDocumentDiff.m in Sources */,
+				DCDF9A0B13C1E9A900F927A3 /* MBDocumentFactory.m in Sources */,
+				DCDF9A0C13C1E9A900F927A3 /* MBElement.m in Sources */,
+				DCDF9A0D13C1E9A900F927A3 /* MBElementContainer.m in Sources */,
+				DCDF9A0E13C1E9A900F927A3 /* MBJsonDocumentParser.m in Sources */,
+				DCDF9A0F13C1E9A900F927A3 /* MBMobbl1DocumentParser.m in Sources */,
+				DCDF9A1013C1E9A900F927A3 /* MBSession.m in Sources */,
+				DCDF9A1113C1E9A900F927A3 /* MBXmlDocumentParser.m in Sources */,
+				DCDF9A1213C1E9A900F927A3 /* MBDocumentOperation.m in Sources */,
+				DCDF9A1313C1E9A900F927A3 /* MBFileDataHandler.m in Sources */,
+				DCDF9A1413C1E9A900F927A3 /* MBMemoryDataHandler.m in Sources */,
+				DCDF9A1513C1E9A900F927A3 /* MBMobbl1ServerDataHandler.m in Sources */,
+				DCDF9A1613C1E9A900F927A3 /* MBRESTServiceDataHandler.m in Sources */,
+				DCDF9A1713C1E9A900F927A3 /* MBSystemDataHandler.m in Sources */,
+				DCDF9A1813C1E9A900F927A3 /* MBWebserviceDataHandler.m in Sources */,
+				DCDF9A1913C1E9A900F927A3 /* MBDataHandlerBase.m in Sources */,
+				DCDF9A1A13C1E9A900F927A3 /* MBDataManagerService.m in Sources */,
+				DCDF9A1B13C1E9A900F927A3 /* MBLocalizationService.m in Sources */,
+				DCDF9A1C13C1E9A900F927A3 /* MBMetadataService.m in Sources */,
+				DCDF9A1D13C1E9A900F927A3 /* MBResourceService.m in Sources */,
+				DCDF9A1E13C1E9A900F927A3 /* MBScriptService.m in Sources */,
+				DCDF9A1F13C1E9A900F927A3 /* BinckUtilities.m in Sources */,
+				DCDF9A2013C1E9A900F927A3 /* ColorUtilities.m in Sources */,
+				DCDF9A2113C1E9A900F927A3 /* DataUtilites.m in Sources */,
+				DCDF9A2213C1E9A900F927A3 /* GTMStackTrace.m in Sources */,
+				DCDF9A2313C1E9A900F927A3 /* NSString+SBJSON.m in Sources */,
+				DCDF9A2413C1E9A900F927A3 /* SBJSON.m in Sources */,
+				DCDF9A2513C1E9A900F927A3 /* SBJsonBase.m in Sources */,
+				DCDF9A2613C1E9A900F927A3 /* SBJsonParser.m in Sources */,
+				DCDF9A2713C1E9A900F927A3 /* SBJsonWriter.m in Sources */,
+				DCDF9A2813C1E9A900F927A3 /* LocaleUtilities.m in Sources */,
+				DCDF9A2913C1E9A900F927A3 /* MBCacheManager.m in Sources */,
+				DCDF9A2A13C1E9A900F927A3 /* MBCacheWriter.m in Sources */,
+				DCDF9A2B13C1E9A900F927A3 /* MBDeviceType.m in Sources */,
+				DCDF9A2C13C1E9A900F927A3 /* MBOrientationManager.m in Sources */,
+				DCDF9A2D13C1E9A900F927A3 /* MBProperties.m in Sources */,
+				DCDF9A2E13C1E9A900F927A3 /* NSData+Base64.m in Sources */,
+				DCDF9A2F13C1E9A900F927A3 /* Reachability.m in Sources */,
+				DCDF9A3013C1E9A900F927A3 /* StringUtilities.m in Sources */,
+				DCDF9A3113C1E9A900F927A3 /* StringUtilitiesHelper.m in Sources */,
+				DCDF9A3213C1E9A900F927A3 /* UncaughtExceptionHandler.m in Sources */,
+				DCDF9A3313C1E9A900F927A3 /* ViewUtilities.m in Sources */,
+				DCDF9A3413C1E9A900F927A3 /* MBFieldViewBuilder.m in Sources */,
+				DCDF9A3513C1E9A900F927A3 /* MBForEachViewBuilder.m in Sources */,
+				DCDF9A3613C1E9A900F927A3 /* MBMatrixViewBuilder.m in Sources */,
+				DCDF9A3713C1E9A900F927A3 /* MBPageViewBuilder.m in Sources */,
+				DCDF9A3813C1E9A900F927A3 /* MBPanelViewBuilder.m in Sources */,
+				DCDF9A3913C1E9A900F927A3 /* MBRowViewBuilder.m in Sources */,
+				DCDF9A3A13C1E9A900F927A3 /* MBStyleHandler.m in Sources */,
+				DCDF9A3B13C1E9A900F927A3 /* MBViewBuilder.m in Sources */,
+				DCDF9A3C13C1E9A900F927A3 /* MBViewBuilderFactory.m in Sources */,
+				DCDF9A3D13C1E9A900F927A3 /* MBPickerController.m in Sources */,
+				DCDF9A3E13C1E9A900F927A3 /* MBPickerPopoverController.m in Sources */,
+				DCDF9A3F13C1E9A900F927A3 /* MBSpinner.m in Sources */,
+				DCDF9A4013C1E9A900F927A3 /* MBComponent.m in Sources */,
+				DCDF9A4113C1E9A900F927A3 /* MBComponentContainer.m in Sources */,
+				DCDF9A4213C1E9A900F927A3 /* MBComponentFactory.m in Sources */,
+				DCDF9A4313C1E9A900F927A3 /* MBConditionalPage.m in Sources */,
+				DCDF9A4413C1E9A900F927A3 /* MBField.m in Sources */,
+				DCDF9A4513C1E9A900F927A3 /* MBForEach.m in Sources */,
+				DCDF9A4613C1E9A900F927A3 /* MBPage.m in Sources */,
+				DCDF9A4713C1E9A900F927A3 /* MBPanel.m in Sources */,
+				DCDF9A4813C1E9A900F927A3 /* MBRow.m in Sources */,
+				DCDF9A4913C1E9A900F927A3 /* MBMatrixCell.m in Sources */,
+				DCDF9A4A13C1E9A900F927A3 /* MBMatrixHeaderView.m in Sources */,
+				DCDF9A4B13C1E9A900F927A3 /* MBMatrixRowView.m in Sources */,
+				DCDF9A4C13C1E9A900F927A3 /* MBMatrixViewController.m in Sources */,
+				DCDF9A4D13C1E9A900F927A3 /* MBTableViewController.m in Sources */,
+				BDE5373113F275E700E52B1E /* MBDatePickerController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		03DA53351371989F00BE1FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "External/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = "External/**";
+				"OTHER_LDFLAGS[arch=*]" = "-lz";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		03DA53361371989F00BE1FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "External/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = "External/**";
+				"OTHER_LDFLAGS[arch=*]" = "-licucore";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = i386;
+			};
+			name = Release;
+		};
+		03DA53381371989F00BE1FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/itude_mobile_iphone_core.dst;
+				EXECUTABLE_EXTENSION = "";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "itude-mobile-iphone-core-Prefix.pch";
+				GENERATE_PKGINFO_FILE = NO;
+				HEADER_SEARCH_PATHS = "External/**";
+				INFOPLIST_FILE = "itude-mobile-iphone-core.plist";
+				LIBRARY_SEARCH_PATHS = "External/**";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME).framework/$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME).framework/Headers";
+				SUPPORTED_PLATFORMS = iphoneos;
+				VALID_ARCHS = "armv6 armv7";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		03DA53391371989F00BE1FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/itude_mobile_iphone_core.dst;
+				EXECUTABLE_EXTENSION = "";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "itude-mobile-iphone-core-Prefix.pch";
+				GENERATE_PKGINFO_FILE = NO;
+				HEADER_SEARCH_PATHS = "External/**";
+				INFOPLIST_FILE = "itude-mobile-iphone-core.plist";
+				LIBRARY_SEARCH_PATHS = "External/**";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME).framework/$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME).framework/Headers";
+				SUPPORTED_PLATFORMS = iphoneos;
+				VALID_ARCHS = "armv6 armv7";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		DCDF9ACF13C1E9A900F927A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/itude_mobile_iphone_core.dst;
+				EXECUTABLE_EXTENSION = "";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "itude-mobile-iphone-core-Prefix.pch";
+				GENERATE_PKGINFO_FILE = NO;
+				HEADER_SEARCH_PATHS = "External/**";
+				INFOPLIST_FILE = "itude-mobile-iphone-core.plist";
+				LIBRARY_SEARCH_PATHS = "External/**";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME).framework/$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME).framework/Headers";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		DCDF9AD013C1E9A900F927A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/itude_mobile_iphone_core.dst;
+				EXECUTABLE_EXTENSION = "";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "itude-mobile-iphone-core-Prefix.pch";
+				GENERATE_PKGINFO_FILE = NO;
+				HEADER_SEARCH_PATHS = "External/**";
+				INFOPLIST_FILE = "itude-mobile-iphone-core.plist";
+				LIBRARY_SEARCH_PATHS = "External/**";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME).framework/$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME).framework/Headers";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03DA53271371989E00BE1FDB /* Build configuration list for PBXProject "itude-mobile-iphone-core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03DA53351371989F00BE1FDB /* Debug */,
+				03DA53361371989F00BE1FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03DA53371371989F00BE1FDB /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03DA53381371989F00BE1FDB /* Debug */,
+				03DA53391371989F00BE1FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCDF9ACE13C1E9A900F927A3 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core-i386" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCDF9ACF13C1E9A900F927A3 /* Debug */,
+				DCDF9AD013C1E9A900F927A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 03DA53241371989E00BE1FDB /* Project object */;
+}
