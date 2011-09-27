@@ -30,16 +30,17 @@
 
 -(UIView*) buildTextField:(MBField*) field withMaxBounds:(CGRect) bounds {
 	// Add both the label and the editfield to a single view; we can only return 1 view: fieldContainer
-
+    
 	UIView *fieldContainer = [[UIView alloc] init];
-	CGRect labelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
-
-	UILabel *label = [[[UILabel alloc] initWithFrame:labelBounds] autorelease];
-	label.text = field.label;
-	[fieldContainer addSubview:label];
+    //	CGRect lablabelFieldelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
+    
+    // Duplicate label will be displayed if added here!
+    //	UILabel *label = [[[UILabel alloc] initWithFrame:labelBounds] autorelease];
+    //	label.text = field.label;
+    //	[fieldContainer addSubview:label];
 	
-	[[self styleHandler] styleLabel:label component:field];
-
+    //	[[self styleHandler] styleLabel:label component:field];
+    
 	CGRect fieldBounds = [[self styleHandler] sizeForTextField:field withMaxBounds:bounds];
 	UITextField *textField = [[[UITextField alloc]initWithFrame: fieldBounds] autorelease];
 	if ([C_FIELD_PASSWORD isEqualToString:field.type]) {
@@ -47,7 +48,7 @@
 	}else if ([C_FIELD_USERNAME isEqualToString:field.type]) {
 		textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	}
-
+    
 	textField.text = [field value];
 	textField.delegate = field;
 	textField.enabled = TRUE;
@@ -60,7 +61,18 @@
 	// There is no nice numericKeyboard with a dot/comma for doubles and floats. 
 	// A possible solution is to create one, but this can easly break when Apple decides to update the keyboard.
 	// So for now we show the numbers and punctuation-keyboard as default. A way to check the characters is set in MBField
-	if ([field.dataType isEqualToString:@"int"]) textField.keyboardType = UIKeyboardTypeNumberPad;
+	if ([field.dataType isEqualToString:@"int"]) {
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    else if ([field.dataType isEqualToString:@"email"]) {
+        textField.keyboardType = UIKeyboardTypeEmailAddress;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    }
+    else if ([field.dataType isEqualToString:@"zipcode"]) {
+        textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    }
 	else if([field.dataType isEqualToString:@"double"] || 
 			[field.dataType isEqualToString:@"float"]) {
 		
@@ -90,7 +102,7 @@
 	if(field.path != nil) label.text = [field value];
 	else label.text = field.label;
 	label.backgroundColor = [UIColor clearColor];
-
+    
 	return [label autorelease];
 }
 

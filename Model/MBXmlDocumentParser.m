@@ -43,7 +43,7 @@
 }
 
 - (void) doParseFragment:(NSData *)data intoDocument:(MBDocument*) document rootPath:(NSString*) rootPath copyRootAttributes:(BOOL) copyRootAttributes {
-
+    
 	if(data != nil) {
 		NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
 		[xmlParser setDelegate:self];
@@ -110,7 +110,10 @@ didStartElement:(NSString *)elementName
 	else {
 		[_pathStack addObject:elementName];
 		MBElementDefinition *elementDefinition = [_definition elementWithPath:[self currentPath]];
-		element = [[[MBElement alloc] initWithDefinition: elementDefinition] autorelease];
+        if (elementDefinition == nil) {
+			WLog(@"Found unexpected element with name '%@'. Check element definition.", elementName);
+        } 
+        element = [[[MBElement alloc] initWithDefinition: elementDefinition] autorelease];
         if(element != nil) [[_stack lastObject] performSelector:@selector(addElement:) withObject:element];
 	}
     

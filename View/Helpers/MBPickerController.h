@@ -10,9 +10,11 @@
 
 
 @interface MBPickerController : UIViewController {
-
+    
 	IBOutlet UIPickerView * _pickerView;
 	IBOutlet UIToolbar * _toolbar;
+    IBOutlet UIBarButtonItem *_cancelButton;
+    IBOutlet UIBarButtonItem *_doneButton;
 	MBField * _field;
 }
 

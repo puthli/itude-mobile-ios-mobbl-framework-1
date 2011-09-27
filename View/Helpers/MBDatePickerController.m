@@ -18,6 +18,8 @@
 @synthesize datePickerView = _datePickerView;
 @synthesize field = _field;
 @synthesize datePickerMode = _datePickerMode;
+@synthesize minimumDate = _minimumDate;
+@synthesize maximumDate = _maximumDate;
 
 // XML date format
 #define XMLDATEFORMAT @"yyyy-MM-dd'T'HH:mm:ss"
@@ -42,25 +44,36 @@
     MBStyleHandler *styler = [MBViewBuilderFactory sharedInstance].styleHandler;
 	[styler styleToolbar:_toolbar];
 	
+    _cancelButton.title = MBLocalizedString(_cancelButton.title);
+    _doneButton.title = MBLocalizedString(_doneButton.title);
+    
     self.datePickerView.datePickerMode = self.datePickerMode;
     
-    // Default date to set is today
-    NSDate *dateToSet = [NSDate date];
-    
-    // Check if the field already has a value to set
+    // Select the row of the untranslated Value. The title of the UIPickerView is translated. The value is not. JIRA: IQ-71
 	NSString *currentValue = [_field untranslatedValue];
+	NSDate *dateToSet = [NSDate date];
     if (currentValue) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter new] autorelease];
+        // TODO: Get Locale from settings
+        //NSLocale *locale = [[NSLocale alloc] init];
+        //[[MBLocalizationService sharedInstance] localeCode];
+        //[dateFormatter setLocale:locale];
         
         // XML date format
         [dateFormatter setDateFormat:XMLDATEFORMAT];
+        
         dateToSet = [dateFormatter dateFromString:currentValue];    
     }
     
     [_datePickerView setDate:dateToSet];
     
-    // Apply style to the navigationbar
-    [[[MBViewBuilderFactory sharedInstance] styleHandler] styleDatePicker:_datePickerView component:_field];
+    if (self.minimumDate) {
+        self.datePickerView.minimumDate = self.minimumDate;
+    }
+    
+    if (self.maximumDate) {
+        self.datePickerView.maximumDate = self.maximumDate;
+    }
     
 	[super viewDidLoad];
 }

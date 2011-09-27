@@ -100,7 +100,7 @@
 		height = [heightString floatValue] + C_CELL_Y_MARGIN * 2;
 		//webView.bounds = CGRectMake(0, 0, webView.bounds.size.width, [heightString floatValue]);
 	}
-
+    
 	// Loop through the fields in the row to determine the size of multiline text cells 
 	MBRow *row = [self getRowForIndexPath:indexPath];
 	
@@ -154,7 +154,7 @@
 	
 	CGRect labelSize = CGRectZero;
 	CGRect subLabelSize = CGRectZero;
-		
+    
 	for(MBComponent *child in [row children]){
 		if ([child isKindOfClass:[MBField class]]) {
 			MBField *field = (MBField *)child;
@@ -162,7 +162,7 @@
 			
 			// #BINCKMOBILE-19
 			if ([field.definition isPreConditionValid:self.page.document currentPath:[field absoluteDataPath]]) {
-			
+                
 				if ([C_FIELD_LABEL isEqualToString:field.type]){
 					if(field.path != nil) {
 						label = [field formattedValue];
@@ -180,8 +180,8 @@
 						MBDomainDefinition * domain = field.domain;
 						for (MBDomainValidatorDefinition *row in domain.domainValidators){
 							if ([row.value isEqualToString:[field untranslatedValue]]) {	// JIRA: IQ-70. Changed by Frank: The rowValue is NEVER translated. The fieldValue can be translated if fetched in a regular way so in that case they will never match
-								sublabel = [field value];									// JIRA: IQ-70. Added by Frank: This value can be translated
-								if ([sublabel length] == 0) sublabel = [row title];			// JIRA: IQ-70. Changed by Frank: Only pick the title if the field has no value
+								sublabel = row.title;//[field value];									// JIRA: IQ-70. Added by Frank: This value can be translated
+								if ([sublabel length] == 0) sublabel = row.value;			// JIRA: IQ-70. Changed by Frank: Only pick the title if the field has no value
 							}
 						}
 					}
@@ -193,8 +193,9 @@
 				}
                 if ([C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
                     [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
-                    [C_FIELD_TIMESELECTOR isEqualToString:field.type]) {
-                
+                    [C_FIELD_TIMESELECTOR isEqualToString:field.type] ||
+                    [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
+                    
                     label = field.label;
 					labelField = field;
                     sublabel = [field formattedValue];
@@ -218,7 +219,7 @@
 					cellType = C_SUBTITLECELL;
 					cellstyle = UITableViewCellStyleSubtitle;
 					subLabelField = field;
-
+                    
 				}
 				if ([C_FIELD_BUTTON isEqualToString:field.type]){
 					// store field for retrieval in didSelectRowAtIndexPath
@@ -248,7 +249,8 @@
 					fieldstyle = [field style];
 					// TODO: move to fieldViewBuilder
 					switchView = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
-					if ([@"true" isEqualToString:[field value] ]) {
+                    // Always check the untranslated value 
+					if ([@"true" isEqualToString:[field untranslatedValue] ]) {
 						switchView.on = YES;
 					}
 					if (!label){
@@ -306,24 +308,24 @@
 		cell.accessoryView = nil;
 		for(UIView *vw in cell.contentView.subviews) [vw removeFromSuperview];
 	}
-
+    
 	cell.textLabel.text = label;
 	[_styleHandler styleLabel:cell.textLabel component:labelField];
-
+    
 	cell.detailTextLabel.text = sublabel;
 	[_styleHandler styleLabel:cell.detailTextLabel component:subLabelField];
-
+    
 	if (text) {
-
+        
 		// TODO: delegate this to a separate builder, webView used for textArea has complexity we don't need here 
-
+        
 		// TODO: include image if present in page
 		NSString *img = @"";
-
+        
 		[self addText:text withImage:img toCell:cell atIndexPath:indexPath];
-
+        
 	}
-
+    
 	if (navigable) {
 		if ([C_FIELD_STYLE_NETWORK isEqualToString:fieldstyle] && [buttons count]>0) {
 			
@@ -331,7 +333,7 @@
 			UIView *buttonsView = [[[UIView alloc] initWithFrame:buttonsFrame] autorelease];
 			// Let the width of the view resize to the parent view to reposition any buttons
 			buttonsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-
+            
 			[[[MBViewBuilderFactory sharedInstance] styleHandler] applyStyle:buttonsView panel:(MBPanel *)row viewState:self.page.currentViewState];
 			buttonsFrame = buttonsView.frame;
 			
@@ -364,7 +366,7 @@
 			// A popUp does not navigate so, don't make the cell selectable
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
-			
+        
 	}
 	else{
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -398,18 +400,18 @@
 	
 	found = [lowercaseText rangeOfString:@"<body>"];
 	if (found.location != NSNotFound) result = YES;
-
+    
 	found = [lowercaseText rangeOfString:@"<b>"];
 	if (found.location != NSNotFound) result = YES;
-
+    
 	found = [lowercaseText rangeOfString:@"<br>"];
 	if (found.location != NSNotFound) result = YES;
-
+    
 	return result;
 }
 
 -(void) addText:(NSString *) text withImage:(NSString *) imageUrl toCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-
+    
 	MBStyleHandler *styleHandler = [[MBViewBuilderFactory sharedInstance] styleHandler];
 	
 	// if the text contains any html, make a webview
@@ -453,7 +455,7 @@
 		[self.tableView reloadData];
 	}
 }	
-	
+
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	// use the first field we come across to trigger keyboard dismissal
@@ -461,14 +463,14 @@
 		[[field page] resignFirstResponder];
 		break;
 	}
-
+    
 	MBField *field = [_cellReferences objectForKey:indexPath];
 	[self fieldWasSelected:field];
 	
 	if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]) { //ds
 		
 		[field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
-
+        
 		// iPad supports popovers, which are a nicer and better way to let the user make a choice from a dropdownlist
 		if ([MBDeviceType isPad]) {
 			MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc] initWithField:field] autorelease];
@@ -487,11 +489,12 @@
 			UIView * superview = [tableView window];
 			[pickerController presentWithSuperview:superview];
 		}
-
+        
 		
 	} else if ([C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
                [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
-               [C_FIELD_TIMESELECTOR isEqualToString:field.type]) {
+               [C_FIELD_TIMESELECTOR isEqualToString:field.type] || 
+               [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
         
         [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
         
@@ -501,12 +504,17 @@
         
         // Determine the datePickerModeStyle
         UIDatePickerMode datePickerMode = UIDatePickerModeDateAndTime;
-        if ([C_FIELD_DATESELECTOR isEqualToString:field.type]) {
+        if ([C_FIELD_DATESELECTOR isEqualToString:field.type] || 
+            [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
             datePickerMode = UIDatePickerModeDate;
         }else if ([C_FIELD_TIMESELECTOR isEqualToString:field.type]) {
             datePickerMode = UIDatePickerModeTime;
         }
         dateTimePickerController.datePickerMode = datePickerMode;
+        
+        if ([C_FIELD_BIRTHDATE isEqualToString:field.type]) {
+            dateTimePickerController.maximumDate = [NSDate date];
+        }
         
         UIView *superView = [tableView window];
         [dateTimePickerController presentWithSuperview:superView];
@@ -517,12 +525,12 @@
 		[field handleOutcome:[field outcomeName] withPathArgument: [field evaluatedDataPath]];//added by Xiaochen: this covers the case when field path has an indexed expressions while the commented one does not
         
 	} 
-
+    
 }
 
 // allows subclasses to attach behaviour to a field.
 -(void) fieldWasSelected:(MBField *)field{
-
+    
 }
 
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNo{

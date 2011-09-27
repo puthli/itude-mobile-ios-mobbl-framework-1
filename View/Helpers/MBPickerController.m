@@ -35,12 +35,15 @@
 - (void)viewDidLoad
 {
     //removed Binck related styler, TODO: update pickerController for Binck!
-//	BinckStyleHandler * styler = (BinckStyleHandler *)[MBViewBuilderFactory sharedInstance].styleHandler;
+    //	BinckStyleHandler * styler = (BinckStyleHandler *)[MBViewBuilderFactory sharedInstance].styleHandler;
     MBStyleHandler *styler = [MBViewBuilderFactory sharedInstance].styleHandler;
 	[styler styleToolbar:_toolbar];
 	
-//	// set the current value of the picker if any
-//	NSString * currentValue = [_field value];
+    _cancelButton.title = MBLocalizedString(_cancelButton.title);
+    _doneButton.title = MBLocalizedString(_doneButton.title);
+    
+    //	// set the current value of the picker if any
+    //	NSString * currentValue = [_field value];
     
     // Select the row of the untranslated Value. The title of the UIPickerView is translated. The value is not. JIRA: IQ-71
 	NSString *currentValue = [_field untranslatedValue];
@@ -55,7 +58,7 @@
 		
 		NSInteger ct = 0;
 		for (MBDomainValidatorDefinition * e in domain.domainValidators) {
-		
+            
 			NSString * elementValue = e.value;
 			if ([elementValue isEqualToString:currentValue]) {
 				index = ct;
@@ -91,7 +94,9 @@
 	[self removeFromSuperviewWithAnimation];
 	
 	MBDomainDefinition * domain = _field.domain;
-	[_field setValue:[[domain.domainValidators objectAtIndex:row] value]];
+    NSString *value = [[domain.domainValidators objectAtIndex:row] value];
+    
+	[_field setValue:value];
 }
 
 #pragma mark -
@@ -135,7 +140,7 @@
     r.origin = CGPointZero;
     self.view.frame = r;
     [UIView commitAnimations];
-
+    
 }
 
 // called when removeFromSuperviewWithAnimation's animation completes

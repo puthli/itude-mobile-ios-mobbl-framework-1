@@ -38,7 +38,7 @@
 	for (MBElementDefinition* elem in _elementsSorted)
 		[result appendString:[elem asXmlWithLevel:level+2]];
 	[result appendFormat:@"%*s</Document>\n", level, ""];
-		 
+    
 	return result;
 }
 
@@ -56,7 +56,9 @@
 }
 
 - (MBElementDefinition*) childWithName:(NSString*) elementName {
-  if(![self isValidChild:elementName]) @throw [NSException exceptionWithName:@"InvalidElementName" reason:elementName userInfo:nil];
+    if(![self isValidChild:elementName]) {
+        @throw [NSException exceptionWithName:@"InvalidElementName" reason:elementName userInfo:nil];
+    }
 	return [_elements objectForKey:elementName];	
 }
 
@@ -65,7 +67,7 @@
 		MBElementDefinition *root = [self childWithName:[pathComponents objectAtIndex:0]];
 		[pathComponents removeObjectAtIndex:0];
 		return [root elementWithPathComponents: pathComponents];
-	   }
+    }
 	@throw [NSException exceptionWithName:@"EmptyPath" reason:@"No path specified" userInfo:nil];
 }
 
@@ -116,12 +118,12 @@
 }
 
 - (MBDocument*) createDocument {
-
+    
 	MBDocument *doc = [[[MBDocument alloc] initWithDocumentDefinition:self] autorelease];
 	for(MBElementDefinition *elemDef in _elementsSorted) {
 		for(int i=0; i< [elemDef minOccurs]; i++) [doc addElement:[elemDef createElement]];
 	}
-		
+    
 	return doc;
 }
 
