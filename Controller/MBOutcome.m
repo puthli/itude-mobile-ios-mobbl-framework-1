@@ -18,6 +18,7 @@
 @synthesize dialogName = _dialogName;
 @synthesize originDialogName = _originDialogName;
 @synthesize displayMode = _displayMode;
+@synthesize transitioningStyle = _transitioningStyle;
 @synthesize document = _document;
 @synthesize path = _path;
 @synthesize persist = _persist;
@@ -32,6 +33,7 @@
         self.originDialogName = outcome.originDialogName;
         self.dialogName = outcome.dialogName;
         self.displayMode = outcome.displayMode;
+        self.transitioningStyle = outcome.transitioningStyle;
         self.document = outcome.document;
         self.path = outcome.path;
         self.persist = outcome.persist;
@@ -66,6 +68,7 @@
 		self.outcomeName = definition.name;
 		self.dialogName = definition.dialog;
 		self.displayMode = definition.displayMode;
+        self.transitioningStyle = definition.transitioningStyle;
 		self.persist = definition.persist;
 		self.transferDocument = definition.transferDocument;
 		self.noBackgroundProcessing = definition.noBackgroundProcessing;
@@ -88,7 +91,7 @@
 }
 
 -(BOOL) isPreConditionValid {
-
+    
 	if(self.preCondition == nil) return TRUE;
 	MBDocument *doc = self.document;
 	
@@ -103,8 +106,8 @@
 }
 
 -(NSString *) description {
-	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ preCondition=%@ noBackgroundProsessing=%@", 
-            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
+	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitioningStyle=%@ preCondition=%@ noBackgroundProsessing=%@", 
+            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitioningStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
 }
 
 @end

@@ -31,14 +31,14 @@
 #import <objc/message.h>
 
 @interface MBViewManager()
-	-(MBDialogController*) dialogWithName:(NSString*) name;
-    - (void) clearWindow;
-    - (void) updateDisplay;
-    - (void) resetView;
-	- (void) showAlertView:(MBPage*) page;
-    - (void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog;
-	- (void) showActivityIndicator;
-	- (void) hideActivityIndicator;
+-(MBDialogController*) dialogWithName:(NSString*) name;
+- (void) clearWindow;
+- (void) updateDisplay;
+- (void) resetView;
+- (void) showAlertView:(MBPage*) page;
+- (void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog;
+- (void) showActivityIndicator;
+- (void) hideActivityIndicator;
 @end
 
 @implementation MBViewManager
@@ -76,13 +76,23 @@
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
-	[self showPage:page displayMode:displayMode selectDialog: TRUE];
+    [self showPage:page displayMode:displayMode transitioningStyle:nil selectDialog:TRUE];
+}
+
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) transitioningStyle {
+    [self showPage:page displayMode:displayMode transitioningStyle:transitioningStyle selectDialog:TRUE];
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog {
+    [self showPage:page displayMode:displayMode transitioningStyle:nil selectDialog:shouldSelectDialog];
+}
 
+
+-(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) transitioningStyle selectDialog:(BOOL) shouldSelectDialog {
+    
+    
     DLog(@"ViewManager: showPage name=%@ dialog=%@ mode=%@ type=%i", page.pageName, page.dialogName, displayMode, page.pageType);
-
+    
 	if(page.pageType == MBPageTypesErrorPage || [@"POPUP" isEqualToString:displayMode]) {
 		[self showAlertView: page];
 	}
@@ -97,45 +107,56 @@
 			 [@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode] || 
 			 [@"MODALCURRENTCONTEXT" isEqualToString:displayMode] ||
 			 [@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode])) {
-		// TODO: support nested modal dialogs
-		_modalController = [[MBNavigationController alloc] initWithRootViewController:[page viewController]];
-		[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
-
-		BOOL addCloseButton = NO;
-		if ([@"MODALFORMSHEET" isEqualToString:displayMode])			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-		else if ([@"MODALPAGESHEET" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationPageSheet];
-		else if ([@"MODALFULLSCREEN" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
-		else if ([@"MODALCURRENTCONTEXT" isEqualToString:displayMode])	[_modalController setModalPresentationStyle:UIModalPresentationCurrentContext];
-		else if ([@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode]) addCloseButton = YES;
-		else if ([@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-			addCloseButton = YES;
-			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-		}
-		else if ([@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-			addCloseButton = YES;
-			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-		}
-		else if ([@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-			addCloseButton = YES;
-			//[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-			[_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
-		}
-		else if ([@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-			addCloseButton = YES;
-			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-		}
-
-		if (addCloseButton) {
-			NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
-			UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalDialog)] autorelease];
-			[_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
-		}
-				
-		[_tabController presentModalViewController:_modalController animated:TRUE];
-		// tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
-		NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_PRESENTED object:self userInfo:dict];
-    }
+                // TODO: support nested modal dialogs
+                _modalController = [[MBNavigationController alloc] initWithRootViewController:[page viewController]];
+                [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
+                
+                BOOL addCloseButton = NO;
+                if ([@"MODALFORMSHEET" isEqualToString:displayMode])			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                else if ([@"MODALPAGESHEET" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationPageSheet];
+                else if ([@"MODALFULLSCREEN" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
+                else if ([@"MODALCURRENTCONTEXT" isEqualToString:displayMode])	[_modalController setModalPresentationStyle:UIModalPresentationCurrentContext];
+                else if ([@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode]) addCloseButton = YES;
+                else if ([@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+                    addCloseButton = YES;
+                    [_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                }
+                else if ([@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+                    addCloseButton = YES;
+                    [_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                }
+                else if ([@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+                    addCloseButton = YES;
+                    //[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                    [_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
+                }
+                else if ([@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+                    addCloseButton = YES;
+                    [_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                }
+                
+                if (addCloseButton) {
+                    NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
+                    UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalDialog)] autorelease];
+                    [_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
+                }
+                
+                // Apply transitioning style (UIModalTransitionStyleCoverVertical = default)
+                if ([@"FLIP" isEqualToString:transitioningStyle]) {
+                    _modalController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                }
+                else if ([@"CURL" isEqualToString:transitioningStyle]) {
+                    _modalController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+                }
+                else if ([@"CROSSDISSOLVE" isEqualToString:transitioningStyle]) {
+                    _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                }
+                                
+                [_tabController presentModalViewController:_modalController animated:TRUE];
+                // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
+                NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_PRESENTED object:self userInfo:dict];
+            }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
 		[_modalController pushViewController:currentViewController animated:TRUE];
@@ -146,8 +167,8 @@
 		NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
 		if (rightBarButtonItem != nil && [rightBarButtonItem.title isEqualToString:closeButtonTitle] && 
 			currentViewController.navigationItem.rightBarButtonItem == nil) {
-				UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalDialog)] autorelease];
-				[currentViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
+            UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalDialog)] autorelease];
+            [currentViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
 		}
 		
 		// Workaround for view delegate method calls in modal views Controller (BINCKAPPS-426 and MOBBL-150)
@@ -259,7 +280,7 @@
 	// Apparently we need to select the tab. Only now we cannot do this for tabs that are on the more tab
 	// because it destroys the navigation controller for some reason
 	// TODO: Make selecting a dialog work; even if it is nested within the more tab
-
+    
 	if(idx != shouldBe && shouldBe < FIRST_MORE_TAB_INDEX) {
 		UIViewController *ctrl = [_tabController selectedViewController];
 		[ctrl viewWillDisappear:FALSE];
@@ -296,7 +317,7 @@
 }
 
 -(MBDialogController*) dialogWithName:(NSString*) name {
-
+    
 	MBDialogController *result = [_dialogControllers objectForKey: name];
 	return result;
 }
@@ -405,7 +426,7 @@
 					idx++;
 				}
 			}
-
+            
 			// For regular DialogControllers
 			else {
 				
@@ -419,7 +440,7 @@
 				dc.rootController.hidesBottomBarWhenPushed = TRUE;
 				dc.rootController.tabBarItem = tabBarItem;
 				[dc.rootController setHidesBottomBarWhenPushed: FALSE];
-
+                
 				// TODO: FIX THIS FOR THE IPAD. This is only valid for the iPhone (with current implementation)!!!
 				if(idx++ >= FIRST_MORE_TAB_INDEX) {
 					// The following is required to make sure TableViewControllers act nice
@@ -448,8 +469,8 @@
 }
 
 -(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-//	if ([[tabBarController viewControllers] objectAtIndex:[tabBarController selectedIndex]] == viewController)
-//		return NO;
+    //	if ([[tabBarController viewControllers] objectAtIndex:[tabBarController selectedIndex]] == viewController)
+    //		return NO;
 	return YES;
 }
 
@@ -493,19 +514,19 @@
 		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
 		
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-
+        
 		/*
-		CGRect activityInset = CGRectInset(bounds, (bounds.size.width - 24) / 2, (bounds.size.height - 24) / 2);
-		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
-		[aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-		[aiv startAnimating];
-		
-		[blocker addSubview:aiv];
+         CGRect activityInset = CGRectInset(bounds, (bounds.size.width - 24) / 2, (bounds.size.height - 24) / 2);
+         UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
+         [aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+         [aiv startAnimating];
+         
+         [blocker addSubview:aiv];
 		 */
 		[_window addSubview:blocker];
 	}
 	_activityIndicatorCount ++;
- 
+    
 	//[[MBSpinner sharedInstance] showActivityIndicator:_window];
 }
 
@@ -519,7 +540,7 @@
 				[top removeFromSuperview];
 		}
 	}
-
+    
 	//[[MBSpinner sharedInstance] hideActivityIndicator:_window];
 }
 
@@ -531,7 +552,7 @@
 	if(dialogName != nil) {
 		if(![_sortedNewDialogNames containsObject:dialogName])
 			[_sortedNewDialogNames addObject:dialogName];
-
+        
 		// Create a temporary dialog controller
 		MBDialogController *dialog = [self dialogWithName: dialogName];
 		if(dialog == nil) {

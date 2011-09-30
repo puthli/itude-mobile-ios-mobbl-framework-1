@@ -16,6 +16,7 @@
 	NSString *_dialogName;
 	NSString *_originDialogName;
 	NSString *_displayMode;
+    NSString *_transitioningStyle;
 	NSString *_path;
 	BOOL _persist;
 	BOOL _transferDocument;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) NSString *originDialogName;
 @property (nonatomic, retain) NSString *path;
 @property (nonatomic, retain) NSString *displayMode;
+@property (nonatomic, retain) NSString *transitioningStyle;
 @property (nonatomic, retain) NSString *preCondition;
 @property (nonatomic, retain) MBDocument *document;
 @property (nonatomic, assign) BOOL persist;

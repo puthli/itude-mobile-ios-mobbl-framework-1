@@ -13,6 +13,7 @@
 	NSString *_action;
 	NSString *_dialog;
 	NSString *_displayMode;
+    NSString *_transitioningStyle;
 	NSString *_preCondition;
 	BOOL _persist;
 	BOOL _transferDocument;
@@ -23,6 +24,7 @@
 @property (nonatomic, retain) NSString *action;
 @property (nonatomic, retain) NSString *dialog;
 @property (nonatomic, retain) NSString *displayMode;
+@property (nonatomic, retain) NSString *transitioningStyle;
 @property (nonatomic, retain) NSString *preCondition;
 @property (nonatomic, assign) BOOL persist;
 @property (nonatomic, assign) BOOL transferDocument;
