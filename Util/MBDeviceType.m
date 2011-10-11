@@ -40,7 +40,7 @@ static MBDeviceType *_instance = nil;
 		
 		// Determine the deviceType
 		self.deviceName = [[UIDevice currentDevice] model];
-		if ([_instance currentSystemVersion] >= UIUSERINTERFACEIDOMIMPLVERSION)	{
+		if ([self currentSystemVersion] >= UIUSERINTERFACEIDOMIMPLVERSION)	{
 			self.deviceIsPad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 			self.deviceIsPhone = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
 		}
