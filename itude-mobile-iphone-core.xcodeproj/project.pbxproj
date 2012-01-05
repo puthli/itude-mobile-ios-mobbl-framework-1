@@ -1534,6 +1534,7 @@
 		03DA53241371989E00BE1FDB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Itude Mobile";
 			};
 			buildConfigurationList = 03DA53271371989E00BE1FDB /* Build configuration list for PBXProject "itude-mobile-iphone-core" */;

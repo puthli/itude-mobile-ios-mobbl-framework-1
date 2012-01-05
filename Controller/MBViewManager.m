@@ -152,7 +152,14 @@
                     _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
                 }
                                 
-                [_tabController presentModalViewController:_modalController animated:TRUE];
+                // If tabController is nil, there is only one viewController
+                if (_tabController) {
+                    [_tabController presentModalViewController:_modalController animated:TRUE];
+                }
+                else if (_singlePageMode){
+                    MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
+                    [dc.rootController presentModalViewController:_modalController animated:TRUE];
+                }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
                 NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_PRESENTED object:self userInfo:dict];
