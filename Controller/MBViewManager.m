@@ -249,7 +249,16 @@
 	if(_modalController != nil) {
 		// Hide any activity indicator for the modal stuff:
 		while(_activityIndicatorCount >0) [self hideActivityIndicator];
-		[_tabController dismissModalViewControllerAnimated:TRUE];
+		
+        // If tabController is nil, there is only one viewController
+        if (_tabController) {
+            [_tabController dismissModalViewControllerAnimated:TRUE];;
+        }
+        else if (_singlePageMode){
+            MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
+            [dc.rootController dismissModalViewControllerAnimated:YES];
+        }
+        
 		[[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_DISMISSED object:self];
 		[_modalController release];	
 		_modalController = nil;
