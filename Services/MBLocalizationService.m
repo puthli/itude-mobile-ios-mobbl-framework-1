@@ -121,7 +121,7 @@ static NSString *_localeCode = nil;
 	{                                   // so we'll handle it separately.
 		[args addObject: argument];
 		va_start(argumentList, argument);          // Start scanning for arguments after argument.
-		while (eachObject = va_arg(argumentList, id)) // As many times as we can get an argument of type "id"
+		while (eachObject == va_arg(argumentList, id)) // As many times as we can get an argument of type "id"
 			[args addObject: eachObject];             // that isn't nil, add it to self's contents.
 		va_end(argumentList);
 	}

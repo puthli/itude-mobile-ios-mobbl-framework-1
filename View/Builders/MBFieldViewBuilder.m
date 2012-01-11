@@ -30,7 +30,7 @@
 
 -(UIView*) buildTextField:(MBField*) field withMaxBounds:(CGRect) bounds {
 	// Add both the label and the editfield to a single view; we can only return 1 view: fieldContainer
-    
+
 	UIView *fieldContainer = [[UIView alloc] init];
     //	CGRect lablabelFieldelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
     
@@ -48,7 +48,7 @@
 	}else if ([C_FIELD_USERNAME isEqualToString:field.type]) {
 		textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	}
-    
+
 	textField.text = [field value];
 	textField.delegate = field;
 	textField.enabled = TRUE;
@@ -102,7 +102,7 @@
 	if(field.path != nil) label.text = [field value];
 	else label.text = field.label;
 	label.backgroundColor = [UIColor clearColor];
-    
+
 	return [label autorelease];
 }
 
@@ -112,6 +112,8 @@
 	if (button == nil) button = [UIButton buttonWithType:UIButtonTypeRoundedRect];	
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	button.frame = CGRectMake(0.0, 0.0, 100.0, 29.0);
+    
+    button.titleLabel.adjustsFontSizeToFitWidth = YES;
 	
 	NSString *text = field.label;
 	

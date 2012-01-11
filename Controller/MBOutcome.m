@@ -91,7 +91,7 @@
 }
 
 -(BOOL) isPreConditionValid {
-    
+
 	if(self.preCondition == nil) return TRUE;
 	MBDocument *doc = self.document;
 	

@@ -11,13 +11,14 @@
 #import "MBDataManagerService.h"
 #import "MBCacheManager.h"
 #import "MBProperties.h"
-#import "MBDeviceType.h"
+#import "MBDevice.h"
 
 #import <CommonCrypto/CommonDigest.h>
 
 @interface MBMobbl1ServerDataHandler (hidden)
 
 -(MBDocument *) getRequestDocumentForApplicationID:(NSString*) applicationID;
+-(MBDocument *) doLoadFreshDocument:(NSString *)documentName withArguments:(MBDocument *)doc;
 
 
 @end
@@ -40,12 +41,25 @@
 		if(result != nil) return result;
 	}
 
+	return [self doLoadFreshDocument:documentName withArguments:doc];
+}
+
+//
+// expects an argument Document of type MBMobbl1Request
+-(MBDocument *) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument *)doc{
+	return [self doLoadFreshDocument:documentName withArguments:doc];
+}
+
+//
+// expects an argument Document of type MBMobbl1Request
+-(MBDocument *) doLoadFreshDocument:(NSString *)documentName withArguments:(MBDocument *)doc{
+    
 	// TODO: Retrieve these settings from a property file somewhere
 	NSString *universeID = [MBProperties valueForProperty:@"mobblUniverseID"];
-	NSString *iPhoneUIDPrefix = [MBProperties valueForProperty:@"iPhoneUIDPrefix"];
+	NSString *iPhoneUIDPrefix = ([MBDevice isPad]?[MBProperties valueForProperty:@"iPadUIDPrefix"]:[MBProperties valueForProperty:@"iPhoneUIDPrefix"]);
 	NSString *iPhoneUID = [NSString stringWithFormat:@"%@ %@",iPhoneUIDPrefix,[[UIDevice currentDevice] uniqueIdentifier] ];
-	NSString *iOSVersion = [MBDeviceType iOSVersionAsString];
-	NSString *deviceName = [MBDeviceType deviceName];
+    NSString *iOSVersion = [MBDevice iOSVersionAsString];
+	NSString *deviceName = [MBDevice deviceName];
 	
 	// package the incoming document in a StrayClient envelope
 	NSString *applicationID = [doc valueForPath:@"Request[0]/@name"];
@@ -102,6 +116,9 @@
 	self.documentFactoryType = PARSER_MOBBL1;
 	MBDocument *result = [super loadDocument:documentName withArguments:mobblDoc];
 	
+	BOOL cacheable = FALSE;
+	MBEndPointDefinition *endPoint = [self getEndPointForDocument:documentName];
+	cacheable = [endPoint cacheable];
 	if(cacheable) {
 		[MBCacheManager setDocument:result forKey:[doc uniqueId] timeToLive:endPoint.ttl];
 	}

@@ -78,14 +78,14 @@
 	MBDocument *fresh;
 	
 	if(_argumentsUsed == nil) fresh = [[MBDataManagerService sharedInstance] loadDocument:_definition.name];
-	else fresh = [[MBDataManagerService sharedInstance] loadDocument:_definition.name withArguments: _argumentsUsed];
+	else fresh = [[MBDataManagerService sharedInstance] loadFreshDocument:_definition.name withArguments: _argumentsUsed];
 	[_elements release];
 	_elements = [[fresh elements] retain];
 	[_pathCache removeAllObjects];
 }
 
 -(void) loadFreshCopyForDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL)errorSelector {
-	[[MBDataManagerService sharedInstance] loadDocument:_definition.name withArguments:_argumentsUsed forDelegate:delegate resultSelector:resultSelector errorSelector:errorSelector];
+	[[MBDataManagerService sharedInstance] loadFreshDocument:_definition.name withArguments:_argumentsUsed forDelegate:delegate resultSelector:resultSelector errorSelector:errorSelector];
 }
 
 - (NSString *) asXmlWithLevel:(int)level

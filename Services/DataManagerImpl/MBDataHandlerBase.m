@@ -17,8 +17,18 @@
 	return nil;
 }
 
+- (MBDocument *) loadFreshDocument:(NSString *)documentName {
+	WLog(@"No loadFreshDocument implementation for %@", documentName);
+	return nil;
+}
+
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument*) args {
 	WLog(@"No loadDocument:withArguments implementation for %@", documentName);
+	return nil;	
+}
+
+- (MBDocument *) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument*) args {
+	WLog(@"No loadFreshDocument:withArguments implementation for %@", documentName);
 	return nil;	
 }
 

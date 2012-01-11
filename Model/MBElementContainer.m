@@ -382,7 +382,7 @@
 	NSMutableArray *elements = [self elementsWithName:elementName];
 	if([elements count] == 0) return;
 
-	MBElementDefinition *elementDef = [[elements objectAtIndex:0] definition];
+	MBElementDefinition *elementDef = [(MBElement*)[elements objectAtIndex:0] definition];
 	
     NSMutableArray *sortDescriptors = [NSMutableArray array];	
 	

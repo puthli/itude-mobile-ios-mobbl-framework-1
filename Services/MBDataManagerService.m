@@ -69,9 +69,22 @@ static MBDataManagerService *_instance = nil;
 	return [[self loaderForDocumentName: documentName arguments: nil] load];
 }
 
+- (MBDocument *) loadFreshDocument:(NSString *)documentName {
+    MBDocumentOperation *loader = [self loaderForDocumentName: documentName arguments: nil];
+    loader.loadFreshCopy = YES;
+	return [loader load];
+}
+
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument*) args {
 	return [[self loaderForDocumentName: documentName arguments: args] load];
 }
+
+- (MBDocument *) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument*) args {
+    MBDocumentOperation *loader = [self loaderForDocumentName: documentName arguments: args];
+    loader.loadFreshCopy = YES;
+	return [loader load];
+}
+
 
 - (void) loadDocument:(NSString *)documentName withArguments:(MBDocument*) args forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector {
 	MBDocumentOperation *loader = [self loaderForDocumentName: documentName arguments: args];
@@ -79,9 +92,23 @@ static MBDataManagerService *_instance = nil;
 	[_operationQueue addOperation:loader];
 }
 
+- (void) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument*) args forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector {
+	MBDocumentOperation *loader = [self loaderForDocumentName: documentName arguments: args];
+	[loader setDelegate: delegate resultCallback: resultSelector errorCallback: errorSelector];
+    loader.loadFreshCopy = YES;
+	[_operationQueue addOperation:loader];
+}
+
 - (void) loadDocument:(NSString *)documentName forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector {
 	MBDocumentOperation *loader = [self loaderForDocumentName: documentName arguments: nil];
 	[loader setDelegate: delegate resultCallback: resultSelector errorCallback: errorSelector];
+	[_operationQueue addOperation:loader];
+}
+
+- (void) loadFreshDocument:(NSString *)documentName forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector {
+	MBDocumentOperation *loader = [self loaderForDocumentName: documentName arguments: nil];
+	[loader setDelegate: delegate resultCallback: resultSelector errorCallback: errorSelector];
+    loader.loadFreshCopy = YES;
 	[_operationQueue addOperation:loader];
 }
 

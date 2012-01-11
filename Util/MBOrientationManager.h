@@ -12,6 +12,11 @@
 
 }
 
+/**
+ * Checks if the given interfaceOrientation is supported
+ * @param interfaceOrientation = the interfaceOrientation that needs to be compared with all supported interfaceOrientations
+ * @return Returns TRUE if the provided interfaceOrientation is supported. 
+ */
 + (BOOL) supportInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 @end

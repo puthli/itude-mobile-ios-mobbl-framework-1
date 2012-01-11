@@ -27,9 +27,13 @@
 
 - (MBDocument *) loadDocument:(NSString *)documentName;
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument*) args;
+- (MBDocument *) loadFreshDocument:(NSString *)documentName;
+- (MBDocument *) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument*) args;
 - (MBDocument *) createDocument:(NSString *)documentName;
 - (void) loadDocument:(NSString *)documentName forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;
 - (void) loadDocument:(NSString *)documentName withArguments:(MBDocument*) args forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;
+- (void) loadFreshDocument:(NSString *)documentName forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;
+- (void) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument*) args forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;
 
 - (void) storeDocument:(MBDocument *)document;
 - (void) storeDocument:(MBDocument *)document forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;

@@ -7,7 +7,10 @@
 //
 
 
-// NOTE: This class is used as a helper to improve performance! It keeps track of all the different numberformatters so they can easly be reused without having to create an instance for each one
+/** 
+ * This class is used as a helper to improve performance! 
+ * It keeps track of all the different numberformatters so they can easly be reused.
+ */
 @interface StringUtilitiesHelper : NSObject {
 	NSDateFormatter *_dateFormatterToFormatDateFromXml;
 	NSDateFormatter *_dateFormatterToFormatDateDependingOnCurrentDate;
@@ -30,8 +33,18 @@
 @property (nonatomic, retain) NSNumberFormatter	*numberWithTwoDecimalsNumberFormatter;
 @property (nonatomic, retain) NSNumberFormatter	*numberWithThreeDecimalsNumberFormatter;
 
-
+/**
+ * Creates an instance for this helper class
+ *
+ * @note IMPORTANT NOTE: This instance is created once in the startApplication method in MBApplicationController.
+ * This is directly after the application launched and well before the helper is needed for the first time.  
+ */
 + (void) createInstance;
+
+
+/** 
+ * All the methods below return the appropriate formatter that is used in StringUtilities
+ */
 + (NSDateFormatter *)dateFormatterToFormatDateFromXml;
 + (NSDateFormatter *)dateFormatterToFormatDateDependingOnCurrentDate;
 + (NSNumberFormatter *)numberFormatterToFormatVolume;

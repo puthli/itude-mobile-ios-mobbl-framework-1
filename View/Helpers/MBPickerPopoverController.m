@@ -92,7 +92,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	MBDomainDefinition * domain = _field.domain;
-	[_field setValue:[[domain.domainValidators objectAtIndex:indexPath.row] value]];
+	[_field setValue:[(MBDomainValidatorDefinition*)[domain.domainValidators objectAtIndex:indexPath.row] value]];
 	if (_popover != nil) [_popover dismissPopoverAnimated:YES];
 }
 

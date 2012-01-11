@@ -8,13 +8,14 @@
 //  Extends a convenience class in UIKit to create a TableView / List type screen
 
 #import "MBViewControllerProtocol.h"
+#import "MBFontChangeListenerProtocol.h"
 
 @class MBStyleHandler;
 @class MBPage;
 @class MBField;
 @class MBRow;
 
-@interface MBTableViewController : UITableViewController <UIWebViewDelegate, MBViewControllerProtocol>{
+@interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>{
 
 	NSMutableArray *_sections;
 	NSMutableDictionary *_cellReferences;
@@ -22,11 +23,15 @@
 	MBStyleHandler *_styleHandler;
 	BOOL _finishedLoadingWebviews;
 	MBPage *_page;
+    
+	int _fontSize;
+    BOOL _fontMenuActive;
 }
 
 // allows subclasses to attach behaviour to a field.
 -(void) fieldWasSelected:(MBField *)field;
 -(UIWebView*) initWebView;
+-(void)reloadAllWebViews;
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNo;
 
 @property (nonatomic, retain) NSMutableArray *sections;

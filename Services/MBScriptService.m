@@ -9,6 +9,7 @@
 #import "MBScriptService.h"
 
 static MBScriptService *_instance = nil;
+NSMutableDictionary *_cache = nil;
 
 @implementation MBScriptService
 
@@ -27,6 +28,7 @@ static MBScriptService *_instance = nil;
 	if (self != nil) {
 		_webView = [[UIWebView alloc] init];
 		[_webView loadHTMLString:@"" baseURL:nil];
+        _cache = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -34,18 +36,27 @@ static MBScriptService *_instance = nil;
 - (void) dealloc
 {
 	[_webView release];
+    [_cache release];
 	[super dealloc];
 }
 
+- (NSString*) description{
+    return [NSString stringWithFormat:@"MBScriptService cache contains %d objects", [_cache count]];
+}
+
 -(NSString*) evaluate:(NSString*) expression {
-	NSString *ERROR_MARKER = @"SCRIPT_ERROR: ";
-	
-	NSString *stub = [NSString stringWithFormat:@"function x(){ try { return %@;} catch(e) { return '%@'+e;}} x();", expression, ERROR_MARKER];
-	NSString *result = [_webView stringByEvaluatingJavaScriptFromString:stub];	
-	if([result hasPrefix:ERROR_MARKER]) { 
-		NSString *msg = [NSString stringWithFormat:@"Error evaluating expression <%@>: %@", expression, [result substringFromIndex:[ERROR_MARKER length]]];
-		@throw [NSException exceptionWithName:@"ScriptError" reason:msg userInfo:nil];
-	}
+    NSString *result = [_cache objectForKey:expression];
+	if (result == nil) {
+        NSString *ERROR_MARKER = @"SCRIPT_ERROR: ";
+        
+        NSString *stub = [NSString stringWithFormat:@"function x(){ try { return %@;} catch(e) { return '%@'+e;}} x();", expression, ERROR_MARKER];
+        result = [_webView stringByEvaluatingJavaScriptFromString:stub];	
+        if([result hasPrefix:ERROR_MARKER]) { 
+            NSString *msg = [NSString stringWithFormat:@"Error evaluating expression <%@>: %@", expression, [result substringFromIndex:[ERROR_MARKER length]]];
+            @throw [NSException exceptionWithName:@"ScriptError" reason:msg userInfo:nil];
+        }
+        [_cache setObject:result forKey:expression];
+    }
 	return result;
 }
 

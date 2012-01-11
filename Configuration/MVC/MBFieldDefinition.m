@@ -7,7 +7,7 @@
 //
 
 #import "MBFieldDefinition.h"
-#import "MBDomainDefinition.h";
+#import "MBDomainDefinition.h"
 #import "MBMetadataService.h"
 
 @implementation MBFieldDefinition

@@ -6,7 +6,7 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBRESTServiceDataHandler.h";
+#import "MBRESTServiceDataHandler.h"
 
 
 @interface MBMobbl1ServerDataHandler : MBRESTServiceDataHandler {

@@ -12,7 +12,6 @@
 #import "MBViewBuilderFactory.h"
 #import "MBStyleHandler.h"
 #import "MBLocalizationService.h"
-//#import "BinckStyleHandler.h"
 
 @implementation MBPickerController
 
@@ -58,7 +57,7 @@
 		
 		NSInteger ct = 0;
 		for (MBDomainValidatorDefinition * e in domain.domainValidators) {
-            
+		
 			NSString * elementValue = e.value;
 			if ([elementValue isEqualToString:currentValue]) {
 				index = ct;
@@ -116,9 +115,8 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
 	MBDomainDefinition * domain = _field.domain;
-    
-    //return [[domain.domainValidators objectAtIndex:row] title]; // Commented by Frank. 
-	return MBLocalizedString([[domain.domainValidators objectAtIndex:row] title]); // Added by Frank. The titles should be translated
+	NSString *title = [[domain.domainValidators objectAtIndex:row] title];
+    return MBLocalizedString(title);
 }
 
 
@@ -140,7 +138,7 @@
     r.origin = CGPointZero;
     self.view.frame = r;
     [UIView commitAnimations];
-    
+
 }
 
 // called when removeFromSuperviewWithAnimation's animation completes

@@ -30,6 +30,7 @@
 	[_actionTypes release];
 	[_outcomeTypes release];
 	[_dialogs release];
+    [_dialogGroups release];
 	[_pageTypes release];
 	[super dealloc];
 }

@@ -20,7 +20,11 @@
 	MBViewManager *_viewManager;
 	BOOL _suppressPageSelection;
 	MBOutcome *_outcomeWhichCausedModal;
+    BOOL _applicationActive;
 }
+
+@property (nonatomic, assign) BOOL applicationActive;
+
 
 -(void) startApplication:(MBApplicationFactory *)_applicationFactory;
 -(void) handleOutcome:(MBOutcome *)outcome;

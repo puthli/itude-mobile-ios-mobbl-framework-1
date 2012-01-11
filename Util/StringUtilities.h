@@ -17,44 +17,100 @@
 - (NSComparisonResult)compareFloat:(NSString *)other;
 - (NSComparisonResult)compareBoolean:(NSString *)other;
 	
-// create a date assuming the receiver is a date string read from XML
+/**
+ * Creates a date object from a date string read from XML
+ * @note The receiver MUST be a date string in XML format
+ * @return Returns an NSDate object formatted from an XML-date string
+ */
 - (NSDate *)dateFromXML;
 
-// returns a string formatted as a price with zero or max 3 decimals
-// used to display neat graph data 10K, 10,1K etc.
+
+/**
+ * Formats a price with a minimum of 0 (zero) decimals and a maximum of 3 (three) decimals 
+ * @note Used to display neat graph data 10K, 10,1K etc.
+ * @return Returns a string formatted as a price with a minimum of 0 (zero) decimals and a maximum of 3 (three) decimals 
+ */
 - (NSString *)formatPriceWithMinimalDecimals;
 
-// returns a string formatted as a number with the original amount of decimals assuming the receiver is a float 
+
+/**
+ * Creates a string formatted as a number with the original amount of decimals
+ * @note This methods assumes that the receiver is a float 
+ * @return Returns a string formatted as a number with the original amount of decimals
+ */
 - (NSString *)formatNumberWithOriginalNumberOfDecimals;
 
-// returns a string formatted as a price with two decimals assuming the receiver is a float string read from XML
+
+/**
+ * Creates a string formatted as a price with excactly 2 (two) decimals
+ * @note This method assumes that the receiver is a float string read from XML
+ * @return Returns a string formatted as a price with excactly 2 (two) decimals
+ */
 - (NSString *)formatPriceWithTwoDecimals;
 
-// returns a string formatted as a price with three decimals assuming the receiver is a float string read from XML
+
+/**
+ * Creates a string formatted as a price with excactly 3 (three) decimals
+ * @note This method assumes that the receiver is a float string read from XML
+ * @return Returns a string formatted as a price with excactly 3 (three) decimals
+ */
 - (NSString *)formatPriceWithThreeDecimals;
 
-// returns a string formatted as a number with two decimals assuming the receiver is a float string read from XML
+
+/**
+ * Creates a string formatted as a number with excactly 2 (two) decimals
+ * @note This method assumes that the receiver is a float string read from XML
+ * @return Returns a string formatted as a number with excactly 2 (two) decimals
+ */
 - (NSString *)formatNumberWithTwoDecimals;
 
-// returns a string formatted as a number with three decimals assuming the receiver is a float string read from XML
+
+/**
+ * Creates a string formatted as a number with excactly 3 (three) decimals
+ * @note This method assumes that the receiver is a float string read from XML
+ * @return Returns a string formatted as a number with excactly 3 (three) decimals
+ */
 - (NSString *)formatNumberWithThreeDecimals;
 
-// returns a string formatted as a percentage with two decimals assuming the receiver is a float string read from XML
-// the receiver's value should be "as displayed", eg for 30%, the receiver should be 30, not 0.3
+
+/**
+ * Creates a string formatted as a percentage with two decimals
+ * @note This method assumes that the receiver is a float string read from XML. 
+ * @note The receiver's value should be "as displayed", eg for 30%, the receiver should be 30, not 0.3
+ * @return Returns a string formatted as a percentage with two decimals
+ */
 - (NSString *)formatPercentageWithTwoDecimals;
 
-// returns a string formatted as a volume with group separators (eg, 131.224.000) assuming the receiver is an int string read from XML
+
+/**
+ * Creates a string formatted as a volume with group seperators (eg, 131.224.000) 
+ * @note This method assumes that the receiver is an integer string read from XML
+ * @return Returns a string formatted as a volume (number) with group seperators
+ */
 - (NSString *)formatVolume;
 
-// Formats the date depending on the current date assuming the receiver is a date string 
-// If the date is equal to the current date, the time is given back as a string
-// If the date is NOT equal to the current date, then a a date is presented back as a string
+
+/** 
+ * Formats the receivers date string depending on the current date 
+ * @note This method assumes that the receiver is a date string
+ * @return Returns a string formatted as a time if the receivers date is equal to the current date
+ * @return Returns a string formatted as a date if the receivers date is NOT equal to the current date
+ */
 - (NSString *)formatDateDependingOnCurrentDate;
 
-// returns a string stripped of all HTML tags from the receiver
+
+/**
+ * Strips all HTML tags from the reciever
+ * @return Returns a string stripped of all HTML tags from the receiver
+ */
 - (NSString *)stripHTMLTags;
 
-// XML Encoding
+
+/**
+ * This method encodes an XML string. It replaces characters that are not supported in XML by a 
+ * characterstring that is supported; e.g. "&" will become @"&amp
+ * @return Returns a encoded XML string
+ */
 - (NSString *)xmlSimpleEscape;
 
 @end

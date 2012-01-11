@@ -74,7 +74,7 @@
 		// Create the label for the title 
 		if (title != nil) {
 			yLabelPosition += 2;
-			UILabel *titleLabel = [[[UILabel alloc ] initWithFrame:CGRectMake(self.frame.origin.x+LABELMARGIN_X, yLabelPosition,  columnsTotalWidth- (margin*2), 20)] autorelease];
+			UILabel *titleLabel = [[[UILabel alloc ] initWithFrame:CGRectMake(self.frame.origin.x+LABELMARGIN_X, yLabelPosition,  columnsTotalWidth- (margin*2)-10, 20)] autorelease];
 			titleLabel.text = title;
 			
 			[[[MBViewBuilderFactory sharedInstance] styleHandler] styleMatrixRowTitle:titleLabel];

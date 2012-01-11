@@ -16,6 +16,7 @@
 @synthesize document = _document;
 @synthesize documentName = _documentName;
 @synthesize arguments = _arguments;
+@synthesize loadFreshCopy = _loadFreshCopy;
 
 - (id) initWithDataHandler:(id<MBDataHandler>) dataHandler document:(MBDocument*) document
 {
@@ -23,6 +24,7 @@
 	if (self != nil) {
 		self.dataHandler = dataHandler;
 		self.document = document;
+        self.loadFreshCopy = NO;
 	}
 	return self;
 }
@@ -34,6 +36,7 @@
 		self.dataHandler = dataHandler;
 		self.documentName = documentName;
 		self.arguments = arguments;
+        self.loadFreshCopy = NO;
 	}
 	return self;
 }
@@ -67,9 +70,14 @@
 	MBDocument *arguments = [[self.arguments copy] autorelease];
 
 	MBDocument *doc;
-	if(self.arguments == nil) doc = [self.dataHandler loadDocument:self.documentName];
-	else doc = [self.dataHandler loadDocument:self.documentName withArguments: arguments];
-
+    if (self.loadFreshCopy){
+        if(self.arguments == nil) doc = [self.dataHandler loadFreshDocument:self.documentName];
+        else doc = [self.dataHandler loadFreshDocument:self.documentName withArguments: arguments];
+    }
+    else{
+        if(self.arguments == nil) doc = [self.dataHandler loadDocument:self.documentName];
+        else doc = [self.dataHandler loadDocument:self.documentName withArguments: arguments];
+    }
 	if(doc == nil) {
 		MBDocumentDefinition *docDef = [[MBMetadataService sharedInstance]definitionForDocumentName: self.documentName];
 		if([docDef autoCreate]) doc = [docDef createDocument];	

@@ -61,7 +61,7 @@
 }
 
 -(NSString*) title {
-	NSString *result = _title;
+	NSString *result = nil;
 	
 	if(_title != nil) result = _title;
 	else {

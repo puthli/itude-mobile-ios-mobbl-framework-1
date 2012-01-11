@@ -47,6 +47,7 @@ static MBResourceService *_instance = nil;
 	[super dealloc];
 }
 
+
 // Returns the resourceDefinition for a resourceId
 - (MBResourceDefinition *)resourceDefinitionByID:(NSString *) resourceId {
     MBResourceDefinition *def = [_config getResourceWithID:resourceId];
@@ -123,10 +124,10 @@ static MBResourceService *_instance = nil;
     if(cacheable) {
         NSData *data = [MBCacheManager dataForKey: urlString];
         if(data != nil) {
-            return data;  
+          return data;  
         } 
     }
-    
+
     NSData *data = [self doGetResourceByURL: urlString];
     if(data != nil && cacheable) {
         [MBCacheManager setData: data forKey: urlString timeToLive: ttl];

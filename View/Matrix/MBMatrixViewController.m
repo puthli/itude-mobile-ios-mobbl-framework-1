@@ -234,6 +234,14 @@
 		[rowView updateWithCells:rowCells withTitle:rowTitle];
 	}
 
+    
+    // Determine if a cell can be selected or not
+	BOOL navigable = [[row viewDataForKey:ROW_NAVIGABLE] boolValue];
+    if (!navigable) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    
 	return cell;
 }
 

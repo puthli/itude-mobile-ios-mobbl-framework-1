@@ -17,7 +17,8 @@
 #import "MBAction.h"
 #import "MBLocalizationService.h"
 #import "Reachability.h"
-
+#import <Foundation/Foundation.h>
+#import "MBServerException.h"
 
 // uncomment to allow self signed SSL certificates
 // #define ALLOW_SELFSIGNED_SSL_CERTS 1
@@ -77,6 +78,11 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
 	_finished = YES;
+}
+
+- (void) cancel{
+    [self.connection cancel];
+    _finished = YES;
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse{
@@ -152,6 +158,7 @@
 		MBRequestDelegate *delegate = [MBRequestDelegate new];
 		NSString *dataString = nil;
 		MBDocument *responseDoc = nil;
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:endPoint.timeout target:(delegate) selector:@selector(cancel) userInfo:nil repeats:NO];
 		@try {
 			delegate.err = nil;
 			delegate.response = nil;
@@ -164,13 +171,14 @@
 			
 			// create new connection and begin loading data
 			[[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
-			if (delegate.connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate]){
+			if ((delegate.connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate])){
 				while (!delegate.finished) {
 					if([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable){
 						// Big problem, throw Exception
 						[delegate.connection cancel];
-						@throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"No internet connection") userInfo:nil];
+						@throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"No internet connection") userInfo:nil];
 					}
+                    
 					
 					// Because the application crashed here all these seperate steps are added to pinpoint the excact location of the crash (BINCKAPPS-502)
 					NSString *endPointUri = endPoint.endPointUri;
@@ -212,13 +220,15 @@
 					//if([[Reachability reachabilityWithHostName:[[NSURL URLWithString:endPoint.endPointUri] host]] currentReachabilityStatus ] == NotReachable){
 						// Big problem, throw Exception
 						[delegate.connection cancel];
-						@throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"Server unreachable") userInfo:nil];
+						@throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"Server unreachable") userInfo:nil];
 					}
 					// Wait for async http request to finish, but make sure delegate methods are called, since this is executed in an NSOperation
 					[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
 				}
 			}
 			
+            [timer invalidate];
+
 			dataString = [[NSString alloc] initWithData:delegate.data encoding:NSUTF8StringEncoding];
 			BOOL serverErrorHandled = NO;
 
@@ -232,7 +242,7 @@
 			if (delegate.err != nil) {
 				[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 				WLog(@"An error (%@) occured while accessing endpoint '%@'", delegate.err, endPoint.endPointUri);
-				@throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.err localizedDescription] userInfo:[delegate.err userInfo]];
+				@throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.err localizedDescription] userInfo:[delegate.err userInfo]];
 			}
 			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 			
@@ -243,7 +253,7 @@
 				if(delegate.err != nil) {
 					msg = [NSString stringWithFormat:@"%@ %@: %@", msg, delegate.err.domain, delegate.err.code];
 				}
-				@throw [NSException exceptionWithName:@"Server Error" reason: msg userInfo:nil];
+				@throw [MBServerException exceptionWithName:@"Server Error" reason: msg userInfo:nil];
 			}
 		}
 		@catch (NSException * e) {
@@ -253,6 +263,7 @@
 		}
 		@finally {
 			[delegate release];
+            [timer invalidate];
 		}
 		
 		//

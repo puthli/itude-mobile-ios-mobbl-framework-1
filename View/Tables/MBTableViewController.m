@@ -5,6 +5,7 @@
 //  Created by Robin Puthli on 5/18/10.
 //  Copyright 2010 Itude Mobile. All rights reserved.
 //
+//  Note: [self.view viewWithTag:100] = fontMenu
 
 #import "MBTableViewController.h"
 #import "MBPanel.h"
@@ -22,11 +23,20 @@
 #import "StringUtilities.h"
 #import "MBPickerController.h"
 #import "MBPickerPopoverController.h"
+#import "MBDevice.h"
+#import "MBFontCustomizer.h"
+#import "MBLocalizationService.h"
 #import "MBDatePickerController.h"
-#import "MBDeviceType.h"
 
+
+#define MAX_FONT_SIZE 20
 
 #define C_CELL_Y_MARGIN 4
+
+// TODO: Get the font size and name from the styleHandler
+#define C_WEBVIEW_DEFAULT_FONTNAME @"arial"
+#define C_WEBVIEW_DEFAULT_FONTSIZE 14
+#define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
 
 @interface MBTableViewController (hidden)
 
@@ -48,6 +58,10 @@
 	_finishedLoadingWebviews = NO;
 	_webViews = [[NSMutableDictionary alloc] init];
 	[self tableView].backgroundColor = [UIColor clearColor];
+    
+    // TODO: Get the font size from the styleHandler
+    _fontSize = C_WEBVIEW_DEFAULT_FONTSIZE;
+    _fontMenuActive = NO;
 }
 
 -(void) dealloc{
@@ -56,7 +70,11 @@
 	for(UIWebView *webView in [_webViews allValues]) {
 		webView.delegate = nil;
 	}
-	
+	//BINCKAPPS-635 
+	//ios tries to update sublayers, which calls the related uitableview to refresh
+	//Uitableview then calls its delegate which has already been deallocated (an instance of this class)
+	//so we manually remove the uitableview from its delegate controller when the controller gets deallocated
+	[self.view removeFromSuperview];
 	[_cellReferences release];
 	[_webViews release];
 	[_sections release];
@@ -165,7 +183,7 @@
                 
 				if ([C_FIELD_LABEL isEqualToString:field.type]){
 					if(field.path != nil) {
-						label = [field formattedValue];
+						label = MBLocalizedString([field formattedValue]);
 					}
 					else {
 						label = field.label;
@@ -297,7 +315,7 @@
 		cell = [[[UITableViewCell alloc] initWithStyle:cellstyle reuseIdentifier:cellType] autorelease];
 		CGRect bounds = cell.bounds;
 		// If the bounds are set for a field with buttons, then the view get's all messed up. 
-		if (![MBDeviceType isPad] && !navigable && ![C_FIELD_STYLE_NETWORK isEqualToString:fieldstyle] && [buttons count]<=0) {
+		if (![MBDevice isPad] && !navigable && ![C_FIELD_STYLE_NETWORK isEqualToString:fieldstyle] && [buttons count]<=0) {
 			bounds.size.width = self.view.frame.size.width;
 		}
 		cell.bounds = bounds;
@@ -424,14 +442,30 @@
 		}
 		
 		// TODO: get the css from the stylehandler
-		NSString *css = @"body {font-size:14; font-family:arial; margin:6px; margin-bottom: 12px; padding:0px;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }";
+		NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, _fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
 		
 		// TODO: put the imageUrl in html tags
 		NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@%@</body></html>",css, imageUrl, text];
 		[webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-		cell.contentView.opaque = NO;
-		cell.contentView.backgroundColor = [UIColor clearColor];
-		[cell.contentView addSubview:webView];
+		cell.opaque = NO;
+		cell.backgroundColor = [UIColor clearColor];
+		[cell addSubview:webView];
+        
+        // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has verry little room to paste all the buttons (refres, close, etc.)
+        BOOL shouldShowFontCustomizer = [MBDevice isPad];
+        if (shouldShowFontCustomizer) {
+
+            UIViewController *parentViewcontroller = self.page.viewController;            
+            UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
+            
+            if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
+                MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
+                [fontCustomizer setButtonsDelegate:self];
+                [fontCustomizer setSender:webView];
+                [fontCustomizer addToViewController:parentViewcontroller animated:YES];
+            }
+        }
+        
 	}
 	else{
 		cell.textLabel.text = text;
@@ -472,7 +506,7 @@
 		[field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
         
 		// iPad supports popovers, which are a nicer and better way to let the user make a choice from a dropdownlist
-		if ([MBDeviceType isPad]) {
+		if ([MBDevice isPad]) {
 			MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc] initWithField:field] autorelease];
 			//picker.field = field;
 			UIView *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -572,8 +606,38 @@
 -(UIWebView*)initWebView {
 	UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)];
 	webView.delegate = self;
-	webView.autoresizingMask = UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+	//webView.autoresizingMask = UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 	return webView;
 }
+
+
+-(void)reloadAllWebViews{
+    for (UIWebView *webView in [_webViews allValues]) {
+        _finishedLoadingWebviews = NO;
+        NSString *innerHTML = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
+		NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, _fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
+        NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, innerHTML];
+        [webView loadHTMLString:htmlString baseURL:nil];
+    }
+}
+
+
+#pragma mark -
+#pragma mark MBFontChangeListenerProtocol methods
+
+-(void)fontsizeIncreased:(id)sender {
+    if (_fontSize < MAX_FONT_SIZE) {
+        _fontSize ++;
+        [self reloadAllWebViews];
+    }
+}
+
+-(void)fontsizeDecreased:(id)sender {
+    if (_fontSize > C_WEBVIEW_DEFAULT_FONTSIZE) {
+        _fontSize --;
+        [self reloadAllWebViews];
+    }
+}
+
 
 @end

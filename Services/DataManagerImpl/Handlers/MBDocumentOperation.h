@@ -18,12 +18,14 @@
 	SEL _resultCallback;
 	SEL _errorCallback;
 	id _delegate;
+    BOOL _loadFreshCopy;
 }
 
 @property (nonatomic, assign) id<MBDataHandler> dataHandler;
 @property (nonatomic, retain) NSString *documentName;
 @property (nonatomic, retain) MBDocument *arguments;
 @property (nonatomic, retain) MBDocument *document;
+@property (assign) BOOL loadFreshCopy;
 
 - (id) initWithDataHandler:(id<MBDataHandler>) dataHandler documentName:(NSString*) documentName arguments:(MBDocument*) arguments;
 - (id) initWithDataHandler:(id<MBDataHandler>) dataHandler document:(MBDocument*) document;

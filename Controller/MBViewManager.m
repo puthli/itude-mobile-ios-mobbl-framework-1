@@ -92,7 +92,7 @@
     
     
     DLog(@"ViewManager: showPage name=%@ dialog=%@ mode=%@ type=%i", page.pageName, page.dialogName, displayMode, page.pageType);
-    
+
 	if(page.pageType == MBPageTypesErrorPage || [@"POPUP" isEqualToString:displayMode]) {
 		[self showAlertView: page];
 	}
@@ -213,25 +213,36 @@
 		
 		NSString *title;
 		NSString *message;
-		if([page.document.name isEqualToString:DOC_SYSTEM_EXCEPTION]) {
-			title = [page.document valueForPath:PATH_SYSTEM_EXCEPTION_NAME];
-			message = [page.document valueForPath:PATH_SYSTEM_EXCEPTION_DESCRIPTION];
+        MBDocument *document = page.document;
+		
+        if([document.name isEqualToString:DOC_SYSTEM_EXCEPTION] &&
+           [[document valueForPath:PATH_SYSTEM_EXCEPTION_TYPE] isEqualToString:DOC_SYSTEM_EXCEPTION_TYPE_SERVER]) {
+			title = [document valueForPath:PATH_SYSTEM_EXCEPTION_NAME];
+			message = [document valueForPath:PATH_SYSTEM_EXCEPTION_DESCRIPTION];
+		}
+		
+        else if([document.name isEqualToString:DOC_SYSTEM_EXCEPTION]) {
+			title = MBLocalizedString(@"Application error");
+			message = MBLocalizedString(@"Unknown error");
 		}
 		else {
 			title = page.title;
-			message = MBLocalizedString([page.document valueForPath:@"/message[0]/@text"]);
-			if(message == nil) message = MBLocalizedString([page.document valueForPath:@"/message[0]/@text()"]);
+			message = MBLocalizedString([document valueForPath:@"/message[0]/@text"]);
+			if(message == nil) message = MBLocalizedString([document valueForPath:@"/message[0]/@text()"]);
 		}
 		
-		self.currentAlert = [[UIAlertView alloc]
+		_currentAlert = [[UIAlertView alloc]
 							 initWithTitle: title
 							 message: message
 							 delegate:self
 							 cancelButtonTitle:@"OK"
 							 otherButtonTitles:nil];
 		
-		[self.currentAlert show];
-		[self.currentAlert autorelease];
+        // There seem to be timing issues with displaying the alert 
+        // while the screen is being redrawn due to becoming active after sleep or background
+        // The alert was shown, but the background was blank / white.
+        // #BINCKAPPS-357 is solved by scheduling the alert to be displayed after all UI stuff has been finished
+		[self.currentAlert performSelector:@selector(show) withObject:nil afterDelay:0.1];
 	}
 }	
 
@@ -296,7 +307,7 @@
 	// Apparently we need to select the tab. Only now we cannot do this for tabs that are on the more tab
 	// because it destroys the navigation controller for some reason
 	// TODO: Make selecting a dialog work; even if it is nested within the more tab
-    
+
 	if(idx != shouldBe && shouldBe < FIRST_MORE_TAB_INDEX) {
 		UIViewController *ctrl = [_tabController selectedViewController];
 		[ctrl viewWillDisappear:FALSE];
@@ -333,7 +344,7 @@
 }
 
 -(MBDialogController*) dialogWithName:(NSString*) name {
-    
+
 	MBDialogController *result = [_dialogControllers objectForKey: name];
 	return result;
 }
@@ -442,7 +453,7 @@
 					idx++;
 				}
 			}
-            
+
 			// For regular DialogControllers
 			else {
 				
@@ -456,7 +467,7 @@
 				dc.rootController.hidesBottomBarWhenPushed = TRUE;
 				dc.rootController.tabBarItem = tabBarItem;
 				[dc.rootController setHidesBottomBarWhenPushed: FALSE];
-                
+
 				// TODO: FIX THIS FOR THE IPAD. This is only valid for the iPhone (with current implementation)!!!
 				if(idx++ >= FIRST_MORE_TAB_INDEX) {
 					// The following is required to make sure TableViewControllers act nice
@@ -495,33 +506,38 @@
 }
 
 - (void)showActivityIndicatorForDialog:(NSString*) dialogName {
-	if(_modalController != nil) [self showActivityIndicator];
-	else {
-		MBDialogController *dialog = [self dialogWithName:dialogName];
-		// If the dialog is nested inside a dialogGroup, the spinner should be displayed over the entire group
-		if (dialog.dialogGroupName) {
-			MBDialogGroupController *dialogGroupController = [self dialogGroupWithName:dialog.dialogGroupName];
-			[dialogGroupController showActivityIndicator];
-		}
-		else {
-			[dialog showActivityIndicator];
-		}
-	}
+	[self showActivityIndicator];
+//	//if(_modalController != nil) 
+//	if (1==1) [self showActivityIndicator];
+//	else {
+//		MBDialogController *dialog = [self dialogWithName:dialogName];
+//		// If the dialog is nested inside a dialogGroup, the spinner should be displayed over the entire group
+//		if (dialog.dialogGroupName) {
+//			MBDialogGroupController *dialogGroupController = [self dialogGroupWithName:dialog.dialogGroupName];
+//			[dialogGroupController showActivityIndicator];
+//		}
+//		else {
+//			[dialog showActivityIndicator];
+//		}
+//	}
 }
 
 - (void)hideActivityIndicatorForDialog:(NSString*) dialogName {
-	if(_modalController != nil) [self hideActivityIndicator];
-	else {
-		MBDialogController *dialog = [self dialogWithName:dialogName];
-		// If the dialog is nested inside a dialogGroup, the spinner should be hidden from the group
-		if (dialog.dialogGroupName) {
-			MBDialogGroupController *dialogGroupController = [self dialogGroupWithName:dialog.dialogGroupName];
-			[dialogGroupController hideActivityIndicator];
-		}
-		else {
-			[dialog hideActivityIndicator];
-		}
-	}
+	[self hideActivityIndicator];
+//	
+//	if(_modalController != nil) [self hideActivityIndicator];
+//	//else 
+//	{
+//		MBDialogController *dialog = [self dialogWithName:dialogName];
+//		// If the dialog is nested inside a dialogGroup, the spinner should be hidden from the group
+//		if (dialog.dialogGroupName) {
+//			MBDialogGroupController *dialogGroupController = [self dialogGroupWithName:dialog.dialogGroupName];
+//			[dialogGroupController hideActivityIndicator];
+//		}
+//		else {
+//			[dialog hideActivityIndicator];
+//		}
+//	}
 }
 
 - (void)showActivityIndicator {
@@ -530,19 +546,19 @@
 		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
 		
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-        
+
 		/*
-         CGRect activityInset = CGRectInset(bounds, (bounds.size.width - 24) / 2, (bounds.size.height - 24) / 2);
-         UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
-         [aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-         [aiv startAnimating];
-         
-         [blocker addSubview:aiv];
+		CGRect activityInset = CGRectInset(bounds, (bounds.size.width - 24) / 2, (bounds.size.height - 24) / 2);
+		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
+		[aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+		[aiv startAnimating];
+		
+		[blocker addSubview:aiv];
 		 */
 		[_window addSubview:blocker];
 	}
 	_activityIndicatorCount ++;
-    
+ 
 	//[[MBSpinner sharedInstance] showActivityIndicator:_window];
 }
 
@@ -556,7 +572,7 @@
 				[top removeFromSuperview];
 		}
 	}
-    
+
 	//[[MBSpinner sharedInstance] hideActivityIndicator:_window];
 }
 
@@ -568,7 +584,7 @@
 	if(dialogName != nil) {
 		if(![_sortedNewDialogNames containsObject:dialogName])
 			[_sortedNewDialogNames addObject:dialogName];
-        
+
 		// Create a temporary dialog controller
 		MBDialogController *dialog = [self dialogWithName: dialogName];
 		if(dialog == nil) {
@@ -610,7 +626,7 @@
 	// Set the actievDialogName
 	for (MBDialogController *dialogController in [_dialogControllers allValues]) {
 		if (dialogController.rootController == viewController) {
-			_activeDialogName = dialogController.name;
+			self.activeDialogName = dialogController.name;
 			break;
 		}
 	}

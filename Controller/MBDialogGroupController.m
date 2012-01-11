@@ -9,7 +9,7 @@
 #import "MBDialogGroupController.h"
 #import "MBMetadataService.h"
 #import "MBActivityIndicator.h"
-#import "MBDeviceType.h"
+#import "MBDevice.h"
 
 @implementation MBDialogGroupController
 
@@ -66,7 +66,7 @@
 		
 		// Somehow, the bounds of the applicationFrame on iPad, are not correct. 
 		// The y starts at 20, while the frame for the application is 0. The code below corrects this.
-		if ([MBDeviceType isPad]) {
+		if ([MBDevice isPad]) {
 			NSInteger correctiohHeight = bounds.origin.y;
 			bounds.origin.y -= correctiohHeight;
 			bounds.size.height+= correctiohHeight;

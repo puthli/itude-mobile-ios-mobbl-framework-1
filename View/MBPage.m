@@ -84,7 +84,7 @@
 			if([def isPreConditionValid:document currentPath:[[self parent] absoluteDataPath]]) [self addChild: [MBComponentFactory componentFromDefinition: def document: document parent: self]];
 		}
 
-        self.viewController = [[MBApplicationFactory sharedInstance]createViewController:self];
+        self.viewController = (UIViewController<MBViewControllerProtocol>*)[[MBApplicationFactory sharedInstance]createViewController:self];
         self.viewController.title = [self title];
         self.viewController.view = [self buildViewWithMaxBounds: bounds viewState: viewState];
         [self.viewController  setPage: self];

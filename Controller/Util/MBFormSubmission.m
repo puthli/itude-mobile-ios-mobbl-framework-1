@@ -11,6 +11,7 @@
 #import "MBDocument.h"
 #import "MBOutcome.h"
 #import "MBMacros.h"
+#import "MBServerException.h"
 
 #define C_GENERIC_REQUEST @"MBGenericRequest"
 
@@ -64,7 +65,7 @@
 	if (error) {
 		DLog(@"Error returned by server: %@", error);
 		// use body rather than error since server-side puts error code in error and error message in body
-		@throw [NSException exceptionWithName: @"Server message" reason:body userInfo:nil];
+		@throw [MBServerException exceptionWithName: @"Server message" reason:body userInfo:nil];
 	}
 
 	// if success, add OK action to document and navigate to confirmation page

@@ -43,7 +43,7 @@
 }
 
 - (void) doParseFragment:(NSData *)data intoDocument:(MBDocument*) document rootPath:(NSString*) rootPath copyRootAttributes:(BOOL) copyRootAttributes {
-    
+
 	if(data != nil) {
 		NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
 		[xmlParser setDelegate:self];

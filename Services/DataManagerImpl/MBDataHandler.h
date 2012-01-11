@@ -12,7 +12,9 @@
 @protocol MBDataHandler
 
 - (MBDocument *) loadDocument:(NSString *)documentName;
+- (MBDocument *) loadFreshDocument:(NSString *)documentName;
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument*) args;
+- (MBDocument *) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument*) args;
 - (void) storeDocument:(MBDocument *)document;
 
 @end

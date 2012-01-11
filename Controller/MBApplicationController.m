@@ -23,7 +23,7 @@
 #import "MBMacros.h"
 #import "MBLocalizationService.h"
 #import "StringUtilitiesHelper.h"
-#import "MBDeviceType.h"
+#import "MBDevice.h"
 
 //#define SELECTOR_HANDLING performSelector
 #define SELECTOR_HANDLING performSelectorInBackground
@@ -40,13 +40,15 @@ static MBApplicationController *_instance = nil;
 
 @implementation MBApplicationController
 
+@synthesize applicationActive = _applicationActive;
+
 - (id) init
 {
 	self = [super init];
 	if (self != nil) {
         _instance = self;
-		// Added for optimization: Make sure the MBDeviceType is created at startup. The createInstance method instantiate variables that only need to be gathered once in the application lifecycle 
-		[MBDeviceType createInstance]; 
+		// Added for optimization: Make sure the MBDevice is created at startup. The createInstance method instantiate variables that only need to be gathered once in the application lifecycle 
+		[MBDevice createInstance]; 
 	}
 	return self;
 }
@@ -68,7 +70,7 @@ static MBApplicationController *_instance = nil;
 	[_applicationFactory retain];
 	
 	_viewManager = [[MBViewManager alloc] init];
-    
+
 	_viewManager.singlePageMode = [[[MBMetadataService sharedInstance] dialogs] count] <= 1;
 	
 	// Added for optimization: Make sure the stringUtilitiesHelper is created. The createInstance methods instantiate variables that only need to be gathered once in the application lifecycle 
@@ -96,11 +98,11 @@ static MBApplicationController *_instance = nil;
     initialOutcome.outcomeName = @"init";
     initialOutcome.dialogName = [self activeDialogName];
 	initialOutcome.noBackgroundProcessing = TRUE;
-    
+
 	_suppressPageSelection = TRUE;
     [self handleOutcome:initialOutcome];	
 	_suppressPageSelection = FALSE;
-    
+
     [initialOutcome release];	
 }	
 
@@ -122,18 +124,18 @@ static MBApplicationController *_instance = nil;
 	[outcome.document clearAllCaches];
 	
 	MBMetadataService *metadataService = [MBMetadataService sharedInstance];
-    
+
 	NSArray *outcomeDefinitions = [metadataService outcomeDefinitionsForOrigin:outcome.originName outcomeName:outcome.outcomeName throwIfInvalid:FALSE];
     if([outcomeDefinitions count] == 0) {
         NSString *msg = [NSString stringWithFormat:@"No outcome defined for origin=%@ outcome=%@", outcome.originName, outcome.outcomeName];
         @throw [NSException exceptionWithName:@"NoOutcomesDefined" reason:msg userInfo:nil];
     }
-    
+
     BOOL shouldPersist = FALSE;
     for(MBOutcomeDefinition *outcomeDef in outcomeDefinitions) {
         shouldPersist |= outcomeDef.persist;
     }
-    
+
     if(shouldPersist) {
 		if([outcome document] == nil) {
 			WLog(@"WARNING: origin=%@ and name=%@ has persistDocument=TRUE but there is no document (probably the outcome originates from an action; which cannot have a document)", outcome.originName, outcome.outcomeName);
@@ -151,12 +153,12 @@ static MBApplicationController *_instance = nil;
 	// use this information to sort the tabs
 	
     for(MBOutcomeDefinition *outcomeDef in outcomeDefinitions) {
-        
+
 		if([@"RESET_CONTROLLER" isEqualToString:outcomeDef.action]) { 
 			[self resetController];
 		}
 		else {
-            
+
 			// Create a working copy of the outcome; we manipulate the outcome below and we want the passed outcome to be left unchanged (good practise)
 			MBOutcome *outcomeToProcess = [[[MBOutcome alloc] initWithOutcomeDefinition: outcomeDef] autorelease];
 			
@@ -165,9 +167,9 @@ static MBApplicationController *_instance = nil;
 			outcomeToProcess.dialogName = outcome.dialogName;
 			if (outcome.displayMode != nil) outcomeToProcess.displayMode = outcome.displayMode;
 			outcomeToProcess.noBackgroundProcessing = outcome.noBackgroundProcessing || outcomeDef.noBackgroundProcessing;
-            
+
 			if([outcomeToProcess isPreConditionValid]) {
-                
+			
 				// Update a possible switch of dialog/display mode set by the outcome definition
 				if(outcomeDef.dialog != nil) outcomeToProcess.dialogName = outcomeDef.dialog;
 				if(outcomeDef.displayMode != nil) outcomeToProcess.displayMode = outcomeDef.displayMode;
@@ -177,6 +179,7 @@ static MBApplicationController *_instance = nil;
 				
 				if([@"MODAL" isEqualToString: outcomeToProcess.displayMode] || 
 				   [@"MODALFORMSHEET" isEqualToString: outcomeToProcess.displayMode] || 
+				   [@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:outcomeToProcess.displayMode] ||
 				   [@"MODALPAGESHEET" isEqualToString:	outcomeToProcess.displayMode] ||		
 				   [@"MODALFULLSCREEN" isEqualToString:	outcomeToProcess.displayMode] ||		
 				   [@"MODALCURRENTCONTEXT" isEqualToString:	outcomeToProcess.displayMode])	{
@@ -207,9 +210,9 @@ static MBApplicationController *_instance = nil;
 				else {
 					[_viewManager notifyDialogUsage: outcomeToProcess.dialogName];	
 				}
-                
+					
 				MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];
-                
+
 				if(actionDef != nil) { 
 					[_viewManager showActivityIndicatorForDialog:outcomeToProcess.dialogName];
 					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
@@ -221,7 +224,7 @@ static MBApplicationController *_instance = nil;
 					[_viewManager showActivityIndicatorForDialog:outcomeToProcess.dialogName];
 					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInDialog, nil]];
 					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInDialog, nil]];
-                    
+
 					selectPageInDialog = @"no";
 				}
 				if(actionDef == nil && pageDef == nil && ![outcomeDef.action isEqualToString:@"none"]) {
@@ -240,7 +243,7 @@ static MBApplicationController *_instance = nil;
     MBOutcome *causingOutcome = [args objectAtIndex:0];
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
     @try {
-        
+	
         NSString *pageName = [args objectAtIndex:1];
         NSString *selectPageInDialog = [args objectAtIndex:2];
         
@@ -265,14 +268,14 @@ static MBApplicationController *_instance = nil;
 		}
 		else { 
 			document = [[MBDataManagerService sharedInstance] loadDocument:[pageDefinition documentName]];	
-            
+        
 			if(document == nil) {
 				document = [[MBDataManagerService sharedInstance] loadDocument:[pageDefinition documentName]];	
 				NSString *msg = [NSString stringWithFormat:@"Document with name %@ not found (check filesystem/webservice)", [pageDefinition documentName]];
 				@throw [NSException exceptionWithName:@"NoDocument" reason:msg userInfo:nil];
 			}
 		}
-        
+				  
 		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingPage:) 
 															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInDialog, nil]];
 		else [self performSelectorOnMainThread:@selector(showResultingPage:) 
@@ -299,6 +302,7 @@ static MBApplicationController *_instance = nil;
 		
 		if([displayMode isEqualToString:@"MODAL"] || 
 		   [displayMode isEqualToString:@"MODALFORMSHEET"] ||
+		   [displayMode isEqualToString:@"MODALFORMSHEETWITHCLOSEBUTTON"] ||
 		   [displayMode isEqualToString:@"MODALPAGESHEET" ] ||		
 		   [displayMode isEqualToString:@"MODALFULLSCREEN"] ||		
 		   [displayMode isEqualToString:@"MODALCURRENTCONTEXT"] ){
@@ -337,10 +341,10 @@ static MBApplicationController *_instance = nil;
 - (void) performActionInBackground:(NSArray *)args {
     
     MBOutcome *causingOutcome = [args objectAtIndex:0];
-    
+
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
     @try {
-        
+	
         MBActionDefinition *actionDef = [args objectAtIndex:1];
         id<MBAction> action = [_applicationFactory createAction: actionDef.className];
         MBOutcome *actionOutcome = [action execute: causingOutcome.document withPath:causingOutcome.path];
@@ -364,7 +368,7 @@ static MBApplicationController *_instance = nil;
 
 - (void) handleActionResult:(NSArray *)args {
     MBOutcome *causingOutcome = [args objectAtIndex:0];
-    
+
     @try {
 		[_viewManager hideActivityIndicatorForDialog:causingOutcome.dialogName];
         
@@ -373,7 +377,7 @@ static MBApplicationController *_instance = nil;
         
         if(actionOutcome.dialogName == nil) actionOutcome.dialogName = causingOutcome.dialogName;
         actionOutcome.originName = actionDef.name;
-        
+
         [self handleOutcome:actionOutcome];
     }
     @catch (NSException *e) {
@@ -456,12 +460,13 @@ static MBApplicationController *_instance = nil;
 	NSArray *trace = [self getStack:exception];
 	if(trace != nil) for(id t in trace) WLog(@"%@", t);
 	WLog(@"______________________________________________________________________________________");
-    
+
 	MBDocument *exceptionDocument = [[MBDataManagerService sharedInstance] loadDocument: DOC_SYSTEM_EXCEPTION];
 	[exceptionDocument setValue: MBLocalizedString(exception.name) forPath: PATH_SYSTEM_EXCEPTION_NAME];
 	[exceptionDocument setValue: MBLocalizedString(exception.reason) forPath: PATH_SYSTEM_EXCEPTION_DESCRIPTION];
 	[exceptionDocument setValue: outcome.originName forPath: PATH_SYSTEM_EXCEPTION_ORIGIN];
 	[exceptionDocument setValue: outcome.outcomeName forPath: PATH_SYSTEM_EXCEPTION_OUTCOME];
+	[exceptionDocument setValue: [[exception class] description] forPath: PATH_SYSTEM_EXCEPTION_TYPE];
 	for(NSString *line in trace) {
 		MBElement *stackline = [exceptionDocument createElementWithName:@"/Exception[0]/Stackline"];	
 		if([line length] > 52) line = [line substringFromIndex:52];
@@ -469,14 +474,14 @@ static MBApplicationController *_instance = nil;
 	}
 	
 	[[MBDataManagerService sharedInstance] storeDocument: exceptionDocument];
-    
+
 	MBMetadataService *metadataService = [MBMetadataService sharedInstance];
 	
 	// We are not sure at this moment if the activity indicator is shown. But to be sure; try to hide it.
 	// This might mess up the count of the activity indicators if more than one page is being constructed in the background;
 	// however most of the times this will work out; so:
 	[_viewManager hideActivityIndicatorForDialog:outcome.dialogName];
-    
+
 	// See if there is an outcome defined for this particular exception
 	NSArray *outcomeDefinitions = [metadataService outcomeDefinitionsForOrigin:outcome.originName outcomeName:[exception name] throwIfInvalid:FALSE];
     if([outcomeDefinitions count] != 0) {
@@ -497,7 +502,7 @@ static MBApplicationController *_instance = nil;
 			@throw [exception retain];
 		}
 		
-		MBOutcome *genericExceptionHandler = [[MBOutcome alloc] initWithOutcomeName:@"exception" document: exceptionDocument];
+		MBOutcome *genericExceptionHandler = [[[MBOutcome alloc] initWithOutcomeName:@"exception" document: exceptionDocument] autorelease];
 		genericExceptionHandler.dialogName = outcome.dialogName;
 		genericExceptionHandler.path = outcome.path;
 		

@@ -36,7 +36,7 @@
 @synthesize temporary = _temporary;
 
 -(id) initWithDefinition:(MBDialogDefinition*)definition temporary:(BOOL) isTemporary {
-	if((self = [super init])) {
+	if(self = [super init]) {
 		self.name = definition.name;
 		self.title = definition.title;
         self.dialogMode = definition.mode;
@@ -91,8 +91,10 @@
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
-    DLog(@"DialogController: showPage name=%@ dialog=%@ mode=%@", page.pageName, _name, displayMode);
-	
+    
+    if(displayMode != nil){
+        DLog(@"DialogController: showPage name=%@ dialog=%@ mode=%@", page.pageName, _name, displayMode);
+	}
 	UINavigationController *nav = [self determineNavigationController];
 	
 	

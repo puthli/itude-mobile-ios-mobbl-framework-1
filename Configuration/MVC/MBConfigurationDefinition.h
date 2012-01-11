@@ -19,11 +19,13 @@
 #define DOC_SYSTEM_EMPTY                  @"MBEmpty"
 #define DOC_SYSTEM_LANGUAGE               @"MBBundle" 
 #define DOC_SYSTEM_EXCEPTION              @"MBException"
+#define DOC_SYSTEM_EXCEPTION_TYPE_SERVER  @"MBServerException"
 #define PATH_SYSTEM_EXCEPTION_NAME        @"/Exception[0]/@name"
 #define PATH_SYSTEM_EXCEPTION_DESCRIPTION @"/Exception[0]/@description"
 #define PATH_SYSTEM_EXCEPTION_ORIGIN      @"/Exception[0]/@origin"
 #define PATH_SYSTEM_EXCEPTION_OUTCOME     @"/Exception[0]/@outcome" 
 #define PATH_SYSTEM_EXCEPTION_PATH        @"/Exception[0]/@path" 
+#define PATH_SYSTEM_EXCEPTION_TYPE        @"/Exception[0]/@type" 
 
 #define DOC_SYSTEM_PROPERTIES             @"MBApplicationProperties"
 
