@@ -109,6 +109,9 @@
 #import "StringUtilitiesHelper.h"
 #import "UncaughtExceptionHandler.h"
 #import "ViewUtilities.h"
+#import "MBDevice.h"
+#import "MBServerException.h"
+#import "UIView+HierarchyLogging.h"
 ////  Defines
 #import "BuildInfo.h"
 #import "MBMacros.h"
@@ -150,6 +153,9 @@
 #import "MBPickerController.h"
 #import "MBPickerPopoverController.h"
 #import "MBSpinner.h"
+#import "MBFontChangeListenerProtocol.h"
+#import "MBFontCustomizer.h"
+#import "MBFontCustomizerToolbar.h"
 //// Matrix
 #import "MBMatrixCell.h"
 #import "MBMatrixHeaderView.h"

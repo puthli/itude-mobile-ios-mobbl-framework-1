@@ -109,6 +109,9 @@
 #import <itude-mobile-iphone-core/StringUtilitiesHelper.h>
 #import <itude-mobile-iphone-core/UncaughtExceptionHandler.h>
 #import <itude-mobile-iphone-core/ViewUtilities.h>
+#import <itude-mobile-iphone-core/MBDevice.h>
+#import <itude-mobile-iphone-core/MBServerException.h>
+#import <itude-mobile-iphone-core/UIView+HierarchyLogging.h>
 ////  Defines
 #import <itude-mobile-iphone-core/BuildInfo.h>
 #import <itude-mobile-iphone-core/MBMacros.h>
@@ -150,6 +153,9 @@
 #import <itude-mobile-iphone-core/MBPickerController.h>
 #import <itude-mobile-iphone-core/MBPickerPopoverController.h>
 #import <itude-mobile-iphone-core/MBSpinner.h>
+#import <itude-mobile-iphone-core/MBFontChangeListenerProtocol.h>
+#import <itude-mobile-iphone-core/MBFontCustomizer.h>
+#import <itude-mobile-iphone-core/MBFontCustomizerToolbar.h>
 //// Matrix
 #import <itude-mobile-iphone-core/MBMatrixCell.h>
 #import <itude-mobile-iphone-core/MBMatrixHeaderView.h>

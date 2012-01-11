@@ -6,8 +6,6 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 
 @interface MBDevice : NSObject {
 	CGFloat _currentSystemVersion;
