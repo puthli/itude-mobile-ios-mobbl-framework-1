@@ -449,7 +449,7 @@
 		[webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 		cell.opaque = NO;
 		cell.backgroundColor = [UIColor clearColor];
-		[cell addSubview:webView];
+		[cell.contentView addSubview:webView];
         
         // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has verry little room to paste all the buttons (refres, close, etc.)
         BOOL shouldShowFontCustomizer = [MBDevice isPad];
