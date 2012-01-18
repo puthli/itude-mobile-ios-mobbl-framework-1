@@ -333,10 +333,7 @@
 	cell.detailTextLabel.text = sublabel;
 	[_styleHandler styleLabel:cell.detailTextLabel component:subLabelField];
     
-    cell.isAccessibilityElement = YES;
-    cell.accessibilityLabel = label;
-    
-    if (text) {
+	if (text) {
         
 		// TODO: delegate this to a separate builder, webView used for textArea has complexity we don't need here 
         
@@ -395,7 +392,7 @@
 	
 	if (showAccesoryDisclosureIndicator) {
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.accessoryView.isAccessibilityElement = YES;
+		cell.accessoryView.isAccessibilityElement = YES;
 		cell.accessoryView.accessibilityLabel = @"DisclosureIndicator";
 	}
 	
@@ -404,13 +401,6 @@
 		CGRect frame = CGRectMake(0, cell.contentView.frame.size.height/2 - inputFieldView.frame.size.height/2 + 2, inputFieldView.frame.size.width, inputFieldView.frame.size.height);
 		inputFieldView.frame = frame;
 		[cell.contentView addSubview:inputFieldView];
-        
-        //modified by xiaochen for KIF Testing
-        //inputFieldView is the super view of the real UITextField that we should use in KIF method call + (id)stepToEnterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label;
-        //therefore we should explicitly make the real UITextField accessible and give it a special label to be identified in KIF
-        UITextField *textField = [inputFieldView.subviews objectAtIndex:1];
-        textField.isAccessibilityElement = YES;
-        textField.accessibilityLabel = [NSString stringWithFormat:@"input_%@", cell.textLabel.text];
 	}
 	if (switchView) {
 		cell.accessoryView = switchView;

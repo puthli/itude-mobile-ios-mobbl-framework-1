@@ -241,6 +241,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    cell.isAccessibilityElement = YES;
+    cell.accessibilityLabel = rowTitle;
     
 	return cell;
 }
