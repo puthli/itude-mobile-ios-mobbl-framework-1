@@ -410,9 +410,13 @@
         textField.accessibilityLabel = [NSString stringWithFormat:@"input_%@", cell.textLabel.text];
 	}
 	if (switchView) {
+		// reformat the frame
+		CGRect frame = CGRectMake(0, cell.contentView.frame.size.height/2 - switchView.frame.size.height/2 + 2, switchView.frame.size.width, switchView.frame.size.height);
+		switchView.frame = frame;
+		[cell.contentView addSubview:switchView];
         switchView.isAccessibilityElement = YES;
         switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", cell.textLabel.text];
-		cell.accessoryView = switchView;
+		//cell.accessoryView = switchView;
 	}
 	
 	return cell;
