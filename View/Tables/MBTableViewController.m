@@ -405,7 +405,7 @@
         //modified for KIF Testing
         //inputFieldView is the super view of the real UITextField that we should use in KIF method call + (id)stepToEnterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label;
         //therefore we should explicitly make the real UITextField accessible and give it a special label to be identified in KIF
-        UITextField *textField = [inputFieldView.subviews objectAtIndex:1];
+        UITextField *textField = [inputFieldView.subviews objectAtIndex:0];
         textField.isAccessibilityElement = YES;
         textField.accessibilityLabel = [NSString stringWithFormat:@"input_%@", cell.textLabel.text];
 	}
