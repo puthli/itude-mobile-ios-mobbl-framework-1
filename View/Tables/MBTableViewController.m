@@ -411,7 +411,7 @@
 	}
 	if (switchView) {
 		// reformat the frame
-		CGRect frame = CGRectMake(cell.accessoryView.frame.origin.x, cell.accessoryView.frame.origin.y, switchView.frame.size.width, switchView.frame.size.height);
+		CGRect frame = CGRectMake(cell.contentView.frame.size.width - switchView.frame.size.width-10, cell.contentView.frame.size.height/2 - (switchView.frame.size.height/2 + 2), switchView.frame.size.width, switchView.frame.size.height);
 		switchView.frame = frame;
 		[cell.contentView addSubview:switchView];
         switchView.isAccessibilityElement = YES;
