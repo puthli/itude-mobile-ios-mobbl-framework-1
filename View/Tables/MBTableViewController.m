@@ -410,6 +410,8 @@
         textField.accessibilityLabel = [NSString stringWithFormat:@"input_%@", cell.textLabel.text];
 	}
 	if (switchView) {
+        switchView.isAccessibilityElement = YES;
+        switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", cell.textLabel.text];
 		cell.accessoryView = switchView;
 	}
 	
