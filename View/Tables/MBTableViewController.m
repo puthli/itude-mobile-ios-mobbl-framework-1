@@ -333,7 +333,10 @@
 	cell.detailTextLabel.text = sublabel;
 	[_styleHandler styleLabel:cell.detailTextLabel component:subLabelField];
     
-	if (text) {
+    cell.isAccessibilityElement = YES;
+    cell.accessibilityLabel = label;
+    
+    if (text) {
         
 		// TODO: delegate this to a separate builder, webView used for textArea has complexity we don't need here 
         
@@ -392,7 +395,7 @@
 	
 	if (showAccesoryDisclosureIndicator) {
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.accessoryView.isAccessibilityElement = YES;
+        cell.accessoryView.isAccessibilityElement = YES;
 		cell.accessoryView.accessibilityLabel = @"DisclosureIndicator";
 	}
 	
