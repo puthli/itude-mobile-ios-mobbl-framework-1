@@ -41,12 +41,14 @@ static MBApplicationController *_instance = nil;
 @implementation MBApplicationController
 
 @synthesize applicationActive = _applicationActive;
+@synthesize viewManager = _viewManager;
 
 - (id) init
 {
 	self = [super init];
 	if (self != nil) {
         _instance = self;
+        _viewManager = [[MBViewManager alloc] init];
 		// Added for optimization: Make sure the MBDevice is created at startup. The createInstance method instantiate variables that only need to be gathered once in the application lifecycle 
 		[MBDevice createInstance]; 
 	}

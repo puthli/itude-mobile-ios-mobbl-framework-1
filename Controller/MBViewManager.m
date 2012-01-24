@@ -43,6 +43,7 @@
 
 @implementation MBViewManager
 
+@synthesize window = _window;
 @synthesize tabController = _tabController;
 @synthesize activeDialogName = _activeDialogName;
 @synthesize activeDialogGroupName = _activeDialogGroupName;

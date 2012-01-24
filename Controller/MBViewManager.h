@@ -26,6 +26,7 @@
 	BOOL _singlePageMode;
 }
 
+@property (nonatomic, readonly) UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabController;
 @property (nonatomic, retain) NSString *activeDialogName;
 @property (nonatomic, retain) NSString *activeDialogGroupName;
