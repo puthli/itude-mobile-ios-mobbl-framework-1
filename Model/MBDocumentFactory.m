@@ -35,6 +35,10 @@ static MBDocumentFactory *_instance = nil;
 	if ([PARSER_MOBBL1 isEqualToString:type]) {
 		return [MBMobbl1DocumentParser documentWithData:data andDefinition:definition];
 	}
+    else
+    if ([PARSER_JSON isEqualToString:type]) {
+        return [MBJsonDocumentParser documentWithData:data andDefinition:definition];
+    }
 	else @throw [NSException exceptionWithName:@"UnknownDataType" reason:type userInfo:nil];
 }
 
