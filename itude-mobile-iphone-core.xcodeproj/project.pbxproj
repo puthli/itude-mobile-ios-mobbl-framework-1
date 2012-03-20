@@ -630,6 +630,7 @@
 		2C654D381518CE4B009B1EE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D371518CE4A009B1EE7 /* UIKit.framework */; };
 		2C654D3A1518CE86009B1EE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D391518CE86009B1EE7 /* CoreGraphics.framework */; };
 		2C654D3C1518CED9009B1EE7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D3B1518CED9009B1EE7 /* SystemConfiguration.framework */; };
+		2C654D401518DBE5009B1EE7 /* MBXmlDocumentParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C654D3F1518DBE5009B1EE7 /* MBXmlDocumentParserTest.m */; };
 		DCEAD30E13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 		DCEAD30F13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -903,6 +904,8 @@
 		2C654D371518CE4A009B1EE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2C654D391518CE86009B1EE7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2C654D3B1518CED9009B1EE7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2C654D3E1518DBE5009B1EE7 /* MBXmlDocumentParserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBXmlDocumentParserTest.h; path = Model/MBXmlDocumentParserTest.h; sourceTree = "<group>"; };
+		2C654D3F1518DBE5009B1EE7 /* MBXmlDocumentParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBXmlDocumentParserTest.m; path = Model/MBXmlDocumentParserTest.m; sourceTree = "<group>"; };
 		DCDF99D213C1E17200F927A3 /* itude-mobile-iphone-core-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-core-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-core-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -1431,6 +1434,7 @@
 		2C654C161518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C654D3D1518DBAF009B1EE7 /* Model */,
 				2C654C2B1518CB87009B1EE7 /* Configuration */,
 				2C654C171518BF89009B1EE7 /* Supporting Files */,
 			);
@@ -1462,6 +1466,15 @@
 				2C654C2E1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m */,
 			);
 			name = MVC;
+			sourceTree = "<group>";
+		};
+		2C654D3D1518DBAF009B1EE7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C654D3E1518DBE5009B1EE7 /* MBXmlDocumentParserTest.h */,
+				2C654D3F1518DBE5009B1EE7 /* MBXmlDocumentParserTest.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2137,6 +2150,7 @@
 				2C654D281518CD55009B1EE7 /* MBRow.m in Sources */,
 				2C654D2B1518CD55009B1EE7 /* MBTableViewController.m in Sources */,
 				2C654C2F1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m in Sources */,
+				2C654D401518DBE5009B1EE7 /* MBXmlDocumentParserTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

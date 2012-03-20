@@ -14,6 +14,7 @@
 #import "StringUtilities.h"
 #import "MBDataManagerService.h"
 #import "MBScriptService.h"
+#import "MBMacros.h"
 
 @interface MBElementContainer()
 	- (void) addAllPathsTo:(NSMutableSet*) set currentPath:(NSString*) currentPath;
@@ -224,16 +225,20 @@
 -(void) addElement: (MBElement*) element {
 
 	NSString *name = [element definition].name;
-	element.parent = self;
-	
-	NSMutableArray *elementContainer = [self elementsWithName: name];
-	if(elementContainer == nil)
-	{
-		elementContainer = [[NSMutableArray alloc] init];
-		[_elements setValue:elementContainer forKey:name];
-		[elementContainer release];
-	}
-	[elementContainer addObject:element];
+    
+    // Only add valid elements
+    if ([self.definition isValidChild:name]) {
+        element.parent = self;
+        
+        NSMutableArray *elementContainer = [self elementsWithName: name];
+        if(elementContainer == nil)
+        {
+            elementContainer = [[NSMutableArray alloc] init];
+            [_elements setValue:elementContainer forKey:name];
+            [elementContainer release];
+        }
+        [elementContainer addObject:element];
+    }
 }
 
 -(void) deleteAllChildElements{
@@ -263,6 +268,9 @@
 	}
 	else {
 		MBElementDefinition *childDef = [[self definition] childWithName:name];
+        if (!childDef) {
+            @throw [NSException exceptionWithName:@"InvalidElementName" reason:name userInfo:nil];
+        }
 		MBElement *element = [childDef createElement];
 		[self addElement:element];
 		return element;
@@ -277,8 +285,8 @@
     }
 	else {
 		if(![self.definition isValidChild:name]) {
-			NSString *msg = [NSString stringWithFormat:@"Child element with name %@ not present", name];
-			@throw [NSException exceptionWithName:@"InvalidPath" reason: msg userInfo:nil];
+            DLog(@"Child element with name %@ not present", name);
+            return nil;
 		}
 		
 		NSMutableArray *result = [_elements valueForKey:name];	

@@ -131,6 +131,9 @@
 		for (NSString *childKey in [jsonValue allKeys]) {
 			id childValue = [jsonValue valueForKey:childKey];
 			MBElementDefinition *childDefinition = [definition childWithName:childKey];
+            if (!childDefinition) {
+                @throw [NSException exceptionWithName:@"InvalidElementName" reason:childKey userInfo:nil];
+            }
 			if ([childValue isKindOfClass:[NSArray class]]) {
 				// repetition
 				[self parseJsonValue:childValue forKey:childKey usingDefinition:childDefinition withElement:element];

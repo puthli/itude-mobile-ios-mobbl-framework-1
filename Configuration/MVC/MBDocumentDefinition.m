@@ -12,6 +12,7 @@
 #import "MBDocument.h"
 #import "StringUtilities.h"
 #import "MBMetadataService.h" 
+#import "MBMacros.h"
 
 @implementation MBDocumentDefinition
 
@@ -57,7 +58,8 @@
 
 - (MBElementDefinition*) childWithName:(NSString*) elementName {
     if(![self isValidChild:elementName]) {
-        @throw [NSException exceptionWithName:@"InvalidElementName" reason:elementName userInfo:nil];
+        DLog(@"Ignoring invalid element name %@", elementName);
+        return nil;
     }
 	return [_elements objectForKey:elementName];	
 }
