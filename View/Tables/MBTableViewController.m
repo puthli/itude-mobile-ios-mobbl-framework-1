@@ -411,8 +411,10 @@
 	}
 	if (switchView) {
 		// reformat the frame
-		CGRect frame = CGRectMake(cell.contentView.frame.size.width - switchView.frame.size.width-30, cell.contentView.frame.size.height/2 - (switchView.frame.size.height/2 + 1), switchView.frame.size.width, switchView.frame.size.height+20);
+        NSInteger leftMargin = 10;
+		CGRect frame = CGRectMake(cell.contentView.frame.size.width - switchView.frame.size.width-leftMargin, cell.contentView.frame.size.height/2 - (switchView.frame.size.height/2 + 1), switchView.frame.size.width, switchView.frame.size.height+20);
 		switchView.frame = frame;
+        switchView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		[cell.contentView addSubview:switchView];
         switchView.isAccessibilityElement = YES;
         switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", cell.textLabel.text];
