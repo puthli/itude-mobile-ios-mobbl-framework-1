@@ -507,6 +507,11 @@
 		1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */; };
 		1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
 		1C01BB9514BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
+		2C654C131518BF89009B1EE7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654BF91518BF3F009B1EE7 /* SenTestingKit.framework */; };
+		2C654C141518BF89009B1EE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654BFB1518BF3F009B1EE7 /* UIKit.framework */; };
+		2C654C151518BF89009B1EE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654BFD1518BF3F009B1EE7 /* Foundation.framework */; };
+		2C654C1B1518BF89009B1EE7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C654C191518BF89009B1EE7 /* InfoPlist.strings */; };
+		2C654C1E1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C654C1D1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m */; };
 		DCEAD30E13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 		DCEAD30F13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -768,6 +773,15 @@
 		1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		2C654BF91518BF3F009B1EE7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2C654BFB1518BF3F009B1EE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		2C654BFD1518BF3F009B1EE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2C654C121518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "itude-mobile-iphone-coreLogicTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C654C181518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-coreLogicTests-Info.plist"; sourceTree = "<group>"; };
+		2C654C1A1518BF89009B1EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2C654C1C1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = itude_mobile_iphone_coreLogicTests.h; sourceTree = "<group>"; };
+		2C654C1D1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itude_mobile_iphone_coreLogicTests.m; sourceTree = "<group>"; };
+		2C654C1F1518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-coreLogicTests-Prefix.pch"; sourceTree = "<group>"; };
 		DCDF99D213C1E17200F927A3 /* itude-mobile-iphone-core-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-core-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-core-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -778,6 +792,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C654C0E1518BF89009B1EE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C654C131518BF89009B1EE7 /* SenTestingKit.framework in Frameworks */,
+				2C654C141518BF89009B1EE7 /* UIKit.framework in Frameworks */,
+				2C654C151518BF89009B1EE7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +819,8 @@
 			isa = PBXGroup;
 			children = (
 				03DA53321371989F00BE1FDB /* itude-mobile-iphone-core */,
+				2C654C161518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */,
+				2C654BF81518BF3F009B1EE7 /* Frameworks */,
 				03DA532E1371989F00BE1FDB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -804,6 +830,7 @@
 			children = (
 				03DA532D1371989F00BE1FDB /* itude-mobile-iphone-core.framework/itude-mobile-iphone-core */,
 				DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */,
+				2C654C121518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1264,6 +1291,36 @@
 			path = Tables;
 			sourceTree = "<group>";
 		};
+		2C654BF81518BF3F009B1EE7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C654BF91518BF3F009B1EE7 /* SenTestingKit.framework */,
+				2C654BFB1518BF3F009B1EE7 /* UIKit.framework */,
+				2C654BFD1518BF3F009B1EE7 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C654C161518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C654C1C1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.h */,
+				2C654C1D1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m */,
+				2C654C171518BF89009B1EE7 /* Supporting Files */,
+			);
+			path = "itude-mobile-iphone-coreLogicTests";
+			sourceTree = "<group>";
+		};
+		2C654C171518BF89009B1EE7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C654C181518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Info.plist */,
+				2C654C191518BF89009B1EE7 /* InfoPlist.strings */,
+				2C654C1F1518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1573,6 +1630,24 @@
 			productReference = 03DA532D1371989F00BE1FDB /* itude-mobile-iphone-core.framework/itude-mobile-iphone-core */;
 			productType = "com.apple.product-type.library.static";
 		};
+		2C654C111518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C654C201518BF89009B1EE7 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-coreLogicTests" */;
+			buildPhases = (
+				2C654C0D1518BF89009B1EE7 /* Sources */,
+				2C654C0E1518BF89009B1EE7 /* Frameworks */,
+				2C654C0F1518BF89009B1EE7 /* Resources */,
+				2C654C101518BF89009B1EE7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "itude-mobile-iphone-coreLogicTests";
+			productName = "itude-mobile-iphone-coreLogicTests";
+			productReference = 2C654C121518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		DCDF99DE13C1E9A900F927A3 /* itude-mobile-iphone-core-i386 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCDF9ACE13C1E9A900F927A3 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core-i386" */;
@@ -1631,9 +1706,21 @@
 			targets = (
 				03DA532C1371989F00BE1FDB /* itude-mobile-iphone-core */,
 				DCDF99DE13C1E9A900F927A3 /* itude-mobile-iphone-core-i386 */,
+				2C654C111518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2C654C0F1518BF89009B1EE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C654C1B1518BF89009B1EE7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		035E218713C5AD56005A6C7D /* ShellScript */ = {
@@ -1648,6 +1735,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "";
+		};
+		2C654C101518BF89009B1EE7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1771,6 +1871,14 @@
 				1C01BB8A14BDF78D00CE79A0 /* MBPanel.m in Sources */,
 				1C01BB8E14BDF78D00CE79A0 /* MBRow.m in Sources */,
 				1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C654C0D1518BF89009B1EE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C654C1E1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1898,6 +2006,17 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		2C654C191518BF89009B1EE7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C654C1A1518BF89009B1EE7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		03DA53351371989F00BE1FDB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1990,6 +2109,54 @@
 			};
 			name = Release;
 		};
+		2C654C211518BF89009B1EE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "itude-mobile-iphone-coreLogicTests/itude-mobile-iphone-coreLogicTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "itude-mobile-iphone-coreLogicTests/itude-mobile-iphone-coreLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		2C654C221518BF89009B1EE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "itude-mobile-iphone-coreLogicTests/itude-mobile-iphone-coreLogicTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "itude-mobile-iphone-coreLogicTests/itude-mobile-iphone-coreLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		DCDF9ACF13C1E9A900F927A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2058,6 +2225,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2C654C201518BF89009B1EE7 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-coreLogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C654C211518BF89009B1EE7 /* Debug */,
+				2C654C221518BF89009B1EE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		DCDF9ACE13C1E9A900F927A3 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core-i386" */ = {
 			isa = XCConfigurationList;
