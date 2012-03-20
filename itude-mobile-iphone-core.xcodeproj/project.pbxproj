@@ -507,11 +507,129 @@
 		1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */; };
 		1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
 		1C01BB9514BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
-		2C654C131518BF89009B1EE7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654BF91518BF3F009B1EE7 /* SenTestingKit.framework */; };
-		2C654C141518BF89009B1EE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654BFB1518BF3F009B1EE7 /* UIKit.framework */; };
-		2C654C151518BF89009B1EE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654BFD1518BF3F009B1EE7 /* Foundation.framework */; };
 		2C654C1B1518BF89009B1EE7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C654C191518BF89009B1EE7 /* InfoPlist.strings */; };
-		2C654C1E1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C654C1D1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m */; };
+		2C654C2F1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C654C2E1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m */; };
+		2C654C311518CD54009B1EE7 /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3CB14BDF78700CE79A0 /* MBConditionalDefinition.m */; };
+		2C654C331518CD54009B1EE7 /* MBConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3CD14BDF78700CE79A0 /* MBConfigurationParser.m */; };
+		2C654C361518CD54009B1EE7 /* MBDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3D014BDF78700CE79A0 /* MBDefinition.m */; };
+		2C654C381518CD54009B1EE7 /* MBActionDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3D314BDF78700CE79A0 /* MBActionDefinition.m */; };
+		2C654C3A1518CD54009B1EE7 /* MBAttributeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3D514BDF78700CE79A0 /* MBAttributeDefinition.m */; };
+		2C654C3C1518CD54009B1EE7 /* MBConfigurationDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3D714BDF78700CE79A0 /* MBConfigurationDefinition.m */; };
+		2C654C3E1518CD54009B1EE7 /* MBDialogDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3D914BDF78700CE79A0 /* MBDialogDefinition.m */; };
+		2C654C401518CD54009B1EE7 /* MBDialogGroupDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3DB14BDF78700CE79A0 /* MBDialogGroupDefinition.m */; };
+		2C654C421518CD54009B1EE7 /* MBDocumentDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3DD14BDF78700CE79A0 /* MBDocumentDefinition.m */; };
+		2C654C441518CD54009B1EE7 /* MBDomainDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3DF14BDF78700CE79A0 /* MBDomainDefinition.m */; };
+		2C654C461518CD54009B1EE7 /* MBDomainValidatorDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3E114BDF78700CE79A0 /* MBDomainValidatorDefinition.m */; };
+		2C654C481518CD54009B1EE7 /* MBElementDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3E314BDF78700CE79A0 /* MBElementDefinition.m */; };
+		2C654C4A1518CD54009B1EE7 /* MBFieldDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3E514BDF78700CE79A0 /* MBFieldDefinition.m */; };
+		2C654C4C1518CD54009B1EE7 /* MBForEachDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3E714BDF78700CE79A0 /* MBForEachDefinition.m */; };
+		2C654C4E1518CD54009B1EE7 /* MBMvcConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3E914BDF78700CE79A0 /* MBMvcConfigurationParser.m */; };
+		2C654C501518CD54009B1EE7 /* MBOutcomeDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3EB14BDF78700CE79A0 /* MBOutcomeDefinition.m */; };
+		2C654C521518CD54009B1EE7 /* MBPageDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3ED14BDF78700CE79A0 /* MBPageDefinition.m */; };
+		2C654C541518CD54009B1EE7 /* MBPanelDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3EF14BDF78700CE79A0 /* MBPanelDefinition.m */; };
+		2C654C561518CD54009B1EE7 /* MBVariableDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3F114BDF78700CE79A0 /* MBVariableDefinition.m */; };
+		2C654C581518CD54009B1EE7 /* MBBundleDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3F414BDF78700CE79A0 /* MBBundleDefinition.m */; };
+		2C654C5A1518CD54009B1EE7 /* MBResourceConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3F614BDF78700CE79A0 /* MBResourceConfiguration.m */; };
+		2C654C5C1518CD54009B1EE7 /* MBResourceConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3F814BDF78700CE79A0 /* MBResourceConfigurationParser.m */; };
+		2C654C5E1518CD54009B1EE7 /* MBResourceDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3FA14BDF78700CE79A0 /* MBResourceDefinition.m */; };
+		2C654C601518CD54009B1EE7 /* MBEndPointDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3FD14BDF78700CE79A0 /* MBEndPointDefinition.m */; };
+		2C654C621518CD54009B1EE7 /* MBResultListenerDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3FF14BDF78700CE79A0 /* MBResultListenerDefinition.m */; };
+		2C654C641518CD54009B1EE7 /* MBWebservicesConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40114BDF78700CE79A0 /* MBWebservicesConfiguration.m */; };
+		2C654C661518CD54009B1EE7 /* MBWebservicesConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40314BDF78700CE79A0 /* MBWebservicesConfigurationParser.m */; };
+		2C654C691518CD54009B1EE7 /* MBApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40714BDF78700CE79A0 /* MBApplicationController.m */; };
+		2C654C6B1518CD54009B1EE7 /* MBApplicationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40914BDF78700CE79A0 /* MBApplicationFactory.m */; };
+		2C654C6D1518CD54009B1EE7 /* MBDialogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40B14BDF78700CE79A0 /* MBDialogController.m */; };
+		2C654C6F1518CD54009B1EE7 /* MBDialogGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40D14BDF78700CE79A0 /* MBDialogGroupController.m */; };
+		2C654C711518CD54009B1EE7 /* MBOutcome.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B40F14BDF78700CE79A0 /* MBOutcome.m */; };
+		2C654C731518CD54009B1EE7 /* MBViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41114BDF78700CE79A0 /* MBViewManager.m */; };
+		2C654C751518CD54009B1EE7 /* MBActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41414BDF78700CE79A0 /* MBActivityIndicator.m */; };
+		2C654C771518CD54009B1EE7 /* MBBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41614BDF78700CE79A0 /* MBBasicViewController.m */; };
+		2C654C791518CD54009B1EE7 /* MBFormSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41814BDF78700CE79A0 /* MBFormSubmission.m */; };
+		2C654C7B1518CD54009B1EE7 /* MBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41A14BDF78700CE79A0 /* MBNavigationController.m */; };
+		2C654C7D1518CD54009B1EE7 /* MBSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41C14BDF78700CE79A0 /* MBSplitViewController.m */; };
+		2C654C801518CD54009B1EE7 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68114BDF78800CE79A0 /* MGSplitCornersView.m */; };
+		2C654C821518CD54009B1EE7 /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68314BDF78800CE79A0 /* MGSplitDividerView.m */; };
+		2C654C841518CD54009B1EE7 /* MGSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68514BDF78800CE79A0 /* MGSplitViewController.m */; };
+		2C654C861518CD54009B1EE7 /* MBDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68814BDF78800CE79A0 /* MBDocument.m */; };
+		2C654C881518CD54009B1EE7 /* MBDocumentDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68A14BDF78800CE79A0 /* MBDocumentDiff.m */; };
+		2C654C8A1518CD54009B1EE7 /* MBDocumentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68C14BDF78800CE79A0 /* MBDocumentFactory.m */; };
+		2C654C8D1518CD54009B1EE7 /* MBElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68F14BDF78800CE79A0 /* MBElement.m */; };
+		2C654C8F1518CD54009B1EE7 /* MBElementContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B69114BDF78800CE79A0 /* MBElementContainer.m */; };
+		2C654C911518CD54009B1EE7 /* MBJsonDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B69314BDF78800CE79A0 /* MBJsonDocumentParser.m */; };
+		2C654C931518CD54009B1EE7 /* MBMobbl1DocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B69514BDF78800CE79A0 /* MBMobbl1DocumentParser.m */; };
+		2C654C951518CD54009B1EE7 /* MBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B69714BDF78800CE79A0 /* MBSession.m */; };
+		2C654C971518CD54009B1EE7 /* MBXmlDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B69914BDF78800CE79A0 /* MBXmlDocumentParser.m */; };
+		2C654C9D1518CD54009B1EE7 /* MBDocumentOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6A514BDF78900CE79A0 /* MBDocumentOperation.m */; };
+		2C654C9F1518CD54009B1EE7 /* MBFileDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6A714BDF78900CE79A0 /* MBFileDataHandler.m */; };
+		2C654CA11518CD54009B1EE7 /* MBMemoryDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6A914BDF78900CE79A0 /* MBMemoryDataHandler.m */; };
+		2C654CA31518CD54009B1EE7 /* MBMobbl1ServerDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6AB14BDF78900CE79A0 /* MBMobbl1ServerDataHandler.m */; };
+		2C654CA51518CD54009B1EE7 /* MBRESTServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6AD14BDF78900CE79A0 /* MBRESTServiceDataHandler.m */; };
+		2C654CA71518CD54009B1EE7 /* MBSystemDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6AF14BDF78900CE79A0 /* MBSystemDataHandler.m */; };
+		2C654CA91518CD54009B1EE7 /* MBWebserviceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6B114BDF78900CE79A0 /* MBWebserviceDataHandler.m */; };
+		2C654CAC1518CD54009B1EE7 /* MBDataHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6B414BDF78900CE79A0 /* MBDataHandlerBase.m */; };
+		2C654CAE1518CD54009B1EE7 /* MBDataManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6B614BDF78900CE79A0 /* MBDataManagerService.m */; };
+		2C654CB01518CD54009B1EE7 /* MBLocalizationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6B814BDF78900CE79A0 /* MBLocalizationService.m */; };
+		2C654CB21518CD54009B1EE7 /* MBMetadataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6BA14BDF78900CE79A0 /* MBMetadataService.m */; };
+		2C654CB41518CD54009B1EE7 /* MBResourceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6BC14BDF78900CE79A0 /* MBResourceService.m */; };
+		2C654CB71518CD54009B1EE7 /* MBScriptService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6BF14BDF78900CE79A0 /* MBScriptService.m */; };
+		2C654CB91518CD54009B1EE7 /* BinckUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6C214BDF78900CE79A0 /* BinckUtilities.m */; };
+		2C654CBB1518CD54009B1EE7 /* ColorUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6C414BDF78900CE79A0 /* ColorUtilities.m */; };
+		2C654CBD1518CD54009B1EE7 /* DataUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6C614BDF78900CE79A0 /* DataUtilites.m */; };
+		2C654CC31518CD54009B1EE7 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6CD14BDF78900CE79A0 /* GTMStackTrace.m */; };
+		2C654CC71518CD54009B1EE7 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6D214BDF78900CE79A0 /* NSString+SBJSON.m */; };
+		2C654CC91518CD54009B1EE7 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6D414BDF78900CE79A0 /* SBJSON.m */; };
+		2C654CCB1518CD54009B1EE7 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6D614BDF78900CE79A0 /* SBJsonBase.m */; };
+		2C654CCD1518CD54009B1EE7 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6D814BDF78900CE79A0 /* SBJsonParser.m */; };
+		2C654CCF1518CD55009B1EE7 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6DA14BDF78900CE79A0 /* SBJsonWriter.m */; };
+		2C654CD11518CD55009B1EE7 /* LocaleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6DC14BDF78900CE79A0 /* LocaleUtilities.m */; };
+		2C654CD31518CD55009B1EE7 /* MBCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6DE14BDF78900CE79A0 /* MBCacheManager.m */; };
+		2C654CD51518CD55009B1EE7 /* MBCacheWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6E014BDF78900CE79A0 /* MBCacheWriter.m */; };
+		2C654CD71518CD55009B1EE7 /* MBDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6E214BDF78900CE79A0 /* MBDevice.m */; };
+		2C654CD91518CD55009B1EE7 /* MBDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6E414BDF78900CE79A0 /* MBDeviceType.m */; };
+		2C654CDB1518CD55009B1EE7 /* MBOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6E614BDF78900CE79A0 /* MBOrientationManager.m */; };
+		2C654CDD1518CD55009B1EE7 /* MBProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6E814BDF78900CE79A0 /* MBProperties.m */; };
+		2C654CE01518CD55009B1EE7 /* MBServerException.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6EB14BDF78900CE79A0 /* MBServerException.m */; };
+		2C654CE21518CD55009B1EE7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6ED14BDF78900CE79A0 /* NSData+Base64.m */; };
+		2C654CE41518CD55009B1EE7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6EF14BDF78900CE79A0 /* Reachability.m */; };
+		2C654CE61518CD55009B1EE7 /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6F114BDF78900CE79A0 /* StringUtilities.m */; };
+		2C654CE81518CD55009B1EE7 /* StringUtilitiesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6F314BDF78900CE79A0 /* StringUtilitiesHelper.m */; };
+		2C654CEB1518CD55009B1EE7 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6F614BDF78900CE79A0 /* UncaughtExceptionHandler.m */; };
+		2C654CED1518CD55009B1EE7 /* ViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6F814BDF78900CE79A0 /* ViewUtilities.m */; };
+		2C654CF01518CD55009B1EE7 /* MBFieldViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6FD14BDF78A00CE79A0 /* MBFieldViewBuilder.m */; };
+		2C654CF21518CD55009B1EE7 /* MBForEachViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6FF14BDF78A00CE79A0 /* MBForEachViewBuilder.m */; };
+		2C654CF41518CD55009B1EE7 /* MBMatrixViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70114BDF78A00CE79A0 /* MBMatrixViewBuilder.m */; };
+		2C654CF61518CD55009B1EE7 /* MBPageViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70314BDF78A00CE79A0 /* MBPageViewBuilder.m */; };
+		2C654CF81518CD55009B1EE7 /* MBPanelViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70514BDF78A00CE79A0 /* MBPanelViewBuilder.m */; };
+		2C654CFA1518CD55009B1EE7 /* MBRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70714BDF78A00CE79A0 /* MBRowViewBuilder.m */; };
+		2C654CFC1518CD55009B1EE7 /* MBStyleHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70914BDF78A00CE79A0 /* MBStyleHandler.m */; };
+		2C654CFE1518CD55009B1EE7 /* MBViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70B14BDF78A00CE79A0 /* MBViewBuilder.m */; };
+		2C654D001518CD55009B1EE7 /* MBViewBuilderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70D14BDF78A00CE79A0 /* MBViewBuilderFactory.m */; };
+		2C654D021518CD55009B1EE7 /* MBDatePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71014BDF78A00CE79A0 /* MBDatePickerController.m */; };
+		2C654D051518CD55009B1EE7 /* MBFontCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71314BDF78A00CE79A0 /* MBFontCustomizer.m */; };
+		2C654D071518CD55009B1EE7 /* MBFontCustomizerToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71514BDF78A00CE79A0 /* MBFontCustomizerToolbar.m */; };
+		2C654D091518CD55009B1EE7 /* MBPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71714BDF78A00CE79A0 /* MBPickerController.m */; };
+		2C654D0B1518CD55009B1EE7 /* MBPickerPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71914BDF78A00CE79A0 /* MBPickerPopoverController.m */; };
+		2C654D0D1518CD55009B1EE7 /* MBSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71B14BDF78A00CE79A0 /* MBSpinner.m */; };
+		2C654D0F1518CD55009B1EE7 /* MBMatrixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B71E14BDF78A00CE79A0 /* MBMatrixCell.m */; };
+		2C654D111518CD55009B1EE7 /* MBMatrixHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72014BDF78A00CE79A0 /* MBMatrixHeaderView.m */; };
+		2C654D131518CD55009B1EE7 /* MBMatrixRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72214BDF78A00CE79A0 /* MBMatrixRowView.m */; };
+		2C654D151518CD55009B1EE7 /* MBMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72414BDF78A00CE79A0 /* MBMatrixViewController.m */; };
+		2C654D171518CD55009B1EE7 /* MBComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72614BDF78A00CE79A0 /* MBComponent.m */; };
+		2C654D191518CD55009B1EE7 /* MBComponentContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72814BDF78A00CE79A0 /* MBComponentContainer.m */; };
+		2C654D1B1518CD55009B1EE7 /* MBComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72A14BDF78A00CE79A0 /* MBComponentFactory.m */; };
+		2C654D1D1518CD55009B1EE7 /* MBConditionalPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72C14BDF78A00CE79A0 /* MBConditionalPage.m */; };
+		2C654D1F1518CD55009B1EE7 /* MBField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B72E14BDF78A00CE79A0 /* MBField.m */; };
+		2C654D211518CD55009B1EE7 /* MBForEach.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73014BDF78A00CE79A0 /* MBForEach.m */; };
+		2C654D241518CD55009B1EE7 /* MBPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73314BDF78A00CE79A0 /* MBPage.m */; };
+		2C654D261518CD55009B1EE7 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73514BDF78A00CE79A0 /* MBPanel.m */; };
+		2C654D281518CD55009B1EE7 /* MBRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73714BDF78A00CE79A0 /* MBRow.m */; };
+		2C654D2B1518CD55009B1EE7 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
+		2C654D321518CE15009B1EE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D311518CE14009B1EE7 /* Foundation.framework */; };
+		2C654D341518CE1D009B1EE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D331518CE1D009B1EE7 /* QuartzCore.framework */; };
+		2C654D361518CE23009B1EE7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D351518CE23009B1EE7 /* SenTestingKit.framework */; };
+		2C654D381518CE4B009B1EE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D371518CE4A009B1EE7 /* UIKit.framework */; };
+		2C654D3A1518CE86009B1EE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D391518CE86009B1EE7 /* CoreGraphics.framework */; };
+		2C654D3C1518CED9009B1EE7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D3B1518CED9009B1EE7 /* SystemConfiguration.framework */; };
 		DCEAD30E13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 		DCEAD30F13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -773,15 +891,18 @@
 		1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
-		2C654BF91518BF3F009B1EE7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		2C654BFB1518BF3F009B1EE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		2C654BFD1518BF3F009B1EE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		2C654C121518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "itude-mobile-iphone-coreLogicTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C654C181518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-coreLogicTests-Info.plist"; sourceTree = "<group>"; };
 		2C654C1A1518BF89009B1EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C654C1C1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = itude_mobile_iphone_coreLogicTests.h; sourceTree = "<group>"; };
-		2C654C1D1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itude_mobile_iphone_coreLogicTests.m; sourceTree = "<group>"; };
 		2C654C1F1518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-coreLogicTests-Prefix.pch"; sourceTree = "<group>"; };
+		2C654C2D1518CBBF009B1EE7 /* MBDocumentDefinitionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBDocumentDefinitionTest.h; path = Configuration/MVC/MBDocumentDefinitionTest.h; sourceTree = "<group>"; };
+		2C654C2E1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBDocumentDefinitionTest.m; path = Configuration/MVC/MBDocumentDefinitionTest.m; sourceTree = "<group>"; };
+		2C654D311518CE14009B1EE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2C654D331518CE1D009B1EE7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2C654D351518CE23009B1EE7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2C654D371518CE4A009B1EE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2C654D391518CE86009B1EE7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C654D3B1518CED9009B1EE7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DCDF99D213C1E17200F927A3 /* itude-mobile-iphone-core-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-core-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-core-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -799,9 +920,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C654C131518BF89009B1EE7 /* SenTestingKit.framework in Frameworks */,
-				2C654C141518BF89009B1EE7 /* UIKit.framework in Frameworks */,
-				2C654C151518BF89009B1EE7 /* Foundation.framework in Frameworks */,
+				2C654D3C1518CED9009B1EE7 /* SystemConfiguration.framework in Frameworks */,
+				2C654D3A1518CE86009B1EE7 /* CoreGraphics.framework in Frameworks */,
+				2C654D381518CE4B009B1EE7 /* UIKit.framework in Frameworks */,
+				2C654D361518CE23009B1EE7 /* SenTestingKit.framework in Frameworks */,
+				2C654D341518CE1D009B1EE7 /* QuartzCore.framework in Frameworks */,
+				2C654D321518CE15009B1EE7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,9 +1418,12 @@
 		2C654BF81518BF3F009B1EE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C654BF91518BF3F009B1EE7 /* SenTestingKit.framework */,
-				2C654BFB1518BF3F009B1EE7 /* UIKit.framework */,
-				2C654BFD1518BF3F009B1EE7 /* Foundation.framework */,
+				2C654D3B1518CED9009B1EE7 /* SystemConfiguration.framework */,
+				2C654D391518CE86009B1EE7 /* CoreGraphics.framework */,
+				2C654D371518CE4A009B1EE7 /* UIKit.framework */,
+				2C654D351518CE23009B1EE7 /* SenTestingKit.framework */,
+				2C654D331518CE1D009B1EE7 /* QuartzCore.framework */,
+				2C654D311518CE14009B1EE7 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1304,8 +1431,7 @@
 		2C654C161518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C654C1C1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.h */,
-				2C654C1D1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m */,
+				2C654C2B1518CB87009B1EE7 /* Configuration */,
 				2C654C171518BF89009B1EE7 /* Supporting Files */,
 			);
 			path = "itude-mobile-iphone-coreLogicTests";
@@ -1319,6 +1445,23 @@
 				2C654C1F1518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C654C2B1518CB87009B1EE7 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2C654C2C1518CB8E009B1EE7 /* MVC */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		2C654C2C1518CB8E009B1EE7 /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				2C654C2D1518CBBF009B1EE7 /* MBDocumentDefinitionTest.h */,
+				2C654C2E1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m */,
+			);
+			name = MVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1878,7 +2021,122 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C654C1E1518BF89009B1EE7 /* itude_mobile_iphone_coreLogicTests.m in Sources */,
+				2C654C311518CD54009B1EE7 /* MBConditionalDefinition.m in Sources */,
+				2C654C331518CD54009B1EE7 /* MBConfigurationParser.m in Sources */,
+				2C654C361518CD54009B1EE7 /* MBDefinition.m in Sources */,
+				2C654C381518CD54009B1EE7 /* MBActionDefinition.m in Sources */,
+				2C654C3A1518CD54009B1EE7 /* MBAttributeDefinition.m in Sources */,
+				2C654C3C1518CD54009B1EE7 /* MBConfigurationDefinition.m in Sources */,
+				2C654C3E1518CD54009B1EE7 /* MBDialogDefinition.m in Sources */,
+				2C654C401518CD54009B1EE7 /* MBDialogGroupDefinition.m in Sources */,
+				2C654C421518CD54009B1EE7 /* MBDocumentDefinition.m in Sources */,
+				2C654C441518CD54009B1EE7 /* MBDomainDefinition.m in Sources */,
+				2C654C461518CD54009B1EE7 /* MBDomainValidatorDefinition.m in Sources */,
+				2C654C481518CD54009B1EE7 /* MBElementDefinition.m in Sources */,
+				2C654C4A1518CD54009B1EE7 /* MBFieldDefinition.m in Sources */,
+				2C654C4C1518CD54009B1EE7 /* MBForEachDefinition.m in Sources */,
+				2C654C4E1518CD54009B1EE7 /* MBMvcConfigurationParser.m in Sources */,
+				2C654C501518CD54009B1EE7 /* MBOutcomeDefinition.m in Sources */,
+				2C654C521518CD54009B1EE7 /* MBPageDefinition.m in Sources */,
+				2C654C541518CD54009B1EE7 /* MBPanelDefinition.m in Sources */,
+				2C654C561518CD54009B1EE7 /* MBVariableDefinition.m in Sources */,
+				2C654C581518CD54009B1EE7 /* MBBundleDefinition.m in Sources */,
+				2C654C5A1518CD54009B1EE7 /* MBResourceConfiguration.m in Sources */,
+				2C654C5C1518CD54009B1EE7 /* MBResourceConfigurationParser.m in Sources */,
+				2C654C5E1518CD54009B1EE7 /* MBResourceDefinition.m in Sources */,
+				2C654C601518CD54009B1EE7 /* MBEndPointDefinition.m in Sources */,
+				2C654C621518CD54009B1EE7 /* MBResultListenerDefinition.m in Sources */,
+				2C654C641518CD54009B1EE7 /* MBWebservicesConfiguration.m in Sources */,
+				2C654C661518CD54009B1EE7 /* MBWebservicesConfigurationParser.m in Sources */,
+				2C654C691518CD54009B1EE7 /* MBApplicationController.m in Sources */,
+				2C654C6B1518CD54009B1EE7 /* MBApplicationFactory.m in Sources */,
+				2C654C6D1518CD54009B1EE7 /* MBDialogController.m in Sources */,
+				2C654C6F1518CD54009B1EE7 /* MBDialogGroupController.m in Sources */,
+				2C654C711518CD54009B1EE7 /* MBOutcome.m in Sources */,
+				2C654C731518CD54009B1EE7 /* MBViewManager.m in Sources */,
+				2C654C751518CD54009B1EE7 /* MBActivityIndicator.m in Sources */,
+				2C654C771518CD54009B1EE7 /* MBBasicViewController.m in Sources */,
+				2C654C791518CD54009B1EE7 /* MBFormSubmission.m in Sources */,
+				2C654C7B1518CD54009B1EE7 /* MBNavigationController.m in Sources */,
+				2C654C7D1518CD54009B1EE7 /* MBSplitViewController.m in Sources */,
+				2C654C801518CD54009B1EE7 /* MGSplitCornersView.m in Sources */,
+				2C654C821518CD54009B1EE7 /* MGSplitDividerView.m in Sources */,
+				2C654C841518CD54009B1EE7 /* MGSplitViewController.m in Sources */,
+				2C654C861518CD54009B1EE7 /* MBDocument.m in Sources */,
+				2C654C881518CD54009B1EE7 /* MBDocumentDiff.m in Sources */,
+				2C654C8A1518CD54009B1EE7 /* MBDocumentFactory.m in Sources */,
+				2C654C8D1518CD54009B1EE7 /* MBElement.m in Sources */,
+				2C654C8F1518CD54009B1EE7 /* MBElementContainer.m in Sources */,
+				2C654C911518CD54009B1EE7 /* MBJsonDocumentParser.m in Sources */,
+				2C654C931518CD54009B1EE7 /* MBMobbl1DocumentParser.m in Sources */,
+				2C654C951518CD54009B1EE7 /* MBSession.m in Sources */,
+				2C654C971518CD54009B1EE7 /* MBXmlDocumentParser.m in Sources */,
+				2C654C9D1518CD54009B1EE7 /* MBDocumentOperation.m in Sources */,
+				2C654C9F1518CD54009B1EE7 /* MBFileDataHandler.m in Sources */,
+				2C654CA11518CD54009B1EE7 /* MBMemoryDataHandler.m in Sources */,
+				2C654CA31518CD54009B1EE7 /* MBMobbl1ServerDataHandler.m in Sources */,
+				2C654CA51518CD54009B1EE7 /* MBRESTServiceDataHandler.m in Sources */,
+				2C654CA71518CD54009B1EE7 /* MBSystemDataHandler.m in Sources */,
+				2C654CA91518CD54009B1EE7 /* MBWebserviceDataHandler.m in Sources */,
+				2C654CAC1518CD54009B1EE7 /* MBDataHandlerBase.m in Sources */,
+				2C654CAE1518CD54009B1EE7 /* MBDataManagerService.m in Sources */,
+				2C654CB01518CD54009B1EE7 /* MBLocalizationService.m in Sources */,
+				2C654CB21518CD54009B1EE7 /* MBMetadataService.m in Sources */,
+				2C654CB41518CD54009B1EE7 /* MBResourceService.m in Sources */,
+				2C654CB71518CD54009B1EE7 /* MBScriptService.m in Sources */,
+				2C654CB91518CD54009B1EE7 /* BinckUtilities.m in Sources */,
+				2C654CBB1518CD54009B1EE7 /* ColorUtilities.m in Sources */,
+				2C654CBD1518CD54009B1EE7 /* DataUtilites.m in Sources */,
+				2C654CC31518CD54009B1EE7 /* GTMStackTrace.m in Sources */,
+				2C654CC71518CD54009B1EE7 /* NSString+SBJSON.m in Sources */,
+				2C654CC91518CD54009B1EE7 /* SBJSON.m in Sources */,
+				2C654CCB1518CD54009B1EE7 /* SBJsonBase.m in Sources */,
+				2C654CCD1518CD54009B1EE7 /* SBJsonParser.m in Sources */,
+				2C654CCF1518CD55009B1EE7 /* SBJsonWriter.m in Sources */,
+				2C654CD11518CD55009B1EE7 /* LocaleUtilities.m in Sources */,
+				2C654CD31518CD55009B1EE7 /* MBCacheManager.m in Sources */,
+				2C654CD51518CD55009B1EE7 /* MBCacheWriter.m in Sources */,
+				2C654CD71518CD55009B1EE7 /* MBDevice.m in Sources */,
+				2C654CD91518CD55009B1EE7 /* MBDeviceType.m in Sources */,
+				2C654CDB1518CD55009B1EE7 /* MBOrientationManager.m in Sources */,
+				2C654CDD1518CD55009B1EE7 /* MBProperties.m in Sources */,
+				2C654CE01518CD55009B1EE7 /* MBServerException.m in Sources */,
+				2C654CE21518CD55009B1EE7 /* NSData+Base64.m in Sources */,
+				2C654CE41518CD55009B1EE7 /* Reachability.m in Sources */,
+				2C654CE61518CD55009B1EE7 /* StringUtilities.m in Sources */,
+				2C654CE81518CD55009B1EE7 /* StringUtilitiesHelper.m in Sources */,
+				2C654CEB1518CD55009B1EE7 /* UncaughtExceptionHandler.m in Sources */,
+				2C654CED1518CD55009B1EE7 /* ViewUtilities.m in Sources */,
+				2C654CF01518CD55009B1EE7 /* MBFieldViewBuilder.m in Sources */,
+				2C654CF21518CD55009B1EE7 /* MBForEachViewBuilder.m in Sources */,
+				2C654CF41518CD55009B1EE7 /* MBMatrixViewBuilder.m in Sources */,
+				2C654CF61518CD55009B1EE7 /* MBPageViewBuilder.m in Sources */,
+				2C654CF81518CD55009B1EE7 /* MBPanelViewBuilder.m in Sources */,
+				2C654CFA1518CD55009B1EE7 /* MBRowViewBuilder.m in Sources */,
+				2C654CFC1518CD55009B1EE7 /* MBStyleHandler.m in Sources */,
+				2C654CFE1518CD55009B1EE7 /* MBViewBuilder.m in Sources */,
+				2C654D001518CD55009B1EE7 /* MBViewBuilderFactory.m in Sources */,
+				2C654D021518CD55009B1EE7 /* MBDatePickerController.m in Sources */,
+				2C654D051518CD55009B1EE7 /* MBFontCustomizer.m in Sources */,
+				2C654D071518CD55009B1EE7 /* MBFontCustomizerToolbar.m in Sources */,
+				2C654D091518CD55009B1EE7 /* MBPickerController.m in Sources */,
+				2C654D0B1518CD55009B1EE7 /* MBPickerPopoverController.m in Sources */,
+				2C654D0D1518CD55009B1EE7 /* MBSpinner.m in Sources */,
+				2C654D0F1518CD55009B1EE7 /* MBMatrixCell.m in Sources */,
+				2C654D111518CD55009B1EE7 /* MBMatrixHeaderView.m in Sources */,
+				2C654D131518CD55009B1EE7 /* MBMatrixRowView.m in Sources */,
+				2C654D151518CD55009B1EE7 /* MBMatrixViewController.m in Sources */,
+				2C654D171518CD55009B1EE7 /* MBComponent.m in Sources */,
+				2C654D191518CD55009B1EE7 /* MBComponentContainer.m in Sources */,
+				2C654D1B1518CD55009B1EE7 /* MBComponentFactory.m in Sources */,
+				2C654D1D1518CD55009B1EE7 /* MBConditionalPage.m in Sources */,
+				2C654D1F1518CD55009B1EE7 /* MBField.m in Sources */,
+				2C654D211518CD55009B1EE7 /* MBForEach.m in Sources */,
+				2C654D241518CD55009B1EE7 /* MBPage.m in Sources */,
+				2C654D261518CD55009B1EE7 /* MBPanel.m in Sources */,
+				2C654D281518CD55009B1EE7 /* MBRow.m in Sources */,
+				2C654D2B1518CD55009B1EE7 /* MBTableViewController.m in Sources */,
+				2C654C2F1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2113,7 +2371,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -2139,7 +2400,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
