@@ -20,98 +20,6 @@
 #import <Foundation/Foundation.h>
 #import "MBServerException.h"
 
-// uncomment to allow self signed SSL certificates
-// #define ALLOW_SELFSIGNED_SSL_CERTS 1
-
-// Inner class MBRequestDelegate - used for callbacks in asynchronous http request. //
-
-@interface MBRequestDelegate : NSObject
-{
-	
-	BOOL _finished;
-	NSMutableData *_data;
-	NSURLConnection *_connection;
-	NSError *_err;
-	NSURLResponse *_response;
-	
-}
-
-@property BOOL finished;
-@property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSError *err;
-@property (nonatomic, retain) NSURLResponse *response;
-@property (nonatomic, retain) NSMutableData *data;
-
-@end
-
-@implementation MBRequestDelegate
-
-@synthesize connection = _connection;
-@synthesize err = _err;
-@synthesize response = _response;
-@synthesize data = _data;
-@synthesize finished = _finished;
-
--(void) dealloc{
-	self.data = nil;
-	self.err = nil;
-	self.response = nil;
-	self.connection = nil;
-	[super dealloc];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-	_finished = YES;
-	self.err = error;
-	
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	[self.data appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	[self.data setLength:0];
-	self.response = response;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-	_finished = YES;
-}
-
-- (void) cancel{
-    [self.connection cancel];
-    _finished = YES;
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse{
-	// never cache the response of the urlConnection here.
-	return nil;
-}
-
-#ifdef ALLOW_SELFSIGNED_SSL_CERTS
-
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
-
-#endif
-
-//
-
-
-@end
-
-
-// -------------------------------------------MBRESTServiceDataHandler starts here ---------------------------------------------- //
-
-
 @implementation MBRESTServiceDataHandler
 
 @synthesize documentFactoryType = _documentFactoryType;
@@ -129,8 +37,6 @@
 	}
 	return self;
 }
-
-
 
 -(MBDocument *) loadDocument:(NSString *)documentName{
 	return [self loadDocument:documentName withArguments: nil];
@@ -171,7 +77,7 @@
 			
 			// create new connection and begin loading data
 			[[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
-			if ((delegate.connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate])){
+			if (delegate.connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate]){
 				while (!delegate.finished) {
 					if([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable){
 						// Big problem, throw Exception

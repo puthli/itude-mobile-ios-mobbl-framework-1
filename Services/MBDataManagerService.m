@@ -9,6 +9,7 @@
 #import "MBDataManagerService.h"
 #import "MBMetadataService.h"
 #import "MBRESTServiceDataHandler.h"
+#import "MBRESTGetServiceDataHandler.h"
 #import "MBMemoryDataHandler.h"
 #import "MBFileDataHandler.h"
 #import "MBMobbl1ServerDataHandler.h"
@@ -45,6 +46,7 @@ static MBDataManagerService *_instance = nil;
         [self registerDataHandler:[[MBSystemDataHandler new] autorelease] withName: DATA_HANDLER_SYSTEM];
         [self registerDataHandler:[[MBMemoryDataHandler new] autorelease] withName: DATA_HANDLER_MEMORY];
         [self registerDataHandler:[[MBRESTServiceDataHandler new] autorelease] withName: DATA_HANDLER_WS_REST];
+        [self registerDataHandler:[[MBRESTGetServiceDataHandler new] autorelease] withName: DATA_HANDLER_WS_REST_GET];
 		[self registerDataHandler:[[MBMobbl1ServerDataHandler new] autorelease] withName: DATA_HANDLER_WS_MOBBL];	
 	}
 	return self;

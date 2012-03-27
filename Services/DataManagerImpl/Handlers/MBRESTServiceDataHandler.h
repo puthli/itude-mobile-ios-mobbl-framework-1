@@ -7,8 +7,9 @@
 //
 
 #import "MBWebserviceDataHandler.h"
+#import "MBURLConnectionDataHandler.h"
 
-@interface MBRESTServiceDataHandler : MBWebserviceDataHandler {
+@interface MBRESTServiceDataHandler : MBURLConnectionDataHandler {
 
 	NSString *_documentFactoryType;
 }

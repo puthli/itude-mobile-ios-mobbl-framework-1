@@ -507,6 +507,18 @@
 		1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */; };
 		1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
 		1C01BB9514BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
+		2C26D9541521B817000E00A2 /* MBRESTGetServiceHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D9531521B817000E00A2 /* MBRESTGetServiceHandlerTest.m */; };
+		2C26D9571521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */; };
+		2C26D9581521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */; };
+		2C26D9591521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D9561521B874000E00A2 /* MBRESTGetServiceDataHandler.m */; };
+		2C26D95A1521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D9561521B874000E00A2 /* MBRESTGetServiceDataHandler.m */; };
+		2C26D95B1521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D9561521B874000E00A2 /* MBRESTGetServiceDataHandler.m */; };
+		2C26D95E1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C26D95C1521C782000E00A2 /* MBURLConnectionDataHandler.h */; };
+		2C26D95F1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C26D95C1521C782000E00A2 /* MBURLConnectionDataHandler.h */; };
+		2C26D9601521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */; };
+		2C26D9611521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */; };
+		2C26D9621521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */; };
+		2C26D9651521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D9641521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m */; };
 		2C654C1B1518BF89009B1EE7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C654C191518BF89009B1EE7 /* InfoPlist.strings */; };
 		2C654C2F1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C654C2E1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m */; };
 		2C654C311518CD54009B1EE7 /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B3CB14BDF78700CE79A0 /* MBConditionalDefinition.m */; };
@@ -892,6 +904,14 @@
 		1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		2C26D9521521B817000E00A2 /* MBRESTGetServiceHandlerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBRESTGetServiceHandlerTest.h; path = Services/DataManagerImpl/Handlers/MBRESTGetServiceHandlerTest.h; sourceTree = "<group>"; };
+		2C26D9531521B817000E00A2 /* MBRESTGetServiceHandlerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBRESTGetServiceHandlerTest.m; path = Services/DataManagerImpl/Handlers/MBRESTGetServiceHandlerTest.m; sourceTree = "<group>"; };
+		2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRESTGetServiceDataHandler.h; sourceTree = "<group>"; };
+		2C26D9561521B874000E00A2 /* MBRESTGetServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRESTGetServiceDataHandler.m; sourceTree = "<group>"; };
+		2C26D95C1521C782000E00A2 /* MBURLConnectionDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBURLConnectionDataHandler.h; sourceTree = "<group>"; };
+		2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBURLConnectionDataHandler.m; sourceTree = "<group>"; };
+		2C26D9631521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestingMBRESTGetServiceDataHandler.h; path = Services/DataManagerImpl/Handlers/TestingMBRESTGetServiceDataHandler.h; sourceTree = "<group>"; };
+		2C26D9641521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestingMBRESTGetServiceDataHandler.m; path = Services/DataManagerImpl/Handlers/TestingMBRESTGetServiceDataHandler.m; sourceTree = "<group>"; };
 		2C654C121518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "itude-mobile-iphone-coreLogicTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C654C181518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-coreLogicTests-Info.plist"; sourceTree = "<group>"; };
 		2C654C1A1518BF89009B1EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1236,6 +1256,10 @@
 				1C01B6AF14BDF78900CE79A0 /* MBSystemDataHandler.m */,
 				1C01B6B014BDF78900CE79A0 /* MBWebserviceDataHandler.h */,
 				1C01B6B114BDF78900CE79A0 /* MBWebserviceDataHandler.m */,
+				2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */,
+				2C26D9561521B874000E00A2 /* MBRESTGetServiceDataHandler.m */,
+				2C26D95C1521C782000E00A2 /* MBURLConnectionDataHandler.h */,
+				2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -1418,6 +1442,33 @@
 			path = Tables;
 			sourceTree = "<group>";
 		};
+		2C26D94E1521B60F000E00A2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2C26D9501521B61D000E00A2 /* DataManagerImpl */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		2C26D9501521B61D000E00A2 /* DataManagerImpl */ = {
+			isa = PBXGroup;
+			children = (
+				2C26D9511521B62A000E00A2 /* Handlers */,
+			);
+			name = DataManagerImpl;
+			sourceTree = "<group>";
+		};
+		2C26D9511521B62A000E00A2 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				2C26D9521521B817000E00A2 /* MBRESTGetServiceHandlerTest.h */,
+				2C26D9531521B817000E00A2 /* MBRESTGetServiceHandlerTest.m */,
+				2C26D9631521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.h */,
+				2C26D9641521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
 		2C654BF81518BF3F009B1EE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1485,7 @@
 		2C654C161518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C26D94E1521B60F000E00A2 /* Services */,
 				2C654D3D1518DBAF009B1EE7 /* Model */,
 				2C654C2B1518CB87009B1EE7 /* Configuration */,
 				2C654C171518BF89009B1EE7 /* Supporting Files */,
@@ -1620,6 +1672,8 @@
 				1C01BB8C14BDF78D00CE79A0 /* MBRow.h in Headers */,
 				1C01BB9014BDF78D00CE79A0 /* MBValueChangeListenerProtocol.h in Headers */,
 				1C01BB9214BDF78D00CE79A0 /* MBTableViewController.h in Headers */,
+				2C26D9571521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */,
+				2C26D95E1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,6 +1817,8 @@
 				1C01BB8D14BDF78D00CE79A0 /* MBRow.h in Headers */,
 				1C01BB9114BDF78D00CE79A0 /* MBValueChangeListenerProtocol.h in Headers */,
 				1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */,
+				2C26D9581521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */,
+				2C26D95F1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2027,6 +2083,8 @@
 				1C01BB8A14BDF78D00CE79A0 /* MBPanel.m in Sources */,
 				1C01BB8E14BDF78D00CE79A0 /* MBRow.m in Sources */,
 				1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */,
+				2C26D9591521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */,
+				2C26D9601521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2151,6 +2209,10 @@
 				2C654D2B1518CD55009B1EE7 /* MBTableViewController.m in Sources */,
 				2C654C2F1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m in Sources */,
 				2C654D401518DBE5009B1EE7 /* MBXmlDocumentParserTest.m in Sources */,
+				2C26D9541521B817000E00A2 /* MBRESTGetServiceHandlerTest.m in Sources */,
+				2C26D95B1521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */,
+				2C26D9621521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */,
+				2C26D9651521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2273,6 +2335,8 @@
 				1C01BB8B14BDF78D00CE79A0 /* MBPanel.m in Sources */,
 				1C01BB8F14BDF78D00CE79A0 /* MBRow.m in Sources */,
 				1C01BB9514BDF78D00CE79A0 /* MBTableViewController.m in Sources */,
+				2C26D95A1521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */,
+				2C26D9611521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2511,6 +2575,7 @@
 				2C654C221518BF89009B1EE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DCDF9ACE13C1E9A900F927A3 /* Build configuration list for PBXNativeTarget "itude-mobile-iphone-core-i386" */ = {
 			isa = XCConfigurationList;
