@@ -18,6 +18,47 @@
 
 @implementation MBRESTGetServiceDataHandler
 
++ (MBDocumentDefinition *)argumentsDocumentDefinition
+{
+    MBDocumentDefinition *requestDocumentDefinition = [[[MBDocumentDefinition alloc] init] autorelease];
+    MBElementDefinition *requestDefinition = [[MBElementDefinition alloc] init];
+    requestDefinition.name = @"Request";
+    [requestDocumentDefinition addElement:requestDefinition];
+    
+    MBElementDefinition *parameterDefinition = [[MBElementDefinition alloc] init];
+    parameterDefinition.name = @"Parameter";
+    parameterDefinition.minOccurs = 0;
+    [requestDefinition addElement:parameterDefinition];
+    
+    MBAttributeDefinition *keyAttribute = [[MBAttributeDefinition alloc] init];
+    keyAttribute.name = @"key";
+    [parameterDefinition addAttribute:keyAttribute];
+    MBAttributeDefinition *valueAttribute = [[MBAttributeDefinition alloc] init];
+    valueAttribute.name = @"value";
+    [parameterDefinition addAttribute:valueAttribute];
+    
+    [requestDefinition release];
+    [parameterDefinition release];
+    [keyAttribute release];
+    [valueAttribute release];
+    
+    return requestDocumentDefinition;
+}
+
++ (MBDocument *)argumentsDocumentForDictionary:(NSDictionary *)arguments
+{
+    MBDocumentDefinition *docDefinition = [[self class] argumentsDocumentDefinition];
+    MBDocument *requestDocument = [[[MBDocument alloc] initWithDocumentDefinition:docDefinition] autorelease];
+    [requestDocument createElementWithName:@"Request"];
+    for (NSString *key in arguments) {
+        MBElement *request = [requestDocument valueForPath:@"Request[0]"];
+        MBElement *parameter = [request createElementWithName:@"Parameter"];
+        [parameter setValue:key forAttribute:@"key"];
+        [parameter setValue:[arguments valueForKey:key] forAttribute:@"value"];
+    }
+    return requestDocument;
+}
+
 - (MBDocument *)loadDocument:(NSString *)documentName
 {
     return [self loadDocument:documentName withArguments:nil];
