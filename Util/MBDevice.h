@@ -39,8 +39,11 @@
 +(CGFloat)iOSVersion;
 +(NSString *)iOSVersionAsString;
 +(NSString *)deviceName;
++(NSString*) identifier;
 +(BOOL) isPad;
 +(BOOL) isPhone;
 +(BOOL) isPod;
+
++(NSString *)uuid;
 
 @end

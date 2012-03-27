@@ -57,7 +57,7 @@
 	// TODO: Retrieve these settings from a property file somewhere
 	NSString *universeID = [MBProperties valueForProperty:@"mobblUniverseID"];
 	NSString *iPhoneUIDPrefix = ([MBDevice isPad]?[MBProperties valueForProperty:@"iPadUIDPrefix"]:[MBProperties valueForProperty:@"iPhoneUIDPrefix"]);
-	NSString *iPhoneUID = [NSString stringWithFormat:@"%@ %@",iPhoneUIDPrefix,[[UIDevice currentDevice] uniqueIdentifier] ];
+	NSString *iPhoneUID = [NSString stringWithFormat:@"%@ %@",iPhoneUIDPrefix,[MBDevice identifier]];
     NSString *iOSVersion = [MBDevice iOSVersionAsString];
 	NSString *deviceName = [MBDevice deviceName];
 	

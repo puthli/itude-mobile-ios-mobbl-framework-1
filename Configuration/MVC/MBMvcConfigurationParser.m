@@ -447,11 +447,26 @@
     [conf addDocument: docDef];
 }
 
+-(void) addDeviceDocument:(MBConfigurationDefinition*) conf {
+	MBDocumentDefinition *docDef = [[MBDocumentDefinition new] autorelease];
+    docDef.name = @"DeviceState";
+    docDef.dataManager = DATA_HANDLER_FILE;
+    docDef.autoCreate = TRUE;
+    
+    MBElementDefinition *elementDef = [[MBElementDefinition new] autorelease];
+    elementDef.minOccurs = 1;
+    elementDef.name = @"Device";
+    [self addAttribute: elementDef name: @"identifier" type: @"string"];
+    [docDef addElement: elementDef];
+    [conf addDocument: docDef];
+}
+
 - (void) addSystemDocuments:(MBConfigurationDefinition*) conf {
 	[self addExceptionDocument: conf];
 	[self addEmptyDocument: conf];
 	[self addPropertiesDocument: conf];
 	[self addLanguageDocument: conf];
+	[self addDeviceDocument: conf];
 }
 
 @end

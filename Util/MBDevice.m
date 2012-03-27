@@ -9,6 +9,9 @@
 #import "MBDevice.h"
 #import "MBMacros.h"
 
+#import "MBDocument.h"
+#import "MBDataManagerService.h"
+
 // UIUserInterfaceIdiom is only available for IOS 3.2 and higher
 #define UIUSERINTERFACEIDOMIMPLVERSION	3.2f
 
@@ -89,6 +92,31 @@ static MBDevice *_instance = nil;
 
 +(BOOL) isPod {
 	return [_instance deviceIsPod];
+}
+
++(NSString*) identifier {
+    MBDocument *deviceDocument = [[MBDataManagerService sharedInstance] loadDocument:@"DeviceState"];
+    NSString *identifier = [deviceDocument valueForPath:@"Device[0]/@identifier"];
+    if (!identifier) 
+    {
+        identifier = [self uuid];
+        [deviceDocument setValue:identifier forPath:@"/Device[0]/@identifier"];
+        [[MBDataManagerService sharedInstance] storeDocument:deviceDocument];
+        NSLog(@"No identifier found: %@", identifier);
+    }
+    return identifier;
+}
+
++(NSString *)uuid
+{
+    // Creates a Universally Unique Identifier (UUID) object.
+    CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
+    
+    // Returns the string representation of a specified CFUUID object.
+    NSString *uuid = (NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObject);
+    CFRelease(uuidObject);
+    
+    return [uuid autorelease];
 }
 
 @end
