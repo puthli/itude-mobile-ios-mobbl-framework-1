@@ -11,16 +11,19 @@
 @implementation TestingMBRESTGetServiceDataHandler
 
 @synthesize nextResult = _nextResult;
+@synthesize lastRequest = _lastRequest;
 
 - (void)dealloc
 {
     [_nextResult release];
+    [_lastRequest release];
     [super dealloc];
 }
 
 - (NSURLConnection *)createConnectionAndStartLoadingWithRequest:(NSURLRequest *)request delegate:(MBRequestDelegate *)delegate
 {
     NSLog(@"Create connection for %@", request);
+    self.lastRequest = request;
     
     // Mark delegate as finished immediately
     delegate.finished = YES;

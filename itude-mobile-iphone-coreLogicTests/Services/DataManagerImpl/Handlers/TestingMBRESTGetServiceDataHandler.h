@@ -16,4 +16,7 @@
 // MBDocument to be returned by loadDocument methods
 @property (nonatomic, retain) MBDocument *nextResult;
 
+// Last request used by data handler, for inspection in unit test
+@property (nonatomic, retain) NSURLRequest *lastRequest;
+
 @end

@@ -73,7 +73,7 @@
 			}
 		}
 		
-		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:endPoint.timeout];
+		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:endPoint.timeout];
 		[request setHTTPMethod:@"GET"];
 		
 		// Content-Type must be set because otherwise the MidletCommandProcessor servlet cannot read the XML
@@ -96,8 +96,6 @@
 			
 			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 			
-            // create new connection and begin loading data
-            [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
             if (delegate.connection = [self createConnectionAndStartLoadingWithRequest:request delegate:delegate]){
                 while (!delegate.finished) {
                     if([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable){

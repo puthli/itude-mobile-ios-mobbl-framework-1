@@ -21,12 +21,14 @@
 
 
 #define TEST_DOCUMENT @"TestDocument"
+#define TEST_URI @"http://www.itude.com"
 - (void)setUp
 {   
     // Setup datahandler
     MBWebservicesConfiguration *configuration = [[MBWebservicesConfiguration alloc] init];
     MBEndPointDefinition *endpoint = [[MBEndPointDefinition alloc] init];
     endpoint.documentOut = TEST_DOCUMENT;
+    endpoint.endPointUri = TEST_URI;
     [configuration addEndPoint:endpoint];
     self.dataHandler = [[[TestingMBRESTGetServiceDataHandler alloc] initWithConfiguration:configuration] autorelease];
     [configuration release];
@@ -43,6 +45,11 @@
     MBDocument *result = [self.dataHandler loadDocument:TEST_DOCUMENT];
     
     STAssertEqualObjects(result, mockResult, nil);
+    
+    // Check URL request that was issued
+    STAssertEqualObjects(self.dataHandler.lastRequest.HTTPMethod, @"GET", @"LoadDocument should use HTTP GET");
+    STAssertEqualObjects(self.dataHandler.lastRequest.URL, [NSURL URLWithString:TEST_URI], nil);
+    STAssertTrue(self.dataHandler.lastRequest.cachePolicy == NSURLRequestUseProtocolCachePolicy, @"Should use default HTTP caching");
 }
 
 @end
