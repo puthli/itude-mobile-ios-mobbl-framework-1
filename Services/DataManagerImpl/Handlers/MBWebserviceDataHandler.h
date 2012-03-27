@@ -13,6 +13,12 @@
 	MBWebservicesConfiguration *_webServiceConfiguration;
 }
 
+// Initialize with configuration read from config files
+- (id) init;
+
+// Initialize with custom configuration
+- (id) initWithConfiguration:(MBWebservicesConfiguration *)configuration;
+
 - (MBDocument *) loadDocument:(NSString *)documentName;
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument *)args;
 - (void) storeDocument:(MBDocument *)document;

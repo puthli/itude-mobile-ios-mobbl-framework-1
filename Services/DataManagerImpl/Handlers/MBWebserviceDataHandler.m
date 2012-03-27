@@ -24,6 +24,15 @@
 	return self;
 }
 
+- (id) initWithConfiguration:(MBWebservicesConfiguration *)configuration
+{
+    self = [super init];
+    if (self) {
+        _webServiceConfiguration = [configuration retain];
+    }
+    return  self;
+}
+
 - (MBEndPointDefinition *) getEndPointForDocument:(NSString*)name {
 	return [_webServiceConfiguration getEndPointForDocumentName:name];	
 }
