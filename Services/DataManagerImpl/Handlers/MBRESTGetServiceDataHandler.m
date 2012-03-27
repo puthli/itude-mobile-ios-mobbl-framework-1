@@ -36,7 +36,7 @@
 - (MBDocument *)loadDocument:(NSString *)documentName withArguments:(MBDocument *)args
 {
     MBEndPointDefinition *endPoint = [self getEndPointForDocument:documentName];
-	DLog(@"MCDSServiceDataHandler:loadDocument %@ from %@", documentName, endPoint.endPointUri);
+	DLog(@"MBRESTGetServiceDataHandler:loadDocument %@ from %@", documentName, endPoint.endPointUri);
 	
 	if (endPoint != nil)
 	{
