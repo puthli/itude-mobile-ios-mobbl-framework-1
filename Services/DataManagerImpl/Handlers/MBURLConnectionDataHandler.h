@@ -10,7 +10,7 @@
 #import "MBWebserviceDataHandler.h"
 
 // Delegate used for callbacks in asynchronous http request. //
-@interface MBRequestDelegate : NSObject <NSURLConnectionDelegate>
+@interface MBRequestDelegate : NSObject // <NSURLConnectionDelegate> from iOS 5 on
 {
 	
 	BOOL _finished;
