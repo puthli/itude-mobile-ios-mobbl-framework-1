@@ -8,8 +8,6 @@
 
 #import "TestingMBRESTGetServiceDataHandler.h"
 #import "MBRESTGetServiceHandlerTest.h"
-#import "MBDocument.h"
-#import "MBMetadataService.h"
 
 @interface MBRESTGetServiceHandlerTest()
 @property (nonatomic, retain) TestingMBRESTGetServiceDataHandler *dataHandler;
@@ -19,6 +17,10 @@
 
 @synthesize dataHandler = _dataHandler;
 
+- (void)dealloc {
+    [_dataHandler release];
+    [super dealloc];
+}
 
 #define TEST_DOCUMENT @"TestDocument"
 #define TEST_URI @"http://www.itude.com"
@@ -64,6 +66,20 @@
     
     NSString *expectedUri = [TEST_URI stringByAppendingString:@"?argument1=value1&argument2=41"];
     STAssertEqualObjects(self.dataHandler.lastRequest.URL, [NSURL URLWithString:expectedUri], nil);
+}
+
+- (void)testLoadFreshDocumentWithoutParameters
+{
+    MBDocument *mockResult = [[[MBDocument alloc] init] autorelease];
+    self.dataHandler.nextResult = mockResult;
+
+    MBDocument *result = [self.dataHandler loadFreshDocument:TEST_DOCUMENT];
+
+    STAssertEqualObjects(result, mockResult, nil);
+
+    // Check URL request that was issued
+    STAssertEqualObjects(self.dataHandler.lastRequest.URL, [NSURL URLWithString:TEST_URI], nil);
+    STAssertTrue(self.dataHandler.lastRequest.cachePolicy == NSURLRequestReloadIgnoringCacheData, @"Should not use caching");
 }
 
 @end

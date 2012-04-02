@@ -22,7 +22,7 @@
 - (void)testXmlWithEmptyDefinition
 {
     NSString *xml = [definition asXmlWithLevel:0];
-    STAssertEqualObjects(@"<Document name='(null)' dataManager='(null)' autoCreate='FALSE'>\n</Document>\n", xml, nil);
+    STAssertEqualObjects(@"<Document name='(null)' dataManager='(null)' rootElement='(null)' autoCreate='FALSE'>\n</Document>\n", xml, nil);
 }
 
 - (void)testElementWithPathWithEmptyDefinition
