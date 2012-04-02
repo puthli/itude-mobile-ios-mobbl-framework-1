@@ -81,16 +81,7 @@
 	
 	if (endPoint != nil)
 	{
-		
-		// Look for any cached result. If there; return it
-		BOOL cacheable = FALSE;
-        
-		cacheable = [endPoint cacheable];
-		if(cacheable) {
-			MBDocument *result = [MBCacheManager documentForKey:[args uniqueId]];
-			if(result != nil) return result;
-		}
-		
+
 		NSString *urlString = endPoint.endPointUri;
 		BOOL firstParam = YES;
 		for (MBElement *element in [args valueForPath:@"/Request[0]/Parameter"]) {
@@ -113,6 +104,13 @@
                 
 			}
 		}
+
+        // Look for any cached result. If there; return it. Use URL as document key.
+        BOOL cacheable = [endPoint cacheable];
+        if(cacheable) {
+            MBDocument *result = [MBCacheManager documentForKey:urlString];
+            if(result != nil) return result;
+        }
 		
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:endPoint.timeout];
 		[request setHTTPMethod:@"GET"];
@@ -129,7 +127,8 @@
 		MBRequestDelegate *delegate = [MBRequestDelegate new];
 		NSString *dataString = nil;
 		MBDocument *responseDoc = nil;
-		@try {
+
+        @try {
 			delegate.err = nil;
 			delegate.response = nil;
 			delegate.finished = NO;
@@ -184,7 +183,7 @@
 			
 			
 			if(cacheable) {
-				[MBCacheManager setDocument:responseDoc forKey:[args uniqueId] timeToLive:endPoint.ttl];
+				[MBCacheManager setDocument:responseDoc forKey:urlString timeToLive:endPoint.ttl];
 			}
 		}
 		@catch (NSException * e) {
