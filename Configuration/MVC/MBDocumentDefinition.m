@@ -17,6 +17,7 @@
 @implementation MBDocumentDefinition
 
 @synthesize dataManager = _dataManager;
+@synthesize rootElement = _rootElement;
 @synthesize autoCreate = _autoCreate;
 
 - (id) init {
@@ -29,13 +30,14 @@
 
 - (void) dealloc {
 	[_dataManager release];
+    [_rootElement release];
 	[_elements release];
 	[_elementsSorted release];
 	[super dealloc];
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Document name='%@' dataManager='%@' autoCreate='%@'>\n", level, "", _name, _dataManager, _autoCreate?@"TRUE":@"FALSE"];	
+	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Document name='%@' dataManager='%@' rootElement='%@' autoCreate='%@'>\n", level, "", _name, _dataManager, _rootElement, _autoCreate?@"TRUE":@"FALSE"];	
 	for (MBElementDefinition* elem in _elementsSorted)
 		[result appendString:[elem asXmlWithLevel:level+2]];
 	[result appendFormat:@"%*s</Document>\n", level, ""];

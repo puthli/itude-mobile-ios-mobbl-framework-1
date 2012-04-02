@@ -64,7 +64,12 @@
 		}
 		else {
 			_rootElement = document;
-			_rootElementName = _definition.name;
+            // Use the rootElement as name. If it is not provided, use the documentName
+            _rootElementName = _definition.rootElement;
+            if (!_rootElementName) {
+                _rootElementName = _definition.name;
+            }
+			
 		}
 		
 		[xmlParser parse];

@@ -42,7 +42,7 @@
 - (id) parseData:(NSData *)data ofDocument:(NSString*) documentName {
 
     self.configAttributes = [NSArray arrayWithObjects:@"xmlns",nil];
-    self.documentAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"dataManager",@"autoCreate",nil];
+    self.documentAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"dataManager",@"rootElement",@"autoCreate",nil];
     self.elementAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"minOccurs",@"maxOccurs",nil];
     self.attributeAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"required",@"defaultValue",nil];
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
@@ -118,6 +118,7 @@
 		MBDocumentDefinition *docDef = [[MBDocumentDefinition alloc] init];
 		docDef.name = [attributeDict valueForKey:@"name"];
 		docDef.dataManager = [attributeDict valueForKey:@"dataManager"];
+        docDef.rootElement = [attributeDict valueForKey:@"rootElement"];
 		docDef.autoCreate = [[attributeDict valueForKey:@"autoCreate"] boolValue];	
         [self notifyProcessed:docDef usingSelector:@selector(addDocument:)];
 		[docDef release];

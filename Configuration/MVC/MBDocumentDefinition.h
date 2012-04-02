@@ -14,6 +14,7 @@
 	NSMutableArray *_elementsSorted;
 	NSMutableDictionary *_elements;
 	NSString *_dataManager;
+    NSString *_rootElement;
 	BOOL _autoCreate;
 }
 
@@ -26,5 +27,6 @@
 - (MBDocument*) createDocument;
 
 @property (nonatomic, retain) NSString* dataManager;
+@property (nonatomic, retain) NSString* rootElement;
 @property (nonatomic, assign) BOOL autoCreate;
 @end
