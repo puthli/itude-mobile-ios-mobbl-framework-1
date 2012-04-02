@@ -11,6 +11,7 @@
 
 #import "MBDocument.h"
 #import "MBDataManagerService.h"
+#import "MBMacros.h"
 
 // UIUserInterfaceIdiom is only available for IOS 3.2 and higher
 #define UIUSERINTERFACEIDOMIMPLVERSION	3.2f
@@ -102,7 +103,7 @@ static MBDevice *_instance = nil;
         identifier = [self uuid];
         [deviceDocument setValue:identifier forPath:@"/Device[0]/@identifier"];
         [[MBDataManagerService sharedInstance] storeDocument:deviceDocument];
-        NSLog(@"No identifier found: %@", identifier);
+        DLog(@"No identifier found: %@", identifier);
     }
     return identifier;
 }
