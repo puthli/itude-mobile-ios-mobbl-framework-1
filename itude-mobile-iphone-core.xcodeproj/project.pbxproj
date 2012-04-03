@@ -2467,6 +2467,7 @@
 				INFOPLIST_FILE = "itude-mobile-iphone-coreLogicTests/itude-mobile-iphone-coreLogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2489,6 +2490,7 @@
 				INFOPLIST_FILE = "itude-mobile-iphone-coreLogicTests/itude-mobile-iphone-coreLogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				WRAPPER_EXTENSION = octest;
