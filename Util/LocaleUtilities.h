@@ -10,7 +10,8 @@
 // A subclass of NSLocale that forces Dutch decimal and grouping separators
 
 
-#define LOCALECODEDUTCH @"nl_NL" // A string for the dutch Locale
+#define LOCALECODEDUTCH   @"nl_NL" // A string for the dutch Locale
+#define LOCALECODEITALIAN @"it_IT" // A string for the italian Locale
 
 @interface NSLocale (DutchLocale) 
 

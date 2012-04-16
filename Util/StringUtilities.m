@@ -9,6 +9,7 @@
 #import "StringUtilities.h"
 #import "StringUtilitiesHelper.h"
 #import "LocaleUtilities.h"
+#import "MBLocalizationService.h"
 
 
 @implementation NSString(StringUtilities)
@@ -254,7 +255,14 @@
 	NSDate *currentDate = [calendar dateFromComponents:currentDateComponents];
 	
 	if ([compareDate isEqualToDate:currentDate]) dateFormatMask = @"HH:mm:ss";
-	else										 dateFormatMask = @"dd-MM-yy";
+	else
+    {
+        
+        NSString *localeCode = [[MBLocalizationService sharedInstance] localeCode];
+        //NSString *localeSettings = [MBProperties valueForProperty:@"localeSettings"];
+        if ([localeCode isEqualToString:LOCALECODEITALIAN]) dateFormatMask = @"dd/MM/yy";
+        else                                                dateFormatMask = @"dd-MM-yy";
+    }
 	
 	// Format the date
 	NSDateFormatter *dateFormatter = [StringUtilitiesHelper dateFormatterToFormatDateDependingOnCurrentDate];
