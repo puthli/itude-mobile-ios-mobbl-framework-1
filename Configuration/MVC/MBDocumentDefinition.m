@@ -42,6 +42,7 @@
 		[result appendString:[elem asXmlWithLevel:level+2]];
 	[result appendFormat:@"%*s</Document>\n", level, ""];
 		 
+    DLog(@"result=%@",result);
 	return result;
 }
 

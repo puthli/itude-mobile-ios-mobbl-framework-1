@@ -241,6 +241,25 @@
     }
 }
 
+-(void) addElement: (MBElement*) element atIndex:(NSInteger)index {
+    
+	NSString *name = [element definition].name;
+    
+    // Only add valid elements
+    if ([self.definition isValidChild:name]) {
+        element.parent = self;
+        
+        NSMutableArray *elementContainer = [self elementsWithName: name];
+        if(elementContainer == nil)
+        {
+            elementContainer = [[NSMutableArray alloc] init];
+            [_elements setValue:elementContainer forKey:name];
+            [elementContainer release];
+        }
+        [elementContainer insertObject:element atIndex:index];
+    }
+}
+
 -(void) deleteAllChildElements{
 	[_elements removeAllObjects]; 
 	[[self document] clearPathCache];
@@ -275,6 +294,29 @@
 		[self addElement:element];
 		return element;
 	}
+}
+
+-(MBElement*) createElementWithName: (NSString*) name atIndex:(NSInteger)index {
+    
+    NSMutableArray *pathComponents = [name splitPath];
+    
+	if([pathComponents count] > 1) {
+		NSString *elementName = [pathComponents lastObject];
+		[pathComponents removeLastObject];
+		
+		MBElement *target = [self valueForPathComponents:pathComponents withPath: name nillIfMissing: FALSE translatedPathComponents:nil];
+        return [target createElementWithName:elementName atIndex:index];
+	}
+	else {
+		MBElementDefinition *childDef = [[self definition] childWithName:name];
+        if (!childDef) {
+            @throw [NSException exceptionWithName:@"InvalidElementName" reason:name userInfo:nil];
+        }
+		MBElement *element = [childDef createElement];
+		[self addElement:element atIndex:index];
+        return element;
+	}
+    
 }
 
 -(NSMutableArray*) elementsWithName: (NSString*) name {

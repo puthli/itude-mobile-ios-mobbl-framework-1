@@ -18,9 +18,11 @@
 
 - (id) init;
 - (MBElement*) createElementWithName: (NSString*) name;
+- (MBElement*) createElementWithName: (NSString*) name atIndex:(NSInteger)index;
 - (void) deleteElementWithName: (NSString*) name atIndex:(int) index;
 - (void) deleteAllChildElements;
 - (void) addElement: (MBElement*) element;
+- (void) addElement: (MBElement*) element atIndex:(NSInteger)index;
 - (NSMutableDictionary*) elements;
 - (id) valueForPath:(NSString *)path;
 - (id) valueForPath:(NSString*)path translatedPathComponents:(NSMutableArray*) translatedPathComponents;
