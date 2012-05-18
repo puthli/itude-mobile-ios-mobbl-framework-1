@@ -50,15 +50,9 @@
 	if (endPoint != nil)
 	{
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endPoint.endPointUri] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:endPoint.timeout];
-		[request setHTTPMethod:@"POST"];
-		
-		// Content-Type must be set because otherwise the MidletCommandProcessor servlet cannot read the XML
-		// this is related to a bug in Tomcat 6
-		// MIME type application/x-www-form-encoded is the default
-		// RM0412 TODO: check handling of special characters
-		[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
+        request = [self setupHTTPRequest:request];
+        
 		NSString *body = [[args valueForPath:@"/*[0]"] asXmlWithLevel:0];
-		
 		if(body != nil) [request setHTTPBody: [body dataUsingEncoding:NSUTF8StringEncoding]];
 		// DLog(@"Request is: %@", body);
 		MBRequestDelegate *delegate = [MBRequestDelegate new];
@@ -200,5 +194,15 @@
 	}	
 }
 
+- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request
+{
+    [request setHTTPMethod:@"POST"];
+    // Content-Type must be set because otherwise the MidletCommandProcessor servlet cannot read the XML
+    // this is related to a bug in Tomcat 6
+    // MIME type application/x-www-form-encoded is the default
+    // RM0412 TODO: check handling of special characters
+    [request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
+    return request;
+}
 
 @end

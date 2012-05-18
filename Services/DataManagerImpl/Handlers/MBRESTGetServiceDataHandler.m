@@ -131,7 +131,6 @@
             }
         }
         dataString = [[NSString alloc] initWithData:delegate.data encoding:NSUTF8StringEncoding];
-
         BOOL serverErrorHandled = NO;
 
         for(MBResultListenerDefinition *lsnr in [endPoint resultListeners]) {
@@ -190,14 +189,7 @@
     }
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:endPoint.timeout];
-    [request setHTTPMethod:@"GET"];
-
-    // Content-Type must be set because otherwise the MidletCommandProcessor servlet cannot read the XML
-    // this is related to a bug in Tomcat 6
-    // MIME type application/x-www-form-encoded is the default
-    // RM0412 TODO: check handling of special characters
-    [request setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
-
+    request = [self setupHTTPRequest:request];
 
     MBDocument *responseDoc = [self loadDocument:documentName withRequest:request endpoint:endPoint arguments:args];
 
@@ -222,8 +214,7 @@
     NSString *urlString = [self getRequestUrlForDocument:documentName WithArguments:args];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:endPoint.timeout];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
+    request = [self setupHTTPRequest:request];
 
     MBDocument *responseDoc = [self loadDocument:documentName withRequest:request endpoint:endPoint arguments:args];
 
@@ -235,6 +226,17 @@
 
 - (MBDocument *)loadFreshDocument:(NSString *)documentName {
     return [self loadFreshDocument:documentName withArguments:nil];
+}
+
+- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request
+{
+    [request setHTTPMethod:@"GET"];
+    // Content-Type must be set because otherwise the MidletCommandProcessor servlet cannot read the XML
+    // this is related to a bug in Tomcat 6
+    // MIME type application/x-www-form-encoded is the default
+    // RM0412 TODO: check handling of special characters
+    [request setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
+    return request;
 }
 
 

@@ -19,4 +19,6 @@
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument *)args;
 - (void) storeDocument:(MBDocument *)document;
 
+- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request;
+
 @end
