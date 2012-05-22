@@ -12,6 +12,7 @@
 #import "MBViewBuilderFactory.h"
 #import "MBStyleHandler.h"
 #import "MBLocalizationService.h"
+#import "StringUtilities.h"
 
 @implementation MBDatePickerController
 
@@ -52,7 +53,7 @@
     // Select the row of the untranslated Value. The title of the UIPickerView is translated. The value is not. JIRA: IQ-71
 	NSString *currentValue = [_field untranslatedValue];
 	NSDate *dateToSet = [NSDate date];
-    if (currentValue) {
+    if ([currentValue length] > 0) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter new] autorelease];
         // TODO: Get Locale from settings
         //NSLocale *locale = [[NSLocale alloc] init];

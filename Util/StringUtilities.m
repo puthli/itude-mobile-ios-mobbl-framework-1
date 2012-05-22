@@ -105,17 +105,18 @@
 	else return result;
 }
 
-
 // create a date assuming the receiver is a date string read from XML
 - (NSDate *)dateFromXML
 {
 	NSDate *date = nil;
-	NSString *dateString = [self substringToIndex:19];
-	if (dateString) { 
-		NSDateFormatter *dateFormatter = [StringUtilitiesHelper dateFormatterToFormatDateFromXml]; // Added for optimization: The dateformatter in the StringUtilitiesHelper is reused all the time. Otherwise a new one would have to be created which is costly in time.
-		date = [dateFormatter dateFromString:dateString];
-		//NSLog(@"dateString=%@, dateFormatter=%@, date=%@",dateString,dateFormatter,date);
-	}
+    if ([self length] > 0) {
+        NSString *dateString = [self substringToIndex:19];
+        if (dateString) { 
+            NSDateFormatter *dateFormatter = [StringUtilitiesHelper dateFormatterToFormatDateFromXml]; // Added for optimization: The dateformatter in the StringUtilitiesHelper is reused all the time. Otherwise a new one would have to be created which is costly in time.
+            date = [dateFormatter dateFromString:dateString];
+            //NSLog(@"dateString=%@, dateFormatter=%@, date=%@",dateString,dateFormatter,date);
+        }
+    }
 	return date;
 }	
 
