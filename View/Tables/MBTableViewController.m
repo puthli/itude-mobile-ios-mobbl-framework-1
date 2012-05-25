@@ -260,7 +260,7 @@
 						showAccesoryDisclosureIndicator = NO;
 						[_cellReferences setObject:field forKey:indexPath];
 					}
-					
+					cellType = fieldstyle;
 				}
 				if ([C_FIELD_CHECKBOX isEqualToString:field.type]){
 					// store field for retrieval in didSelectRowAtIndexPath
@@ -290,7 +290,7 @@
 						label = field.label;
 					}
 					labelField = field;
-					
+					cellType = field.type;
 					
 				}
 				if ([C_FIELD_TEXT isEqualToString:field.type]){
@@ -306,7 +306,7 @@
 			}
 		}
 	}
-	
+    
 	//
 	// Now build the cell
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellType];
@@ -469,7 +469,7 @@
         // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has verry little room to paste all the buttons (refres, close, etc.)
         BOOL shouldShowFontCustomizer = [MBDevice isPad];
         if (shouldShowFontCustomizer) {
-
+            
             UIViewController *parentViewcontroller = self.page.viewController;            
             UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
             
