@@ -51,8 +51,14 @@ static MBApplicationFactory *_instance = nil;
 }
 
 -(id<MBAction>) createAction:(NSString *)actionClassName {
-	// Override in the	applicationFactory specific for the app; return the app specific actions
-	return nil;
+    id action = [[NSClassFromString(actionClassName) alloc] init];
+    if ([action conformsToProtocol:@protocol(MBAction)]) {
+        return [action autorelease];
+    } else {
+        [action release];
+        [NSException raise:@"Invalid action class name" format:@"Action class name %@ is invalid", actionClassName];
+    }
+    return nil;
 }
 
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName {
