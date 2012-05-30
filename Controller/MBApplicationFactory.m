@@ -62,7 +62,13 @@ static MBApplicationFactory *_instance = nil;
 }
 
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName {
-	// Override in the	applicationFactory specific for the app; return the app specific actions
+    id listener = [[NSClassFromString(listenerClassName) alloc] init];
+    if ([listener conformsToProtocol:@protocol(MBResultListener)]) {
+        return [listener autorelease];
+    } else {
+        [listener release];
+        [NSException raise:@"Invalid listener class name" format:@"Listener class name %@ is invalid", listenerClassName];
+    }
 	return nil;
 }
 
