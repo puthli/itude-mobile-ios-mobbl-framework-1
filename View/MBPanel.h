@@ -15,12 +15,14 @@
 
 	NSString *_type;
 	NSString *_title;
+    NSString *_titlePath;
 	int _width;
 	int _height;
 }
 
 @property (nonatomic, retain) NSString *type;
 @property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *titlePath;
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
 

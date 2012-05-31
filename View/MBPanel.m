@@ -22,6 +22,7 @@
 
 @synthesize type = _type;
 @synthesize title = _title;
+@synthesize titlePath = _titlePath;
 @synthesize width = _width;
 @synthesize height = _height;
 
@@ -33,6 +34,7 @@
 	self = [super initWithDefinition:definition document: document parent: parent];
 	if (self != nil) {
 		self.title = definition.title;
+        self.titlePath = [self substituteExpressions:definition.titlePath];
 		self.type = definition.type;
 		self.width = definition.width;
 		self.height = definition.height;
@@ -56,6 +58,8 @@
 
 - (void) dealloc
 {
+    [_titlePath release];
+    [_title release];
 	[_type release];
 	[super dealloc];
 }
@@ -68,7 +72,7 @@
 		MBPanelDefinition *definition = (MBPanelDefinition*)[self definition];
 		if(definition.title != nil) result = definition.title;
 		else if(definition.titlePath != nil) {
-			NSString *path = definition.titlePath;
+			NSString *path = self.titlePath;
 			if(![path hasPrefix:@"/"]) path = [NSString stringWithFormat:@"%@/%@", [self absoluteDataPath], path];
 			// Do not localize data coming from documents; which would become very confusing
 			return [[self document] valueForPath: path];
