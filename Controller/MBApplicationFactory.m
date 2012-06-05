@@ -56,7 +56,7 @@ static MBApplicationFactory *_instance = nil;
         return [action autorelease];
     } else {
         [action release];
-        [NSException raise:@"Invalid action class name" format:@"Action class name %@ is invalid", actionClassName];
+        [NSException raise:@"Invalid action class name" format:@"You have defined an action class named '%@' in your actions configuration but there is no objc class found with that name. Check the actions configuration or create a class named '%@' that follows the MBAction protocol.", actionClassName, actionClassName];
     }
     return nil;
 }
