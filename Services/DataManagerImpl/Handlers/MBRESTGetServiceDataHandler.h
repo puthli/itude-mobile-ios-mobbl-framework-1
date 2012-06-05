@@ -20,6 +20,9 @@
 - (NSURLConnection *)createConnectionAndStartLoadingWithRequest:(NSURLRequest *)request delegate:(MBRequestDelegate *)delegate;
 - (MBDocument *)createDocumentWithName:(NSString *)documentName forData:(NSData *)data;
 
+- (NSString *)getRequestUrlForDocument:(NSString *)documentName WithArguments:(MBDocument *)arguments;
+
+
 - (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request;
 
 @end
