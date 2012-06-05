@@ -191,7 +191,8 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:endPoint.timeout];
     request = [self setupHTTPRequest:request];
 
-    NSString *body = [args asXmlWithLevel:0];
+    // Take first element of arguments document as request body
+    NSString *body = [[args valueForPath:@"/*[0]"] asXmlWithLevel:0];
     if(body != nil) [request setHTTPBody: [body dataUsingEncoding:NSUTF8StringEncoding]];
 
     MBDocument *responseDoc = [self loadDocument:documentName withRequest:request endpoint:endPoint arguments:args];
