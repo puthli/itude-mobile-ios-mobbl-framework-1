@@ -90,17 +90,18 @@
 
 - (NSString *) asXmlWithLevel:(int)level
 {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<%@", level, "", _definition.name];
+    NSString *elementName = _definition.rootElement ? _definition.rootElement : _definition.name;
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<%@", level, "", elementName];
 	if([[self elements] count] == 0)
 		[result appendString:@"/>\n"];
 	else {
 		[result appendString:@">\n"];
 		for(MBElementDefinition *elemDef in [_definition children]) {
 			NSArray *lst = [[self elements] objectForKey:elemDef.name];
-			for(MBElement *elem in lst)
-    			[result appendString: [elem asXmlWithLevel: level+2]];
+            for(MBElement *elem in lst)
+    			[result appendString:[elem asXmlWithLevel:level + 2]];
 		}
-		[result appendFormat:@"%*s</%@>\n", level, "", _definition.name];
+		[result appendFormat:@"%*s</%@>\n", level, "", elementName];
 	}
 	
 	return result;
@@ -124,7 +125,7 @@
 }
 
 - (NSString *) description {
-	return [self asXmlWithLevel: 0];
+    return [NSString stringWithFormat:@"Document with name %@:\n %@", _definition.name, [self asXmlWithLevel:0]];
 }
 
 - (id) definition {
