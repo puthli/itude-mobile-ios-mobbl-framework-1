@@ -110,11 +110,14 @@
         delegate.err = nil;
         delegate.response = nil;
         delegate.finished = NO;
-        delegate.data = [[NSMutableData new] retain];
+        NSMutableData *data = [[NSMutableData alloc] init];
+        delegate.data = data;
+        [data release];
 
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
-        if (delegate.connection = [self createConnectionAndStartLoadingWithRequest:request delegate:delegate]){
+        delegate.connection = [self createConnectionAndStartLoadingWithRequest:request delegate:delegate];
+        if (delegate.connection){
             while (!delegate.finished) {
                 if([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable){
                     // Big problem, throw Exception
@@ -189,11 +192,7 @@
     }
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:endPoint.timeout];
-    request = [self setupHTTPRequest:request];
-
-    // Take first element of arguments document as request body
-    NSString *body = [[args valueForPath:@"/*[0]"] asXmlWithLevel:0];
-    if(body != nil) [request setHTTPBody: [body dataUsingEncoding:NSUTF8StringEncoding]];
+    request = [self setupHTTPRequest:request withArguments:args];
 
     MBDocument *responseDoc = [self loadDocument:documentName withRequest:request endpoint:endPoint arguments:args];
 
@@ -218,7 +217,7 @@
     NSString *urlString = [self getRequestUrlForDocument:documentName WithArguments:args];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:endPoint.timeout];
-    request = [self setupHTTPRequest:request];
+    request = [self setupHTTPRequest:request withArguments:args];
 
     MBDocument *responseDoc = [self loadDocument:documentName withRequest:request endpoint:endPoint arguments:args];
 
@@ -232,7 +231,7 @@
     return [self loadFreshDocument:documentName withArguments:nil];
 }
 
-- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request
+- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request withArguments:(MBDocument *)arguments
 {
     [request setHTTPMethod:@"GET"];
     // Content-Type must be set because otherwise the MidletCommandProcessor servlet cannot read the XML
@@ -240,6 +239,13 @@
     // MIME type application/x-www-form-encoded is the default
     // RM0412 TODO: check handling of special characters
     [request setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
+
+    // Don't set body for GET requests.
+
+    // Take first element of arguments document as request body
+//    NSString *body = [[arguments valueForPath:@"/*[0]"] asXmlWithLevel:0];
+//    if(body != nil) [request setHTTPBody: [body dataUsingEncoding:NSUTF8StringEncoding]];
+
     return request;
 }
 

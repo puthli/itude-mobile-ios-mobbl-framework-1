@@ -22,7 +22,6 @@
 
 - (NSString *)getRequestUrlForDocument:(NSString *)documentName WithArguments:(MBDocument *)arguments;
 
-
-- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request;
+- (NSMutableURLRequest *) setupHTTPRequest:(NSMutableURLRequest *)request withArguments:(MBDocument *)arguments;
 
 @end
