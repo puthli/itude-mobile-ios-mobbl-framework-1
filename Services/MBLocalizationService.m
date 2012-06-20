@@ -100,6 +100,22 @@ static NSString *_localeCode = nil;
 	return text;
 }
 
+// NOTE: Calling this method a lot decreases performance drasticly. Be aware of this
+-(NSString*) textForKey:(NSString*) key forLanguageCode:(NSString *)languageCode logWarnings:(BOOL)logWarnings {
+	if(key == nil) return nil;
+	
+    NSMutableDictionary *keys = [self languageForCode:languageCode];
+	NSString* text = [keys valueForKey:key];
+	if(text == nil) {
+		// NOTE for optimization: This log is printed only in a debug build (not in release build). Logging to the console is verry costly! Keep that in minde when optimizing code!
+		if (logWarnings) {
+			WLog(@"Warning: no translation defined for key '%@' using languageCode=%@", key, self.currentLanguage);
+		}
+		text = key;
+	}
+	return text;
+}
+
 -(NSString*) textForKey:(NSString*) key withArguments:(id) argument, ...
 {
 	if(key == nil) return nil;
