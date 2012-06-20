@@ -68,7 +68,10 @@
 - (MBDocumentDiff*) diffDocument:(MBDocument*) other;
 - (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
 - (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
+
+- (void)rebuild;
 - (void) rebuildView;
+
 - (MBViewState) currentViewState;
 - (void) unregisterAllViewControllers;
 - (id) viewControllerOfType:(Class) clazz;
