@@ -28,6 +28,7 @@
 
 -(NSString*) textForKey:(NSString*) key;
 -(NSString*) textForKey:(NSString*) key logWarnings:(BOOL)logWarnings;
+-(NSString*) textForKey:(NSString*) key forLanguageCode:(NSString *)languageCode logWarnings:(BOOL)logWarnings;
 -(NSString*) textForKey:(NSString*) key withArguments:(id) argument, ...;
 -(NSString*) localeCode;
 
