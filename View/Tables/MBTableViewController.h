@@ -15,7 +15,18 @@
 @class MBField;
 @class MBRow;
 
-@interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>
+@interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>{
+
+    NSMutableArray *_sections;
+    NSMutableDictionary *_cellReferences;
+    NSMutableDictionary *_webViews;
+    MBStyleHandler *_styleHandler;
+    BOOL _finishedLoadingWebviews;
+    MBPage *_page;
+
+    int _fontSize;
+    BOOL _fontMenuActive;
+}
 
 @property (nonatomic, assign) MBStyleHandler *styleHandler;
 @property (nonatomic, retain) NSMutableDictionary *cellReferences;
