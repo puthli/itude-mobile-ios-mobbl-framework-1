@@ -144,7 +144,6 @@
             }
         }
         if (delegate.err != nil) {
-            NSLog(@"%@",  delegate.err);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             WLog(@"An error (%@) occured while accessing endpoint '%@'", delegate.err, request.URL);
             @throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.err localizedDescription] userInfo:[delegate.err userInfo]];
