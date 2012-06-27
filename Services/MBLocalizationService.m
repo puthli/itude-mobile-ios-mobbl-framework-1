@@ -88,14 +88,19 @@ static NSString *_localeCode = nil;
 
 -(NSString*) textForKey:(NSString*) key logWarnings:(BOOL)logWarnings {
 	if(key == nil) return nil;
-	
-	NSString* text = [_currentDictionary valueForKey:key];
-	if(text == nil) {
+	BOOL found = NO;
+	NSString* text = key;
+    for (NSString *keyString in [_currentDictionary allKeys]) {
+        if ([keyString isEqualToString:key]) {
+            text = [_currentDictionary valueForKey:key];
+            found = YES;
+        }
+    }
+	if(!found) {
 		// NOTE for optimization: This log is printed only in a debug build (not in release build). Logging to the console is verry costly! Keep that in minde when optimizing code!
 		if (logWarnings) {
 			WLog(@"Warning: no translation defined for key '%@' using languageCode=%@", key, self.currentLanguage);
 		}
-		text = key;
 	}
 	return text;
 }
