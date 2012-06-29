@@ -15,6 +15,7 @@
 #import "MBDocumentFactory.h"
 #import "MBMetadataService.h"
 #import "Reachability.h"
+#import "MBServerException.h"
 
 @implementation MBRESTGetServiceDataHandler
 
@@ -122,12 +123,12 @@
                 if([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable){
                     // Big problem, throw Exception
                     [delegate.connection cancel];
-                    @throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"No internet connection") userInfo:nil];
+                    @throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"No internet connection") userInfo:nil];
                 }
                 if([[Reachability reachabilityWithHostName:[request.URL host]] currentReachabilityStatus ] == NotReachable){
                     // Big problem, throw Exception
                     [delegate.connection cancel];
-                    @throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"Server unreachable") userInfo:nil];
+                    @throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"Server unreachable") userInfo:nil];
                 }
                 // Wait for async http request to finish, but make sure delegate methods are called, since this is executed in an NSOperation
                 [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -146,7 +147,7 @@
         if (delegate.err != nil) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             WLog(@"An error (%@) occured while accessing endpoint '%@'", delegate.err, request.URL);
-            @throw [NSException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.err localizedDescription] userInfo:[delegate.err userInfo]];
+            @throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.err localizedDescription] userInfo:[delegate.err userInfo]];
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
@@ -158,7 +159,7 @@
             if(delegate.err != nil) {
                 msg = [NSString stringWithFormat:@"%@ %@: %i", msg, delegate.err.domain, delegate.err.code];
             }
-            @throw [NSException exceptionWithName:@"Server Error" reason: msg userInfo:nil];
+            @throw [MBServerException exceptionWithName:@"Server Error" reason: msg userInfo:nil];
         }
         return responseDoc;
     }
