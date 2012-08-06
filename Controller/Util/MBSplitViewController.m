@@ -156,30 +156,4 @@
 	[super willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:duration];
 }
 
-/*
-#pragma mark -
-#pragma mark SplitViewControllerDelegate methods
-// Called when the orientation changes from portrait to landscape. Menu will appear at the left of the screen
-- (void) splitViewController:(UISplitViewController *)svc 
-	  willShowViewController:(UIViewController *)aViewController 
-   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
-	//NSLog(@"Orientation changed from portrait to landscape.");
-}
-
-// Called when the orientation changes from landscape to portrait. Menu will disappear from the left of the screen
-- (void) splitViewController:(UISplitViewController *)svc 
-	  willHideViewController:(UIViewController *)aViewController 
-		   withBarButtonItem:(UIBarButtonItem *)barButtonItem 
-		forPopoverController:(UIPopoverController *)pc {
-	//NSLog(@"Orientation changed from landscape to portrait.");
-}
-
-// Called when the MenuViewController will be displayed in a popover
--(void) splitViewController:(UISplitViewController *)svc 
-		  popoverController:(UIPopoverController *)pc 
-  willPresentViewController:(UIViewController *)aViewController {
-	
-}
-*/
-
 @end

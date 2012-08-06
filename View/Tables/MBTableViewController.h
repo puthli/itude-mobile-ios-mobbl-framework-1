@@ -17,16 +17,23 @@
 
 @interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>{
 
-	NSMutableArray *_sections;
-	NSMutableDictionary *_cellReferences;
-	NSMutableDictionary *_webViews;
-	MBStyleHandler *_styleHandler;
-	BOOL _finishedLoadingWebviews;
-	MBPage *_page;
-    
-	int _fontSize;
+    NSMutableArray *_sections;
+    NSMutableDictionary *_cellReferences;
+    NSMutableDictionary *_webViews;
+    MBStyleHandler *_styleHandler;
+    BOOL _finishedLoadingWebviews;
+    MBPage *_page;
+
+    int _fontSize;
     BOOL _fontMenuActive;
 }
+
+@property (nonatomic, assign) MBStyleHandler *styleHandler;
+@property (nonatomic, retain) NSMutableDictionary *cellReferences;
+@property (nonatomic, retain) NSMutableDictionary *webViews;
+@property (nonatomic, assign) BOOL finishedLoadingWebviews;
+@property (nonatomic, assign) int fontSize;
+@property (nonatomic, assign) BOOL fontMenuActive;
 
 // allows subclasses to attach behaviour to a field.
 -(void) fieldWasSelected:(MBField *)field;
