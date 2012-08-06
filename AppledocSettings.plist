@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>--project-name</key>
+	<string>itude-mobile-iphone-core</string>
+	<key>--output</key>
+	<string>appledoc</string>
+	<key>--input</key>
+	<array>
+		<string>.</string>
+	</array>
+	<key>--company-id</key>
+	<string>com.itude</string>
+	<key>--project-company</key>
+	<string>Itude Mobile</string>
+	<key>--ignore</key>
+	<array>
+		<string>itude-mobile-iphone-coreLogicTests</string>
+		<string>External</string>
+	</array>
+</dict>
+</plist>
