@@ -35,6 +35,11 @@
 /** Creates and returns an empty Document conforming to the given MBDocumentDefinition. */
 - (id) initWithDocumentDefinition: (MBDocumentDefinition*) definition;
 - (void) assignToDocument:(MBDocument*) target;
+
+/** Loads a fresh copy of this document using the registered DataHandler. 
+ 
+ See [MBDataManagerService loadFreshDocument:withArguments:forDelegate:resultSelector:errorSelector:]
+ */
 - (void) loadFreshCopyForDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL)errorSelector;
 - (void) reload;
 

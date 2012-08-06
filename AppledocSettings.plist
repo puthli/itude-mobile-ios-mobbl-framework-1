@@ -2,10 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>--repeat-first-par</key>
+	<false/>
+	<key>--install-docset</key>
+	<true/>
+	<key>--create-docset</key>
+	<true/>
 	<key>--project-name</key>
 	<string>itude-mobile-iphone-core</string>
 	<key>--output</key>
-	<string>appledoc</string>
+	<string>~/help</string>
 	<key>--input</key>
 	<array>
 		<string>.</string>
@@ -16,6 +22,7 @@
 	<string>Itude Mobile</string>
 	<key>--ignore</key>
 	<array>
+		<string>*.m</string>
 		<string>itude-mobile-iphone-coreLogicTests</string>
 		<string>External</string>
 	</array>
