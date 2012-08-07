@@ -4,6 +4,8 @@
 <dict>
 	<key>--repeat-first-par</key>
 	<false/>
+  <key>--keep-undocumented-members</key>
+	<true/>
 	<key>--install-docset</key>
 	<true/>
 	<key>--create-docset</key>
