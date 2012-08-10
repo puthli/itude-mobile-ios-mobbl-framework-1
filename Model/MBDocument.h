@@ -14,7 +14,7 @@
  
  This is the data structure containing application state. Its structure
  is defined by a MBDocumentDefinition. The document definition is typically defined
- in an XML configuration file named `documents.mxml`.
+ in an XML configuration file named `documents.xmlx`.
  */
 @interface MBDocument : MBElementContainer {
 	MBDocumentDefinition *_definition;

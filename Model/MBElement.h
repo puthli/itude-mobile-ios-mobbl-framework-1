@@ -11,6 +11,9 @@
 
 #define TEXT_ATTRIBUTE @"text()"
 
+/**
+* A node in an Element tree.
+*/
 @interface MBElement : MBElementContainer {
 
 	@private
@@ -18,19 +21,32 @@
 	MBElementDefinition *_definition;
 }
 
+/// @name Creating and Initializing an Element
 - (id) initWithDefinition:(id) definition;
-- (void) setValue:(id)value forAttribute:(NSString *)attributeName;
-- (void) setValue:(id)value forAttribute:(NSString *)attributeName throwIfInvalid:(BOOL) throwIfInvalid;
-- (NSString*) valueForAttribute:(NSString*)attributeName;
-- (NSString *) asXmlWithLevel:(int)level;
-- (MBElementDefinition*) definition;
-- (BOOL) isValidAttribute:(NSString*) attributeName;
-- (NSString *) bodyText;
-- (void) setBodyText:(NSString*) text;
-- (void) assignToElement:(MBElement*) target;
-- (void) assignByName:(MBElementContainer*) other;
+
+/// @name Getting Element Properties
 - (NSString *) name;
+- (MBElementDefinition*) definition;
+/** Gets the physical index of an element with a given path */
 - (NSInteger) physicalIndexWithCurrentPath: (NSString *)path;
 
+/// @name Working with Attribute Values
+- (NSString*) valueForAttribute:(NSString*)attributeName;
+- (void) setValue:(id)value forAttribute:(NSString *)attributeName;
+- (void) setValue:(id)value forAttribute:(NSString *)attributeName throwIfInvalid:(BOOL) throwIfInvalid;
+
+/// @name Working with the 'text()' attribute
+- (NSString *) bodyText;
+- (void) setBodyText:(NSString*) text;
+
+/// @name Checking Existence of Attributes
+- (BOOL) isValidAttribute:(NSString*) attributeName;
+
+/// @name Exporting to XML
+- (NSString *) asXmlWithLevel:(int)level;
+
+/// @name Copying Element State
+- (void) assignToElement:(MBElement*) target;
+- (void) assignByName:(MBElementContainer*) other;
 
 @end
