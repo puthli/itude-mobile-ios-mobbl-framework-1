@@ -6,6 +6,7 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
+#import "MBRowViewBuilder.h"
 #import "MBViewBuilderFactory.h"
 #import "MBPanelViewBuilder.h"
 #import "MBPageViewBuilder.h"

@@ -9,6 +9,9 @@
 
 @class MBRow;
 
+/**
+* Constructs UITableViewCells for MBRows. Implement this interface for custom UITableViewCells.
+*/
 @protocol MBRowViewBuilder <NSObject>
-- (UIView *)buildRowView:(MBRow *)row withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState;
+- (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState cellReferences:(NSMutableDictionary *)cellReferences forTableView:(UITableView *)tableView;
 @end
