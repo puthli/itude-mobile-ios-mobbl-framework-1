@@ -74,7 +74,7 @@
 }
 
 
-- (UITableViewCell *)createCellForTableView:(UITableView *)tableView withType:(NSString *)cellType
+- (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType
                                                             style:(UITableViewCellStyle)cellstyle
 {
 // First build the cell
@@ -90,7 +90,7 @@
     return cell;
 }
 
-- (UITableViewCell *)initCellForRow:(MBRow *)row forTableView:(UITableView *)tableView {
+- (UITableViewCell *)buildCellForRow:(MBRow *)row forTableView:(UITableView *)tableView {
     NSString *type = C_REGULARCELL;
     UITableViewCellStyle style = UITableViewCellStyleDefault;
 
@@ -129,13 +129,13 @@
             }
         }
     }
-    return [self createCellForTableView:tableView withType:type style:style];
+    UITableViewCell *cell = [self cellForTableView:tableView withType:type style:style];
+    return cell;
 }
 
 - (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
                      forTableView:(UITableView *)tableView delegate:(id <MBViewBuilderDelegate>)delegate
 {
-    NSString *text     = nil;
     NSString *fieldstyle  = nil;
     BOOL navigable     = NO;
     BOOL showAccesoryDisclosureIndicator  = NO;
@@ -147,7 +147,7 @@
 
     CGRect labelSize = CGRectZero;
     CGRect subLabelSize = CGRectZero;
-    UITableViewCell *cell = [self initCellForRow:row forTableView:tableView];
+    UITableViewCell *cell = [self buildCellForRow:row forTableView:tableView];
 
     // Loop through the fields in the row to determine the content of the cell
     for(MBComponent *child in [row children]){
@@ -265,6 +265,7 @@
                     labelField = field;
                 }
                 if ([C_FIELD_TEXT isEqualToString:field.type]){
+                    NSString *text;
                     if(field.path != nil) {
                         text = [field formattedValue];
                     }
@@ -300,11 +301,12 @@
             // Let the width of the view resize to the parent view to reposition any buttons
             buttonsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
-            [[[MBViewBuilderFactory sharedInstance] styleHandler] applyStyle:buttonsView panel:(MBPanel *)row viewState:viewState];
+            // Disabled: row is not a MBPanel, will probably crash
+            //[[[MBViewBuilderFactory sharedInstance] styleHandler] applyStyle:buttonsView panel:(MBPanel *)row viewState:viewState];
             buttonsFrame = buttonsView.frame;
 
             CGFloat spaceBetweenButtons = 10;
-            NSUInteger buttonXposition = buttonsFrame.size.width;
+            NSUInteger buttonXposition = (NSUInteger) buttonsFrame.size.width;
             for (UIView *button in buttons) {
                 CGRect buttonFrame = button.frame;
                 buttonXposition -= buttonFrame.size.width;
