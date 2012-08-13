@@ -145,7 +145,7 @@
 #import <itude-mobile-iphone-core/MBMatrixViewBuilder.h>
 #import <itude-mobile-iphone-core/MBPageViewBuilder.h>
 #import <itude-mobile-iphone-core/MBPanelViewBuilder.h>
-#import <itude-mobile-iphone-core/MBRowViewBuilder.h>
+#import "MBDefaultRowViewBuilder.h"
 #import <itude-mobile-iphone-core/MBStyleHandler.h>
 #import <itude-mobile-iphone-core/MBViewBuilder.h>
 #import <itude-mobile-iphone-core/MBViewBuilderFactory.h>

@@ -9,7 +9,7 @@
 #import "MBRow.h"
 #import "MBForEachDefinition.h"
 #import "MBViewBuilderFactory.h"
-#import "MBRowViewBuilder.h"
+#import "MBDefaultRowViewBuilder.h"
 #import "MBPage.h"
 
 @implementation MBRow

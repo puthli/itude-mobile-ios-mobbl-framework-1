@@ -1,17 +1,17 @@
 //
-//  MBRowViewBuilder.m
+//  MBDefaultRowViewBuilder.m
 //  Core
 //
 //  Created by Wido on 24-5-10.
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBRowViewBuilder.h"
+#import "MBDefaultRowViewBuilder.h"
 #import "MBRow.h"
 #import "MBComponent.h"
 #import "MBStyleHandler.h"
 
-@implementation MBRowViewBuilder
+@implementation MBDefaultRowViewBuilder
 
 
 -(UIView*) buildRowView:(MBRow*) row withMaxBounds:(CGRect) maxBounds viewState:(MBViewState) viewState {

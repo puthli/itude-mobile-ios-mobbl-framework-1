@@ -10,7 +10,7 @@
 #import "MBPanelViewBuilder.h"
 #import "MBPageViewBuilder.h"
 #import "MBForEachViewBuilder.h"
-#import "MBRowViewBuilder.h"
+#import "MBDefaultRowViewBuilder.h"
 #import "MBFieldViewBuilder.h"
 #import "MBStyleHandler.h"
 
@@ -32,7 +32,7 @@ static MBViewBuilderFactory *_instance = nil;
 		_panelViewBuilder = [[MBPanelViewBuilder alloc] init];
 		_pageViewBuilder = [[MBPageViewBuilder alloc] init];
 		_forEachViewBuilder = [[MBForEachViewBuilder alloc] init];
-		_rowViewBuilder = [[MBRowViewBuilder alloc] init];
+		_rowViewBuilder = [[MBDefaultRowViewBuilder alloc] init];
 		_fieldViewBuilder = [[MBFieldViewBuilder alloc] init];
 		_styleHandler = [[MBStyleHandler alloc] init];
 	}
