@@ -20,6 +20,7 @@
 #import "MBDevice.h"
 #import "MBFontCustomizer.h"
 #import "MBDatePickerController.h"
+#import "MBViewBuilderDelegate.h"
 
 
 #define MAX_FONT_SIZE 20
@@ -31,7 +32,7 @@
 #define C_WEBVIEW_DEFAULT_FONTSIZE 14
 #define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
 
-@interface MBTableViewController (hidden)
+@interface MBTableViewController() <MBViewBuilderDelegate>
 
 -(BOOL) hasHTML:(NSString *) text;
 -(void) addText:(NSString *) text withImage:(NSString *) imageUrl toCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -152,10 +153,8 @@
 
 	MBRow *row = [self getRowForIndexPath:indexPath];
     id<MBRowViewBuilder> builder = [[MBViewBuilderFactory sharedInstance] rowViewBuilder];
-    UITableViewCell *cell = [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState cellReferences:self.cellReferences forTableView:tableView];
-
-    return cell;
-
+    return [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView
+                        delegate:self];
 }
 
 -(BOOL) hasHTML:(NSString *) text{
@@ -174,56 +173,6 @@
 	if (found.location != NSNotFound) result = YES;
     
 	return result;
-}
-
--(void) addText:(NSString *) text withImage:(NSString *) imageUrl toCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    
-	MBStyleHandler *styleHandler = [[MBViewBuilderFactory sharedInstance] styleHandler];
-	
-	// if the text contains any html, make a webview
-	if ([self hasHTML:text]) {
-		UIWebView *webView = [self.webViews objectForKey:indexPath];
-		if (webView==nil){
-			webView = [[self initWebView] autorelease];
-			webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-			[self.webViews setObject:webView forKey:indexPath];
-		}
-		
-		// TODO: get the css from the stylehandler
-		NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, self.fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
-		
-		// TODO: put the imageUrl in html tags
-		NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@%@</body></html>",css, imageUrl, text];
-		[webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-		cell.opaque = NO;
-		cell.backgroundColor = [UIColor clearColor];
-		[cell.contentView addSubview:webView];
-        
-        // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has verry little room to paste all the buttons (refres, close, etc.)
-        BOOL shouldShowFontCustomizer = [MBDevice isPad];
-        if (shouldShowFontCustomizer) {
-            
-            UIViewController *parentViewcontroller = self.page.viewController;            
-            UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
-            
-            if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
-                MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
-                [fontCustomizer setButtonsDelegate:self];
-                [fontCustomizer setSender:webView];
-                [fontCustomizer addToViewController:parentViewcontroller animated:YES];
-            }
-        }
-        
-	}
-	else{
-		cell.textLabel.text = text;
-		cell.textLabel.numberOfLines = 0;
-		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-		[styleHandler styleMultilineLabel:cell.textLabel component:[self.cellReferences objectForKey:indexPath]];
-		
-	}
-	
-	
 }
 
 // callback when pickerView value changes
@@ -369,6 +318,29 @@
     }
 }
 
+#pragma mark - MBViewBuilderDelegate
+- (UIWebView *)webViewWithText:(NSString *)text forIndexPath:(NSIndexPath *)indexPath
+{
+    UIWebView *webView = [self.webViews objectForKey:indexPath];
+    if (webView==nil){
+        webView = [[self initWebView] autorelease];
+        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self.webViews setObject:webView forKey:indexPath];
+    }
+
+    // TODO: get the css from the stylehandler
+    NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, self.fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
+
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, text];
+    [webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+
+    return webView;
+}
+
+- (void)viewBuilder:(id)viewBuilder didCreateInteractiveField:(MBField *)field atIndexPath:(NSIndexPath *)indexPath
+{
+    [self.cellReferences setObject:field forKey:indexPath];
+}
 
 #pragma mark -
 #pragma mark MBFontChangeListenerProtocol methods
