@@ -37,7 +37,7 @@
 
 // allows subclasses to attach behaviour to a field.
 -(void) fieldWasSelected:(MBField *)field;
--(UIWebView*) initWebView;
+
 -(void)reloadAllWebViews;
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNo;
 

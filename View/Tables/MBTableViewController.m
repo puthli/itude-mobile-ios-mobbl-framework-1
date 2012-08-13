@@ -18,7 +18,6 @@
 #import "MBPickerController.h"
 #import "MBPickerPopoverController.h"
 #import "MBDevice.h"
-#import "MBFontCustomizer.h"
 #import "MBDatePickerController.h"
 #import "MBViewBuilderDelegate.h"
 
@@ -33,9 +32,6 @@
 #define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
 
 @interface MBTableViewController() <MBViewBuilderDelegate>
-
--(BOOL) hasHTML:(NSString *) text;
--(void) addText:(NSString *) text withImage:(NSString *) imageUrl toCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -87,15 +83,15 @@
 }
 
 -(NSInteger) tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)sectionNo {
-	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:sectionNo];
+	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:(NSUInteger) sectionNo];
 	NSMutableArray *rows = [section descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_ROW];
 	return [rows count];
 }
 
 -(MBRow *)getRowForIndexPath:(NSIndexPath *) indexPath {
-	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:indexPath.section];
+	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:(NSUInteger) indexPath.section];
 	NSMutableArray *rows = [section descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_ROW];
-	MBRow *row = [rows objectAtIndex:indexPath.row];
+	MBRow *row = [rows objectAtIndex:(NSUInteger) indexPath.row];
 	return row;
 }
 
@@ -202,7 +198,7 @@
 		
 		[field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
         
-		// iPad supports popovers, which are a nicer and better way to let the user make a choice from a dropdownlist
+		// iPad supports popovers, which are a nicer and better way to let the user make a choice from a dropdown list
 		if ([MBDevice isPad]) {
 			MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc] initWithField:field] autorelease];
 			//picker.field = field;
@@ -266,10 +262,8 @@
 }
 
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNo{
-	NSString *title = nil;
-	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:sectionNo];
-	title = [section title];
-	return title;
+    MBPanel *section = (MBPanel *)[self.sections objectAtIndex:(NSUInteger) sectionNo];
+    return [section title];
 }
 
 
@@ -285,11 +279,10 @@
 	
 	if (done) {
 		
-		for (UIWebView *w in [self.webViews allValues]){
-			// reset the frame to something small, somehow this triggers UIKit to recalculate the height
-			webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, 1);
-			[webView sizeToFit];
-		}
+        // reset the frame to something small, somehow this triggers UIKit to recalculate the height
+        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, 1);
+        [webView sizeToFit];
+
 		if (!self.finishedLoadingWebviews) {
 			self.finishedLoadingWebviews = YES;
 			[self.tableView reloadData];
@@ -300,13 +293,6 @@
 -(void) rebuildView {
 	
 }
-
--(UIWebView*)initWebView {
-	UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)] autorelease];
-	webView.delegate = self;
-	return webView;
-}
-
 
 -(void)reloadAllWebViews{
     for (UIWebView *webView in [self.webViews allValues]) {
@@ -323,7 +309,8 @@
 {
     UIWebView *webView = [self.webViews objectForKey:indexPath];
     if (webView==nil){
-        webView = [[self initWebView] autorelease];
+        webView = [[[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)] autorelease];
+        webView.delegate = self;
         webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.webViews setObject:webView forKey:indexPath];
     }
