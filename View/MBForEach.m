@@ -41,7 +41,7 @@
 
 			id pathResult = [document valueForPath: fullPath];
 			if(pathResult != nil) {
-				if(![pathResult isKindOfClass:[NSArray class]]) @throw [[NSException alloc]initWithName:@"InvalidPath" reason:_value userInfo:nil];
+				if(![pathResult isKindOfClass:[NSArray class]]) @throw [[[NSException alloc]initWithName:@"InvalidPath" reason:_value userInfo:nil] autorelease];
 
 				for(MBElement *element in pathResult) {
 					MBRow *row = [[[MBRow alloc] initWithDefinition: [self definition] document: document parent: self] autorelease];

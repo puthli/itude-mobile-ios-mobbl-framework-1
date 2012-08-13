@@ -140,7 +140,7 @@ static MBDataManagerService *_instance = nil;
 	id handler = [_registeredHandlers objectForKey: dataManagerName];
 	if(handler == nil) {
 		NSString *msg = [NSString stringWithFormat:@"No datamanager (%@) found for document %@", dataManagerName, documentName];
-		@throw [[NSException alloc]initWithName:@"NoDataManager" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"NoDataManager" reason:msg userInfo:nil] autorelease];
 	}
 	return handler;
 }

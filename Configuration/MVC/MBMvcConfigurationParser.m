@@ -219,7 +219,10 @@
 			if([@"normal" isEqualToString:type]) pageDef.pageType = MBPageTypesNormal;
 			else if([@"popup" isEqualToString:type]) pageDef.pageType = MBPageTypesPopup;
 			else if([@"error" isEqualToString:type]) pageDef.pageType = MBPageTypesErrorPage;
-			else @throw [NSException exceptionWithName:@"InvalidPageType" reason:type userInfo:nil];
+			else {
+                [pageDef release];
+                @throw [NSException exceptionWithName:@"InvalidPageType" reason:type userInfo:nil];
+            }
 		}
 			
         [self notifyProcessed:pageDef usingSelector:@selector(addPage:)];

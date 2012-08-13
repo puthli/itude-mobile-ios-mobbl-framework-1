@@ -67,7 +67,7 @@ static NSString *_endpointsName = @"endpoints";
 	MBDocumentDefinition *docDef = [_cfg definitionForDocumentName: documentName];
 	if(docDef == nil && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"Document with name %@ not defined", documentName];
-		@throw [[NSException alloc]initWithName:@"DocumentNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"DocumentNotDefined" reason:msg userInfo:nil]autorelease];
 	}
 	return docDef;
 }
@@ -80,7 +80,7 @@ static NSString *_endpointsName = @"endpoints";
 	MBDomainDefinition *domDef = [_cfg definitionForDomainName: domainName];
 	if(domDef == nil && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"Domain with name %@ not defined", domainName];
-		@throw [[NSException alloc]initWithName:@"DomainNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"DomainNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return domDef;
 }
@@ -93,7 +93,7 @@ static NSString *_endpointsName = @"endpoints";
 	MBPageDefinition *pageDef = [_cfg definitionForPageName: pageName];
 	if(pageDef == nil && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"Page with name %@ not defined", pageName];
-		@throw [[NSException alloc]initWithName:@"PageNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"PageNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return pageDef;
     
@@ -107,7 +107,7 @@ static NSString *_endpointsName = @"endpoints";
 	MBActionDefinition *actionDef = [_cfg definitionForActionName: actionName];
 	if(actionDef == nil && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"Action with name %@ not defined", actionName];
-		@throw [[NSException alloc]initWithName:@"ActionNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"ActionNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return actionDef;
 }
@@ -124,7 +124,7 @@ static NSString *_endpointsName = @"endpoints";
 	MBDialogDefinition *dialogDef = [_cfg definitionForDialogName: dialogName];
 	if(dialogDef == nil && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"Dialog with name %@ not defined", dialogName];
-		@throw [[NSException alloc]initWithName:@"DialogNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"DialogNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return dialogDef;
 }
@@ -141,7 +141,7 @@ static NSString *_endpointsName = @"endpoints";
 	MBDialogGroupDefinition *dialogGroupDef = [_cfg definitionForDialogGroupName:dialogGroupName];
 	if(dialogGroupDef == nil && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"DialogGroup with name %@ not defined", dialogGroupName];
-		@throw [[NSException alloc]initWithName:@"DialogGroupNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"DialogGroupNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return dialogGroupDef;
 }
@@ -163,7 +163,7 @@ static NSString *_endpointsName = @"endpoints";
 	NSArray *ocDefs = [_cfg outcomeDefinitionsForOrigin:originName outcomeName:outcomeName];
 	if([ocDefs count] == 0 && doThrow) {
 		NSString *msg = [NSString stringWithFormat: @"Outcome with originName=%@ outcomeName=%@ not defined", originName, outcomeName];
-		@throw [[NSException alloc]initWithName:@"ActionNotDefined" reason:msg userInfo:nil];
+		@throw [[[NSException alloc]initWithName:@"ActionNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return ocDefs;
 }

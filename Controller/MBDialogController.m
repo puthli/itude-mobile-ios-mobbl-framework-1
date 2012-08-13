@@ -42,8 +42,9 @@
         self.dialogMode = definition.mode;
 		self.dialogGroupName = definition.groupName;
 		self.position = definition.position;
-		
-		self.rootController = [[UIViewController alloc] init];
+        UINavigationController *controller = [[UINavigationController alloc] init];
+		self.rootController = controller;
+        [controller release];
 		self.rootController.title = self.title;
 		self.temporary = isTemporary;
 		_usesNavbar = FALSE;
@@ -64,7 +65,9 @@
 
         _bounds = bounds;
 		
-		self.rootController = [[MBNavigationController alloc] initWithRootViewController:page.viewController];
+        MBNavigationController *controller = [[MBNavigationController alloc] initWithRootViewController:page.viewController];
+		self.rootController = controller;
+        [controller release];
 		self.rootController.delegate = self;
 		self.rootController.title = self.title;
 		_usesNavbar = [definition.mode isEqualToString:@"STACK"];

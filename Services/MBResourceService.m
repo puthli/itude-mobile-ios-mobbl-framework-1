@@ -34,7 +34,7 @@ static MBResourceService *_instance = nil;
 			// Never read??
 			//NSString *resourceXml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 			
-			_instance.config = [[parser parseData:data ofDocument: RESOURCE_CONFIG_FILE_NAME] retain];
+			_instance.config = [parser parseData:data ofDocument: RESOURCE_CONFIG_FILE_NAME];
 			[parser release];
 		}
 	}

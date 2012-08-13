@@ -33,7 +33,7 @@
 		result =  [[MBField alloc] initWithDefinition: definition document: document parent: parent];
 	} else {
 		NSString *msg = [NSString stringWithFormat:@"Unsupported child type: %@ in page or panel", [definition class]];
-		@throw [[NSException alloc] initWithName:@"InvalidComponentType" reason: msg userInfo:nil];
+		@throw [[[NSException alloc] initWithName:@"InvalidComponentType" reason: msg userInfo:nil] autorelease];
 	}
 	
 	return [result autorelease];
