@@ -20,6 +20,8 @@
 #import "MBDevice.h"
 #import "MBDatePickerController.h"
 #import "MBViewBuilderDelegate.h"
+#import "UIWebView+FontResizing.h"
+#import "UIView+TreeWalker.h"
 
 
 #define MAX_FONT_SIZE 20
@@ -27,10 +29,6 @@
 #define C_CELL_Y_MARGIN 4
 
 // TODO: Get the font size and name from the styleHandler
-#define C_WEBVIEW_DEFAULT_FONTNAME @"arial"
-#define C_WEBVIEW_DEFAULT_FONTSIZE 14
-#define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
-
 @interface MBTableViewController() <MBViewBuilderDelegate>
 
 @end
@@ -106,13 +104,13 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	CGFloat height = 44;
+    NSLog(@"heightForRow: %@", indexPath);
+    CGFloat height = 44;
 	
 	UIWebView *webView = [self.webViews objectForKey:indexPath];
 	if (webView) {
 		NSString *heightString = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
 		height = [heightString floatValue] + C_CELL_Y_MARGIN * 2;
-		//webView.bounds = CGRectMake(0, 0, webView.bounds.size.width, [heightString floatValue]);
 	}
     
 	// Loop through the fields in the row to determine the size of multiline text cells 
@@ -140,17 +138,31 @@
 			}
 		}
 	}
-	
-	
-	return height;
+
+    NSLog(@"webView = %@", webView);
+    NSLog(@"height = %f", height);
+
+    return height;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"cellForRow: %@", indexPath);
 
 	MBRow *row = [self getRowForIndexPath:indexPath];
     id<MBRowViewBuilder> builder = [[MBViewBuilderFactory sharedInstance] rowViewBuilder];
-    return [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView
-                        delegate:self];
+    UITableViewCell *cell = [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState
+                                                      forTableView:tableView delegate:self];
+
+    // Register any webViews in the cell
+    [self.webViews removeObjectForKey:indexPath]; // Make sure no old webViews are retained
+    for (UIView *subview in [cell subviewsOfClass:[UIWebView class]]) {
+        UIWebView *webview = (UIWebView *)subview;
+        webview.delegate = self;
+        [self.webViews setObject:subview forKey:indexPath];
+        [webview refreshWithFontSize:self.fontSize];
+    }
+
+    return cell;
 }
 
 -(BOOL) hasHTML:(NSString *) text{
@@ -258,7 +270,7 @@
 
 // allows subclasses to attach behaviour to a field.
 -(void) fieldWasSelected:(MBField *)field{
-    
+    (void)field;    // Prevent compiler warning of unused parameter
 }
 
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)sectionNo{
@@ -270,7 +282,11 @@
 // UIWebViewDelegate methods
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
 	BOOL done = YES;
-	
+
+    // reset the frame to something small, somehow this triggers UIKit to recalculate the height
+    webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, 1);
+    [webView sizeToFit];
+
 	for (UIWebView *w in [self.webViews allValues]){
 		if (w.loading) {
 			done=NO;
@@ -278,11 +294,6 @@
 	}
 	
 	if (done) {
-		
-        // reset the frame to something small, somehow this triggers UIKit to recalculate the height
-        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, 1);
-        [webView sizeToFit];
-
 		if (!self.finishedLoadingWebviews) {
 			self.finishedLoadingWebviews = YES;
 			[self.tableView reloadData];
@@ -294,36 +305,14 @@
 	
 }
 
-- (void)loadWebView:(UIWebView *)webView withText:(NSString *)text
-{
-    NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, self.fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, text];
-    [webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-}
-
 -(void)reloadAllWebViews{
+    self.finishedLoadingWebviews = NO;
     for (UIWebView *webView in [self.webViews allValues]) {
-        self.finishedLoadingWebviews = NO;
-        NSString *text = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
-		[self loadWebView:webView withText:text];
+        [webView refreshWithFontSize:self.fontSize];
     }
 }
 
 #pragma mark - MBViewBuilderDelegate
-- (UIWebView *)webViewWithText:(NSString *)text forIndexPath:(NSIndexPath *)indexPath
-{
-    UIWebView *webView = [self.webViews objectForKey:indexPath];
-    if (webView==nil){
-        webView = [[[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)] autorelease];
-        webView.delegate = self;
-        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        [self.webViews setObject:webView forKey:indexPath];
-    }
-
-    [self loadWebView:webView withText:text];
-    return webView;
-}
-
 - (void)viewBuilder:(id)viewBuilder didCreateInteractiveField:(MBField *)field atIndexPath:(NSIndexPath *)indexPath
 {
     [self.cellReferences setObject:field forKey:indexPath];

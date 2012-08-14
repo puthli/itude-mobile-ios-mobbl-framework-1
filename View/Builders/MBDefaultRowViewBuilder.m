@@ -15,6 +15,7 @@
 #import "MBFontCustomizer.h"
 #import "MBPage.h"
 #import "MBViewBuilderDelegate.h"
+#import "UIWebView+FontResizing.h"
 
 @implementation MBDefaultRowViewBuilder
 
@@ -36,8 +37,7 @@
     return result;
 }
 
-- (void)configureCell:(UITableViewCell *)cell withTextField:(MBField *)field  atIndexPath:(NSIndexPath *)indexPath
-              fromRow:(MBRow *)row delegate:(id <MBViewBuilderDelegate>)delegate
+- (void)configureCell:(UITableViewCell *)cell withTextField:(MBField *)field fromRow:(MBRow *)row
 {
 
     NSString *text;
@@ -52,11 +52,13 @@
 
     // if the text contains any html, make a webview
     if ([self hasHTML:text]) {
-        UIWebView *webView = [delegate webViewWithText:text forIndexPath:indexPath];
-
+        UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)] autorelease];
+        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        webView.text = text;
         cell.opaque = NO;
         cell.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:webView];
+
 
         // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has very little room to paste all the buttons (refresh, close, etc.)
         BOOL shouldShowFontCustomizer = [MBDevice isPad];
@@ -393,7 +395,7 @@
                     [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
                 if ([C_FIELD_TEXT isEqualToString:field.type]){
-                    [self configureCell:cell withTextField:field atIndexPath:indexPath fromRow:row delegate:delegate];
+                    [self configureCell:cell withTextField:field fromRow:row];
                     [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
             }
