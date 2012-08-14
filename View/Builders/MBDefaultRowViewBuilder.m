@@ -12,9 +12,6 @@
 #import "MBRow.h"
 #import "MBLocalizationService.h"
 #import "MBDevice.h"
-#import "MBFontCustomizer.h"
-#import "MBPage.h"
-#import "MBViewBuilderDelegate.h"
 #import "UIWebView+FontResizing.h"
 
 @implementation MBDefaultRowViewBuilder
@@ -37,7 +34,7 @@
     return result;
 }
 
-- (void)configureCell:(UITableViewCell *)cell withTextField:(MBField *)field fromRow:(MBRow *)row
+- (void)configureCell:(UITableViewCell *)cell withTextField:(MBField *)field
 {
 
     NSString *text;
@@ -58,23 +55,6 @@
         cell.opaque = NO;
         cell.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:webView];
-
-
-        // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has very little room to paste all the buttons (refresh, close, etc.)
-        BOOL shouldShowFontCustomizer = [MBDevice isPad];
-        if (shouldShowFontCustomizer) {
-
-            UIViewController *parentViewcontroller = row.page.viewController;
-            UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
-
-            if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
-                MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
-                [fontCustomizer setButtonsDelegate:self];
-                [fontCustomizer setSender:webView];
-                [fontCustomizer addToViewController:parentViewcontroller animated:YES];
-            }
-        }
-
     }
     else {
         cell.textLabel.text = text;
@@ -216,15 +196,13 @@
     [self.styleHandler styleLabel:cell.detailTextLabel component:field];
 }
 
-- (void)addButtonsToCell:(UITableViewCell *)cell forRow:(MBRow *)row indexPath:(NSIndexPath *)indexPath
-                                                                            delegate:(id <MBViewBuilderDelegate>)delegate
+- (void)addButtonsToCell:(UITableViewCell *)cell forRow:(MBRow *)row
 {
     NSMutableArray *buttons = nil;
     NSString *fieldstyle = nil;
     for (MBComponent *child in [row children]) {
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *) child;
-            field.responder = nil;
             if ([field.definition isPreConditionValid:row.document currentPath:[field absoluteDataPath]]) {
                 if ([C_FIELD_BUTTON isEqualToString:field.type]){
                     if ([C_FIELD_STYLE_NETWORK isEqualToString:[field style]]) {
@@ -238,10 +216,6 @@
                     }
                     if ([C_FIELD_STYLE_NAVIGATION isEqualToString:[field style]]) {
                         [self addAccessoryDisclosureIndicatorToCell:cell];
-                        [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
-                    }
-                    if ([C_FIELD_STYLE_POPUP isEqualToString:[field style]]) {
-                        [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                     }
                     fieldstyle = [field style];
                 }
@@ -351,7 +325,7 @@
 }
 
 - (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
-                     forTableView:(UITableView *)tableView delegate:(id <MBViewBuilderDelegate>)delegate
+                     forTableView:(UITableView *)tableView
 {
     UITableViewCell *cell = [self buildCellForRow:row forTableView:tableView];
 
@@ -369,7 +343,6 @@
                 }
                 if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]){
                     [self configureCell:cell withDropDownListField:field];
-                    [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
                 if ([C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
                         [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
@@ -377,7 +350,6 @@
                         [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
 
                     [self configureCell:cell withDateField:field];
-                    [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
 
                 if ([C_FIELD_SUBLABEL isEqualToString:field.type]){
@@ -392,17 +364,15 @@
                         [C_FIELD_USERNAME isEqualToString:field.type]||
                         [C_FIELD_PASSWORD isEqualToString:field.type]){
                     [self configureCell:cell withInputField:field];
-                    [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
                 if ([C_FIELD_TEXT isEqualToString:field.type]){
-                    [self configureCell:cell withTextField:field fromRow:row];
-                    [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
+                    [self configureCell:cell withTextField:field];
                 }
             }
         }
     }
 
-    [self addButtonsToCell:cell forRow:row indexPath:indexPath delegate:delegate];
+    [self addButtonsToCell:cell forRow:row];
 
     CGRect bounds = cell.bounds;
     // If the bounds are set for a field with buttons, then the view get's all messed up.
