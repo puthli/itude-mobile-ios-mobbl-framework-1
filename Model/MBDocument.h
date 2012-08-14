@@ -28,6 +28,7 @@
 	MBDocument *_argumentsUsed;
 }
 
+/// @name Properties
 @property (nonatomic, retain) NSMutableDictionary *sharedContext;
 @property (nonatomic, retain) MBDocument *argumentsUsed;
 
