@@ -294,13 +294,18 @@
 	
 }
 
+- (void)loadWebView:(UIWebView *)webView withText:(NSString *)text
+{
+    NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, self.fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, text];
+    [webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+}
+
 -(void)reloadAllWebViews{
     for (UIWebView *webView in [self.webViews allValues]) {
         self.finishedLoadingWebviews = NO;
-        NSString *innerHTML = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
-		NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, self.fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
-        NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, innerHTML];
-        [webView loadHTMLString:htmlString baseURL:nil];
+        NSString *text = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
+		[self loadWebView:webView withText:text];
     }
 }
 
@@ -315,12 +320,7 @@
         [self.webViews setObject:webView forKey:indexPath];
     }
 
-    // TODO: get the css from the stylehandler
-    NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, self.fontSize, C_WEBVIEW_DEFAULT_FONTNAME];
-
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, text];
-    [webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-
+    [self loadWebView:webView withText:text];
     return webView;
 }
 

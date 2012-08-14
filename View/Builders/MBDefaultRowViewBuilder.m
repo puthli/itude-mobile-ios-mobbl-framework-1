@@ -36,7 +36,9 @@
     return result;
 }
 
--(void) configureCell:(UITableViewCell *)cell withTextField:(MBField *)field  atIndexPath:(NSIndexPath *)indexPath fromRow:(MBRow *)row delegate:(id<MBViewBuilderDelegate>) delegate {
+- (void)configureCell:(UITableViewCell *)cell withTextField:(MBField *)field  atIndexPath:(NSIndexPath *)indexPath
+              fromRow:(MBRow *)row delegate:(id <MBViewBuilderDelegate>)delegate
+{
 
     NSString *text;
     if(field.path != nil) {
@@ -170,6 +172,7 @@
         cell.textLabel.text = field.label;
     }
     cell.textLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
+    [self.styleHandler styleLabel:cell.textLabel component:field];
 }
 
 - (void)configureCell:(UITableViewCell *)cell withDropDownListField:(MBField *)field
@@ -188,6 +191,7 @@
     }
     cell.textLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
     [self addAccessoryDisclosureIndicatorToCell:cell];
+    [self.styleHandler styleLabel:cell.textLabel component:field];
 }
 
 - (void)configureCell:(UITableViewCell *)cell withDateField:(MBField *)field
@@ -196,6 +200,7 @@
     cell.detailTextLabel.text = [field formattedValue];
     cell.textLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
     [self addAccessoryDisclosureIndicatorToCell:cell];
+    [self.styleHandler styleLabel:cell.textLabel component:field];
 }
 
 - (void)configureCell:(UITableViewCell *)cell withSublabelField:(MBField *)field
@@ -206,6 +211,7 @@
         cell.detailTextLabel.text = field.label;
     }
     cell.detailTextLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
+    [self.styleHandler styleLabel:cell.detailTextLabel component:field];
 }
 
 - (void)addButtonsToCell:(UITableViewCell *)cell forRow:(MBRow *)row indexPath:(NSIndexPath *)indexPath
@@ -309,6 +315,7 @@
     [cell.contentView addSubview:switchView];
     switchView.isAccessibilityElement = YES;
     switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", cell.textLabel.text];
+    [self.styleHandler styleLabel:cell.textLabel component:field];
 }
 
 - (void)configureCell:(UITableViewCell *)cell withInputField:(MBField *)field
@@ -338,6 +345,7 @@
     textField.accessibilityLabel = [NSString stringWithFormat:@"input_%@", cell.textLabel.text];
 
     [self.styleHandler styleTextfield:inputFieldView component:field];
+    [self.styleHandler styleLabel:cell.textLabel component:field];
 }
 
 - (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
@@ -356,11 +364,9 @@
 
                 if ([C_FIELD_LABEL isEqualToString:field.type]){
                     [self configureCell:cell withLabelField:field];
-                    [self.styleHandler styleLabel:cell.textLabel component:field];
                 }
                 if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]){
                     [self configureCell:cell withDropDownListField:field];
-                    [self.styleHandler styleLabel:cell.textLabel component:field];
                     [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
                 if ([C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
@@ -369,18 +375,15 @@
                         [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
 
                     [self configureCell:cell withDateField:field];
-                    [self.styleHandler styleLabel:cell.textLabel component:field];
                     [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
                 }
 
                 if ([C_FIELD_SUBLABEL isEqualToString:field.type]){
                     [self configureCell:cell withSublabelField:field];
-                    [self.styleHandler styleLabel:cell.detailTextLabel component:field];
                 }
 
                 if ([C_FIELD_CHECKBOX isEqualToString:field.type]){
                     [self configureCell:cell withCheckboxField:field];
-                    [self.styleHandler styleLabel:cell.textLabel component:field];
                 }
 
                 if ([C_FIELD_INPUT isEqualToString:field.type]||
@@ -388,7 +391,6 @@
                         [C_FIELD_PASSWORD isEqualToString:field.type]){
                     [self configureCell:cell withInputField:field];
                     [delegate viewBuilder:self didCreateInteractiveField:field atIndexPath:indexPath];
-                    [self.styleHandler styleLabel:cell.textLabel component:field];
                 }
                 if ([C_FIELD_TEXT isEqualToString:field.type]){
                     [self configureCell:cell withTextField:field atIndexPath:indexPath fromRow:row delegate:delegate];
