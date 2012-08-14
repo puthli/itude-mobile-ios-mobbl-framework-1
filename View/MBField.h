@@ -10,6 +10,7 @@
 @class MBFieldDefinition;
 @class MBDomainDefinition;
 
+/** smallest user interface element definition in MOBBL framework. Typically an input field, label or button */
 @interface MBField  : MBComponent <UITextFieldDelegate>{
 	
 	@private

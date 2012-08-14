@@ -19,6 +19,7 @@
 @class MBApplicationController;
 @class MBApplicationFactory;
 
+/** Main unit of navigation within the application. Associated with exactly one UIViewController subclass. You never need to subclass an MBPage */
 @interface MBPage : MBPanel {
 	NSString *_pageName;
 	NSString *_rootPath;
