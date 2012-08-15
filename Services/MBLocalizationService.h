@@ -21,7 +21,10 @@
 [[MBLocalizationService sharedInstance] textForKey:key logWarnings:NO]
 
 
-/** Service class for loading localized translations for keys. */
+/** Central service for localizing strings
+ * All labels and values are passed through the MBLocalizationService by the MOBBL framework. 
+ * Simply add a texts-[country code].xmlx (e.g. texts-en.xmlx) file and set the country code on the MBLocalisation service for a new language.
+ */
 @interface MBLocalizationService : NSObject {
 	NSMutableDictionary *_languages; // Dictionary of Dictionaries (language code -> (key -> value))
 	NSMutableDictionary *_currentDictionary; // Added for optimization. 
