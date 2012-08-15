@@ -6,34 +6,54 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-
+/** Returns a localized value for a key */
 #define MBLocalizedString(key) \
 [[MBLocalizationService sharedInstance] textForKey:key]
+
+/** Should return a localized value for a key using arguments */
 #define MBLocalizedStringWithArgs(key, ...) \
 [[MBLocalizationService sharedInstance] textForKey:key withArguments: __VA_ARGS__]
 
-// Added for optimization. Is used in the framework for parsing documents. Logging when parsing documents is useless in most cases. This call never prints the "no translation found" message to the log. Logging is verry costly.
+/** Returns a localized value for a key witout logging warnings when the key is not found. 
+ @discussion Use this macro when you need an optimzed localized key. Logging is costly and can reduce performance. This method is used by the framework while parsing documents.
+ */
 #define MBLocalizedStringWithoutLoggingWarnings(key) \
 [[MBLocalizationService sharedInstance] textForKey:key logWarnings:NO]
 
-/** Central service for localizing strings 
- * All labels and values are passed through the MBLocalizationService by the MOBBL framework. Simply add a texts_[country code].xmlx file and set the country code on the MBLocalisation service for a new language.
- 
-*/
+
+/** Service class for loading localized translations for keys. */
 @interface MBLocalizationService : NSObject {
 	NSMutableDictionary *_languages; // Dictionary of Dictionaries (language code -> (key -> value))
 	NSMutableDictionary *_currentDictionary; // Added for optimization. 
 	NSString *_currentLanguage;
 }
 
+/// @name Properties
+/** Contains the current language code. */
 @property (nonatomic, retain) NSString *currentLanguage;
 
+/// @name Getting a service instance
+/** The shared instance */
 + (MBLocalizationService *) sharedInstance;
 
+/// @name Getting localized translations
+/** See [MBLocalizationService textForKey:forLanguageCode:logWarnings:] */
 -(NSString*) textForKey:(NSString*) key;
+
+/** See [MBLocalizationService textForKey:forLanguageCode:logWarnings:] */
 -(NSString*) textForKey:(NSString*) key logWarnings:(BOOL)logWarnings;
+
+/** Returns a value for a key in a specific language. The value should appear in the translation file (e.g. 'texts-en.xml')
+ @param key key that is used to find the value in the language file
+ @param languageCode language code that the where the key should be searched in. 
+ @param logWarnings boolean property that indicates if a warning should be logged when the key is not found
+ */
 -(NSString*) textForKey:(NSString*) key forLanguageCode:(NSString *)languageCode logWarnings:(BOOL)logWarnings;
+
+/** Should return a value for a key in a specific language, using arguments as parameters. NOTE: This method currently does not work as espected */
 -(NSString*) textForKey:(NSString*) key withArguments:(id) argument, ...;
+
+/** Returns the current localCode (e.g. 'nl_NL') */
 -(NSString*) localeCode;
 
 @end
