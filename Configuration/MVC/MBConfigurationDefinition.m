@@ -20,6 +20,7 @@
 		_dialogs = [NSMutableDictionary new];
 		_dialogGroups = [NSMutableDictionary new];
 		_pageTypes = [NSMutableDictionary new];
+        _alerts = [NSMutableDictionary new];
 	}
 	return self;
 }
@@ -32,6 +33,7 @@
 	[_dialogs release];
     [_dialogGroups release];
 	[_pageTypes release];
+    [_alerts release];
 	[super dealloc];
 }
 
@@ -43,6 +45,7 @@
 	for(MBDialogDefinition *def in [otherConfig.dialogs allValues]) [self addDialog:def];
 	for(MBDialogGroupDefinition *def in [otherConfig.dialogGroups allValues]) [self addDialogGroup:def];
 	for(MBPageDefinition *def in [otherConfig.pages allValues]) [self addPage:def];
+    for(MBAlertDefinition *def in [otherConfig.alerts allValues]) [self addAlert:def];
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
@@ -76,7 +79,12 @@
 	[result appendFormat: @"%*s</Dialogs>\n", level+4, ""];
 	for (MBPageDefinition* page in [_pageTypes allValues])
 		[result appendString: [page asXmlWithLevel:level+4]];
+    [result appendFormat: @"%*s<Alerts>\n", level+4, ""];
+    for (MBAlertDefinition *alert in [_alerts allValues]) 
+        [result appendString:[alert asXmlWithLevel:level+6]];
+    [result appendFormat: @"%*s</Alerts>\n", level+4, ""];
 	[result appendFormat: @"%*s</View>\n", level+2, ""];
+    
 	[result appendFormat: @"%*s</Configuration>\n", level, ""];
 
 	return result;
@@ -109,7 +117,7 @@
 
 - (void) addDialog:(MBDialogDefinition*)dialog {
     if([_dialogs valueForKey:dialog.name] != nil) {
-		WLog(@"Dialog definition overridden: multiple definitions for action with name %@", dialog.name);
+		WLog(@"Dialog definition overridden: multiple definitions for dialog with name %@", dialog.name);
 	}
 	if(_firstDialog == nil) _firstDialog = dialog;
 	[_dialogs setObject:dialog forKey:dialog.name];
@@ -117,7 +125,7 @@
 
 - (void) addDialogGroup:(MBDialogGroupDefinition*)dialogGroup {
     if([_dialogGroups valueForKey:dialogGroup.name] != nil) {
-		WLog(@"DialogGroup definition overridden: multiple definitions for action with name %@", dialogGroup.name);
+		WLog(@"DialogGroup definition overridden: multiple definitions for dialog group with name %@", dialogGroup.name);
 	}
 	[_dialogGroups setObject:dialogGroup forKey:dialogGroup.name];
 }
@@ -127,6 +135,13 @@
 		WLog(@"Page definition overridden: multiple definitions for page with name %@", page.name);
 	}
 	[_pageTypes setValue:page forKey:page.name];
+}
+
+- (void)addAlert:(MBAlertDefinition *)alert {
+    if ([_alerts valueForKey:alert.name] != nil) {
+        WLog(@"Alert definition overridden: multiple definitions for alert with name %@",alert.name);
+    }
+    [_alerts setValue:alert forKey:alert.name];
 }
 
 -(MBDomainDefinition *) definitionForDomainName:(NSString *)domainName {
@@ -151,6 +166,10 @@
 
 -(MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName {
 	return [_documentTypes objectForKey:documentName];
+}
+
+- (MBAlertDefinition *)definitionForAlertName:(NSString *)alertName {
+    return [_alerts objectForKey:alertName];
 }
 
 -(NSArray*) outcomeDefinitionsForOrigin:(NSString *)originName {
@@ -209,6 +228,10 @@
 
 -(NSMutableDictionary*) pages {
 	return _pageTypes;	
+}
+
+-(NSMutableDictionary*)alerts {
+    return _alerts;
 }
 
 -(MBDialogDefinition *) firstDialogDefinition {

@@ -8,6 +8,7 @@
 
 #import "MBPanelViewBuilder.h"
 #import "MBPageViewBuilder.h"
+#import "MBAlertViewBuilder.h"
 #import "MBForEachViewBuilder.h"
 #import "MBRowViewBuilder.h"
 #import "MBFieldViewBuilder.h"
@@ -17,6 +18,7 @@
 
 	MBPanelViewBuilder *_panelViewBuilder;
 	MBPageViewBuilder *_pageViewBuilder;
+    MBAlertViewBuilder *_alertViewBuilder;
 	MBForEachViewBuilder *_forEachViewBuilder;
 	id<MBRowViewBuilder> _rowViewBuilder;
 	MBFieldViewBuilder *_fieldViewBuilder;
@@ -26,6 +28,7 @@
 
 @property (nonatomic, retain) MBPanelViewBuilder *panelViewBuilder;
 @property (nonatomic, retain) MBPageViewBuilder *pageViewBuilder;
+@property (nonatomic, retain) MBAlertViewBuilder *alertViewBuilder;
 @property (nonatomic, retain) MBForEachViewBuilder *forEachViewBuilder;
 @property (nonatomic, retain) id<MBRowViewBuilder> rowViewBuilder;
 @property (nonatomic, retain) MBFieldViewBuilder *fieldViewBuilder;

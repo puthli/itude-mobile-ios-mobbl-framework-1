@@ -11,6 +11,7 @@
 #import "MBMetadataService.h"
 #import "MBOutcome.h"
 #import "MBPage.h"
+#import "MBAlert.h"
 #import "MBPageDefinition.h"
 #import "MBBasicViewController.h"
 #import "MBTypes.h"
@@ -44,6 +45,10 @@ static MBApplicationFactory *_instance = nil;
 			 viewState:(MBViewState) viewState 
 		 withMaxBounds:(CGRect) bounds {
 	return [[[MBPage alloc] initWithDefinition: definition document: document rootPath:(NSString*) rootPath viewState: viewState withMaxBounds: bounds] autorelease];
+}
+
+-(MBAlert *)createAlert:(MBAlertDefinition *)definition document:(MBDocument *)document rootPath:(NSString *)rootPath {
+    return [[[MBAlert alloc] initWithDefinition: definition document: document rootPath:(NSString*) rootPath] autorelease];
 }
 
 -(UIViewController<MBViewControllerProtocol> *) createViewController:(MBPage*) page {

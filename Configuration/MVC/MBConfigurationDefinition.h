@@ -14,6 +14,7 @@
 #import "MBDialogDefinition.h"
 #import "MBDialogGroupDefinition.h"
 #import "MBPageDefinition.h"
+#import "MBAlertDefinition.h"
 #import "MBDefinition.h"
 
 #define DOC_SYSTEM_EMPTY                  @"MBEmpty"
@@ -37,6 +38,7 @@
 	NSMutableDictionary *_pageTypes;
 	NSMutableDictionary *_dialogs;
 	NSMutableDictionary *_dialogGroups;
+    NSMutableDictionary *_alerts;
 	MBDialogDefinition *_firstDialog;
 }
 
@@ -48,6 +50,7 @@
 - (void) addPage:(MBPageDefinition*)page;
 - (void) addDialog:(MBDialogDefinition*)dialog;
 - (void) addDialogGroup:(MBDialogGroupDefinition*)dialogGroup;
+- (void) addAlert:(MBAlertDefinition*)alert;
 
 - (MBDomainDefinition *) definitionForDomainName:(NSString *)domainName;
 - (MBPageDefinition*) definitionForPageName:(NSString*) name;
@@ -55,6 +58,7 @@
 - (MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName;
 - (MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
 - (MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName;
+- (MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *)originName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
 - (NSMutableDictionary*) dialogs;
@@ -64,6 +68,7 @@
 - (NSMutableArray*) outcomes;
 - (NSMutableDictionary*) documents;
 - (NSMutableDictionary*) pages;
+- (NSMutableDictionary*) alerts;
 - (void) addAll:(MBConfigurationDefinition*) otherConfig;
 - (MBDialogDefinition *) firstDialogDefinition;
 

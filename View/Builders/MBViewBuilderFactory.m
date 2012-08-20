@@ -21,6 +21,7 @@ static MBViewBuilderFactory *_instance = nil;
 
 @synthesize panelViewBuilder = _panelViewBuilder;
 @synthesize pageViewBuilder = _pageViewBuilder;
+@synthesize alertViewBuilder = _alertViewBuilder;
 @synthesize forEachViewBuilder = _forEachViewBuilder;
 @synthesize rowViewBuilder = _rowViewBuilder;
 @synthesize fieldViewBuilder = _fieldViewBuilder;
@@ -32,6 +33,7 @@ static MBViewBuilderFactory *_instance = nil;
 	if (self != nil) {
 		_panelViewBuilder = [[MBPanelViewBuilder alloc] init];
 		_pageViewBuilder = [[MBPageViewBuilder alloc] init];
+        _alertViewBuilder = [[MBAlertViewBuilder alloc] init];
 		_forEachViewBuilder = [[MBForEachViewBuilder alloc] init];
 		_rowViewBuilder = [[MBDefaultRowViewBuilder alloc] init];
 		_fieldViewBuilder = [[MBFieldViewBuilder alloc] init];
@@ -45,6 +47,7 @@ static MBViewBuilderFactory *_instance = nil;
 {
 	[_panelViewBuilder release];
 	[_pageViewBuilder release];
+    [_alertViewBuilder release];
 	[_forEachViewBuilder release];
 	[_rowViewBuilder release];
 	[_fieldViewBuilder release];

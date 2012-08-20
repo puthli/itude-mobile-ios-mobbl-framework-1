@@ -96,7 +96,6 @@ static NSString *_endpointsName = @"endpoints";
 		@throw [[[NSException alloc]initWithName:@"PageNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return pageDef;
-    
 }
 
 -(MBActionDefinition *) definitionForActionName:(NSString *)actionName {
@@ -144,6 +143,19 @@ static NSString *_endpointsName = @"endpoints";
 		@throw [[[NSException alloc]initWithName:@"DialogGroupNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return dialogGroupDef;
+}
+
+- (MBAlertDefinition *)definitionForAlertName:(NSString *)alertName {
+    return [self definitionForAlertName:alertName throwIfInvalid:TRUE];
+}
+
+- (MBAlertDefinition *)definitionForAlertName:(NSString *)alertName throwIfInvalid:(BOOL)doThrow {
+    MBAlertDefinition *alertDef = [_cfg definitionForAlertName:alertName];
+    if (alertDef == nil && doThrow) {
+        NSString *msg = [NSString stringWithFormat: @"Alert with name %@ not defined", alertName];
+		@throw [[[NSException alloc]initWithName:@"AlertNotDefined" reason:msg userInfo:nil] autorelease];
+    }
+	return alertDef;
 }
 
 // For now do not raise an exception if an outcome is not defined

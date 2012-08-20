@@ -31,6 +31,7 @@
 @synthesize dialogAttributes = _dialogAttributes;
 @synthesize dialogGroupAttributes = _dialogGroupAttributes;
 @synthesize pageAttributes = _pageAttributes;
+@synthesize alertAttributes = _alertAttributes;
 @synthesize panelAttributes = _panelAttributes;
 @synthesize forEachAttributes = _forEachAttributes;
 @synthesize fieldAttributes = _fieldAttributes;
@@ -50,6 +51,7 @@
     self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
 	self.dialogGroupAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
+    self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title", nil];
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"preCondition",nil];
     self.forEachAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"value",@"suppressRowComponent",@"preCondition",nil];
     self.variableAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"expression",nil];
@@ -77,6 +79,7 @@
     [_dialogAttributes release];
 	[_dialogGroupAttributes release];
     [_pageAttributes release];
+    [_alertAttributes release];
     [_panelAttributes release];
     [_forEachAttributes release];
     [_variableAttributes release];
@@ -228,6 +231,20 @@
         [self notifyProcessed:pageDef usingSelector:@selector(addPage:)];
 		[pageDef release];
 	}
+    
+    else if ([elementName isEqualToString:@"Alert"]) {
+        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_alertAttributes];
+        
+        MBAlertDefinition *alertDefinition = [[MBAlertDefinition alloc] init];
+        alertDefinition.type = [attributeDict valueForKey:@"type"];
+        alertDefinition.name = [attributeDict valueForKey:@"name"];
+        alertDefinition.style = [attributeDict valueForKey:@"style"];
+        alertDefinition.title = [attributeDict valueForKey:@"title"];
+		alertDefinition.titlePath = [attributeDict valueForKey:@"titlePath"];
+        [self notifyProcessed:alertDefinition usingSelector:@selector(addAlert:)];
+        [alertDefinition release];
+	}
+    
 	else if ([elementName isEqualToString:@"Panel"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_panelAttributes];
 
@@ -343,6 +360,7 @@
 			[element isEqualToString:@"Action"] ||
 			[element isEqualToString:@"Outcome"] ||
 			[element isEqualToString:@"Page"] ||
+            [element isEqualToString:@"Alert"] ||
 			[element isEqualToString:@"Dialog"] ||
 			[element isEqualToString:@"DialogGroup"] ||
 			[element isEqualToString:@"ForEach"] ||
@@ -362,7 +380,8 @@
 			[element isEqualToString:@"Controller"] ||
 			[element isEqualToString:@"Actions"] ||
 			[element isEqualToString:@"Wiring"] ||
-			[element isEqualToString:@"View"]);
+			[element isEqualToString:@"View"] ||
+            [element isEqualToString:@"Alerts"]);
 }
 
 - (void) addExceptionDocument:(MBConfigurationDefinition*) conf {

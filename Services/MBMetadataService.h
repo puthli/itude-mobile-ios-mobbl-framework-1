@@ -34,6 +34,8 @@
 -(MBDialogDefinition *) firstDialogDefinition;
 -(MBDialogGroupDefinition *)definitionForDialogGroupName:(NSString *)dialogGroupName;
 -(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName throwIfInvalid:(BOOL) doThrow;
+-(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
+-(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName throwIfInvalid:(BOOL) doThrow;
 -(NSArray*) dialogs;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *)originName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;

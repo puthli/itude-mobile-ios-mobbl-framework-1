@@ -15,6 +15,8 @@
 
 @property (nonatomic, retain) NSMutableArray *children;
 
+-(id) initWithDefinition:(id)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent;
+
 - (void) addChild: (MBComponent*) child;
 - (NSString *) childrenAsXmlWithLevel:(int)level;
 

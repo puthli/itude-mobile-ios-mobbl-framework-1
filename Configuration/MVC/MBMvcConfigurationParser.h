@@ -21,6 +21,7 @@
     NSArray* _dialogAttributes;
 	NSArray* _dialogGroupAttributes;
     NSArray* _pageAttributes;
+    NSArray* _alertAttributes;
     NSArray* _panelAttributes;
     NSArray* _forEachAttributes;
     NSArray* _fieldAttributes;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) NSArray* dialogAttributes;
 @property (nonatomic, retain) NSArray* dialogGroupAttributes;
 @property (nonatomic, retain) NSArray* pageAttributes;
+@property (nonatomic, retain) NSArray* alertAttributes;
 @property (nonatomic, retain) NSArray* panelAttributes;
 @property (nonatomic, retain) NSArray* forEachAttributes;
 @property (nonatomic, retain) NSArray* variableAttributes;

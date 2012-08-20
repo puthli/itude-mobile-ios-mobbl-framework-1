@@ -9,11 +9,13 @@
 #import "MBViewManager.h"
 #import "MBApplicationController.h"
 #import "MBPageDefinition.h"
+#import "MBAlertDefinition.h"
 #import "MBAction.h"
 #import "MBResultListener.h"
 
 @class MBApplicationController;
 @class MBPage;
+@class MBAlert;
 @class MBOutcome;
 @class MBDocument;
 
@@ -27,8 +29,11 @@
 -(MBPage *) createPage:(MBPageDefinition *)definition 
 			  document:(MBDocument*) document 
 			  rootPath:(NSString*) rootPath 
-			 viewState:(MBViewState) viewState 
+			 viewState:(MBViewState) viewState
 		 withMaxBounds:(CGRect) bounds;
+-(MBAlert *)createAlert:(MBAlertDefinition *)definition
+               document:(MBDocument *) document
+               rootPath:(NSString *)rootPath;
 -(id<MBAction>) createAction:(NSString *)actionClassName;
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName;
 
