@@ -11,6 +11,10 @@
 #import "MBRow.h"
 #import "MBComponentContainer.h"
 
+/** Iterator for creating MBPanel instances based on the data in an MBPage. 
+ * MBForEach instances are defined in a page definition in the application definition file(s).
+ * You never need to subclass an MBForEach */
+
 @interface MBForEach : MBComponentContainer {
 	
 	NSMutableArray *_rows; // array of MBRows

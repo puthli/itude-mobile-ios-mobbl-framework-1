@@ -5,7 +5,6 @@
 //  Created by Robin Puthli on 5/18/10.
 //  Copyright 2010 Itude Mobile. All rights reserved.
 //
-//  Extends a convenience class in UIKit to create a TableView / List type screen
 
 #import "MBViewControllerProtocol.h"
 #import "MBFontChangeListenerProtocol.h"
@@ -15,6 +14,8 @@
 @class MBField;
 @class MBRow;
 
+/** Extends a convenience class in UIKit to create a TableView / List type screen based on an MBPage definition. The page definition is generally stored in the file config.xmlx or in a file referenced by config.xmlx using the <Include ... /> directive. 
+ */
 @interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>{
 
     NSMutableArray *_sections;

@@ -45,6 +45,13 @@ NSMutableDictionary *_cache = nil;
 }
 
 -(NSString*) evaluate:(NSString*) expression {
+    
+    // Escape the '\' in '\n' so that the javascript is validated properly
+    NSMutableString *mutableExpression = [expression mutableCopy];
+    [mutableExpression replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableExpression length])];
+    expression = mutableExpression;
+    
+    // Search for cached result to improve performance
     NSString *result = [_cache objectForKey:expression];
 	if (result == nil) {
         NSString *ERROR_MARKER = @"SCRIPT_ERROR: ";

@@ -8,6 +8,7 @@
 
 #import "MBDataHandlerBase.h"
 
+/** retrieves and stores MBDocument instances in memory only */
 @interface MBMemoryDataHandler : MBDataHandlerBase {
 	NSMutableDictionary *_dictionary;
 }
