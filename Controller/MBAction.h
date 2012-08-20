@@ -8,6 +8,9 @@
 
 #import "MBDocument.h"
 @class MBOutcome;
+
+/** Business rule or unit of application logic. Typical use is to influence the flow of navigation between screens during authentication sequences or purchase flows. 
+ */
 @protocol MBAction
 
 -(MBOutcome*) execute:(MBDocument *)document withPath:(NSString *)path;

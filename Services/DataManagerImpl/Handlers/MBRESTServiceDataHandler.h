@@ -9,6 +9,7 @@
 #import "MBWebserviceDataHandler.h"
 #import "MBURLConnectionDataHandler.h"
 
+/** retrieves and sends MBDocument instances to and from a webservice using HTTP POST. */
 @interface MBRESTServiceDataHandler : MBURLConnectionDataHandler {
 
 	NSString *_documentFactoryType;

@@ -11,25 +11,27 @@
 #import "MBFieldDefinition.h"
 #import "MBConfigurationDefinition.h"
 
-/** Service class for loading localized configuring endpoints and config files and getting definitions. */
+/** Service class for working with Model, View and Controller definition objects.
+ *
+ * Use this class to: 
+ * - Set which configuration and webservice-endpoint files to use.
+ * - Retrieve definitions for programmatically creating MBDocument, MBDomain, MBDomainValidator objects.
+ * 
+ */
 @interface MBMetadataService : NSObject {
 	MBConfigurationDefinition* _cfg;
 }
 
-/// @name Getters and setters for properties
-
-/** Allows the developer to set the filename of the Config file 
- @param name The filename of the config file without extension
- */
+/// @name setting which configuration files are used
+/** set the master configuration file */
 +(void) setConfigName:(NSString*) name;
-
-/** Allows the developer to set the filename of the endpoints file
- @param name The filename of the endpoints file without extension 
+/** the filename for webservice endpoints 
+ * @param name The filename of the endpoints file without extension 
  */
 +(void) setEndpointsName:(NSString*) name;
 
 /** Returns the filename of the endpoints file
- @return The filename of the endpoints file
+ * @return The filename of the endpoints file
  */
 +(NSString *) getEndpointsName;
 	
@@ -38,24 +40,24 @@
 +(MBMetadataService *) sharedInstance;
 
 
-/// @name Getting domain definitions
+/// @name (data) model layer definitions
 /** Returns a MBDomainDefinition for a domainName
- @param domainName The name of the domain
- @throws Throws an NSException when the domainName does not exist.
+ * @param domainName The name of the domain
+ * @throws Throws an NSException when the domainName does not exist.
  */
 -(MBDomainDefinition *) definitionForDomainName:(NSString *)domainName;
 
 /** Returns a MBDomainDefinition for a domainName
- @param domainName The name of the domain
- @param doThrow Determines if an NSException is thrown if the domainName does not exist
- @throws Throws an NSException when the domainName does not exist.
+ * @param domainName The name of the domain
+ * @param doThrow Determines if an NSException is thrown if the domainName does not exist
+ * @throws Throws an NSException when the domainName does not exist.
  */
 -(MBDomainDefinition *) definitionForDomainName:(NSString *)domainName throwIfInvalid:(BOOL) doThrow;
 
 /// @name Getting page definitions
 /** Returns a MBPageDefinition for a pageName
- @param pageName The name of the page
- @throws Throws an NSException when the pageName does not exist.
+ * @param pageName The name of the page
+ * @throws Throws an NSException when the pageName does not exist.
  */
 -(MBPageDefinition *) definitionForPageName:(NSString *)pageName;
 -(MBPageDefinition *) definitionForPageName:(NSString *)pageName throwIfInvalid:(BOOL) doThrow;
@@ -72,19 +74,15 @@
 -(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
 -(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName throwIfInvalid:(BOOL) doThrow;
 -(MBDialogDefinition *) firstDialogDefinition;
-
-/// @name Getting dialoggroup definitions
--(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName;
+-(MBDialogGroupDefinition *)definitionForDialogGroupName:(NSString *)dialogGroupName;
 -(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName throwIfInvalid:(BOOL) doThrow;
-
-
 -(NSArray*) dialogs;
-
-/// @name Getting outcome definitions
+/// @name Controller layer definitions
+-(MBActionDefinition *) definitionForActionName:(NSString *)actionName;
+-(MBActionDefinition *) definitionForActionName:(NSString *)actionName throwIfInvalid:(BOOL) doThrow;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *)originName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName throwIfInvalid:(BOOL) doThrow;
-
-/// @name Getting configuration definitions
+/// @name Master configuration
 -(MBConfigurationDefinition *) configuration;
 @end

@@ -21,6 +21,14 @@
 
 /** Service class for loading and storing MBDocument instances.
 
+ The MBDataManagerService handles MBDocument instantiation and storage. Depending on the options defined in the configuration and endpoints files it (and the MBDataHandlers it uses) also handles:
+ - caching
+ - background threading and callback on completion
+ - concurrent requests
+ - network errors
+ - reachability
+ - cancellable network requests
+ 
  Every MBDocument is associated with a specific MBDataHandler in the document definition (see MBDocumentDefinition). When accessing
  documents using for instance loadDocument: , its associated DataHandler is used to perform the actual operation. For this to work, the
  name of the DataHandler must be registered using registerDataHandler:withName: first.

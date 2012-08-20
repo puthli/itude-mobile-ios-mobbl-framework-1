@@ -8,6 +8,8 @@
 
 #import "MBDataHandlerBase.h"
 
+/** retrieves and stores MBDocument instances using the device Filesystem */
+
 @interface MBFileDataHandler : MBDataHandlerBase {
 }
 

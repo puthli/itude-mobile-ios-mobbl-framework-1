@@ -11,6 +11,10 @@
 
 @class MBPanelDefinition;
 
+/** Basic building block of an MBPage.
+ * MBPanel instances are defined in a page definition in the application definition file(s).
+ * You never need to subclass an MBPanel */
+
 @interface MBPanel : MBComponentContainer {
 
 	NSString *_type;
