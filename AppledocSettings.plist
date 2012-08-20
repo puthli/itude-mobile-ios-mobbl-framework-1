@@ -2,9 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>--include</key>
+	<string>./docs</string>
 	<key>--repeat-first-par</key>
 	<false/>
-  <key>--keep-undocumented-members</key>
+	<key>--keep-undocumented-members</key>
 	<true/>
 	<key>--install-docset</key>
 	<true/>

@@ -913,6 +913,8 @@
 		2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBURLConnectionDataHandler.m; sourceTree = "<group>"; };
 		2C26D9631521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestingMBRESTGetServiceDataHandler.h; path = Services/DataManagerImpl/Handlers/TestingMBRESTGetServiceDataHandler.h; sourceTree = "<group>"; };
 		2C26D9641521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestingMBRESTGetServiceDataHandler.m; path = Services/DataManagerImpl/Handlers/TestingMBRESTGetServiceDataHandler.m; sourceTree = "<group>"; };
+		2C47E5B915E276050080940B /* Layers-template.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Layers-template.txt"; path = "docs/Layers-template.txt"; sourceTree = "<group>"; };
+		2C47E5BA15E276050080940B /* Writing Documentation-template.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Writing Documentation-template.txt"; path = "docs/Writing Documentation-template.txt"; sourceTree = "<group>"; };
 		2C4BB07915CFF264004CC9C7 /* AppledocSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = SOURCE_ROOT; };
 		2C654C121518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "itude-mobile-iphone-coreLogicTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C654C181518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-coreLogicTests-Info.plist"; sourceTree = "<group>"; };
@@ -969,6 +971,7 @@
 		03DA53221371989E00BE1FDB = {
 			isa = PBXGroup;
 			children = (
+				2C47E5B715E275E10080940B /* docs */,
 				03DA53321371989F00BE1FDB /* itude-mobile-iphone-core */,
 				2C654C161518BF89009B1EE7 /* itude-mobile-iphone-coreLogicTests */,
 				2C654BF81518BF3F009B1EE7 /* Frameworks */,
@@ -1472,6 +1475,15 @@
 				2C26D9641521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m */,
 			);
 			name = Handlers;
+			sourceTree = "<group>";
+		};
+		2C47E5B715E275E10080940B /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				2C47E5B915E276050080940B /* Layers-template.txt */,
+				2C47E5BA15E276050080940B /* Writing Documentation-template.txt */,
+			);
+			name = docs;
 			sourceTree = "<group>";
 		};
 		2C654BF81518BF3F009B1EE7 /* Frameworks */ = {

@@ -1,0 +1,47 @@
+# MOBBL Layers #
+
+The MOBBL Framework uses a layered Model-View-Controller architecture.
+This page cross-references the most important classes with the layers where
+they belong.
+
+## Model layer ##
+
+* MBElementContainer
+* MBElement
+* MBDocument
+* MBDocumentFactory
+
+## View layer ##
+
+### Structure ###
+
+* MBComponent
+* MBComponentContainer
+* MBPanel
+* MBRow
+* MBField
+* MBTableViewController
+* MBMatrixViewController
+
+### Construction ###
+
+* MBViewBuilderFactory
+* MBViewBuilder
+* MBPanelViewBuilder
+* MBRowViewBuilder
+* MBFieldViewBuilder
+* MBPageViewBuilder
+* MBForEachViewBuilder
+* MBComponentFactory
+
+## Controller layer ##
+
+* MBApplicationController
+* MBViewManager
+* MBOutcome
+* MBAction
+* MBDialogController
+* MBBasicViewController
+* MBViewController
+
+
