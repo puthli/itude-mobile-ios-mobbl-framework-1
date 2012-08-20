@@ -229,7 +229,6 @@
 	return [self definition].name;
 }
 
-//to get the physical index of an element with a given path
 - (NSInteger) physicalIndexWithCurrentPath: (NSString *)path {
 	NSMutableArray *pathComponents = [path splitPath];
 	NSString *lastPathComponent = [pathComponents objectAtIndex:[pathComponents count] - 1];
