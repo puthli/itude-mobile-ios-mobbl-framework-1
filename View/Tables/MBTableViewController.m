@@ -107,7 +107,6 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"heightForRow: %@", indexPath);
     CGFloat height = 44;
 	
 	UIWebView *webView = [self.webViews objectForKey:indexPath];
@@ -141,9 +140,6 @@
 			}
 		}
 	}
-
-    NSLog(@"webView = %@", webView);
-    NSLog(@"height = %f", height);
 
     return height;
 }
