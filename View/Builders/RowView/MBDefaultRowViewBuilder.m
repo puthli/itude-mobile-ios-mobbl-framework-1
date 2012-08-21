@@ -14,7 +14,29 @@
 #import "MBTableViewCellConfiguratorFactory.h"
 #import "MBTableViewCellConfigurator.h"
 
+@interface MBDefaultRowViewBuilder()
+@property (nonatomic, retain) MBTableViewCellConfiguratorFactory *tableViewCellConfiguratorFactory;
+@end
+
 @implementation MBDefaultRowViewBuilder
+
+@synthesize tableViewCellConfiguratorFactory = _tableViewCellConfiguratorFactory;
+
+- (void)dealloc
+{
+    [_tableViewCellConfiguratorFactory release];
+    [super dealloc];
+}
+
+- (MBTableViewCellConfiguratorFactory *)tableViewCellConfiguratorFactory
+{
+    if (!_tableViewCellConfiguratorFactory) {
+        _tableViewCellConfiguratorFactory = [[MBTableViewCellConfiguratorFactory alloc]
+                initWithStyleHandler:self.styleHandler];
+    }
+    return _tableViewCellConfiguratorFactory;
+}
+
 
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType
                                                             style:(UITableViewCellStyle)cellstyle
@@ -168,8 +190,6 @@
     UITableViewCell *cell = [self buildCellForRow:row forTableView:tableView];
 
     // Loop through the fields in the row to determine the content of the cell
-    MBTableViewCellConfiguratorFactory *configuratorFactory = [[MBTableViewCellConfiguratorFactory alloc]
-            initWithStyleHandler:self.styleHandler];
     for(MBComponent *child in [row children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
@@ -178,12 +198,11 @@
             // #BINCKMOBILE-19
             if ([field.definition isPreConditionValid:row.document currentPath:[field absoluteDataPath]]) {
 
-                MBTableViewCellConfigurator *cellConfigurator = [configuratorFactory configuratorForFieldType:field.type];
+                MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
                 [cellConfigurator configureCell:cell withField:field];
             }
         }
     }
-    [configuratorFactory release];
 
     [self addButtonsToCell:cell forRow:row];
 

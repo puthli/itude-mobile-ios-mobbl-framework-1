@@ -20,6 +20,10 @@
 
 - (id)initWithStyleHandler:(MBStyleHandler *)styleHandler;
 
+/**
+* Registers the MBTableViewConfigurator implementation to use for the given [MBField type].
+*/
+- (void)registerTableViewCellConfigurator:(MBTableViewCellConfigurator *)configurator forFieldType:(NSString *)type;
 
 /**
 * @return the correct MBTableViewCellConfigurator for the given [MBField type]
