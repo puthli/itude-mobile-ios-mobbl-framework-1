@@ -11,6 +11,8 @@
 
 @implementation MBTableViewCellConfigurator
 
+@synthesize styleHandler = _styleHandler;
+
 - (void)addAccessoryDisclosureIndicatorToCell:(UITableViewCell *)cell
 {
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
