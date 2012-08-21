@@ -18,6 +18,8 @@
 
 @implementation MBTableViewCellConfiguratorFactory
 
+@synthesize styleHandler = _styleHandler;
+
 - (id)initWithStyleHandler:(MBStyleHandler *)styleHandler
 {
     self = [super init];
