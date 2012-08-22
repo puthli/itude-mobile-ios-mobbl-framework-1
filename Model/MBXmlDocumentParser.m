@@ -108,8 +108,7 @@ didStartElement:(NSString *)elementName
 							 _definition.name, elementName, _rootElementName];
 			@throw [NSException exceptionWithName:@"InvalidDocument" reason: msg userInfo:nil];
 		}
-        // see release below
-        element = [_rootElement retain];
+        element = (MBElement*)_rootElement;
         copyAttributes = _copyRootAttributes;
 	}
 	else {

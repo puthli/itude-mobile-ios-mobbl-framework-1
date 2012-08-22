@@ -48,16 +48,23 @@ static MBApplicationController *_instance = nil;
 	self = [super init];
 	if (self != nil) {
         _instance = self;
-        _viewManager = [[MBViewManager alloc] init];
-		// Added for optimization: Make sure the MBDevice is created at startup. The createInstance method instantiate variables that only need to be gathered once in the application lifecycle 
+		// Added for optimization: Make sure the MBDevice is created at startup. The createInstance method instantiate variables that only need to be gathered once in the application lifecycle
 		[MBDevice createInstance]; 
 	}
 	return self;
 }
 
+- (MBViewManager *)viewManager {
+    if (!_viewManager) {
+        _viewManager = [[MBViewManager alloc] init];
+    }
+    return _viewManager;
+}
+
 -(void) dealloc {
 	[_applicationFactory release];
 	[_outcomeWhichCausedModal release];
+    [_viewManager release];
 	[super dealloc];
 }
 

@@ -30,7 +30,7 @@
 }
 
 @property (nonatomic, assign) BOOL applicationActive;
-@property (nonatomic, assign) MBViewManager *viewManager;
+@property (nonatomic, retain) MBViewManager *viewManager;
 
 /** determines which MBPage or MBAction to execute based on the outcome.
  @param outcome an MBOutcome defined in the application configuration (config.xmlx)
