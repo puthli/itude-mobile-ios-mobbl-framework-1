@@ -51,7 +51,7 @@
     self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
 	self.dialogGroupAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
-    self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title", nil];
+    self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"document",@"title",@"titlePath", nil];
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"preCondition",nil];
     self.forEachAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"value",@"suppressRowComponent",@"preCondition",nil];
     self.variableAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"expression",nil];
@@ -237,6 +237,7 @@
         
         MBAlertDefinition *alertDefinition = [[MBAlertDefinition alloc] init];
         alertDefinition.type = [attributeDict valueForKey:@"type"];
+        alertDefinition.documentName = [attributeDict valueForKey:@"document"];	
         alertDefinition.name = [attributeDict valueForKey:@"name"];
         alertDefinition.style = [attributeDict valueForKey:@"style"];
         alertDefinition.title = [attributeDict valueForKey:@"title"];

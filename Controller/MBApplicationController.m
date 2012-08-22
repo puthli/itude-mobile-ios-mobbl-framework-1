@@ -212,15 +212,16 @@ static MBApplicationController *_instance = nil;
 				else {
 					[_viewManager notifyDialogUsage: outcomeToProcess.dialogName];	
 				}
-					
+				
+                // Action
 				MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];
-
 				if(actionDef != nil) { 
 					[_viewManager showActivityIndicatorForDialog:outcomeToProcess.dialogName];
 					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
 					else [self SELECTOR_HANDLING:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
 				}
 				
+                // Page
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
 					[_viewManager showActivityIndicatorForDialog:outcomeToProcess.dialogName];
@@ -229,7 +230,15 @@ static MBApplicationController *_instance = nil;
 
 					selectPageInDialog = @"no";
 				}
-				if(actionDef == nil && pageDef == nil && ![outcomeDef.action isEqualToString:@"none"]) {
+                
+                // Alert
+                MBAlertDefinition *alertDef = [metadataService definitionForAlertName:outcomeDef.action throwIfInvalid:FALSE];
+                if (alertDef != nil) {
+                    NSArray *args = [NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], alertDef.name, nil];
+                    [self performSelector:@selector(prepareAlertInBackground:) withObject:args];
+                }
+                
+				if(actionDef == nil && pageDef == nil && alertDef == nil && ![outcomeDef.action isEqualToString:@"none"]) {
 					NSString *msg = [NSString stringWithFormat:@"Invalid outcome; no action or page with name %@ defined. See outcome origin=%@ action=%@. Check \n%@", outcomeDef.action, outcomeDef.origin, outcomeDef.name, [outcomeDef asXmlWithLevel:5]];
 					@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
 				}
@@ -338,6 +347,83 @@ static MBApplicationController *_instance = nil;
 
 //////// END OF PAGE HANDLING
 
+
+//////// ALERT HANDLING
+#pragma mark - Alert Handling
+
+- (void)prepareAlertInBackground:(NSArray *)args {
+ 
+    MBOutcome *causingOutcome = [args objectAtIndex:0];
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
+    @try {
+        
+        
+        NSString *alertName = [args objectAtIndex:1];
+
+        // construct the alert
+        MBAlertDefinition *alertDefinition = [[MBMetadataService sharedInstance] definitionForAlertName:alertName];
+
+		// Load the document from the store
+		MBDocument *document = nil;
+		if(causingOutcome.transferDocument) {
+			if(causingOutcome.document == nil)  {
+				NSString *msg = [NSString stringWithFormat:@"No document provided (nil) in outcome by action/alert=%@ but transferDocument='TRUE' in outcome definition", causingOutcome.originName];
+				@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
+			}
+			NSString *actualType =  [[causingOutcome.document definition] name];
+			if(![actualType isEqualToString: [alertDefinition documentName]]) {
+				NSString *msg = [NSString stringWithFormat:@"Document provided via outcome by action/alert=%@ (transferDocument='TRUE') is of type %@ but must be of type %@",
+								 causingOutcome.originName, actualType, [alertDefinition documentName]];
+				@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
+			}
+			document = causingOutcome.document;
+		}
+		else {
+			document = [[MBDataManagerService sharedInstance] loadDocument:[alertDefinition documentName]];
+            
+			if(document == nil) {
+				document = [[MBDataManagerService sharedInstance] loadDocument:[alertDefinition documentName]];
+				NSString *msg = [NSString stringWithFormat:@"Document with name %@ not found (check filesystem/webservice)", [alertDefinition documentName]];
+				@throw [NSException exceptionWithName:@"NoDocument" reason:msg userInfo:nil];
+			}
+		}
+        
+        // Show the alert
+		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingAlert:)
+															 withObject:[NSArray arrayWithObjects:causingOutcome, alertDefinition, document, nil]];
+		else [self performSelectorOnMainThread:@selector(showResultingAlert:)
+									withObject:[NSArray arrayWithObjects:causingOutcome, alertDefinition, document, nil]
+								 waitUntilDone:YES];
+        
+    }
+    @catch (NSException *e) {
+        [self handleException: e outcome: causingOutcome];
+    }
+    @finally {
+        [pool release];
+    }
+    
+}
+
+- (void)showResultingAlert:(NSArray *)args {
+    MBOutcome *causingOutcome = [args objectAtIndex:0];
+    @try {
+        [_viewManager hideActivityIndicatorForDialog:causingOutcome.dialogName];
+        
+        MBAlertDefinition *alertDefinition = [args objectAtIndex:1];
+        MBDocument *document = [args objectAtIndex:2];
+
+        MBAlert *alert = [_applicationFactory createAlert:alertDefinition document:document rootPath:causingOutcome.path];
+        [_viewManager showAlert:alert];
+    }
+    @catch (NSException *e) {
+        [self handleException: e outcome: causingOutcome];
+    }
+}
+
+//////// END OF ALERT HANDLING
+
+
 //////// ACTION HANDLING
 
 - (void) performActionInBackground:(NSArray *)args {
@@ -389,12 +475,11 @@ static MBApplicationController *_instance = nil;
 
 //////// END OF ACTION HANDLING
 
-
 - (MBOutcome*) outcomeWhichCausedModal {
 	
 	MBOutcome * result = nil;
 	@synchronized(self) {
-		result = _outcomeWhichCausedModal;	
+		result = _outcomeWhichCausedModal;
 	}
 	return result;
 }

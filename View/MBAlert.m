@@ -9,6 +9,7 @@
 #import "MBAlert.h"
 #import "MBApplicationFactory.h"
 #import "MBComponentFactory.h"
+#import "MBViewbuilderFactory.h"
 
 @implementation MBAlert
 
@@ -42,14 +43,24 @@
 
         // Ok; now we can build the children:
         for(MBDefinition *def in definition.children) {
-			if([def isPreConditionValid:document currentPath:[[self parent] absoluteDataPath]]) [self addChild: [MBComponentFactory componentFromDefinition: def document: document parent: self]];
+			if([def isPreConditionValid:document currentPath:[[self parent] absoluteDataPath]]) {
+                [self addChild: [MBComponentFactory componentFromDefinition: def document: document parent: self]];
+            } 
 		}
         
-        //self.alertView = [[MBApplicationFactory sharedInstance] createAlertView:self];
-        //self.alertView.title = [self title];
+        // No need for bounds or viewstate because the alert will show up on it's own and will use the entire window. 
+        self.alertView = (UIAlertView *)[self buildViewWithMaxBounds:CGRectMake(0, 0, 0, 0) viewState:0];
+        
+        //self.alertView.delegate = self; // This causes the message to be sent to the deallocated instance. This also means that another class should be delegate.
         
     }
 	return self;
 }
+
+
+-(UIView*) buildViewWithMaxBounds:(CGRect) bounds  viewState:(MBViewState) viewState {
+    return [[[MBViewBuilderFactory sharedInstance] alertViewBuilder] buildAlertView:self];
+}
+
 
 @end

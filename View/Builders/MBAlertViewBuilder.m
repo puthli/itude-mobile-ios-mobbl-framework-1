@@ -11,7 +11,9 @@
 @implementation MBAlertViewBuilder
 
 -(UIAlertView *)buildAlertView:(MBAlert *)alert {
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:[alert title] message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
+    
+    // TODO: Here is where the magic should happen
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:[alert title] message:@"TODO" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
     
     return alertView;
 }

@@ -8,6 +8,7 @@
 
 #import "MBTypes.h"
 @class MBPage;
+@class MBAlert;
 
 @interface MBViewManager : NSObject<UITabBarControllerDelegate> {
 	UIWindow *_window;
@@ -39,6 +40,7 @@
 - (void) showPage:(MBPage*) page displayMode:(NSString*) mode transitioningStyle:(NSString *) style;
 - (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog;
 - (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) style selectDialog:(BOOL) shouldSelectDialog;
+- (void) showAlert:(MBAlert *) alert;
 - (void) activateDialogWithName:(NSString*) dialogName;
 - (void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition;
 - (void) popPage:(NSString*) dialogName;

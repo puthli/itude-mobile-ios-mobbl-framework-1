@@ -16,6 +16,7 @@
 #import "MBOutcome.h"
 #import "MBMetadataService.h"
 #import "MBPage.h"
+#import "MBAlert.h"
 #import "MBResourceService.h"
 #import "MBActivityIndicator.h"
 #import "MBConfigurationDefinition.h"
@@ -245,7 +246,11 @@
         // #BINCKAPPS-357 is solved by scheduling the alert to be displayed after all UI stuff has been finished
 		[self.currentAlert performSelector:@selector(show) withObject:nil afterDelay:0.1];
 	}
-}	
+}
+
+- (void)showAlert:(MBAlert *)alert {
+    [alert.alertView show];
+}
 
 - (void) makeKeyAndVisible {
 	[_tabController.moreNavigationController popToRootViewControllerAnimated:NO];

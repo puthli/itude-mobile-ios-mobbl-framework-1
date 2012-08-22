@@ -47,12 +47,13 @@ static MBApplicationFactory *_instance = nil;
 	return [[[MBPage alloc] initWithDefinition: definition document: document rootPath:(NSString*) rootPath viewState: viewState withMaxBounds: bounds] autorelease];
 }
 
--(MBAlert *)createAlert:(MBAlertDefinition *)definition document:(MBDocument *)document rootPath:(NSString *)rootPath {
-    return [[[MBAlert alloc] initWithDefinition: definition document: document rootPath:(NSString*) rootPath] autorelease];
-}
 
 -(UIViewController<MBViewControllerProtocol> *) createViewController:(MBPage*) page {
     return [[[MBBasicViewController alloc] init] autorelease];
+}
+
+- (MBAlert *)createAlert:(MBAlertDefinition *)definition document:(MBDocument *)document rootPath:(NSString *)rootPath {
+    return [[[MBAlert alloc] initWithDefinition:definition document:document rootPath:rootPath] autorelease];
 }
 
 -(id<MBAction>) createAction:(NSString *)actionClassName {

@@ -12,7 +12,7 @@
 
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Alert name='%@'%@>\n", level, "",  _name, [self attributeAsXml:@"title" withValue:_title]];
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Alert name='%@' document='%@'%@>\n", level, "",  _name, _documentName, [self attributeAsXml:@"title" withValue:_title]];
 	for (MBFieldDefinition* child in _children) {
 		[result appendString: [child asXmlWithLevel:level+2]];
     }

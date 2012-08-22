@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Itude Mobile. All rights reserved.
 //
 
-#import "MBPanelDefinition.h"
+#import "MBPageDefinition.h"
 
-@interface MBAlertDefinition : MBPanelDefinition
+@interface MBAlertDefinition : MBPageDefinition
 
 @end
