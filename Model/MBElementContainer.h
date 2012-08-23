@@ -9,37 +9,65 @@
 @class MBElement;
 @class MBDocument;
 
+/**
+* A node in a tree of MBElement instances.
+*
+* Configuration and application state in MOBBL is represented in trees of MBELement instances,
+* resembling an XML tree.
+*
+* Each ElementContainer has an associated MBElementDefinition. The structure of the Element tree
+* must conform to the ElementDefinition.
+*/
 @interface MBElementContainer : NSObject {
 	NSMutableDictionary *_elements; // Dictionary of lists of elements
 	MBElementContainer *_parent;
 }
 
-@property (nonatomic, assign) MBElementContainer *parent;
-
+/// @name Creating and Initializing an Element Tree
 - (id) init;
+
+/// @name Getting ElementContainer Properties
+@property (nonatomic, assign) MBElementContainer *parent;
+/** MBElementDefinition for this ElementContainer */
+- (id) definition;
+- (NSString*) name;
+- (MBDocument*) document;
+- (NSString*) documentName;
+- (NSString*) uniqueId;
+
+/// @name Adding Elements to the Tree
 - (MBElement*) createElementWithName: (NSString*) name;
 - (MBElement*) createElementWithName: (NSString*) name atIndex:(NSInteger)index;
-- (void) deleteElementWithName: (NSString*) name atIndex:(int) index;
-- (void) deleteAllChildElements;
 - (void) addElement: (MBElement*) element;
 - (void) addElement: (MBElement*) element atIndex:(NSInteger)index;
+
+/// @name Removing Elements from the Tree
+- (void) deleteElementWithName: (NSString*) name atIndex:(int) index;
+- (void) deleteAllChildElements;
+
+/// @name Getting Elements from the Tree
 - (NSMutableDictionary*) elements;
+- (NSMutableArray*) elementsWithName: (NSString*) name;
+
+/// @name Getting a Value from the Tree
 - (id) valueForPath:(NSString *)path;
 - (id) valueForPath:(NSString*)path translatedPathComponents:(NSMutableArray*) translatedPathComponents;
-- (void) setValue:(NSString*)value forPath:(NSString *)path;
-- (NSMutableArray*) elementsWithName: (NSString*) name;
-- (id) definition;
 - (id) valueForPathComponents:(NSMutableArray*)pathComponents withPath: (NSString*) originalPath nillIfMissing:(BOOL) nillIfMissing translatedPathComponents:(NSMutableArray*)translatedPathComponents;
-- (NSString*) name;
+
+/// @name Setting a Value in the Tree
+- (void) setValue:(NSString*)value forPath:(NSString *)path;
+
+/// @name Evaluating Expressions
+- (NSString*) evaluateExpression:(NSString*) expression;
+- (NSString*) evaluateExpression:(NSString*) expression currentPath:(NSString*) currentPath;
+
+/// @name Reordering Elements
+- (void) sortElements:(NSString*) elementName onAttributes:(NSString*) attributeNames;
+
+/// @name Working with the Shared Context
 - (NSMutableDictionary*) sharedContext;
 - (void) setSharedContext:(NSMutableDictionary*) sharedContext;
 - (MBDocument*) getDocumentFromSharedContext:(NSString*) documentName;
 - (void) registerDocumentWithSharedContext:(MBDocument*) document;
-- (MBDocument*) document;
-- (NSString*) documentName;
-- (NSString*) evaluateExpression:(NSString*) expression;
-- (NSString*) evaluateExpression:(NSString*) expression currentPath:(NSString*) currentPath;
-- (NSString*) uniqueId;
-- (void) sortElements:(NSString*) elementName onAttributes:(NSString*) attributeNames;
 
 @end

@@ -16,6 +16,12 @@
 @synthesize resourceAttributes = _resourceAttributes;
 @synthesize bundleAttributes = _bundleAttributes;
 
+- (void)dealloc {
+    [_bundleAttributes release];
+    [_resourceAttributes release];
+    [super dealloc];
+}
+
 - (id) parseData:(NSData *)data ofDocument:(NSString*) documentName {
 	
     self.resourceAttributes = [NSArray arrayWithObjects:@"xmlns",@"id",@"url",@"cacheable",@"ttl",nil];

@@ -45,18 +45,25 @@ NSMutableDictionary *_cache = nil;
 }
 
 -(NSString*) evaluate:(NSString*) expression {
-    NSString *result = [_cache objectForKey:expression];
+    
+    // Escape the '\' in '\n' so that the javascript is validated properly
+    NSMutableString *mutableExpression = [expression mutableCopy];
+    [mutableExpression replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [mutableExpression length])];
+    
+    // Search for cached result to improve performance
+    NSString *result = [_cache objectForKey:mutableExpression];
 	if (result == nil) {
         NSString *ERROR_MARKER = @"SCRIPT_ERROR: ";
         
-        NSString *stub = [NSString stringWithFormat:@"function x(){ try { return %@;} catch(e) { return '%@'+e;}} x();", expression, ERROR_MARKER];
+        NSString *stub = [NSString stringWithFormat:@"function x(){ try { return %@;} catch(e) { return '%@'+e;}} x();", mutableExpression, ERROR_MARKER];
         result = [_webView stringByEvaluatingJavaScriptFromString:stub];	
         if([result hasPrefix:ERROR_MARKER]) { 
-            NSString *msg = [NSString stringWithFormat:@"Error evaluating expression <%@>: %@", expression, [result substringFromIndex:[ERROR_MARKER length]]];
+            NSString *msg = [NSString stringWithFormat:@"Error evaluating expression <%@>: %@", mutableExpression, [result substringFromIndex:[ERROR_MARKER length]]];
             @throw [NSException exceptionWithName:@"ScriptError" reason:msg userInfo:nil];
         }
-        [_cache setObject:result forKey:expression];
+        [_cache setObject:result forKey:mutableExpression];
     }
+    [mutableExpression release];
 	return result;
 }
 

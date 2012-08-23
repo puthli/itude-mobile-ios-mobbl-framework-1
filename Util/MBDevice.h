@@ -6,7 +6,7 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-
+/** returns information about the physical device */
 @interface MBDevice : NSObject {
 	CGFloat _currentSystemVersion;
 	NSString *_currentSystemVersionAsString;

@@ -9,6 +9,9 @@
 #import "MBPropertiesConstants.h"
 #import "MBDocument.h"
 
+/** class to retrieve application wide properties.
+ * the properties are stored in a file applicationproperties.xmlx
+ */
 @interface MBProperties : NSObject {
     @private
     MBDocument *_propertiesDoc;

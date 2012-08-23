@@ -22,6 +22,7 @@
 #import "UIWebView+FontResizing.h"
 #import "UIView+TreeWalker.h"
 #import "MBFontCustomizer.h"
+#import "MBRowViewBuilderFactory.h"
 
 
 #define MAX_FONT_SIZE 20
@@ -107,45 +108,19 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"heightForRow: %@", indexPath);
     CGFloat height = 44;
-	
-	UIWebView *webView = [self.webViews objectForKey:indexPath];
-	if (webView) {
-		NSString *heightString = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
-		height = [heightString floatValue] + C_CELL_Y_MARGIN * 2;
-	}
-    
-	// Loop through the fields in the row to determine the size of multiline text cells 
-	MBRow *row = [self getRowForIndexPath:indexPath];
-	
-	for(MBComponent *child in [row children]){
-		if ([child isKindOfClass:[MBField class]]) {
-			MBField *field = (MBField *)child;
-			
-			if ([C_FIELD_TEXT isEqualToString:field.type]){
-				NSString * text;
-				if(field.path != nil) {
-					text = [field formattedValue];
-				}
-				else {
-					text= field.label;
-				}
-				if (![self hasHTML:text]) {
-					MBStyleHandler *styleHandler = [[MBViewBuilderFactory sharedInstance] styleHandler];
-					// calculate bounding box
-					CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
-					CGSize size = [text sizeWithFont:[styleHandler fontForField:field] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-					height = size.height + 22; // inset
-				}
-			}
-		}
-	}
 
-    NSLog(@"webView = %@", webView);
-    NSLog(@"height = %f", height);
+    UIWebView *webView = [self.webViews objectForKey:indexPath];
+    if (webView) {
+        NSString *heightString = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
+        return [heightString floatValue] + C_CELL_Y_MARGIN * 2;
+    }
 
-    return height;
+    MBRow *row = [self getRowForIndexPath:indexPath];
+    id <MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
+                                                            rowViewBuilderFactory]
+                                                            builderForStyle:row.style];
+    return [builder heightForRow:row atIndexPath:indexPath forTableView:tableView];
 }
 
 - (void)addFontCustomizerForWebView:(UIWebView *)webview
@@ -169,7 +144,8 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 	MBRow *row = [self getRowForIndexPath:indexPath];
-    id<MBRowViewBuilder> builder = [[MBViewBuilderFactory sharedInstance] rowViewBuilder];
+    id<MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
+                                                           rowViewBuilderFactory] builderForStyle:row.style];
     UITableViewCell *cell = [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState
                                                       forTableView:tableView];
 
@@ -186,24 +162,6 @@
     [self.rowsByIndexPath setObject:row forKey:indexPath];
 
     return cell;
-}
-
--(BOOL) hasHTML:(NSString *) text{
-	BOOL result = NO;
-	NSString * lowercaseText = [text lowercaseString];
-	NSRange found = [lowercaseText rangeOfString:@"<html>"];
-	if (found.location != NSNotFound) result = YES;
-	
-	found = [lowercaseText rangeOfString:@"<body>"];
-	if (found.location != NSNotFound) result = YES;
-    
-	found = [lowercaseText rangeOfString:@"<b>"];
-	if (found.location != NSNotFound) result = YES;
-    
-	found = [lowercaseText rangeOfString:@"<br>"];
-	if (found.location != NSNotFound) result = YES;
-    
-	return result;
 }
 
 // callback when pickerView value changes
