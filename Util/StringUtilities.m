@@ -316,4 +316,22 @@
 	return self;
 }
 
+-(BOOL) hasHTML {
+    BOOL result = NO;
+    NSString * lowercaseText = [self lowercaseString];
+    NSRange found = [lowercaseText rangeOfString:@"<html>"];
+    if (found.location != NSNotFound) result = YES;
+
+    found = [lowercaseText rangeOfString:@"<body>"];
+    if (found.location != NSNotFound) result = YES;
+
+    found = [lowercaseText rangeOfString:@"<b>"];
+    if (found.location != NSNotFound) result = YES;
+
+    found = [lowercaseText rangeOfString:@"<br>"];
+    if (found.location != NSNotFound) result = YES;
+
+    return result;
+}
+
 @end

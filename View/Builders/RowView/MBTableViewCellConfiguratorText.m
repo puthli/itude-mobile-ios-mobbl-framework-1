@@ -8,26 +8,9 @@
 #import <MBViewBuilderFactory.h>
 #import "MBTableViewCellConfiguratorText.h"
 #import "UIWebView+FontResizing.h"
+#import "StringUtilities.h"
 
 @implementation MBTableViewCellConfiguratorText
-
--(BOOL) hasHTML:(NSString *) text{
-    BOOL result = NO;
-    NSString * lowercaseText = [text lowercaseString];
-    NSRange found = [lowercaseText rangeOfString:@"<html>"];
-    if (found.location != NSNotFound) result = YES;
-
-    found = [lowercaseText rangeOfString:@"<body>"];
-    if (found.location != NSNotFound) result = YES;
-
-    found = [lowercaseText rangeOfString:@"<b>"];
-    if (found.location != NSNotFound) result = YES;
-
-    found = [lowercaseText rangeOfString:@"<br>"];
-    if (found.location != NSNotFound) result = YES;
-
-    return result;
-}
 
 - (void)configureCell:(UITableViewCell *)cell withField:(MBField *)field
 {
@@ -43,7 +26,7 @@
     MBStyleHandler *styleHandler = [[MBViewBuilderFactory sharedInstance] styleHandler];
 
     // if the text contains any html, make a webview
-    if ([self hasHTML:text]) {
+    if ([text hasHTML]) {
         UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)] autorelease];
         webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         webView.text = text;

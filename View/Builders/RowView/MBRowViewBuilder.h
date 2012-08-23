@@ -15,4 +15,5 @@
 @protocol MBRowViewBuilder <NSObject>
 - (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
                      forTableView:(UITableView *)tableView;
+- (CGFloat)heightForRow:(MBRow *)row atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView;
 @end

@@ -113,4 +113,14 @@
  */
 - (NSString *)xmlSimpleEscape;
 
+/**
+    Checks if this NSString contains any of the following HTML tags:
+    * <html>
+    * <body>
+    * <b>
+    * <br>
+*/
+- (BOOL)hasHTML;
+
+
 @end

@@ -13,6 +13,7 @@
 #import "MBDevice.h"
 #import "MBTableViewCellConfiguratorFactory.h"
 #import "MBTableViewCellConfigurator.h"
+#import "StringUtilities.h"
 
 @interface MBDefaultRowViewBuilder()
 @property (nonatomic, retain) MBTableViewCellConfiguratorFactory *tableViewCellConfiguratorFactory;
@@ -218,5 +219,37 @@
     }
     return cell;
 }
+
+- (CGFloat)heightForRow:(MBRow *)row atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView
+{
+    CGFloat height = 44;
+
+    // Loop through the fields in the row to determine the size of multiline text cells
+    for(MBComponent *child in [row children]){
+        if ([child isKindOfClass:[MBField class]]) {
+            MBField *field = (MBField *)child;
+
+            if ([C_FIELD_TEXT isEqualToString:field.type]) {
+                NSString * text;
+                if(field.path != nil) {
+                        text = [field formattedValue];
+                    }
+                else {
+                        text= field.label;
+                    }
+                if (![text hasHTML]) {
+                    MBStyleHandler *styleHandler = [[MBViewBuilderFactory sharedInstance] styleHandler];
+                    // calculate bounding box
+                    CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
+                    CGSize size = [text sizeWithFont:[styleHandler fontForField:field] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+                    height = size.height + 22; // inset
+                }
+            }
+        }
+    }
+
+    return height;
+}
+
 
 @end
