@@ -5,9 +5,8 @@
 //  Copyright (c) 2012 Itude Mobile. All rights reserved.
 //
 
+#import "MBDefaultRowViewBuilder.h"
 #import "MBRowViewBuilderFactory.h"
-#import "MBRowViewBuilder.h"
-#import "itude-mobile-ios-core.h"
 
 @interface MBRowViewBuilderFactory()
 @property (nonatomic, retain) NSMutableDictionary *registeredBuilders;

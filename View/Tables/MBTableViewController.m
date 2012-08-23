@@ -22,6 +22,7 @@
 #import "UIWebView+FontResizing.h"
 #import "UIView+TreeWalker.h"
 #import "MBFontCustomizer.h"
+#import "MBRowViewBuilderFactory.h"
 
 
 #define MAX_FONT_SIZE 20
@@ -165,7 +166,8 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 	MBRow *row = [self getRowForIndexPath:indexPath];
-    id<MBRowViewBuilder> builder = [[MBViewBuilderFactory sharedInstance] rowViewBuilder];
+    id<MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
+                                                           rowViewBuilderFactory] builderForStyle:row.style];
     UITableViewCell *cell = [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState
                                                       forTableView:tableView];
 
