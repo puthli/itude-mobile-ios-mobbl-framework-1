@@ -14,6 +14,7 @@
 #import "MBDefaultRowViewBuilder.h"
 #import "MBFieldViewBuilder.h"
 #import "MBStyleHandler.h"
+#import "MBRowViewBuilderFactory.h"
 
 static MBViewBuilderFactory *_instance = nil;
 
@@ -22,9 +23,9 @@ static MBViewBuilderFactory *_instance = nil;
 @synthesize panelViewBuilder = _panelViewBuilder;
 @synthesize pageViewBuilder = _pageViewBuilder;
 @synthesize forEachViewBuilder = _forEachViewBuilder;
-@synthesize rowViewBuilder = _rowViewBuilder;
 @synthesize fieldViewBuilder = _fieldViewBuilder;
 @synthesize styleHandler = _styleHandler;
+@synthesize rowViewBuilderFactory = _rowViewBuilderFactory;
 
 - (id) init
 {
@@ -33,9 +34,9 @@ static MBViewBuilderFactory *_instance = nil;
 		_panelViewBuilder = [[MBPanelViewBuilder alloc] init];
 		_pageViewBuilder = [[MBPageViewBuilder alloc] init];
 		_forEachViewBuilder = [[MBForEachViewBuilder alloc] init];
-		_rowViewBuilder = [[MBDefaultRowViewBuilder alloc] init];
 		_fieldViewBuilder = [[MBFieldViewBuilder alloc] init];
 		_styleHandler = [[MBStyleHandler alloc] init];
+        _rowViewBuilderFactory = [[MBRowViewBuilderFactory alloc] init];
 	}
 	return self;
 }
@@ -46,8 +47,8 @@ static MBViewBuilderFactory *_instance = nil;
 	[_panelViewBuilder release];
 	[_pageViewBuilder release];
 	[_forEachViewBuilder release];
-	[_rowViewBuilder release];
 	[_fieldViewBuilder release];
+    [_rowViewBuilderFactory release];
 	[super dealloc];
 }
 
@@ -68,6 +69,11 @@ static MBViewBuilderFactory *_instance = nil;
 		_instance = factory;
 		[_instance retain];
 	}
+}
+
+- (id <MBRowViewBuilder>)rowViewBuilder
+{
+    return self.rowViewBuilderFactory.defaultBuilder;
 }
 
 
