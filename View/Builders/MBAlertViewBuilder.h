@@ -9,9 +9,10 @@
 #import "MBViewBuilder.h"
 
 @class MBAlert;
+@class MBAlertView;
 
 @interface MBAlertViewBuilder : MBViewBuilder
 
-- (UIAlertView *)buildAlertView:(MBAlert *) alert;
+-(MBAlertView *)buildAlertView:(MBAlert *)alert forDelegate:(id<UIAlertViewDelegate>) alertViewDelegate;
 
 @end

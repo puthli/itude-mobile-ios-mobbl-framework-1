@@ -51,35 +51,15 @@
             } 
 		}
         
-        // No need for bounds or viewstate because the alert will show up on it's own and will use the entire window. 
-        self.alertView = (UIAlertView *)[self buildViewWithMaxBounds:CGRectMake(0, 0, 0, 0) viewState:0];
-        self.alertView.delegate = alertViewDelegate; 
-        
+        self.alertView = [[[MBViewBuilderFactory sharedInstance] alertViewBuilder] buildAlertView:self forDelegate:alertViewDelegate];
+
     }
 	return self;
 }
 
 
--(UIView*) buildViewWithMaxBounds:(CGRect) bounds  viewState:(MBViewState) viewState {
-    return [[[MBViewBuilderFactory sharedInstance] alertViewBuilder] buildAlertView:self];
-}
-
-
 - (NSString *)outcomeNameForButtonAtIndex:(NSInteger)index {
-    
-    NSInteger componentIndex = 0;
-    for (MBField *field in self.children) {
-        if ([C_FIELD_BUTTON isEqualToString:field.type]) {
-            if (index == componentIndex) {
-                return field.outcomeName;
-            }
-            
-            componentIndex ++;
-        }
-    }
-    
-    return nil;
-    
+    return [self.alertView outcomeNameForButtonAtIndex:index];
 }
 
 

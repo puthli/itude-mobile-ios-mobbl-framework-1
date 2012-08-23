@@ -8,20 +8,21 @@
 
 #import "MBPanel.h"
 #import "MBAlertDefinition.h"
+#import "MBAlertView.h"
 
 @interface MBAlert : MBComponentContainer {
     NSString *_alertName;
 	NSString *_rootPath;
     NSString *_title;
     MBDocument *_document;
-    UIAlertView *_alertView;
+    MBAlertView *_alertView;
 }
 
 @property (nonatomic, retain) NSString *alertName;
 @property (nonatomic, retain) NSString *rootPath;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) MBDocument *document;
-@property (nonatomic, retain) UIAlertView *alertView;
+@property (nonatomic, retain) MBAlertView *alertView;
 
 -(id) initWithDefinition:(MBAlertDefinition*) definition
                 document:(MBDocument*) document

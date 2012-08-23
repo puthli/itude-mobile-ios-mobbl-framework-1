@@ -7,18 +7,13 @@
 //
 
 #import "MBAlertViewBuilder.h"
+#import "MBAlertView.h"
 #import "MBAlert.h"
 #import "MBField.h"
 #import "MBFieldTypes.h"
 #import "MBMacros.h"
 
 @implementation MBAlertViewBuilder
-
-/*
- <Field type="BUTTON" label="OK" outcome="OUTCOME-ok" style="POSITIVE" />
- <Field type="BUTTON" label="Cancel" style="NEGATIVE" />
- <Field type="BUTTON" label="Help" outcome="OUTCOME-help" style="OTHER" />
- */
 
 /**
  * In iOS we only define the cancel button and other buttons. In Android this is different. They have three different types of buttons. 
@@ -28,21 +23,26 @@
 #define C_FIELD_BUTTON_STYLE_POSITIVE @"POSITIVE" // iOS: Other Button
 #define C_FIELD_BUTTON_STYLE_OTHER    @"OTHER"    // iOS: Other Button
 
--(UIAlertView *)buildAlertView:(MBAlert *)alert {
+-(MBAlertView *)buildAlertView:(MBAlert *)alert forDelegate:(id<UIAlertViewDelegate>) alertViewDelegate {
     
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:[alert title] message:nil delegate:nil cancelButtonTitle:@"Test" otherButtonTitles: nil] autorelease];
-    
+
+    NSString *message = nil;
+    NSString *cancelButtonTitle = nil;
     NSInteger cancelButtonIndex = 0;
+    NSMutableArray *otherButtonTitles = [NSMutableArray new];
+    NSMutableArray *buttonFields = [NSMutableArray new];
+    
+    NSInteger counter = 0;
     NSArray *children = [alert children];
     for (MBField *field in children) {
         
         // The message
         if ([C_FIELD_TEXT isEqualToString:field.type]) {
             if(field.path != nil) {
-                alertView.message = [field formattedValue];
+                message = [field formattedValue];
             }
             else {
-                alertView.message = field.label;
+                message = field.label;
             }
         }
         
@@ -50,27 +50,48 @@
         else if ([C_FIELD_BUTTON isEqualToString:field.type]) {
             // Cancel Button
             if ([C_FIELD_BUTTON_STYLE_NEGATIVE isEqualToString:field.style]) {
-                if (alertView.cancelButtonIndex == -1) {
-                    [alertView setCancelButtonIndex:cancelButtonIndex];
+                if (cancelButtonTitle.length == 0) {
+                    cancelButtonTitle = field.label;
+                    cancelButtonIndex = counter;
                 }
                 else {
-                    WLog(@"WARNING! There are two NEGATIVE (cancel) buttons defined for alert with name %@. Check config definition! Button with index %i is set as the cancel button.",alert.title ,alertView.cancelButtonIndex);
+                    WLog(@"WARNING! There are two NEGATIVE (cancel) buttons defined for alert with name %@. Check config definition! Button with title '%@' is set as the cancel button.",alert.title ,cancelButtonTitle);
+                    [otherButtonTitles addObject:field.label];
                 }
-                
             }
             
             // Other buttons
-            [alertView addButtonWithTitle:field.label];
-
-            cancelButtonIndex ++;
+            else {
+                [otherButtonTitles addObject:field.label];
+            }
+            
+            [buttonFields addObject:field];
+            
+            counter ++;
+        }
+    }
+    
+    // Now build the actual AlertView
+    MBAlertView *alertView = [[[MBAlertView alloc] initWithTitle:[alert title] message:message delegate:alertViewDelegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil] autorelease];
+    for (NSString *title in otherButtonTitles) {
+        [alertView addButtonWithTitle:title];
+    }
+    
+    alertView.cancelButtonIndex = cancelButtonIndex;
+    
+    // Set the outcomes
+    for (MBField *field in buttonFields) {
+        if (field.outcomeName.length > 0) {
+            [alertView setOutcomeName:field.outcomeName forButtonWithKey:field.label];
         }
     }
 
+    
+    [otherButtonTitles release];
+    [buttonFields release];
+    
     return alertView;
 }
-
-
-
 
 
 @end
