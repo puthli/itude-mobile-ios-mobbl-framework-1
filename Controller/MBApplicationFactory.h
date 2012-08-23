@@ -33,7 +33,8 @@
 		 withMaxBounds:(CGRect) bounds;
 -(MBAlert *)createAlert:(MBAlertDefinition *)definition
                document:(MBDocument *) document
-               rootPath:(NSString *)rootPath;
+               rootPath:(NSString *)rootPath
+               delegate:(id<UIAlertViewDelegate>)alertViewDelegate;
 -(id<MBAction>) createAction:(NSString *)actionClassName;
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName;
 

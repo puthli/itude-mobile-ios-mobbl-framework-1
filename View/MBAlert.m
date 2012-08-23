@@ -10,6 +10,8 @@
 #import "MBApplicationFactory.h"
 #import "MBComponentFactory.h"
 #import "MBViewbuilderFactory.h"
+#import "MBFieldTypes.h"
+
 
 @implementation MBAlert
 
@@ -31,7 +33,8 @@
 
 -(id) initWithDefinition:(MBAlertDefinition*) definition
                 document:(MBDocument*) document
-                rootPath:(NSString*) rootPath {
+                rootPath:(NSString*) rootPath
+                delegate:(id<UIAlertViewDelegate>)alertViewDelegate {
 
 
     if (self = [super initWithDefinition:definition document:document parent:nil])
@@ -50,8 +53,7 @@
         
         // No need for bounds or viewstate because the alert will show up on it's own and will use the entire window. 
         self.alertView = (UIAlertView *)[self buildViewWithMaxBounds:CGRectMake(0, 0, 0, 0) viewState:0];
-        
-        //self.alertView.delegate = self; // This causes the message to be sent to the deallocated instance. This also means that another class should be delegate.
+        self.alertView.delegate = alertViewDelegate; 
         
     }
 	return self;
@@ -60,6 +62,24 @@
 
 -(UIView*) buildViewWithMaxBounds:(CGRect) bounds  viewState:(MBViewState) viewState {
     return [[[MBViewBuilderFactory sharedInstance] alertViewBuilder] buildAlertView:self];
+}
+
+
+- (NSString *)outcomeNameForButtonAtIndex:(NSInteger)index {
+    
+    NSInteger componentIndex = 0;
+    for (MBField *field in self.children) {
+        if ([C_FIELD_BUTTON isEqualToString:field.type]) {
+            if (index == componentIndex) {
+                return field.outcomeName;
+            }
+            
+            componentIndex ++;
+        }
+    }
+    
+    return nil;
+    
 }
 
 

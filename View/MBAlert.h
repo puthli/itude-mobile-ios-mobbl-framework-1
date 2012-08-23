@@ -25,6 +25,9 @@
 
 -(id) initWithDefinition:(MBAlertDefinition*) definition
                 document:(MBDocument*) document
-                rootPath:(NSString*) rootPath;
+                rootPath:(NSString*) rootPath
+                delegate:(id<UIAlertViewDelegate>) alertViewDelegate;
+
+-(NSString *)outcomeNameForButtonAtIndex:(NSInteger) index;
 
 @end

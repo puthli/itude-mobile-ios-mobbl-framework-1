@@ -52,8 +52,8 @@ static MBApplicationFactory *_instance = nil;
     return [[[MBBasicViewController alloc] init] autorelease];
 }
 
-- (MBAlert *)createAlert:(MBAlertDefinition *)definition document:(MBDocument *)document rootPath:(NSString *)rootPath {
-    return [[[MBAlert alloc] initWithDefinition:definition document:document rootPath:rootPath] autorelease];
+- (MBAlert *)createAlert:(MBAlertDefinition *)definition document:(MBDocument *)document rootPath:(NSString *)rootPath delegate:(id<UIAlertViewDelegate>)alertViewDelegate {
+    return [[[MBAlert alloc] initWithDefinition:definition document:document rootPath:rootPath delegate:alertViewDelegate] autorelease];
 }
 
 -(id<MBAction>) createAction:(NSString *)actionClassName {

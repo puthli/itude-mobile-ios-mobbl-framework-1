@@ -25,6 +25,7 @@
 
 @property (nonatomic, assign) BOOL applicationActive;
 @property (nonatomic, assign) MBViewManager *viewManager;
+@property (readonly, nonatomic) MBApplicationFactory *applicationFactory;
 
 
 -(void) startApplication:(MBApplicationFactory *)_applicationFactory;
