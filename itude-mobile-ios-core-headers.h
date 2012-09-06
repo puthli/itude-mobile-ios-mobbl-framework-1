@@ -88,9 +88,12 @@
 #import "MBFileDataHandler.h"
 #import "MBMemoryDataHandler.h"
 #import "MBMobbl1ServerDataHandler.h"
+#import "MBRESTGetServiceDataHandler.h"
 #import "MBRESTServiceDataHandler.h"
 #import "MBSystemDataHandler.h"
+#import "MBURLConnectionDataHandler.h"
 #import "MBWebserviceDataHandler.h"
+
 
 //  Util
 #import "BinckUtilities.h"
