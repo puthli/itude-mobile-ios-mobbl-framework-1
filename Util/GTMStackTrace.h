@@ -53,13 +53,13 @@ struct GTMAddressDescriptor {
 
 NSString *GTMStackTrace(void);
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
+//#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
 // Returns a string containing a nicely formatted stack trace from the
 // exception.  Only available on 10.5 or later, uses 
 // -[NSException callStackReturnAddresses].
 //
 NSString *GTMStackTraceFromException(NSException *e);
-#endif
+//#endif
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_5
 // Returns an array of program counters from the current thread's stack.
