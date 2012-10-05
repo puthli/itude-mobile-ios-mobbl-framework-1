@@ -249,6 +249,13 @@
 
 - (void) makeKeyAndVisible {
 	[_tabController.moreNavigationController popToRootViewControllerAnimated:NO];
+    
+    // check if there are dialogcontrollers available to set as rootviewcontroller
+    if ((int)[[_dialogControllers allKeys] count] > 0) {
+        MBDialogController *dialogController = ((MBDialogController *)[_dialogControllers objectForKey:[[_dialogControllers allKeys] objectAtIndex:0]]);
+        [_window setRootViewController:dialogController.rootController];
+    }
+    
 	[_window makeKeyAndVisible];
 	
 	// ensure first dialogGroup is selected.
