@@ -114,15 +114,27 @@
 	[sendData setValue:md5Hash forAttribute:@"messageID"];
 	
 	self.documentFactoryType = PARSER_MOBBL1;
-	MBDocument *result = [super loadDocument:documentName withArguments:mobblDoc];
+    
+    MBDocument *result = nil;
+    
+    @try {
+        result = [super loadDocument:documentName withArguments:mobblDoc];
+        BOOL cacheable = FALSE;
+        MBEndPointDefinition *endPoint = [self getEndPointForDocument:documentName];
+        cacheable = [endPoint cacheable];
+        if(cacheable) {
+            [MBCacheManager setDocument:result forKey:[doc uniqueId] timeToLive:endPoint.ttl];
+        }
+    }
+    @catch (NSException *exception) {
+        [MBCacheManager expireDocumentForKey:[doc uniqueId]];
+        @throw exception;
+    }
+    @finally {
+        
+    }
 	
-	BOOL cacheable = FALSE;
-	MBEndPointDefinition *endPoint = [self getEndPointForDocument:documentName];
-	cacheable = [endPoint cacheable];
-	if(cacheable) {
-		[MBCacheManager setDocument:result forKey:[doc uniqueId] timeToLive:endPoint.ttl];
-	}
-	return result;	
+	return result;
 }
 
 -(MBDocument *) getRequestDocumentForApplicationID:(NSString*) applicationID{
