@@ -179,7 +179,13 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MBRow *selectedRow = [self.rowsByIndexPath objectForKey:indexPath];
-
+    
+    // This handles the outcome on a Panel of type "ROW"
+    if (selectedRow.outcomeName) {
+        [self.page handleOutcome:selectedRow.outcomeName];
+    }
+    
+    
 	// use the first field we come across to trigger keyboard dismissal
 //	for(MBField *field in [self.cellReferences allValues]){
 //		[[field page] resignFirstResponder];
@@ -258,8 +264,7 @@
         } else if (field && [field outcomeName]) {
             [self fieldWasSelected:field];
             // this covers the case when field path has an indexed expressions while the commented one does not
-            [field handleOutcome:[field outcomeName]
-                   withPathArgument:[field evaluatedDataPath]];
+            [field handleOutcome:[field outcomeName] withPathArgument:[field evaluatedDataPath]];
 
         }
     }

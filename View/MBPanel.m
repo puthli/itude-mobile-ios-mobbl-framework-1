@@ -25,6 +25,7 @@
 @synthesize titlePath = _titlePath;
 @synthesize width = _width;
 @synthesize height = _height;
+@synthesize outcomeName = _outcomeName;
 
 -(id) initWithDefinition:(MBPanelDefinition *)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent {
     return [self initWithDefinition: definition document: document parent: parent buildViewStructure: TRUE];
@@ -38,6 +39,7 @@
 		self.type = definition.type;
 		self.width = definition.width;
 		self.height = definition.height;
+        self.outcomeName = definition.outcomeName;
 
 		if(buildViewStructure) {
             for(MBDefinition *def in definition.children) {
@@ -61,6 +63,7 @@
     [_titlePath release];
     [_title release];
 	[_type release];
+    [_outcomeName release];
 	[super dealloc];
 }
 
@@ -86,11 +89,12 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPanel%@%@%@%@>\n", level, "",
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPanel%@%@%@%@%@>\n", level, "",
 							   [self attributeAsXml:@"type" withValue:_type],
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"width" withValue:[NSString stringWithFormat:@"%i", _width]],
-							   [self attributeAsXml:@"height" withValue:[NSString stringWithFormat:@"%i", _height]]
+							   [self attributeAsXml:@"height" withValue:[NSString stringWithFormat:@"%i", _height]],
+                               [self attributeAsXml:@"outcome" withValue:_outcomeName]
 							   ];
 	
     [result appendString: [self childrenAsXmlWithLevel: level+2]];

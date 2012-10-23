@@ -182,6 +182,12 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     }
+
+    // Style for a Panel with type "ROW"
+    if (row.outcomeName) {
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
 }
 
 
@@ -214,7 +220,7 @@
     }
     cell.bounds = bounds;
 
-    if (![self rowContainsButtonField:row]) {
+    if (![self rowContainsButtonField:row] && !row.outcomeName) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
