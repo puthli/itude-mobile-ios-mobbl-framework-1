@@ -10,7 +10,7 @@
 #import "MBField.h"
 #import "MBPage.h"
 #import "MBPanel.h"
-#import "MBRow.h"
+#import "MBForEachItem.h"
 #import "MBForEach.h"
 #import "MBComponent.h"
 #import "MBFieldTypes.h"
@@ -34,7 +34,7 @@
 	else if([component isKindOfClass:[MBPanel class]]) {
 		[self applyStyle:view panel: component viewState: viewState];
 	}
-	else if([component isKindOfClass:[MBRow class]]) {
+	else if([component isKindOfClass:[MBForEachItem class]]) {
 		
 	}
 	else if([component isKindOfClass:[MBForEach class]]) {

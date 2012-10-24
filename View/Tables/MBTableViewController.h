@@ -12,7 +12,7 @@
 @class MBStyleHandler;
 @class MBPage;
 @class MBField;
-@class MBRow;
+@class MBForEachItem;
 
 /** Extends a convenience class in UIKit to create a TableView / List type screen based on an MBPage definition. The page definition is generally stored in the file config.xmlx or in a file referenced by config.xmlx using the <Include ... /> directive. 
  */

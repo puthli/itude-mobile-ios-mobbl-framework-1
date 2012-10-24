@@ -8,7 +8,7 @@
 
 #import "MBForEachDefinition.h"
 #import "MBComponent.h"
-#import "MBRow.h"
+#import "MBForEachItem.h"
 #import "MBComponentContainer.h"
 
 /** Iterator for creating MBPanel instances based on the data in an MBPage. 
@@ -24,6 +24,6 @@
 @property (nonatomic, retain) NSMutableArray *rows;
 @property (nonatomic, retain) NSString *value;
 
--(void) addRow: (MBRow*) row;
+-(void) addRow: (MBForEachItem*) row;
 
 @end

@@ -11,7 +11,7 @@
 #import "MBTableViewController.h"
 #import "MBPanel.h"
 #import "MBField.h"
-#import "MBRow.h"
+#import "MBForEachItem.h"
 #import "MBViewBuilderFactory.h"
 #import "MBFieldDefinition.h"
 #import "MBPage.h"
@@ -175,12 +175,17 @@
 
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MBRow *selectedRow = [self.rowsByIndexPath objectForKey:indexPath];
+    MBComponentContainer *selectedRow = [self.rowsByIndexPath objectForKey:indexPath];
+    
+    NSString *outcomeName = nil;
+    if ([selectedRow isKindOfClass:[MBPanel class]]) {
+        outcomeName = [((MBPanel *)selectedRow) outcomeName];
+    }
     
     // This handles the outcome on a Panel of type "ROW"
-    if (selectedRow.outcomeName) {
+    if (outcomeName) {
         // TODO: Maybe include a path as arguments
-        [self.page handleOutcome:selectedRow.outcomeName];
+        [self.page handleOutcome:outcomeName];
     }
     
     

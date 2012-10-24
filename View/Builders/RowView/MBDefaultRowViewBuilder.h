@@ -10,7 +10,7 @@
 #import "MBTypes.h"
 #import "MBRowViewBuilder.h"
 
-@class MBRow;
+@class MBForEachItem;
 
 @interface MBDefaultRowViewBuilder : MBViewBuilder <MBRowViewBuilder> {
 

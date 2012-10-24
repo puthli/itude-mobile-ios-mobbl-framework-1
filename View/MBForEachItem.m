@@ -6,13 +6,13 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBRow.h"
+#import "MBForEachItem.h"
 #import "MBForEachDefinition.h"
 #import "MBViewBuilderFactory.h"
 #import "MBDefaultRowViewBuilder.h"
 #import "MBPage.h"
 
-@implementation MBRow
+@implementation MBForEachItem
 
 @synthesize index = _index;
 

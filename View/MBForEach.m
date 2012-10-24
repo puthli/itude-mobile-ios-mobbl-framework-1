@@ -8,7 +8,7 @@
 
 #import "MBComponent.h"
 #import "MBForEach.h"
-#import "MBRow.h"
+#import "MBForEachItem.h"
 #import "MBDefinition.h"
 #import "MBComponentFactory.h"
 #import "MBViewBuilderFactory.h"
@@ -44,7 +44,7 @@
 				if(![pathResult isKindOfClass:[NSArray class]]) @throw [[[NSException alloc]initWithName:@"InvalidPath" reason:_value userInfo:nil] autorelease];
 
 				for(MBElement *element in pathResult) {
-					MBRow *row = [[[MBRow alloc] initWithDefinition: [self definition] document: document parent: self] autorelease];
+					MBForEachItem *row = [[[MBForEachItem alloc] initWithDefinition: [self definition] document: document parent: self] autorelease];
 					[self addRow: row];
 					for(MBForEachDefinition *childDef in [definition children]) {
 						//commented by Xiaochen: ForEach tag in config file with precondition does not work
@@ -55,7 +55,7 @@
 				}
 				if(definition.suppressRowComponent) {
 				// Prune the rows and ourselves
-					for(MBRow *row in _rows) {
+					for(MBForEachItem *row in _rows) {
 						for(MBComponent *child in row.children) {
 							[child translatePath];
 							[[self parent] addChild:child];
@@ -78,7 +78,7 @@
 	[super dealloc];
 }
 
--(void) addRow: (MBRow*) row {
+-(void) addRow: (MBForEachItem*) row {
 	row.index = [_rows count];
 	[_rows addObject:row];
 	[row setParent:self];
@@ -90,7 +90,7 @@
 
 -(BOOL) resignFirstResponder {
 	BOOL result = FALSE;
-	for(MBRow *row in self.rows) result |= [row resignFirstResponder];
+	for(MBForEachItem *row in self.rows) result |= [row resignFirstResponder];
 	return result;
 }
 
@@ -98,7 +98,7 @@
 - (NSMutableArray*) descendantsOfKind:(Class) clazz {
     
     NSMutableArray *result = [super descendantsOfKind: clazz];
-    for(MBRow *child in _rows) {
+    for(MBForEachItem *child in _rows) {
         if([child isKindOfClass: clazz]) [result addObject: child];
         [result addObjectsFromArray: [child descendantsOfKind: clazz]];
     }
@@ -121,7 +121,7 @@
 	MBForEachDefinition *def = (MBForEachDefinition*) [self definition];
 	for (MBVariableDefinition* var in [[def variables] allValues])
 		[result appendString:[var asXmlWithLevel:level+2]];
-	for (MBRow* child in _rows)
+	for (MBForEachItem* child in _rows)
 		[result appendString:[child asXmlWithLevel:level+2]];
     
     [result appendString: [self childrenAsXmlWithLevel: level+2]];
