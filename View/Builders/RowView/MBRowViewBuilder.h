@@ -7,13 +7,13 @@
 
 #import "MBTypes.h"
 
-@class MBRow;
+@class MBComponentContainer;
 
 /**
 * Constructs UITableViewCells for MBRows. Implement this interface for custom UITableViewCells.
 */
 @protocol MBRowViewBuilder <NSObject>
-- (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
+- (UITableViewCell *)buildTableViewCellFor:(MBComponentContainer *)component forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
                      forTableView:(UITableView *)tableView;
-- (CGFloat)heightForRow:(MBRow *)row atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView;
+- (CGFloat)heightForComponent:(MBComponentContainer *)component atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView;
 @end

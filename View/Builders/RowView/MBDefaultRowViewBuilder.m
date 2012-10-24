@@ -9,7 +9,8 @@
 #import "MBFieldViewBuilder.h"
 #import "MBViewBuilderFactory.h"
 #import "MBDefaultRowViewBuilder.h"
-#import "MBRow.h"
+#import "MBComponentContainer.h"
+#import "MBPanel.h"
 #import "MBDevice.h"
 #import "MBTableViewCellConfiguratorFactory.h"
 #import "MBTableViewCellConfigurator.h"
@@ -55,7 +56,7 @@
     return cell;
 }
 
-- (UITableViewCell *)buildCellForRow:(MBRow *)row forTableView:(UITableView *)tableView {
+- (UITableViewCell *)buildCellForRow:(MBComponentContainer *)row forTableView:(UITableView *)tableView {
     NSString *type = C_REGULARCELL;
     UITableViewCellStyle style = UITableViewCellStyleDefault;
 
@@ -98,7 +99,7 @@
     return cell;
 }
 
-- (BOOL)rowContainsButtonField:(MBRow *)row
+- (BOOL)rowContainsButtonField:(MBComponentContainer *)row
 {
     BOOL navigable     = NO;
     for(MBComponent *child in [row children]){
@@ -112,7 +113,7 @@
     return navigable;
 }
 
-- (void)addButtonsToCell:(UITableViewCell *)cell forRow:(MBRow *)row
+- (void)addButtonsToCell:(UITableViewCell *)cell forRow:(MBComponentContainer *)row
 {
     NSMutableArray *buttons = nil;
     NSString *fieldstyle = nil;
@@ -184,26 +185,24 @@
     }
 
     // Style for a Panel with type "ROW"
-    if (row.outcomeName) {
+    if ([self outcomeNameFor:row]) {
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
 
-
-- (UITableViewCell *)buildRowView:(MBRow *)row forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState
-                     forTableView:(UITableView *)tableView
+- (UITableViewCell *)buildTableViewCellFor:(MBComponentContainer *)component forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState forTableView:(UITableView *)tableView
 {
-    UITableViewCell *cell = [self buildCellForRow:row forTableView:tableView];
+    UITableViewCell *cell = [self buildCellForRow:component forTableView:tableView];
 
     // Loop through the fields in the row to determine the content of the cell
-    for(MBComponent *child in [row children]){
+    for(MBComponent *child in [component children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             field.responder = nil;
 
             // #BINCKMOBILE-19
-            if ([field.definition isPreConditionValid:row.document currentPath:[field absoluteDataPath]]) {
+            if ([field.definition isPreConditionValid:component.document currentPath:[field absoluteDataPath]]) {
 
                 MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
                 [cellConfigurator configureCell:cell withField:field];
@@ -211,27 +210,28 @@
         }
     }
 
-    [self addButtonsToCell:cell forRow:row];
+    [self addButtonsToCell:cell forRow:component];
 
     CGRect bounds = cell.bounds;
     // If the bounds are set for a field with buttons, then the view get's all messed up.
-    if (![MBDevice isPad] && ![self rowContainsButtonField:row]) {
+    if (![MBDevice isPad] && ![self rowContainsButtonField:component]) {
         bounds.size.width = tableView.frame.size.width;
     }
     cell.bounds = bounds;
 
-    if (![self rowContainsButtonField:row] && !row.outcomeName) {
+    
+    if (![self rowContainsButtonField:component] && ![self outcomeNameFor:component]) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
 
-- (CGFloat)heightForRow:(MBRow *)row atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView
+-(CGFloat)heightForComponent:(MBComponentContainer *)component atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView
 {
     CGFloat height = 44;
 
     // Loop through the fields in the row to determine the size of multiline text cells
-    for(MBComponent *child in [row children]){
+    for(MBComponent *child in [component children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
 
@@ -257,5 +257,13 @@
     return height;
 }
 
+- (NSString *)outcomeNameFor:(MBComponentContainer *)component
+{
+    NSString *outcomeName = nil;
+    if ([component isKindOfClass:[MBPanel class]]) {
+        outcomeName = [((MBPanel *)component) outcomeName];
+    }
+    return outcomeName;
+}
 
 @end

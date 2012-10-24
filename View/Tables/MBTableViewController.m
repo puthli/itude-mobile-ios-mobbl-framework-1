@@ -90,11 +90,11 @@
 	return [rows count];
 }
 
--(MBRow *)getRowForIndexPath:(NSIndexPath *) indexPath {
+-(MBPanel *)getRowForIndexPath:(NSIndexPath *) indexPath {
 	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:(NSUInteger) indexPath.section];
-	NSMutableArray *rows = [section descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_ROW];
-	MBRow *row = [rows objectAtIndex:(NSUInteger) indexPath.row];
-	return row;
+	NSMutableArray *panels = [section descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_ROW];
+	MBPanel *panel = [panels objectAtIndex:(NSUInteger) indexPath.row];
+	return panel;
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -108,19 +108,17 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat height = 44;
-
     UIWebView *webView = [self.webViews objectForKey:indexPath];
     if (webView) {
         NSString *heightString = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
         return [heightString floatValue] + C_CELL_Y_MARGIN * 2;
     }
 
-    MBRow *row = [self getRowForIndexPath:indexPath];
+    MBComponentContainer *row = [self getRowForIndexPath:indexPath];
     id <MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
                                                             rowViewBuilderFactory]
                                                             builderForStyle:row.style];
-    return [builder heightForRow:row atIndexPath:indexPath forTableView:tableView];
+    return [builder heightForComponent:row atIndexPath:indexPath forTableView:tableView];
 }
 
 - (void)addFontCustomizerForWebView:(UIWebView *)webview
@@ -143,12 +141,11 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-	MBRow *row = [self getRowForIndexPath:indexPath];
+	MBComponentContainer *component = [self getRowForIndexPath:indexPath];
     id<MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
-                                                           rowViewBuilderFactory] builderForStyle:row.style];
-    UITableViewCell *cell = [builder buildRowView:row forIndexPath:indexPath viewState:self.page.currentViewState
-                                                      forTableView:tableView];
-
+                                                           rowViewBuilderFactory] builderForStyle:component.style];
+    UITableViewCell *cell = [builder buildTableViewCellFor:component forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
+    
     // Register any webViews in the cell
     [self.webViews removeObjectForKey:indexPath]; // Make sure no old webViews are retained
     for (UIView *subview in [cell subviewsOfClass:[UIWebView class]]) {
@@ -159,7 +156,7 @@
         [self addFontCustomizerForWebView:webview];
     }
 
-    [self.rowsByIndexPath setObject:row forKey:indexPath];
+    [self.rowsByIndexPath setObject:component forKey:indexPath];
 
     return cell;
 }
@@ -182,6 +179,7 @@
     
     // This handles the outcome on a Panel of type "ROW"
     if (selectedRow.outcomeName) {
+        // TODO: Maybe include a path as arguments
         [self.page handleOutcome:selectedRow.outcomeName];
     }
     
@@ -263,8 +261,12 @@
 
         } else if (field && [field outcomeName]) {
             [self fieldWasSelected:field];
-            // this covers the case when field path has an indexed expressions while the commented one does not
-            [field handleOutcome:[field outcomeName] withPathArgument:[field evaluatedDataPath]];
+            
+            // We check the field style because otherwise the outcome always gets triggered, even for actual buttons inside a row Ticket http://macserver.itude.com/jira/browse/MOBBL-509
+            if ([C_FIELD_STYLE_NAVIGATION isEqualToString:[field style]]) {
+                // this covers the case when field path has an indexed expressions while the commented one does not
+                [field handleOutcome:[field outcomeName] withPathArgument:[field evaluatedDataPath]];
+            }
 
         }
     }

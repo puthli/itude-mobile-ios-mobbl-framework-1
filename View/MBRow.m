@@ -21,13 +21,6 @@
 	[super dealloc];
 }
 
-- (NSString *)outcomeName {
-    if ([self isKindOfClass:[MBPanel class]]) {
-        return ((MBPanel *)self).outcomeName;
-    }
-    return nil;
-}
-
 -(NSString *) componentDataPath {
 	MBForEachDefinition *def = (MBForEachDefinition*)[self definition];
 	NSString *path = [NSString stringWithFormat:@"%@[%i]", [def value], _index];
