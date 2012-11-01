@@ -23,6 +23,7 @@
 	int _width;
 	int _height;
     NSString *_outcomeName;
+    NSString *_path;
 }
 
 @property (nonatomic, retain) NSString *type;
@@ -31,6 +32,7 @@
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
 @property (nonatomic, retain) NSString *outcomeName;
+@property (nonatomic, retain) NSString *path;
 
 - (id) initWithDefinition:(MBPanelDefinition *)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent buildViewStructure:(BOOL) buildViewStructure;
 - (void) rebuild;

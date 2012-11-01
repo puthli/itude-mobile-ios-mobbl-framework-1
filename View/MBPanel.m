@@ -26,6 +26,7 @@
 @synthesize width = _width;
 @synthesize height = _height;
 @synthesize outcomeName = _outcomeName;
+@synthesize path = _path;
 
 -(id) initWithDefinition:(MBPanelDefinition *)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent {
     return [self initWithDefinition: definition document: document parent: parent buildViewStructure: TRUE];
@@ -40,6 +41,7 @@
 		self.width = definition.width;
 		self.height = definition.height;
         self.outcomeName = definition.outcomeName;
+        self.path = definition.path;
 
 		if(buildViewStructure) {
             for(MBDefinition *def in definition.children) {
@@ -64,6 +66,7 @@
     [_title release];
 	[_type release];
     [_outcomeName release];
+    [_path release];
 	[super dealloc];
 }
 

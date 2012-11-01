@@ -177,17 +177,15 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MBComponentContainer *selectedRow = [self.rowsByIndexPath objectForKey:indexPath];
     
-    NSString *outcomeName = nil;
+    // Handle the outcome on a Panel of type "ROW"
     if ([selectedRow isKindOfClass:[MBPanel class]]) {
-        outcomeName = [((MBPanel *)selectedRow) outcomeName];
+        MBPanel *panel = (MBPanel *)selectedRow;
+        
+        if (panel.outcomeName) {
+            [self.page handleOutcome:panel.outcomeName withPathArgument:panel.path];
+        }
     }
-    
-    // This handles the outcome on a Panel of type "ROW"
-    if (outcomeName) {
-        // TODO: Maybe include a path as arguments
-        [self.page handleOutcome:outcomeName];
-    }
-    
+
     
 	// use the first field we come across to trigger keyboard dismissal
 //	for(MBField *field in [self.cellReferences allValues]){

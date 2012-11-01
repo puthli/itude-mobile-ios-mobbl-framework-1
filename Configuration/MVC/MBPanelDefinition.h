@@ -18,6 +18,7 @@
 	int _width;
 	int _height;
     NSString *_outcomeName;
+    NSString *_path;
 	NSMutableArray *_children;
 }
 
@@ -29,6 +30,7 @@
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
 @property (nonatomic, retain) NSString *outcomeName;
+@property (nonatomic, retain) NSString *path;
 
 - (void) addChild:(MBDefinition*)child;
 
