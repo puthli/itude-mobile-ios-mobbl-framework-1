@@ -18,6 +18,12 @@
 #import "MBDefinition.h"
 #import "MBLocalizationService.h"
 
+@interface MBPanel() {
+    NSString *_translatedPath;
+}
+    @property (nonatomic, retain) NSString *translatedPath;
+@end
+
 @implementation MBPanel
 
 @synthesize type = _type;
@@ -27,6 +33,7 @@
 @synthesize height = _height;
 @synthesize outcomeName = _outcomeName;
 @synthesize path = _path;
+@synthesize translatedPath = _translatedPath;
 
 -(id) initWithDefinition:(MBPanelDefinition *)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent {
     return [self initWithDefinition: definition document: document parent: parent buildViewStructure: TRUE];
@@ -67,7 +74,19 @@
 	[_type release];
     [_outcomeName release];
     [_path release];
+    [_translatedPath release];
 	[super dealloc];
+}
+
+// This will translate any expression that are part of the path to their actual values
+- (void) translatePath {
+	self.translatedPath = [self substituteExpressions:[self absoluteDataPath]];
+    [super translatePath];
+}
+
+-(NSString *) absoluteDataPath {
+	if(self.translatedPath != nil) return self.translatedPath;
+	return [super absoluteDataPath];
 }
 
 -(NSString*) title {
