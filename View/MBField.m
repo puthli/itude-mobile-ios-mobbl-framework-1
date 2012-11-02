@@ -219,26 +219,6 @@
 	return [super absoluteDataPath];
 }
 
-// Returns a path that has indexed expressions evaluated (translated) i.e. something like myelement[someattr='xx'] -> myelement[12]
-// for the current document; where the 12th element is matched
--(NSString *) evaluatedDataPath {
-	NSString *path = [self absoluteDataPath];
-	if(path != nil && [path length] > 0 && [path rangeOfString:@"="].length>0) {
-		// Now translate the index expressions like [someAttr=='x' and someOther=='y'] into [idx]
-		// We can only do this if the row that matches the expression does exist!
-		NSMutableArray *components = [[NSMutableArray new] autorelease];
-		NSString *value = [[self document] valueForPath:path translatedPathComponents:components];
-		
-		// Now glue together the components to make a full path again:
-		NSMutableString *result = [[NSMutableString new] autorelease];
-		for(NSString *part in components) {
-			if(![part hasSuffix:@":"]) [result appendString:@"/"];
-			[result appendFormat:@"%@", part];
-		}
-		if(value != nil) return result;
-	}
-	return path;
-}
 
 -(BOOL) resignFirstResponder {
 	return [self resignFirstResponder: _responder];

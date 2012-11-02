@@ -64,7 +64,6 @@
 -(int) width;
 -(int) height;
 -(NSString *) formattedValue;
--(NSString *) evaluatedDataPath;
 
 // for UISwitch
 -(void) switchToggled:(id)sender;

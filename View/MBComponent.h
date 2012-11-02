@@ -45,6 +45,7 @@
 - (NSString*) substituteExpressions:(NSString*) expression;
 - (NSString *) componentDataPath;
 - (NSString *) absoluteDataPath;
+- (NSString *) evaluatedDataPath;
 - (MBDocument*) document;
 - (MBPage*) page;
 - (BOOL) resignFirstResponder;
