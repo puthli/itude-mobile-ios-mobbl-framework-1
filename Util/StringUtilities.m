@@ -90,7 +90,7 @@
 	NSRange dotRange = [self rangeOfString: @"."];
 	NSRange slashRange = [self rangeOfString:@"//"];
 	// Only normalize the path if a dot (.) or double slashes (//) are found
-	if (dotRange.location != NSNotFound ^ slashRange.location != NSNotFound) { 
+	if (dotRange.location != NSNotFound || slashRange.location != NSNotFound) {
 		NSMutableArray *splittedPath = [self splitPath];
 		for(NSString *component in splittedPath) {
 			[result appendFormat:@"/%@", component];

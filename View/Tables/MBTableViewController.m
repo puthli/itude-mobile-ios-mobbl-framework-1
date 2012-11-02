@@ -182,7 +182,8 @@
         MBPanel *panel = (MBPanel *)selectedRow;
         
         if (panel.outcomeName) {
-            [panel handleOutcome:[panel outcomeName] withPathArgument:[panel evaluatedDataPath]];
+            NSString *path = [NSString stringWithFormat:@"%@/%@",[panel evaluatedDataPath], [panel path]];
+            [panel handleOutcome:[panel outcomeName] withPathArgument:path];
         }
     }
 
