@@ -114,7 +114,7 @@
 	[sendData setValue:md5Hash forAttribute:@"messageID"];
 	
 	self.documentFactoryType = PARSER_MOBBL1;
-    
+	
     MBDocument *result = nil;
     
     @try {
@@ -133,7 +133,7 @@
     @finally {
         
     }
-	
+
 	return result;
 }
 
