@@ -33,6 +33,8 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     //removed Binck related styler, TODO: update pickerController for Binck!
     //	BinckStyleHandler * styler = (BinckStyleHandler *)[MBViewBuilderFactory sharedInstance].styleHandler;
     MBStyleHandler *styler = [MBViewBuilderFactory sharedInstance].styleHandler;
@@ -74,7 +76,13 @@
 		
 	}
 	
-	[super viewDidLoad];
+    // Adjust frame height for 4-inch screen (iPhone5)
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) {
+        CGRect r = self.view.frame;
+        r.size.height = screenBounds.size.height;
+        self.view.frame = r;
+    }
 }
 
 
