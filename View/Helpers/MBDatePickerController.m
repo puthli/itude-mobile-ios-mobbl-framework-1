@@ -41,6 +41,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     
     MBStyleHandler *styler = [MBViewBuilderFactory sharedInstance].styleHandler;
 	[styler styleToolbar:_toolbar];
@@ -76,7 +77,13 @@
         self.datePickerView.maximumDate = self.maximumDate;
     }
     
-	[super viewDidLoad];
+    // Adjust frame height for 4-inch screen (iPhone5)
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) {
+        CGRect r = self.view.frame;
+        r.size.height = screenBounds.size.height;
+        self.view.frame = r;
+    }
 }
 
 #pragma mark -

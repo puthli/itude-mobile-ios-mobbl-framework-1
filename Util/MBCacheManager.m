@@ -39,7 +39,7 @@ static MBCacheManager *_instance = nil;
         _registryFileName = [[docsDirectory stringByAppendingPathComponent: CACHE_REGISTRY_FILE] retain];
         NSMutableDictionary *combined = [[[NSMutableDictionary alloc] initWithContentsOfFile:_registryFileName] autorelease];
 		if(combined == nil) combined = [[NSMutableDictionary new] autorelease];
-		
+        
 		_registry = [NSMutableDictionary new];
 		_documentTypes = [NSMutableDictionary new];
 		
@@ -54,9 +54,15 @@ static MBCacheManager *_instance = nil;
         _operationQueue = [NSOperationQueue new];
         [_operationQueue setMaxConcurrentOperationCount:1];
 		_temporaryMemoryCache = [NSMutableDictionary new];
-
-		_ttls = [NSMutableDictionary new];
+        
         _ttlsFileName = [[docsDirectory stringByAppendingPathComponent: CACHE_TTL_FILE] retain];
+        
+		NSMutableDictionary *ttlFromFile = [[NSMutableDictionary alloc] initWithContentsOfFile:_ttlsFileName];
+        _ttls = [NSMutableDictionary new];
+        if (ttlFromFile) {
+            _ttls = [[NSMutableDictionary alloc] initWithDictionary:ttlFromFile];
+        }
+        [ttlFromFile release];
     }
     return self;
 }
