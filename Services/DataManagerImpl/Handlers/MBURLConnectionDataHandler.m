@@ -83,7 +83,7 @@
     
     @try {
 #ifdef DEBUG
-        MBDocument *environmentDocument = [[MBDataManagerService sharedInstance] loadDocument:C_DOC_APPLICATION_ENVIRONMENT];
+        MBDocument *environmentDocument = [[MBDataManagerService sharedInstance] loadDocument:C_APPLICATION_ENVIRONMENT];
         allowSelfSignedSslCerfificates = [[environmentDocument valueForPath:@"Secure[0]/@allowAll"] boolValue];
 #endif
     }

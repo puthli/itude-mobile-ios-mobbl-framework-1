@@ -8,6 +8,6 @@
 
 @interface MBConstants 
 
-#define C_DOC_APPLICATION_ENVIRONMENT @"Environment" //C_APPLICATION_ENVIRONMENT is not allowed
+#define C_APPLICATION_ENVIRONMENT @"Environment"
 
 @end
