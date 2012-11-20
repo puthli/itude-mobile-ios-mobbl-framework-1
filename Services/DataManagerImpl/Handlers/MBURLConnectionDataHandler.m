@@ -7,9 +7,9 @@
 //
 
 #import "MBURLConnectionDataHandler.h"
-
-// uncomment to allow self signed SSL certificates
-// #define ALLOW_SELFSIGNED_SSL_CERTS 1
+#import "MBDataManagerService.h"
+#import "MBMacros.h"
+#import "MBConstants.h"
 
 @implementation MBRequestDelegate
 
@@ -57,18 +57,44 @@
 	return nil;
 }
 
-#ifdef ALLOW_SELFSIGNED_SSL_CERTS
-
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+    if ([self allowSelfSignedSslCertificates]) {
+        return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+    }
+    return NO;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+    if ([self allowSelfSignedSslCertificates]) {
+        [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+        [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+    }
 }
 
+/**
+ * @return YES if self signed certificates are allowed and debug is disabled
+ * @discussion This methoud will return FALSE if; 
+ * - debug is disabled,
+ * - the environment document can not be found.
+ */
+- (BOOL) allowSelfSignedSslCertificates {
+
+    BOOL allowSelfSignedSslCerfificates = NO;
+    
+    @try {
+#ifdef DEBUG
+        MBDocument *environmentDocument = [[MBDataManagerService sharedInstance] loadDocument:C_DOC_APPLICATION_ENVIRONMENT];
+        allowSelfSignedSslCerfificates = [[environmentDocument valueForPath:@"Secure[0]/@allowAll"] boolValue];
 #endif
+    }
+    @catch (NSException *exception) {
+        DLog(@"No Environment properties set");
+    }
+    @finally {
+        return allowSelfSignedSslCerfificates;
+    }
+
+}
 
 @end
 
