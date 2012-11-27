@@ -107,7 +107,7 @@
 }
 
 -(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] panelViewBuilder] buildPanelView: self withMaxBounds: bounds viewState: viewState];
+	return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView: self withMaxBounds: bounds viewState: viewState];
 }
 
 - (NSString *) asXmlWithLevel:(int)level {

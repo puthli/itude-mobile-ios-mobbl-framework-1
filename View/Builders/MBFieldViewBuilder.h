@@ -10,14 +10,6 @@
 #import "MBFieldTypes.h"
 @class MBField;
 
-@interface MBFieldViewBuilder : MBViewBuilder {
-
-}
-
+@protocol MBFieldViewBuilder <NSObject>
 -(UIView*) buildFieldView:(MBField*) field withMaxBounds:(CGRect) bounds;
-
--(UIView*) buildButton:(MBField*) field withMaxBounds:(CGRect) bounds;
--(UIView*) buildLabel:(MBField*) field withMaxBounds:(CGRect) bounds;
--(UIView*) buildTextField:(MBField*) field withMaxBounds:(CGRect) bounds;
-
 @end

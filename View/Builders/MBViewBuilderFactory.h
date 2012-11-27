@@ -6,34 +6,31 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBPanelViewBuilder.h"
+#import "MBPanelViewBuilderFactory.h"
 #import "MBPageViewBuilder.h"
 #import "MBAlertViewBuilder.h"
 #import "MBForEachViewBuilder.h"
 #import "MBRowViewBuilder.h"
-#import "MBFieldViewBuilder.h"
+#import "MBFieldViewBuilderFactory.h"
 #import "MBStyleHandler.h"
 
 @class MBRowViewBuilderFactory;
 
 @interface MBViewBuilderFactory : NSObject {
 
-	MBPanelViewBuilder *_panelViewBuilder;
 	MBPageViewBuilder *_pageViewBuilder;
     MBAlertViewBuilder *_alertViewBuilder;
 	MBForEachViewBuilder *_forEachViewBuilder;
-	MBFieldViewBuilder *_fieldViewBuilder;
 	MBStyleHandler *_styleHandler;
 }
 
-@property (nonatomic, retain) MBPanelViewBuilder *panelViewBuilder;
+@property (nonatomic, retain, readonly) MBPanelViewBuilderFactory *panelViewBuilderFactory;
 @property (nonatomic, retain) MBPageViewBuilder *pageViewBuilder;
 @property (nonatomic, retain) MBAlertViewBuilder *alertViewBuilder;
 @property (nonatomic, retain) MBForEachViewBuilder *forEachViewBuilder;
-@property (nonatomic, retain) MBFieldViewBuilder *fieldViewBuilder;
 @property (nonatomic, retain) MBStyleHandler *styleHandler;
-
-@property (nonatomic, retain) MBRowViewBuilderFactory *rowViewBuilderFactory;
+@property (nonatomic, retain, readonly) MBFieldViewBuilderFactory *fieldViewBuilderFactory;
+@property (nonatomic, retain, readonly) MBRowViewBuilderFactory *rowViewBuilderFactory;
 
 /**
 * Return the default MBRowViewBuilder.
@@ -44,6 +41,7 @@
 
 +(MBViewBuilderFactory *) sharedInstance;
 +(void) setSharedInstance:(MBViewBuilderFactory *) factory;
+
 
 
 @end

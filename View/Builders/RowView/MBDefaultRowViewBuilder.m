@@ -123,7 +123,7 @@
             if ([field.definition isPreConditionValid:row.document currentPath:[field absoluteDataPath]]) {
                 if ([C_FIELD_BUTTON isEqualToString:field.type]){
                     if ([C_FIELD_STYLE_NETWORK isEqualToString:[field style]]) {
-                        UIView *buttonView = [[[MBViewBuilderFactory sharedInstance] fieldViewBuilder]  buildButton:field withMaxBounds:CGRectZero];
+                        UIView *buttonView = [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory]  buildFieldView:field withMaxBounds:CGRectZero];
                         [field setResponder:buttonView];
                         if (buttons == nil) {
                             buttons = [[[NSMutableArray alloc]initWithObjects:buttonView,nil] autorelease];

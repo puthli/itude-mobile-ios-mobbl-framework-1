@@ -23,6 +23,7 @@
 #import "UIView+TreeWalker.h"
 #import "MBFontCustomizer.h"
 #import "MBRowViewBuilderFactory.h"
+#import "MBFieldTypes.h"
 
 
 #define MAX_FONT_SIZE 20

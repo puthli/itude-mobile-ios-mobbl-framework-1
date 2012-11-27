@@ -7,6 +7,7 @@
 
 #import <MBViewBuilderFactory.h>
 #import "MBTableViewCellConfiguratorInput.h"
+#import "MBFieldViewBuilderFactory.h"
 
 
 @implementation MBTableViewCellConfiguratorInput
@@ -14,7 +15,7 @@
 - (void)configureCell:(UITableViewCell *)cell withField:(MBField *)field
 {
 // store field for retrieval in didSelectRowAtIndexPath
-    UIView *inputFieldView = [[[MBViewBuilderFactory sharedInstance] fieldViewBuilder]  buildTextField:field withMaxBounds:CGRectZero];
+    UIView *inputFieldView = [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory]  buildFieldView:field withMaxBounds:CGRectZero];
     field.responder = inputFieldView;
 
     if (!cell.textLabel.text){

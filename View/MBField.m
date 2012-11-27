@@ -200,7 +200,7 @@
 }
 
 -(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] fieldViewBuilder] buildFieldView: self withMaxBounds: bounds];
+	return [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView: self withMaxBounds: bounds];
 }
 
 // This will translate any expression that are part of the path to their actual values

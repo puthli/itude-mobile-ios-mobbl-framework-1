@@ -1,0 +1,5 @@
+#define C_PANEL_PLAIN @"PLAIN"
+#define C_PANEL_BASIC @"BASIC"
+#define C_PANEL_SECTION @"SECTION"
+#define C_PANEL_LIST @"LIST"
+#define C_PANEL_MATRIX @"MATRIX"

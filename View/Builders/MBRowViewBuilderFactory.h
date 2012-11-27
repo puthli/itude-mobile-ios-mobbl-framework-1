@@ -18,4 +18,7 @@
 /// @name Getting a MBRowViewBuilder instance
 @property (nonatomic, retain) id<MBRowViewBuilder> defaultBuilder;
 - (id<MBRowViewBuilder>)builderForStyle:(NSString *)style;
+
+
+
 @end

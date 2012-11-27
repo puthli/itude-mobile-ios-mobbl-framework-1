@@ -8,7 +8,7 @@
 
 #import "MBRowViewBuilder.h"
 #import "MBViewBuilderFactory.h"
-#import "MBPanelViewBuilder.h"
+#import "MBPanelViewBuilderFactory.h"
 #import "MBPageViewBuilder.h"
 #import "MBForEachViewBuilder.h"
 #import "MBDefaultRowViewBuilder.h"
@@ -20,23 +20,23 @@ static MBViewBuilderFactory *_instance = nil;
 
 @implementation MBViewBuilderFactory
 
-@synthesize panelViewBuilder = _panelViewBuilder;
 @synthesize pageViewBuilder = _pageViewBuilder;
 @synthesize alertViewBuilder = _alertViewBuilder;
 @synthesize forEachViewBuilder = _forEachViewBuilder;
-@synthesize fieldViewBuilder = _fieldViewBuilder;
+@synthesize fieldViewBuilderFactory = _fieldViewBuilderFactory;
 @synthesize styleHandler = _styleHandler;
 @synthesize rowViewBuilderFactory = _rowViewBuilderFactory;
+@synthesize panelViewBuilderFactory = _panelViewBuilderFactory;
 
 - (id) init
 {
 	self = [super init];
 	if (self != nil) {
-		_panelViewBuilder = [[MBPanelViewBuilder alloc] init];
+		_panelViewBuilderFactory = [[MBPanelViewBuilderFactory alloc] init];
 		_pageViewBuilder = [[MBPageViewBuilder alloc] init];
         _alertViewBuilder = [[MBAlertViewBuilder alloc] init];
 		_forEachViewBuilder = [[MBForEachViewBuilder alloc] init];
-		_fieldViewBuilder = [[MBFieldViewBuilder alloc] init];
+		_fieldViewBuilderFactory = [[MBFieldViewBuilderFactory alloc] init];
 		_styleHandler = [[MBStyleHandler alloc] init];
         _rowViewBuilderFactory = [[MBRowViewBuilderFactory alloc] init];
 	}
@@ -46,11 +46,11 @@ static MBViewBuilderFactory *_instance = nil;
 
 - (void) dealloc
 {
-	[_panelViewBuilder release];
+	[_panelViewBuilderFactory release];
 	[_pageViewBuilder release];
     [_alertViewBuilder release];
 	[_forEachViewBuilder release];
-	[_fieldViewBuilder release];
+	[_fieldViewBuilderFactory release];
     [_rowViewBuilderFactory release];
 	[super dealloc];
 }

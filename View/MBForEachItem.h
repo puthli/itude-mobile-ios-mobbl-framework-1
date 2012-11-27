@@ -21,6 +21,4 @@
 
 @property (nonatomic, assign) int index;
 
-- (NSString *)outcomeName;
-
 @end

@@ -28,7 +28,7 @@
 }
 
 -(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] rowViewBuilder] buildRowView: self withMaxBounds: bounds viewState: viewState];
+	return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildRowView: self withMaxBounds: bounds viewState: viewState];
 }
 
 -(NSString*) evaluateExpression:(NSString*) variableName {
