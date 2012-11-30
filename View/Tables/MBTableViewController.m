@@ -621,7 +621,7 @@
 }
 
 -(UIWebView*)initWebView {
-	UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)] autorelease];
+	UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(6, 6, 284, 36)];
 	webView.delegate = self;
 	return webView;
 }
