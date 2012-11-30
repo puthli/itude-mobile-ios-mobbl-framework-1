@@ -43,7 +43,7 @@
 		self.dialogGroupName = definition.groupName;
 		self.position = definition.position;
 		
-		self.rootController = [[UIViewController alloc] init];
+		self.rootController = (UINavigationController*)[[UIViewController alloc] init];
 		self.rootController.title = self.title;
 		self.temporary = isTemporary;
 		_usesNavbar = FALSE;

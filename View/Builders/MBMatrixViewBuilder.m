@@ -85,7 +85,7 @@ static MBMatrixViewBuilder *_instance = nil;
 	
 	// Throw error when there is no MatrixRowView found
 	if (matrixRowView == nil) {
-		NSString *msg = [NSString stringWithFormat:@"The cell has no subview of type @%!",[MBMatrixRowView class]];
+		NSString *msg = [NSString stringWithFormat:@"The cell has no subview of type %@",[MBMatrixRowView class]];
 		@throw [[NSException alloc] initWithName:@"NoColumnsFound" reason: msg userInfo:nil];
 	}
 	

@@ -151,7 +151,7 @@
 			if (!serverErrorHandled && responseDoc == nil) {
 				NSString *msg = MBLocalizedString(@"The server returned an error. Please try again later");
 				if(delegate.err != nil) {
-					msg = [NSString stringWithFormat:@"%@ %@: %@", msg, delegate.err.domain, delegate.err.code];
+					msg = [NSString stringWithFormat:@"%@ %@: %d", msg, delegate.err.domain, delegate.err.code];
 				}
 				@throw [MBServerException exceptionWithName:@"Server Error" reason: msg userInfo:nil];
 			}

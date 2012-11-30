@@ -16,4 +16,6 @@
 @interface NSString(BinckUtilities)
 - (double)doubleValueDutch;
 - (float)floatValueDutch;
+- (NSString*)replaceAdditionalHTMLTags;
+- (NSString*)getCurrencyCode;
 @end
