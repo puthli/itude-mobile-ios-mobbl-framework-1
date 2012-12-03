@@ -18,4 +18,3 @@ project.xcworkspace
 *.swp
 *.out
 appledoc
-BuildInfo.h
