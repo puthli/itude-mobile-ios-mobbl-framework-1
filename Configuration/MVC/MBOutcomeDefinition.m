@@ -29,12 +29,12 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Outcome origin='%@' name='%@' action='%@' transferDocument='%@' persist='%@' noBackgroundProcessing='%@'%@%@%@/>\n", level, "", 
+	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Outcome origin='%@' name='%@' action='%@' transferDocument='%@' persist='%@' noBackgroundProcessing='%@'%@%@%@%@/>\n", level, "", 
 							   _origin, _name, _action, _transferDocument?@"TRUE":@"FALSE", _persist?@"TRUE":@"FALSE",_noBackgroundProcessing?@"TRUE":@"FALSE",
 							   [self attributeAsXml:@"dialog" withValue:_dialog],
                                [self attributeAsXml:@"preCondition" withValue:_preCondition],
-                               [self attributeAsXml:@"displayMode" withValue:_displayMode]/*,
-                               [self attributeAsXml:@"transitioningStyle" withValue:_transitioningStyle]*/];
+                               [self attributeAsXml:@"displayMode" withValue:_displayMode],
+                               [self attributeAsXml:@"transitioningStyle" withValue:_transitioningStyle]];
 	return result;
 }
 

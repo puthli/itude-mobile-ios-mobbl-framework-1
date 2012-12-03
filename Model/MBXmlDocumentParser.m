@@ -97,7 +97,7 @@ didStartElement:(NSString *)elementName
 	[_characters release];
 	_characters = [NSMutableString new];
 	
-    MBElement *element = nil;
+    MBElementContainer *element = nil;
     BOOL copyAttributes = TRUE;
     
 	// check that we have the correct document type
@@ -109,7 +109,7 @@ didStartElement:(NSString *)elementName
 			@throw [NSException exceptionWithName:@"InvalidDocument" reason: msg userInfo:nil];
 		}
         // see release below
-        element = (MBElement*)[_rootElement retain];
+        element = [_rootElement retain];
         copyAttributes = _copyRootAttributes;
 	}
 	else {
@@ -123,8 +123,11 @@ didStartElement:(NSString *)elementName
 	}
     
     // Do not process elements that are not defined; so also check for nil definition
-    if(copyAttributes && element.definition != nil) {
-        for(NSString *attrName in [attributeDict allKeys]) [element setValue:[attributeDict valueForKey:attrName] forAttribute:attrName throwIfInvalid:FALSE];
+    if(copyAttributes && element.definition != nil && [element isKindOfClass:[MBElement class]]) {
+        MBElement *e = (MBElement *)element;
+        for(NSString *attrName in [attributeDict allKeys]) {
+            [e setValue:[attributeDict valueForKey:attrName] forAttribute:attrName throwIfInvalid:FALSE];
+        }
     }
     [_stack addObject:element];
 }
