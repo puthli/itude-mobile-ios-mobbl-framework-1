@@ -169,7 +169,9 @@ static MBApplicationController *_instance = nil;
 			outcomeToProcess.dialogName = outcome.dialogName;
 			if (outcome.displayMode != nil) outcomeToProcess.displayMode = outcome.displayMode;
 			outcomeToProcess.noBackgroundProcessing = outcome.noBackgroundProcessing || outcomeDef.noBackgroundProcessing;
-
+            if (outcome.transferDocumentSet) {
+                outcomeToProcess.transferDocument = outcome.transferDocument;
+            }
 			if([outcomeToProcess isPreConditionValid]) {
 			
 				// Update a possible switch of dialog/display mode set by the outcome definition

@@ -11,6 +11,12 @@
 #import "MBDataManagerService.h"
 #import "MBConfigurationDefinition.h"
 
+@interface MBOutcome () {
+    BOOL _transferDocumentSet;
+}
+
+@end
+
 @implementation MBOutcome
 
 @synthesize originName = _originName;
@@ -22,9 +28,10 @@
 @synthesize document = _document;
 @synthesize path = _path;
 @synthesize persist = _persist;
-@synthesize transferDocument = _transferDocument;
 @synthesize preCondition = _preCondition;
 @synthesize noBackgroundProcessing = _noBackgroundProcessing;
+@synthesize transferDocument = _transferDocument;
+@synthesize transferDocumentSet = _transferDocumentSet;
 
 -(id) initWithOutcome:(MBOutcome*) outcome {
     if(self = [super init]) {
@@ -37,6 +44,7 @@
         self.document = outcome.document;
         self.path = outcome.path;
         self.persist = outcome.persist;
+        _transferDocumentSet = outcome.transferDocumentSet;
         self.transferDocument = outcome.transferDocument;
         self.preCondition = outcome.preCondition;
         self.noBackgroundProcessing = outcome.noBackgroundProcessing;
@@ -106,8 +114,14 @@
 }
 
 -(NSString *) description {
-	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitioningStyle=%@ preCondition=%@ noBackgroundProsessing=%@", 
-            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitioningStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
+	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitioningStyle=%@ preCondition=%@ noBackgroundProsessing=%@ transferDocument=%@", 
+            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitioningStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE", _transferDocument ? @"TRUE" : @"FALSE"];
 }
+
+-(void)setTransferDocument:(BOOL)transferDocument {
+    _transferDocument = transferDocument;
+    _transferDocumentSet = true;
+}
+
 
 @end

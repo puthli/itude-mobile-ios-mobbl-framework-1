@@ -37,6 +37,7 @@
 @property (nonatomic, assign) BOOL persist;
 @property (nonatomic, assign) BOOL transferDocument;
 @property (nonatomic, assign) BOOL noBackgroundProcessing;
+@property (nonatomic, assign, readonly) BOOL transferDocumentSet;
 
 -(id) initWithOutcome:(MBOutcome*) outcome;
 -(id) initWithOutcomeDefinition:(MBOutcomeDefinition*) definition;
