@@ -644,6 +644,8 @@
 		2C654D3C1518CED9009B1EE7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D3B1518CED9009B1EE7 /* SystemConfiguration.framework */; };
 		2C654D401518DBE5009B1EE7 /* MBXmlDocumentParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C654D3F1518DBE5009B1EE7 /* MBXmlDocumentParserTest.m */; };
 		BDC7BF9A155809B6001A5BF6 /* MBElementContainerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC7BF99155809B6001A5BF6 /* MBElementContainerTest.m */; };
+		BDCB1853165BD44E0012C337 /* MBConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BDCB1852165BD44E0012C337 /* MBConstants.h */; };
+		BDCB1854165BD44E0012C337 /* MBConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BDCB1852165BD44E0012C337 /* MBConstants.h */; };
 		DCEAD30E13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 		DCEAD30F13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -932,6 +934,7 @@
 		2C654D3F1518DBE5009B1EE7 /* MBXmlDocumentParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBXmlDocumentParserTest.m; path = Model/MBXmlDocumentParserTest.m; sourceTree = "<group>"; };
 		BDC7BF98155809B6001A5BF6 /* MBElementContainerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBElementContainerTest.h; path = Model/MBElementContainerTest.h; sourceTree = "<group>"; };
 		BDC7BF99155809B6001A5BF6 /* MBElementContainerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBElementContainerTest.m; path = Model/MBElementContainerTest.m; sourceTree = "<group>"; };
+		BDCB1852165BD44E0012C337 /* MBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConstants.h; sourceTree = "<group>"; };
 		DCDF99D213C1E17200F927A3 /* itude-mobile-iphone-core-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "itude-mobile-iphone-core-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DCDF9AD113C1E9A900F927A3 /* itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386 */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "itude-mobile-iphone-core-i386.framework/itude-mobile-iphone-core-i386"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEAD30D13C2DE4B00CFF3E8 /* itude-mobile-iphone-core-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-iphone-core-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -1275,6 +1278,7 @@
 		1C01B6C014BDF78900CE79A0 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				BDCB1852165BD44E0012C337 /* MBConstants.h */,
 				1C01B6C114BDF78900CE79A0 /* BinckUtilities.h */,
 				1C01B6C214BDF78900CE79A0 /* BinckUtilities.m */,
 				1C01B6C314BDF78900CE79A0 /* ColorUtilities.h */,
@@ -1693,6 +1697,7 @@
 				1C01BB9214BDF78D00CE79A0 /* MBTableViewController.h in Headers */,
 				2C26D9571521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */,
 				2C26D95E1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */,
+				BDCB1853165BD44E0012C337 /* MBConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1838,6 +1843,7 @@
 				1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */,
 				2C26D9581521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */,
 				2C26D95F1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */,
+				BDCB1854165BD44E0012C337 /* MBConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
