@@ -12,6 +12,7 @@
 
 @class MBForEachItem;
 
+DEPRECATED_ATTRIBUTE
 @interface MBDefaultRowViewBuilder : MBViewBuilder <MBRowViewBuilder> {
 
 }

@@ -13,13 +13,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell withField:(MBField *)field
 {
-    if (field.path != nil) {
-        cell.textLabel.text = MBLocalizedString([field formattedValue]);
-    } else {
-        cell.textLabel.text = field.label;
-    }
-    cell.textLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
-    [self.styleHandler styleLabel:cell.textLabel component:field];
+    [self configureView:cell.textLabel forField:field];
 }
 
 

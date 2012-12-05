@@ -8,16 +8,25 @@
 
 #import "MBLabelBuilder.h"
 #import "MBField.h"
+#import "MBStyleHandler.h"
 
 @implementation MBLabelBuilder
 
 -(UIView *)buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds {
  	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, [UIScreen mainScreen].applicationFrame.size.width, 25.0)];
-	if(field.path != nil) label.text = [field value];
+
+    [self configureView:label forField:field];
+	return [label autorelease];
+}
+
+
+-(void)configureView:(UIView *)view forField:(MBField *)field {
+    UILabel *label = (UILabel*)view;
+    if(field.path != nil) label.text = [field value];
 	else label.text = field.label;
 	label.backgroundColor = [UIColor clearColor];
-    
-	return [label autorelease];
+    label.autoresizingMask =   UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.styleHandler applyStyle:field forView: label viewState:0];
 }
 
 @end

@@ -9,5 +9,6 @@
 #import "MBTableViewCellConfigurator.h"
 
 /** Configures UITableViewCells for Checkbox fields. */
+DEPRECATED_ATTRIBUTE
 @interface MBTableViewCellConfiguratorCheckbox : MBTableViewCellConfigurator
 @end

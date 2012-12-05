@@ -8,6 +8,6 @@
 
 #import "MBLabelBuilder.h"
 
-@interface MBSubLabelBuilder : MBLabelBuilder
+@interface MBSubLabelBuilder : MBViewBuilder <MBFieldViewBuilder>
 
 @end

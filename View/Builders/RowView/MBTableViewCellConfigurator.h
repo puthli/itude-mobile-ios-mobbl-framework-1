@@ -33,4 +33,6 @@
 - (void)addAccessoryDisclosureIndicatorToCell:(UITableViewCell *)cell;
 
 
+
+- (void) configureView:(UIView*)view forField:(MBField*)field;
 @end

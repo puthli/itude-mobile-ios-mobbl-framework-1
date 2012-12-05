@@ -57,6 +57,7 @@
 - (void) applyStyle:(UIView*) view field:(MBField*) field viewState:(MBViewState) viewState {
 
 	if([field.type isEqualToString: C_FIELD_LABEL]) [self styleLabel: view component: field];
+    else if([field.type isEqualToString: C_FIELD_SUBLABEL]) [self styleSubLabel: view component: field];
 	else if([field.type isEqualToString: C_FIELD_BUTTON]) [self styleButton: view component: field];
 	
 }
@@ -65,10 +66,28 @@
 	if([view isKindOfClass:[UILabel class]]) {
 		UILabel *label = (UILabel*) view;
 		label.backgroundColor = [UIColor clearColor];
-		
+        
+		/*
+        CGFloat size =[UIFont labelFontSize];
+        label.font = [label.font fontWithSize:size];
+*/        
 		[self alignLabel:label forAlignMent:field.alignment];
 	}
 }
+
+
+- (void) styleSubLabel:(UIView*) view component:(MBField*) field {
+	if([view isKindOfClass:[UILabel class]]) {
+		UILabel *label = (UILabel*) view;
+		label.backgroundColor = [UIColor clearColor];
+		/*
+        CGFloat size =[UIFont smallSystemFontSize];
+        label.font = [label.font fontWithSize:size];
+        */
+		[self alignLabel:label forAlignMent:field.alignment];
+	}
+}
+
 
 - (void) styleMultilineLabel:(UIView*) view component:(MBField*) field {
 	[self styleLabel:view component:field];

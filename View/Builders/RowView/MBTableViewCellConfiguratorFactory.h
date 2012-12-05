@@ -17,6 +17,7 @@
 
 /** The MBStyleHandler to be used for constructing the UITableViewCells */
 @property (nonatomic, retain) MBStyleHandler *styleHandler;
+@property (nonatomic,retain) MBTableViewCellConfigurator *defaultConfigurator;
 
 - (id)initWithStyleHandler:(MBStyleHandler *)styleHandler;
 

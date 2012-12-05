@@ -11,6 +11,8 @@
 #import "MBButtonBuilder.h"
 #import "MBTextBuilder.h"
 #import "MBLabelBuilder.h"
+#import "MBSubLabelBuilder.h"
+#import "MBCheckboxBuilder.h"
 #import <Foundation/Foundation.h>
 
 
@@ -39,12 +41,18 @@
     
     id<MBFieldViewBuilder> buttonBuilder = [[[MBTextBuilder alloc] init] autorelease];
     [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_INPUT ];
+    [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_TEXT ];
     [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_USERNAME ];
     [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_PASSWORD ];
     
     id<MBFieldViewBuilder> labelBuilder = [[[MBLabelBuilder alloc] init] autorelease];
     [self registerFieldViewBuilder:labelBuilder forFieldType:C_FIELD_LABEL];
-    [self registerFieldViewBuilder:labelBuilder forFieldType:C_FIELD_SUBLABEL];
+    
+    id<MBFieldViewBuilder> subLabelBuilder = [[[MBSubLabelBuilder alloc] init] autorelease];
+    [self registerFieldViewBuilder:subLabelBuilder forFieldType:C_FIELD_SUBLABEL];
+    
+    id<MBFieldViewBuilder> checkboxBuilder = [[[MBCheckboxBuilder alloc] init] autorelease];
+    [self registerFieldViewBuilder:checkboxBuilder forFieldType:C_FIELD_CHECKBOX];
         
     return self;
 }
@@ -93,6 +101,14 @@
     else {
         [NSException raise:@"BuilderNotFound" format:@"No builder found for type %@ and style %@", field.type, field.style];
         return nil;
+    }
+}
+
+-(void)configureView:(UIView *) view forField :(MBField *)field {
+    id<MBFieldViewBuilder> builder = [self builderForType:field.type withStyle:field.style];
+    if (builder) return [builder configureView:view forField:field];
+    else {
+        [NSException raise:@"BuilderNotFound" format:@"No builder found for type %@ and style %@", field.type, field.style];
     }
 }
 

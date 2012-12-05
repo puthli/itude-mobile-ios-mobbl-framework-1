@@ -7,6 +7,8 @@
 
 #import <MBStyleHandler.h>
 #import "MBTableViewCellConfigurator.h"
+#import "MBFieldViewBuilderFactory.h"
+#import "MBViewBuilderFactory.h"
 
 
 @implementation MBTableViewCellConfigurator
@@ -38,6 +40,10 @@
 - (void)configureCell:(UITableViewCell *)cell withField:(MBField *)field
 {
     // Empty implementation, override in type-specific subclasses.
+}
+
+- (void) configureView:(UIView*)view forField:(MBField*)field {
+    [[[MBViewBuilderFactory sharedInstance]fieldViewBuilderFactory]configureView:view forField:field];
 }
 
 

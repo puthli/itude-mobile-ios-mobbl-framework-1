@@ -5,6 +5,8 @@
 //  Copyright (c) 2012 Itude Mobile. All rights reserved.
 //
 
+#import "MBRowViewBuilder.h"
+#import "MBNewRowViewBuilder.h"
 #import "MBDefaultRowViewBuilder.h"
 #import "MBRowViewBuilderFactory.h"
 
@@ -22,7 +24,7 @@
     self = [super init];
     if (self) {
         _registeredBuilders = [[NSMutableDictionary dictionary] retain];
-        _defaultBuilder = [[MBDefaultRowViewBuilder alloc] init];
+        _defaultBuilder = [[MBNewRowViewBuilder alloc] init];
     }
     return self;
 }

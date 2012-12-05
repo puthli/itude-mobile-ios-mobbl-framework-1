@@ -12,4 +12,5 @@
 
 @protocol MBFieldViewBuilder <NSObject>
 -(UIView*) buildFieldView:(MBField*) field withMaxBounds:(CGRect) bounds;
+-(void) configureView:(UIView*) view forField:(MBField*)field;
 @end

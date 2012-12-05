@@ -24,6 +24,7 @@
 
 @synthesize styleHandler = _styleHandler;
 @synthesize registeredImplementations = _registeredImplementations;
+@synthesize defaultConfigurator = _defaultConfigurator;
 
 - (id)initWithStyleHandler:(MBStyleHandler *)styleHandler
 {
@@ -58,7 +59,7 @@
                                                                                                       initWithStyleHandler:self.styleHandler];
     [self registerTableViewCellConfigurator:sublabelConf forFieldType:C_FIELD_SUBLABEL];
     [sublabelConf release];
-
+/*
     MBTableViewCellConfiguratorCheckbox *checkboxConf = [[MBTableViewCellConfiguratorCheckbox alloc]
                                                                                               initWithStyleHandler:self.styleHandler];
     [self registerTableViewCellConfigurator:checkboxConf forFieldType:C_FIELD_CHECKBOX];
@@ -70,7 +71,7 @@
     [self registerTableViewCellConfigurator:inputConf forFieldType:C_FIELD_USERNAME];
     [self registerTableViewCellConfigurator:inputConf forFieldType:C_FIELD_PASSWORD];
     [inputConf release];
-
+*/
     MBTableViewCellConfiguratorText *textConf = [[MBTableViewCellConfiguratorText alloc]
                                                                                   initWithStyleHandler:self.styleHandler];
     [self registerTableViewCellConfigurator:textConf forFieldType:C_FIELD_TEXT];
@@ -93,13 +94,16 @@
 
 - (MBTableViewCellConfigurator *)configuratorForFieldType:(NSString *)fieldType
 {
-    return [self.registeredImplementations objectForKey:fieldType];
+    MBTableViewCellConfigurator * conf = [self.registeredImplementations objectForKey:fieldType];
+    if (!conf) conf = _defaultConfigurator;
+    return conf;
 }
 
 - (void)dealloc
 {
     [_styleHandler release];
     [_registeredImplementations release];
+    [_defaultConfigurator release];
     [super dealloc];
 }
 

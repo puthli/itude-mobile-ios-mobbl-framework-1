@@ -200,6 +200,8 @@
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             field.responder = nil;
+      /*      UIView *view = [field buildViewWithMaxBounds:cell.bounds viewState:viewState];
+            [cell.contentView addSubview:view];*/
 
             // #BINCKMOBILE-19
             if ([field.definition isPreConditionValid:component.document currentPath:[field absoluteDataPath]]) {

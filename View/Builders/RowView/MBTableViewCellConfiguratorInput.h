@@ -11,5 +11,6 @@
 /**
 * Configures UITableViewCells for Input fields.
 */
+DEPRECATED_ATTRIBUTE
 @interface MBTableViewCellConfiguratorInput : MBTableViewCellConfigurator
 @end

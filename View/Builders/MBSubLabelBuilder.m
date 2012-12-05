@@ -7,7 +7,23 @@
 //
 
 #import "MBSubLabelBuilder.h"
+#import "MBField.h"
+#import "MBStyleHandler.h"
 
 @implementation MBSubLabelBuilder
+-(UIView *)buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds {
+ 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 25.0, [UIScreen mainScreen].applicationFrame.size.width, 15.0)];
+    [self configureView:label forField:field];
+	return [label autorelease];
+}
+
+-(void)configureView:(UIView *)view forField:(MBField *)field {
+    UILabel *label = (UILabel*)view;
+    if(field.path != nil) label.text = [field value];
+	else label.text = field.label;
+	label.backgroundColor = [UIColor clearColor];
+    label.autoresizingMask =   UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.styleHandler applyStyle:field forView: label viewState:0];
+}
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "MBViewBuilder.h"
+#import "MBRowViewBuilder.h"
 
-@interface MBNewRowViewBuilder : MBViewBuilder
+@interface MBNewRowViewBuilder : MBViewBuilder <MBRowViewBuilder>
 
 @end

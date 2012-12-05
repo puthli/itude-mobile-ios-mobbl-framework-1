@@ -7,7 +7,8 @@
 //
 
 #import "MBViewBuilder.h"
+#import "MBFieldViewBuilder.h"
 
-@interface MBCheckboxBuilder : MBViewBuilder
+@interface MBCheckboxBuilder : MBViewBuilder <MBFieldViewBuilder>
 
 @end

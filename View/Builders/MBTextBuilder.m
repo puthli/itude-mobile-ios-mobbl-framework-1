@@ -29,6 +29,21 @@
     
 	CGRect fieldBounds = [[self styleHandler] sizeForTextField:field withMaxBounds:bounds];
 	UITextField *textField = [[[UITextField alloc]initWithFrame: fieldBounds] autorelease];
+
+    [self configureView:textField forField:field];
+    
+    [fieldContainer addSubview:textField];
+
+	// Whatever; this needs some clever stuff (and this is not it ;-):
+	fieldContainer.frame = CGRectMake(0.0, 0.0, [UIScreen mainScreen].applicationFrame.size.width, 30.0);
+	
+	return [fieldContainer autorelease];
+
+}
+
+-(void)configureView:(UIView *)view forField:(MBField *)field {
+    UITextField *textField = (UITextField*)view;
+    
 	if ([C_FIELD_PASSWORD isEqualToString:field.type]) {
 		textField.secureTextEntry = YES;
 	}else if ([C_FIELD_USERNAME isEqualToString:field.type]) {
@@ -74,14 +89,6 @@
 	}
 	
 	[[self styleHandler] styleTextfield: textField component:field];
-	
-	[fieldContainer addSubview:textField];
-	
-	// Whatever; this needs some clever stuff (and this is not it ;-):
-	fieldContainer.frame = CGRectMake(0.0, 0.0, [UIScreen mainScreen].applicationFrame.size.width, 30.0);
-	
-	return [fieldContainer autorelease];
-
 }
 
 @end

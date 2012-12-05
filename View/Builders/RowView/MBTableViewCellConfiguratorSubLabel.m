@@ -7,18 +7,13 @@
 
 #import "MBTableViewCellConfiguratorSubLabel.h"
 
-
 @implementation MBTableViewCellConfiguratorSubLabel
 
 - (void)configureCell:(UITableViewCell *)cell withField:(MBField *)field
 {
-    if (field.path != nil) {
-        cell.detailTextLabel.text = [field formattedValue];
-    } else {
-        cell.detailTextLabel.text = field.label;
-    }
-    cell.detailTextLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
-    [self.styleHandler styleLabel:cell.detailTextLabel component:field];
+    
+    [self configureView:cell.detailTextLabel forField:field];
+    
 }
 
 @end

@@ -13,15 +13,13 @@
 
 @interface MBFieldViewBuilderFactory : NSObject
 
-/// @name Registering MBRowViewBuilder instances
 - (void)registerFieldViewBuilder:(id<MBFieldViewBuilder>)fieldViewBuilder forFieldType:(NSString*)type forFieldStyle:(NSString *)style;
 - (void)registerFieldViewBuilder:(id<MBFieldViewBuilder>)fieldViewBuilder forFieldType:(NSString*)type;
 
-/// @name Getting a MBRowViewBuilder instance
 @property (nonatomic, retain) id<MBFieldViewBuilder> defaultBuilder;
 - (id<MBFieldViewBuilder>)builderForType:(NSString *)type withStyle:(NSString*)style;
 
 -(UIView*) buildFieldView:(MBField*) field withMaxBounds:(CGRect) bounds;
-
+-(void) configureView:(UIView*)view forField:(MBField*)field;
 
 @end
