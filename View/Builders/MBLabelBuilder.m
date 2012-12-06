@@ -19,6 +19,11 @@
 	return [label autorelease];
 }
 
+-(UIView*)buildFieldView:(MBField*)field forTableCell:(UITableViewCell *)cell withMaxBounds:(CGRect) bounds {
+    UIView *view = cell.textLabel;
+    [self configureView: view forField: field];
+    return view;
+}
 
 -(void)configureView:(UIView *)view forField:(MBField *)field {
     UILabel *label = (UILabel*)view;

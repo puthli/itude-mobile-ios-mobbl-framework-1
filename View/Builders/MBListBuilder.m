@@ -19,7 +19,7 @@
 	return [[[MBTableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
 }
 
--(UIView*)buildPanelView:(MBPanel *)panel withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
+-(UIView*)buildPanelView:(MBPanel *)panel forParent:(UIView*) parent  withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
     
 	MBTableViewController *tableViewController = [self createTableViewController:panel];
     // Make sure the viewcontroller is retained by the panel:
@@ -55,8 +55,10 @@
 	NSString *label = [self getAccessibilityLabelForPanel:panel];
 	[tableView setIsAccessibilityElement: YES];
 	[tableView setAccessibilityLabel: label];
+    
+    [parent addSubview:tableView];
 	
-	return tableViewController.tableView;
+	return tableView;
 
 }
 

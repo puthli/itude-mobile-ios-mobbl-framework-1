@@ -12,11 +12,13 @@
 @implementation MBPlainPanelBuilder
 
 
--(UIView*)buildPanelView:(MBPanel *)panel withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
-    UIView *view= [super buildPanelView:panel withMaxBounds:bounds viewState:viewState];
+-(UIView*)buildPanelView:(MBPanel *)panel forParent:(UIView*) parent  withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
+    UIView *view= [super buildPanelView:panel forParent:parent withMaxBounds:bounds viewState:viewState];
     
     UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:bounds];
     scrollView.contentSize = view.frame.size;
+    
+    [view removeFromSuperview];
     
     [scrollView addSubview:view];
     [scrollView autorelease];
@@ -24,7 +26,9 @@
     
     //add accessibilityLabel for ui automation
     view.accessibilityLabel = [self getAccessibilityLabelForPanel:panel];
-	
+    
+    [parent addSubview:view];
+    
     return view;
 }
 

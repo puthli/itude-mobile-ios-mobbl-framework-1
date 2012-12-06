@@ -83,11 +83,11 @@
 }
 
 
--(UIView*) buildPanelView:(MBPanel*) panel withMaxBounds:(CGRect) bounds viewState:(MBViewState)viewState {
+-(UIView*) buildPanelView:(MBPanel*) panel forParent:(UIView*) parent withMaxBounds:(CGRect) bounds viewState:(MBViewState)viewState {
     id<MBPanelViewBuilder> builder = [self builderForType:panel.type withStyle:panel.style];
     
     if (builder) {
-        UIView *view= [builder buildPanelView:panel withMaxBounds:bounds viewState:viewState];
+        UIView *view= [builder buildPanelView:panel forParent:(UIView*) parent withMaxBounds:bounds viewState:viewState];
         [[[MBViewBuilderFactory sharedInstance] styleHandler] applyStyle:panel forView:view viewState: viewState];
         return view;
     }

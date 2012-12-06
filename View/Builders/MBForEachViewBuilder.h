@@ -15,6 +15,6 @@
 
 }
 
--(UIView*) buildForEachView:(MBForEach*) forEach withMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState;
+-(UIView*) buildForEachView:(MBForEach*) forEach forParent:(UIView*) parent withMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState;
 
 @end

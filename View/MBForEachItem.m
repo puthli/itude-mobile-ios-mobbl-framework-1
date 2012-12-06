@@ -9,7 +9,6 @@
 #import "MBForEachItem.h"
 #import "MBForEachDefinition.h"
 #import "MBViewBuilderFactory.h"
-#import "MBDefaultRowViewBuilder.h"
 #import "MBPage.h"
 
 @implementation MBForEachItem
@@ -27,8 +26,8 @@
 	return [self substituteExpressions: path];
 }
 
--(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildRowView: self withMaxBounds: bounds viewState: viewState];
+-(UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*) parent viewState:(MBViewState) viewState {
+	return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildRowView: self forParent: parent withMaxBounds: bounds viewState: viewState];
 }
 
 -(NSString*) evaluateExpression:(NSString*) variableName {

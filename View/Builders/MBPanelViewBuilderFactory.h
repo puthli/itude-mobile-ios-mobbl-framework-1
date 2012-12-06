@@ -22,6 +22,6 @@
 @property (nonatomic, retain) id<MBPanelViewBuilder> defaultBuilder;
 - (id<MBPanelViewBuilder>)builderForType:(NSString *)type withStyle:(NSString*)style;
 
--(UIView*) buildPanelView:(MBPanel*) panel withMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState;
+-(UIView*) buildPanelView:(MBPanel*) panel forParent:(UIView*) parent  withMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState;
 
 @end

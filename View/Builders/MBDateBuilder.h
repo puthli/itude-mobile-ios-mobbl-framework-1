@@ -1,5 +1,5 @@
 //
-//  MBTextBuilder.h
+//  MBDateBuilder.h
 //  itude-mobile-ios-app
 //
 //  Created by Pjotter Tommassen on 2012/6/12.
@@ -8,6 +8,6 @@
 
 #import "MBFieldViewBuilder.h"
 
-@interface MBTextBuilder : MBFieldViewBuilder
+@interface MBDateBuilder : MBFieldViewBuilder
 
 @end

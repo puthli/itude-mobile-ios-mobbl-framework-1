@@ -12,7 +12,7 @@
 @implementation MBBasicPanelBuilder
 
 
--(UIView*)buildPanelView:(MBPanel *)panel withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
+-(UIView*)buildPanelView:(MBPanel *)panel  forParent:(UIView*) parent  withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
     
     // Use a large canvas to begin with; and determine the actual size later
 	// Using the default init constructor causes the nested children being unable to get focus for some reason
@@ -25,6 +25,9 @@
 									  viewState: viewState];
 	
 	[self adjustBoundsForView: view maxBounds: bounds boundsLeftOver: boundsLeftOver];
+    
+    [parent addSubview:view];
+    
     return view;
 
 }

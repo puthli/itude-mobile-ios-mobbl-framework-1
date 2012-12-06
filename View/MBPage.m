@@ -86,7 +86,7 @@
 
         self.viewController = (UIViewController<MBViewControllerProtocol>*)[[MBApplicationFactory sharedInstance]createViewController:self];
         self.viewController.title = [self title];
-        self.viewController.view = [self buildViewWithMaxBounds: bounds viewState: viewState];
+        self.viewController.view = [self buildViewWithMaxBounds: bounds forParent: nil viewState: viewState];
         [self.viewController  setPage: self];
     }
 	return self;
@@ -112,7 +112,7 @@
 	// Make sure we clear the cache of all related documents:
 	[self rebuild];
 	CGRect bounds = [UIScreen mainScreen].applicationFrame;	
-	self.viewController.view = [self buildViewWithMaxBounds: bounds viewState: _viewState];
+	self.viewController.view = [self buildViewWithMaxBounds: bounds forParent:nil viewState: _viewState];
 }
 
 // This is a method required by component so any component can find the page
@@ -124,7 +124,7 @@
 	[self resignFirstResponder];
 }
 
--(UIView*) buildViewWithMaxBounds:(CGRect) bounds  viewState:(MBViewState) viewState {
+-(UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*) parent  viewState:(MBViewState) viewState {
 	return [[[MBViewBuilderFactory sharedInstance] pageViewBuilder] buildPageView: self withMaxBounds: bounds viewState: viewState];
 }
 

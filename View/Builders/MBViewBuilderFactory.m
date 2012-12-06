@@ -11,7 +11,6 @@
 #import "MBPanelViewBuilderFactory.h"
 #import "MBPageViewBuilder.h"
 #import "MBForEachViewBuilder.h"
-#import "MBDefaultRowViewBuilder.h"
 #import "MBFieldViewBuilder.h"
 #import "MBStyleHandler.h"
 #import "MBRowViewBuilderFactory.h"

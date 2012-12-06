@@ -12,34 +12,11 @@
 #import "MBField.h"
 #import "MBFieldViewBuilderFactory.h"
 #import "MBViewBuilderFactory.h"
-#import "MBTableViewCellConfiguratorFactory.h"
 #import "MBDevice.h"
-#import "MBTableViewCellConfiguratorDefault.h"
-
-
-@interface MBNewRowViewBuilder()
-@property (nonatomic, retain) MBTableViewCellConfiguratorFactory *tableViewCellConfiguratorFactory;
-@end
+#import "MBPanel.h"
+#import "StringUtilities.h"
 
 @implementation MBNewRowViewBuilder
-
-@synthesize tableViewCellConfiguratorFactory = _tableViewCellConfiguratorFactory;
-
-- (void)dealloc
-{
-    [_tableViewCellConfiguratorFactory release];
-    [super dealloc];
-}
-
-- (MBTableViewCellConfiguratorFactory *)tableViewCellConfiguratorFactory
-{
-    if (!_tableViewCellConfiguratorFactory) {
-        _tableViewCellConfiguratorFactory = [[MBTableViewCellConfiguratorFactory alloc]
-                                             initWithStyleHandler:self.styleHandler];
-        _tableViewCellConfiguratorFactory.defaultConfigurator = [[MBTableViewCellConfiguratorDefault alloc] init];
-    }
-    return _tableViewCellConfiguratorFactory;
-}
 
 
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType
@@ -55,7 +32,10 @@
     else {
         cell.accessoryView = nil;
         for(UIView *vw in cell.contentView.subviews) [vw removeFromSuperview];
-              //  for(UIView *vw in cell.subviews) [vw removeFromSuperview];
+        cell.textLabel.text = nil;
+        cell.detailTextLabel.text = nil;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
 }
@@ -89,7 +69,7 @@
                     type = C_SUBTITLECELL;
                     style = UITableViewCellStyleSubtitle;
                 }
-              
+             
             }
         }
     }
@@ -106,14 +86,13 @@
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             field.responder = nil;
-            /*      UIView *view = [field buildViewWithMaxBounds:cell.bounds viewState:viewState];
-             [cell.contentView addSubview:view];*/
             
             // #BINCKMOBILE-19
             if ([field.definition isPreConditionValid:component.document currentPath:[field absoluteDataPath]]) {
                 
-                MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
-                [cellConfigurator configureCell:cell withField:field];
+               /* MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
+                [cellConfigurator configureCell:cell withField:field];*/
+                [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView:field forParent:cell withMaxBounds:cell.bounds];
             }
         }
     }

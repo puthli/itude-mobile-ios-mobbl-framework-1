@@ -40,7 +40,7 @@
 		CGRect maxChildBounds = maxBounds;
 		maxChildBounds.size.width -= insetLeft + insetRight;
 		maxChildBounds.size.height -= insetTop + insetBottom;
-		UIView *childView = [child buildViewWithMaxBounds:maxChildBounds viewState: viewState];
+		UIView *childView = [child buildViewWithMaxBounds:maxChildBounds forParent: view viewState: viewState];
 		
 		if(childView)
 		{
@@ -56,7 +56,7 @@
 			frame.size.height -= insetTop + insetBottom;
 			
 			childView.frame = frame;
-			[view addSubview:childView];
+            if (!childView.superview)			[view addSubview:childView];
 			
 			if(horizontalLayout) {
 				xOffset += childView.frame.size.width;

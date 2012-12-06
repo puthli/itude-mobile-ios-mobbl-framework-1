@@ -12,7 +12,7 @@
 
 @implementation MBForEachViewBuilder
 
--(UIView*) buildForEachView:(MBForEach*) forEach withMaxBounds:(CGRect) maxBounds viewState:(MBViewState) viewState {
+-(UIView*) buildForEachView:(MBForEach*) forEach forParent:(UIView*) parent  withMaxBounds:(CGRect) maxBounds viewState:(MBViewState) viewState {
 	// One that we surely want to support here is the UITableView
 	// For now do a simple implementation
 	

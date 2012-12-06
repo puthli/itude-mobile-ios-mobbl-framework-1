@@ -106,8 +106,8 @@
 	return MBLocalizedStringWithoutLoggingWarnings(result);
 }
 
--(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView: self withMaxBounds: bounds viewState: viewState];
+-(UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*) parent  viewState:(MBViewState) viewState {
+	return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView: self forParent:parent withMaxBounds: bounds viewState: viewState];
 }
 
 - (NSString *) asXmlWithLevel:(int)level {

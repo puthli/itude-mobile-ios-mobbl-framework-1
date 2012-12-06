@@ -9,6 +9,6 @@
 #import "MBViewBuilder.h"
 #import "MBFieldViewBuilder.h"
 
-@interface MBLabelBuilder : MBViewBuilder <MBFieldViewBuilder>
+@interface MBLabelBuilder : MBFieldViewBuilder
 
 @end

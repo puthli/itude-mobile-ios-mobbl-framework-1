@@ -84,8 +84,8 @@
 	[row setParent:self];
 }
 
--(UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] forEachViewBuilder] buildForEachView: self withMaxBounds: bounds viewState: viewState];
+-(UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*) parent viewState:(MBViewState) viewState {
+	return [[[MBViewBuilderFactory sharedInstance] forEachViewBuilder] buildForEachView: self forParent:parent withMaxBounds: bounds viewState: viewState];
 }
 
 -(BOOL) resignFirstResponder {

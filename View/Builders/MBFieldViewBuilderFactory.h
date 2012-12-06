@@ -9,17 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @class MBField;
-@protocol MBFieldViewBuilder;
+@class MBFieldViewBuilder;
 
 @interface MBFieldViewBuilderFactory : NSObject
 
-- (void)registerFieldViewBuilder:(id<MBFieldViewBuilder>)fieldViewBuilder forFieldType:(NSString*)type forFieldStyle:(NSString *)style;
-- (void)registerFieldViewBuilder:(id<MBFieldViewBuilder>)fieldViewBuilder forFieldType:(NSString*)type;
+- (void)registerFieldViewBuilder:(MBFieldViewBuilder*)fieldViewBuilder forFieldType:(NSString*)type forFieldStyle:(NSString *)style;
+- (void)registerFieldViewBuilder:(MBFieldViewBuilder*)fieldViewBuilder forFieldType:(NSString*)type;
 
-@property (nonatomic, retain) id<MBFieldViewBuilder> defaultBuilder;
-- (id<MBFieldViewBuilder>)builderForType:(NSString *)type withStyle:(NSString*)style;
+@property (nonatomic, retain) MBFieldViewBuilder *defaultBuilder;
+- (MBFieldViewBuilder*)builderForType:(NSString *)type withStyle:(NSString*)style;
 
--(UIView*) buildFieldView:(MBField*) field withMaxBounds:(CGRect) bounds;
--(void) configureView:(UIView*)view forField:(MBField*)field;
+-(UIView*) buildFieldView:(MBField*) field forParent:(UIView*)parent withMaxBounds:(CGRect) bounds;
 
 @end

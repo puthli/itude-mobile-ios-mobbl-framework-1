@@ -19,7 +19,7 @@
 }
 
 
--(UIView*)buildPanelView:(MBPanel *)panel withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
+-(UIView*)buildPanelView:(MBPanel *)panel forParent:(UIView*) parent  withMaxBounds:(CGRect)bounds viewState:(MBViewState)viewState {
     
 	MBMatrixViewController *matrixViewController = [self createMatrixViewController:panel];
 	
@@ -47,6 +47,8 @@
 	
 	//add accessibilityLabel for ui automation
 	matrixViewController.tableView.accessibilityLabel = [self getAccessibilityLabelForPanel:panel];
+    
+   [parent addSubview:matrixViewController.tableView];
     
 	return matrixViewController.tableView;
 

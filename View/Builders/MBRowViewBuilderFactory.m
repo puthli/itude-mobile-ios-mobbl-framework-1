@@ -7,7 +7,6 @@
 
 #import "MBRowViewBuilder.h"
 #import "MBNewRowViewBuilder.h"
-#import "MBDefaultRowViewBuilder.h"
 #import "MBRowViewBuilderFactory.h"
 
 @interface MBRowViewBuilderFactory()

@@ -39,7 +39,7 @@
 @property (nonatomic, assign) int bottomInset;
 
 - (id) initWithDefinition:(id)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent;
-- (UIView*) buildViewWithMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState;
+- (UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*)parent viewState:(MBViewState) viewState;
 - (void) handleOutcome:(MBOutcome *)outcome;
 - (void) handleOutcome:(NSString *)outcomeName withPathArgument:(NSString*) path;
 - (NSString*) substituteExpressions:(NSString*) expression;

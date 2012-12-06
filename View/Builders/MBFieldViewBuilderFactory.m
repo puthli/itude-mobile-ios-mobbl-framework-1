@@ -7,12 +7,16 @@
 //
 
 #import "MBFieldViewBuilderFactory.h"
+#import "MBFieldViewBuilder.h"
 #import "MBField.h"
 #import "MBButtonBuilder.h"
-#import "MBTextBuilder.h"
+#import "MBInputBuilder.h"
 #import "MBLabelBuilder.h"
 #import "MBSubLabelBuilder.h"
 #import "MBCheckboxBuilder.h"
+#import "MBDropDownBuilder.h"
+#import "MBDateBuilder.h"
+#import "MBTextBuilder.h"
 #import <Foundation/Foundation.h>
 
 
@@ -22,7 +26,7 @@
 
 @implementation MBFieldViewBuilderFactory {
     NSMutableDictionary *_registry;
-    id<MBFieldViewBuilder> _defaultBuilder;
+    MBFieldViewBuilder *_defaultBuilder;
 }
 
 @synthesize registry = _registry;
@@ -36,24 +40,46 @@
         _registry = [[NSMutableDictionary dictionary] retain];
         _defaultBuilder = nil;
     }
-    [self registerFieldViewBuilder:[[[MBButtonBuilder alloc]init] autorelease] forFieldType:C_FIELD_BUTTON];
+    
+    MBFieldViewBuilder *buttonBuilder = [[MBButtonBuilder alloc]init];
+    [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_BUTTON];
+    [buttonBuilder release];
     
     
-    id<MBFieldViewBuilder> buttonBuilder = [[[MBTextBuilder alloc] init] autorelease];
-    [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_INPUT ];
-    [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_TEXT ];
-    [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_USERNAME ];
-    [self registerFieldViewBuilder:buttonBuilder forFieldType:C_FIELD_PASSWORD ];
+    MBFieldViewBuilder* inputBuilder = [[MBInputBuilder alloc] init] ;
+    [self registerFieldViewBuilder:inputBuilder forFieldType:C_FIELD_INPUT ];
+    [self registerFieldViewBuilder:inputBuilder forFieldType:C_FIELD_USERNAME ];
+    [self registerFieldViewBuilder:inputBuilder forFieldType:C_FIELD_PASSWORD ];
+    [inputBuilder release];
     
-    id<MBFieldViewBuilder> labelBuilder = [[[MBLabelBuilder alloc] init] autorelease];
+    MBFieldViewBuilder* textBuilder = [[MBTextBuilder alloc] init] ;
+    [self registerFieldViewBuilder:textBuilder forFieldType:C_FIELD_TEXT ];
+        [textBuilder release];
+    
+    MBFieldViewBuilder* labelBuilder = [[MBLabelBuilder alloc] init] ;
     [self registerFieldViewBuilder:labelBuilder forFieldType:C_FIELD_LABEL];
+    [labelBuilder release];
     
-    id<MBFieldViewBuilder> subLabelBuilder = [[[MBSubLabelBuilder alloc] init] autorelease];
+    MBFieldViewBuilder* subLabelBuilder = [[MBSubLabelBuilder alloc] init] ;
     [self registerFieldViewBuilder:subLabelBuilder forFieldType:C_FIELD_SUBLABEL];
+    [subLabelBuilder release];
     
-    id<MBFieldViewBuilder> checkboxBuilder = [[[MBCheckboxBuilder alloc] init] autorelease];
+    MBFieldViewBuilder* checkboxBuilder = [[MBCheckboxBuilder alloc] init] ;
     [self registerFieldViewBuilder:checkboxBuilder forFieldType:C_FIELD_CHECKBOX];
-        
+    [checkboxBuilder release];
+    
+    MBDropDownBuilder *dropDownBuilder = [[MBDropDownBuilder alloc]init];
+    [self registerFieldViewBuilder:dropDownBuilder forFieldType:C_FIELD_DROPDOWNLIST];
+    [dropDownBuilder release];
+    
+    MBDateBuilder *dateBuilder = [[MBDateBuilder alloc]init];
+    [self registerFieldViewBuilder:dateBuilder forFieldType:C_FIELD_DATETIMESELECTOR];
+    [self registerFieldViewBuilder:dateBuilder forFieldType:C_FIELD_TIMESELECTOR];
+    [self registerFieldViewBuilder:dateBuilder forFieldType:C_FIELD_DATESELECTOR];
+    [self registerFieldViewBuilder:dateBuilder forFieldType:C_FIELD_BIRTHDATE];
+    [dateBuilder release];
+    
+    
     return self;
 }
 
@@ -65,11 +91,11 @@
 }
 
 
-- (void)registerFieldViewBuilder:(id<MBFieldViewBuilder>)fieldViewBuilder forFieldType:(NSString*)type  {
+- (void)registerFieldViewBuilder:(MBFieldViewBuilder*)fieldViewBuilder forFieldType:(NSString*)type  {
     [self registerFieldViewBuilder:fieldViewBuilder forFieldType:type forFieldStyle:nil];
 }
 
-- (void)registerFieldViewBuilder:(id<MBFieldViewBuilder>)fieldViewBuilder forFieldType:(NSString*)type forFieldStyle:(NSString *)style {
+- (void)registerFieldViewBuilder:(MBFieldViewBuilder*)fieldViewBuilder forFieldType:(NSString*)type forFieldStyle:(NSString *)style {
     NSMutableDictionary *styleDict = [self.registry valueForKey:type];
     if (!styleDict) {
         
@@ -82,11 +108,11 @@
    }
 
 
-- (id<MBFieldViewBuilder>)builderForType:(NSString *)type withStyle:(NSString*)style {
+- (MBFieldViewBuilder*) builderForType:(NSString *)type withStyle:(NSString*)style {
     NSMutableDictionary *styleDict = [self.registry valueForKey:type];
     if (!styleDict) return self.defaultBuilder;
     
-    id<MBFieldViewBuilder> builder = [styleDict valueForKey:style];
+    MBFieldViewBuilder* builder = [styleDict valueForKey:style];
     if (!builder) builder = [styleDict objectForKey:[NSNull null]];
     if (!builder) builder = self.defaultBuilder;
     
@@ -96,7 +122,7 @@
 
 
 -(UIView*) buildFieldView:(MBField*) field withMaxBounds:(CGRect) bounds {
-    id<MBFieldViewBuilder> builder = [self builderForType:field.type withStyle:field.style];
+    MBFieldViewBuilder* builder = [self builderForType:field.type withStyle:field.style];
     if (builder) return [builder buildFieldView:field withMaxBounds:bounds];
     else {
         [NSException raise:@"BuilderNotFound" format:@"No builder found for type %@ and style %@", field.type, field.style];
@@ -104,12 +130,14 @@
     }
 }
 
--(void)configureView:(UIView *) view forField :(MBField *)field {
-    id<MBFieldViewBuilder> builder = [self builderForType:field.type withStyle:field.style];
-    if (builder) return [builder configureView:view forField:field];
+-(UIView *)buildFieldView:(MBField *)field forParent:(UIView *)parent withMaxBounds:(CGRect)bounds {
+    MBFieldViewBuilder* builder = [self builderForType:field.type withStyle:field.style];
+    if (builder) return [builder buildFieldView:field forParent:parent withMaxBounds:bounds];
     else {
         [NSException raise:@"BuilderNotFound" format:@"No builder found for type %@ and style %@", field.type, field.style];
+        return nil;
     }
 }
+
 
 @end

@@ -1,17 +1,18 @@
 //
-//  MBTableViewCellConfiguratorDropDownList 
+//  MBDropDownBuilder.m
+//  itude-mobile-ios-app
 //
-//  Created by Pieter Kuijpers on 20-08-12.
+//  Created by Pjotter Tommassen on 2012/6/12.
 //  Copyright (c) 2012 Itude Mobile. All rights reserved.
 //
 
-#import "MBTableViewCellConfiguratorDropDownList.h"
+#import "MBDropDownBuilder.h"
+#import "MBField.h"
+#import "MBStyleHandler.h"
 
+@implementation MBDropDownBuilder
 
-@implementation MBTableViewCellConfiguratorDropDownList
-
-- (void)configureCell:(UITableViewCell *)cell withField:(MBField *)field
-{
+-(UIView*)buildFieldView:(MBField*)field forTableCell:(UITableViewCell *)cell withMaxBounds:(CGRect) bounds {
     cell.textLabel.text = field.label;
     if (field.path != nil) {
         MBDomainDefinition *domain = field.domain;
@@ -20,14 +21,19 @@
             // translated if fetched in a regular way so in that case they will never match
             if ([domainValidator.value isEqualToString:[field untranslatedValue]]) {
                 cell.detailTextLabel.text =
-                        [domainValidator.title length] ? domainValidator.title : domainValidator.value;
+                [domainValidator.title length] ? domainValidator.title : domainValidator.value;
             }
         }
     }
     cell.textLabel.frame = [self.styleHandler sizeForLabel:field withMaxBounds:CGRectZero];
-    [self addAccessoryDisclosureIndicatorToCell:cell];
-    [self.styleHandler styleLabel:cell.textLabel component:field];
-}
 
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryView.isAccessibilityElement = YES;
+    cell.accessoryView.accessibilityLabel = @"DisclosureIndicator";
+
+    [self.styleHandler styleLabel:cell.textLabel component:field];
+    
+    return cell.textLabel;
+}
 
 @end
