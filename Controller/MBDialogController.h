@@ -46,5 +46,7 @@
 - (CGRect) screenBoundsForDisplayMode:(NSString*) displayMode;
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
+- (void) willActivate;
+- (void) didActivate;
 
 @end

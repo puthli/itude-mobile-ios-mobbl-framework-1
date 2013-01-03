@@ -20,9 +20,9 @@
 #import "MBResourceService.h"
 #import "MBActivityIndicator.h"
 #import "MBConfigurationDefinition.h"
-#import "MBNavigationController.h"
 #import "MBSpinner.h"
 #import "MBLocalizationService.h"
+#import "MBBasicViewController.h"
 
 // Used to get a stylehandler to style navigationBar
 #import "MBStyleHandler.h"
@@ -98,7 +98,7 @@
 	if(page.pageType == MBPageTypesErrorPage || [@"POPUP" isEqualToString:displayMode]) {
 		[self showAlertView: page];
 	}
-	else if(_modalController == nil && 
+	else if(_modalController == nil &&
 			([@"MODAL" isEqualToString:displayMode] || 
 			 [@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode] || 
 			 [@"MODALFORMSHEET" isEqualToString:displayMode] ||
@@ -110,7 +110,7 @@
 			 [@"MODALCURRENTCONTEXT" isEqualToString:displayMode] ||
 			 [@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode])) {
                 // TODO: support nested modal dialogs
-                _modalController = [[MBNavigationController alloc] initWithRootViewController:[page viewController]];
+                _modalController = [[UINavigationController alloc] initWithRootViewController:[page viewController]];
                 [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
                 
                 BOOL addCloseButton = NO;
@@ -314,7 +314,7 @@
 	// because it destroys the navigation controller for some reason
 	// TODO: Make selecting a dialog work; even if it is nested within the more tab
 
-	if(idx != shouldBe && shouldBe < FIRST_MORE_TAB_INDEX) {
+if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 		UIViewController *ctrl = [_tabController selectedViewController];
 		[ctrl viewWillDisappear:FALSE];
 		[_tabController setSelectedViewController: dialog.rootController];
@@ -342,8 +342,8 @@
 
 - (void) resetViewPreservingCurrentDialog {
 	for (UIViewController *controller in [_tabController viewControllers]){
-		if ([controller isKindOfClass:[MBNavigationController class]]) {
-			[(MBNavigationController *) controller popToRootViewControllerAnimated:YES];
+		if ([controller isKindOfClass:[UINavigationController class]]) {
+			[(UINavigationController *) controller popToRootViewControllerAnimated:YES];
 		}
 	}
 	
@@ -475,7 +475,7 @@
 				[dc.rootController setHidesBottomBarWhenPushed: FALSE];
 
 				// TODO: FIX THIS FOR THE IPAD. This is only valid for the iPhone (with current implementation)!!!
-				if(idx++ >= FIRST_MORE_TAB_INDEX) {
+/*				if(idx++ >= FIRST_MORE_TAB_INDEX) {
 					// The following is required to make sure TableViewControllers act nice
 					// Not sure why this works for ALL controllers since it looks like the
 					// moreNavigationController can only have 1 delegate and this is within a loop
@@ -485,7 +485,7 @@
 					
 					// Apply style to the navigationBar behind "More" button
 					[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_tabController.moreNavigationController.navigationBar];
-				}
+				}*/
 			}
         }
 		
@@ -497,6 +497,8 @@
 		
         [_tabController setViewControllers: tabs animated: YES];
 		[[_tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
+        _tabController.moreNavigationController.delegate = self;
+        _tabController.customizableViewControllers = nil;
         [tabs release];
     }
 }
@@ -655,6 +657,23 @@
 			}
 		}
 	}
+}
+
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isKindOfClass:[MBBasicViewController class]])
+    {
+        MBBasicViewController* controller = (MBBasicViewController*) viewController;
+        [controller.dialogController didActivate];
+    }
+}
+
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+ if ([viewController isKindOfClass:[MBBasicViewController class]])
+    {
+        MBBasicViewController* controller = (MBBasicViewController*) viewController;
+        [controller.dialogController willActivate];
+        
+    }
 }
 
 @end

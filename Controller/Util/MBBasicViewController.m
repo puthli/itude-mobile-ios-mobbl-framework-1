@@ -9,10 +9,12 @@
 #import "MBBasicViewController.h"
 #import "MBPage.h"
 #import "MBOrientationManager.h"
+#import "MBDialogController.h"
 
 @implementation MBBasicViewController
 
 @synthesize page = _page;
+@synthesize dialogController = _dialogController;
 
 - (void) dealloc
 {

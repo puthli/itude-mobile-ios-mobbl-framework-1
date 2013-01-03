@@ -9,6 +9,7 @@
 #import "MBViewControllerProtocol.h"
 
 @class MBPage;
+@class MBDialogController;
 
 // This class is the ROOT of the MEMORY ALLOCATION STRUCTURE; the root of all retains.
 // This class is pushed on UINavigationControllers or other controllers; when released it should trigger
@@ -18,9 +19,11 @@
 /** Template for custom MBViewController classes. Coupled to exactly one MBPage */
 @interface MBBasicViewController : UIViewController<MBViewControllerProtocol> {
 	MBPage *_page;
+    MBDialogController *_dialogController;
 }
 
 @property (nonatomic, retain) MBPage *page;
+@property (nonatomic, retain) MBDialogController *dialogController;
 
 /** looks up the MBPage associated with this instance and sets the view property with a fresh view hierarchy constructed from the page definition */
 - (void) rebuildView;

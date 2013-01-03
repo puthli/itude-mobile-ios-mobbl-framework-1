@@ -10,7 +10,7 @@
 @class MBPage;
 @class MBAlert;
 
-@interface MBViewManager : NSObject<UITabBarControllerDelegate> {
+@interface MBViewManager : NSObject<UITabBarControllerDelegate, UINavigationControllerDelegate> {
 	UIWindow *_window;
 	UITabBarController *_tabController;
 	NSMutableDictionary *_dialogControllers;

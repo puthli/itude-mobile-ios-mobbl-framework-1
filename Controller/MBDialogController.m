@@ -10,16 +10,18 @@
 #import "MBDialogController.h"
 #import "MBPage.h"
 #import "MBActivityIndicator.h"
-#import "MBNavigationController.h"
 #import "MBSpinner.h"
 // Used to get a stylehandler to style navigationBar
 #import "MBStyleHandler.h"
 #import "MBViewBuilderFactory.h" 
 #import "MBBasicViewController.h"
+#import "UINavigationController+MBRebuilder.h"
+#import "MBViewManager.h"
 
 @interface MBDialogController()
 	-(void) clearSubviews;
     -(UINavigationController*) determineNavigationController;
+-(UITabBarController*) determineTabBarController;
 
 @end
 
@@ -35,48 +37,41 @@
 @synthesize rootController = _rootController;
 @synthesize temporary = _temporary;
 
--(id) initWithDefinition:(MBDialogDefinition*)definition temporary:(BOOL) isTemporary {
+
+-(id) initWithDefinition:(MBDialogDefinition *)definition {
 	if(self = [super init]) {
 		self.name = definition.name;
 		self.title = definition.title;
         self.dialogMode = definition.mode;
 		self.dialogGroupName = definition.groupName;
 		self.position = definition.position;
+        		_usesNavbar = [definition.mode isEqualToString:@"STACK"];
         UINavigationController *controller = [[UINavigationController alloc] init];
 		self.rootController = controller;
-        [controller release];
-		self.rootController.title = self.title;
-		self.temporary = isTemporary;
-		_usesNavbar = FALSE;
+               [controller release];
 		_activityIndicatorCount = 0;
 		[self showActivityIndicator];
+        		[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.rootController.navigationBar];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRebuild) name:REBUILD_DIALOG_NOTIFICATION object:nil];
 	}
-	return self;	
+	return self;
+    
+}
+
+-(id) initWithDefinition:(MBDialogDefinition*)definition temporary:(BOOL) isTemporary {
+    if (self = [self initWithDefinition:definition]) {
+		self.temporary = isTemporary;        
+    }
+    return self;
 }
 
 -(id) initWithDefinition:(MBDialogDefinition*)definition page:(MBPage*) page bounds:(CGRect) bounds {
-	if(self = [super init]) {
-		self.name = definition.name;
-		self.title = definition.title;
-        self.dialogMode = definition.mode;
-		//self.dialogGroupName = definition.groupName;
+	if(self = [self initWithDefinition:definition]) {
 		self.temporary = FALSE;
-
+        MBBasicViewController *controller = (MBBasicViewController*)page.viewController;
+        controller.dialogController = self;
+        [self.rootController setRootViewController:page.viewController];
         _bounds = bounds;
-		
-        MBNavigationController *controller = [[MBNavigationController alloc] initWithRootViewController:page.viewController];
-		self.rootController = controller;
-        [controller release];
-		self.rootController.delegate = self;
-		self.rootController.title = self.title;
-		_usesNavbar = [definition.mode isEqualToString:@"STACK"];
-		_activityIndicatorCount = 0;
-		self.rootController.navigationBarHidden = !_usesNavbar;
-		
-		// Apply style to the navigationbar
-		[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.rootController.navigationBar];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRebuild) name:REBUILD_DIALOG_NOTIFICATION object:nil];
 	}
 	return self;
 }
@@ -105,11 +100,9 @@
 
 		// If the rootController is popped, there is no controller to go back to. 
 		// A black screen will be displayed when the user navigates back! That is why we need to replace it
-		if ((nav.visibleViewController == nav.topViewController)&& 
-			[nav isKindOfClass:[MBNavigationController class]]) {
-			MBNavigationController *mbNav = (MBNavigationController *)nav;
-			[mbNav popViewControllerAnimated:FALSE];
-			[mbNav setRootViewController:page.viewController];
+		if (nav.visibleViewController == nav.topViewController) {
+			[nav popViewControllerAnimated:FALSE];
+			[nav setRootViewController:page.viewController];
 		}
 		else {
 			[nav popViewControllerAnimated:FALSE];
@@ -139,70 +132,55 @@
 
 -(void) rebuildPage:(id) args {
 	id navigationController = [self determineNavigationController];
-	
-	if([navigationController isKindOfClass:[MBNavigationController class]]) {
-		MBNavigationController *nc = (MBNavigationController*) navigationController;
-		[nc rebuild];
-	}
-	else if([navigationController respondsToSelector:@selector(popViewControllerAnimated:)]) {
-			NSMutableArray *ctrls = [[NSMutableArray new] autorelease];
-			
-			UIViewController *ctrl;
-			do { ctrl = [navigationController popViewControllerAnimated:NO];
-				if(ctrl != nil)  {
-					[ctrls addObject:ctrl]; 
-					if([ctrl isKindOfClass:[MBBasicViewController class]]) {
-						MBBasicViewController *basic = (MBBasicViewController*) ctrl;
-						[basic rebuildView];
-					}
-				}
-			} while(ctrl != nil);
-			
-			for(int i=[ctrls count]-1; i>=0; i--) {
-				[navigationController pushViewController: [ctrls objectAtIndex:i] animated: NO];
-			}
-			if([ctrls count] == 0) {
-				// Workaround; this is probably the case when the more navigation controller is not touched yet
-				// resort to using the rootcontroller
-				if([_rootController isKindOfClass:[MBNavigationController class]]) {
-					MBNavigationController *nav = (MBNavigationController*) _rootController;
-					[nav rebuild];
-				}
-			}
-		}
-	else {
-		WLog(@"WARNING: Do not know how to rebuild a %@; navigation stack not refreshed", [navigationController class]);
-	}
+    
+    [navigationController rebuild];
+}
 
-	
+-(UITabBarController*)determineTabBarController {
+    return [[[MBApplicationController currentInstance] viewManager] tabController];
 }
 
 // The following code is really ugly: depending on the time of construction of the dialog the navigation controller
 // might be nil; try a few possibilities:
 -(UINavigationController*) determineNavigationController {
 
-	if(_navigationController != nil) return _navigationController;
+//    return [self.rootController.visibleViewController]
+    
+//	if(_navigationController != nil) return _navigationController;
 	
-	if(_rootController.tabBarController) {
-		int idx = [_rootController.tabBarController.viewControllers indexOfObject:_rootController];
+    UITabBarController *tabBarController = [self determineTabBarController];
+	if(tabBarController) {
+		int idx = [tabBarController.viewControllers indexOfObject:_rootController];
 		if(idx >= FIRST_MORE_TAB_INDEX) {
-			return _rootController.tabBarController.moreNavigationController;
+			return tabBarController.moreNavigationController;
 		}
 	}
-	return _rootController;
+    return _rootController;
 }
 
--(void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-	// Read issue MOBBL-150 before changing this. 
-	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
-	[viewController viewWillAppear:animated];
-	
+-(void)willActivate {
+    NSLog(@"Showing dialog %@", [self name]);
+    
+    UINavigationController * navigationController = [self determineNavigationController];
+    
 	UINavigationBar *morenavbar = navigationController.navigationBar;
     UINavigationItem *morenavitem = morenavbar.topItem;
     // Currently we don't want Edit button in More screen; because we need to store the order then also
-	if(_rootController.tabBarController.moreNavigationController == navigationController) morenavitem.rightBarButtonItem = nil;
+	if([self determineTabBarController].moreNavigationController == navigationController) morenavitem.rightBarButtonItem = nil;
+}
 
+-(void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+	// Read issue MOBBL-150 before changing this. 
+	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
+	[viewController viewWillAppear:animated];
+    
 	_navigationController = viewController.navigationController;
+    [self willActivate];
+}
+
+-(void)didActivate {
+    NSLog(@"Did show %@", [self name]);
 }
 
 -(void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -211,6 +189,8 @@
 	[viewController viewDidAppear:animated];
 	
 	_navigationController = viewController.navigationController;
+    
+    [self didActivate];
 }
 
 -(void) clearSubviews {
@@ -241,6 +221,15 @@
         bounds.size.height += 44;
     } 
 	return bounds;
+}
+
+-(void)setRootController:(UINavigationController *)rootController {
+    [_rootController release];
+    _rootController = [rootController retain];
+    _rootController.delegate = self;
+    _rootController.title = self.title;
+    _rootController.navigationBarHidden = !_usesNavbar;
+
 }
 
 - (void)showActivityIndicator {
