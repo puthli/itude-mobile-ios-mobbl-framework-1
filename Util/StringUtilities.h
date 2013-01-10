@@ -58,6 +58,14 @@
 
 
 /**
+ * Creates a string formatted as a price with excactly 4 (four) decimals
+ * @note This method assumes that the receiver is a float string read from XML
+ * @return Returns a string formatted as a price with excactly 4 (four) decimals
+ */
+- (NSString *)formatPriceWithFourDecimals;
+
+
+/**
  * Creates a string formatted as a number with excactly 2 (two) decimals
  * @note This method assumes that the receiver is a float string read from XML
  * @return Returns a string formatted as a number with excactly 2 (two) decimals

@@ -148,6 +148,8 @@
 		fieldValue = [fieldValue formatPriceWithTwoDecimals];
 	} else if ((fieldValue != self.valueIfNil) && [self.dataType isEqualToString:@"priceWithThreeDecimals"]) {
 		fieldValue = [fieldValue formatPriceWithThreeDecimals];
+	} else if ((fieldValue != self.valueIfNil) && [self.dataType isEqualToString:@"priceWithFourDecimals"]) {
+		fieldValue = [fieldValue formatPriceWithFourDecimals];
 	} else if ([self.dataType isEqualToString:@"volume"]) {
 		fieldValue = [fieldValue formatVolume];
 	} else if ([self.dataType isEqualToString:@"formatPercentageWithTwoDecimals"]) {

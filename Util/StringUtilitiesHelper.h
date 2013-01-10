@@ -18,6 +18,7 @@
 	NSNumberFormatter *_priceWithMinimalDecimalsNumberFormatter;
 	NSNumberFormatter *_priceWithTwoDecimalsNumberFormatter;
 	NSNumberFormatter *_priceWithThreeDecimalsNumberFormatter;
+	NSNumberFormatter *_priceWithFourDecimalsNumberFormatter;
 	NSNumberFormatter *_numberWithOriginalNumberOfDecimalsNumberFormatter;
 	NSNumberFormatter *_numberWithTwoDecimalsNumberFormatter;
 	NSNumberFormatter *_numberWithThreeDecimalsNumberFormatter;
@@ -29,6 +30,7 @@
 @property (nonatomic, retain) NSNumberFormatter	*priceWithMinimalDecimalsNumberFormatter;
 @property (nonatomic, retain) NSNumberFormatter	*priceWithTwoDecimalsNumberFormatter;
 @property (nonatomic, retain) NSNumberFormatter	*priceWithThreeDecimalsNumberFormatter;
+@property (nonatomic, retain) NSNumberFormatter	*priceWithFourDecimalsNumberFormatter;
 @property (nonatomic, retain) NSNumberFormatter	*numberWithOriginalNumberOfDecimalsNumberFormatter;
 @property (nonatomic, retain) NSNumberFormatter	*numberWithTwoDecimalsNumberFormatter;
 @property (nonatomic, retain) NSNumberFormatter	*numberWithThreeDecimalsNumberFormatter;
@@ -51,6 +53,7 @@
 + (NSNumberFormatter *)numberFormatterToFormatPriceWithMinimalDecimals;
 + (NSNumberFormatter *)numberFormatterToFormatPriceWithTwoDecimals;
 + (NSNumberFormatter *)numberFormatterToFormatPriceWithThreeDecimals;
++ (NSNumberFormatter *)numberFormatterToFormatPriceWithFourDecimals;
 + (NSNumberFormatter *)numberFormatterToFormatNumberWithOriginalNumberOfDecimals;
 + (NSNumberFormatter *)numberFormatterToFormatNumberWithTwoDecimals;
 + (NSNumberFormatter *)numberFormatterToFormatNumberWithThreeDecimals;

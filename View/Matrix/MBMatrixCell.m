@@ -97,6 +97,9 @@
 	else if ((fieldValue != field.valueIfNil) && [field.dataType isEqualToString:@"priceWithThreeDecimals"]) {
 		fieldValue = [fieldValue formatPriceWithThreeDecimals];
 	}
+	else if ((fieldValue != field.valueIfNil) && [field.dataType isEqualToString:@"priceWithFourDecimals"]) {
+		fieldValue = [fieldValue formatPriceWithFourDecimals];
+	}
 	else if ((fieldValue != field.valueIfNil) && [field.dataType isEqualToString:@"percentageWithTwoDecimals"]) {
 		fieldValue = [fieldValue formatPercentageWithTwoDecimals];
 	}

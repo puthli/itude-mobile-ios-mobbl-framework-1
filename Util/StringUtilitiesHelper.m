@@ -19,6 +19,7 @@ static StringUtilitiesHelper *_instance = nil;
 @synthesize priceWithMinimalDecimalsNumberFormatter = _priceWithMinimalDecimalsNumberFormatter;
 @synthesize priceWithTwoDecimalsNumberFormatter = _priceWithTwoDecimalsNumberFormatter;
 @synthesize priceWithThreeDecimalsNumberFormatter = _priceWithThreeDecimalsNumberFormatter;
+@synthesize priceWithFourDecimalsNumberFormatter = _priceWithFourDecimalsNumberFormatter;
 @synthesize numberWithOriginalNumberOfDecimalsNumberFormatter = _numberWithOriginalNumberOfDecimalsNumberFormatter;
 @synthesize numberWithTwoDecimalsNumberFormatter = _numberWithTwoDecimalsNumberFormatter;
 @synthesize numberWithThreeDecimalsNumberFormatter = _numberWithThreeDecimalsNumberFormatter;
@@ -72,7 +73,7 @@ static StringUtilitiesHelper *_instance = nil;
 		[self.priceWithTwoDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
 		[self.priceWithTwoDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
 		
-		// Price with trhee decimals
+		// Price with three decimals
 		self.priceWithThreeDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 		[self.priceWithThreeDecimalsNumberFormatter setMinimumIntegerDigits:1];
 		[self.priceWithThreeDecimalsNumberFormatter setMaximumFractionDigits:3];
@@ -81,6 +82,16 @@ static StringUtilitiesHelper *_instance = nil;
 		[self.priceWithThreeDecimalsNumberFormatter setGroupingSize:3];
 		[self.priceWithThreeDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
 		[self.priceWithThreeDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		
+		// Price with four decimals
+		self.priceWithFourDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+		[self.priceWithFourDecimalsNumberFormatter setMinimumIntegerDigits:1];
+		[self.priceWithFourDecimalsNumberFormatter setMaximumFractionDigits:4];
+		[self.priceWithFourDecimalsNumberFormatter setMinimumFractionDigits:4];
+		[self.priceWithFourDecimalsNumberFormatter setUsesGroupingSeparator:YES];
+		[self.priceWithFourDecimalsNumberFormatter setGroupingSize:4];
+		[self.priceWithFourDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
+		[self.priceWithFourDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
 		
 		// Number with original number of decimals
 		self.numberWithOriginalNumberOfDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
@@ -123,6 +134,7 @@ static StringUtilitiesHelper *_instance = nil;
 	[_priceWithMinimalDecimalsNumberFormatter release];
 	[_priceWithTwoDecimalsNumberFormatter release];
 	[_priceWithThreeDecimalsNumberFormatter release];
+	[_priceWithFourDecimalsNumberFormatter release];
 	[_numberWithOriginalNumberOfDecimalsNumberFormatter release];
 	[_numberWithTwoDecimalsNumberFormatter release];
 	[_numberWithThreeDecimalsNumberFormatter release];
@@ -211,6 +223,23 @@ static StringUtilitiesHelper *_instance = nil;
 		@synchronized(self){
 			numberFormatter = [[[_instance priceWithThreeDecimalsNumberFormatter] copy] autorelease];
 			[threadDictionary setObject: numberFormatter forKey: @"priceWithThreeDecimalsNumberFormatter"];
+		}
+    }
+    return numberFormatter;
+	
+	//return [_instance priceWithThreeDecimalsNumberFormatter]; // This is NOT threadsafe!!!
+}
+
++ (NSNumberFormatter *)numberFormatterToFormatPriceWithFourDecimals {
+	
+	// To make it threadSafe, create a formatter for each thread that is calling this method
+	NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+    NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"priceWithFourDecimalsNumberFormatter"];
+    if (numberFormatter == nil)
+    {
+		@synchronized(self){
+			numberFormatter = [[[_instance priceWithFourDecimalsNumberFormatter] copy] autorelease];
+			[threadDictionary setObject: numberFormatter forKey: @"priceWithFourDecimalsNumberFormatter"];
 		}
     }
     return numberFormatter;

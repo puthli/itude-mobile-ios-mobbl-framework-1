@@ -164,22 +164,37 @@
 	}
 
 	return result;
-}	
+}
 
 // returns a string formatted as a price with three decimals assuming the receiver is a float string read from XML
 // WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
 - (NSString *)formatPriceWithThreeDecimals
 {
 	NSString * result = nil;
-		
+    
 	if (self && self.length > 0) {
 		NSNumber * priceNumber = [NSNumber numberWithDouble:[self doubleValue]];
 		NSNumberFormatter * nf = [StringUtilitiesHelper numberFormatterToFormatPriceWithThreeDecimals];
 		result = [nf stringFromNumber:priceNumber];
 	}
-
+    
 	return result;
-}	
+}
+
+// returns a string formatted as a price with four decimals assuming the receiver is a float string read from XML
+// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+- (NSString *)formatPriceWithFourDecimals
+{
+	NSString * result = nil;
+    
+	if (self && self.length > 0) {
+		NSNumber * priceNumber = [NSNumber numberWithDouble:[self doubleValue]];
+		NSNumberFormatter * nf = [StringUtilitiesHelper numberFormatterToFormatPriceWithFourDecimals];
+		result = [nf stringFromNumber:priceNumber];
+	}
+    
+	return result;
+}
 
 
 // returns a string formatted as a number with two decimals assuming the receiver is a float string read from XML
