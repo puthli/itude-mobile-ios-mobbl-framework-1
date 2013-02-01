@@ -71,6 +71,7 @@
      
 	tableViewController.page = panel.page;
 	tableViewController.title = panel.title;
+    tableViewController.zoomable = panel.zoomable;
 	
 	// determine sections and pass them to the tableViewController
 	NSMutableArray *sections = [panel descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_SECTION];

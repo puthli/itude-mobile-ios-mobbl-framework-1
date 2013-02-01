@@ -17,6 +17,7 @@
 @synthesize children = _children;
 @synthesize width = _width;
 @synthesize height = _height;
+@synthesize zoomable = _zoomable;
 
 - (id) init {
 	if (self = [super init]) {
@@ -35,10 +36,11 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Panel width='%i' height='%i' type='%@'%@%@%@>\n", level, "", _width, _height, _type,
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Panel width='%i' height='%i' type='%@'%@%@%@ zoomable='%@'>\n", level, "", _width, _height, _type,
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"titlePath" withValue:_titlePath],
-							   [self attributeAsXml:@"style" withValue:_style]];
+							   [self attributeAsXml:@"style" withValue:_style],
+                               _zoomable?@"TRUE":@"FALSE"];
 	for (MBDefinition* child in _children)
 		[result appendString:[child asXmlWithLevel:level+2]];
 	[result appendFormat:@"%*s</Panel>\n", level, ""];

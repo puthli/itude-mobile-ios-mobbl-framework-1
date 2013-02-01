@@ -50,6 +50,7 @@
 @synthesize page=_page;
 @synthesize fontSize = _fontSize;
 @synthesize fontMenuActive = _fontMenuActive;
+@synthesize zoomable = _zoomable;
 
 -(void) dealloc{
     // The following is REQUIRED to make sure no signal 10 is generated when a webview is still loading
@@ -79,6 +80,7 @@
     // TODO: Get the font size from the styleHandler
     self.fontSize = C_WEBVIEW_DEFAULT_FONTSIZE;
     self.fontMenuActive = NO;
+    [self showFontCustomizer:self.zoomable];
 }
 
 
@@ -467,21 +469,6 @@
 		cell.backgroundColor = [UIColor clearColor];
 		[cell.contentView addSubview:webView];
         
-        // Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the iPad, because the iPhone has verry little room to paste all the buttons (refres, close, etc.)
-        BOOL shouldShowFontCustomizer = [MBDevice isPad];
-        if (shouldShowFontCustomizer) {
-            
-            UIViewController *parentViewcontroller = self.page.viewController;            
-            UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
-            
-            if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
-                MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
-                [fontCustomizer setButtonsDelegate:self];
-                [fontCustomizer setSender:webView];
-                [fontCustomizer addToViewController:parentViewcontroller animated:YES];
-            }
-        }
-        
 	}
 	else{
 		cell.textLabel.text = text;
@@ -640,6 +627,22 @@
 
 #pragma mark -
 #pragma mark MBFontChangeListenerProtocol methods
+
+// Adds Two buttons to the navigationBar that allows the user to change the fontSize.
+-(void)showFontCustomizer:(BOOL)show {
+    if (show) {
+        
+        UIViewController *parentViewcontroller = self.page.viewController;
+        UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
+        
+        if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
+            MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
+            [fontCustomizer setButtonsDelegate:self];
+            //[fontCustomizer setSender:webView];
+            [fontCustomizer addToViewController:parentViewcontroller animated:YES];
+        }
+    }
+}
 
 -(void)fontsizeIncreased:(id)sender {
     if (self.fontSize < MAX_FONT_SIZE) {

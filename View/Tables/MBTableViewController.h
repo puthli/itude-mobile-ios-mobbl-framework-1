@@ -24,6 +24,7 @@
     MBStyleHandler *_styleHandler;
     BOOL _finishedLoadingWebviews;
     MBPage *_page;
+    BOOL _zoomable;
 
     int _fontSize;
     BOOL _fontMenuActive;
@@ -44,5 +45,8 @@
 
 @property (nonatomic, retain) NSMutableArray *sections;
 @property (nonatomic, assign) MBPage *page;
+
+// allows webviews within the tableview to change the font size
+@property (nonatomic, assign) BOOL zoomable;
 
 @end

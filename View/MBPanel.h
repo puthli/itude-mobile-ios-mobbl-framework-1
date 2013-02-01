@@ -22,6 +22,7 @@
     NSString *_titlePath;
 	int _width;
 	int _height;
+    BOOL _zoomable;
 }
 
 @property (nonatomic, retain) NSString *type;
@@ -29,6 +30,7 @@
 @property (nonatomic, retain) NSString *titlePath;
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
+@property (nonatomic, assign) BOOL zoomable;
 
 - (id) initWithDefinition:(MBPanelDefinition *)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent buildViewStructure:(BOOL) buildViewStructure;
 - (void) rebuild;
