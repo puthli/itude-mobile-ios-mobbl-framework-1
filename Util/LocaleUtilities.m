@@ -20,7 +20,7 @@
 	NSString *localeCode = [[MBLocalizationService sharedInstance] localeCode];
 	
 	//NSString *localeSettings = [MBProperties valueForProperty:@"localeSettings"];
-	if ([localeCode isEqualToString:LOCALECODEDUTCH]) result = @",";
+	if ([localeCode isEqualToString:LOCALECODEDUTCH] || [localeCode isEqualToString:LOCALECODEITALIAN]) result = @",";
 	// Use phone settings by default
 	else result = [[NSLocale currentLocale] objectForKey:NSLocaleDecimalSeparator];
 
@@ -33,7 +33,7 @@
 	
 	NSString *localeCode = [[MBLocalizationService sharedInstance] localeCode];
 	//NSString *localeSettings = [MBProperties valueForProperty:@"localeSettings"];
-	if ([localeCode isEqualToString:LOCALECODEDUTCH]) result = @".";
+	if ([localeCode isEqualToString:LOCALECODEDUTCH] || [localeCode isEqualToString:LOCALECODEITALIAN]) result = @".";
 	// Use phone settings by default
 	else result = [[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator];
 	
