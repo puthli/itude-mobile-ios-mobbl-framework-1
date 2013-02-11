@@ -56,7 +56,7 @@ static StringUtilitiesHelper *_instance = nil;
 		// Price with minimal decimals
 		self.priceWithMinimalDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 		[self.priceWithMinimalDecimalsNumberFormatter setMinimumIntegerDigits:1];
-		[self.priceWithMinimalDecimalsNumberFormatter setMaximumFractionDigits:3];
+		[self.priceWithMinimalDecimalsNumberFormatter setMaximumFractionDigits:4];
 		[self.priceWithMinimalDecimalsNumberFormatter setMinimumFractionDigits:0];
 		[self.priceWithMinimalDecimalsNumberFormatter setUsesGroupingSeparator:YES];
 		[self.priceWithMinimalDecimalsNumberFormatter setGroupingSize:3];
