@@ -10,6 +10,9 @@
 #import "MGSplitDividerView.h"
 #import "MGSplitCornersView.h"
 
+// Used do determine orientation changes
+#import "MBOrientationManager.h"
+
 #define MG_DEFAULT_SPLIT_POSITION		320.0	// default width of master view in UISplitViewController.
 #define MG_DEFAULT_SPLIT_WIDTH			1.0		// default width of split-gutter in UISplitViewController.
 #define MG_DEFAULT_CORNER_RADIUS		5.0		// default corner-radius of overlapping split-inner corners on the master and detail views.
@@ -164,7 +167,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;
+    return [[MBOrientationManager sharedInstance] supportInterfaceOrientation:interfaceOrientation];
 }
 
 
