@@ -85,11 +85,11 @@ static StringUtilitiesHelper *_instance = nil;
 		
 		// Price with four decimals
 		self.priceWithFourDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+        [self.priceWithFourDecimalsNumberFormatter setGroupingSize:3];
 		[self.priceWithFourDecimalsNumberFormatter setMinimumIntegerDigits:1];
 		[self.priceWithFourDecimalsNumberFormatter setMaximumFractionDigits:4];
 		[self.priceWithFourDecimalsNumberFormatter setMinimumFractionDigits:4];
 		[self.priceWithFourDecimalsNumberFormatter setUsesGroupingSeparator:YES];
-		[self.priceWithFourDecimalsNumberFormatter setGroupingSize:4];
 		[self.priceWithFourDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
 		[self.priceWithFourDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
 		
