@@ -22,6 +22,7 @@
 #import "MBFontCustomizer.h"
 #import "MBLocalizationService.h"
 #import "MBDatePickerController.h"
+#import "MBDatePickerPopoverController.h"
 
 
 #define MAX_FONT_SIZE 20
@@ -535,28 +536,56 @@
                [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
         
         [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
-        
-        MBDatePickerController *dateTimePickerController = [[[MBDatePickerController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
-        dateTimePickerController.field = field;
-        [field setViewData:dateTimePickerController forKey:@"datePickerController"];
-        
+       
         // Determine the datePickerModeStyle
         UIDatePickerMode datePickerMode = UIDatePickerModeDateAndTime;
-        if ([C_FIELD_DATESELECTOR isEqualToString:field.type] || 
-            [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
+        if ([C_FIELD_DATESELECTOR isEqualToString:field.type]) {
             datePickerMode = UIDatePickerModeDate;
         }else if ([C_FIELD_TIMESELECTOR isEqualToString:field.type]) {
             datePickerMode = UIDatePickerModeTime;
+        }else if ([@"BIRTHDATE" isEqualToString:field.type])
+        {
+            // Set the starting date to 25 years ago
+            datePickerMode = UIDatePickerModeDate;
+            NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];
+            components.year = -25;
+            NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
+            
+            //dateTimePickerController.maximumDate = newDate;
+            
+            // For versions earlier than iOS 5.
+            NSString *bDate = [self.page.document valueForPath:@"/DemoSettings[0]/@birthDate"];
+            if (bDate == nil)
+            {
+                NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+                [self.page.document setValue:[dateFormatter stringFromDate:newDate] forPath:@"/DemoSettings[0]/@birthDate"];
+            }
         }
-        dateTimePickerController.datePickerMode = datePickerMode;
         
-        if ([C_FIELD_BIRTHDATE isEqualToString:field.type]) {
-            dateTimePickerController.maximumDate = [NSDate date];
+        // iPad supports popovers, which are a nicer and better way to let the user make a selection
+		if ([MBDevice isPad]) {
+			MBDatePickerPopoverController *dateTimePickerController = [[[MBDatePickerPopoverController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
+            dateTimePickerController.field = field;
+            dateTimePickerController.datePickerMode = datePickerMode;
+            [field setViewData:dateTimePickerController forKey:@"datePickerController"];
+            
+            UIView *cell = [tableView cellForRowAtIndexPath:indexPath];
+			UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:dateTimePickerController];
+			[popover presentPopoverFromRect:cell.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+			dateTimePickerController.popover = popover;
+            [popover release];
+		}
+		// On devices with a smaller screensize it's better to use a scrollWheel
+		else {
+            MBDatePickerController *dateTimePickerController = [[[MBDatePickerController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
+            dateTimePickerController.field = field;
+            dateTimePickerController.datePickerMode = datePickerMode;
+            [field setViewData:dateTimePickerController forKey:@"datePickerController"];
+            
+            UIView *superView = [tableView window];
+            [dateTimePickerController presentWithSuperview:superView];
         }
-        
-        UIView *superView = [tableView window];
-        [dateTimePickerController presentWithSuperview:superView];
-        
         
     } else if (field && [field outcomeName]) {
         //[field handleOutcome:[field outcomeName] withPathArgument: [field absoluteDataPath]];//commented by Xiaochen

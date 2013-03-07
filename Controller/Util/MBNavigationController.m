@@ -22,8 +22,9 @@
 
 //override the standard init
 -(id)initWithRootViewController:(UIViewController *)rootViewController {
-	//create the fake controller and set it as the root
-	UIViewController *fakeController = [[[UIViewController alloc] init] autorelease];
+	// Create the fake controller and set it as the root
+    // Use a MBBasicViewController so we can modify the behaviour of rotation in iOS 5.1. If we don't and we replace the rootViewcontroller it will go to the default rotation (Portrait)
+    MBBasicViewController *fakeController = [[[MBBasicViewController alloc] init] autorelease];
 	if (self = [super initWithRootViewController:fakeController]) {
 		// These ar for issue MOBBL-150. See issue for more information before changing anything.
 		// If the application starts, the viewWillAppear and viewDidAppear methods are called 
