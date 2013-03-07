@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MBField;
 @interface MBAlertView : UIAlertView
 
-- (void)setOutcomeName:(NSString *)outcomeName forButtonWithKey:(NSString *)key;
-- (NSString *)outcomeNameForButtonAtIndex:(NSInteger) index;
+
+
+- (void)setField:(MBField *)field forButtonWithKey:(NSString *)key;
+- (MBField *)fieldForButtonAtIndex:(NSInteger) index;
 
 @end

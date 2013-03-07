@@ -14,6 +14,7 @@
 @class MBViewController;
 @class MBPage;
 @class MBComponentContainer;
+@class MBDocument;
 
 @interface MBComponent : NSObject {
 	
@@ -37,6 +38,7 @@
 @property (nonatomic, assign) int rightInset;
 @property (nonatomic, assign) int topInset;
 @property (nonatomic, assign) int bottomInset;
+@property (nonatomic, assign) MBDocument *document;
 
 - (id) initWithDefinition:(id)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent;
 - (UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*)parent viewState:(MBViewState) viewState;

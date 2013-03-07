@@ -99,7 +99,8 @@
 }
 
 -(NSString*) value {
-	return MBLocalizedStringWithoutLoggingWarnings([[self document] valueForPath: [self absoluteDataPath]]);	
+    MBDocument *doc = self.document;
+	return MBLocalizedStringWithoutLoggingWarnings([doc valueForPath: [self absoluteDataPath]]);
 }
 
 // Returns the untranslated value of the field. In some cases we want to use the untranslated value of the field (e.g. for comparing to the value of the domainValidator. JIRA IQ-70)

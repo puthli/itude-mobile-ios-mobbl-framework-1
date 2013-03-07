@@ -57,9 +57,15 @@
 	return self;
 }
 
-
-- (NSString *)outcomeNameForButtonAtIndex:(NSInteger)index {
-    return [self.alertView outcomeNameForButtonAtIndex:index];
+- (MBOutcome *)outcomeForButtonAtIndex:(NSInteger)index {    
+    MBField *field = [self.alertView fieldForButtonAtIndex:index];
+    if (field.outcomeName.length > 0) {
+        MBOutcome *outcome = [[[MBOutcome alloc] initWithOutcomeName:field.outcomeName document:self.document] autorelease];
+        outcome.path = field.path;
+        return outcome;
+    }
+    
+    return nil;
 }
 
 

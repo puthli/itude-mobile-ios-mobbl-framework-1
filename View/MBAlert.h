@@ -29,6 +29,6 @@
                 rootPath:(NSString*) rootPath
                 delegate:(id<UIAlertViewDelegate>) alertViewDelegate;
 
--(NSString *)outcomeNameForButtonAtIndex:(NSInteger) index;
+- (MBOutcome *)outcomeForButtonAtIndex:(NSInteger)index;
 
 @end

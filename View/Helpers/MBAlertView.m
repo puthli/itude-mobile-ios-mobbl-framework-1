@@ -7,39 +7,40 @@
 //
 
 #import "MBAlertView.h"
+#import "MBField.h"
 
 @interface MBAlertView () {
-    NSMutableDictionary *_outcomeNames;
+    NSMutableDictionary *_fields;
 }
-@property (nonatomic, retain) NSMutableDictionary *outcomeNames;
+@property (nonatomic, retain) NSMutableDictionary *fields;
 @end
 
 @implementation MBAlertView
 
-@synthesize outcomeNames = _outcomeNames;
+@synthesize fields = _fields;
+
 
 - (void)dealloc
 {
-    [_outcomeNames release];
+    [_fields release];
     [super dealloc];
 }
 
-
-- (void)setOutcomeName:(NSString *)outcomeName forButtonWithKey:(NSString *)key {
-    [self.outcomeNames setObject:outcomeName forKey:key];
+- (void)setField:(MBField *)field forButtonWithKey:(NSString *)key {
+    [self.fields setObject:field forKey:key];
 }
 
-- (NSString *)outcomeNameForButtonAtIndex:(NSInteger) index {
+- (MBField *)fieldForButtonAtIndex:(NSInteger) index {
     NSString *title = [self buttonTitleAtIndex:index];
-    return [self.outcomeNames objectForKey:title];
+    return [self.fields objectForKey:title];
 }
 
 
-- (NSMutableDictionary *)outcomeNames {
-    if (!_outcomeNames) {
-        _outcomeNames = [NSMutableDictionary new];
+- (NSMutableDictionary *)fields {
+    if (!_fields) {
+        _fields = [NSMutableDictionary new];
     }
-    return _outcomeNames;
+    return _fields;
 }
 
 @end

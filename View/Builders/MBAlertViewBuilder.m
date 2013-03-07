@@ -81,9 +81,7 @@
     
     // Set the outcomes
     for (MBField *field in buttonFields) {
-        if (field.outcomeName.length > 0) {
-            [alertView setOutcomeName:field.outcomeName forButtonWithKey:field.label];
-        }
+        [alertView setField:field forButtonWithKey:field.label];
     }
 
     

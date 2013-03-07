@@ -9,6 +9,12 @@
 #import "MBComponent.h"
 #import "MBValueChangeListenerProtocol.h"
 
+@interface MBComponent () {
+    MBDocument *_document;
+}
+
+@end
+
 @implementation MBComponent
 
 @synthesize definition = _definition;
@@ -19,6 +25,7 @@
 @synthesize rightInset = _rightInset;
 @synthesize topInset = _topInset;
 @synthesize bottomInset = _bottomInset;
+@synthesize document = _document;
 
 -(id) initWithDefinition:(id)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent {
 
@@ -26,6 +33,7 @@
 	if (self != nil) {
 		self.definition = definition;
 		self.parent = parent;
+        self.document = document;
         
         // Not all definitions have a style attribute; if they do set it
 		if([definition respondsToSelector:@selector(style)]) {
@@ -142,7 +150,12 @@
 }
 
 -(MBDocument*) document {
-	return [[self page] document];	
+    // TODO: See if still nessesary. This document of page was always returned (even if nil) but some components have no page (like MBFields in an MBAlert) Therefor created a ivar.
+    if ([[self page] document]) {
+        return [[self page] document];
+    }
+
+    return _document;
 }
 
 -(BOOL) resignFirstResponder {
