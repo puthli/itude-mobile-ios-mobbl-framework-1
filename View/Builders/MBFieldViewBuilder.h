@@ -11,5 +11,6 @@
 @class MBField;
 
 @interface MBFieldViewBuilder : MBViewBuilder
+-(UIView*) buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds;
 -(UIView*) buildFieldView:(MBField*) field forParent:(UIView*)parent withMaxBounds:(CGRect) bounds;
 @end

@@ -8,6 +8,7 @@
 //  Note: [self.view viewWithTag:100] = fontMenu
 
 #import "MBRowViewBuilder.h"
+#import "MBPanelViewBuilder.h"
 #import "MBTableViewController.h"
 #import "MBPanel.h"
 #import "MBField.h"
@@ -98,9 +99,40 @@
 	return panel;
 }
 
+// This method returns nil by default so the default sectionHeader can be used.
+// Register your own SectionPanelViewBuilder in the MBPanelViewBuilderFactory and return a custom view to override that,
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    MBPanel *panel = (MBPanel *)[self.sections objectAtIndex:section];
+    return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView:panel forParent:self.tableView withMaxBounds:CGRectZero viewState: self.page.currentViewState];
+}
+
 -(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	// The height is set below
 	return [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)] autorelease];	
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    MBPanel *panel = (MBPanel *)[self.sections objectAtIndex:section];
+    id<MBPanelViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] builderForType:C_PANEL_SECTION withStyle:panel.style];
+    CGFloat height = [builder heightForPanel:panel];
+    if (height > 0) {
+        return height;
+    }
+    
+    else if (!panel.title) {
+        return 0;
+    }
+    
+    else if ([MBDevice iOSVersion] <= 5.0) {
+        return UITableViewAutomaticDimension;
+    }
+    
+    else if (self.tableView.style == UITableViewStyleGrouped) {
+        return 44;
+    }
+    
+    // Default height
+    return 22;
 }
 
 // Need to call to pad the footer height otherwise the footer collapses

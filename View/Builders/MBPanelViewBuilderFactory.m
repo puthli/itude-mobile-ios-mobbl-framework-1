@@ -8,12 +8,12 @@
 
 #import "MBPanelViewBuilderFactory.h"
 #import "MBPanel.h"
-#import "MBPanelTypes.h"
 #import "MBPlainPanelBuilder.h"
 #import "MBBasicPanelBuilder.h"
 #import "MBViewBuilderFactory.h"
 #import "MBListBuilder.h"
 #import "MBMatrixBuilder.h"
+#import "MBSectionPanelViewBuilder.h"
 
 @interface MBPanelViewBuilderFactory ()
 @property(readonly,nonatomic, retain) NSMutableDictionary *registry;
@@ -41,6 +41,7 @@
     [self registerPanelViewBuilder:[[[MBPlainPanelBuilder alloc]init] autorelease] forPanelType:C_PANEL_PLAIN];
     [self registerPanelViewBuilder:[[[MBListBuilder alloc]init] autorelease] forPanelType:C_PANEL_LIST];
     [self registerPanelViewBuilder:[[[MBMatrixBuilder alloc]init] autorelease] forPanelType:C_PANEL_MATRIX];
+    [self registerPanelViewBuilder:[[[MBSectionPanelViewBuilder alloc] init] autorelease] forPanelType:C_PANEL_SECTION];
 
     return self;
 }

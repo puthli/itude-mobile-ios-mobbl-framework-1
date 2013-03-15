@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MBTypes.h"
+#import "MBPanelTypes.h"
 
 @protocol MBPanelViewBuilder;
 @class MBPanel;
