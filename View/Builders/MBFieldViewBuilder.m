@@ -25,7 +25,7 @@
     frame.origin.x= right - width;
     frame.origin.y = (cell.frame.size.height - frame.size.height) / 2;
     child.frame = frame;
-    child.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    child.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth;
     
     [cell.contentView addSubview:child];
     

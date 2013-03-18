@@ -75,7 +75,6 @@
 	}
 }
 
-
 - (void) styleSubLabel:(UIView*) view component:(MBField*) field {
 	if([view isKindOfClass:[UILabel class]]) {
 		UILabel *label = (UILabel*) view;
@@ -91,6 +90,13 @@
 
 - (void) styleMultilineLabel:(UIView*) view component:(MBField*) field {
 	[self styleLabel:view component:field];
+}
+
+- (void) styleWebView:(UIView*) view component:(MBField*) field {
+	if([view isKindOfClass:[UIWebView class]]) {
+		UIWebView *webView = (UIWebView*) view;
+		webView.backgroundColor = [UIColor clearColor];
+	}
 }
 
 - (UIFont *) fontForField:(MBField *) field {

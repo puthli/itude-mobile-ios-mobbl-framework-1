@@ -29,6 +29,7 @@
 @synthesize type = _type;
 @synthesize title = _title;
 @synthesize titlePath = _titlePath;
+@synthesize zoomable = _zoomable;
 @synthesize width = _width;
 @synthesize height = _height;
 @synthesize outcomeName = _outcomeName;
@@ -47,6 +48,7 @@
 		self.type = definition.type;
 		self.width = definition.width;
 		self.height = definition.height;
+        self.zoomable = definition.zoomable;
         self.outcomeName = definition.outcomeName;
         self.path = definition.path;
 
@@ -111,11 +113,12 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPanel%@%@%@%@%@>\n", level, "",
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPanel%@%@%@%@%@%@>\n", level, "",
 							   [self attributeAsXml:@"type" withValue:_type],
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"width" withValue:[NSString stringWithFormat:@"%i", _width]],
 							   [self attributeAsXml:@"height" withValue:[NSString stringWithFormat:@"%i", _height]],
+                               [self attributeAsXml:@"zoomable" withValue:_zoomable],
                                [self attributeAsXml:@"outcome" withValue:_outcomeName]
 							   ];
 	

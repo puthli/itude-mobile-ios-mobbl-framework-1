@@ -15,6 +15,7 @@
 	NSString *_style;
 	NSString *_title;
 	NSString *_titlePath;
+    BOOL zoomable;
 	int _width;
 	int _height;
     NSString *_outcomeName;
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *titlePath;
 @property (nonatomic, retain) NSMutableArray* children;
+@property (nonatomic, assign) BOOL zoomable;
 @property (nonatomic, assign) int width;
 @property (nonatomic, assign) int height;
 @property (nonatomic, retain) NSString *outcomeName;

@@ -52,7 +52,7 @@
 	self.dialogGroupAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
     self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"document",@"title",@"titlePath", nil];
-    self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",nil];
+    self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",@"zoomable",nil];
     self.forEachAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"value",@"suppressRowComponent",@"preCondition",nil];
     self.variableAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"expression",nil];
     self.fieldAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"label",@"path",@"type",@"dataType",@"required",@"outcome", @"style",@"width",@"height",@"formatMask",@"alignment",@"valueIfNil",@"hidden",@"preCondition",@"custom1",@"custom2",@"custom3",nil];
@@ -259,7 +259,8 @@
 		panelDef.height = [[attributeDict valueForKey:@"height"] intValue];
         panelDef.outcomeName = [attributeDict valueForKey:@"outcome"];
         panelDef.path = [attributeDict valueForKey:@"path"];
-		panelDef.preCondition = [attributeDict valueForKey:@"preCondition"];		
+        panelDef.zoomable = [[attributeDict valueForKey:@"zoomable"] boolValue];
+		panelDef.preCondition = [attributeDict valueForKey:@"preCondition"];
         [self notifyProcessed:panelDef usingSelector:@selector(addChild:)];
 		[panelDef release];
 	}	

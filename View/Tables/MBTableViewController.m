@@ -20,14 +20,11 @@
 #import "MBPickerPopoverController.h"
 #import "MBDevice.h"
 #import "MBDatePickerController.h"
-#import "UIWebView+FontResizing.h"
+#import "MBWebView.h"
 #import "UIView+TreeWalker.h"
 #import "MBFontCustomizer.h"
 #import "MBRowViewBuilderFactory.h"
 #import "MBFieldTypes.h"
-
-
-#define MAX_FONT_SIZE 20
 
 #define C_CELL_Y_MARGIN 4
 
@@ -35,7 +32,7 @@
 @interface MBTableViewController()
 
 @property (nonatomic, retain) NSMutableDictionary *rowsByIndexPath;
-
+@property (nonatomic, assign) NSInteger fontCustomizerFontSizeDifference;
 @end
 
 @implementation MBTableViewController
@@ -45,14 +42,14 @@
 @synthesize finishedLoadingWebviews = _finishedLoadingWebviews;
 @synthesize sections=_sections;
 @synthesize page=_page;
-@synthesize fontSize = _fontSize;
-@synthesize fontMenuActive = _fontMenuActive;
+@synthesize zoomable = _zoomable;
 @synthesize rowsByIndexPath = _rowsByIndexPath;
+@synthesize fontCustomizerFontSizeDifference = _fontCustomizerFontSizeDifference;
 
 -(void) dealloc{
     // The following is REQUIRED to make sure no signal 10 is generated when a webview is still loading
     // while this controller is dealloced
-    for(UIWebView *webView in [_webViews allValues]) {
+    for(MBWebView *webView in [_webViews allValues]) {
         webView.delegate = nil;
     }
     //BINCKAPPS-635
@@ -74,10 +71,8 @@
 	self.finishedLoadingWebviews = NO;
 	self.webViews = [NSMutableDictionary dictionary];
 	[self tableView].backgroundColor = [UIColor clearColor];
-    
-    // TODO: Get the font size from the styleHandler
-    self.fontSize = C_WEBVIEW_DEFAULT_FONTSIZE;
-    self.fontMenuActive = NO;
+    [self showFontCustomizer:self.zoomable];
+    self.fontCustomizerFontSizeDifference = 0;
 }
 
 
@@ -141,7 +136,7 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIWebView *webView = [self.webViews objectForKey:indexPath];
+    MBWebView *webView = [self.webViews objectForKey:indexPath];
     if (webView) {
         NSString *heightString = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
         return [heightString floatValue] + C_CELL_Y_MARGIN * 2;
@@ -154,39 +149,27 @@
     return [builder heightForComponent:row atIndexPath:indexPath forTableView:tableView];
 }
 
-- (void)addFontCustomizerForWebView:(UIWebView *)webview
-{
-// Adds Two buttons to the navigationBar that allows the user to change the fontSize. We only add this on the
-    // iPad, because the iPhone has very little room to paste all the buttons (refresh, close, etc.)
-    if ([MBDevice isPad]) {
-
-        UIViewController *parentViewcontroller = self.page.viewController;
-        UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
-
-        if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
-            MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
-            [fontCustomizer setButtonsDelegate:self];
-            [fontCustomizer setSender:webview];
-            [fontCustomizer addToViewController:parentViewcontroller animated:YES];
-        }
-    }
-}
-
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 	MBComponentContainer *component = [self getRowForIndexPath:indexPath];
-    id<MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
-                                                           rowViewBuilderFactory] builderForStyle:component.style];
+    id<MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] builderForStyle:component.style];
     UITableViewCell *cell = [builder buildTableViewCellFor:component forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
     
     // Register any webViews in the cell
     [self.webViews removeObjectForKey:indexPath]; // Make sure no old webViews are retained
-    for (UIView *subview in [cell subviewsOfClass:[UIWebView class]]) {
-        UIWebView *webview = (UIWebView *)subview;
+    for (UIView *subview in [cell subviewsOfClass:[MBWebView class]]) {
+        MBWebView *webview = (MBWebView *)subview;
         webview.delegate = self;
+        
+        // Update the font for the fontCustomizer
+        if (self.zoomable) {
+            UIFont *currentFont = webview.font;
+            UIFont *newFont = [UIFont fontWithName:currentFont.fontName size:currentFont.pointSize+self.fontCustomizerFontSizeDifference];
+            [webview setFont:newFont];
+            [webview refreshFont];
+        }
+
         [self.webViews setObject:subview forKey:indexPath];
-        [webview refreshWithFontSize:self.fontSize];
-        [self addFontCustomizerForWebView:webview];
     }
 
     [self.rowsByIndexPath setObject:component forKey:indexPath];
@@ -328,7 +311,7 @@
     webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, 1);
     [webView sizeToFit];
 
-	for (UIWebView *w in [self.webViews allValues]){
+	for (MBWebView *w in [self.webViews allValues]){
 		if (w.loading) {
 			done=NO;
 		}
@@ -348,25 +331,52 @@
 
 -(void)reloadAllWebViews{
     self.finishedLoadingWebviews = NO;
-    for (UIWebView *webView in [self.webViews allValues]) {
-        [webView refreshWithFontSize:self.fontSize];
+    for (MBWebView *webView in [self.webViews allValues]) {
+        [webView reload];
     }
 }
+
 
 #pragma mark -
 #pragma mark MBFontChangeListenerProtocol methods
 
+
+-(void)showFontCustomizer:(BOOL)show {
+    if (show) {
+        
+        UIViewController *parentViewcontroller = self.page.viewController;
+        UIBarButtonItem *item = parentViewcontroller.navigationItem.rightBarButtonItem;
+        
+        if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
+            MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
+            [fontCustomizer setButtonsDelegate:self];
+            [fontCustomizer addToViewController:parentViewcontroller animated:YES];
+        }
+    }
+}
+
+
 -(void)fontsizeIncreased:(id)sender {
-    if (self.fontSize < MAX_FONT_SIZE) {
-        self.fontSize ++;
-        [self reloadAllWebViews];
+    // The user may not increase the fontsize more than 4 points
+    if (self.fontCustomizerFontSizeDifference <= 4) {
+        self.finishedLoadingWebviews = NO;
+        self.fontCustomizerFontSizeDifference+=1;
+        for (MBWebView *webView in [self.webViews allValues]) {
+            [webView refreshFont];
+        }
+        [self.tableView reloadData];
     }
 }
 
 -(void)fontsizeDecreased:(id)sender {
-    if (self.fontSize > C_WEBVIEW_DEFAULT_FONTSIZE) {
-        self.fontSize --;
-        [self reloadAllWebViews];
+    // The user may not decrease the fontsize more than 4 points
+    if (self.fontCustomizerFontSizeDifference >= -4) {
+        self.finishedLoadingWebviews = NO;
+        self.fontCustomizerFontSizeDifference-=1;
+        for (MBWebView *webView in [self.webViews allValues]) {
+            [webView refreshFont];
+        }
+        [self.tableView reloadData];
     }
 }
 

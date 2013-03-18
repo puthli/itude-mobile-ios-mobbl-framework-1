@@ -23,17 +23,14 @@
     MBStyleHandler *_styleHandler;
     BOOL _finishedLoadingWebviews;
     MBPage *_page;
-
-    int _fontSize;
-    BOOL _fontMenuActive;
+    BOOL _zoomable;
 }
 
 @property (nonatomic, assign) MBStyleHandler *styleHandler;
 //@property (nonatomic, retain) NSMutableDictionary *cellReferences;
 @property (nonatomic, retain) NSMutableDictionary *webViews;
 @property (nonatomic, assign) BOOL finishedLoadingWebviews;
-@property (nonatomic, assign) int fontSize;
-@property (nonatomic, assign) BOOL fontMenuActive;
+@property (nonatomic, assign) BOOL zoomable;
 
 // allows subclasses to attach behaviour to a field.
 -(void) fieldWasSelected:(MBField *)field;

@@ -22,6 +22,7 @@
 - (void) styleLabel:(UIView*) view component:(MBField*) field;
 - (void) styleMultilineLabel:(UIView*) view component:(MBField*) field;
 - (void) styleTextfield:(UIView*) view component:(MBField*) field;
+- (void) styleWebView:(UIView*) view component:(MBField*) field;
 - (void) styleButton:(UIView *) view component:(MBField *) field;
 - (void) styleMatrixHeaderTitle:(UIView *)view;
 - (void) styleMatrixHeaderCell:(UIView *)view component:(MBMatrixCell *)cell;

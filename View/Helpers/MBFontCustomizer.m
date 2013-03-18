@@ -9,10 +9,6 @@
 #import "MBFontCustomizer.h"
 #import "MBFontCustomizerToolbar.h"
 
-#define DEFAULT_WEBVIEW_FONT_SIZE 14
-#define DEFAULT_WEBVIEW_FONT_NAME @"arial"
-
-
 @implementation MBFontCustomizer
 
 @synthesize toolBar = _toolBar;
