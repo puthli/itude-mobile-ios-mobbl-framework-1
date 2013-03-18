@@ -16,7 +16,7 @@
 	UIButton *button = [[self styleHandler] createStyledButton:field];
 	if (button == nil) button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	button.frame = CGRectMake(0.0, 0.0, 100.0, 29.0);
+	button.frame = CGRectMake(0.0, 0.0, 100.0, 44.0);
     
     button.titleLabel.adjustsFontSizeToFitWidth = YES;
 	

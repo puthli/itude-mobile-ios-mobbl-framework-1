@@ -16,6 +16,7 @@
 #import "MBFieldTypes.h"
 #import "LocaleUtilities.h"
 #import "MBLocalizationService.h"
+#import "StringUtilities.h"
 
 @interface MBStyleHandler(hidden) 
 - (void) alignLabel:(UILabel *)label forAlignMent:(NSString *)alignment;
@@ -99,9 +100,39 @@
 	}
 }
 
+- (CGFloat) heightForField:(MBField *) field forTableView:(UITableView *)tableView {
+    
+    CGFloat height = 44; // 44 is default tableview height
+    if ([C_FIELD_TEXT isEqualToString:field.type]) {
+        NSString * text;
+        if(field.path != nil) {
+            text = [field formattedValue];
+        }
+        else {
+            text= field.label;
+        }
+        if (![text hasHTML]) {
+            // calculate bounding box
+            CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
+            CGSize size = [text sizeWithFont:[self fontForField:field] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+            height = size.height + 22; // inset
+        }
+    }
+        
+    return height;
+}
+
 - (UIFont *) fontForField:(MBField *) field {
 	UIFont *font = [UIFont systemFontOfSize:[UIFont labelFontSize]];
 	return font;
+}
+
+- (UIColor *)textColorForField:(MBField *)field {
+    return [UIColor blackColor];
+}
+
+- (UIColor *)backgroundColorField:(MBField *)field {
+    return [UIColor whiteColor];
 }
 
 - (void) styleTextfield:(UIView*) view component:(MBField*) field {

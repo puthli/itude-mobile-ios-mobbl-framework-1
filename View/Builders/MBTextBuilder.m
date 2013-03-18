@@ -52,7 +52,9 @@
     MBWebView *webView = [[[MBWebView alloc] initWithFrame:CGRectMake(margin, margin, bounds.size.width-(margin*2), 36)] autorelease];
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    [webView setText:text withFont:[[[MBViewBuilderFactory sharedInstance] styleHandler] fontForField:field]];
+    webView.backgroundColor = [self.styleHandler backgroundColorField:field];
+    webView.textColor = [self.styleHandler textColorForField:field];
+    [webView setText:text withFont:[self.styleHandler fontForField:field]];
     [self.styleHandler styleWebView:webView component:field];
     return webView;
 }

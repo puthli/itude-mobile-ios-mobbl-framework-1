@@ -11,6 +11,7 @@
 @interface MBWebView : UIWebView
 
 @property (nonatomic, retain) UIFont *font;
+@property (nonatomic, retain) UIColor *textColor;
 @property (nonatomic, retain) NSString *text;
 
 -(void)setText:(NSString *)text withFont:(UIFont *)font;

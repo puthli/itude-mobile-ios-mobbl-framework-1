@@ -37,7 +37,10 @@
 - (CGRect) sizeForTextField:(MBField*) field withMaxBounds:(CGRect) bounds ;
 - (CGRect) sizeForLabel:(MBField*) field withMaxBounds:(CGRect) bounds ;
 
+- (CGFloat) heightForField:(MBField *) field forTableView:(UITableView *)tableView;
 - (UIFont *) fontForField:(MBField *) field;
+- (UIColor *) textColorForField:(MBField *)field;
+- (UIColor *) backgroundColorField:(MBField *)field;
 
 - (UIButton *)createStyledButton:(MBField *)field;
 

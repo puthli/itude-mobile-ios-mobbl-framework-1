@@ -92,7 +92,7 @@
                 
                /* MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
                 [cellConfigurator configureCell:cell withField:field];*/
-                [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView:field forParent:cell withMaxBounds:cell.bounds];
+                [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView:field forParent:cell.contentView withMaxBounds:cell.contentView.bounds];
             }
         }
     }
@@ -124,23 +124,12 @@
     for(MBComponent *child in [component children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
+            CGFloat childHight = [self.styleHandler heightForField:field forTableView:tableView];
             
-            if ([C_FIELD_TEXT isEqualToString:field.type]) {
-                NSString * text;
-                if(field.path != nil) {
-                    text = [field formattedValue];
-                }
-                else {
-                    text= field.label;
-                }
-                if (![text hasHTML]) {
-                    MBStyleHandler *styleHandler = [[MBViewBuilderFactory sharedInstance] styleHandler];
-                    // calculate bounding box
-                    CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
-                    CGSize size = [text sizeWithFont:[styleHandler fontForField:field] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-                    height = size.height + 22; // inset
-                }
+            if (childHight > height){
+                height = childHight;
             }
+            
         }
     }
     

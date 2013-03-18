@@ -7,6 +7,7 @@
 //
 
 #import "MBWebView.h"
+#import "MBViewBuilderFactory.h"
 
 @interface MBWebView () {
     NSString *_text;
@@ -20,19 +21,21 @@
 @implementation MBWebView
 
 @synthesize text = _text;
+@synthesize textColor = _textColor;
 @synthesize fontSize = _fontSize;
 @synthesize fontName = _fontName;
 
 - (void)dealloc
 {
     [_text release];
+    [_textColor release];
     [_fontName release];
     [super dealloc];
 }
 
 #define C_WEBVIEW_DEFAULT_FONTSIZE 14
 #define C_WEBVIEW_DEFAULT_FONTNAME @"arial"
-#define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
+#define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px; color:%@; background-color:%@;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
 
 
 -(void)setText:(NSString *)text withFont:(UIFont *)font
@@ -56,8 +59,7 @@
 #pragma mark Reload and Refresh methods
 
 - (void)refreshFont {
-    NSString *css = [NSString stringWithFormat:C_WEBVIEW_CSS, (int) self.fontSize, self.fontName];
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",css, self.text];
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",[self buildCSS], self.text];
     [self loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 }
 
@@ -77,6 +79,30 @@
         return [UIFont fontWithName:self.fontName size:self.fontSize];
     }
     return nil;
+}
+
+- (UIColor *)textColor {
+    if (!_textColor) {
+        _textColor = [[UIColor blackColor] retain];
+    }
+    return _textColor;
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (NSString *) hexFromColor:(UIColor *)color {
+    const CGFloat *components = CGColorGetComponents(color.CGColor);
+    int red = (int)(components[0] * 255);
+    int green = (int)(components[1] * 255);
+    int blue = (int)(components[2] * 255);
+    return [NSString stringWithFormat:@"#%0.2X%0.2X%0.2X", red, green, blue];
+}
+
+- (NSString *)buildCSS {
+    NSString *textColor = [self hexFromColor:self.textColor];
+    NSString *backgroundColor = [self hexFromColor:self.backgroundColor];
+    return [NSString stringWithFormat:C_WEBVIEW_CSS, (int) self.fontSize, self.fontName, textColor, backgroundColor];
 }
 
 @end
