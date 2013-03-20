@@ -133,7 +133,7 @@
 
 // Need to call to pad the footer height otherwise the footer collapses
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return section == [self.sections count]-1?0.0f:10.0f;
+	return 0.0f;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
