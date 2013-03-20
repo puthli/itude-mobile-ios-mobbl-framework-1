@@ -84,13 +84,13 @@
 
 -(NSInteger) tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)sectionNo {
 	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:(NSUInteger) sectionNo];
-	NSMutableArray *rows = [section descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_ROW];
+	NSMutableArray *rows = [section childrenOfKind:[MBPanel class]];
 	return [rows count];
 }
 
 -(MBPanel *)getRowForIndexPath:(NSIndexPath *) indexPath {
 	MBPanel *section = (MBPanel *)[self.sections objectAtIndex:(NSUInteger) indexPath.section];
-	NSMutableArray *panels = [section descendantsOfKind: [MBPanel class] filterUsingSelector: @selector(type) havingValue: C_ROW];
+	NSMutableArray *panels = [section childrenOfKind:[MBPanel class]];
 	MBPanel *panel = [panels objectAtIndex:(NSUInteger) indexPath.row];
 	return panel;
 }
@@ -150,7 +150,7 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     MBPanel *panel = [self getRowForIndexPath:indexPath];
-    UITableViewCell *cell = [[[MBViewBuilderFactory sharedInstance] rowViewBuilder] buildTableViewCellFor:panel forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
+    UITableViewCell *cell = [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildTableViewCellFor:panel forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
 
     // Register any webViews in the cell
     [self.webViews removeObjectForKey:indexPath]; // Make sure no old webViews are retained
