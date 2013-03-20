@@ -22,7 +22,8 @@
         UIWebView *webView = [self buildWebView:field text:text withMaxBounds:bounds];
         return webView;
     } else {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, [UIScreen mainScreen].applicationFrame.size.width, 25.0)];
+        CGFloat inset = 10.0;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(inset, 0.0, bounds.size.width-(2*inset), bounds.size.height)];
         [self configureLabel:label withText:text forField:field];
         return [label autorelease];
     }
@@ -75,6 +76,8 @@
     label.text = text;
     label.numberOfLines = 0;
     label.lineBreakMode = UILineBreakModeWordWrap;
+    label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    label.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.styleHandler styleMultilineLabel:label component:field];
 
 }
