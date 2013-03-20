@@ -77,18 +77,18 @@
     return cell;
 }
 
-- (UITableViewCell *)buildTableViewCellFor:(MBComponentContainer *)component forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState forTableView:(UITableView *)tableView
+- (UITableViewCell *)buildTableViewCellFor:(MBPanel *)panel forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState forTableView:(UITableView *)tableView
 {
-    UITableViewCell *cell = [self buildCellForRow:component forTableView:tableView];
+    UITableViewCell *cell = [self buildCellForRow:panel forTableView:tableView];
     
     // Loop through the fields in the row to determine the content of the cell
-    for(MBComponent *child in [component children]){
+    for(MBComponent *child in [panel children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             field.responder = nil;
             
             // #BINCKMOBILE-19
-            if ([field.definition isPreConditionValid:component.document currentPath:[field absoluteDataPath]]) {
+            if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
                 
                /* MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
                 [cellConfigurator configureCell:cell withField:field];*/
@@ -107,7 +107,7 @@
     cell.bounds = bounds;
     
     
-    if (![self outcomeNameFor:component]) {
+    if (![panel outcomeName]) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else  {
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -116,12 +116,12 @@
     return cell;
 }
 
--(CGFloat)heightForComponent:(MBComponentContainer *)component atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView
+-(CGFloat)heightForPanel:(MBPanel *)panel atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView
 {
     CGFloat height = 44;
     
     // Loop through the fields in the row to determine the size of multiline text cells
-    for(MBComponent *child in [component children]){
+    for(MBComponent *child in [panel children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             CGFloat childHight = [self.styleHandler heightForField:field forTableView:tableView];
@@ -134,15 +134,6 @@
     }
     
     return height;
-}
-
-- (NSString *)outcomeNameFor:(MBComponentContainer *)component
-{
-    NSString *outcomeName = nil;
-    if ([component isKindOfClass:[MBPanel class]]) {
-        outcomeName = [((MBPanel *)component) outcomeName];
-    }
-    return outcomeName;
 }
 
 @end

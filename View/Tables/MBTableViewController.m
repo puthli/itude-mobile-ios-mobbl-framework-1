@@ -25,6 +25,7 @@
 #import "MBFontCustomizer.h"
 #import "MBRowViewBuilderFactory.h"
 #import "MBFieldTypes.h"
+#import "MBRowTypes.h"
 
 #define C_CELL_Y_MARGIN 4
 
@@ -142,19 +143,15 @@
         return [heightString floatValue] + C_CELL_Y_MARGIN * 2;
     }
 
-    MBComponentContainer *row = [self getRowForIndexPath:indexPath];
-    id <MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance]
-                                                            rowViewBuilderFactory]
-                                                            builderForStyle:row.style];
-    return [builder heightForComponent:row atIndexPath:indexPath forTableView:tableView];
+    MBPanel *panel = [self getRowForIndexPath:indexPath];
+    return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] heightForPanel:panel atIndexPath:indexPath forTableView:tableView];
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-	MBComponentContainer *component = [self getRowForIndexPath:indexPath];
-    id<MBRowViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] builderForStyle:component.style];
-    UITableViewCell *cell = [builder buildTableViewCellFor:component forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
-    
+    MBPanel *panel = [self getRowForIndexPath:indexPath];
+    UITableViewCell *cell = [[[MBViewBuilderFactory sharedInstance] rowViewBuilder] buildTableViewCellFor:panel forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
+
     // Register any webViews in the cell
     [self.webViews removeObjectForKey:indexPath]; // Make sure no old webViews are retained
     for (UIView *subview in [cell subviewsOfClass:[MBWebView class]]) {
@@ -172,7 +169,7 @@
         [self.webViews setObject:subview forKey:indexPath];
     }
 
-    [self.rowsByIndexPath setObject:component forKey:indexPath];
+    [self.rowsByIndexPath setObject:panel forKey:indexPath];
 
     return cell;
 }
@@ -191,18 +188,13 @@
 
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MBComponentContainer *selectedRow = [self.rowsByIndexPath objectForKey:indexPath];
+    MBPanel *panel = [self.rowsByIndexPath objectForKey:indexPath];
     
     // Handle the outcome on a Panel of type "ROW"
-    if ([selectedRow isKindOfClass:[MBPanel class]]) {
-        MBPanel *panel = (MBPanel *)selectedRow;
-        
-        if (panel.outcomeName) {
-            NSString *path = [NSString stringWithFormat:@"%@/%@",[panel evaluatedDataPath], [panel path]];
-            [panel handleOutcome:[panel outcomeName] withPathArgument:path];
-        }
+    if (panel.outcomeName) {
+        NSString *path = [NSString stringWithFormat:@"%@/%@",[panel evaluatedDataPath], [panel path]];
+        [panel handleOutcome:[panel outcomeName] withPathArgument:path];
     }
-
     
 	// use the first field we come across to trigger keyboard dismissal
 //	for(MBField *field in [self.cellReferences allValues]){
@@ -212,7 +204,7 @@
 
     [self.page resignFirstResponder];
 
-    for (MBField *field in [selectedRow childrenOfKind:[MBField class]]) {
+    for (MBField *field in [panel childrenOfKind:[MBField class]]) {
 
 
         if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]) { //ds

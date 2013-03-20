@@ -8,14 +8,15 @@
 
 // container types
 #define C_SECTION @"SECTION"
-#define C_ROW @"ROW"
 #define C_MATRIXHEADER @"MATRIX-HEADER"
 #define C_MATRIXROW @"MATRIX-ROW"
+
 // cell types for use in identifiers
 #define C_REGULARCELL @"REGULARCELL"
 #define C_SUBTITLECELL @"SUBTITLECELL"
 #define C_DROPDOWNLISTCELL @"DROPDOWNLISTCELL"
 #define C_WEBVIEWCELL @"WEBVIEWCELL"
+
 // field types
 #define C_FIELD_LABEL @"LABEL"
 #define C_FIELD_SUBLABEL @"SUBLABEL"
