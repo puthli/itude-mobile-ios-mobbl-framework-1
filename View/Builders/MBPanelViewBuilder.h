@@ -13,5 +13,7 @@
 
 @protocol MBPanelViewBuilder <NSObject>
 - (UIView*) buildPanelView:(MBPanel*) panel forParent:(UIView*) parent  withMaxBounds:(CGRect) bounds viewState:(MBViewState) viewState;
+
+@optional
 - (CGFloat) heightForPanel:(MBPanel *)panel;
 @end
