@@ -113,13 +113,14 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPanel%@%@%@%@%@%@>\n", level, "",
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPanel%@%@%@%@%@%@%@>\n", level, "",
 							   [self attributeAsXml:@"type" withValue:_type],
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"width" withValue:[NSString stringWithFormat:@"%i", _width]],
 							   [self attributeAsXml:@"height" withValue:[NSString stringWithFormat:@"%i", _height]],
                                [self attributeAsXml:@"zoomable" withValue:_zoomable],
-                               [self attributeAsXml:@"outcome" withValue:_outcomeName]
+                               [self attributeAsXml:@"outcome" withValue:_outcomeName],
+                               [self attributeAsXml:@"style" withValue:self.style]
 							   ];
 	
     [result appendString: [self childrenAsXmlWithLevel: level+2]];
