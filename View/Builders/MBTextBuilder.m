@@ -23,7 +23,8 @@
         return webView;
     } else {
         CGFloat inset = 10.0;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(inset, 0.0, bounds.size.width-(2*inset), bounds.size.height)];
+        // The plus 2 is to avoid that text is getting cut off the edge of the UILabel for some unknown reason.
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(inset, 0.0, (bounds.size.width-(2*inset))+2, bounds.size.height)];
         [self configureLabel:label withText:text forField:field];
         return [label autorelease];
     }
