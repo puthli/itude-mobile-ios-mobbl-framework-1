@@ -99,7 +99,8 @@
 // Register your own SectionPanelViewBuilder in the MBPanelViewBuilderFactory and return a custom view to override that,
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MBPanel *panel = (MBPanel *)[self.sections objectAtIndex:section];
-    return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView:panel forParent:self.tableView withMaxBounds:CGRectZero viewState: self.page.currentViewState];
+    CGRect bounds = CGRectMake(0, 0, tableView.frame.size.width, 0); 
+    return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView:panel forParent:self.tableView withMaxBounds:bounds viewState: self.page.currentViewState];
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
