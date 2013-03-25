@@ -9,8 +9,14 @@
 #import "MBDropDownBuilder.h"
 #import "MBField.h"
 #import "MBStyleHandler.h"
+#import "MBMacros.h"
 
 @implementation MBDropDownBuilder
+
+-(UIView *)buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds {
+    DLog(@"WARNING! MBDropDownBuilder does not implement 'buildFieldView: withMaxBounds:'.");
+    return nil;
+}
 
 -(UIView*)buildFieldView:(MBField*)field forTableCell:(UITableViewCell *)cell withMaxBounds:(CGRect) bounds {
     cell.textLabel.text = field.label;
