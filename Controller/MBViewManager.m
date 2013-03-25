@@ -253,13 +253,24 @@
 }
 
 - (void) makeKeyAndVisible {
-	[_tabController.moreNavigationController popToRootViewControllerAnimated:NO];
-	[_window makeKeyAndVisible];
+	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
+	[self.window makeKeyAndVisible];
 	
 	// ensure first dialogGroup is selected.
 	if (_dialogGroupControllersOrdered.count >0) {
 		_activeDialogGroupName = (NSString*)[_dialogGroupControllersOrdered objectAtIndex:0];
 	}
+}
+
+- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated {
+    // iOS 6.0 and up
+    if ([controller respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
+        [controller dismissViewControllerAnimated:animated completion:nil];
+    }
+    // iOS 5.x and lower
+    else {
+        [controller dismissModalViewControllerAnimated:animated];
+    }
 }
 
 - (void) endModalDialog {
@@ -268,12 +279,12 @@
 		while(_activityIndicatorCount >0) [self hideActivityIndicator];
 		
         // If tabController is nil, there is only one viewController
-        if (_tabController) {
-            [_tabController dismissModalViewControllerAnimated:TRUE];;
+        if (self.tabController) {
+            [self dismisViewController:self.tabController animated:TRUE];
         }
         else if (_singlePageMode){
             MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-            [dc.rootController dismissModalViewControllerAnimated:YES];
+            [self dismisViewController:dc.rootController animated:YES];
         }
         
 		[[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_DISMISSED object:self];
@@ -387,22 +398,20 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 
 // Remove every view that is not the activityIndicatorView
 -(void) clearWindow {
-    for(UIView *view in [_window subviews]) {
+    for(UIView *view in [self.window subviews]) {
 		if(![view isKindOfClass:[MBActivityIndicator class]]) [view removeFromSuperview];
 	}
 }
 
--(void) setContentView:(UIView*) view {
-	[self clearWindow];
-	[_window insertSubview:view atIndex:0];
+- (void)setContentViewController:(UIViewController *)viewController {
+    [self clearWindow];
+    [self.window setRootViewController:viewController];
 }
 
 -(void) updateDisplay {
     if(_singlePageMode && [_dialogControllers count] == 1) {
-        
         MBDialogController *controller = [[_dialogControllers allValues] objectAtIndex:0];
-        [_window setRootViewController:controller.rootController];
-		//[self setContentView: [[[_dialogControllers allValues] objectAtIndex:0] view]];
+        [self setContentViewController:controller.rootController];
     } 
     else if([_dialogControllers count] > 1 || !_singlePageMode) 
 	{
@@ -416,9 +425,7 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 			
 			// Apply style to the tabbarController
 			[[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:_tabController];
-			
-			[self clearWindow];
-			[_window insertSubview:_tabController.view atIndex:0];
+            [self setContentViewController:_tabController];
 		}		
 		[self sortTabs];
 		
@@ -507,8 +514,6 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 }
 
 -(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    //	if ([[tabBarController viewControllers] objectAtIndex:[tabBarController selectedIndex]] == viewController)
-    //		return NO;
 	return YES;
 }
 
@@ -518,37 +523,10 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 
 - (void)showActivityIndicatorForDialog:(NSString*) dialogName {
 	[self showActivityIndicator];
-//	//if(_modalController != nil) 
-//	if (1==1) [self showActivityIndicator];
-//	else {
-//		MBDialogController *dialog = [self dialogWithName:dialogName];
-//		// If the dialog is nested inside a dialogGroup, the spinner should be displayed over the entire group
-//		if (dialog.dialogGroupName) {
-//			MBDialogGroupController *dialogGroupController = [self dialogGroupWithName:dialog.dialogGroupName];
-//			[dialogGroupController showActivityIndicator];
-//		}
-//		else {
-//			[dialog showActivityIndicator];
-//		}
-//	}
 }
 
 - (void)hideActivityIndicatorForDialog:(NSString*) dialogName {
 	[self hideActivityIndicator];
-//	
-//	if(_modalController != nil) [self hideActivityIndicator];
-//	//else 
-//	{
-//		MBDialogController *dialog = [self dialogWithName:dialogName];
-//		// If the dialog is nested inside a dialogGroup, the spinner should be hidden from the group
-//		if (dialog.dialogGroupName) {
-//			MBDialogGroupController *dialogGroupController = [self dialogGroupWithName:dialog.dialogGroupName];
-//			[dialogGroupController hideActivityIndicator];
-//		}
-//		else {
-//			[dialog hideActivityIndicator];
-//		}
-//	}
 }
 
 - (void)showActivityIndicator {
@@ -558,19 +536,9 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 		
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
 
-		/*
-		CGRect activityInset = CGRectInset(bounds, (bounds.size.width - 24) / 2, (bounds.size.height - 24) / 2);
-		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
-		[aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-		[aiv startAnimating];
-		
-		[blocker addSubview:aiv];
-		 */
-		[_window addSubview:blocker];
+		[self.window addSubview:blocker];
 	}
 	_activityIndicatorCount ++;
- 
-	//[[MBSpinner sharedInstance] showActivityIndicator:_window];
 }
 
 - (void)hideActivityIndicator {
@@ -578,17 +546,15 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-			UIView *top = [_window.subviews lastObject];
+			UIView *top = [self.window.subviews lastObject];
 			if ([top isKindOfClass:[MBActivityIndicator class]])
 				[top removeFromSuperview];
 		}
 	}
-
-	//[[MBSpinner sharedInstance] hideActivityIndicator:_window];
 }
 
 -(CGRect) bounds {
-    return [_window bounds];
+    return [self.window bounds];
 }
 
 - (void) notifyDialogUsage:(NSString*) dialogName {

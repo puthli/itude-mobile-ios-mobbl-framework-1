@@ -46,9 +46,9 @@ static MBOrientationManager *_instance = nil;
     
     // Set a defaultOrientationMask if none is set
     if (_orientationMask == 0) {
-        // Should in my opinion (Frank) support all orientations by default (UIInterfaceOrientationMaskAll)
-        // but since the old version of this class only supported portrait we applied the same behaviour
-        _orientationMask = UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+        // Default is all orientations.
+        // If you want to override this behaviour, set the orientationmask in your project's appDelegate class
+        _orientationMask = UIInterfaceOrientationMaskAll;
     }
     
     return _orientationMask;
