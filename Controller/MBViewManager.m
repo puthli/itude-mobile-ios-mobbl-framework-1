@@ -399,7 +399,10 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 
 -(void) updateDisplay {
     if(_singlePageMode && [_dialogControllers count] == 1) {
-		[self setContentView: [[[_dialogControllers allValues] objectAtIndex:0] view]];
+        
+        MBDialogController *controller = [[_dialogControllers allValues] objectAtIndex:0];
+        [_window setRootViewController:controller.rootController];
+		//[self setContentView: [[[_dialogControllers allValues] objectAtIndex:0] view]];
     } 
     else if([_dialogControllers count] > 1 || !_singlePageMode) 
 	{
