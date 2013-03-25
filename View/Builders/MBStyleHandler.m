@@ -49,9 +49,8 @@
 
 - (void) applyStyle:(UIView *)view panel:(MBPanel *)panel viewState:(MBViewState) viewState {
 	if([panel.type isEqualToString:@"MATRIX"] || [panel.type isEqualToString:@"LIST"]) {
-		UITableView *matrix = (UITableView*)view;
-		
-		matrix.separatorStyle = UITableViewCellSeparatorStyleNone;
+		UITableView *tableView = (UITableView*)view;
+		[self styleTableView:tableView panel:panel viewState:viewState];
 	}
 }
 
@@ -162,6 +161,11 @@
 		[button setBackgroundColor:[UIColor lightGrayColor]];
 
 	}
+}
+
+// Applies style to the UITableView
+- (void) styleTableView:(UITableView *)tableView panel:(MBPanel *)panel viewState:(MBViewState)viewState{
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 // Apply style to a title in a matrix-header

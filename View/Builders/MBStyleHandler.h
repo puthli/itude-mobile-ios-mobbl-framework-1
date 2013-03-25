@@ -24,6 +24,7 @@
 - (void) styleTextfield:(UIView*) view component:(MBField*) field;
 - (void) styleWebView:(UIView*) view component:(MBField*) field;
 - (void) styleButton:(UIView *) view component:(MBField *) field;
+- (void) styleTableView:(UITableView *)tableView panel:(MBPanel *)panel viewState:(MBViewState)viewState;
 - (void) styleMatrixHeaderTitle:(UIView *)view;
 - (void) styleMatrixHeaderCell:(UIView *)view component:(MBMatrixCell *)cell;
 - (void) styleMatrixRowTitle:(UIView *)view;
