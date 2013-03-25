@@ -120,7 +120,8 @@
         return 0;
     }
     
-    else if ([MBDevice iOSVersion] <= 5.0) {
+    // Automatic only works on iOS 5 and higher
+    else if ([MBDevice iOSVersion] >= 5.0) {
         return UITableViewAutomaticDimension;
     }
     
