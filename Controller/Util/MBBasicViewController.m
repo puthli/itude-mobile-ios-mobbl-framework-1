@@ -81,7 +81,7 @@
 }
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-	return [MBOrientationManager supportInterfaceOrientation:toInterfaceOrientation];
+	return [[MBOrientationManager sharedInstance] supportInterfaceOrientation:toInterfaceOrientation];
 }
 
 @end

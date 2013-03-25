@@ -8,17 +8,51 @@
 
 #import "MBOrientationManager.h"
 
+static MBOrientationManager *_instance = nil;
 
 @implementation MBOrientationManager
 
-+ (BOOL) supportInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-	// For now, we only support portrait
-	if (interfaceOrientation == UIInterfaceOrientationPortrait ||
-		interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-		return YES;
-	}else {
-		return NO;
+@synthesize orientationMask = _orientationMask;
+@synthesize shouldAutorotate = _shouldAutorotate;
+
++ (MBOrientationManager *) sharedInstance {
+	@synchronized(self) {
+		if(_instance == nil) {
+			_instance = [[self alloc] init];
+		}
 	}
+	return _instance;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // ShouldAutoRotate is TRUE by default
+        _shouldAutorotate = YES;
+    }
+    return self;
+}
+
+
+// Returns TRUE if the interfaceOrientation is allowed
+- (BOOL) supportInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    
+    // Bitshift the interfaceOrientation to compare if it is in the allowed mask
+    return self.orientationMask & (1 << interfaceOrientation);
+}
+
+- (UIInterfaceOrientationMask)orientationMask {
+    
+    // Set a defaultOrientationMask if none is set
+    if (_orientationMask == 0) {
+        // Should in my opinion (Frank) support all orientations by default (UIInterfaceOrientationMaskAll)
+        // but since the old version of this class only supported portrait we applied the same behaviour
+        _orientationMask = UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+    }
+    
+    return _orientationMask;
+
 }
 
 @end
