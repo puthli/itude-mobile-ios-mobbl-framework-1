@@ -9,6 +9,7 @@
 #import "MBPickerPopoverController.h"
 #import "MBViewBuilderFactory.h"
 #import "MBStyleHandler.h"
+#import "MBOrientationManager.h"
 
 #define ROWHEIGHT 44
 
@@ -132,6 +133,15 @@
 	}
 	
 	return cell;
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return [[MBOrientationManager sharedInstance] supportInterfaceOrientation:toInterfaceOrientation];
+}
+
+-(BOOL)shouldAutorotate {
+    return [[MBOrientationManager sharedInstance] shouldAutorotate];
 }
 
 @end
