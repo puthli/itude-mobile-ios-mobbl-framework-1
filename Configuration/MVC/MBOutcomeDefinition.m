@@ -14,7 +14,7 @@
 @synthesize action = _action;
 @synthesize dialog = _dialog;
 @synthesize displayMode = _displayMode;
-@synthesize transitionStyle = _transitioningStyle;
+@synthesize transitionStyle = _transitionStyle;
 @synthesize preCondition = _preCondition;
 @synthesize persist = _persist;
 @synthesize transferDocument = _transferDocument;
@@ -34,7 +34,7 @@
 							   [self attributeAsXml:@"dialog" withValue:_dialog],
                                [self attributeAsXml:@"preCondition" withValue:_preCondition],
                                [self attributeAsXml:@"displayMode" withValue:_displayMode], 
-                               [self attributeAsXml:@"transitioningStyle" withValue:_transitioningStyle]];
+                               [self attributeAsXml:@"transitionStyle" withValue:_transitionStyle]];
 	return result;
 }
 

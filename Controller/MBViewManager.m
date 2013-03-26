@@ -78,19 +78,19 @@
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
-    [self showPage:page displayMode:displayMode transitioningStyle:nil selectDialog:TRUE];
+    [self showPage:page displayMode:displayMode transitionStyle:nil selectDialog:TRUE];
 }
 
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) transitioningStyle {
-    [self showPage:page displayMode:displayMode transitioningStyle:transitioningStyle selectDialog:TRUE];
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle {
+    [self showPage:page displayMode:displayMode transitionStyle:transitionStyle selectDialog:TRUE];
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog {
-    [self showPage:page displayMode:displayMode transitioningStyle:nil selectDialog:shouldSelectDialog];
+    [self showPage:page displayMode:displayMode transitionStyle:nil selectDialog:shouldSelectDialog];
 }
 
 
--(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) transitioningStyle selectDialog:(BOOL) shouldSelectDialog {
+-(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle selectDialog:(BOOL) shouldSelectDialog {
     
     
     DLog(@"ViewManager: showPage name=%@ dialog=%@ mode=%@ type=%i", page.pageName, page.dialogName, displayMode, page.pageType);
@@ -144,13 +144,13 @@
                 }
                 
                 // Apply transitioning style (UIModalTransitionStyleCoverVertical = default)
-                if ([@"FLIP" isEqualToString:transitioningStyle]) {
+                if ([@"FLIP" isEqualToString:transitionStyle]) {
                     _modalController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 }
-                else if ([@"CURL" isEqualToString:transitioningStyle]) {
+                else if ([@"CURL" isEqualToString:transitionStyle]) {
                     _modalController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
                 }
-                else if ([@"CROSSDISSOLVE" isEqualToString:transitioningStyle]) {
+                else if ([@"CROSSDISSOLVE" isEqualToString:transitionStyle]) {
                     _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
                 }
                                 

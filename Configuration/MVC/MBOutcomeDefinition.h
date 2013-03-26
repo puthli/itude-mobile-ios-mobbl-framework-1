@@ -13,7 +13,7 @@
 	NSString *_action;
 	NSString *_dialog;
 	NSString *_displayMode;
-    NSString *_transitioningStyle;
+    NSString *_transitionStyle;
 	NSString *_preCondition;
 	BOOL _persist;
 	BOOL _transferDocument;
