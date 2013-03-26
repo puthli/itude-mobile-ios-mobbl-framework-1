@@ -17,6 +17,9 @@
 #import "MBBasicViewController.h"
 #import "UINavigationController+MBRebuilder.h"
 #import "MBViewManager.h"
+#import "MBTransitionStyle.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface MBDialogController()
 	-(void) clearSubviews;
@@ -88,7 +91,7 @@
 	[super dealloc];
 }
 
--(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
+-(void)showPage:(MBPage *)page displayMode:(NSString *)displayMode transitionStyle:(NSString *)transitionStyle {
     
     if(displayMode != nil){
         DLog(@"DialogController: showPage name=%@ dialog=%@ mode=%@", page.pageName, _name, displayMode);
@@ -98,25 +101,30 @@
 	
 	if([displayMode isEqualToString:@"REPLACE"]) {
 
-		// If the rootController is popped, there is no controller to go back to. 
-		// A black screen will be displayed when the user navigates back! That is why we need to replace it
+        // Replace page controller on the stack
 		if (nav.visibleViewController == nav.topViewController) {
+            
+            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
 			[nav popViewControllerAnimated:FALSE];
 			[nav setRootViewController:page.viewController];
 		}
+        // Replace the last page on the stack
 		else {
+            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
 			[nav popViewControllerAnimated:FALSE];
 			[nav pushViewController:page.viewController animated:FALSE];
 		}
 
 		return;
 	}
-    //redundant pop 
-//	else if([displayMode isEqualToString:@"POP"]) {		
-//		[nav popViewControllerAnimated:FALSE];
-//	}
 
-	[nav pushViewController:page.viewController animated:YES];
+    // Apply transitionStyle for a regular page navigation
+    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
+    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+    [style applyTransitionStyleToViewController:nav];
+    
+    // Regular navigation to new page
+	[nav pushViewController:page.viewController animated:[style animated]];
 	
 }
 

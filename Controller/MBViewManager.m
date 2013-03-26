@@ -23,6 +23,7 @@
 #import "MBSpinner.h"
 #import "MBLocalizationService.h"
 #import "MBBasicViewController.h"
+#import "MBTransitionStyle.h"
 
 // Used to get a stylehandler to style navigationBar
 #import "MBStyleHandler.h"
@@ -37,7 +38,7 @@
 - (void) updateDisplay;
 - (void) resetView;
 - (void) showAlertView:(MBPage*) page;
-- (void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog;
+- (void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle selectDialog:(BOOL) shouldSelectDialog;
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
 @end
@@ -143,24 +144,34 @@
                     [_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
                 }
                 
+                // TODO:
                 // Apply transitioning style (UIModalTransitionStyleCoverVertical = default)
-                if ([@"FLIP" isEqualToString:transitionStyle]) {
-                    _modalController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-                }
-                else if ([@"CURL" isEqualToString:transitionStyle]) {
-                    _modalController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-                }
-                else if ([@"CROSSDISSOLVE" isEqualToString:transitionStyle]) {
-                    _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                }
+//                if ([@"FLIP" isEqualToString:transitionStyle]) {
+//                    _modalController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//                }
+//                else if ([@"CURL" isEqualToString:transitionStyle]) {
+//                    _modalController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+//                }
+//                else if ([@"CROSSDISSOLVE" isEqualToString:transitionStyle]) {
+//                    _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//                }
+                
+                // TODO: Remove this
+                // Apply transitionStyle for a regular page navigation
+//                [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+//                id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+//                BOOL animated = [style animated];
+//                [style applyTransitionStyleToViewController:_modalController];
                                 
                 // If tabController is nil, there is only one viewController
                 if (_tabController) {
-                    [_tabController presentModalViewController:_modalController animated:TRUE];
+                    BOOL animated = [self applyTransitionStyleToViewController:_tabController withTransitionStyle:transitionStyle];
+                    [_tabController presentModalViewController:_modalController animated:animated];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-                    [dc.rootController presentModalViewController:_modalController animated:TRUE];
+                    BOOL animated = [self applyTransitionStyleToViewController:dc.rootController withTransitionStyle:transitionStyle];
+                    [dc.rootController presentModalViewController:_modalController animated:animated];
                 }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
                 NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
@@ -168,6 +179,7 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
+        [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle];
 		[_modalController pushViewController:currentViewController animated:TRUE];
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
@@ -185,11 +197,11 @@
 		[currentViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:0]; 
 	}
     else {
-		[self addPageToDialog:page displayMode:displayMode selectDialog:shouldSelectDialog];
+		[self addPageToDialog:page displayMode:displayMode transitionStyle:transitionStyle selectDialog:shouldSelectDialog];
 	}
 }	
 
--(void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog {
+-(void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle selectDialog:(BOOL) shouldSelectDialog {
     MBDialogController *dialog = [self dialogWithName: page.dialogName];
     if(dialog == nil || dialog.temporary) {
 		MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:page.dialogName];
@@ -202,9 +214,17 @@
 		[dialog release];
 		[self updateDisplay];
 	}
-	else [dialog showPage: page displayMode: displayMode];
+	else [dialog showPage: page displayMode: displayMode transitionStyle:transitionStyle];
 	
 	if(shouldSelectDialog ) [self activateDialogWithName:page.dialogName];
+}
+
+- (BOOL) applyTransitionStyleToViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+    // Apply transitionStyle for page navigation
+    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:viewController];
+    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+    [style applyTransitionStyleToViewController:viewController];
+    return  [style animated];
 }
 
 -(void) showAlertView:(MBPage*) page {
