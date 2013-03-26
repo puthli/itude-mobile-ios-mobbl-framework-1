@@ -18,7 +18,7 @@
 @synthesize dialogName = _dialogName;
 @synthesize originDialogName = _originDialogName;
 @synthesize displayMode = _displayMode;
-@synthesize transitioningStyle = _transitioningStyle;
+@synthesize transitionStyle = _transitionStyle;
 @synthesize document = _document;
 @synthesize path = _path;
 @synthesize persist = _persist;
@@ -33,7 +33,7 @@
         self.originDialogName = outcome.originDialogName;
         self.dialogName = outcome.dialogName;
         self.displayMode = outcome.displayMode;
-        self.transitioningStyle = outcome.transitioningStyle;
+        self.transitionStyle = outcome.transitionStyle;
         self.document = outcome.document;
         self.path = outcome.path;
         self.persist = outcome.persist;
@@ -68,7 +68,7 @@
 		self.outcomeName = definition.name;
 		self.dialogName = definition.dialog;
 		self.displayMode = definition.displayMode;
-        self.transitioningStyle = definition.transitioningStyle;
+        self.transitionStyle = definition.transitionStyle;
 		self.persist = definition.persist;
 		self.transferDocument = definition.transferDocument;
 		self.noBackgroundProcessing = definition.noBackgroundProcessing;
@@ -87,6 +87,7 @@
 	[_document release];
 	[_path release];
 	[_preCondition release];
+    [_transitionStyle release];
 	[super dealloc];
 }
 
@@ -107,7 +108,7 @@
 
 -(NSString *) description {
 	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitioningStyle=%@ preCondition=%@ noBackgroundProsessing=%@", 
-            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitioningStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
+            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitionStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
 }
 
 @end

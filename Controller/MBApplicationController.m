@@ -323,7 +323,7 @@ static MBApplicationController *_instance = nil;
     @try {
         [_viewManager hideActivityIndicatorForDialog:causingOutcome.dialogName];
         NSString *displayMode = causingOutcome.displayMode;
-        NSString *transitioningStyle = causingOutcome.transitioningStyle;
+        NSString *transitioningStyle = causingOutcome.transitionStyle;
 		MBViewState viewState = [_viewManager currentViewState];
 		
 		if([displayMode isEqualToString:@"MODAL"] || 
