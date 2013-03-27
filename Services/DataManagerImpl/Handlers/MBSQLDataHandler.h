@@ -8,6 +8,13 @@
 
 #import "MBDataHandlerBase.h"
 
-@interface MBSQLDataHandler : MBDataHandlerBase
+#import "FMDatabase.h"
+
+@interface MBSQLDataHandler : MBDataHandlerBase {
+    FMDatabase *_database;
+    NSString *_databaseName;
+}
+
+@property (nonatomic, retain) NSString *databaseName;
 
 @end
