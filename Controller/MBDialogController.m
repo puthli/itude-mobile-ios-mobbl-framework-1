@@ -104,13 +104,13 @@
         // Replace page controller on the stack
 		if (nav.visibleViewController == nav.topViewController) {
             
-            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
+            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav modal:NO];
 			[nav popViewControllerAnimated:FALSE];
 			[nav setRootViewController:page.viewController];
 		}
         // Replace the last page on the stack
 		else {
-            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
+            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav modal:NO];
 			[nav popViewControllerAnimated:FALSE];
 			[nav pushViewController:page.viewController animated:FALSE];
 		}
@@ -119,9 +119,9 @@
 	}
 
     // Apply transitionStyle for a regular page navigation
-    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
+    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav modal:NO];
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [style applyTransitionStyleToViewController:nav];
+    [style applyTransitionStyleToViewController:nav modal:NO];
     
     // Regular navigation to new page
 	[nav pushViewController:page.viewController animated:[style animated]];

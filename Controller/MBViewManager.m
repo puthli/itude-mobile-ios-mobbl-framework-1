@@ -165,12 +165,12 @@
                                 
                 // If tabController is nil, there is only one viewController
                 if (_tabController) {
-                    BOOL animated = [self applyTransitionStyleToViewController:_tabController withTransitionStyle:transitionStyle];
+                    BOOL animated = [self applyTransitionStyleToViewController:_tabController withTransitionStyle:transitionStyle modal:YES];
                     [_tabController presentModalViewController:_modalController animated:animated];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-                    BOOL animated = [self applyTransitionStyleToViewController:dc.rootController withTransitionStyle:transitionStyle];
+                    BOOL animated = [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle modal:YES];
                     [dc.rootController presentModalViewController:_modalController animated:animated];
                 }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
@@ -179,7 +179,7 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
-        [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle];
+        [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle modal:NO];
 		[_modalController pushViewController:currentViewController animated:TRUE];
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
@@ -219,11 +219,11 @@
 	if(shouldSelectDialog ) [self activateDialogWithName:page.dialogName];
 }
 
-- (BOOL) applyTransitionStyleToViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+- (BOOL) applyTransitionStyleToViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle modal:(BOOL)modal{
     // Apply transitionStyle for page navigation
-    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:viewController];
+    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:viewController modal:modal];
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [style applyTransitionStyleToViewController:viewController];
+    [style applyTransitionStyleToViewController:viewController modal:modal];
     return  [style animated];
 }
 

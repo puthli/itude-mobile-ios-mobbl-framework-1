@@ -16,6 +16,6 @@
 - (BOOL) animated;
 
 /** Return TRUE to use regular iOS page navigation */
-- (void) applyTransitionStyleToViewController:(UIViewController *)viewController;
+- (void) applyTransitionStyleToViewController:(UIViewController *)viewController modal:(BOOL)modal;
 
 @end

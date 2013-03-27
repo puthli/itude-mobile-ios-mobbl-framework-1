@@ -20,6 +20,6 @@
 @property (nonatomic, retain) id<MBTransitionStyle> defaultTransition;
 - (id<MBTransitionStyle>)transitionForStyle:(NSString*)transitionStyle;
 
-- (void) applyTransitionStyle:(NSString *)transitionStyle forViewController:(UIViewController *)viewController;
+- (void) applyTransitionStyle:(NSString *)transitionStyle forViewController:(UIViewController *)viewController modal:(BOOL)modal;
 
 @end

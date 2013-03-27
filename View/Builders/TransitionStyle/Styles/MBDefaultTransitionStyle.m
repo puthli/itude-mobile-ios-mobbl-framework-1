@@ -11,13 +11,14 @@
 
 @implementation MBDefaultTransitionStyle
 
-// Return TRUE to use regular iOS page navigation
 -(BOOL)animated {
     return YES;
 }
 
-- (void)applyTransitionStyleToViewController:(UIViewController *)viewController {
-    // empty implementation, default ios transition
+- (void)applyTransitionStyleToViewController:(UIViewController *)viewController modal:(BOOL)modal {
+    [super applyTransitionStyleToViewController:viewController modal:modal];
+    
+    // default implementation, normal transition
     
 }
 

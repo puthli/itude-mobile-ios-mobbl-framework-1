@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MBTransitionStyle.h"
+#import "MBBasicTransitionStyle.h"
 
-@interface MBFadeTransitionStyle : NSObject <MBTransitionStyle>
+@interface MBFadeTransitionStyle : MBBasicTransitionStyle
 
 @end
