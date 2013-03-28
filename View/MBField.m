@@ -52,7 +52,7 @@
 		spec = [(MBFieldDefinition*)[self definition] dataType];	
 		self.dataType = [self substituteExpressions: spec];
 
-		spec = [(MBFieldDefinition*)[self definition] label];	
+		spec = [(MBFieldDefinition*)[self definition] label];
 		self.label = [self substituteExpressions: spec];
 
 		spec = [(MBFieldDefinition*)[self definition] formatMask];	
@@ -122,8 +122,14 @@
 //
 // Apply a formatmask
 -(NSString *) formattedValue{
-	
-	NSString *fieldValue = self.value;
+	NSString *fieldValue = nil;
+    if (self.path) {
+        fieldValue = self.value;
+    }
+    else {
+        fieldValue= self.label;
+    }
+
 	if (self.formatMask != nil && [self.dataType isEqualToString:@"dateTime"]) {
 
 		// Get a NSDate from a xml-dateFormat
@@ -154,6 +160,12 @@
 	} else if ([self.dataType isEqualToString:@"formatPercentageWithTwoDecimals"]) {
 		fieldValue = [fieldValue formatPercentageWithTwoDecimals];
 	}
+    
+    
+    // Un-escape newline characters
+    fieldValue = [fieldValue stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    fieldValue = [fieldValue stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""];
+
 	
 	// CURRENCY Symbols
 	if ([@"EURO" isEqualToString:self.style]) {

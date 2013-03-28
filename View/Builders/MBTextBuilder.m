@@ -61,15 +61,7 @@
 }
 
 -(NSString*)getText:(MBField*)field {
-    
-    NSString *text;
-    if(field.path != nil) {
-        text = [field formattedValue];
-    }
-    else {
-        text= field.label;
-    }
-    return text;
+    return [field formattedValue];
 }
 
 -(void) configureLabel:(UILabel*) label withText:(NSString*)text forField:(MBField*)field {

@@ -15,7 +15,6 @@
     UISwitch *switchView = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
     [self configureView:switchView forField:field];
     return switchView;
-
 }
 
 -(void)configureView:(UIView *)view forField:(MBField *)field {
@@ -27,8 +26,6 @@
     }
     [switchView addTarget:field action:@selector(switchToggled:) forControlEvents:UIControlEventValueChanged];
     
-    // reformat the frame
-    switchView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     switchView.isAccessibilityElement = YES;
     switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", field.label];
 }

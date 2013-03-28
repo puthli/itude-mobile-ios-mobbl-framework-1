@@ -1,4 +1,6 @@
 #import "MBFieldViewBuilder.h"
+#import "MBField.h"
+#import "MBFieldAlignmentTypes.h"
 #import "MBUtil.h"
 #import <UIKit/UIKit.h>
 
@@ -24,10 +26,18 @@
     // Place new child on the right of other children
     CGFloat right = cell.bounds.size.width;
     CGRect frame = child.frame;
-    frame.origin.x= right - width; 
-    frame.origin.y = (cell.frame.size.height - frame.size.height) / 2; // Center new child horizontally
+    
+    // Adjust alignment for new child
+    if ([C_FIELD_ALIGNMENT_CENTER isEqualToString:field.alignment]) {
+        frame.origin.x = (right - width)/2;
+    }
+    else if ([C_FIELD_ALIGNMENT_RIGHT isEqualToString:field.alignment]) {
+        frame.origin.x= right - width-10; //10 px Right Margin
+    }
+    // Center new child horizontally
+    frame.origin.y = (cell.frame.size.height - frame.size.height) / 2; 
     child.frame = frame;
-    child.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth;
+    child.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
     
     [cell.contentView addSubview:child];
     

@@ -29,7 +29,12 @@
     UILabel *label = (UILabel*)view;
     if(field.path != nil) label.text = [field value];
 	else label.text = field.label;
-	label.backgroundColor = [UIColor clearColor];
+    
+
+    label.numberOfLines = 0;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+
     label.autoresizingMask =   UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.styleHandler applyStyle:field forView: label viewState:0];
 }
