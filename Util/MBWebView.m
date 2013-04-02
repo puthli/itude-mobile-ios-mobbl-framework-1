@@ -8,6 +8,7 @@
 
 #import "MBWebView.h"
 #import "MBViewBuilderFactory.h"
+#import "ColorUtilities.h"
 
 @interface MBWebView () {
     NSString *_text;
@@ -82,6 +83,7 @@
 }
 
 - (UIColor *)textColor {
+    // Fallback Scenario. We MUST have a textColor in case the user has set none
     if (!_textColor) {
         _textColor = [[UIColor blackColor] retain];
     }
@@ -91,17 +93,10 @@
 #pragma mark -
 #pragma mark Helpers
 
-- (NSString *) hexFromColor:(UIColor *)color {
-    const CGFloat *components = CGColorGetComponents(color.CGColor);
-    int red = (int)(components[0] * 255);
-    int green = (int)(components[1] * 255);
-    int blue = (int)(components[2] * 255);
-    return [NSString stringWithFormat:@"#%0.2X%0.2X%0.2X", red, green, blue];
-}
-
 - (NSString *)buildCSS {
-    NSString *textColor = [self hexFromColor:self.textColor];
-    NSString *backgroundColor = [self hexFromColor:self.backgroundColor];
+    NSString *textColor = [self.textColor hexValue];
+    // TODO: If the backgroundColor is clearColor, this translates to black.
+    NSString *backgroundColor = [self.backgroundColor hexValue];
     return [NSString stringWithFormat:C_WEBVIEW_CSS, (int) self.fontSize, self.fontName, textColor, backgroundColor];
 }
 

@@ -10,7 +10,7 @@
 
 @interface UIColor (ColorUtilities) 
 
-// Create a color from a UIColor with a alpha value 
+// Create a color from a UIColor with a alpha value
 /**
  * Creates a UIColor object with a UIColor and aplha value 
  * @param color = The color that needs to be created with alpha value
@@ -28,5 +28,11 @@
  * @return Returns true if the colors match
  */
 - (BOOL) isEqualToColor:(UIColor *) otherColor;
+
+/**
+ * Creates a NSString object with a HEX color value.
+ * @return Returns a string representation of a HEX color value (e.g. #FF0000).
+ */
+- (NSString *) hexValue;
 
 @end
