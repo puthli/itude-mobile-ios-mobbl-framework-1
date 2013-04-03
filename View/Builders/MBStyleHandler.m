@@ -104,13 +104,7 @@
     
     CGFloat height = 44; // 44 is default tableview height
     if ([C_FIELD_TEXT isEqualToString:field.type]) {
-        NSString * text;
-        if(field.path != nil) {
-            text = [field formattedValue];
-        }
-        else {
-            text= field.label;
-        }
+        NSString *text = [field formattedValue];
         if (![text hasHTML]) {
             // calculate bounding box
             CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
