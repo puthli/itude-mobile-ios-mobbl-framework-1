@@ -17,15 +17,15 @@ struct ColorComponents {
 };
 
 
-// Create a color from a UIColor with a alpha value
 + (UIColor *)colorWithColor:(UIColor *)color withAlpha:(CGFloat)alpha {
 
+    // Get the individual color components in RGBA.
+    struct ColorComponents colorComponents = [color colorComponents];
+    colorComponents.a = alpha;
     
-    struct ColorComponents colorComponents = [color colorComponentsWithAlpha:alpha];
+    // Create the new UIColor from the RGBA color components
     CGColorRef colorRef = [self newColorRefFromColorComponents:colorComponents];
-    
 	UIColor *newColor = [UIColor colorWithCGColor:colorRef];
-	
 	CGColorRelease(colorRef);
 	
 	return newColor;
@@ -38,17 +38,29 @@ struct ColorComponents {
 
 
 - (NSString *) hexValue {    
-    struct ColorComponents colorComponents = [self colorComponentsWithAlpha:1.0];
+    struct ColorComponents colorComponents = [self colorComponents];
     int red = (int)(colorComponents.r * 255);
     int green = (int)(colorComponents.g * 255);
     int blue = (int)(colorComponents.b * 255);
-    
     return [NSString stringWithFormat:@"#%0.2X%0.2X%0.2X", red, green, blue];
 }
+
+-(NSString *)rgbaValue {
+    struct ColorComponents colorComponents = [self colorComponents];
+    int red = (int)(colorComponents.r * 255);
+    int green = (int)(colorComponents.g * 255);
+    int blue = (int)(colorComponents.b * 255);
+    return [NSString stringWithFormat:@"rgba(%i,%i,%i,%f)",red,green,blue,colorComponents.a];
+}
+
 
 #pragma mark -
 #pragma mark Helper methods
 
+/**
+ * @param struct ColorComponents The color components used to build a new CGColorRef
+ * @return A retained CGColorRef object created from the colorComponents
+ */
 + (CGColorRef) newColorRefFromColorComponents:(struct ColorComponents) colorComponents{
     CGFloat newComponents[4];
     newComponents[0] = colorComponents.r;
@@ -64,7 +76,11 @@ struct ColorComponents {
     return color;
 }
 
-- (struct ColorComponents) colorComponentsWithAlpha:(CGFloat)alpha  {
+/**
+ * Creates a struct ColorComponents object of self. self is a UIColor.
+ * @return struct ColorComponents
+ */
+- (struct ColorComponents) colorComponents {
     UIColor *color = self;
     
     // oldComponents is the array INSIDE the original color
@@ -76,29 +92,29 @@ struct ColorComponents {
 	{
 		case 2:
 		{
-			//grayscale
+			// Grayscale
             components.r = oldComponents[0];
             components.g = oldComponents[0];
             components.b = oldComponents[0];
-            components.a = alpha;
+            components.a = oldComponents[1];
 			break;
 		}
 		case 4:
 		{
-			//RGBA
+			// RGBA
             components.r = oldComponents[0];
             components.g = oldComponents[1];
             components.b = oldComponents[2];
-            components.a = alpha;
+            components.a = oldComponents[3];
 			break;
 		}
         default:
         {
-            //RGBA
-            components.r = oldComponents[0];
-            components.g = oldComponents[0];
-            components.b = oldComponents[0];
-            components.a = alpha;
+            // When no color found
+            components.r = 0;
+            components.g = 0;
+            components.b = 0;
+            components.a = 1;
             DLog(@"Warning! Unrecognized ColorSpace for Color: %@.",color);
         }
 	}

@@ -31,8 +31,14 @@
 
 /**
  * Creates a NSString object with a HEX color value.
- * @return Returns a string representation of a HEX color value (e.g. #FF0000).
+ * @return Returns a string representation of a HEX color value (e.g. "#FF0000").
  */
 - (NSString *) hexValue;
+
+/**
+ * Creates a NSString object with a CSS rgba value.
+ * @return Returns a string representation of a rgba color value (e.g. "rgba(255,255,0,0.5)").
+ */
+- (NSString *) rgbaValue;
 
 @end

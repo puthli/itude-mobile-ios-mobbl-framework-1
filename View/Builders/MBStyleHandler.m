@@ -96,6 +96,7 @@
 	if([view isKindOfClass:[UIWebView class]]) {
 		UIWebView *webView = (UIWebView*) view;
 		webView.backgroundColor = [UIColor clearColor];
+        webView.opaque = NO; // The webview does not know backgroundColor so if you set clearColor as backgroundColor, set opague to FALSE.
 	}
 }
 

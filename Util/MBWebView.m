@@ -34,11 +34,6 @@
     [super dealloc];
 }
 
-#define C_WEBVIEW_DEFAULT_FONTSIZE 14
-#define C_WEBVIEW_DEFAULT_FONTNAME @"arial"
-#define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px; color:%@; background-color:%@;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
-
-
 -(void)setText:(NSString *)text withFont:(UIFont *)font
 {
     [self setText:text withFontSize:[font pointSize] fontName:[font fontName]];
@@ -60,8 +55,7 @@
 #pragma mark Reload and Refresh methods
 
 - (void)refreshFont {
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>",[self buildCSS], self.text];
-    [self loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    [self loadHTMLString:[self buildHtmlString] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 }
 
 
@@ -90,14 +84,21 @@
     return _textColor;
 }
 
+
 #pragma mark -
 #pragma mark Helpers
 
+#define C_WEBVIEW_HTML @"<html><head><style type='text/css'>%@</style></head><body id='page'>%@</body></html>"
+#define C_WEBVIEW_CSS @"body {font-size:%i; font-family:%@; margin:6px; margin-bottom: 12px; padding:0px; color:%@; background-color:%@;} img {padding-bottom:12px; margin-left:auto; margin-right:auto; display:block; }"
+
 - (NSString *)buildCSS {
-    NSString *textColor = [self.textColor hexValue];
-    // TODO: If the backgroundColor is clearColor, this translates to black.
-    NSString *backgroundColor = [self.backgroundColor hexValue];
+    NSString *textColor = [self.textColor rgbaValue];
+    NSString *backgroundColor = [self.backgroundColor rgbaValue];
     return [NSString stringWithFormat:C_WEBVIEW_CSS, (int) self.fontSize, self.fontName, textColor, backgroundColor];
+}
+
+- (NSString *)buildHtmlString {
+    return [NSString stringWithFormat:C_WEBVIEW_HTML,[self buildCSS], self.text];
 }
 
 @end
