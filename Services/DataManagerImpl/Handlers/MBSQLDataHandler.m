@@ -79,7 +79,7 @@
         NSString *key  = [parameter valueForAttribute:@"key"];
         NSString *value = [parameter valueForAttribute:@"value"];
         
-        query = [NSString stringWithFormat:@"%@ %@ %@ = '%%%@%%'", query, (firstParameter?@"WHERE":queryOperator), key, value];
+        query = [NSString stringWithFormat:@"%@ %@ %@ = '%@'", query, (firstParameter?@"WHERE":queryOperator), key, value];
         firstParameter = NO;
     }
     
