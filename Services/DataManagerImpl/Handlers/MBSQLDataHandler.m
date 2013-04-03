@@ -70,12 +70,14 @@
     MBDocument *document = [[[MBMetadataService sharedInstance] definitionForDocumentName:documentName] createDocument];
     NSString *query = [NSString stringWithFormat:@"SELECT * FROM %@", documentName];
     BOOL firstParameter = YES;
+    NSString *queryOperator = [args valueForPath:@"/Query[0]/@operator"];
+    queryOperator = (queryOperator?queryOperator:@"AND");
     
     for (MBElement *parameter in [args valueForPath:@"/Query[0]/Parameter"]) {
         NSString *key  = [parameter valueForAttribute:@"key"];
         NSString *value = [parameter valueForAttribute:@"value"];
         
-        query = [NSString stringWithFormat:@"%@ %@ %@ LIKE '%%%@%%'", query, (firstParameter?@"WHERE":@"AND"), key, value];
+        query = [NSString stringWithFormat:@"%@ %@ %@ LIKE '%%%@%%'", query, (firstParameter?@"WHERE":queryOperator), key, value];
         firstParameter = NO;
     }
     
