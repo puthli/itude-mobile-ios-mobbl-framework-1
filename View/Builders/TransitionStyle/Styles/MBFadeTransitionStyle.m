@@ -11,19 +11,20 @@
 
 @implementation MBFadeTransitionStyle
 
--(void)applyTransitionStyleToViewController:(UIViewController *)viewController modal:(BOOL)modal {
-    [super applyTransitionStyleToViewController:viewController modal:modal];
+-(BOOL)animated {
+    return NO;
+}
+
+-(void)applyTransitionStyleToViewController:(UIViewController *)viewController {
+    [super applyTransitionStyleToViewController:viewController];
     
-    if (self.isModal) {
-        viewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    }else{
-        CATransition* transition = [CATransition animation];
-        transition.duration = 0.5;
-        transition.type = kCATransitionFade;
-        transition.subtype = kCATransitionFromTop;
-        
-        [viewController.view.layer addAnimation:transition forKey:kCATransition];
-    }
+    viewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = kCATransitionFade;
+    transition.subtype = kCATransitionFromTop;
+    [viewController.view.layer addAnimation:transition forKey:kCATransition];
 }
 
 @end

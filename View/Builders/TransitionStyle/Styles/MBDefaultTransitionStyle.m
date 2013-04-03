@@ -15,9 +15,7 @@
     return YES;
 }
 
-- (void)applyTransitionStyleToViewController:(UIViewController *)viewController modal:(BOOL)modal {
-    [super applyTransitionStyleToViewController:viewController modal:modal];
-    
+- (void)applyTransitionStyleToViewController:(UIViewController *)viewController {
     // default implementation, normal transition
     
 }

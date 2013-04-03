@@ -165,13 +165,13 @@
                                 
                 // If tabController is nil, there is only one viewController
                 if (_tabController) {
-                    BOOL animated = [self applyTransitionStyleToViewController:_tabController withTransitionStyle:transitionStyle modal:YES];
-                    [_tabController presentModalViewController:_modalController animated:animated];
+                    [self applyTransitionStyleToViewController:_tabController withTransitionStyle:transitionStyle];
+                    [_tabController presentModalViewController:_modalController animated:YES];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-                    BOOL animated = [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle modal:YES];
-                    [dc.rootController presentModalViewController:_modalController animated:animated];
+                    [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle];
+                    [dc.rootController presentModalViewController:_modalController animated:YES];
                 }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
                 NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
@@ -179,8 +179,8 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
-        [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle modal:NO];
-		[_modalController pushViewController:currentViewController animated:TRUE];
+        [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle];
+		[_modalController pushViewController:currentViewController animated:YES];
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
 		UIViewController *rootViewController = [_modalController.viewControllers objectAtIndex:0];		
@@ -219,11 +219,11 @@
 	if(shouldSelectDialog ) [self activateDialogWithName:page.dialogName];
 }
 
-- (BOOL) applyTransitionStyleToViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle modal:(BOOL)modal{
+- (BOOL) applyTransitionStyleToViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle{
     // Apply transitionStyle for page navigation
-    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:viewController modal:modal];
+    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:viewController];
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [style applyTransitionStyleToViewController:viewController modal:modal];
+    [style applyTransitionStyleToViewController:viewController];
     return  [style animated];
 }
 
