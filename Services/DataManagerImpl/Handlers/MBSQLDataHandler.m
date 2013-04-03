@@ -72,15 +72,18 @@
     BOOL firstParameter = YES;
     NSString *queryOperator = [args valueForPath:@"/Query[0]/@operator"];
     queryOperator = (queryOperator?queryOperator:@"AND");
+    NSString *groupBy = [args valueForPath:@"/Query[0]/@groupBy"];
+    groupBy = (groupBy?[NSString stringWithFormat:@" GROUP BY %@", groupBy]:@"");
     
     for (MBElement *parameter in [args valueForPath:@"/Query[0]/Parameter"]) {
         NSString *key  = [parameter valueForAttribute:@"key"];
         NSString *value = [parameter valueForAttribute:@"value"];
         
-        query = [NSString stringWithFormat:@"%@ %@ %@ LIKE '%%%@%%'", query, (firstParameter?@"WHERE":queryOperator), key, value];
+        query = [NSString stringWithFormat:@"%@ %@ %@ = '%%%@%%'", query, (firstParameter?@"WHERE":queryOperator), key, value];
         firstParameter = NO;
     }
     
+    query = [query stringByAppendingString:groupBy];
     DLog(@"MBSQLDataHandler.m: Execute query: %@", query);
     FMResultSet *resultSet = [self.database executeQuery:query];
     while ([resultSet next]) {
