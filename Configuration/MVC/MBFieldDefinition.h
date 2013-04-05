@@ -17,7 +17,9 @@
 	NSString *_style;
 	NSString *_displayType;
 	NSString *_dataType;
+    NSString *_required;
 	NSString *_text;
+    NSString *_hint;
 	NSString *_outcomeName;
 	NSString *_width;
 	NSString *_height;
@@ -28,7 +30,6 @@
 	NSString *_custom1;
 	NSString *_custom2;
 	NSString *_custom3;
-	NSString *_required;
 }
 
 @property (nonatomic, retain) NSString *outcomeName;
@@ -36,6 +37,7 @@
 @property (nonatomic, retain) NSString *path;
 @property (nonatomic, retain) NSString *style;
 @property (nonatomic, retain) NSString *text;
+@property (nonatomic, retain) NSString *hint;
 @property (nonatomic, retain) NSString *displayType;
 @property (nonatomic, retain) NSString *dataType;
 @property (nonatomic, retain) NSString *required;
@@ -48,5 +50,6 @@
 @property (nonatomic, retain) NSString *custom1;
 @property (nonatomic, retain) NSString *custom2;
 @property (nonatomic, retain) NSString *custom3;
+
 
 @end
