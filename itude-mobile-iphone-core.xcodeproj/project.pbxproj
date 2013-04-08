@@ -159,10 +159,6 @@
 		1C01B7D114BDF78C00CE79A0 /* MBFormSubmission.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B41714BDF78700CE79A0 /* MBFormSubmission.h */; };
 		1C01B7D214BDF78C00CE79A0 /* MBFormSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41814BDF78700CE79A0 /* MBFormSubmission.m */; };
 		1C01B7D314BDF78C00CE79A0 /* MBFormSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41814BDF78700CE79A0 /* MBFormSubmission.m */; };
-		1C01B7D414BDF78C00CE79A0 /* MBNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B41914BDF78700CE79A0 /* MBNavigationController.h */; };
-		1C01B7D514BDF78C00CE79A0 /* MBNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B41914BDF78700CE79A0 /* MBNavigationController.h */; };
-		1C01B7D614BDF78C00CE79A0 /* MBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41A14BDF78700CE79A0 /* MBNavigationController.m */; };
-		1C01B7D714BDF78C00CE79A0 /* MBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41A14BDF78700CE79A0 /* MBNavigationController.m */; };
 		1C01B7D814BDF78C00CE79A0 /* MBSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B41B14BDF78700CE79A0 /* MBSplitViewController.h */; };
 		1C01B7D914BDF78C00CE79A0 /* MBSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B41B14BDF78700CE79A0 /* MBSplitViewController.h */; };
 		1C01B7DA14BDF78C00CE79A0 /* MBSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41C14BDF78700CE79A0 /* MBSplitViewController.m */; };
@@ -403,12 +399,6 @@
 		1C01BB2B14BDF78D00CE79A0 /* MBPageViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70314BDF78A00CE79A0 /* MBPageViewBuilder.m */; };
 		1C01BB2C14BDF78D00CE79A0 /* MBPanelViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B70414BDF78A00CE79A0 /* MBPanelViewBuilder.h */; };
 		1C01BB2D14BDF78D00CE79A0 /* MBPanelViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B70414BDF78A00CE79A0 /* MBPanelViewBuilder.h */; };
-		1C01BB2E14BDF78D00CE79A0 /* MBPanelViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70514BDF78A00CE79A0 /* MBPanelViewBuilder.m */; };
-		1C01BB2F14BDF78D00CE79A0 /* MBPanelViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70514BDF78A00CE79A0 /* MBPanelViewBuilder.m */; };
-		1C01BB3014BDF78D00CE79A0 /* MBRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B70614BDF78A00CE79A0 /* MBRowViewBuilder.h */; };
-		1C01BB3114BDF78D00CE79A0 /* MBRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B70614BDF78A00CE79A0 /* MBRowViewBuilder.h */; };
-		1C01BB3214BDF78D00CE79A0 /* MBRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70714BDF78A00CE79A0 /* MBRowViewBuilder.m */; };
-		1C01BB3314BDF78D00CE79A0 /* MBRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70714BDF78A00CE79A0 /* MBRowViewBuilder.m */; };
 		1C01BB3414BDF78D00CE79A0 /* MBStyleHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B70814BDF78A00CE79A0 /* MBStyleHandler.h */; };
 		1C01BB3514BDF78D00CE79A0 /* MBStyleHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B70814BDF78A00CE79A0 /* MBStyleHandler.h */; };
 		1C01BB3614BDF78D00CE79A0 /* MBStyleHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70914BDF78A00CE79A0 /* MBStyleHandler.m */; };
@@ -497,16 +487,58 @@
 		1C01BB8914BDF78D00CE79A0 /* MBPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73414BDF78A00CE79A0 /* MBPanel.h */; };
 		1C01BB8A14BDF78D00CE79A0 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73514BDF78A00CE79A0 /* MBPanel.m */; };
 		1C01BB8B14BDF78D00CE79A0 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73514BDF78A00CE79A0 /* MBPanel.m */; };
-		1C01BB8C14BDF78D00CE79A0 /* MBRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73614BDF78A00CE79A0 /* MBRow.h */; };
-		1C01BB8D14BDF78D00CE79A0 /* MBRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73614BDF78A00CE79A0 /* MBRow.h */; };
-		1C01BB8E14BDF78D00CE79A0 /* MBRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73714BDF78A00CE79A0 /* MBRow.m */; };
-		1C01BB8F14BDF78D00CE79A0 /* MBRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73714BDF78A00CE79A0 /* MBRow.m */; };
 		1C01BB9014BDF78D00CE79A0 /* MBValueChangeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */; };
 		1C01BB9114BDF78D00CE79A0 /* MBValueChangeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */; };
 		1C01BB9214BDF78D00CE79A0 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */; };
 		1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */; };
 		1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
 		1C01BB9514BDF78D00CE79A0 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
+		1CC49AA51701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A971701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h */; };
+		1CC49AA61701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A971701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h */; };
+		1CC49AA71701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A981701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m */; };
+		1CC49AA81701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A981701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m */; };
+		1CC49AA91701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A981701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m */; };
+		1CC49AAA1701D8A10074F453 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A991701D8A10074F453 /* FMDatabase.h */; };
+		1CC49AAB1701D8A10074F453 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A991701D8A10074F453 /* FMDatabase.h */; };
+		1CC49AAC1701D8A10074F453 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9A1701D8A10074F453 /* FMDatabase.m */; };
+		1CC49AAD1701D8A10074F453 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9A1701D8A10074F453 /* FMDatabase.m */; };
+		1CC49AAE1701D8A10074F453 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9A1701D8A10074F453 /* FMDatabase.m */; };
+		1CC49AAF1701D8A10074F453 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A9B1701D8A10074F453 /* FMDatabaseAdditions.h */; };
+		1CC49AB01701D8A10074F453 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A9B1701D8A10074F453 /* FMDatabaseAdditions.h */; };
+		1CC49AB11701D8A10074F453 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9C1701D8A10074F453 /* FMDatabaseAdditions.m */; };
+		1CC49AB21701D8A10074F453 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9C1701D8A10074F453 /* FMDatabaseAdditions.m */; };
+		1CC49AB31701D8A10074F453 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9C1701D8A10074F453 /* FMDatabaseAdditions.m */; };
+		1CC49AB41701D8A10074F453 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A9D1701D8A10074F453 /* FMDatabasePool.h */; };
+		1CC49AB51701D8A10074F453 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A9D1701D8A10074F453 /* FMDatabasePool.h */; };
+		1CC49AB61701D8A10074F453 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9E1701D8A10074F453 /* FMDatabasePool.m */; };
+		1CC49AB71701D8A10074F453 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9E1701D8A10074F453 /* FMDatabasePool.m */; };
+		1CC49AB81701D8A10074F453 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49A9E1701D8A10074F453 /* FMDatabasePool.m */; };
+		1CC49AB91701D8A10074F453 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A9F1701D8A10074F453 /* FMDatabaseQueue.h */; };
+		1CC49ABA1701D8A10074F453 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49A9F1701D8A10074F453 /* FMDatabaseQueue.h */; };
+		1CC49ABB1701D8A10074F453 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA01701D8A10074F453 /* FMDatabaseQueue.m */; };
+		1CC49ABC1701D8A10074F453 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA01701D8A10074F453 /* FMDatabaseQueue.m */; };
+		1CC49ABD1701D8A10074F453 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA01701D8A10074F453 /* FMDatabaseQueue.m */; };
+		1CC49ABE1701D8A10074F453 /* fmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA11701D8A10074F453 /* fmdb.m */; };
+		1CC49ABF1701D8A10074F453 /* fmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA11701D8A10074F453 /* fmdb.m */; };
+		1CC49AC01701D8A10074F453 /* fmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA11701D8A10074F453 /* fmdb.m */; };
+		1CC49AC11701D8A10074F453 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49AA21701D8A10074F453 /* FMResultSet.h */; };
+		1CC49AC21701D8A10074F453 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49AA21701D8A10074F453 /* FMResultSet.h */; };
+		1CC49AC31701D8A10074F453 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA31701D8A10074F453 /* FMResultSet.m */; };
+		1CC49AC41701D8A10074F453 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA31701D8A10074F453 /* FMResultSet.m */; };
+		1CC49AC51701D8A10074F453 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AA31701D8A10074F453 /* FMResultSet.m */; };
+		1CC49AC61701D8A10074F453 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1CC49AA41701D8A10074F453 /* LICENSE.txt */; };
+		1CC49AC91701DA380074F453 /* MBSQLDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49AC71701DA380074F453 /* MBSQLDataHandler.h */; };
+		1CC49ACA1701DA380074F453 /* MBSQLDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49AC71701DA380074F453 /* MBSQLDataHandler.h */; };
+		1CC49ACB1701DA380074F453 /* MBSQLDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AC81701DA380074F453 /* MBSQLDataHandler.m */; };
+		1CC49ACC1701DA380074F453 /* MBSQLDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AC81701DA380074F453 /* MBSQLDataHandler.m */; };
+		1CC49ACD1701DA380074F453 /* MBSQLDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AC81701DA380074F453 /* MBSQLDataHandler.m */; };
+		1CC49AD21701E02C0074F453 /* MBNewRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49ACF1701E02C0074F453 /* MBNewRowViewBuilder.h */; };
+		1CC49AD31701E02C0074F453 /* MBNewRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49ACF1701E02C0074F453 /* MBNewRowViewBuilder.h */; };
+		1CC49AD41701E02C0074F453 /* MBNewRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AD01701E02C0074F453 /* MBNewRowViewBuilder.m */; };
+		1CC49AD51701E02C0074F453 /* MBNewRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AD01701E02C0074F453 /* MBNewRowViewBuilder.m */; };
+		1CC49AD61701E02C0074F453 /* MBNewRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC49AD01701E02C0074F453 /* MBNewRowViewBuilder.m */; };
+		1CC49AD71701E02C0074F453 /* MBRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49AD11701E02C0074F453 /* MBRowViewBuilder.h */; };
+		1CC49AD81701E02C0074F453 /* MBRowViewBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CC49AD11701E02C0074F453 /* MBRowViewBuilder.h */; };
 		2C26D9541521B817000E00A2 /* MBRESTGetServiceHandlerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26D9531521B817000E00A2 /* MBRESTGetServiceHandlerTest.m */; };
 		2C26D9571521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */; };
 		2C26D9581521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */; };
@@ -557,7 +589,6 @@
 		2C654C751518CD54009B1EE7 /* MBActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41414BDF78700CE79A0 /* MBActivityIndicator.m */; };
 		2C654C771518CD54009B1EE7 /* MBBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41614BDF78700CE79A0 /* MBBasicViewController.m */; };
 		2C654C791518CD54009B1EE7 /* MBFormSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41814BDF78700CE79A0 /* MBFormSubmission.m */; };
-		2C654C7B1518CD54009B1EE7 /* MBNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41A14BDF78700CE79A0 /* MBNavigationController.m */; };
 		2C654C7D1518CD54009B1EE7 /* MBSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B41C14BDF78700CE79A0 /* MBSplitViewController.m */; };
 		2C654C801518CD54009B1EE7 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68114BDF78800CE79A0 /* MGSplitCornersView.m */; };
 		2C654C821518CD54009B1EE7 /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B68314BDF78800CE79A0 /* MGSplitDividerView.m */; };
@@ -611,8 +642,6 @@
 		2C654CF21518CD55009B1EE7 /* MBForEachViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B6FF14BDF78A00CE79A0 /* MBForEachViewBuilder.m */; };
 		2C654CF41518CD55009B1EE7 /* MBMatrixViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70114BDF78A00CE79A0 /* MBMatrixViewBuilder.m */; };
 		2C654CF61518CD55009B1EE7 /* MBPageViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70314BDF78A00CE79A0 /* MBPageViewBuilder.m */; };
-		2C654CF81518CD55009B1EE7 /* MBPanelViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70514BDF78A00CE79A0 /* MBPanelViewBuilder.m */; };
-		2C654CFA1518CD55009B1EE7 /* MBRowViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70714BDF78A00CE79A0 /* MBRowViewBuilder.m */; };
 		2C654CFC1518CD55009B1EE7 /* MBStyleHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70914BDF78A00CE79A0 /* MBStyleHandler.m */; };
 		2C654CFE1518CD55009B1EE7 /* MBViewBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70B14BDF78A00CE79A0 /* MBViewBuilder.m */; };
 		2C654D001518CD55009B1EE7 /* MBViewBuilderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B70D14BDF78A00CE79A0 /* MBViewBuilderFactory.m */; };
@@ -634,7 +663,6 @@
 		2C654D211518CD55009B1EE7 /* MBForEach.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73014BDF78A00CE79A0 /* MBForEach.m */; };
 		2C654D241518CD55009B1EE7 /* MBPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73314BDF78A00CE79A0 /* MBPage.m */; };
 		2C654D261518CD55009B1EE7 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73514BDF78A00CE79A0 /* MBPanel.m */; };
-		2C654D281518CD55009B1EE7 /* MBRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73714BDF78A00CE79A0 /* MBRow.m */; };
 		2C654D2B1518CD55009B1EE7 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */; };
 		2C654D321518CE15009B1EE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D311518CE14009B1EE7 /* Foundation.framework */; };
 		2C654D341518CE1D009B1EE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C654D331518CE1D009B1EE7 /* QuartzCore.framework */; };
@@ -727,8 +755,6 @@
 		1C01B41614BDF78700CE79A0 /* MBBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBBasicViewController.m; sourceTree = "<group>"; };
 		1C01B41714BDF78700CE79A0 /* MBFormSubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFormSubmission.h; sourceTree = "<group>"; };
 		1C01B41814BDF78700CE79A0 /* MBFormSubmission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFormSubmission.m; sourceTree = "<group>"; };
-		1C01B41914BDF78700CE79A0 /* MBNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBNavigationController.h; sourceTree = "<group>"; };
-		1C01B41A14BDF78700CE79A0 /* MBNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBNavigationController.m; sourceTree = "<group>"; };
 		1C01B41B14BDF78700CE79A0 /* MBSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSplitViewController.h; sourceTree = "<group>"; };
 		1C01B41C14BDF78700CE79A0 /* MBSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSplitViewController.m; sourceTree = "<group>"; };
 		1C01B41D14BDF78700CE79A0 /* MBViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBViewControllerProtocol.h; sourceTree = "<group>"; };
@@ -853,9 +879,6 @@
 		1C01B70214BDF78A00CE79A0 /* MBPageViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPageViewBuilder.h; sourceTree = "<group>"; };
 		1C01B70314BDF78A00CE79A0 /* MBPageViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPageViewBuilder.m; sourceTree = "<group>"; };
 		1C01B70414BDF78A00CE79A0 /* MBPanelViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPanelViewBuilder.h; sourceTree = "<group>"; };
-		1C01B70514BDF78A00CE79A0 /* MBPanelViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPanelViewBuilder.m; sourceTree = "<group>"; };
-		1C01B70614BDF78A00CE79A0 /* MBRowViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRowViewBuilder.h; sourceTree = "<group>"; };
-		1C01B70714BDF78A00CE79A0 /* MBRowViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRowViewBuilder.m; sourceTree = "<group>"; };
 		1C01B70814BDF78A00CE79A0 /* MBStyleHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBStyleHandler.h; sourceTree = "<group>"; };
 		1C01B70914BDF78A00CE79A0 /* MBStyleHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBStyleHandler.m; sourceTree = "<group>"; };
 		1C01B70A14BDF78A00CE79A0 /* MBViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBViewBuilder.h; sourceTree = "<group>"; };
@@ -900,11 +923,28 @@
 		1C01B73314BDF78A00CE79A0 /* MBPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPage.m; sourceTree = "<group>"; };
 		1C01B73414BDF78A00CE79A0 /* MBPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPanel.h; sourceTree = "<group>"; };
 		1C01B73514BDF78A00CE79A0 /* MBPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPanel.m; sourceTree = "<group>"; };
-		1C01B73614BDF78A00CE79A0 /* MBRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRow.h; sourceTree = "<group>"; };
-		1C01B73714BDF78A00CE79A0 /* MBRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRow.m; sourceTree = "<group>"; };
 		1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		1C01B73A14BDF78A00CE79A0 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		1CC49A971701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+InMemoryOnDiskIO.h"; sourceTree = "<group>"; };
+		1CC49A981701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+InMemoryOnDiskIO.m"; sourceTree = "<group>"; };
+		1CC49A991701D8A10074F453 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		1CC49A9A1701D8A10074F453 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		1CC49A9B1701D8A10074F453 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		1CC49A9C1701D8A10074F453 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		1CC49A9D1701D8A10074F453 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		1CC49A9E1701D8A10074F453 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		1CC49A9F1701D8A10074F453 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		1CC49AA01701D8A10074F453 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		1CC49AA11701D8A10074F453 /* fmdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmdb.m; sourceTree = "<group>"; };
+		1CC49AA21701D8A10074F453 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		1CC49AA31701D8A10074F453 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		1CC49AA41701D8A10074F453 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		1CC49AC71701DA380074F453 /* MBSQLDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSQLDataHandler.h; sourceTree = "<group>"; };
+		1CC49AC81701DA380074F453 /* MBSQLDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSQLDataHandler.m; sourceTree = "<group>"; };
+		1CC49ACF1701E02C0074F453 /* MBNewRowViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBNewRowViewBuilder.h; sourceTree = "<group>"; };
+		1CC49AD01701E02C0074F453 /* MBNewRowViewBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBNewRowViewBuilder.m; sourceTree = "<group>"; };
+		1CC49AD11701E02C0074F453 /* MBRowViewBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRowViewBuilder.h; sourceTree = "<group>"; };
 		2C26D9521521B817000E00A2 /* MBRESTGetServiceHandlerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBRESTGetServiceHandlerTest.h; path = Services/DataManagerImpl/Handlers/MBRESTGetServiceHandlerTest.h; sourceTree = "<group>"; };
 		2C26D9531521B817000E00A2 /* MBRESTGetServiceHandlerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBRESTGetServiceHandlerTest.m; path = Services/DataManagerImpl/Handlers/MBRESTGetServiceHandlerTest.m; sourceTree = "<group>"; };
 		2C26D9551521B874000E00A2 /* MBRESTGetServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRESTGetServiceDataHandler.h; sourceTree = "<group>"; };
@@ -1134,8 +1174,6 @@
 				1C01B41614BDF78700CE79A0 /* MBBasicViewController.m */,
 				1C01B41714BDF78700CE79A0 /* MBFormSubmission.h */,
 				1C01B41814BDF78700CE79A0 /* MBFormSubmission.m */,
-				1C01B41914BDF78700CE79A0 /* MBNavigationController.h */,
-				1C01B41A14BDF78700CE79A0 /* MBNavigationController.m */,
 				1C01B41B14BDF78700CE79A0 /* MBSplitViewController.h */,
 				1C01B41C14BDF78700CE79A0 /* MBSplitViewController.m */,
 				1C01B41D14BDF78700CE79A0 /* MBViewControllerProtocol.h */,
@@ -1146,6 +1184,7 @@
 		1C01B41E14BDF78700CE79A0 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				1CC49A961701D8A10074F453 /* FMDB */,
 				1C01B67F14BDF78800CE79A0 /* MGSplitViewController */,
 			);
 			path = External;
@@ -1268,6 +1307,8 @@
 				2C26D9561521B874000E00A2 /* MBRESTGetServiceDataHandler.m */,
 				2C26D95C1521C782000E00A2 /* MBURLConnectionDataHandler.h */,
 				2C26D95D1521C782000E00A2 /* MBURLConnectionDataHandler.m */,
+				1CC49AC71701DA380074F453 /* MBSQLDataHandler.h */,
+				1CC49AC81701DA380074F453 /* MBSQLDataHandler.m */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -1372,8 +1413,6 @@
 				1C01B73314BDF78A00CE79A0 /* MBPage.m */,
 				1C01B73414BDF78A00CE79A0 /* MBPanel.h */,
 				1C01B73514BDF78A00CE79A0 /* MBPanel.m */,
-				1C01B73614BDF78A00CE79A0 /* MBRow.h */,
-				1C01B73714BDF78A00CE79A0 /* MBRow.m */,
 				1C01B73814BDF78A00CE79A0 /* MBValueChangeListenerProtocol.h */,
 				1C01B73914BDF78A00CE79A0 /* Tables */,
 			);
@@ -1383,6 +1422,7 @@
 		1C01B6FA14BDF78A00CE79A0 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
+				1CC49ACE1701E02C0074F453 /* RowView */,
 				1C01B6FB14BDF78A00CE79A0 /* MBFieldTypes.h */,
 				1C01B6FC14BDF78A00CE79A0 /* MBFieldViewBuilder.h */,
 				1C01B6FD14BDF78A00CE79A0 /* MBFieldViewBuilder.m */,
@@ -1393,9 +1433,6 @@
 				1C01B70214BDF78A00CE79A0 /* MBPageViewBuilder.h */,
 				1C01B70314BDF78A00CE79A0 /* MBPageViewBuilder.m */,
 				1C01B70414BDF78A00CE79A0 /* MBPanelViewBuilder.h */,
-				1C01B70514BDF78A00CE79A0 /* MBPanelViewBuilder.m */,
-				1C01B70614BDF78A00CE79A0 /* MBRowViewBuilder.h */,
-				1C01B70714BDF78A00CE79A0 /* MBRowViewBuilder.m */,
 				1C01B70814BDF78A00CE79A0 /* MBStyleHandler.h */,
 				1C01B70914BDF78A00CE79A0 /* MBStyleHandler.m */,
 				1C01B70A14BDF78A00CE79A0 /* MBViewBuilder.h */,
@@ -1448,6 +1485,37 @@
 				1C01B73B14BDF78A00CE79A0 /* MBTableViewController.m */,
 			);
 			path = Tables;
+			sourceTree = "<group>";
+		};
+		1CC49A961701D8A10074F453 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				1CC49A971701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h */,
+				1CC49A981701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m */,
+				1CC49A991701D8A10074F453 /* FMDatabase.h */,
+				1CC49A9A1701D8A10074F453 /* FMDatabase.m */,
+				1CC49A9B1701D8A10074F453 /* FMDatabaseAdditions.h */,
+				1CC49A9C1701D8A10074F453 /* FMDatabaseAdditions.m */,
+				1CC49A9D1701D8A10074F453 /* FMDatabasePool.h */,
+				1CC49A9E1701D8A10074F453 /* FMDatabasePool.m */,
+				1CC49A9F1701D8A10074F453 /* FMDatabaseQueue.h */,
+				1CC49AA01701D8A10074F453 /* FMDatabaseQueue.m */,
+				1CC49AA11701D8A10074F453 /* fmdb.m */,
+				1CC49AA21701D8A10074F453 /* FMResultSet.h */,
+				1CC49AA31701D8A10074F453 /* FMResultSet.m */,
+				1CC49AA41701D8A10074F453 /* LICENSE.txt */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		1CC49ACE1701E02C0074F453 /* RowView */ = {
+			isa = PBXGroup;
+			children = (
+				1CC49ACF1701E02C0074F453 /* MBNewRowViewBuilder.h */,
+				1CC49AD01701E02C0074F453 /* MBNewRowViewBuilder.m */,
+				1CC49AD11701E02C0074F453 /* MBRowViewBuilder.h */,
+			);
+			path = RowView;
 			sourceTree = "<group>";
 		};
 		2C26D94E1521B60F000E00A2 /* Services */ = {
@@ -1596,7 +1664,6 @@
 				1C01B7C814BDF78C00CE79A0 /* MBActivityIndicator.h in Headers */,
 				1C01B7CC14BDF78C00CE79A0 /* MBBasicViewController.h in Headers */,
 				1C01B7D014BDF78C00CE79A0 /* MBFormSubmission.h in Headers */,
-				1C01B7D414BDF78C00CE79A0 /* MBNavigationController.h in Headers */,
 				1C01B7D814BDF78C00CE79A0 /* MBSplitViewController.h in Headers */,
 				1C01B7DC14BDF78C00CE79A0 /* MBViewControllerProtocol.h in Headers */,
 				1C01BA4414BDF78D00CE79A0 /* MGSplitCornersView.h in Headers */,
@@ -1664,7 +1731,6 @@
 				1C01BB2414BDF78D00CE79A0 /* MBMatrixViewBuilder.h in Headers */,
 				1C01BB2814BDF78D00CE79A0 /* MBPageViewBuilder.h in Headers */,
 				1C01BB2C14BDF78D00CE79A0 /* MBPanelViewBuilder.h in Headers */,
-				1C01BB3014BDF78D00CE79A0 /* MBRowViewBuilder.h in Headers */,
 				1C01BB3414BDF78D00CE79A0 /* MBStyleHandler.h in Headers */,
 				1C01BB3814BDF78D00CE79A0 /* MBViewBuilder.h in Headers */,
 				1C01BB3C14BDF78D00CE79A0 /* MBViewBuilderFactory.h in Headers */,
@@ -1688,11 +1754,19 @@
 				1C01BB8214BDF78D00CE79A0 /* MBOutcomeListenerProtocol.h in Headers */,
 				1C01BB8414BDF78D00CE79A0 /* MBPage.h in Headers */,
 				1C01BB8814BDF78D00CE79A0 /* MBPanel.h in Headers */,
-				1C01BB8C14BDF78D00CE79A0 /* MBRow.h in Headers */,
 				1C01BB9014BDF78D00CE79A0 /* MBValueChangeListenerProtocol.h in Headers */,
 				1C01BB9214BDF78D00CE79A0 /* MBTableViewController.h in Headers */,
 				2C26D9571521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */,
 				2C26D95E1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */,
+				1CC49AA51701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h in Headers */,
+				1CC49AAA1701D8A10074F453 /* FMDatabase.h in Headers */,
+				1CC49AAF1701D8A10074F453 /* FMDatabaseAdditions.h in Headers */,
+				1CC49AB41701D8A10074F453 /* FMDatabasePool.h in Headers */,
+				1CC49AB91701D8A10074F453 /* FMDatabaseQueue.h in Headers */,
+				1CC49AC11701D8A10074F453 /* FMResultSet.h in Headers */,
+				1CC49AC91701DA380074F453 /* MBSQLDataHandler.h in Headers */,
+				1CC49AD21701E02C0074F453 /* MBNewRowViewBuilder.h in Headers */,
+				1CC49AD71701E02C0074F453 /* MBRowViewBuilder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1741,7 +1815,6 @@
 				1C01B7C914BDF78C00CE79A0 /* MBActivityIndicator.h in Headers */,
 				1C01B7CD14BDF78C00CE79A0 /* MBBasicViewController.h in Headers */,
 				1C01B7D114BDF78C00CE79A0 /* MBFormSubmission.h in Headers */,
-				1C01B7D514BDF78C00CE79A0 /* MBNavigationController.h in Headers */,
 				1C01B7D914BDF78C00CE79A0 /* MBSplitViewController.h in Headers */,
 				1C01B7DD14BDF78C00CE79A0 /* MBViewControllerProtocol.h in Headers */,
 				1C01BA4514BDF78D00CE79A0 /* MGSplitCornersView.h in Headers */,
@@ -1809,7 +1882,6 @@
 				1C01BB2514BDF78D00CE79A0 /* MBMatrixViewBuilder.h in Headers */,
 				1C01BB2914BDF78D00CE79A0 /* MBPageViewBuilder.h in Headers */,
 				1C01BB2D14BDF78D00CE79A0 /* MBPanelViewBuilder.h in Headers */,
-				1C01BB3114BDF78D00CE79A0 /* MBRowViewBuilder.h in Headers */,
 				1C01BB3514BDF78D00CE79A0 /* MBStyleHandler.h in Headers */,
 				1C01BB3914BDF78D00CE79A0 /* MBViewBuilder.h in Headers */,
 				1C01BB3D14BDF78D00CE79A0 /* MBViewBuilderFactory.h in Headers */,
@@ -1833,11 +1905,19 @@
 				1C01BB8314BDF78D00CE79A0 /* MBOutcomeListenerProtocol.h in Headers */,
 				1C01BB8514BDF78D00CE79A0 /* MBPage.h in Headers */,
 				1C01BB8914BDF78D00CE79A0 /* MBPanel.h in Headers */,
-				1C01BB8D14BDF78D00CE79A0 /* MBRow.h in Headers */,
 				1C01BB9114BDF78D00CE79A0 /* MBValueChangeListenerProtocol.h in Headers */,
 				1C01BB9314BDF78D00CE79A0 /* MBTableViewController.h in Headers */,
 				2C26D9581521B874000E00A2 /* MBRESTGetServiceDataHandler.h in Headers */,
 				2C26D95F1521C782000E00A2 /* MBURLConnectionDataHandler.h in Headers */,
+				1CC49AA61701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.h in Headers */,
+				1CC49AAB1701D8A10074F453 /* FMDatabase.h in Headers */,
+				1CC49AB01701D8A10074F453 /* FMDatabaseAdditions.h in Headers */,
+				1CC49AB51701D8A10074F453 /* FMDatabasePool.h in Headers */,
+				1CC49ABA1701D8A10074F453 /* FMDatabaseQueue.h in Headers */,
+				1CC49AC21701D8A10074F453 /* FMResultSet.h in Headers */,
+				1CC49ACA1701DA380074F453 /* MBSQLDataHandler.h in Headers */,
+				1CC49AD31701E02C0074F453 /* MBNewRowViewBuilder.h in Headers */,
+				1CC49AD81701E02C0074F453 /* MBRowViewBuilder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1948,6 +2028,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C654C1B1518BF89009B1EE7 /* InfoPlist.strings in Resources */,
+				1CC49AC61701D8A10074F453 /* LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2023,7 +2104,6 @@
 				1C01B7CA14BDF78C00CE79A0 /* MBActivityIndicator.m in Sources */,
 				1C01B7CE14BDF78C00CE79A0 /* MBBasicViewController.m in Sources */,
 				1C01B7D214BDF78C00CE79A0 /* MBFormSubmission.m in Sources */,
-				1C01B7D614BDF78C00CE79A0 /* MBNavigationController.m in Sources */,
 				1C01B7DA14BDF78C00CE79A0 /* MBSplitViewController.m in Sources */,
 				1C01BA4614BDF78D00CE79A0 /* MGSplitCornersView.m in Sources */,
 				1C01BA4A14BDF78D00CE79A0 /* MGSplitDividerView.m in Sources */,
@@ -2077,8 +2157,6 @@
 				1C01BB2214BDF78D00CE79A0 /* MBForEachViewBuilder.m in Sources */,
 				1C01BB2614BDF78D00CE79A0 /* MBMatrixViewBuilder.m in Sources */,
 				1C01BB2A14BDF78D00CE79A0 /* MBPageViewBuilder.m in Sources */,
-				1C01BB2E14BDF78D00CE79A0 /* MBPanelViewBuilder.m in Sources */,
-				1C01BB3214BDF78D00CE79A0 /* MBRowViewBuilder.m in Sources */,
 				1C01BB3614BDF78D00CE79A0 /* MBStyleHandler.m in Sources */,
 				1C01BB3A14BDF78D00CE79A0 /* MBViewBuilder.m in Sources */,
 				1C01BB3E14BDF78D00CE79A0 /* MBViewBuilderFactory.m in Sources */,
@@ -2100,10 +2178,18 @@
 				1C01BB8014BDF78D00CE79A0 /* MBForEach.m in Sources */,
 				1C01BB8614BDF78D00CE79A0 /* MBPage.m in Sources */,
 				1C01BB8A14BDF78D00CE79A0 /* MBPanel.m in Sources */,
-				1C01BB8E14BDF78D00CE79A0 /* MBRow.m in Sources */,
 				1C01BB9414BDF78D00CE79A0 /* MBTableViewController.m in Sources */,
 				2C26D9591521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */,
 				2C26D9601521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */,
+				1CC49AA71701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				1CC49AAC1701D8A10074F453 /* FMDatabase.m in Sources */,
+				1CC49AB11701D8A10074F453 /* FMDatabaseAdditions.m in Sources */,
+				1CC49AB61701D8A10074F453 /* FMDatabasePool.m in Sources */,
+				1CC49ABB1701D8A10074F453 /* FMDatabaseQueue.m in Sources */,
+				1CC49ABE1701D8A10074F453 /* fmdb.m in Sources */,
+				1CC49AC31701D8A10074F453 /* FMResultSet.m in Sources */,
+				1CC49ACB1701DA380074F453 /* MBSQLDataHandler.m in Sources */,
+				1CC49AD41701E02C0074F453 /* MBNewRowViewBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2147,7 +2233,6 @@
 				2C654C751518CD54009B1EE7 /* MBActivityIndicator.m in Sources */,
 				2C654C771518CD54009B1EE7 /* MBBasicViewController.m in Sources */,
 				2C654C791518CD54009B1EE7 /* MBFormSubmission.m in Sources */,
-				2C654C7B1518CD54009B1EE7 /* MBNavigationController.m in Sources */,
 				2C654C7D1518CD54009B1EE7 /* MBSplitViewController.m in Sources */,
 				2C654C801518CD54009B1EE7 /* MGSplitCornersView.m in Sources */,
 				2C654C821518CD54009B1EE7 /* MGSplitDividerView.m in Sources */,
@@ -2201,8 +2286,6 @@
 				2C654CF21518CD55009B1EE7 /* MBForEachViewBuilder.m in Sources */,
 				2C654CF41518CD55009B1EE7 /* MBMatrixViewBuilder.m in Sources */,
 				2C654CF61518CD55009B1EE7 /* MBPageViewBuilder.m in Sources */,
-				2C654CF81518CD55009B1EE7 /* MBPanelViewBuilder.m in Sources */,
-				2C654CFA1518CD55009B1EE7 /* MBRowViewBuilder.m in Sources */,
 				2C654CFC1518CD55009B1EE7 /* MBStyleHandler.m in Sources */,
 				2C654CFE1518CD55009B1EE7 /* MBViewBuilder.m in Sources */,
 				2C654D001518CD55009B1EE7 /* MBViewBuilderFactory.m in Sources */,
@@ -2224,7 +2307,6 @@
 				2C654D211518CD55009B1EE7 /* MBForEach.m in Sources */,
 				2C654D241518CD55009B1EE7 /* MBPage.m in Sources */,
 				2C654D261518CD55009B1EE7 /* MBPanel.m in Sources */,
-				2C654D281518CD55009B1EE7 /* MBRow.m in Sources */,
 				2C654D2B1518CD55009B1EE7 /* MBTableViewController.m in Sources */,
 				2C654C2F1518CBBF009B1EE7 /* MBDocumentDefinitionTest.m in Sources */,
 				2C654D401518DBE5009B1EE7 /* MBXmlDocumentParserTest.m in Sources */,
@@ -2233,6 +2315,15 @@
 				2C26D9621521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */,
 				2C26D9651521D917000E00A2 /* TestingMBRESTGetServiceDataHandler.m in Sources */,
 				BDC7BF9A155809B6001A5BF6 /* MBElementContainerTest.m in Sources */,
+				1CC49AA91701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				1CC49AAE1701D8A10074F453 /* FMDatabase.m in Sources */,
+				1CC49AB31701D8A10074F453 /* FMDatabaseAdditions.m in Sources */,
+				1CC49AB81701D8A10074F453 /* FMDatabasePool.m in Sources */,
+				1CC49ABD1701D8A10074F453 /* FMDatabaseQueue.m in Sources */,
+				1CC49AC01701D8A10074F453 /* fmdb.m in Sources */,
+				1CC49AC51701D8A10074F453 /* FMResultSet.m in Sources */,
+				1CC49ACD1701DA380074F453 /* MBSQLDataHandler.m in Sources */,
+				1CC49AD61701E02C0074F453 /* MBNewRowViewBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2276,7 +2367,6 @@
 				1C01B7CB14BDF78C00CE79A0 /* MBActivityIndicator.m in Sources */,
 				1C01B7CF14BDF78C00CE79A0 /* MBBasicViewController.m in Sources */,
 				1C01B7D314BDF78C00CE79A0 /* MBFormSubmission.m in Sources */,
-				1C01B7D714BDF78C00CE79A0 /* MBNavigationController.m in Sources */,
 				1C01B7DB14BDF78C00CE79A0 /* MBSplitViewController.m in Sources */,
 				1C01BA4714BDF78D00CE79A0 /* MGSplitCornersView.m in Sources */,
 				1C01BA4B14BDF78D00CE79A0 /* MGSplitDividerView.m in Sources */,
@@ -2330,8 +2420,6 @@
 				1C01BB2314BDF78D00CE79A0 /* MBForEachViewBuilder.m in Sources */,
 				1C01BB2714BDF78D00CE79A0 /* MBMatrixViewBuilder.m in Sources */,
 				1C01BB2B14BDF78D00CE79A0 /* MBPageViewBuilder.m in Sources */,
-				1C01BB2F14BDF78D00CE79A0 /* MBPanelViewBuilder.m in Sources */,
-				1C01BB3314BDF78D00CE79A0 /* MBRowViewBuilder.m in Sources */,
 				1C01BB3714BDF78D00CE79A0 /* MBStyleHandler.m in Sources */,
 				1C01BB3B14BDF78D00CE79A0 /* MBViewBuilder.m in Sources */,
 				1C01BB3F14BDF78D00CE79A0 /* MBViewBuilderFactory.m in Sources */,
@@ -2353,10 +2441,18 @@
 				1C01BB8114BDF78D00CE79A0 /* MBForEach.m in Sources */,
 				1C01BB8714BDF78D00CE79A0 /* MBPage.m in Sources */,
 				1C01BB8B14BDF78D00CE79A0 /* MBPanel.m in Sources */,
-				1C01BB8F14BDF78D00CE79A0 /* MBRow.m in Sources */,
 				1C01BB9514BDF78D00CE79A0 /* MBTableViewController.m in Sources */,
 				2C26D95A1521B874000E00A2 /* MBRESTGetServiceDataHandler.m in Sources */,
 				2C26D9611521C782000E00A2 /* MBURLConnectionDataHandler.m in Sources */,
+				1CC49AA81701D8A10074F453 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				1CC49AAD1701D8A10074F453 /* FMDatabase.m in Sources */,
+				1CC49AB21701D8A10074F453 /* FMDatabaseAdditions.m in Sources */,
+				1CC49AB71701D8A10074F453 /* FMDatabasePool.m in Sources */,
+				1CC49ABC1701D8A10074F453 /* FMDatabaseQueue.m in Sources */,
+				1CC49ABF1701D8A10074F453 /* fmdb.m in Sources */,
+				1CC49AC41701D8A10074F453 /* FMResultSet.m in Sources */,
+				1CC49ACC1701DA380074F453 /* MBSQLDataHandler.m in Sources */,
+				1CC49AD51701E02C0074F453 /* MBNewRowViewBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
