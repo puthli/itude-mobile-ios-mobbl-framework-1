@@ -12,9 +12,8 @@
 #import "MBForEachViewBuilder.h"
 #import "MBRowViewBuilder.h"
 #import "MBFieldViewBuilderFactory.h"
+#import "MBRowViewBuilderFactory.h"
 #import "MBStyleHandler.h"
-
-@class MBRowViewBuilderFactory;
 
 @interface MBViewBuilderFactory : NSObject {
 
