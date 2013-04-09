@@ -15,9 +15,8 @@
     return NO;
 }
 
--(void)applyTransitionStyleToViewController:(UIViewController *)viewController {
-    [super applyTransitionStyleToViewController:viewController];
-    
+- (void)applyTransitionStyleToViewController:(UIViewController *)viewController forMovement:(MBTransitionMovement)transitionMovement {
+
     viewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     CATransition* transition = [CATransition animation];

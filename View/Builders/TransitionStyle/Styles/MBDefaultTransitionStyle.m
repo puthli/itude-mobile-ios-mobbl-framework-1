@@ -15,7 +15,7 @@
     return YES;
 }
 
-- (void)applyTransitionStyleToViewController:(UIViewController *)viewController {
+- (void)applyTransitionStyleToViewController:(UIViewController *)viewController forMovement:(MBTransitionMovement)transitionMovement {
     // default implementation, normal transition
     
 }

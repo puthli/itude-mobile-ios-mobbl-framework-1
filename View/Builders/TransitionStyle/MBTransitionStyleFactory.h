@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MBTransitionStyles.h"
-
-@protocol MBTransitionStyle;
+#import "MBTransitionStyle.h"
 
 @interface MBTransitionStyleFactory : NSObject
 
@@ -20,6 +19,6 @@
 @property (nonatomic, retain) id<MBTransitionStyle> defaultTransition;
 - (id<MBTransitionStyle>)transitionForStyle:(NSString*)transitionStyle;
 
-- (void) applyTransitionStyle:(NSString *)transitionStyle forViewController:(UIViewController *)viewController;
+- (void) applyTransitionStyle:(NSString *)transitionStyle withMovement:(MBTransitionMovement)transitionMovement forViewController:(UIViewController *)viewController;
 
 @end

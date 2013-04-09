@@ -7,6 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
+enum MBTransitionMovementEnum {
+	MBTransitionMovementPush=0, MBTransitionMovementPop=1
+};
+typedef NSUInteger MBTransitionMovement;
+
 /**
  * Protocol used by TransitionStyle instances. Implement this interface for custom TransitionStyles.
  */
@@ -15,7 +22,7 @@
 /** Return TRUE to use regular iOS page navigation */
 - (BOOL) animated;
 
-/** Return TRUE to use regular iOS page navigation */
-- (void) applyTransitionStyleToViewController:(UIViewController *)viewController;
+/** Implement your modal and regular navigation in this method. Use transitionMovement to determine the movement */
+- (void) applyTransitionStyleToViewController:(UIViewController *)viewController forMovement:(MBTransitionMovement)transitionMovement;
 
 @end

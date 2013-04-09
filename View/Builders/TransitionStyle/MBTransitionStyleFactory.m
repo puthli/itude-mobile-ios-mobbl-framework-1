@@ -61,11 +61,11 @@
     return self.defaultTransition;
 }
 
-- (void) applyTransitionStyle:(NSString *)transitionStyle forViewController:(UIViewController *)viewController {
+- (void)applyTransitionStyle:(NSString *)transitionStyle withMovement:(MBTransitionMovement)transitionMovement forViewController:(UIViewController *)viewController {
     id<MBTransitionStyle> style = [self transitionForStyle:transitionStyle];
     
     if (style) {
-        [style applyTransitionStyleToViewController:viewController];
+        [style applyTransitionStyleToViewController:viewController forMovement:transitionMovement];
     }
     else {
         [NSException raise:@"MBTransitionStyleNotFound" format:@"No transition found for style %@", transitionStyle];

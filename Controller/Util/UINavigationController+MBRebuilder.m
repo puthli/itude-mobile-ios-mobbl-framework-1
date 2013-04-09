@@ -59,7 +59,7 @@
             }
             
             id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-            [style applyTransitionStyleToViewController:self];
+            [style applyTransitionStyleToViewController:self forMovement:MBTransitionMovementPop];
             
             // This will pop the ViewController but not the navigationBar. It will also result in a second call of this delegate method
             [self popViewControllerAnimated:[style animated]];
