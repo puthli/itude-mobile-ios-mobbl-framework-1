@@ -96,8 +96,10 @@
     if(displayMode != nil){
         DLog(@"DialogController: showPage name=%@ dialog=%@ mode=%@", page.pageName, _name, displayMode);
 	}
+    
+    page.transitionStyle = transitionStyle;
+    
 	UINavigationController *nav = [self determineNavigationController];
-	
 	
 	if([displayMode isEqualToString:@"REPLACE"]) {
 
@@ -119,7 +121,6 @@
 	}
 
     // Apply transitionStyle for a regular page navigation
-    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:nav];
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
     [style applyTransitionStyleToViewController:nav];
     
@@ -128,8 +129,19 @@
 	
 }
 
--(void) popPageAnimated:(BOOL) animated {
+-(void)popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL)animated
+{
 	UINavigationController *nav = [self determineNavigationController];
+    
+    // Apply transitionStyle for a regular page navigation
+    if (transitionStyle) {
+        id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+        [style applyTransitionStyleToViewController:nav];
+        
+        // Regular navigation to new page
+        animated = [style animated];
+    }
+    
 	[nav popViewControllerAnimated:animated];
 }
 
@@ -182,7 +194,7 @@
 	// Read issue MOBBL-150 before changing this. 
 	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
 	[viewController viewWillAppear:animated];
-    
+
 	_navigationController = viewController.navigationController;
     [self willActivate];
 }
@@ -195,7 +207,6 @@
 	// Read issue MOBBL-150 before changing this. 
 	// Notify the viewController after the UINavigationControllerDelegate has shown the view
 	[viewController viewDidAppear:animated];
-	
 	_navigationController = viewController.navigationController;
     
     [self didActivate];

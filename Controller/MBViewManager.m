@@ -143,34 +143,17 @@
                     UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalDialog)] autorelease];
                     [_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
                 }
-                
-                // TODO:
-                // Apply transitioning style (UIModalTransitionStyleCoverVertical = default)
-//                if ([@"FLIP" isEqualToString:transitionStyle]) {
-//                    _modalController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//                }
-//                else if ([@"CURL" isEqualToString:transitionStyle]) {
-//                    _modalController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-//                }
-//                else if ([@"CROSSDISSOLVE" isEqualToString:transitionStyle]) {
-//                    _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//                }
-                
-                // TODO: Remove this
-                // Apply transitionStyle for a regular page navigation
-//                [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
-//                id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-//                BOOL animated = [style animated];
-//                [style applyTransitionStyleToViewController:_modalController];
-                                
+                                                
                 // If tabController is nil, there is only one viewController
                 if (_tabController) {
-                    [self applyTransitionStyleToViewController:_tabController withTransitionStyle:transitionStyle];
+                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_tabController];
+                    page.transitionStyle = transitionStyle;
                     [_tabController presentModalViewController:_modalController animated:YES];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-                    [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle];
+                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+                    page.transitionStyle = transitionStyle;
                     [dc.rootController presentModalViewController:_modalController animated:YES];
                 }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
@@ -179,7 +162,8 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
-        [self applyTransitionStyleToViewController:_modalController withTransitionStyle:transitionStyle];
+        [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+        page.transitionStyle = transitionStyle;
 		[_modalController pushViewController:currentViewController animated:YES];
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
@@ -214,17 +198,13 @@
 		[dialog release];
 		[self updateDisplay];
 	}
-	else [dialog showPage: page displayMode: displayMode transitionStyle:transitionStyle];
+	else {
+        [dialog showPage: page displayMode: displayMode transitionStyle:transitionStyle];
+    }
 	
-	if(shouldSelectDialog ) [self activateDialogWithName:page.dialogName];
-}
-
-- (BOOL) applyTransitionStyleToViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle{
-    // Apply transitionStyle for page navigation
-    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:viewController];
-    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [style applyTransitionStyleToViewController:viewController];
-    return  [style animated];
+	if(shouldSelectDialog ) {
+        [self activateDialogWithName:page.dialogName];
+    }
 }
 
 -(void) showAlertView:(MBPage*) page {
@@ -315,7 +295,7 @@
 
 - (void) popPage:(NSString*) dialogName {
     MBDialogController *result = [_dialogControllers objectForKey: dialogName];
-	[result popPageAnimated:FALSE];	
+    [result popPageWithTransitionStyle:nil animated:FALSE];
 }
 
 -(void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition {

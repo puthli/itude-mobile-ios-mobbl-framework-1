@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UINavigationController (MBRebuilder)
+@interface UINavigationController (MBRebuilder)<UINavigationBarDelegate>
 -(void) rebuild;
 -(void)setRootViewController:(UIViewController *)rootViewController;
 @end
