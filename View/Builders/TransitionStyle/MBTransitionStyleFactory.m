@@ -12,6 +12,7 @@
 // Transition Styles
 #import "MBDefaultTransitionStyle.h"
 #import "MBFadeTransitionStyle.h"
+#import "MBFlipTransitionStyle.h"
 
 @interface MBTransitionStyleFactory ()
 @property(readonly,nonatomic, retain) NSMutableDictionary *registry;
@@ -36,7 +37,7 @@
     
     // Register other generic builders
     [self registerTransistion:[[MBFadeTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_FADE];
-
+    [self registerTransistion:[[MBFlipTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_FLIP];
     
     return self;
 }
