@@ -8,3 +8,4 @@
 
 #define C_TRANSITIONSTYLE_FADE      @"FADE"
 #define C_TRANSITIONSTYLE_FLIP      @"FLIP"
+#define C_TRANSITIONSTYLE_CURL      @"CURL"
