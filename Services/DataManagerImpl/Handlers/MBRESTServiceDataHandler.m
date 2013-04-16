@@ -71,7 +71,7 @@
 			
 			// create new connection and begin loading data
 			[[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
-			if (delegate.connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate]){
+			if ((delegate.connection = [[NSURLConnection alloc] initWithRequest:request delegate:delegate])){
 				while (!delegate.finished) {
 					if([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable){
 						// Big problem, throw Exception
@@ -151,7 +151,7 @@
 			if (!serverErrorHandled && responseDoc == nil) {
 				NSString *msg = MBLocalizedString(@"The server returned an error. Please try again later");
 				if(delegate.err != nil) {
-					msg = [NSString stringWithFormat:@"%@ %@: %@", msg, delegate.err.domain, delegate.err.code];
+					msg = [NSString stringWithFormat:@"%@ %@: %ld", msg, delegate.err.domain, (long)delegate.err.code];
 				}
 				@throw [MBServerException exceptionWithName:@"Server Error" reason: msg userInfo:nil];
 			}

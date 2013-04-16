@@ -217,7 +217,7 @@
 	}
 	
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:reuseId] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
 		self.columnsTotalWidth = [self calculateTotalWidthForColumnsInTables];
 		MBMatrixRowView *rowView = [self.matrixViewBuilder createRowForCells:rowCells 
 																   withTitle:rowTitle 

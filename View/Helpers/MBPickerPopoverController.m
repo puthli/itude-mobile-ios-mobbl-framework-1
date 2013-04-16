@@ -114,7 +114,7 @@
 	NSString *reuseId = @"pickerPopoverTableViewCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
 	if (cell==nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:reuseId] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	

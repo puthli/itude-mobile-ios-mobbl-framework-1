@@ -101,7 +101,9 @@
 	[self removeFromSuperviewWithAnimation];
 	
 	MBDomainDefinition * domain = _field.domain;
-    NSString *value = [[domain.domainValidators objectAtIndex:row] value];
+    
+    MBDomainValidatorDefinition *def = [domain.domainValidators objectAtIndex:row];
+    NSString *value = [def value];
     
 	[_field setValue:value];
 }
