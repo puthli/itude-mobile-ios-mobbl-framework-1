@@ -89,6 +89,8 @@ void *NewBase64Decode(
 		// Accumulate 4 valid characters (ignore everything else)
 		//
 		unsigned char accumulated[BASE64_UNIT_SIZE];
+        memset(accumulated, 0, sizeof(unsigned char) * BASE64_UNIT_SIZE);
+        
 		size_t accumulateIndex = 0;
 		while (i < length)
 		{
@@ -174,6 +176,7 @@ char *NewBase64Encode(
 	char *outputBuffer = (char *)malloc(outputBufferSize);
 	if (!outputBuffer)
 	{
+        *outputLength = 0;
 		return NULL;
 	}
 

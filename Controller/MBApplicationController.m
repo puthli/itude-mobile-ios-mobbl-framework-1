@@ -82,7 +82,7 @@ static MBApplicationController *_instance = nil;
 -(void) startApplication:(MBApplicationFactory *)applicationFactory {
 	DLog(@"MBApplicationController:startApplication");
 	
-    self.alertController = [MBAlertController new];
+    self.alertController = [[MBAlertController new] autorelease];
     
 	_applicationFactory = applicationFactory;
 	[_applicationFactory retain];

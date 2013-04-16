@@ -38,7 +38,7 @@
 - (FMDatabase *)database {
     if (!_database) {
         DLog(@"MBSQLDataHandler.m: Opening database: %@", self.databaseName);
-        NSString *dbPath = [self copyDatabaseToDocuments];
+        NSString *dbPath = [self duplicateDatabaseToDocuments];
         
         _database = [[FMDatabase databaseWithPath:dbPath] retain];
         [_database open];
@@ -46,7 +46,8 @@
     return _database;
 }
 
-- (NSString *)copyDatabaseToDocuments {
+// If a method name starts with 'new' or 'copy' the returned object must be retained.
+- (NSString *)duplicateDatabaseToDocuments {
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *databasePath = [[documentPaths objectAtIndex:0] stringByAppendingPathComponent:self.databaseName];
     DLog(@"MBSQLDataHandler.m: at location: %@", databasePath);
