@@ -8,6 +8,7 @@
 
 #import "MBDataManagerService.h"
 #import "MBMetadataService.h"
+#import "MBSQLDataHandler.h"
 #import "MBRESTServiceDataHandler.h"
 #import "MBRESTGetServiceDataHandler.h"
 #import "MBMemoryDataHandler.h"
@@ -38,16 +39,17 @@ static MBDataManagerService *_instance = nil;
 - (id) init {
 	if (self = [super init])
 	{
-		_operationQueue = [[NSOperationQueue alloc] init]; 
+		_operationQueue = [[NSOperationQueue alloc] init];
 		[_operationQueue setMaxConcurrentOperationCount: MAX_CONCURRENT_OPERATIONS];
 		
     	_registeredHandlers = [NSMutableDictionary new];
         [self registerDataHandler:[[MBFileDataHandler new] autorelease] withName: DATA_HANDLER_FILE];
         [self registerDataHandler:[[MBSystemDataHandler new] autorelease] withName: DATA_HANDLER_SYSTEM];
+        [self registerDataHandler:[[MBSQLDataHandler new] autorelease] withName: DATA_HANDLER_SQL];
         [self registerDataHandler:[[MBMemoryDataHandler new] autorelease] withName: DATA_HANDLER_MEMORY];
         [self registerDataHandler:[[MBRESTServiceDataHandler new] autorelease] withName: DATA_HANDLER_WS_REST];
         [self registerDataHandler:[[MBRESTGetServiceDataHandler new] autorelease] withName: DATA_HANDLER_WS_REST_GET];
-		[self registerDataHandler:[[MBMobbl1ServerDataHandler new] autorelease] withName: DATA_HANDLER_WS_MOBBL];	
+		[self registerDataHandler:[[MBMobbl1ServerDataHandler new] autorelease] withName: DATA_HANDLER_WS_MOBBL];
 	}
 	return self;
 }
@@ -120,14 +122,14 @@ static MBDataManagerService *_instance = nil;
 
 - (void) storeDocument:(MBDocument *)document forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector {
 	MBDocumentOperation *storer = [[[MBDocumentOperation alloc] initWithDataHandler: [self handlerForDocument:[document name]] document:document] autorelease];
-
+    
 	[storer setDelegate: delegate resultCallback: resultSelector errorCallback: errorSelector];
 	[_operationQueue addOperation:storer];
 }
 
 - (void) deregisterDelegate: (id) delegate {
   	for(MBDocumentOperation *operation in [_operationQueue operations]) {
-		if(delegate == [operation delegate]) { 
+		if(delegate == [operation delegate]) {
 			[operation setDelegate:nil resultCallback:nil errorCallback:nil];
 			[operation cancel];
 		}
@@ -136,7 +138,7 @@ static MBDataManagerService *_instance = nil;
 
 - (MBDataHandlerBase *) handlerForDocument:(NSString *)documentName {
 	NSString *dataManagerName = [[MBMetadataService sharedInstance] definitionForDocumentName:documentName].dataManager;
-
+    
 	id handler = [_registeredHandlers objectForKey: dataManagerName];
 	if(handler == nil) {
 		NSString *msg = [NSString stringWithFormat:@"No datamanager (%@) found for document %@", dataManagerName, documentName];
@@ -150,7 +152,7 @@ static MBDataManagerService *_instance = nil;
 }
 
 - (void) setMaxConcurrentOperations:(int) max {
-	[_operationQueue setMaxConcurrentOperationCount:max];	
+	[_operationQueue setMaxConcurrentOperationCount:max];
 }
 
 

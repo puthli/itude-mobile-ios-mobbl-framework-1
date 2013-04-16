@@ -22,6 +22,7 @@
 	NSString *_label;
 	NSString *_type;
 	NSString *_dataType;
+    NSString *_hint;
 	NSString *_formatMask;
 	NSString *_alignment;
 	NSString *_valueIfNil;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) NSString *label;
 @property (nonatomic, retain) NSString *type;
 @property (nonatomic, retain) NSString *dataType;
+@property (nonatomic, retain) NSString *hint;
 @property (nonatomic, retain) NSString *formatMask;
 @property (nonatomic, retain) NSString *alignment;
 @property (nonatomic, retain) NSString *valueIfNil;

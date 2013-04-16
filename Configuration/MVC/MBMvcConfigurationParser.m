@@ -55,7 +55,7 @@
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",@"zoomable",nil];
     self.forEachAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"value",@"suppressRowComponent",@"preCondition",nil];
     self.variableAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"expression",nil];
-    self.fieldAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"label",@"path",@"type",@"dataType",@"required",@"outcome", @"style",@"width",@"height",@"formatMask",@"alignment",@"valueIfNil",@"hidden",@"preCondition",@"custom1",@"custom2",@"custom3",nil];
+    self.fieldAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"label",@"path",@"type",@"dataType",@"hint",@"required",@"outcome", @"style",@"width",@"height",@"formatMask",@"alignment",@"valueIfNil",@"hidden",@"preCondition",@"custom1",@"custom2",@"custom3",nil];
     self.domainAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"maxLength",nil];
     self.domainValidatorAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"value",@"lowerBound",@"upperBound",nil];
     
@@ -291,7 +291,8 @@
 		fieldDef.label = [attributeDict valueForKey:@"label"];
 		fieldDef.path = [attributeDict valueForKey:@"path"];
 		fieldDef.displayType = [attributeDict valueForKey:@"type"];	
-		fieldDef.dataType = [attributeDict valueForKey:@"dataType"];	
+		fieldDef.dataType = [attributeDict valueForKey:@"dataType"];
+        fieldDef.hint = [attributeDict valueForKey:@"hint"];
 		fieldDef.style = [attributeDict valueForKey:@"style"];	
 		fieldDef.required = [attributeDict valueForKey:@"required"];	
 		fieldDef.outcomeName = [attributeDict valueForKey:@"outcome"];	

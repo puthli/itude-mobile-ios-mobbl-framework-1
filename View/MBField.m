@@ -24,6 +24,7 @@
 @synthesize label = _label;
 @synthesize type = _type;
 @synthesize dataType = _dataType;
+
 @synthesize formatMask = _formatMask;
 @synthesize alignment = _alignment;
 @synthesize valueIfNil = _valueIfNil;
@@ -52,6 +53,9 @@
 		spec = [(MBFieldDefinition*)[self definition] dataType];	
 		self.dataType = [self substituteExpressions: spec];
 
+        spec = [(MBFieldDefinition*)[self definition] hint];
+        self.hint = [self substituteExpressions:spec];
+        
 		spec = [(MBFieldDefinition*)[self definition] label];
 		self.label = [self substituteExpressions: spec];
 
@@ -344,6 +348,10 @@
 
 -(NSString *) label {
 	return MBLocalizedStringWithoutLoggingWarnings(_label);
+}
+
+- (NSString *)hint {
+    return MBLocalizedStringWithoutLoggingWarnings(_hint);
 }
 
 // Convenience methods

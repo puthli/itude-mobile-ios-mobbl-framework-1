@@ -133,9 +133,8 @@
 	if([view isKindOfClass:[UITextField class]]) {
 
 		UITextField *textField = (UITextField*) view;
-		
-		textField.placeholder = field.label;
 		textField.textAlignment = UITextAlignmentLeft;
+        textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 		textField.backgroundColor = [UIColor clearColor];
 		textField.borderStyle = UITextBorderStyleRoundedRect;
 	}
@@ -257,12 +256,28 @@
 	
 	// Possibly handle CGRectZero for bounds
 	// TODO: possibly make a difference here for the field.type = LABEL | TEXTFIELD
-	return CGRectMake(150.0, 0.0, 140.0, 25.0);
+    // The Label of a inputField is in a container that has half the width
+    if ([field.type isEqualToString:C_FIELD_INPUT]) {
+        CGFloat margin = 10.0;
+        CGFloat width = (bounds.size.width/2);
+        CGFloat height = bounds.size.height;
+        return CGRectMake(width, 0.0, width-margin, height);
+    }
+    
+    return CGRectMake(150.0, 0.0, 140.0, 25.0);
 }
 
 - (CGRect) sizeForLabel:(MBField*) field withMaxBounds:(CGRect) bounds {
 
-	// Possibly handle CGRectZero for bounds
+    // The Label of a inputField is in a container that has half the width
+    if ([field.type isEqualToString:C_FIELD_INPUT]) {
+        CGFloat margin = 10.0;
+        CGFloat width = bounds.size.width/2;
+        CGFloat height = bounds.size.height;
+        return CGRectMake(margin, 0.0, width, height);
+    }
+    
+    // Possibly handle CGRectZero for bounds
 	// TODO: possibly make a difference here for the field.type = LABEL | TEXTFIELD
 	return CGRectMake(20.0, 0.0, 50.0, 25.0);
 }

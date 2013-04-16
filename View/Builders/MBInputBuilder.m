@@ -14,30 +14,43 @@
 
 @implementation MBInputBuilder
 
--(UIView *)buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds {
-    // Add both the label and the editfield to a single view; we can only return 1 view: fieldContainer
+-(UILabel *)buildLabelForField:(MBField *)field withMaxBounds:(CGRect)bounds {
     
-	UIView *fieldContainer = [[UIView alloc] init];
-    //	CGRect lablabelFieldelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
-    
-    // Duplicate label will be displayed if added here!
-    //	UILabel *label = [[[UILabel alloc] initWithFrame:labelBounds] autorelease];
-    //	label.text = field.label;
-    //	[fieldContainer addSubview:label];
-	
-    //	[[self styleHandler] styleLabel:label component:field];
-    
-	CGRect fieldBounds = [[self styleHandler] sizeForTextField:field withMaxBounds:bounds];
-	UITextField *textField = [[[UITextField alloc]initWithFrame: fieldBounds] autorelease];
+    CGRect labelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
+    UILabel *label = [[[UILabel alloc] initWithFrame:labelBounds] autorelease];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin;
+    label.text = field.label;
+    [[self styleHandler] styleLabel:label component:field];
+    return label;
+}
 
-    [self configureView:textField forField:field];
+-(UITextField *)buildTextFieldForField:(MBField *)field withMaxBounds:(CGRect)bounds {
     
+    CGRect fieldBounds = [[self styleHandler] sizeForTextField:field withMaxBounds:bounds];
+	UITextField *textField = [[[UITextField alloc]initWithFrame: fieldBounds] autorelease];
+    
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
+    textField.placeholder = field.hint;
+    [self configureView:textField forField:field];
+    return textField;
+}
+
+-(UIView *)buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds {
+    
+    // Add both the label and the editfield to a single view; we can only return 1 view: fieldContainer
+	UIView *fieldContainer = [[UIView new] autorelease];
+    fieldContainer.frame = CGRectMake(0.0, 0.0, bounds.size.width, bounds.size.height);
+    fieldContainer.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    
+    // Create the label
+    UILabel *label = [self buildLabelForField:field withMaxBounds:CGRectMake(0.0, 0.0, bounds.size.width, bounds.size.height)];
+    [fieldContainer addSubview:label];
+    
+    // Create the textField
+	UITextField *textField = [self buildTextFieldForField:field withMaxBounds:CGRectMake(0.0, 0.0, bounds.size.width, bounds.size.height)];
     [fieldContainer addSubview:textField];
 
-	// Whatever; this needs some clever stuff (and this is not it ;-):
-	fieldContainer.frame = CGRectMake(0.0, 0.0, [UIScreen mainScreen].applicationFrame.size.width, 30.0);
-	
-	return [fieldContainer autorelease];
+	return fieldContainer;
 
 }
 

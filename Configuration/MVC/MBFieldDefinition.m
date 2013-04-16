@@ -16,6 +16,7 @@
 @synthesize path = _path;
 @synthesize style = _style;
 @synthesize text = _text;
+@synthesize hint = _hint;
 @synthesize outcomeName = _outcomeName;
 @synthesize displayType = _displayType;
 @synthesize dataType = _dataType;
@@ -44,6 +45,7 @@
 	[_path release];
 	[_style release];
 	[_text release];
+    [_hint release];
 	[_required release];
 	[_hidden release];
 	[_outcomeName release];
@@ -57,7 +59,6 @@
 	[_custom1 release];
 	[_custom2 release];
 	[_custom3 release];
-	 
 	[super dealloc];
 }
 
@@ -66,11 +67,12 @@
 	NSString *bodyText = nil;
 	if(![_text isEqualToString:@""]) bodyText = _text;
 	
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Field%@%@%@%@%@%@%@%@%@%@%@%@", level, "", 
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Field%@%@%@%@%@%@%@%@%@%@%@%@%@", level, "", 
 							   [self attributeAsXml:@"label" withValue:_label],
 							   [self attributeAsXml:@"path" withValue:_path],
 							   [self attributeAsXml:@"type" withValue:_displayType],
 							   [self attributeAsXml:@"dataType" withValue:_dataType],
+                               [self attributeAsXml:@"hint" withValue:_hint],
 							   [self attributeAsXml:@"outcome" withValue:_outcomeName],
 							   [self attributeAsXml:@"formatMask" withValue:_formatMask],
 							   [self attributeAsXml:@"alignment" withValue:_alignment],
