@@ -15,6 +15,7 @@
 #import "MBPageDefinition.h"
 #import "MBBasicViewController.h"
 #import "MBTypes.h"
+#import <objc/runtime.h>
 
 @interface MBApplicationFactory () {
     MBTransitionStyleFactory *_transitionStyleFactory;
@@ -53,7 +54,10 @@ static MBApplicationFactory *_instance = nil;
 +(void) setSharedInstance:(MBApplicationFactory *) factory {
 	@synchronized(self) {
 		if(_instance != nil && _instance != factory) {
-			[_instance release];
+            NSString *name = @"MBApplicationFactoryException";
+            NSString *reason = [NSString stringWithFormat:@"The shared instance of the MBApplicationFactory is already set. It can't be overridden. The current instance is %@. Instance that you tried to set is %@. Hint: Try to set your own factory before the first call of sharedInstance on MBApplicationFactory. ",_instance, factory];
+            @throw [NSException exceptionWithName:name reason:reason userInfo:nil];
+            //[_instance release];
 		}
 		_instance = factory;
 		[_instance retain];
@@ -97,6 +101,12 @@ static MBApplicationFactory *_instance = nil;
         [NSException raise:@"Invalid listener class name" format:@"Listener class name %@ is invalid", listenerClassName];
     }
 	return nil;
+}
+
+- (NSString *)description
+{
+    const char* className = class_getName([self class]);
+    return [NSString stringWithFormat:@"<%@: %p; className: %s>", [self class], self, className];
 }
 
 @end
