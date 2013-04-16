@@ -13,12 +13,13 @@
 @interface MBTransitionStyleFactory : NSObject
 
 /// @name Registering MBTransitionStyle instances
-- (void)registerTransistion:(id<MBTransitionStyle>)transition forTransitionStyle:(NSString *)transitionStyle;
+- (void)registerTransition:(id<MBTransitionStyle>)transition forTransitionStyle:(NSString *)transitionStyle;
 
-/// @name Getting a MBRowViewBuilder instance
+/// @name Getting a MBTransitionStyle instance
 @property (nonatomic, retain) id<MBTransitionStyle> defaultTransition;
 - (id<MBTransitionStyle>)transitionForStyle:(NSString*)transitionStyle;
 
+/// @name Applying TransitionStyles
 - (void) applyTransitionStyle:(NSString *)transitionStyle withMovement:(MBTransitionMovement)transitionMovement forViewController:(UIViewController *)viewController;
 
 @end

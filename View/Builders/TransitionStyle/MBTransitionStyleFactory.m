@@ -14,6 +14,7 @@
 #import "MBFadeTransitionStyle.h"
 #import "MBFlipTransitionStyle.h"
 #import "MBCurlTransitionStyle.h"
+#import "MBNoTransitionStyle.h"
 
 @interface MBTransitionStyleFactory ()
 @property(readonly,nonatomic, retain) NSMutableDictionary *registry;
@@ -37,9 +38,10 @@
     }
     
     // Register other generic builders
-    [self registerTransistion:[[MBFadeTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_FADE];
-    [self registerTransistion:[[MBFlipTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_FLIP];
-    [self registerTransistion:[[MBCurlTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_CURL];
+    [self registerTransition:[[MBFadeTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_FADE];
+    [self registerTransition:[[MBFlipTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_FLIP];
+    [self registerTransition:[[MBCurlTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_CURL];
+    [self registerTransition:[[MBNoTransitionStyle new] autorelease] forTransitionStyle:C_TRANSITIONSTYLE_NONE];
     
     return self;
 }
@@ -51,7 +53,7 @@
     [super dealloc];
 }
 
-- (void)registerTransistion:(id<MBTransitionStyle>)transition forTransitionStyle:(NSString *)transitionStyle {
+- (void)registerTransition:(id<MBTransitionStyle>)transition forTransitionStyle:(NSString *)transitionStyle {
     [self.registry setObject:transition forKey:transitionStyle];
 }
 
