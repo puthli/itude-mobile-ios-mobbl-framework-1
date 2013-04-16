@@ -67,7 +67,7 @@
 -(void) configureLabel:(UILabel*) label withText:(NSString*)text forField:(MBField*)field {
     label.text = text;
     label.numberOfLines = 0;
-    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.lineBreakMode = NSLineBreakByWordWrapping; //UILineBreakModeWordWrap;
     label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
     label.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.styleHandler styleMultilineLabel:label component:field];

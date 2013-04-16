@@ -64,7 +64,7 @@ static MBMatrixViewBuilder *_instance = nil;
 	[matrixRowView setTextColor:color forColumAtIndex:index];
 }
 
--(void) setAlignment:(UITextAlignment)textAlignment forColumnAtIndex:(NSInteger)index inCell:(UITableViewCell *)cell
+-(void) setAlignment:(NSTextAlignment)textAlignment forColumnAtIndex:(NSInteger)index inCell:(UITableViewCell *)cell
 {
 	MBMatrixRowView *matrixRowView = [self findMatrixRowViewForCell:cell];
 	[matrixRowView setAlignment:textAlignment forColumnAtIndex:index];

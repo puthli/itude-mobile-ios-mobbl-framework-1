@@ -213,7 +213,9 @@
 }
 
 -(void) setViewController:(UIViewController<MBViewControllerProtocol>*) viewController {
+    [_viewController release];
     _viewController = viewController;
+    [_viewController retain];
 }
 
 -(UIViewController<MBViewControllerProtocol>*) viewController {

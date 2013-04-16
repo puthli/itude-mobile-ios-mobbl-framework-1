@@ -26,6 +26,6 @@
 // Styling of columns
 // Sets the color of a given column in a cell. Note: cell must be created trough the MatrixViewBuilder. Otherwise colors may not be set
 - (void)setColor:(UIColor *)color forColumnAtIndex:(NSInteger)index inCell:(UITableViewCell *)cell;
-- (void)setAlignment:(UITextAlignment)textAlignment forColumnAtIndex:(NSInteger)index inCell:(UITableViewCell *)cell;
+- (void)setAlignment:(NSTextAlignment)textAlignment forColumnAtIndex:(NSInteger)index inCell:(UITableViewCell *)cell;
 
 @end

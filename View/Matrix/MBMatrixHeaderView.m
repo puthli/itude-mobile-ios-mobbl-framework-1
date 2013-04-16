@@ -100,10 +100,10 @@
 
 				// Align the first label to the left to align with all the data. The rest should be centerd
 				if (isFirst) {
-					cellLabel.textAlignment = UITextAlignmentLeft;
+					cellLabel.textAlignment = NSTextAlignmentLeft;
 					isFirst = FALSE;
 				}else {
-					cellLabel.textAlignment = UITextAlignmentCenter;
+					cellLabel.textAlignment = NSTextAlignmentCenter;
 				}
 				
 				cellLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin;
@@ -119,7 +119,7 @@
 					[[[MBViewBuilderFactory sharedInstance] styleHandler] styleMatrixHeaderCell:pipeLabel component:cell];
 
 					pipeLabel.text = @"|";
-					pipeLabel.textAlignment = UITextAlignmentCenter;
+					pipeLabel.textAlignment = NSTextAlignmentCenter;
 					
 					[self addSubview:pipeLabel];
 					
