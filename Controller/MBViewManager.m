@@ -162,9 +162,12 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
-        [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
+        
+        // Apply transition. Pushing on the navigation stack
+        id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+        [transition applyTransitionStyleToViewController:_modalController forMovement:MBTransitionMovementPush];
         page.transitionStyle = transitionStyle;
-		[_modalController pushViewController:currentViewController animated:YES];
+		[_modalController pushViewController:currentViewController animated:[transition animated]];
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
 		UIViewController *rootViewController = [_modalController.viewControllers objectAtIndex:0];		
