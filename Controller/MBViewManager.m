@@ -146,13 +146,13 @@
                                                 
                 // If tabController is nil, there is only one viewController
                 if (_tabController) {
-                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_tabController];
+                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_tabController];
                     page.transitionStyle = transitionStyle;
                     [_tabController presentModalViewController:_modalController animated:YES];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
                     page.transitionStyle = transitionStyle;
                     [dc.rootController presentModalViewController:_modalController animated:YES];
                 }
@@ -162,7 +162,7 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
-        [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+        [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
         page.transitionStyle = transitionStyle;
 		[_modalController pushViewController:currentViewController animated:YES];
 		
