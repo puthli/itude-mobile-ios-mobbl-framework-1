@@ -323,7 +323,7 @@ static MBApplicationController *_instance = nil;
     @try {
         [_viewManager hideActivityIndicatorForDialog:causingOutcome.dialogName];
         NSString *displayMode = causingOutcome.displayMode;
-        NSString *transitioningStyle = causingOutcome.transitioningStyle;
+        NSString *transitionStyle = causingOutcome.transitionStyle;
 		MBViewState viewState = [_viewManager currentViewState];
 		
 		if([displayMode isEqualToString:@"MODAL"] || 
@@ -353,7 +353,7 @@ static MBApplicationController *_instance = nil;
 			page.dialogName = [self activeDialogName];
 		}
         BOOL doSelect = [@"yes" isEqualToString:selectPageInDialog] && !_suppressPageSelection;
-        [_viewManager showPage: page displayMode: displayMode transitioningStyle: transitioningStyle selectDialog:doSelect];
+        [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle selectDialog:doSelect];
     }
     @catch (NSException *e) {
         [self handleException: e outcome: causingOutcome];

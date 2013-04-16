@@ -12,6 +12,7 @@
 #import "MBAlertDefinition.h"
 #import "MBAction.h"
 #import "MBResultListener.h"
+#import "MBTransitionStyleFactory.h"
 
 @class MBApplicationController;
 @class MBPage;
@@ -30,8 +31,9 @@
      [MBApplicationFactory setSharedInstance:applicationFactory];
 
 */
-@interface MBApplicationFactory :  NSObject {
-}
+@interface MBApplicationFactory :  NSObject 
+
+@property (nonatomic, retain) MBTransitionStyleFactory *transitionStyleFactory;
 
 /** the shared instance */
 +(MBApplicationFactory *) sharedInstance;

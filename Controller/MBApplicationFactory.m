@@ -16,9 +16,30 @@
 #import "MBBasicViewController.h"
 #import "MBTypes.h"
 
+@interface MBApplicationFactory () {
+    MBTransitionStyleFactory *_transitionStyleFactory;
+}
+@end
+
 @implementation MBApplicationFactory
 
+@synthesize transitionStyleFactory = _transitionStyleFactory;
 static MBApplicationFactory *_instance = nil;
+
+- (void)dealloc
+{
+    [_transitionStyleFactory release];
+    [super dealloc];
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _transitionStyleFactory = [MBTransitionStyleFactory new];
+    }
+    return self;
+}
 
 +(MBApplicationFactory *) sharedInstance {
 	@synchronized(self) {

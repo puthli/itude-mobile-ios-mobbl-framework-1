@@ -47,7 +47,7 @@
     self.elementAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"minOccurs",@"maxOccurs",nil];
     self.attributeAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"required",@"defaultValue",nil];
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
-    self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"displayMode",@"transitioningStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",nil];
+    self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",nil];
     self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
 	self.dialogGroupAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
@@ -165,7 +165,7 @@
 		outcomeDef.action = [attributeDict valueForKey:@"action"];		
 		outcomeDef.dialog = [attributeDict valueForKey:@"dialog"];		
 		outcomeDef.displayMode = [attributeDict valueForKey:@"displayMode"];	
-        outcomeDef.transitioningStyle = [attributeDict valueForKey:@"transitioningStyle"];
+        outcomeDef.transitionStyle = [attributeDict valueForKey:@"transitionStyle"];
 		outcomeDef.preCondition = [attributeDict valueForKey:@"preCondition"];		
 		outcomeDef.persist = [[attributeDict valueForKey:@"persist"] boolValue];	 
 		outcomeDef.transferDocument = [[attributeDict valueForKey:@"transferDocument"] boolValue];	

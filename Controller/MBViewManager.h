@@ -37,9 +37,9 @@
 - (id) init;
 - (CGRect) screenBoundsForDialog:(NSString*) dialogName displayMode:(NSString*) mode;
 - (void) showPage:(MBPage*) page displayMode:(NSString*) mode;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) mode transitioningStyle:(NSString *) style;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) mode transitionStyle:(NSString *) style;
 - (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) style selectDialog:(BOOL) shouldSelectDialog;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style selectDialog:(BOOL) shouldSelectDialog;
 - (void) showAlert:(MBAlert *) alert;
 - (void) activateDialogWithName:(NSString*) dialogName;
 - (void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition;

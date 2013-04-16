@@ -32,6 +32,7 @@
 @synthesize childViewControllers = _childViewControllers;
 @synthesize documentDiff = _documentDiff;
 @synthesize pageType = _pageType;
+@synthesize transitionStyle = _transitionStyle;
 
 -(id) initWithDefinition:(MBPageDefinition*) definition 
       withViewController:(UIViewController<MBViewControllerProtocol>*) viewController 
@@ -100,6 +101,7 @@
 	[_documentDiff release];
 	[_valueChangedListeners release];
 	[_outcomeListeners release];
+    [_transitionStyle release];
 	[super dealloc];
 }
 

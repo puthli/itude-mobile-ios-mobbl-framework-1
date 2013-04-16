@@ -40,8 +40,8 @@
 
 - (id) initWithDefinition:(MBDialogDefinition*)definition temporary:(BOOL) isTemporary;
 - (id) initWithDefinition:(MBDialogDefinition*)definition page:(MBPage*) page bounds:(CGRect) bounds;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode;
--(void) popPageAnimated:(BOOL) animated;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style;
+-(void) popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL) animated;
 - (UIView*) view;
 - (CGRect) screenBoundsForDisplayMode:(NSString*) displayMode;
 - (void) showActivityIndicator;

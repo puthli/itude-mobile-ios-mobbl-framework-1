@@ -23,6 +23,7 @@
 #import "MBSpinner.h"
 #import "MBLocalizationService.h"
 #import "MBBasicViewController.h"
+#import "MBTransitionStyle.h"
 
 // Used to get a stylehandler to style navigationBar
 #import "MBStyleHandler.h"
@@ -37,7 +38,7 @@
 - (void) updateDisplay;
 - (void) resetView;
 - (void) showAlertView:(MBPage*) page;
-- (void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog;
+- (void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle selectDialog:(BOOL) shouldSelectDialog;
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
 @end
@@ -78,19 +79,19 @@
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
-    [self showPage:page displayMode:displayMode transitioningStyle:nil selectDialog:TRUE];
+    [self showPage:page displayMode:displayMode transitionStyle:nil selectDialog:TRUE];
 }
 
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) transitioningStyle {
-    [self showPage:page displayMode:displayMode transitioningStyle:transitioningStyle selectDialog:TRUE];
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle {
+    [self showPage:page displayMode:displayMode transitionStyle:transitionStyle selectDialog:TRUE];
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog {
-    [self showPage:page displayMode:displayMode transitioningStyle:nil selectDialog:shouldSelectDialog];
+    [self showPage:page displayMode:displayMode transitionStyle:nil selectDialog:shouldSelectDialog];
 }
 
 
--(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitioningStyle:(NSString *) transitioningStyle selectDialog:(BOOL) shouldSelectDialog {
+-(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle selectDialog:(BOOL) shouldSelectDialog {
     
     
     DLog(@"ViewManager: showPage name=%@ dialog=%@ mode=%@ type=%i", page.pageName, page.dialogName, displayMode, page.pageType);
@@ -142,25 +143,18 @@
                     UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalDialog)] autorelease];
                     [_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
                 }
-                
-                // Apply transitioning style (UIModalTransitionStyleCoverVertical = default)
-                if ([@"FLIP" isEqualToString:transitioningStyle]) {
-                    _modalController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-                }
-                else if ([@"CURL" isEqualToString:transitioningStyle]) {
-                    _modalController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-                }
-                else if ([@"CROSSDISSOLVE" isEqualToString:transitioningStyle]) {
-                    _modalController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                }
-                                
+                                                
                 // If tabController is nil, there is only one viewController
                 if (_tabController) {
-                    [_tabController presentModalViewController:_modalController animated:TRUE];
+                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_tabController];
+                    page.transitionStyle = transitionStyle;
+                    [_tabController presentModalViewController:_modalController animated:YES];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
-                    [dc.rootController presentModalViewController:_modalController animated:TRUE];
+                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+                    page.transitionStyle = transitionStyle;
+                    [dc.rootController presentModalViewController:_modalController animated:YES];
                 }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
                 NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
@@ -168,7 +162,9 @@
             }
 	else if(_modalController != nil) {
 		UIViewController *currentViewController = [page viewController];
-		[_modalController pushViewController:currentViewController animated:TRUE];
+        [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle forViewController:_modalController];
+        page.transitionStyle = transitionStyle;
+		[_modalController pushViewController:currentViewController animated:YES];
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
 		UIViewController *rootViewController = [_modalController.viewControllers objectAtIndex:0];		
@@ -185,11 +181,11 @@
 		[currentViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:0]; 
 	}
     else {
-		[self addPageToDialog:page displayMode:displayMode selectDialog:shouldSelectDialog];
+		[self addPageToDialog:page displayMode:displayMode transitionStyle:transitionStyle selectDialog:shouldSelectDialog];
 	}
 }	
 
--(void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode selectDialog:(BOOL) shouldSelectDialog {
+-(void) addPageToDialog:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle selectDialog:(BOOL) shouldSelectDialog {
     MBDialogController *dialog = [self dialogWithName: page.dialogName];
     if(dialog == nil || dialog.temporary) {
 		MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:page.dialogName];
@@ -202,9 +198,13 @@
 		[dialog release];
 		[self updateDisplay];
 	}
-	else [dialog showPage: page displayMode: displayMode];
+	else {
+        [dialog showPage: page displayMode: displayMode transitionStyle:transitionStyle];
+    }
 	
-	if(shouldSelectDialog ) [self activateDialogWithName:page.dialogName];
+	if(shouldSelectDialog ) {
+        [self activateDialogWithName:page.dialogName];
+    }
 }
 
 -(void) showAlertView:(MBPage*) page {
@@ -295,7 +295,7 @@
 
 - (void) popPage:(NSString*) dialogName {
     MBDialogController *result = [_dialogControllers objectForKey: dialogName];
-	[result popPageAnimated:FALSE];	
+    [result popPageWithTransitionStyle:nil animated:FALSE];
 }
 
 -(void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition {

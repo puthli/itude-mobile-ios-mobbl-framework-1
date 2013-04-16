@@ -17,6 +17,9 @@
 #import "MBBasicViewController.h"
 #import "UINavigationController+MBRebuilder.h"
 #import "MBViewManager.h"
+#import "MBTransitionStyle.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface MBDialogController()
 	-(void) clearSubviews;
@@ -88,40 +91,57 @@
 	[super dealloc];
 }
 
--(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
+-(void)showPage:(MBPage *)page displayMode:(NSString *)displayMode transitionStyle:(NSString *)transitionStyle {
     
     if(displayMode != nil){
         DLog(@"DialogController: showPage name=%@ dialog=%@ mode=%@", page.pageName, _name, displayMode);
 	}
+    
+    page.transitionStyle = transitionStyle;
+    
 	UINavigationController *nav = [self determineNavigationController];
-	
 	
 	if([displayMode isEqualToString:@"REPLACE"]) {
 
-		// If the rootController is popped, there is no controller to go back to. 
-		// A black screen will be displayed when the user navigates back! That is why we need to replace it
+        // Replace page controller on the stack
 		if (nav.visibleViewController == nav.topViewController) {
-			[nav popViewControllerAnimated:FALSE];
+            
+            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:nav];
+			[nav popViewControllerAnimated:NO];
 			[nav setRootViewController:page.viewController];
 		}
+        // Replace the last page on the stack
 		else {
-			[nav popViewControllerAnimated:FALSE];
-			[nav pushViewController:page.viewController animated:FALSE];
+            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:nav];
+			[nav popViewControllerAnimated:NO];
+			[nav pushViewController:page.viewController animated:NO];
 		}
 
 		return;
 	}
-    //redundant pop 
-//	else if([displayMode isEqualToString:@"POP"]) {		
-//		[nav popViewControllerAnimated:FALSE];
-//	}
 
-	[nav pushViewController:page.viewController animated:YES];
+    // Apply transitionStyle for a regular page navigation
+    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+    [style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
+    
+    // Regular navigation to new page
+	[nav pushViewController:page.viewController animated:[style animated]];
 	
 }
 
--(void) popPageAnimated:(BOOL) animated {
+-(void)popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL)animated
+{
 	UINavigationController *nav = [self determineNavigationController];
+    
+    // Apply transitionStyle for a regular page navigation
+    if (transitionStyle) {
+        id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+        [style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPop];
+        
+        // Regular navigation to new page
+        animated = [style animated];
+    }
+    
 	[nav popViewControllerAnimated:animated];
 }
 
@@ -174,7 +194,7 @@
 	// Read issue MOBBL-150 before changing this. 
 	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
 	[viewController viewWillAppear:animated];
-    
+
 	_navigationController = viewController.navigationController;
     [self willActivate];
 }
@@ -187,7 +207,6 @@
 	// Read issue MOBBL-150 before changing this. 
 	// Notify the viewController after the UINavigationControllerDelegate has shown the view
 	[viewController viewDidAppear:animated];
-	
 	_navigationController = viewController.navigationController;
     
     [self didActivate];

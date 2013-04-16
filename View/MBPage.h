@@ -34,6 +34,7 @@
 	MBPageType _pageType;
 	CGRect _maxBounds;
 	MBViewState _viewState;
+    NSString *_transitionStyle;
 }
 
 @property (nonatomic, retain) NSString *pageName;
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) MBDocumentDiff *documentDiff;
 @property (nonatomic, retain) NSMutableArray *childViewControllers;
 @property (nonatomic, assign) MBPageType pageType;
+@property (nonatomic, retain) NSString *transitionStyle;
 
 // for loading interface builder files:
 - (id) initWithDefinition:(MBPageDefinition*) definition 
