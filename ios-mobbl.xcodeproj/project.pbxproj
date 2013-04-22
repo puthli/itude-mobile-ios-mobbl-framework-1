@@ -1607,7 +1607,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\n\n$XCODEBUILD -project ios-mobbl.xcodeproj -target \"ios-mobbl\" -sdk \"iphonesimulator\" -configuration \"Release\" clean build\n$XCODEBUILD -project ios-mobbl.xcodeproj -target \"ios-mobbl\" -sdk \"iphoneos\" -configuration \"Release\" clean build\n\nlipo -create -output \"build/ios-mobbl-universal.a\" \"build/Release-iphoneos/ios-mobbl.a\" \"build/Release-iphonesimulator/ios-mobbl.a\"";
+			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\nSCHEME=Release\n\n$XCODEBUILD -project ios-mobbl.xcodeproj -target \"ios-mobbl\" -sdk \"iphonesimulator\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphonesimulator\n$XCODEBUILD -project ios-mobbl.xcodeproj -target \"ios-mobbl\" -sdk \"iphoneos\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphoneos\n\ncp -Rf build/iphoneos/$SCHEME-iphoneos/include build/universal/\nlipo -create -output \"build/universal/ios-mobbl-universal.a\" \"build/iphoneos/$SCHEME-iphoneos/libios-mobbl.a\" \"build/iphonesimulator/$SCHEME-iphonesimulator/libios-mobbl.a\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1835,11 +1835,12 @@
 				DSTROOT = /tmp/ios_mobbl.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ios-mobbl/ios-mobbl-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv6 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -1850,11 +1851,12 @@
 				DSTROOT = /tmp/ios_mobbl.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ios-mobbl/ios-mobbl-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv6 armv7 armv7s i386";
 			};
 			name = Release;
 		};
@@ -1905,6 +1907,7 @@
 				1CC88E95171ED84200B30461 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CC89194171FF02C00B30461 /* Build configuration list for PBXAggregateTarget "ios-mobbl-universal" */ = {
 			isa = XCConfigurationList;
@@ -1913,6 +1916,7 @@
 				1CC89196171FF02C00B30461 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
