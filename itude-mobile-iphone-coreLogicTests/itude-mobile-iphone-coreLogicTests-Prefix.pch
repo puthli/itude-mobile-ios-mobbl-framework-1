@@ -1,8 +1,0 @@
-//
-// Prefix header for all source files of the 'itude-mobile-iphone-coreLogicTests' target in the 'itude-mobile-iphone-coreLogicTests' project
-//
-
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-#endif
