@@ -26,6 +26,6 @@
 +(CGFloat)heightForRowWithTitle:(BOOL)title withCells:(BOOL)cells;
 -(void) setBackgroundColor:(UIColor *)color forColumAtIndex:(int)index;
 -(void) setTextColor:(UIColor *)color forColumAtIndex:(int)index;
--(void) setAlignment:(UITextAlignment)textAlignment forColumnAtIndex:(NSInteger)index;
+-(void) setAlignment:(NSTextAlignment)textAlignment forColumnAtIndex:(NSInteger)index;
 
 @end

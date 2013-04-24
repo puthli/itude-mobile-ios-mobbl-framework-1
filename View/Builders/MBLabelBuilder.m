@@ -32,7 +32,7 @@
     
 
     label.numberOfLines = 0;
-    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.lineBreakMode = NSLineBreakByWordWrapping; //UILineBreakModeWordWrap;
     label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 
     label.autoresizingMask =   UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

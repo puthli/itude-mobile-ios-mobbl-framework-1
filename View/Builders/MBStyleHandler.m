@@ -108,7 +108,7 @@
         if (![text hasHTML]) {
             // calculate bounding box
             CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
-            CGSize size = [text sizeWithFont:[self fontForField:field] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+            CGSize size = [text sizeWithFont:[self fontForField:field] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
             height = size.height + 22; // inset
         }
     }
@@ -133,7 +133,7 @@
 	if([view isKindOfClass:[UITextField class]]) {
 
 		UITextField *textField = (UITextField*) view;
-		textField.textAlignment = UITextAlignmentLeft;
+		textField.textAlignment = NSTextAlignmentLeft;
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 		textField.backgroundColor = [UIColor clearColor];
 		textField.borderStyle = UITextBorderStyleRoundedRect;
@@ -285,11 +285,11 @@
 - (void) alignLabel:(UILabel *)label forAlignMent:(NSString *)alignment {
 	// Align the label
 	if ([alignment isEqualToString:@"LEFT"]) {
-		label.textAlignment = UITextAlignmentLeft;
+		label.textAlignment = NSTextAlignmentLeft;
 	} else if ([alignment isEqualToString:@"CENTER"]) {
-		label.textAlignment = UITextAlignmentCenter;
+		label.textAlignment = NSTextAlignmentCenter;
 	} else if ([alignment isEqualToString:@"RIGHT"]) {
-		label.textAlignment = UITextAlignmentRight;
+		label.textAlignment = NSTextAlignmentRight;
 	}
 }
 

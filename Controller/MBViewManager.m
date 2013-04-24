@@ -148,13 +148,13 @@
                 if (_tabController) {
                     [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_tabController];
                     page.transitionStyle = transitionStyle;
-                    [_tabController presentModalViewController:_modalController animated:YES];
+                    [self presentViewController:_modalController fromViewController:_tabController animated:YES];
                 }
                 else if (_singlePageMode){
                     MBDialogController *dc = [[_dialogControllers allValues] objectAtIndex:0];
                     [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
                     page.transitionStyle = transitionStyle;
-                    [dc.rootController presentModalViewController:_modalController animated:YES];
+                    [self presentViewController:_modalController fromViewController:dc.rootController animated:YES];
                 }
                 // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
                 NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
@@ -265,6 +265,22 @@
 	}
 }
 
+- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
+    // iOS 6.0 and up
+    if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
+        [fromViewController presentViewController:controller animated:animated completion:nil];
+    }
+    // iOS 5.x and lower
+    else {
+        // Suppress the deprecation warning
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [fromViewController presentModalViewController:controller animated:animated];
+        #pragma clang diagnostic pop
+    }
+    
+}
+
 - (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated {
     // iOS 6.0 and up
     if ([controller respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
@@ -272,7 +288,12 @@
     }
     // iOS 5.x and lower
     else {
+        
+        // Suppress the deprecation warning
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         [controller dismissModalViewControllerAnimated:animated];
+        #pragma clang diagnostic pop
     }
 }
 

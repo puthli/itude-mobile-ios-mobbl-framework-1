@@ -107,11 +107,11 @@
 					// NOTE: This is done here because here we iterate trough the cells and know which one is the first! 
 					// The stylehandler doesn't know anything about a collection of cells. It just knows to style one cell
 					if (first) {
-						columnLabel.textAlignment = UITextAlignmentLeft;
+						columnLabel.textAlignment = NSTextAlignmentLeft;
 						first = FALSE;
 					}else {
 						// Default alignment
-						columnLabel.textAlignment = UITextAlignmentCenter;
+						columnLabel.textAlignment = NSTextAlignmentCenter;
 					}
 					
 					// Apply Styling
@@ -209,7 +209,7 @@
 	label.textColor = color;
 }
 
--(void) setAlignment:(UITextAlignment)textAlignment forColumnAtIndex:(NSInteger)index
+-(void) setAlignment:(NSTextAlignment)textAlignment forColumnAtIndex:(NSInteger)index
 {
 	UILabel *label = [self.fieldLabels objectAtIndex:index];
 	label.textAlignment = textAlignment;
