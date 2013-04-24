@@ -161,7 +161,7 @@
 }
 
 -(NSString *) description {
-	return [NSString stringWithFormat:@"Page: pageID=%@", _pageName];
+    return [NSString stringWithFormat:@"<%@: %p; pageID: %@>", [self class], self, _pageName];
 }
 
 -(void) setRootPath:(NSString *) path {
