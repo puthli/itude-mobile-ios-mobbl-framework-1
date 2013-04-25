@@ -26,7 +26,7 @@
 @implementation MBPage
 
 @synthesize pageName = _pageName;
-@synthesize dialogName = _dialogName;
+@synthesize pageStackName = _pageStackName;
 @synthesize document = _document;
 @synthesize controller = _controller;
 @synthesize childViewControllers = _childViewControllers;
@@ -96,6 +96,7 @@
 -(void) dealloc {
 	[_document release];
 	[_pageName release];
+    [_pageStackName release];
 	[_rootPath release];
     [_childViewControllers release];
 	[_documentDiff release];
@@ -145,7 +146,7 @@
 	outcome.originName = self.pageName;
 	outcome.outcomeName = outcomeName;
 	outcome.document = [self document];
-	outcome.dialogName = [self dialogName];
+	outcome.pageStackName = [self pageStackName];
 	outcome.path = path;
 
 	for(id<MBOutcomeListenerProtocol> lsnr in _outcomeListeners) {
@@ -243,7 +244,7 @@
 	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPage%@%@%@%@>\n", level, "",
 							   [self attributeAsXml:@"pageName" withValue:_pageName],
 							   [self attributeAsXml:@"rootPath" withValue:_rootPath],
-							   [self attributeAsXml:@"dialogName" withValue:_dialogName],
+							   [self attributeAsXml:@"pageStackName" withValue:_pageStackName],
 							   [self attributeAsXml:@"document" withValue:_document.documentName]
 							   ];
 

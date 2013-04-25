@@ -1,5 +1,5 @@
 //
-//  MBDialogController.m
+//  MBPageStackController.m
 //  Core
 //
 //  Created by Wido on 28-5-10.
@@ -7,7 +7,7 @@
 //
 
 #import "MBMacros.h"
-#import "MBDialogController.h"
+#import "MBPageStackController.h"
 #import "MBPage.h"
 #import "MBActivityIndicator.h"
 #import "MBSpinner.h"
@@ -21,31 +21,31 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface MBDialogController()
+@interface MBPageStackController()
 	-(void) clearSubviews;
     -(UINavigationController*) determineNavigationController;
 -(UITabBarController*) determineTabBarController;
 
 @end
 
-@implementation MBDialogController
+@implementation MBPageStackController
 
 @synthesize name = _name;
 @synthesize iconName = _iconName;
 @synthesize title = _title;
 @synthesize bounds = _bounds;
-@synthesize dialogMode = _dialogMode;
+@synthesize pageStackMode = _pageStackMode;
 @synthesize dialogGroupName = _dialogGroupName;
 @synthesize position = _position;
 @synthesize rootController = _rootController;
 @synthesize temporary = _temporary;
 
 
--(id) initWithDefinition:(MBDialogDefinition *)definition {
+-(id) initWithDefinition:(MBPageStackDefinition *)definition {
 	if(self = [super init]) {
 		self.name = definition.name;
 		self.title = definition.title;
-        self.dialogMode = definition.mode;
+        self.pageStackMode = definition.mode;
 		self.dialogGroupName = definition.groupName;
 		self.position = definition.position;
         		_usesNavbar = [definition.mode isEqualToString:@"STACK"];
@@ -55,24 +55,23 @@
 		_activityIndicatorCount = 0;
 		[self showActivityIndicator];
         		[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.rootController.navigationBar];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRebuild) name:REBUILD_DIALOG_NOTIFICATION object:nil];
 	}
 	return self;
     
 }
 
--(id) initWithDefinition:(MBDialogDefinition*)definition temporary:(BOOL) isTemporary {
+-(id) initWithDefinition:(MBPageStackDefinition*)definition temporary:(BOOL) isTemporary {
     if (self = [self initWithDefinition:definition]) {
 		self.temporary = isTemporary;        
     }
     return self;
 }
 
--(id) initWithDefinition:(MBDialogDefinition*)definition page:(MBPage*) page bounds:(CGRect) bounds {
+-(id) initWithDefinition:(MBPageStackDefinition*)definition page:(MBPage*) page bounds:(CGRect) bounds {
 	if(self = [self initWithDefinition:definition]) {
 		self.temporary = FALSE;
         MBBasicViewController *controller = (MBBasicViewController*)page.viewController;
-        controller.dialogController = self;
+        controller.pageStackController = self;
         [self.rootController setRootViewController:page.viewController];
         _bounds = bounds;
 	}
@@ -85,7 +84,7 @@
 
 	[_name release];
 	[_iconName release];
-	[_dialogMode release];
+	[_pageStackMode release];
 	[_dialogGroupName release];
 	[_rootController release];
 	[super dealloc];
@@ -94,7 +93,7 @@
 -(void)showPage:(MBPage *)page displayMode:(NSString *)displayMode transitionStyle:(NSString *)transitionStyle {
     
     if(displayMode != nil){
-        DLog(@"DialogController: showPage name=%@ dialog=%@ mode=%@", page.pageName, _name, displayMode);
+        DLog(@"PageStackController: showPage name=%@ pageStack=%@ mode=%@", page.pageName, _name, displayMode);
 	}
     
     page.transitionStyle = transitionStyle;
@@ -160,7 +159,7 @@
     return [[[MBApplicationController currentInstance] viewManager] tabController];
 }
 
-// The following code is really ugly: depending on the time of construction of the dialog the navigation controller
+// The following code is really ugly: depending on the time of construction of the pageStack the navigation controller
 // might be nil; try a few possibilities:
 -(UINavigationController*) determineNavigationController {
 
@@ -179,7 +178,7 @@
 }
 
 -(void)willActivate {
-    NSLog(@"Showing dialog %@", [self name]);
+    NSLog(@"Showing pageStack %@", [self name]);
     
     UINavigationController * navigationController = [self determineNavigationController];
     
@@ -269,9 +268,7 @@
 		[_rootController.parentViewController.view addSubview:blocker];
 	}
 	_activityIndicatorCount ++;
- 
-	
-	//[[MBSpinner sharedInstance] showActivityIndicator:_rootController.parentViewController.view];
+
 }
 
 - (void)hideActivityIndicator {
@@ -284,8 +281,7 @@
 				[top removeFromSuperview];
 		}
 	}
- 
-	//[[MBSpinner sharedInstance] hideActivityIndicator:_rootController.parentViewController.view];
+
 }
 
 @end

@@ -17,7 +17,7 @@
 		_documentTypes = [NSMutableDictionary new];
 		_actionTypes = [NSMutableDictionary new];
 		_outcomeTypes = [NSMutableArray new];
-		_dialogs = [NSMutableDictionary new];
+		_pageStacks = [NSMutableDictionary new];
 		_dialogGroups = [NSMutableDictionary new];
 		_pageTypes = [NSMutableDictionary new];
         _alerts = [NSMutableDictionary new];
@@ -30,7 +30,7 @@
 	[_documentTypes release];
 	[_actionTypes release];
 	[_outcomeTypes release];
-	[_dialogs release];
+	[_pageStacks release];
     [_dialogGroups release];
 	[_pageTypes release];
     [_alerts release];
@@ -42,7 +42,7 @@
 	for(MBDomainDefinition *def in [otherConfig.domains allValues]) [self addDomain:def];
 	for(MBActionDefinition *def in [otherConfig.actions allValues]) [self addAction:def];
 	for(MBOutcomeDefinition *def in otherConfig.outcomes) [self addOutcome:def];
-	for(MBDialogDefinition *def in [otherConfig.dialogs allValues]) [self addDialog:def];
+	for(MBPageStackDefinition *def in [otherConfig.pageStacks allValues]) [self addPageStack:def];
 	for(MBDialogGroupDefinition *def in [otherConfig.dialogGroups allValues]) [self addDialogGroup:def];
 	for(MBPageDefinition *def in [otherConfig.pages allValues]) [self addPage:def];
     for(MBAlertDefinition *def in [otherConfig.alerts allValues]) [self addAlert:def];
@@ -50,7 +50,8 @@
 
 - (NSString *) asXmlWithLevel:(int)level {
 	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Configuration>\n", level, ""];
-	[result appendFormat: @"%*s<Model>\n", level+2, ""];
+	// ===== Model =====
+    [result appendFormat: @"%*s<Model>\n", level+2, ""];
 	[result appendFormat: @"%*s<Domains>\n", level+4, ""];
 	for (MBDomainDefinition* domain in [_domainTypes allValues])
 		[result appendString: [domain asXmlWithLevel:level+6]];
@@ -60,7 +61,9 @@
 		[result appendString: [document asXmlWithLevel:level+6]];
 	[result appendFormat: @"%*s</Documents>\n", level+4, ""];
 	[result appendFormat: @"%*s</Model>\n", level+2, ""];
-
+    // ===== Model =====
+    
+    // ===== Controller =====
 	[result appendFormat: @"%*s<Controller>\n", level+2, ""];
 	[result appendFormat: @"%*s<Actions>\n", level+4, ""];
 	for (MBActionDefinition* action in [_actionTypes allValues])
@@ -71,19 +74,28 @@
 		[result appendString: [outcome asXmlWithLevel:level+6]];
 	[result appendFormat: @"%*s</Wiring>\n", level+4, ""];
 	[result appendFormat: @"%*s</Controller>\n", level+2, ""];
+    // ===== Controller =====
 
+    // ===== View =====
 	[result appendFormat: @"%*s<View>\n", level+2, ""];
-	[result appendFormat: @"%*s<Dialogs>\n", level+4, ""];
-	for (MBDialogDefinition* dialog in [_dialogs allValues])
-		[result appendString: [dialog asXmlWithLevel:level+6]];
-	[result appendFormat: @"%*s</Dialogs>\n", level+4, ""];
-	for (MBPageDefinition* page in [_pageTypes allValues])
+    
+    // Build pageStacks
+    [result appendFormat: @"%*s<PageStacks>\n", level+4, ""];
+	for (MBPageStackDefinition* pageStack in [_pageStacks allValues])
+		[result appendString: [pageStack asXmlWithLevel:level+6]];
+	[result appendFormat: @"%*s</PageStacks>\n", level+4, ""];
+	
+    // Pages
+    for (MBPageDefinition* page in [_pageTypes allValues])
 		[result appendString: [page asXmlWithLevel:level+4]];
+    
+    // Alerts
     [result appendFormat: @"%*s<Alerts>\n", level+4, ""];
     for (MBAlertDefinition *alert in [_alerts allValues]) 
         [result appendString:[alert asXmlWithLevel:level+6]];
     [result appendFormat: @"%*s</Alerts>\n", level+4, ""];
 	[result appendFormat: @"%*s</View>\n", level+2, ""];
+    // ===== View =====
     
 	[result appendFormat: @"%*s</Configuration>\n", level, ""];
 
@@ -115,17 +127,16 @@
 	[_outcomeTypes addObject:outcome];
 }
 
-- (void) addDialog:(MBDialogDefinition*)dialog {
-    if([_dialogs valueForKey:dialog.name] != nil) {
-		WLog(@"Dialog definition overridden: multiple definitions for dialog with name %@", dialog.name);
+- (void) addPageStack:(MBPageStackDefinition*)pageStack {
+    if([_pageStacks valueForKey:pageStack.name] != nil) {
+		WLog(@"PageStack definition overridden: multiple definitions for pageStack with name %@", pageStack.name);
 	}
-	if(_firstDialog == nil) _firstDialog = dialog;
-	[_dialogs setObject:dialog forKey:dialog.name];
+	[_pageStacks setObject:pageStack forKey:pageStack.name];
 }
 
 - (void) addDialogGroup:(MBDialogGroupDefinition*)dialogGroup {
     if([_dialogGroups valueForKey:dialogGroup.name] != nil) {
-		WLog(@"DialogGroup definition overridden: multiple definitions for dialog group with name %@", dialogGroup.name);
+		WLog(@"DialogGroup definition overridden: multiple definitions for dialogGroup with name %@", dialogGroup.name);
 	}
 	[_dialogGroups setObject:dialogGroup forKey:dialogGroup.name];
 }
@@ -156,8 +167,8 @@
 	return [_actionTypes objectForKey:actionName];
 }
 
--(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName {
-	return [_dialogs objectForKey:dialogName];
+-(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName {
+	return [_pageStacks objectForKey:pageStackName];
 }
 
 -(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName {
@@ -218,8 +229,8 @@
 	return _outcomeTypes;	
 }
 
--(NSMutableDictionary*) dialogs {
-	return _dialogs;	
+-(NSMutableDictionary*) pageStacks {
+	return _pageStacks;	
 }
 
 -(NSMutableDictionary*) dialogGroups {
@@ -234,7 +245,4 @@
     return _alerts;
 }
 
--(MBDialogDefinition *) firstDialogDefinition {
-	return _firstDialog;
-}
 @end

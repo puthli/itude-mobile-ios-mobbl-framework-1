@@ -28,7 +28,7 @@
 @synthesize attributeAttributes = _attributeAttributes;
 @synthesize actionAttributes = _actionAttributes;
 @synthesize outcomeAttributes = _outcomeAttributes;
-@synthesize dialogAttributes = _dialogAttributes;
+@synthesize pageStackAttributes = _pageStackAttributes;
 @synthesize dialogGroupAttributes = _dialogGroupAttributes;
 @synthesize pageAttributes = _pageAttributes;
 @synthesize alertAttributes = _alertAttributes;
@@ -48,7 +48,7 @@
     self.attributeAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"required",@"defaultValue",nil];
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
     self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",nil];
-    self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
+    self.pageStackAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
 	self.dialogGroupAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
     self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"document",@"title",@"titlePath", nil];
@@ -76,7 +76,7 @@
     [_attributeAttributes release];
     [_actionAttributes release];
     [_outcomeAttributes release];
-    [_dialogAttributes release];
+    [_pageStackAttributes release];
 	[_dialogGroupAttributes release];
     [_pageAttributes release];
     [_alertAttributes release];
@@ -174,24 +174,24 @@
 		[outcomeDef release];
 	}
 	else if ([elementName isEqualToString:@"Dialog"]) {
-        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_dialogAttributes];
+        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:self.pageStackAttributes];
 
-		MBDialogDefinition *dialogDef = [[MBDialogDefinition alloc] init];
-		dialogDef.name = [attributeDict valueForKey:@"name"];
-		dialogDef.title = [attributeDict valueForKey:@"title"];	
-		dialogDef.mode = [attributeDict valueForKey:@"mode"];	
-		dialogDef.icon = [attributeDict valueForKey:@"icon"];	
-		dialogDef.position = [attributeDict valueForKey:@"position"];
+		MBPageStackDefinition *pageStackDef = [[MBPageStackDefinition alloc] init];
+		pageStackDef.name = [attributeDict valueForKey:@"name"];
+		pageStackDef.title = [attributeDict valueForKey:@"title"];	
+		pageStackDef.mode = [attributeDict valueForKey:@"mode"];	
+		pageStackDef.icon = [attributeDict valueForKey:@"icon"];	
+		pageStackDef.position = [attributeDict valueForKey:@"position"];
 		
 		// On iPad, we can have a splitViewController, which is defined as a DialogGroup in xml
 		MBDefinition *lastDef = [_stack lastObject];
 		if ([lastDef isKindOfClass:[MBDialogGroupDefinition class]]) {
-			dialogDef.groupName = lastDef.name;
-			dialogDef.icon = ((MBDialogGroupDefinition *)lastDef).icon;
+			pageStackDef.groupName = lastDef.name;
+			pageStackDef.icon = ((MBDialogGroupDefinition *)lastDef).icon;
 		}
 		
-		[self notifyProcessed:dialogDef usingSelector:@selector(addDialog:)];
-		[dialogDef release];
+		[self notifyProcessed:pageStackDef usingSelector:@selector(addPageStack:)];
+		[pageStackDef release];
 	}
 	else if ([elementName isEqualToString:@"DialogGroup"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_dialogGroupAttributes];
@@ -342,13 +342,13 @@
 		[[_stack lastObject] performSelector:@selector(setText:) withObject:_characters];
 	
 	else if ([elementName isEqualToString:@"DialogGroup"]) {
-		// On iPad, we can have a UISplitViewController in a tab. In XML they are defined as two dialogs in a dialogGroup.
+		// On iPad, we can have a UISplitViewController in a tab. In XML they are defined as two pageStacks in a dialogGroup.
 		// This means that the dialogs are automaticly added to a dialogGroup. 
-		// That is why we need to make sure that the dialogs are also kept loccaly, like on the iPhone, because the local references are used to adress the Dialogs
+		// That is why we need to make sure that the pageStacks are also kept loccaly, like on the iPhone, because the local references are used to adress the pageStacks
 		// Thats why we copy them here afther the group has been added.
 		MBDefinition *previousDef = [_stack objectAtIndex:([_stack count]-2)];
 		MBDialogGroupDefinition *dialogGroupDef = [_stack lastObject];
-		for (MBDefinition *def in [dialogGroupDef children]) [previousDef performSelector:@selector(addDialog:) withObject:def];
+		for (MBDefinition *def in [dialogGroupDef children]) [previousDef performSelector:@selector(addPageStack:) withObject:def];
 	}
 	
 	if (![elementName isEqualToString:@"Configuration"] && ![elementName isEqualToString:@"Include"]) { // end config file or special case for Include
@@ -386,7 +386,8 @@
 			[element isEqualToString:@"Actions"] ||
 			[element isEqualToString:@"Wiring"] ||
 			[element isEqualToString:@"View"] ||
-            [element isEqualToString:@"Alerts"]);
+            [element isEqualToString:@"Alerts"] ||
+            [element isEqualToString:@"Pages"]);
 }
 
 - (void) addExceptionDocument:(MBConfigurationDefinition*) conf {

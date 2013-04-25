@@ -11,6 +11,6 @@
  * Notifications should never be posed with a local name, because if we do, we lose track of which notifications are posted
  */
 #define ACCOUNT_CHANGED_NOTIFICATION	@"AccountChanged"
-#define REBUILD_DIALOG_NOTIFICATION		@"REBUILD_DIALOG"
+
 #define MODAL_VIEW_CONTROLLER_PRESENTED	@"Modal View Controller presented"
 #define MODAL_VIEW_CONTROLLER_DISMISSED	@"Modal View Controller dismissed"

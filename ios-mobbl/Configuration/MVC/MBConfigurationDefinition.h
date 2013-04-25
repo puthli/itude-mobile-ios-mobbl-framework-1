@@ -11,7 +11,7 @@
 #import "MBAttributeDefinition.h"
 #import "MBActionDefinition.h"
 #import "MBOutcomeDefinition.h"
-#import "MBDialogDefinition.h"
+#import "MBPageStackDefinition.h"
 #import "MBDialogGroupDefinition.h"
 #import "MBPageDefinition.h"
 #import "MBAlertDefinition.h"
@@ -36,10 +36,9 @@
 	NSMutableDictionary *_actionTypes;
 	NSMutableArray *_outcomeTypes;
 	NSMutableDictionary *_pageTypes;
-	NSMutableDictionary *_dialogs;
+	NSMutableDictionary *_pageStacks;
 	NSMutableDictionary *_dialogGroups;
     NSMutableDictionary *_alerts;
-	MBDialogDefinition *_firstDialog;
 }
 
 - (NSString *) asXmlWithLevel:(int)level;
@@ -48,7 +47,7 @@
 - (void) addAction:(MBActionDefinition*)action;
 - (void) addOutcome:(MBOutcomeDefinition*)outcome;
 - (void) addPage:(MBPageDefinition*)page;
-- (void) addDialog:(MBDialogDefinition*)dialog;
+- (void) addPageStack:(MBPageStackDefinition*)pageStack;
 - (void) addDialogGroup:(MBDialogGroupDefinition*)dialogGroup;
 - (void) addAlert:(MBAlertDefinition*)alert;
 
@@ -56,12 +55,12 @@
 - (MBPageDefinition*) definitionForPageName:(NSString*) name;
 - (MBActionDefinition *) definitionForActionName:(NSString *)actionName;
 - (MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName;
-- (MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
+- (MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName;
 - (MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName;
 - (MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *)originName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
-- (NSMutableDictionary*) dialogs;
+- (NSMutableDictionary*) pageStacks;
 - (NSMutableDictionary*) dialogGroups;
 - (NSMutableDictionary*) domains;
 - (NSMutableDictionary*) actions;
@@ -70,7 +69,6 @@
 - (NSMutableDictionary*) pages;
 - (NSMutableDictionary*) alerts;
 - (void) addAll:(MBConfigurationDefinition*) otherConfig;
-- (MBDialogDefinition *) firstDialogDefinition;
 
 
 @end

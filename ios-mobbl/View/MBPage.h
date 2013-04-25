@@ -23,7 +23,7 @@
 @interface MBPage : MBPanel {
 	NSString *_pageName;
 	NSString *_rootPath;
-	NSString *_dialogName;
+	NSString *_pageStackName;
     MBDocument *_document;
 	MBApplicationController *_controller;
     UIViewController<MBViewControllerProtocol> *_viewController;
@@ -38,7 +38,7 @@
 }
 
 @property (nonatomic, retain) NSString *pageName;
-@property (nonatomic, retain) NSString *dialogName;
+@property (nonatomic, retain) NSString *pageStackName;
 @property (nonatomic, assign) MBApplicationController *controller;
 @property (nonatomic, retain) MBDocument *document;
 @property (nonatomic, retain) MBDocumentDiff *documentDiff;

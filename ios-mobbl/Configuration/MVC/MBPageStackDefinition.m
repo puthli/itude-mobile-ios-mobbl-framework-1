@@ -1,15 +1,15 @@
 //
-//  MBDialogDefinition.m
+//  MBPageStackDefinition.m
 //  Core
 //
 //  Created by Wido on 28-5-10.
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBDialogDefinition.h"
+#import "MBPageStackDefinition.h"
 
 
-@implementation MBDialogDefinition
+@implementation MBPageStackDefinition
 
 @synthesize title = _title;
 @synthesize mode = _mode;
@@ -28,7 +28,7 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Dialog name='%@'%@%@%@%@%@/>\n", level, "",  _name, 
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<PageStack name='%@'%@%@%@%@%@/>\n", level, "",  _name,
 							   [self attributeAsXml:@"mode" withValue:_mode],
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"icon" withValue:_icon],
@@ -38,8 +38,13 @@
 }
 
 -(void) validateDefinition {
-	if(_name == nil) @throw [NSException exceptionWithName: @"InvalidDialogDefinition" reason: [NSString stringWithFormat: @"no name set for dialog"] userInfo:nil];
-	if (_groupName!=nil && _position==nil) @throw [NSException exceptionWithName: @"InvalidDialogDefinition" reason: [NSString stringWithFormat: @"dialog '%@' is nested in a dialogGroup '%@', but has no position attribute. Position should be 'LEFT' or 'RIGHT'",_name,_groupName] userInfo:nil];
+	if(self.name.length == 0) {
+        @throw [NSException exceptionWithName: @"InvalidPageStackDefinition" reason: [NSString stringWithFormat: @"no name set for pageStack"] userInfo:nil];
+    }
+	if (self.groupName.length > 0 && self.position.length == 0) {
+        NSString *reason = [NSString stringWithFormat: @"pageStack '%@' is nested in a dialogGroup '%@', but has no position attribute. Position should be 'LEFT' or 'RIGHT'", self.name, self.groupName];
+        @throw [NSException exceptionWithName: @"InvalidPageStackDefinition" reason:reason  userInfo:nil];
+    }
 }
 
 @end

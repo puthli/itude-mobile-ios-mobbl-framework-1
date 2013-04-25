@@ -24,8 +24,8 @@
 	[_name release];
 	[_iconName release];
 	[_title release];
-	[_leftDialogController release];
-	[_rightDialogController release];
+	[_leftPageStackController release];
+	[_rightPageStackController release];
 	[_splitViewController release];
 	[super dealloc];
 }
@@ -43,12 +43,12 @@
 }
  
 // Update the split view controller's view controllers array.
-- (void) loadDialogs {
+- (void) loadPageStacks {
 	
-	UIViewController *leftViewController = _leftDialogController.rootController;
-	UIViewController *rightViewController = _rightDialogController.rootController;
+	UIViewController *leftViewController = _leftPageStackController.rootController;
+	UIViewController *rightViewController = _rightPageStackController.rootController;
 	
-	// Use dummyViewControllers if the Dialog has no rootController, so the splitViewcontroller can still be created
+	// Use dummyViewControllers if the PageStack has no rootController, so the splitViewcontroller can still be created
 	if (leftViewController==nil)  leftViewController  = [[[UIViewController alloc] init] autorelease];
 	if (rightViewController==nil) rightViewController = [[[UIViewController alloc] init] autorelease];
 	
@@ -92,31 +92,31 @@
 
 #pragma mark -
 #pragma mark Setters
-- (void) setLeftDialogController:(MBDialogController *) dialogController {
-	if (_leftDialogController != dialogController) {
-		[_leftDialogController release];
-		_leftDialogController = dialogController;
-		[_leftDialogController retain];
+- (void) setLeftPageStackController:(MBPageStackController *) pageStackController {
+	if (_leftPageStackController != pageStackController) {
+		[_leftPageStackController release];
+		_leftPageStackController = pageStackController;
+		[_leftPageStackController retain];
 	}
 }
 
-- (void) setRightDialogController:(MBDialogController *) dialogController {
-	if (_rightDialogController != dialogController) {
-		[_rightDialogController release];
-		_rightDialogController = dialogController;
-		[_rightDialogController retain];
+- (void) setRightPageStackController:(MBPageStackController *) pageStackController {
+	if (_rightPageStackController != pageStackController) {
+		[_rightPageStackController release];
+		_rightPageStackController = pageStackController;
+		[_rightPageStackController retain];
 	}
 }
 
 
 #pragma mark -
 #pragma mark Getters
-- (MBDialogController *)leftDialogController {
-	return _leftDialogController;
+- (MBPageStackController *)leftPageStackController {
+	return _leftPageStackController;
 }
 
-- (MBDialogController *)rightDialogController {
-	return _rightDialogController;
+- (MBPageStackController *)rightPageStackController {
+	return _rightPageStackController;
 }
 
 

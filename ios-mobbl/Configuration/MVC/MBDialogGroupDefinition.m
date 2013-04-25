@@ -7,7 +7,7 @@
 //
 
 #import "MBDialogGroupDefinition.h"
-#import "MBDialogDefinition.h"
+#import "MBPageStackDefinition.h"
 
 
 @implementation MBDialogGroupDefinition
@@ -41,8 +41,8 @@
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"icon" withValue:_icon]];
 	
-	for (MBDialogDefinition *dialog in _childrenSorted) {
-		[result appendString:[dialog asXmlWithLevel:level+2]];
+	for (MBPageStackDefinition *definition in _childrenSorted) {
+		[result appendString:[definition asXmlWithLevel:level+2]];
 	}
 
 	[result appendFormat:@"%*s</DialogGroup>\n", level, ""];
@@ -55,11 +55,6 @@
 
 - (NSMutableArray*) children {
 	return _childrenSorted;	
-}
-
-- (void) addDialog:(MBDialogDefinition *)dialog {
-	[_childrenSorted addObject:dialog];
-	[_children setValue:dialog forKey:dialog.name];
 }
 
 @end

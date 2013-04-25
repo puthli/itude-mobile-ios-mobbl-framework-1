@@ -43,9 +43,9 @@
 +(MBApplicationController *) currentInstance;
 -(NSString*) activeDialogName;
 -(NSString *) activeDialogGroupName;
--(void) activateDialogWithName:(NSString*) name;
--(void) showActivityIndicatorForDialog:(NSString*) dialogName;
--(void) hideActivityIndicatorForDialog:(NSString*) dialogName;
+-(void) activatePageStackWithName:(NSString*) name;
+-(void) showActivityIndicator;
+-(void) hideActivityIndicator;
 -(void) resetControllerPreservingCurrentDialog;
 
 @end

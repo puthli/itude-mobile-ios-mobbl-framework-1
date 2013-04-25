@@ -15,7 +15,7 @@
 
 @synthesize originName = _originName;
 @synthesize outcomeName = _outcomeName;
-@synthesize dialogName = _dialogName;
+@synthesize pageStackName = _dialogName;
 @synthesize originDialogName = _originDialogName;
 @synthesize displayMode = _displayMode;
 @synthesize transitionStyle = _transitionStyle;
@@ -31,7 +31,7 @@
         self.originName = outcome.originName;
         self.outcomeName = outcome.outcomeName;
         self.originDialogName = outcome.originDialogName;
-        self.dialogName = outcome.dialogName;
+        self.pageStackName = outcome.pageStackName;
         self.displayMode = outcome.displayMode;
         self.transitionStyle = outcome.transitionStyle;
         self.document = outcome.document;
@@ -57,7 +57,7 @@
 				 document:(MBDocument *)document 
 			   dialogName:(NSString*) dialogName {
 	if(self = [self initWithOutcomeName: outcomeName document: document]) {
-		self.dialogName = dialogName;
+		self.pageStackName = dialogName;
 	}
 	return self;
 }
@@ -66,7 +66,7 @@
 	if(self = [super init]) {
 		self.originName = definition.origin;
 		self.outcomeName = definition.name;
-		self.dialogName = definition.dialog;
+		self.pageStackName = definition.dialog;
 		self.displayMode = definition.displayMode;
         self.transitionStyle = definition.transitionStyle;
 		self.persist = definition.persist;

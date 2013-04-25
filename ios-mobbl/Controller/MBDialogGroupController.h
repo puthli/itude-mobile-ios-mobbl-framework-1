@@ -6,7 +6,7 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBDialogController.h"
+#import "MBPageStackController.h"
 #import "MBDialogGroupDefinition.h"
 #import "MBSplitViewController.h"
 
@@ -16,8 +16,8 @@
 	NSString *_name;
 	NSString *_iconName;
 	NSString *_title;
-	MBDialogController *_leftDialogController;
-	MBDialogController *_rightDialogController;
+	MBPageStackController *_leftPageStackController;
+	MBPageStackController *_rightPageStackController;
 	MBSplitViewController *_splitViewController;
 	BOOL _keepLeftViewControllerVisibleInPortraitMode;
 	NSInteger _activityIndicatorCount;
@@ -32,8 +32,8 @@
 - (id) initWithDefinition:(MBDialogGroupDefinition*)definition;
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
-- (void) setLeftDialogController:(MBDialogController *) dialogController;
-- (void) setRightDialogController:(MBDialogController *) dialogController;
-- (void) loadDialogs;
+- (void) setLeftPageStackController:(MBPageStackController *) pageStackController;
+- (void) setRightPageStackController:(MBPageStackController *) pageStackController;
+- (void) loadPageStacks;
 
 @end

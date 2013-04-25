@@ -9,12 +9,19 @@
 #import "MBBasicViewController.h"
 #import "MBPage.h"
 #import "MBOrientationManager.h"
-#import "MBDialogController.h"
+#import "MBPageStackController.h"
+
+@interface MBBasicViewController () {
+    MBPage *_page;
+    MBPageStackController *_pageStackController;
+}
+
+@end
 
 @implementation MBBasicViewController
 
 @synthesize page = _page;
-@synthesize dialogController = _dialogController;
+@synthesize pageStackController = _pageStackController;
 
 - (void) dealloc
 {
@@ -31,11 +38,11 @@
 }
 
 -(void) showActivityIndicator {
-	[[MBApplicationController currentInstance] showActivityIndicatorForDialog:self.page.dialogName];
+	[[MBApplicationController currentInstance] showActivityIndicator];
 }
 
 -(void) hideActivityIndicator {
-	[[MBApplicationController currentInstance] hideActivityIndicatorForDialog:self.page.dialogName];
+	[[MBApplicationController currentInstance] hideActivityIndicator];
 }
 
 -(void) viewDidAppear:(BOOL)animated {

@@ -70,15 +70,19 @@
 -(MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName;
 -(MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName throwIfInvalid:(BOOL) doThrow;
 
-/// @name Getting dialog definitions
--(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
--(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName throwIfInvalid:(BOOL) doThrow;
--(MBDialogDefinition *) firstDialogDefinition;
+/// @name Getting pageStack definitions
+-(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName;
+-(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow;
+-(NSArray*) pageStacks;
+
+/// @name Getting dialogGroup definitions
 -(MBDialogGroupDefinition *)definitionForDialogGroupName:(NSString *)dialogGroupName;
 -(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName throwIfInvalid:(BOOL) doThrow;
+
+/// @name Gettings alert definitions
 -(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
 -(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName throwIfInvalid:(BOOL) doThrow;
--(NSArray*) dialogs;
+
 /// @name Controller layer definitions
 -(MBActionDefinition *) definitionForActionName:(NSString *)actionName;
 -(MBActionDefinition *) definitionForActionName:(NSString *)actionName throwIfInvalid:(BOOL) doThrow;

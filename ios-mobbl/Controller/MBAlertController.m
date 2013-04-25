@@ -99,7 +99,7 @@
     MBOutcome *causingOutcome = [args objectAtIndex:0];
     MBViewManager *viewManager = [[MBApplicationController currentInstance] viewManager];
     @try {
-        [viewManager hideActivityIndicatorForDialog:causingOutcome.dialogName];
+        [viewManager hideActivityIndicator];
         
         MBAlertDefinition *alertDefinition = [args objectAtIndex:1];
         MBDocument *document = [args objectAtIndex:2];

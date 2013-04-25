@@ -27,7 +27,7 @@
 
 @property (nonatomic, retain) NSString *originName;
 @property (nonatomic, retain) NSString *outcomeName;
-@property (nonatomic, retain) NSString *dialogName;
+@property (nonatomic, retain) NSString *pageStackName;
 @property (nonatomic, retain) NSString *originDialogName;
 @property (nonatomic, retain) NSString *path;
 @property (nonatomic, retain) NSString *displayMode;

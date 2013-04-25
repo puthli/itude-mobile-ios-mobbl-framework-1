@@ -1,5 +1,5 @@
 //
-//  MBDialogDefinition.h
+//  MBPageStackDefinition.h
 //  Core
 //
 //  Created by Wido on 28-5-10.
@@ -8,7 +8,7 @@
 
 #import "MBDefinition.h"
 
-@interface MBDialogDefinition : MBDefinition {
+@interface MBPageStackDefinition : MBDefinition {
 	NSString *_title;
 	NSString *_mode;
 	NSString *_icon;
