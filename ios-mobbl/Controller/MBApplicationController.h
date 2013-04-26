@@ -42,7 +42,7 @@
 -(void) handleException:(NSException*) exception outcome:(MBOutcome*) outcome;
 +(MBApplicationController *) currentInstance;
 -(NSString*) activePageStackName;
--(NSString *) activeDialogGroupName;
+-(NSString *) activeDialogName;
 -(void) activatePageStackWithName:(NSString*) name;
 -(void) showActivityIndicator;
 -(void) hideActivityIndicator;

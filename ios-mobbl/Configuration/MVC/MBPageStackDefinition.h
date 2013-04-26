@@ -8,18 +8,6 @@
 
 #import "MBDefinition.h"
 
-@interface MBPageStackDefinition : MBDefinition {
-	NSString *_title;
-	NSString *_mode;
-	NSString *_icon;
-	NSString *_groupName;
-	NSString *_position;
-}
-
+@interface MBPageStackDefinition : MBDefinition 
 @property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSString* mode;
-@property (nonatomic, retain) NSString* icon;
-@property (nonatomic, retain) NSString* groupName;
-@property (nonatomic, retain) NSString* position;
-
 @end

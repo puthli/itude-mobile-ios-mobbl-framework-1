@@ -10,6 +10,7 @@
 #import "MBApplicationController.h"
 #import "MBPageDefinition.h"
 #import "MBAlertDefinition.h"
+#import "MBDialogDefinition.h"
 #import "MBAction.h"
 #import "MBResultListener.h"
 #import "MBTransitionStyleFactory.h"
@@ -19,6 +20,7 @@
 @class MBAlert;
 @class MBOutcome;
 @class MBDocument;
+@class MBDialogController;
 
 /** Factory class for creating custom UIViewControllers, MBResultListeners and MBActions 
  * In short there are three steps to using custom code with MOBBL framework:
@@ -50,6 +52,9 @@
                delegate:(id<UIAlertViewDelegate>)alertViewDelegate;
 /** override to create MBAction conforming custom actions */
 -(id<MBAction>) createAction:(NSString *)actionClassName;
+
+-(MBDialogController *)createDialogController:(MBDialogDefinition *)definition;
+
 /** override to create custom MBResultListeners */
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName;
 -(UIViewController *) createViewController:(MBPage*) page;

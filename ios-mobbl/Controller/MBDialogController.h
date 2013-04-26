@@ -1,5 +1,5 @@
 //
-//  MBDialogGroupController.h
+//  MBDialogController.h
 //  Core
 //
 //  Created by Frank van Eenbergen on 10/18/10.
@@ -7,29 +7,27 @@
 //
 
 #import "MBPageStackController.h"
-#import "MBDialogGroupDefinition.h"
+#import "MBDialogDefinition.h"
 #import "MBSplitViewController.h"
+#import "MBPageStackController.h"
 
 
-@interface MBDialogGroupController : NSObject {
-	
-	NSString *_name;
-	NSString *_iconName;
-	NSString *_title;
-	MBPageStackController *_leftPageStackController;
-	MBPageStackController *_rightPageStackController;
-	MBSplitViewController *_splitViewController;
-	BOOL _keepLeftViewControllerVisibleInPortraitMode;
-	NSInteger _activityIndicatorCount;
-}
+@interface MBDialogController : NSObject 
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *iconName;
 @property (nonatomic, retain) NSString *title;
+
+@property (nonatomic, retain) NSMutableArray *pageStacks;
+
 @property (nonatomic, retain) MBSplitViewController *splitViewController;
 @property (nonatomic, assign) BOOL keepLeftViewControllerVisibleInPortraitMode;
 
-- (id) initWithDefinition:(MBDialogGroupDefinition*)definition;
+- (id) initWithDefinition:(MBDialogDefinition*)definition;
+
+- (MBPageStackController *)pageStackControllerWithName:(NSString *)name;
+
+
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
 - (void) setLeftPageStackController:(MBPageStackController *) pageStackController;

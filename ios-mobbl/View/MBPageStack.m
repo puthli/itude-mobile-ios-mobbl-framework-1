@@ -7,8 +7,7 @@
 //
 
 #import "MBPageStack.h"
-#import "MBPageStackDefinition.h"
-#import "MBDialogGroupDefinition.h"
+#import "MBDefinition.h"
 
 @interface MBPageStack (){
     NSString *_name;
@@ -30,15 +29,10 @@
     self = [super initWithDefinition:definition document:document parent:parent];
     if (self) {
         
-        NSString *name = nil;
-        if ([definition isKindOfClass:[MBPageStackDefinition class]]) {
-            name = [(MBPageStackDefinition *)definition name];
-        }
-        else if ([definition isKindOfClass:[MBDialogGroupDefinition class]]) {
-            name = [(MBDialogGroupDefinition *)definition name];
+        if ([definition isKindOfClass:[MBDefinition class]]) {
+            self.name = [(MBDefinition *)definition name];
         }
         
-        self.name = name;
     }
     return self;
 }

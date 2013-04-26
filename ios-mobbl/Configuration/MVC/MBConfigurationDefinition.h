@@ -12,7 +12,7 @@
 #import "MBActionDefinition.h"
 #import "MBOutcomeDefinition.h"
 #import "MBPageStackDefinition.h"
-#import "MBDialogGroupDefinition.h"
+#import "MBDialogDefinition.h"
 #import "MBPageDefinition.h"
 #import "MBAlertDefinition.h"
 #import "MBDefinition.h"
@@ -37,7 +37,7 @@
 	NSMutableArray *_outcomeTypes;
 	NSMutableDictionary *_pageTypes;
 	NSMutableDictionary *_pageStacks;
-	NSMutableDictionary *_dialogGroups;
+	NSMutableDictionary *_dialogs;
     NSMutableDictionary *_alerts;
 }
 
@@ -48,7 +48,7 @@
 - (void) addOutcome:(MBOutcomeDefinition*)outcome;
 - (void) addPage:(MBPageDefinition*)page;
 - (void) addPageStack:(MBPageStackDefinition*)pageStack;
-- (void) addDialogGroup:(MBDialogGroupDefinition*)dialogGroup;
+- (void) addDialog:(MBDialogDefinition*)dialog;
 - (void) addAlert:(MBAlertDefinition*)alert;
 
 - (MBDomainDefinition *) definitionForDomainName:(NSString *)domainName;
@@ -56,12 +56,12 @@
 - (MBActionDefinition *) definitionForActionName:(NSString *)actionName;
 - (MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName;
 - (MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName;
-- (MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName;
+- (MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
 - (MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *)originName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
 - (NSMutableDictionary*) pageStacks;
-- (NSMutableDictionary*) dialogGroups;
+- (NSMutableDictionary*) dialogs;
 - (NSMutableDictionary*) domains;
 - (NSMutableDictionary*) actions;
 - (NSMutableArray*) outcomes;

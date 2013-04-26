@@ -14,13 +14,13 @@
 	UIWindow *_window;
 	UITabBarController *_tabController;
 	NSMutableDictionary *_pageStackControllers;
-	NSMutableDictionary *_dialogGroupControllers;
+	NSMutableDictionary *_dialogControllers;
 	NSMutableDictionary *_activityIndicatorCounts;
 	NSMutableArray *_pageStackControllersOrdered;
-	NSMutableArray *_dialogGroupControllersOrdered;
+	NSMutableArray *_dialogControllersOrdered;
 	NSMutableArray *_sortedNewPageStackNames;
 	NSString *_activePageStackName;
-	NSString *_activeDialogGroupName;
+	NSString *_activeDialogName;
 	UIAlertView *_currentAlert;
 	UINavigationController *_modalController;
 	int _activityIndicatorCount;
@@ -30,7 +30,7 @@
 @property (nonatomic, readonly) UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabController;
 @property (nonatomic, retain) NSString *activePageStackName;
-@property (nonatomic, retain) NSString *activeDialogGroupName;
+@property (nonatomic, retain) NSString *activeDialogName;
 @property (nonatomic, retain) UIAlertView *currentAlert;
 @property (nonatomic, assign) BOOL singlePageMode;
 

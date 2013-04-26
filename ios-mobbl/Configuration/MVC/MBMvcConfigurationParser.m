@@ -29,7 +29,7 @@
 @synthesize actionAttributes = _actionAttributes;
 @synthesize outcomeAttributes = _outcomeAttributes;
 @synthesize pageStackAttributes = _pageStackAttributes;
-@synthesize dialogGroupAttributes = _dialogGroupAttributes;
+@synthesize dialogAttributes = _dialogAttributes;
 @synthesize pageAttributes = _pageAttributes;
 @synthesize alertAttributes = _alertAttributes;
 @synthesize panelAttributes = _panelAttributes;
@@ -49,7 +49,7 @@
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
     self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",nil];
     self.pageStackAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
-	self.dialogGroupAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
+	self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
     self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"document",@"title",@"titlePath", nil];
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",@"zoomable",nil];
@@ -77,7 +77,7 @@
     [_actionAttributes release];
     [_outcomeAttributes release];
     [_pageStackAttributes release];
-	[_dialogGroupAttributes release];
+	[_dialogAttributes release];
     [_pageAttributes release];
     [_alertAttributes release];
     [_panelAttributes release];
@@ -173,36 +173,27 @@
         [self notifyProcessed:outcomeDef usingSelector:@selector(addOutcome:)];
 		[outcomeDef release];
 	}
-	else if ([elementName isEqualToString:@"Dialog"]) {
+    else if ([elementName isEqualToString:@"PageStack"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:self.pageStackAttributes];
-
 		MBPageStackDefinition *pageStackDef = [[MBPageStackDefinition alloc] init];
 		pageStackDef.name = [attributeDict valueForKey:@"name"];
 		pageStackDef.title = [attributeDict valueForKey:@"title"];	
-		pageStackDef.mode = [attributeDict valueForKey:@"mode"];	
-		pageStackDef.icon = [attributeDict valueForKey:@"icon"];	
-		pageStackDef.position = [attributeDict valueForKey:@"position"];
-		
-		// On iPad, we can have a splitViewController, which is defined as a DialogGroup in xml
-		MBDefinition *lastDef = [_stack lastObject];
-		if ([lastDef isKindOfClass:[MBDialogGroupDefinition class]]) {
-			pageStackDef.groupName = lastDef.name;
-			pageStackDef.icon = ((MBDialogGroupDefinition *)lastDef).icon;
-		}
-		
 		[self notifyProcessed:pageStackDef usingSelector:@selector(addPageStack:)];
 		[pageStackDef release];
 	}
-	else if ([elementName isEqualToString:@"DialogGroup"]) {
-        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_dialogGroupAttributes];
-		
-		MBDialogGroupDefinition *dialogGroupDef = [[MBDialogGroupDefinition alloc] init];
-		dialogGroupDef.name = [attributeDict valueForKey:@"name"];
-		dialogGroupDef.title = [attributeDict valueForKey:@"title"];	
-		dialogGroupDef.mode = [attributeDict valueForKey:@"mode"];	
-		dialogGroupDef.icon = [attributeDict valueForKey:@"icon"];
-        [self notifyProcessed:dialogGroupDef usingSelector:@selector(addDialogGroup:)];
-		[dialogGroupDef release];
+	else if ([elementName isEqualToString:@"Dialog"]) {
+        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:self.dialogAttributes];
+		MBDialogDefinition *dialogDef = [[MBDialogDefinition alloc] init];
+		dialogDef.name = [attributeDict valueForKey:@"name"];
+		dialogDef.title = [attributeDict valueForKey:@"title"];	
+		dialogDef.mode = [attributeDict valueForKey:@"mode"];	
+		dialogDef.iconName = [attributeDict valueForKey:@"icon"];
+        dialogDef.contentType = [attributeDict valueForKey:@"contentType"];
+        dialogDef.decorator = [attributeDict valueForKey:@"decorator"];
+        dialogDef.stackStrategy = [attributeDict valueForKey:@"stackStrategy"];
+
+        [self notifyProcessed:dialogDef usingSelector:@selector(addDialog:)];
+		[dialogDef release];
 	}
 	else if ([elementName isEqualToString:@"Page"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_pageAttributes];
@@ -215,7 +206,7 @@
 		pageDef.width = [[attributeDict valueForKey:@"width"] intValue];	
 		pageDef.height = [[attributeDict valueForKey:@"height"] intValue];	
 		pageDef.preCondition = [attributeDict valueForKey:@"preCondition"];	
-		pageDef.style = [attributeDict valueForKey:@"style"];	
+		pageDef.style = [attributeDict valueForKey:@"style"];
 		
 		NSString *type = [attributeDict valueForKey:@"type"];
 		if(type != nil) {
@@ -341,15 +332,18 @@
 	if([elementName isEqualToString:@"Field"])
 		[[_stack lastObject] performSelector:@selector(setText:) withObject:_characters];
 	
-	else if ([elementName isEqualToString:@"DialogGroup"]) {
-		// On iPad, we can have a UISplitViewController in a tab. In XML they are defined as two pageStacks in a dialogGroup.
-		// This means that the dialogs are automaticly added to a dialogGroup. 
-		// That is why we need to make sure that the pageStacks are also kept loccaly, like on the iPhone, because the local references are used to adress the pageStacks
-		// Thats why we copy them here afther the group has been added.
-		MBDefinition *previousDef = [_stack objectAtIndex:([_stack count]-2)];
-		MBDialogGroupDefinition *dialogGroupDef = [_stack lastObject];
-		for (MBDefinition *def in [dialogGroupDef children]) [previousDef performSelector:@selector(addPageStack:) withObject:def];
-	}
+//	else if ([elementName isEqualToString:@"DialogGroup"]) {
+//        // TODO: This is going to need refactoring
+//		// On iPad, we can have a UISplitViewController in a tab. In XML they are defined as two pageStacks in a Dialog.
+//		// This means that the dialogs are automaticly added to a dialogGroup. 
+//		// That is why we need to make sure that the pageStacks are also kept loccaly, like on the iPhone, because the local references are used to adress the pageStacks
+//		// Thats why we copy them here afther the group has been added.
+//		MBDefinition *previousDef = [_stack objectAtIndex:([_stack count]-2)];
+//		MBDialogDefinition *dialogDef = [_stack lastObject];
+//		for (MBDefinition *def in [dialogDef children]) {
+//            [previousDef performSelector:@selector(addPageStack:) withObject:def];
+//        }
+//	}
 	
 	if (![elementName isEqualToString:@"Configuration"] && ![elementName isEqualToString:@"Include"]) { // end config file or special case for Include
 		[_stack removeLastObject];	
@@ -366,8 +360,8 @@
 			[element isEqualToString:@"Outcome"] ||
 			[element isEqualToString:@"Page"] ||
             [element isEqualToString:@"Alert"] ||
+			[element isEqualToString:@"PageStack"] ||
 			[element isEqualToString:@"Dialog"] ||
-			[element isEqualToString:@"DialogGroup"] ||
 			[element isEqualToString:@"ForEach"] ||
 			[element isEqualToString:@"Variable"] ||
 			[element isEqualToString:@"Panel"] ||

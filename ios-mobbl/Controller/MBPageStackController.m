@@ -11,19 +11,32 @@
 #import "MBPage.h"
 #import "MBActivityIndicator.h"
 #import "MBSpinner.h"
-// Used to get a stylehandler to style navigationBar
+
 #import "MBStyleHandler.h"
 #import "MBViewBuilderFactory.h" 
 #import "MBBasicViewController.h"
 #import "UINavigationController+MBRebuilder.h"
 #import "MBViewManager.h"
 #import "MBTransitionStyle.h"
+#import "MBDialogController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface MBPageStackController()
-	-(void) clearSubviews;
-    -(UINavigationController*) determineNavigationController;
+@interface MBPageStackController(){
+    
+	NSString *_name;
+	NSString *_title;
+
+	CGRect _bounds;
+    UINavigationController *_rootController;
+    UINavigationController *_navigationController;
+	NSInteger _activityIndicatorCount;
+	BOOL _temporary;
+}
+@property (nonatomic, assign) NSInteger activityIndicatorCount;
+
+-(void) clearSubviews;
+-(UINavigationController*) determineNavigationController;
 -(UITabBarController*) determineTabBarController;
 
 @end
@@ -31,45 +44,49 @@
 @implementation MBPageStackController
 
 @synthesize name = _name;
-@synthesize iconName = _iconName;
 @synthesize title = _title;
 @synthesize bounds = _bounds;
-@synthesize pageStackMode = _pageStackMode;
-@synthesize dialogGroupName = _dialogGroupName;
-@synthesize position = _position;
-@synthesize rootController = _rootController;
-@synthesize temporary = _temporary;
 
+@synthesize rootController = _rootController;
+@synthesize activityIndicatorCount = _activityIndicatorCount;
+
+- (void) dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+	[_name release];
+    [_title release];
+
+	[_rootController release];
+	[super dealloc];
+}
 
 -(id) initWithDefinition:(MBPageStackDefinition *)definition {
 	if(self = [super init]) {
 		self.name = definition.name;
 		self.title = definition.title;
-        self.pageStackMode = definition.mode;
-		self.dialogGroupName = definition.groupName;
-		self.position = definition.position;
-        		_usesNavbar = [definition.mode isEqualToString:@"STACK"];
+
         UINavigationController *controller = [[UINavigationController alloc] init];
 		self.rootController = controller;
-               [controller release];
-		_activityIndicatorCount = 0;
+        [controller release];
+        
+		self.activityIndicatorCount = 0;
 		[self showActivityIndicator];
-        		[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.rootController.navigationBar];
+        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.rootController.navigationBar];
 	}
 	return self;
     
 }
 
--(id) initWithDefinition:(MBPageStackDefinition*)definition temporary:(BOOL) isTemporary {
-    if (self = [self initWithDefinition:definition]) {
-		self.temporary = isTemporary;        
-    }
-    return self;
+- (id)initWithDefinition:(MBPageStackDefinition *)definition withDialogController:(MBDialogController *)parent {
+    if(self = [self initWithDefinition:definition]) {
+        self.dialogController = parent;
+	}
+	return self;
 }
 
 -(id) initWithDefinition:(MBPageStackDefinition*)definition page:(MBPage*) page bounds:(CGRect) bounds {
 	if(self = [self initWithDefinition:definition]) {
-		self.temporary = FALSE;
         MBBasicViewController *controller = (MBBasicViewController*)page.viewController;
         controller.pageStackController = self;
         [self.rootController setRootViewController:page.viewController];
@@ -78,17 +95,7 @@
 	return self;
 }
 
-- (void) dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
-	[_name release];
-	[_iconName release];
-	[_pageStackMode release];
-	[_dialogGroupName release];
-	[_rootController release];
-	[super dealloc];
-}
 
 -(void)showPage:(MBPage *)page displayMode:(NSString *)displayMode transitionStyle:(NSString *)transitionStyle {
     
@@ -246,42 +253,37 @@
     _rootController = [rootController retain];
     _rootController.delegate = self;
     _rootController.title = self.title;
-    _rootController.navigationBarHidden = !_usesNavbar;
+    //_rootController.navigationBarHidden = !_usesNavbar;
 
 }
 
 - (void)showActivityIndicator {
 
-	if(_activityIndicatorCount == 0) {
+	if(self.activityIndicatorCount == 0) {
 		// determine the maximum bounds of the screen
 		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
-		//CGRect activityInset = CGRectInset(bounds, (bounds.size.width - 24) / 2, (bounds.size.height - 24) / 2);
-		
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-		/*
-		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
-		[aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-		[aiv startAnimating];
-		
-		[blocker addSubview:aiv];
-		 */
 		[_rootController.parentViewController.view addSubview:blocker];
 	}
-	_activityIndicatorCount ++;
+	self.activityIndicatorCount ++;
 
 }
 
 - (void)hideActivityIndicator {
-	if(_activityIndicatorCount > 0) {
-		_activityIndicatorCount--;
+	if(self.activityIndicatorCount > 0) {
+		self.activityIndicatorCount--;
 		
-		if(_activityIndicatorCount == 0) {
+		if(self.activityIndicatorCount == 0) {
 			UIView *top = [_rootController.parentViewController.view.subviews lastObject];
 			if ([top isKindOfClass:[MBActivityIndicator class]])
 				[top removeFromSuperview];
 		}
 	}
 
+}
+
+- (NSString *)dialogName {
+    return self.dialogController.name;
 }
 
 @end

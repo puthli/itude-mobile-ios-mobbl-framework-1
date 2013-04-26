@@ -128,18 +128,44 @@ static NSString *_endpointsName = @"endpoints";
 	return pageStackDefinition;
 }
 
--(MBDialogGroupDefinition *)definitionForDialogGroupName:(NSString *)dialogGroupName {
-	return [self definitionForDialogGroupName:dialogGroupName throwIfInvalid:TRUE];
+-(MBDialogDefinition *)definitionForDialogName:(NSString *)dialogName {
+	return [self definitionForDialogName:dialogName throwIfInvalid:TRUE];
 }
 
--(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName throwIfInvalid:(BOOL) doThrow {
-	MBDialogGroupDefinition *dialogGroupDef = [_cfg definitionForDialogGroupName:dialogGroupName];
-	if(dialogGroupDef == nil && doThrow) {
-		NSString *msg = [NSString stringWithFormat: @"DialogGroup with name %@ not defined", dialogGroupName];
-		@throw [[[NSException alloc]initWithName:@"DialogGroupNotDefined" reason:msg userInfo:nil] autorelease];
+-(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName throwIfInvalid:(BOOL) doThrow {
+	MBDialogDefinition *dialogDefinition = [_cfg definitionForDialogName:dialogName];
+	if(dialogDefinition == nil && doThrow) {
+		NSString *msg = [NSString stringWithFormat: @"Dialog with name %@ not defined", dialogName];
+		@throw [[[NSException alloc]initWithName:@"DialogNotDefined" reason:msg userInfo:nil] autorelease];
 	}
-	return dialogGroupDef;
+	return dialogDefinition;
 }
+
+-(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName {
+	return [self dialogDefinitionForPageStackName:pageStackName throwIfInvalid:TRUE];
+}
+
+-(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow {
+    for (MBDialogDefinition *dialogDef in _cfg.dialogs) {
+        for (MBPageStackDefinition *stackDef in dialogDef.pageStacks) {
+            if ([pageStackName isEqualToString:stackDef.name]) {
+                return dialogDef;
+            }
+        }
+        
+        // in case we have an implicit stack
+        if (dialogDef.pageStacks.count == 0 && [dialogDef.name isEqualToString:pageStackName]) {
+            return dialogDef;
+        }
+    }
+    
+	if(doThrow) {
+		NSString *msg = [NSString stringWithFormat: @"Dialog for stack %@ not defined", pageStackName];
+		@throw [[[NSException alloc]initWithName:@"DialogNotDefined" reason:msg userInfo:nil] autorelease];
+	}
+	return nil;
+}
+
 
 - (MBAlertDefinition *)definitionForAlertName:(NSString *)alertName {
     return [self definitionForAlertName:alertName throwIfInvalid:TRUE];

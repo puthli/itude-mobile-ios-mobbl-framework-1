@@ -75,9 +75,11 @@
 -(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow;
 -(NSArray*) pageStacks;
 
-/// @name Getting dialogGroup definitions
--(MBDialogGroupDefinition *)definitionForDialogGroupName:(NSString *)dialogGroupName;
--(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName throwIfInvalid:(BOOL) doThrow;
+/// @name Getting dialog definitions
+-(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
+-(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName throwIfInvalid:(BOOL) doThrow;
+-(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName;
+-(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow;
 
 /// @name Gettings alert definitions
 -(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;

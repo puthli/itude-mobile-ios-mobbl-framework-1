@@ -9,9 +9,9 @@
 #import "MBMacros.h"
 #import "MBViewManager.h"
 #import "MBPageStackDefinition.h"
-#import "MBDialogGroupDefinition.h"
+#import "MBDialogDefinition.h"
 #import "MBPageStackController.h"
-#import "MBDialogGroupController.h"
+#import "MBDialogController.h"
 #import "MBOutcomeDefinition.h"
 #import "MBOutcome.h"
 #import "MBMetadataService.h"
@@ -46,7 +46,7 @@
 @synthesize window = _window;
 @synthesize tabController = _tabController;
 @synthesize activePageStackName = _activePageStackName;
-@synthesize activeDialogGroupName = _activeDialogGroupName;
+@synthesize activeDialogName = _activeDialogName;
 @synthesize currentAlert = _currentAlert;
 @synthesize singlePageMode = _singlePageMode;
 
@@ -64,13 +64,13 @@
 
 - (void) dealloc {
 	[_pageStackControllers release];
-	[_dialogGroupControllers release];
+	[_dialogControllers release];
 	[_window release];
 	[_tabController release];
 	[_sortedNewPageStackNames release];
 	[_activityIndicatorCounts release];
 	[_activePageStackName release];
-	[_activeDialogGroupName release];
+	[_activeDialogName release];
 	[_currentAlert release];
 	[_modalController release];
 	[super dealloc];
@@ -187,25 +187,47 @@
 }	
 
 -(void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle selectPageStack:(BOOL) shouldSelectPageStack {
-    MBPageStackController *pageStackController = [self pageStackControllerWithName: page.pageStackName];
-    if(pageStackController == nil || pageStackController.temporary) {
-		MBPageStackDefinition *pageStackDefinition = [[MBMetadataService sharedInstance] definitionForPageStackName:page.pageStackName];
-		pageStackController = [[MBPageStackController alloc] initWithDefinition: pageStackDefinition page: page bounds: [self bounds]];
-		pageStackController.iconName = pageStackDefinition.icon;
-		pageStackController.dialogGroupName = pageStackDefinition.groupName;
-		pageStackController.position = pageStackDefinition.position;
-		
-		[_pageStackControllers setValue: pageStackController forKey: page.pageStackName];
-		[pageStackController release];
-		[self updateDisplay];
-	}
-	else {
-        [pageStackController showPage: page displayMode: displayMode transitionStyle:transitionStyle];
+    
+    MBDialogDefinition *dialogDef = [[MBMetadataService sharedInstance] definitionForDialogName:page.pageStackName];
+    MBDialogController *dialogController = [self dialogWithName:dialogDef.name];
+    
+    if (dialogController == nil) {
+        dialogController = [self createDialogController:dialogDef];
     }
+    
+    MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
+    [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
+
+//    MBPageStackController *pageStackController = [self pageStackControllerWithName: page.pageStackName];
+//    if(pageStackController == nil || pageStackController.temporary) {
+//		MBPageStackDefinition *pageStackDefinition = [[MBMetadataService sharedInstance] definitionForPageStackName:page.pageStackName];
+//		pageStackController = [[MBPageStackController alloc] initWithDefinition: pageStackDefinition page: page bounds: [self bounds]];
+//		
+//		[_pageStackControllers setValue: pageStackController forKey: page.pageStackName];
+//		[pageStackController release];
+//		[self updateDisplay];
+//	}
+//	else {
+//        [pageStackController showPage: page displayMode: displayMode transitionStyle:transitionStyle];
+//    }
 	
 	if(shouldSelectPageStack ) {
         [self activatePageStackWithName:page.pageStackName];
     }
+}
+
+- (MBDialogController *)createDialogController:(MBDialogDefinition *)definition {
+    MBDialogController *dialogController = [self dialogWithName:definition.name];
+    
+    if (dialogController == nil) {
+        dialogController = [[MBApplicationFactory sharedInstance] createDialogController:definition];
+        
+        [_dialogControllers setValue:dialogController forKey:dialogController.name];
+        for (MBPageStackController *stack in dialogController.pageStacks) {
+            [_pageStackControllers setObject:stack forKey:stack.name];
+        }
+    }
+    return dialogController;
 }
 
 -(void) showAlertView:(MBPage*) page {
@@ -257,9 +279,9 @@
 	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
 	[self.window makeKeyAndVisible];
 	
-	// ensure first dialogGroup is selected.
-	if (_dialogGroupControllersOrdered.count >0) {
-		_activeDialogGroupName = (NSString*)[_dialogGroupControllersOrdered objectAtIndex:0];
+	// ensure first Dialog is selected.
+	if (_dialogControllersOrdered.count >0) {
+		_activeDialogName = (NSString*)[_dialogControllersOrdered objectAtIndex:0];
 	}
 }
 
@@ -335,8 +357,9 @@
 	self.activePageStackName = pageStackName;
     MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
 	
-	// Property is nil if the current ActivePageStack is not nested inside a DialogGroup.
-	self.activeDialogGroupName = pageStackController.dialogGroupName;
+    // TODO: This will need refactoring
+	// Property is nil if the current ActivePageStack is not nested inside a DialogGrou[.
+	self.activeDialogName = [pageStackController dialogName];
 	
 	
 	// Only set the selected tab if realy necessary; because it messes up the more navigation controller
@@ -359,16 +382,16 @@
     [_tabController release];
     [_pageStackControllers release];
     [_pageStackControllersOrdered release];
-	[_dialogGroupControllers release];
-	[_dialogGroupControllersOrdered release];
+	[_dialogControllers release];
+	[_dialogControllersOrdered release];
 	[_modalController release];
     
     _tabController = nil;
 	_modalController = nil;
     _pageStackControllers = [NSMutableDictionary new];
     _pageStackControllersOrdered = [NSMutableArray new];
-	_dialogGroupControllers = [NSMutableDictionary new];
-	_dialogGroupControllersOrdered = [NSMutableArray new];
+	_dialogControllers = [NSMutableDictionary new];
+	_dialogControllersOrdered = [NSMutableArray new];
     [self clearWindow];
 }
 
@@ -387,9 +410,9 @@
 	return result;
 }
 
--(MBDialogGroupController*) dialogGroupWithName:(NSString*) name {
+-(MBDialogController*) dialogWithName:(NSString*) name {
 	
-	MBDialogGroupController *result = [_dialogGroupControllers objectForKey: name];
+	MBDialogController *result = [_dialogControllers objectForKey: name];
 	return result;
 }
 
@@ -459,33 +482,33 @@
 			UITabBarItem *tabBarItem = nil;
 			
 			// If pageStacks are nested in DialogGroups, create a MBDialogGroup
-			NSString *dialogGroupName = pageStackController.dialogGroupName;
-			if (dialogGroupName) {
+			NSString *dialogName = pageStackController.dialogName;
+			if (dialogName) {
 				
-				MBDialogGroupController *dialogGroupController = nil;
-				if (![_dialogGroupControllersOrdered containsObject:dialogGroupName]) {
-					MBDialogGroupDefinition *dialogGroupDefinition = [[MBMetadataService sharedInstance] definitionForDialogGroupName:dialogGroupName];		
-					dialogGroupController = [[[MBDialogGroupController alloc] initWithDefinition:dialogGroupDefinition] autorelease];
-					[_dialogGroupControllersOrdered addObject:dialogGroupName];
-					[_dialogGroupControllers setValue:dialogGroupController forKey:dialogGroupName];
+				MBDialogController *dialogController = nil;
+				if (![_dialogControllersOrdered containsObject:dialogName]) {
+					MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:dialogName];		
+					dialogController = [[[MBDialogController alloc] initWithDefinition:dialogDefinition] autorelease];
+					[_dialogControllersOrdered addObject:dialogName];
+					[_dialogControllers setValue:dialogController forKey:dialogName];
 				} else {
-					dialogGroupController = [_dialogGroupControllers valueForKey:dialogGroupName];
+					dialogController = [_dialogControllers valueForKey:dialogName];
 				}
 				
-				if ([pageStackController.position isEqualToString:@"LEFT"])			[dialogGroupController setLeftPageStackController:pageStackController];
-				else if ([pageStackController.position isEqualToString:@"RIGHT"])	[dialogGroupController setRightPageStackController:pageStackController];
+//				if ([pageStackController.position isEqualToString:@"LEFT"])			[dialogController setLeftPageStackController:pageStackController];
+//				else if ([pageStackController.position isEqualToString:@"RIGHT"])	[dialogController setRightPageStackController:pageStackController];
 				
-				if (![tabs containsObject:dialogGroupController.splitViewController]) {
+				if (![tabs containsObject:dialogController.splitViewController]) {
 					// Set some tabbarProperties
-					tabImage = [[MBResourceService sharedInstance] imageByID: dialogGroupController.iconName];
-					tabTitle = MBLocalizedString(dialogGroupController.title);
+					tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
+					tabTitle = MBLocalizedString(dialogController.title);
 					tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
 					
-					dialogGroupController.splitViewController.hidesBottomBarWhenPushed = TRUE;
-					dialogGroupController.splitViewController.tabBarItem = tabBarItem;
-					[dialogGroupController.splitViewController setHidesBottomBarWhenPushed:FALSE];
+					dialogController.splitViewController.hidesBottomBarWhenPushed = TRUE;
+					dialogController.splitViewController.tabBarItem = tabBarItem;
+					[dialogController.splitViewController setHidesBottomBarWhenPushed:FALSE];
 					
-					[tabs addObject:dialogGroupController.splitViewController];
+					[tabs addObject:dialogController.splitViewController];
 					
 					idx++;
 				}
@@ -495,7 +518,7 @@
 			else {
 				
 				// Set some tabbarProperties
-				tabImage = [[MBResourceService sharedInstance] imageByID: pageStackController.iconName];
+				//tabImage = [[MBResourceService sharedInstance] imageByID: pageStackController.iconName];
 				tabTitle = MBLocalizedString(pageStackController.title);
 				tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
 				
@@ -520,10 +543,10 @@
 			}
         }
 		
-		// For each pageStack in the DialogGroups, we need to trigger the loading of the views and stuff.
+		// For each pageStack in the Dialogs, we need to trigger the loading of the views and stuff.
 		// The MBSplitViewController will take care of that by triggering the loadPageStacks method.
-		for (MBDialogGroupController *dialogGroupController in [_dialogGroupControllers allValues]) {
-			[dialogGroupController loadPageStacks];
+		for (MBDialogController *dialogController in [_dialogControllers allValues]) {
+			[dialogController loadPageStacks];
 		}
 		
         [_tabController setViewControllers: tabs animated: YES];
@@ -568,23 +591,21 @@
 
 - (void) notifyPageStackUsage:(NSString*) pageStackName {
 	if(pageStackName != nil) {
-		if(![_sortedNewPageStackNames containsObject:pageStackName])
+		if(![_sortedNewPageStackNames containsObject:pageStackName]) {
 			[_sortedNewPageStackNames addObject:pageStackName];
-
+        }
+        
+        // TODO: This looks wrong. Figure out what is happening here
 		// Create a temporary pageStack controller
-		MBPageStackController *pageStackController = [self pageStackControllerWithName: pageStackName];
-		if(pageStackController == nil) {
-			MBPageStackDefinition *pageStackDefinition = [[MBMetadataService sharedInstance] definitionForPageStackName: pageStackName];
-			pageStackController = [[MBPageStackController alloc] initWithDefinition: pageStackDefinition temporary: TRUE];
-			pageStackController.iconName = pageStackDefinition.icon;
-			pageStackController.pageStackMode = pageStackDefinition.mode;
-			pageStackController.dialogGroupName = pageStackDefinition.groupName;
-			pageStackController.position = pageStackDefinition.position;
-			
-			[_pageStackControllers setValue: pageStackController forKey: pageStackName];
-			[pageStackController release];
-			[self updateDisplay];
-		}
+//		MBPageStackController *pageStackController = [self pageStackControllerWithName: pageStackName];
+//		if(pageStackController == nil) {
+//			MBPageStackDefinition *pageStackDefinition = [[MBMetadataService sharedInstance] definitionForPageStackName: pageStackName];
+//			pageStackController = [[MBPageStackController alloc] initWithDefinition: pageStackDefinition];
+//			
+//			[_pageStackControllers setValue: pageStackController forKey: pageStackName];
+//			[pageStackController release];
+//			[self updateDisplay];
+//		}
 	}
 }
 
@@ -617,10 +638,10 @@
 		}
 	}
 	
-	// Set the activeDialogGroupName
-	for (MBDialogGroupController * groupController in [_dialogGroupControllers allValues]){
+	// Set the activeDialogName
+	for (MBDialogController * groupController in [_dialogControllers allValues]){
 		if (groupController.splitViewController == viewController){
-			if ([_activeDialogGroupName isEqualToString:groupController.name]) {
+			if ([_activeDialogName isEqualToString:groupController.name]) {
 				id masterNavController = groupController.splitViewController.masterViewController;
 				if ([masterNavController respondsToSelector:@selector(popToRootViewControllerAnimated:)]) {
 					[((UINavigationController *) masterNavController ) popToRootViewControllerAnimated:YES];
@@ -631,7 +652,7 @@
 				}
 			}
 			else{
-				_activeDialogGroupName = groupController.name;
+				_activeDialogName = groupController.name;
 			}
 		}
 	}

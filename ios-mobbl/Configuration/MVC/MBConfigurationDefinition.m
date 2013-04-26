@@ -18,7 +18,7 @@
 		_actionTypes = [NSMutableDictionary new];
 		_outcomeTypes = [NSMutableArray new];
 		_pageStacks = [NSMutableDictionary new];
-		_dialogGroups = [NSMutableDictionary new];
+		_dialogs = [NSMutableDictionary new];
 		_pageTypes = [NSMutableDictionary new];
         _alerts = [NSMutableDictionary new];
 	}
@@ -31,7 +31,7 @@
 	[_actionTypes release];
 	[_outcomeTypes release];
 	[_pageStacks release];
-    [_dialogGroups release];
+    [_dialogs release];
 	[_pageTypes release];
     [_alerts release];
 	[super dealloc];
@@ -42,8 +42,8 @@
 	for(MBDomainDefinition *def in [otherConfig.domains allValues]) [self addDomain:def];
 	for(MBActionDefinition *def in [otherConfig.actions allValues]) [self addAction:def];
 	for(MBOutcomeDefinition *def in otherConfig.outcomes) [self addOutcome:def];
+	for(MBDialogDefinition *def in [otherConfig.dialogs allValues]) [self addDialog:def];
 	for(MBPageStackDefinition *def in [otherConfig.pageStacks allValues]) [self addPageStack:def];
-	for(MBDialogGroupDefinition *def in [otherConfig.dialogGroups allValues]) [self addDialogGroup:def];
 	for(MBPageDefinition *def in [otherConfig.pages allValues]) [self addPage:def];
     for(MBAlertDefinition *def in [otherConfig.alerts allValues]) [self addAlert:def];
 }
@@ -79,11 +79,11 @@
     // ===== View =====
 	[result appendFormat: @"%*s<View>\n", level+2, ""];
     
-    // Build pageStacks
-    [result appendFormat: @"%*s<PageStacks>\n", level+4, ""];
-	for (MBPageStackDefinition* pageStack in [_pageStacks allValues])
-		[result appendString: [pageStack asXmlWithLevel:level+6]];
-	[result appendFormat: @"%*s</PageStacks>\n", level+4, ""];
+    // Build Dialogs
+    [result appendFormat: @"%*s<Dialogs>\n", level+4, ""];
+	for (MBDialogDefinition* dialog in [_dialogs allValues])
+		[result appendString: [dialog asXmlWithLevel:level+6]];
+	[result appendFormat: @"%*s</Dialogs>\n", level+4, ""];
 	
     // Pages
     for (MBPageDefinition* page in [_pageTypes allValues])
@@ -134,11 +134,11 @@
 	[_pageStacks setObject:pageStack forKey:pageStack.name];
 }
 
-- (void) addDialogGroup:(MBDialogGroupDefinition*)dialogGroup {
-    if([_dialogGroups valueForKey:dialogGroup.name] != nil) {
-		WLog(@"DialogGroup definition overridden: multiple definitions for dialogGroup with name %@", dialogGroup.name);
+- (void) addDialog:(MBDialogDefinition*)dialog {
+    if([_dialogs valueForKey:dialog.name] != nil) {
+		WLog(@"Dialog definition overridden: multiple definitions for dialog with name %@", dialog.name);
 	}
-	[_dialogGroups setObject:dialogGroup forKey:dialogGroup.name];
+	[_dialogs setObject:dialog forKey:dialog.name];
 }
 
 - (void) addPage:(MBPageDefinition*)page {
@@ -171,8 +171,8 @@
 	return [_pageStacks objectForKey:pageStackName];
 }
 
--(MBDialogGroupDefinition *) definitionForDialogGroupName:(NSString *)dialogGroupName {
-	return [_dialogGroups objectForKey:dialogGroupName];
+-(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName {
+	return [_dialogs objectForKey:dialogName];
 }
 
 -(MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName {
@@ -233,8 +233,8 @@
 	return _pageStacks;	
 }
 
--(NSMutableDictionary*) dialogGroups {
-	return _dialogGroups;	
+-(NSMutableDictionary*) dialogs {
+	return _dialogs;	
 }
 
 -(NSMutableDictionary*) pages {

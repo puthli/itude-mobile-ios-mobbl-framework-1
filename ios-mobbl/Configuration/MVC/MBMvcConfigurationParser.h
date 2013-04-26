@@ -19,7 +19,7 @@
     NSArray* _actionAttributes;
     NSArray* _outcomeAttributes;
     NSArray* _pageStackAttributes;
-	NSArray* _dialogGroupAttributes;
+	NSArray* _dialogAttributes;
     NSArray* _pageAttributes;
     NSArray* _alertAttributes;
     NSArray* _panelAttributes;
@@ -39,7 +39,7 @@
 @property (nonatomic, retain) NSArray* actionAttributes;
 @property (nonatomic, retain) NSArray* outcomeAttributes;
 @property (nonatomic, retain) NSArray* pageStackAttributes;
-@property (nonatomic, retain) NSArray* dialogGroupAttributes;
+@property (nonatomic, retain) NSArray* dialogAttributes;
 @property (nonatomic, retain) NSArray* pageAttributes;
 @property (nonatomic, retain) NSArray* alertAttributes;
 @property (nonatomic, retain) NSArray* panelAttributes;

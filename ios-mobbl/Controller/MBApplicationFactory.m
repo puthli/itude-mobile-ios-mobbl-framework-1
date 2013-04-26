@@ -12,6 +12,7 @@
 #import "MBOutcome.h"
 #import "MBPage.h"
 #import "MBAlert.h"
+#import "MBDialogController.h"
 #import "MBPageDefinition.h"
 #import "MBBasicViewController.h"
 #import "MBTypes.h"
@@ -90,6 +91,10 @@ static MBApplicationFactory *_instance = nil;
         [NSException raise:@"Invalid action class name" format:@"You have defined an action class named '%@' in your actions configuration but there is no objc class found with that name. Check the actions configuration or create a class named '%@' that follows the MBAction protocol.", actionClassName, actionClassName];
     }
     return nil;
+}
+
+- (MBDialogController *)createDialogController:(MBDialogDefinition *)definition {
+    return [[[MBDialogController alloc] initWithDefinition:definition] autorelease];
 }
 
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName {

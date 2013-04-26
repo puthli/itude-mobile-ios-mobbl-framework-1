@@ -440,11 +440,11 @@ static MBApplicationController *_instance = nil;
 }
 
 // Returns nil if the current ActiveDialog is not nested inside a DialogGroup.
-- (NSString *) activeDialogGroupName {
+- (NSString *) activeDialogName {
 	NSString *result = nil;
 	if (_viewManager != nil) {
 		
-		result = _viewManager.activeDialogGroupName;
+		result = _viewManager.activeDialogName;
 	}
 	return result;
 }

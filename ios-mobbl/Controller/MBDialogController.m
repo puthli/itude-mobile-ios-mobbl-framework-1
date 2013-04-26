@@ -1,21 +1,39 @@
 //
-//  MBDialogGroupController.m
+//  MBDialogController.m
 //  Core
 //
 //  Created by Frank van Eenbergen on 10/18/10.
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBDialogGroupController.h"
+#import "MBDialogController.h"
 #import "MBMetadataService.h"
 #import "MBActivityIndicator.h"
 #import "MBDevice.h"
 
-@implementation MBDialogGroupController
+@interface MBDialogController (){
+	
+	NSString *_name;
+	NSString *_iconName;
+	NSString *_title;
+    NSMutableArray *_pageStacks;
+    
+	MBPageStackController *_leftPageStackController;
+	MBPageStackController *_rightPageStackController;
+	MBSplitViewController *_splitViewController;
+	BOOL _keepLeftViewControllerVisibleInPortraitMode;
+	NSInteger _activityIndicatorCount;
+}
+
+@end
+
+@implementation MBDialogController
 
 @synthesize name = _name;
 @synthesize iconName = _iconName;
 @synthesize title = _title;
+@synthesize pageStacks = _pageStacks;
+
 @synthesize splitViewController = _splitViewController;
 @synthesize keepLeftViewControllerVisibleInPortraitMode = _keepLeftViewControllerVisibleInPortraitMode;
 
@@ -24,24 +42,44 @@
 	[_name release];
 	[_iconName release];
 	[_title release];
+    [_pageStacks release];
+    
 	[_leftPageStackController release];
 	[_rightPageStackController release];
 	[_splitViewController release];
 	[super dealloc];
 }
 
--(id) initWithDefinition:(MBDialogGroupDefinition*)definition {
+-(id) initWithDefinition:(MBDialogDefinition*)definition {
 	if(self = [super init]) {
-		_name = definition.name;
-		_iconName = definition.icon;
-		_title = definition.title;
+		self.name = definition.name;
+		self.iconName = definition.iconName;
+		self.title = definition.title;
 		_activityIndicatorCount = 0;
 		// TODO: Make the property leftViewControllerVisibleInPortraitMode variable (come from xml)
 		_splitViewController = [[MBSplitViewController alloc] initWithLeftViewControllerVisibleInPortraitMode:YES];
+        
+        self.pageStacks = [NSMutableArray array];
+        
+        for (MBPageStackDefinition *stackDef in definition.pageStacks) {
+            MBPageStackController *stackController = [[MBPageStackController alloc] initWithDefinition:stackDef withDialogController:self];
+            [self.pageStacks addObject:stackController];
+        }
+        
 	}
 	return self;	
 }
- 
+
+- (MBPageStackController *)pageStackControllerWithName:(NSString *)name {
+    for (MBPageStackController *pageStackController in self.pageStacks) {
+        if ([pageStackController.name isEqualToString:name]) {
+            return pageStackController;
+        }
+    }
+    return nil;
+}
+
+// TODO: This implementation needs to be updated
 // Update the split view controller's view controllers array.
 - (void) loadPageStacks {
 	
