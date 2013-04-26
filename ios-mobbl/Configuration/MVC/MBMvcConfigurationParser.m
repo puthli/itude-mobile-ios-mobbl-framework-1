@@ -163,7 +163,7 @@
 		outcomeDef.origin = [attributeDict valueForKey:@"origin"];
 		outcomeDef.name = [attributeDict valueForKey:@"name"];
 		outcomeDef.action = [attributeDict valueForKey:@"action"];		
-		outcomeDef.dialog = [attributeDict valueForKey:@"dialog"];		
+		outcomeDef.pageStackName = [attributeDict valueForKey:@"dialog"];		
 		outcomeDef.displayMode = [attributeDict valueForKey:@"displayMode"];	
         outcomeDef.transitionStyle = [attributeDict valueForKey:@"transitionStyle"];
 		outcomeDef.preCondition = [attributeDict valueForKey:@"preCondition"];		

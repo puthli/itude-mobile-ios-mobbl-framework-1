@@ -13,8 +13,8 @@
 @interface MBOutcome : NSObject {
 	NSString *_originName;
 	NSString *_outcomeName;
-	NSString *_dialogName;
-	NSString *_originDialogName;
+	NSString *_pageStackName;
+	NSString *_originPageStackName;
 	NSString *_displayMode;
     NSString *_transitionStyle;
 	NSString *_path;
@@ -28,7 +28,7 @@
 @property (nonatomic, retain) NSString *originName;
 @property (nonatomic, retain) NSString *outcomeName;
 @property (nonatomic, retain) NSString *pageStackName;
-@property (nonatomic, retain) NSString *originDialogName;
+@property (nonatomic, retain) NSString *originPageStackName;
 @property (nonatomic, retain) NSString *path;
 @property (nonatomic, retain) NSString *displayMode;
 @property (nonatomic, retain) NSString *transitionStyle;
@@ -46,7 +46,7 @@
 
 -(id) initWithOutcomeName:(NSString *)outcomeName
 				 document:(MBDocument *)document
-			   dialogName:(NSString*) dialogName;
+			   pageStackName:(NSString*) pageStackName;
 
 -(BOOL) isPreConditionValid;
 

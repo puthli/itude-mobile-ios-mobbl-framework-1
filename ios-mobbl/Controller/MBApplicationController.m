@@ -104,7 +104,7 @@ static MBApplicationController *_instance = nil;
     [UIView commitAnimations];
 }
 
--(void) resetControllerPreservingCurrentDialog {
+-(void) resetControllerPreservingCurrentPageStack {
 	[_viewManager resetViewPreservingCurrentPageStack];
 }
 
@@ -113,7 +113,7 @@ static MBApplicationController *_instance = nil;
 	MBOutcome *initialOutcome = [[MBOutcome alloc]init];
     initialOutcome.originName = @"Controller";
     initialOutcome.outcomeName = @"init";
-    initialOutcome.pageStackName = [self activeDialogName];
+    initialOutcome.pageStackName = [self activePageStackName];
 	initialOutcome.noBackgroundProcessing = TRUE;
 
 	_suppressPageSelection = TRUE;
@@ -160,8 +160,8 @@ static MBApplicationController *_instance = nil;
 		else [[MBDataManagerService sharedInstance] storeDocument: outcome.document];
 	}
     
-    NSMutableArray *dialogs = [NSMutableArray array];
-    NSString *selectPageInDialog = @"yes";
+    NSMutableArray *pageStacks = [NSMutableArray array];
+    NSString *selectPageInPageStack = @"yes";
 	
 	// We need to make sure that the order of the dialog tabs conforms to the order of the outcomes
 	// This is not necessarily the case because preparing of page A might take longer in the background than page B
@@ -187,12 +187,12 @@ static MBApplicationController *_instance = nil;
 
 			if([outcomeToProcess isPreConditionValid]) {
 			
-				// Update a possible switch of dialog/display mode set by the outcome definition
-				if(outcomeDef.dialog != nil) outcomeToProcess.pageStackName = outcomeDef.dialog;
+				// Update a possible switch of pageStack/display mode set by the outcome definition
+				if(outcomeDef.pageStackName != nil) outcomeToProcess.pageStackName = outcomeDef.pageStackName;
 				if(outcomeDef.displayMode != nil) outcomeToProcess.displayMode = outcomeDef.displayMode;
-				if(outcomeToProcess.originDialogName == nil) outcomeToProcess.originDialogName = outcomeToProcess.pageStackName;
+				if(outcomeToProcess.originPageStackName == nil) outcomeToProcess.originPageStackName = outcomeToProcess.pageStackName;
 				
-				if(outcomeToProcess.pageStackName != nil) [dialogs addObject: outcomeToProcess.pageStackName];
+				if(outcomeToProcess.pageStackName != nil) [pageStacks addObject: outcomeToProcess.pageStackName];
 				
 				if([@"MODAL" isEqualToString: outcomeToProcess.displayMode] || 
 				   [@"MODALFORMSHEET" isEqualToString: outcomeToProcess.displayMode] || 
@@ -222,7 +222,7 @@ static MBApplicationController *_instance = nil;
 				}
 				else if([@"END" isEqualToString: outcomeToProcess.displayMode]) {
 					[_viewManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];   
-					[dialogs removeObject:outcomeToProcess.pageStackName];
+					[pageStacks removeObject:outcomeToProcess.pageStackName];
 				}
 				else {
 					[_viewManager notifyPageStackUsage: outcomeToProcess.pageStackName];	
@@ -240,10 +240,10 @@ static MBApplicationController *_instance = nil;
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
                     [_viewManager showActivityIndicator];
-					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInDialog, nil]];
-					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInDialog, nil]];
+					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInPageStack, nil]];
+					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInPageStack, nil]];
 
-					selectPageInDialog = @"no";
+					selectPageInPageStack = @"no";
 				}
                 
                 // Alert
@@ -270,7 +270,7 @@ static MBApplicationController *_instance = nil;
     @try {
 	
         NSString *pageName = [args objectAtIndex:1];
-        NSString *selectPageInDialog = [args objectAtIndex:2];
+        NSString *selectPageInPageStack = [args objectAtIndex:2];
         
         // construct the page
         MBPageDefinition *pageDefinition = [[MBMetadataService sharedInstance] definitionForPageName:pageName];
@@ -302,9 +302,9 @@ static MBApplicationController *_instance = nil;
 		}
 				  
 		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingPage:) 
-															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInDialog, nil]];
+															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInPageStack, nil]];
 		else [self performSelectorOnMainThread:@selector(showResultingPage:) 
-									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInDialog, nil]
+									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInPageStack, nil]
 								 waitUntilDone:YES];
         
     }
@@ -336,7 +336,7 @@ static MBApplicationController *_instance = nil;
 		
         MBPageDefinition *pageDefinition = [args objectAtIndex:1];
         MBDocument *document = [args objectAtIndex:2];
-        NSString *selectPageInDialog = [args objectAtIndex:3];
+        NSString *selectPageInPageStack = [args objectAtIndex:3];
         
         CGRect bounds = [[UIScreen mainScreen] applicationFrame];
         
@@ -347,11 +347,11 @@ static MBApplicationController *_instance = nil;
 										 withMaxBounds: bounds];
         page.controller = self;
         page.pageStackName = causingOutcome.pageStackName;
-		// Fallback on the lastly selected dialog if there is no dialog set in the outcome:
+		// Fallback on the lastly selected pageStack if there is no pageStack set in the outcome:
 	    if(page.pageStackName == nil) {
-			page.pageStackName = [self activeDialogName];
+			page.pageStackName = [self activePageStackName];
 		}
-        BOOL doSelect = [@"yes" isEqualToString:selectPageInDialog] && !_suppressPageSelection;
+        BOOL doSelect = [@"yes" isEqualToString:selectPageInPageStack] && !_suppressPageSelection;
         [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle selectPageStack:doSelect];
     }
     @catch (NSException *e) {
@@ -431,7 +431,7 @@ static MBApplicationController *_instance = nil;
 	}
 }
 
-- (NSString*) activeDialogName {
+- (NSString*) activePageStackName {
 	NSString *result = nil;
 	if(_viewManager != nil) {
 	  	result = _viewManager.activePageStackName;

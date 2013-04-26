@@ -41,11 +41,11 @@
 -(void) handleExceptionAfterDelay:(NSArray *)args;
 -(void) handleException:(NSException*) exception outcome:(MBOutcome*) outcome;
 +(MBApplicationController *) currentInstance;
--(NSString*) activeDialogName;
+-(NSString*) activePageStackName;
 -(NSString *) activeDialogGroupName;
 -(void) activatePageStackWithName:(NSString*) name;
 -(void) showActivityIndicator;
 -(void) hideActivityIndicator;
--(void) resetControllerPreservingCurrentDialog;
+-(void) resetControllerPreservingCurrentPageStack;
 
 @end

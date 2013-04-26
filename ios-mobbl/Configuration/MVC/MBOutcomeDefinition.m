@@ -12,7 +12,7 @@
 
 @synthesize origin = _origin;
 @synthesize action = _action;
-@synthesize dialog = _dialog;
+@synthesize pageStackName = _dialog;
 @synthesize displayMode = _displayMode;
 @synthesize transitionStyle = _transitionStyle;
 @synthesize preCondition = _preCondition;

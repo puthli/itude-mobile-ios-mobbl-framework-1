@@ -22,7 +22,7 @@
 
 @property (nonatomic, retain) NSString *origin;
 @property (nonatomic, retain) NSString *action;
-@property (nonatomic, retain) NSString *dialog;
+@property (nonatomic, retain) NSString *pageStackName;
 @property (nonatomic, retain) NSString *displayMode;
 @property (nonatomic, retain) NSString *transitionStyle;
 @property (nonatomic, retain) NSString *preCondition;

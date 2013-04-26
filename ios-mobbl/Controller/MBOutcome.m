@@ -15,8 +15,8 @@
 
 @synthesize originName = _originName;
 @synthesize outcomeName = _outcomeName;
-@synthesize pageStackName = _dialogName;
-@synthesize originDialogName = _originDialogName;
+@synthesize pageStackName = _pageStackName;
+@synthesize originPageStackName = _originPageStackName;
 @synthesize displayMode = _displayMode;
 @synthesize transitionStyle = _transitionStyle;
 @synthesize document = _document;
@@ -30,7 +30,7 @@
     if(self = [super init]) {
         self.originName = outcome.originName;
         self.outcomeName = outcome.outcomeName;
-        self.originDialogName = outcome.originDialogName;
+        self.originPageStackName = outcome.originPageStackName;
         self.pageStackName = outcome.pageStackName;
         self.displayMode = outcome.displayMode;
         self.transitionStyle = outcome.transitionStyle;
@@ -55,9 +55,9 @@
 
 -(id) initWithOutcomeName:(NSString *)outcomeName
 				 document:(MBDocument *)document 
-			   dialogName:(NSString*) dialogName {
+			   pageStackName:(NSString*) pageStackName {
 	if(self = [self initWithOutcomeName: outcomeName document: document]) {
-		self.pageStackName = dialogName;
+		self.pageStackName = pageStackName;
 	}
 	return self;
 }
@@ -66,7 +66,7 @@
 	if(self = [super init]) {
 		self.originName = definition.origin;
 		self.outcomeName = definition.name;
-		self.pageStackName = definition.dialog;
+		self.pageStackName = definition.pageStackName;
 		self.displayMode = definition.displayMode;
         self.transitionStyle = definition.transitionStyle;
 		self.persist = definition.persist;
@@ -83,7 +83,7 @@
 -(void) dealloc {
 	[_originName release];
 	[_outcomeName release];
-	[_dialogName release];
+	[_pageStackName release];
 	[_document release];
 	[_path release];
 	[_preCondition release];
@@ -108,7 +108,7 @@
 
 -(NSString *) description {
 	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitionStyle=%@ preCondition=%@ noBackgroundProsessing=%@", 
-            _dialogName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitionStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
+            _pageStackName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitionStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
 }
 
 @end
