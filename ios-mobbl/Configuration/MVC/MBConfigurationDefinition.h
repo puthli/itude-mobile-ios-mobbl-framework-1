@@ -36,7 +36,6 @@
 	NSMutableDictionary *_actionTypes;
 	NSMutableArray *_outcomeTypes;
 	NSMutableDictionary *_pageTypes;
-	NSMutableDictionary *_pageStacks;
 	NSMutableDictionary *_dialogs;
     NSMutableDictionary *_alerts;
 }
@@ -47,7 +46,6 @@
 - (void) addAction:(MBActionDefinition*)action;
 - (void) addOutcome:(MBOutcomeDefinition*)outcome;
 - (void) addPage:(MBPageDefinition*)page;
-- (void) addPageStack:(MBPageStackDefinition*)pageStack;
 - (void) addDialog:(MBDialogDefinition*)dialog;
 - (void) addAlert:(MBAlertDefinition*)alert;
 
@@ -55,12 +53,10 @@
 - (MBPageDefinition*) definitionForPageName:(NSString*) name;
 - (MBActionDefinition *) definitionForActionName:(NSString *)actionName;
 - (MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName;
-- (MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName;
 - (MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
 - (MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *)originName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
-- (NSMutableDictionary*) pageStacks;
 - (NSMutableDictionary*) dialogs;
 - (NSMutableDictionary*) domains;
 - (NSMutableDictionary*) actions;

@@ -17,11 +17,7 @@
 	NSString *_iconName;
 	NSString *_title;
     NSMutableArray *_pageStacks;
-    
-	MBPageStackController *_leftPageStackController;
-	MBPageStackController *_rightPageStackController;
-	MBSplitViewController *_splitViewController;
-	BOOL _keepLeftViewControllerVisibleInPortraitMode;
+    UIViewController *_viewController;
 	NSInteger _activityIndicatorCount;
 }
 
@@ -32,10 +28,9 @@
 @synthesize name = _name;
 @synthesize iconName = _iconName;
 @synthesize title = _title;
-@synthesize pageStacks = _pageStacks;
+@synthesize pageStackControllers = _pageStacks;
 
-@synthesize splitViewController = _splitViewController;
-@synthesize keepLeftViewControllerVisibleInPortraitMode = _keepLeftViewControllerVisibleInPortraitMode;
+
 
 - (void) dealloc
 {
@@ -43,10 +38,7 @@
 	[_iconName release];
 	[_title release];
     [_pageStacks release];
-    
-	[_leftPageStackController release];
-	[_rightPageStackController release];
-	[_splitViewController release];
+    [_viewController release];
 	[super dealloc];
 }
 
@@ -56,14 +48,24 @@
 		self.iconName = definition.iconName;
 		self.title = definition.title;
 		_activityIndicatorCount = 0;
-		// TODO: Make the property leftViewControllerVisibleInPortraitMode variable (come from xml)
-		_splitViewController = [[MBSplitViewController alloc] initWithLeftViewControllerVisibleInPortraitMode:YES];
-        
-        self.pageStacks = [NSMutableArray array];
-        
+		
+        // Load all the pageStacks
+        self.pageStackControllers = [NSMutableArray array];
         for (MBPageStackDefinition *stackDef in definition.pageStacks) {
             MBPageStackController *stackController = [[MBPageStackController alloc] initWithDefinition:stackDef withDialogController:self];
-            [self.pageStacks addObject:stackController];
+            [self.pageStackControllers addObject:stackController];
+            [stackController release];
+        }
+        
+        // Create at least one pageStack for backwards compatibility
+        if (definition.pageStacks.count == 0) {
+            MBPageStackDefinition *stackDefinition = [[MBPageStackDefinition alloc] init];
+            stackDefinition.name = self.name;
+            stackDefinition.title = self.title;
+            MBPageStackController *stackController = [[MBPageStackController alloc] initWithDefinition:stackDefinition withDialogController:self];
+            [self.pageStackControllers addObject:stackController];
+            [stackController release];
+            [stackDefinition release];
         }
         
 	}
@@ -71,7 +73,7 @@
 }
 
 - (MBPageStackController *)pageStackControllerWithName:(NSString *)name {
-    for (MBPageStackController *pageStackController in self.pageStacks) {
+    for (MBPageStackController *pageStackController in self.pageStackControllers) {
         if ([pageStackController.name isEqualToString:name]) {
             return pageStackController;
         }
@@ -79,19 +81,17 @@
     return nil;
 }
 
-// TODO: This implementation needs to be updated
-// Update the split view controller's view controllers array.
-- (void) loadPageStacks {
-	
-	UIViewController *leftViewController = _leftPageStackController.rootController;
-	UIViewController *rightViewController = _rightPageStackController.rootController;
-	
-	// Use dummyViewControllers if the PageStack has no rootController, so the splitViewcontroller can still be created
-	if (leftViewController==nil)  leftViewController  = [[[UIViewController alloc] init] autorelease];
-	if (rightViewController==nil) rightViewController = [[[UIViewController alloc] init] autorelease];
-	
-	NSArray *viewControllers = [NSArray arrayWithObjects:leftViewController,rightViewController,nil];
-	_splitViewController.viewControllers = viewControllers;
+// loadView
+- (void) loadView {
+    if (!self.rootViewController) {
+        self.rootViewController = [[[UIViewController alloc] init] autorelease];
+        self.rootViewController.view.backgroundColor = [UIColor greenColor];
+        
+        // TODO: These should not be on top of each other!
+        for (MBPageStackController *pageStackController in self.pageStackControllers) {
+            [self.rootViewController.view addSubview:pageStackController.navigationController.view];
+        }
+    }
 }
 
 #pragma mark -
@@ -111,7 +111,7 @@
 		}
 		
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-		[_splitViewController.view addSubview:blocker];
+		[self.rootViewController.view addSubview:blocker];
 	}
 	_activityIndicatorCount ++;
 }
@@ -121,41 +121,13 @@
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-			UIView *top = [_splitViewController.view.subviews lastObject];
+			UIView *top = [self.rootViewController.view.subviews lastObject];
 			if ([top isKindOfClass:[MBActivityIndicator class]])
 				[top removeFromSuperview];
 		}
 	}
 }
 
-#pragma mark -
-#pragma mark Setters
-- (void) setLeftPageStackController:(MBPageStackController *) pageStackController {
-	if (_leftPageStackController != pageStackController) {
-		[_leftPageStackController release];
-		_leftPageStackController = pageStackController;
-		[_leftPageStackController retain];
-	}
-}
-
-- (void) setRightPageStackController:(MBPageStackController *) pageStackController {
-	if (_rightPageStackController != pageStackController) {
-		[_rightPageStackController release];
-		_rightPageStackController = pageStackController;
-		[_rightPageStackController retain];
-	}
-}
-
-
-#pragma mark -
-#pragma mark Getters
-- (MBPageStackController *)leftPageStackController {
-	return _leftPageStackController;
-}
-
-- (MBPageStackController *)rightPageStackController {
-	return _rightPageStackController;
-}
 
 
 @end

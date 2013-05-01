@@ -10,23 +10,7 @@
 @class MBPage;
 @class MBAlert;
 
-@interface MBViewManager : NSObject<UITabBarControllerDelegate, UINavigationControllerDelegate> {
-	UIWindow *_window;
-	UITabBarController *_tabController;
-	NSMutableDictionary *_pageStackControllers;
-	NSMutableDictionary *_dialogControllers;
-	NSMutableDictionary *_activityIndicatorCounts;
-	NSMutableArray *_pageStackControllersOrdered;
-	NSMutableArray *_dialogControllersOrdered;
-	NSMutableArray *_sortedNewPageStackNames;
-	NSString *_activePageStackName;
-	NSString *_activeDialogName;
-	UIAlertView *_currentAlert;
-	UINavigationController *_modalController;
-	int _activityIndicatorCount;
-	BOOL _singlePageMode;
-}
-
+@interface MBViewManager : NSObject<UITabBarControllerDelegate, UINavigationControllerDelegate> 
 @property (nonatomic, readonly) UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabController;
 @property (nonatomic, retain) NSString *activePageStackName;

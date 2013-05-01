@@ -17,7 +17,6 @@
 		_documentTypes = [NSMutableDictionary new];
 		_actionTypes = [NSMutableDictionary new];
 		_outcomeTypes = [NSMutableArray new];
-		_pageStacks = [NSMutableDictionary new];
 		_dialogs = [NSMutableDictionary new];
 		_pageTypes = [NSMutableDictionary new];
         _alerts = [NSMutableDictionary new];
@@ -30,7 +29,6 @@
 	[_documentTypes release];
 	[_actionTypes release];
 	[_outcomeTypes release];
-	[_pageStacks release];
     [_dialogs release];
 	[_pageTypes release];
     [_alerts release];
@@ -43,7 +41,6 @@
 	for(MBActionDefinition *def in [otherConfig.actions allValues]) [self addAction:def];
 	for(MBOutcomeDefinition *def in otherConfig.outcomes) [self addOutcome:def];
 	for(MBDialogDefinition *def in [otherConfig.dialogs allValues]) [self addDialog:def];
-	for(MBPageStackDefinition *def in [otherConfig.pageStacks allValues]) [self addPageStack:def];
 	for(MBPageDefinition *def in [otherConfig.pages allValues]) [self addPage:def];
     for(MBAlertDefinition *def in [otherConfig.alerts allValues]) [self addAlert:def];
 }
@@ -127,13 +124,6 @@
 	[_outcomeTypes addObject:outcome];
 }
 
-- (void) addPageStack:(MBPageStackDefinition*)pageStack {
-    if([_pageStacks valueForKey:pageStack.name] != nil) {
-		WLog(@"PageStack definition overridden: multiple definitions for pageStack with name %@", pageStack.name);
-	}
-	[_pageStacks setObject:pageStack forKey:pageStack.name];
-}
-
 - (void) addDialog:(MBDialogDefinition*)dialog {
     if([_dialogs valueForKey:dialog.name] != nil) {
 		WLog(@"Dialog definition overridden: multiple definitions for dialog with name %@", dialog.name);
@@ -165,10 +155,6 @@
 
 -(MBActionDefinition *) definitionForActionName:(NSString *)actionName {
 	return [_actionTypes objectForKey:actionName];
-}
-
--(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName {
-	return [_pageStacks objectForKey:pageStackName];
 }
 
 -(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName {
@@ -227,10 +213,6 @@
 
 -(NSMutableArray*) outcomes {
 	return _outcomeTypes;	
-}
-
--(NSMutableDictionary*) pageStacks {
-	return _pageStacks;	
 }
 
 -(NSMutableDictionary*) dialogs {

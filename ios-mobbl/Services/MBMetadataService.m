@@ -111,23 +111,6 @@ static NSString *_endpointsName = @"endpoints";
 	return actionDef;
 }
 
--(NSArray*) pageStacks {
-	return [[_cfg pageStacks] allValues];	
-}
-
--(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName {
-	return [self definitionForPageStackName: pageStackName throwIfInvalid: TRUE];
-}
-
--(MBPageStackDefinition *) definitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow {
-	MBPageStackDefinition *pageStackDefinition = [_cfg definitionForPageStackName: pageStackName];
-	if(pageStackDefinition == nil && doThrow) {
-		NSString *msg = [NSString stringWithFormat: @"PageStack with name %@ not defined", pageStackName];
-		@throw [[[NSException alloc]initWithName:@"PageStackNotDefined" reason:msg userInfo:nil] autorelease];
-	}
-	return pageStackDefinition;
-}
-
 -(MBDialogDefinition *)definitionForDialogName:(NSString *)dialogName {
 	return [self definitionForDialogName:dialogName throwIfInvalid:TRUE];
 }
@@ -146,7 +129,7 @@ static NSString *_endpointsName = @"endpoints";
 }
 
 -(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow {
-    for (MBDialogDefinition *dialogDef in _cfg.dialogs) {
+    for (MBDialogDefinition *dialogDef in [_cfg.dialogs allValues]) {
         for (MBPageStackDefinition *stackDef in dialogDef.pageStacks) {
             if ([pageStackName isEqualToString:stackDef.name]) {
                 return dialogDef;
@@ -164,6 +147,10 @@ static NSString *_endpointsName = @"endpoints";
 		@throw [[[NSException alloc]initWithName:@"DialogNotDefined" reason:msg userInfo:nil] autorelease];
 	}
 	return nil;
+}
+
+- (NSArray *)dialogs {
+    return [[_cfg dialogs] allValues];
 }
 
 

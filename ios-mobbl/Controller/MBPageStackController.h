@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) MBDialogController *dialogController;
-@property (nonatomic, retain) UINavigationController *rootController;
+@property (nonatomic, retain) UINavigationController *navigationController;
 @property (nonatomic, assign) CGRect bounds;
 
 - (id) initWithDefinition:(MBPageStackDefinition *)definition withDialogController:(MBDialogController *)parent;

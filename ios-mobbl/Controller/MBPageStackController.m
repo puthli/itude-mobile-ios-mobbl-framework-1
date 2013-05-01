@@ -28,7 +28,6 @@
 	NSString *_title;
 
 	CGRect _bounds;
-    UINavigationController *_rootController;
     UINavigationController *_navigationController;
 	NSInteger _activityIndicatorCount;
 	BOOL _temporary;
@@ -46,8 +45,7 @@
 @synthesize name = _name;
 @synthesize title = _title;
 @synthesize bounds = _bounds;
-
-@synthesize rootController = _rootController;
+@synthesize navigationController = _navigationController;
 @synthesize activityIndicatorCount = _activityIndicatorCount;
 
 - (void) dealloc
@@ -56,8 +54,7 @@
     
 	[_name release];
     [_title release];
-
-	[_rootController release];
+    [_navigationController release];
 	[super dealloc];
 }
 
@@ -65,14 +62,11 @@
 	if(self = [super init]) {
 		self.name = definition.name;
 		self.title = definition.title;
-
-        UINavigationController *controller = [[UINavigationController alloc] init];
-		self.rootController = controller;
-        [controller release];
-        
+		self.navigationController = [[UINavigationController new] autorelease];
+        self.navigationController.view.backgroundColor = [UIColor purpleColor];
 		self.activityIndicatorCount = 0;
 		[self showActivityIndicator];
-        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.rootController.navigationBar];
+        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.navigationController.navigationBar];
 	}
 	return self;
     
@@ -89,7 +83,7 @@
 	if(self = [self initWithDefinition:definition]) {
         MBBasicViewController *controller = (MBBasicViewController*)page.viewController;
         controller.pageStackController = self;
-        [self.rootController setRootViewController:page.viewController];
+        [self.navigationController setRootViewController:page.viewController];
         _bounds = bounds;
 	}
 	return self;
@@ -176,12 +170,12 @@
 	
     UITabBarController *tabBarController = [self determineTabBarController];
 	if(tabBarController) {
-		int idx = [tabBarController.viewControllers indexOfObject:_rootController];
+		int idx = [tabBarController.viewControllers indexOfObject:self.navigationController];
 		if(idx >= FIRST_MORE_TAB_INDEX) {
 			return tabBarController.moreNavigationController;
 		}
 	}
-    return _rootController;
+    return self.navigationController;
 }
 
 -(void)willActivate {
@@ -201,7 +195,7 @@
 	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
 	[viewController viewWillAppear:animated];
 
-	_navigationController = viewController.navigationController;
+	self.navigationController = viewController.navigationController;
     [self willActivate];
 }
 
@@ -219,17 +213,17 @@
 }
 
 -(void) clearSubviews {
-    for(UIView *vw in [_rootController.view subviews]) {
+    for(UIView *vw in [self.navigationController.view subviews]) {
       [vw removeFromSuperview];  
     } 
 }
 
 -(UIView*) view {
-	return _rootController.view;
+	return self.navigationController.view;
 }
 -(void) setBounds:(CGRect) bounds {
     _bounds = bounds;
-    self.rootController.view.bounds = bounds;
+    self.navigationController.view.bounds = bounds;
 }
 
 - (CGRect) screenBoundsForDisplayMode:(NSString*) displayMode {
@@ -238,23 +232,21 @@
 
     if([displayMode isEqualToString:@"PUSH"]) {
         bounds.size.height -= 44;
-    } else if([displayMode isEqualToString:@"REPLACE"] && [_rootController.viewControllers count] > 1) {
+    } else if([displayMode isEqualToString:@"REPLACE"] && [self.navigationController.viewControllers count] > 1) {
         // full screen when page will show
         bounds.size.height += 44;
-    } else if([[_rootController viewControllers] count] == 1 && [displayMode isEqualToString:@"POP"]) {
+    } else if([[self.navigationController viewControllers] count] == 1 && [displayMode isEqualToString:@"POP"]) {
         // full screen when page will show
         bounds.size.height += 44;
     } 
 	return bounds;
 }
 
--(void)setRootController:(UINavigationController *)rootController {
-    [_rootController release];
-    _rootController = [rootController retain];
-    _rootController.delegate = self;
-    _rootController.title = self.title;
-    //_rootController.navigationBarHidden = !_usesNavbar;
-
+-(void)setNavigationController:(UINavigationController *)navigationController {
+    [_navigationController release];
+    _navigationController = [navigationController retain];
+    _navigationController.delegate = self;
+    _navigationController.title = self.title;
 }
 
 - (void)showActivityIndicator {
@@ -263,7 +255,7 @@
 		// determine the maximum bounds of the screen
 		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-		[_rootController.parentViewController.view addSubview:blocker];
+		[_navigationController.parentViewController.view addSubview:blocker];
 	}
 	self.activityIndicatorCount ++;
 
@@ -274,7 +266,7 @@
 		self.activityIndicatorCount--;
 		
 		if(self.activityIndicatorCount == 0) {
-			UIView *top = [_rootController.parentViewController.view.subviews lastObject];
+			UIView *top = [_navigationController.parentViewController.view.subviews lastObject];
 			if ([top isKindOfClass:[MBActivityIndicator class]])
 				[top removeFromSuperview];
 		}

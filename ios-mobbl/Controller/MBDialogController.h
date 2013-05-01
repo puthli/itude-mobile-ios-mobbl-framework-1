@@ -18,10 +18,10 @@
 @property (nonatomic, retain) NSString *iconName;
 @property (nonatomic, retain) NSString *title;
 
-@property (nonatomic, retain) NSMutableArray *pageStacks;
+@property (nonatomic, retain) NSMutableArray *pageStackControllers;
 
-@property (nonatomic, retain) MBSplitViewController *splitViewController;
-@property (nonatomic, assign) BOOL keepLeftViewControllerVisibleInPortraitMode;
+@property (nonatomic, retain) UIViewController *rootViewController;
+
 
 - (id) initWithDefinition:(MBDialogDefinition*)definition;
 
@@ -30,8 +30,6 @@
 
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
-- (void) setLeftPageStackController:(MBPageStackController *) pageStackController;
-- (void) setRightPageStackController:(MBPageStackController *) pageStackController;
-- (void) loadPageStacks;
+- (void) loadView;
 
 @end

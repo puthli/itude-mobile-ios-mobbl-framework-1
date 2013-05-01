@@ -88,7 +88,7 @@ static MBApplicationController *_instance = nil;
 	
 	_viewManager = [[MBViewManager alloc] init];
 
-	_viewManager.singlePageMode = [[[MBMetadataService sharedInstance] pageStacks] count] <= 1;
+	_viewManager.singlePageMode = [[[MBMetadataService sharedInstance] dialogs] count] <= 1;
 	
 	// Added for optimization: Make sure the stringUtilitiesHelper is created. The createInstance methods instantiate variables that only need to be gathered once in the application lifecycle 
 	[StringUtilitiesHelper createInstance]; // Added for optimization
