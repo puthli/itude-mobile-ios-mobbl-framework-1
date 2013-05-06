@@ -10,12 +10,14 @@
 #import "MBMetadataService.h"
 #import "MBActivityIndicator.h"
 #import "MBDevice.h"
+#import "MBDialogContentTypes.h"
 
 @interface MBDialogController (){
 	
 	NSString *_name;
 	NSString *_iconName;
 	NSString *_title;
+    NSString *_contentType;
     NSMutableArray *_pageStacks;
     UIViewController *_viewController;
 	NSInteger _activityIndicatorCount;
@@ -28,6 +30,7 @@
 @synthesize name = _name;
 @synthesize iconName = _iconName;
 @synthesize title = _title;
+@synthesize contentType = _contentType;
 @synthesize pageStackControllers = _pageStacks;
 
 
@@ -37,6 +40,7 @@
 	[_name release];
 	[_iconName release];
 	[_title release];
+    [_contentType release];
     [_pageStacks release];
     [_viewController release];
 	[super dealloc];
@@ -47,6 +51,8 @@
 		self.name = definition.name;
 		self.iconName = definition.iconName;
 		self.title = definition.title;
+        self.contentType = definition.contentType;
+        
 		_activityIndicatorCount = 0;
 		
         // Load all the pageStacks
@@ -66,6 +72,14 @@
             [self.pageStackControllers addObject:stackController];
             [stackController release];
             [stackDefinition release];
+        }
+        
+        // If the user did not set a contentType we set a default one so the DialogContentBuilderFactory knows which ContentBuilder to choose
+        if (self.contentType.length == 0 && definition.pageStacks.count == 1) {
+            self.contentType = C_DIALOG_CONTENT_TYPE_SINGLE;
+        }
+        else if (self.contentType.length == 0 && definition.pageStacks.count > 1) {
+            self.contentType = C_DIALOG_CONTENT_TYPE_SPLIT;
         }
         
 	}

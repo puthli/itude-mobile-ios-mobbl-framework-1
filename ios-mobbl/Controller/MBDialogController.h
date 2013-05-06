@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *iconName;
 @property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *contentType;
 
 @property (nonatomic, retain) NSMutableArray *pageStackControllers;
 
