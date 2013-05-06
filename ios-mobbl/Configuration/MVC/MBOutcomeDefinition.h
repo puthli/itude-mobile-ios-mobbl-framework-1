@@ -8,20 +8,11 @@
 
 #import "MBDefinition.h"
 
-@interface MBOutcomeDefinition : MBDefinition {
-	NSString *_origin;
-	NSString *_action;
-	NSString *_dialog;
-	NSString *_displayMode;
-    NSString *_transitionStyle;
-	NSString *_preCondition;
-	BOOL _persist;
-	BOOL _transferDocument;
-	BOOL _noBackgroundProcessing;
-}
+@interface MBOutcomeDefinition : MBDefinition 
 
 @property (nonatomic, retain) NSString *origin;
 @property (nonatomic, retain) NSString *action;
+@property (nonatomic, retain) NSString *dialog;
 @property (nonatomic, retain) NSString *pageStackName;
 @property (nonatomic, retain) NSString *displayMode;
 @property (nonatomic, retain) NSString *transitionStyle;

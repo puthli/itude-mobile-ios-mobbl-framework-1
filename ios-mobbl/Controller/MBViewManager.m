@@ -40,7 +40,7 @@
 	NSMutableDictionary *_activityIndicatorCounts;
 	NSMutableArray *_pageStackControllersOrdered;
 	NSMutableArray *_dialogControllersOrdered;
-	NSMutableArray *_sortedNewDialogNames;
+	NSMutableArray *_sortedNewPageStackNames;
 	NSString *_activePageStackName;
 	NSString *_activeDialogName;
 	UIAlertView *_currentAlert;
@@ -71,7 +71,7 @@
 	if (self != nil) {
 		_activityIndicatorCounts = [NSMutableDictionary new];
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
-		_sortedNewDialogNames = [NSMutableArray new];
+		_sortedNewPageStackNames = [NSMutableArray new];
 		self.singlePageMode = FALSE;
         [self resetView];
 	}
@@ -83,7 +83,7 @@
 	[_dialogControllers release];
 	[_window release];
 	[_tabController release];
-	[_sortedNewDialogNames release];
+	[_sortedNewPageStackNames release];
 	[_activityIndicatorCounts release];
 	[_activePageStackName release];
 	[_activeDialogName release];
@@ -345,18 +345,18 @@
 }
 
 - (void) popPage:(NSString*) pageStackName {
-    MBPageStackController *result = [_pageStackControllers objectForKey: pageStackName];
+    MBPageStackController *result = [self pageStackControllerWithName:pageStackName];
     [result popPageWithTransitionStyle:nil animated:FALSE];
 }
 
 -(void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition {
-    MBPageStackController *result = [_pageStackControllers objectForKey: pageStackName];
+    MBPageStackController *result = [self pageStackControllerWithName:pageStackName]; 
     if(result != nil) {
         [_pageStackControllersOrdered removeObject:result];
         [_pageStackControllers removeObjectForKey: pageStackName];
         [self updateDisplay];
     }
-	if(!keepPosition) [_sortedNewDialogNames removeObject:pageStackName];
+	if(!keepPosition) [_sortedNewPageStackNames removeObject:pageStackName];
 }
 
 -(void) activatePageStackWithName:(NSString*) pageStackName {
@@ -402,7 +402,9 @@
     [self clearWindow];
 }
 
+
 - (void) resetViewPreservingCurrentPageStack {
+    // TODO: This will probably fail because Dialogs (ViewControllers) have nested PageStacks (NavigationControllers)
 	for (UIViewController *controller in [_tabController viewControllers]){
 		if ([controller isKindOfClass:[UINavigationController class]]) {
 			[(UINavigationController *) controller popToRootViewControllerAnimated:YES];
@@ -412,9 +414,7 @@
 }
 
 -(MBPageStackController*) pageStackControllerWithName:(NSString*) name {
-
-	MBPageStackController *result = [_pageStackControllers objectForKey: name];
-	return result;
+	return [_pageStackControllers objectForKey: name];
 }
 
 -(MBDialogController*) dialogWithName:(NSString*) name {
@@ -426,19 +426,25 @@
 - (void) sortTabs {
 	NSMutableArray *orderedTabNames = [NSMutableArray new];
 	
-	// First add the names of the pageStacks that are NOT new; the order is already OK
+	// First add the names of the dialogs that are NOT new; the order is already OK
     for (MBDialogController *dialogController in _dialogControllersOrdered) {
-        if ([_sortedNewDialogNames indexOfObject:dialogController.name] == NSNotFound) {
-            [orderedTabNames addObject:dialogController.name];
+        for (MBPageStackController *pageStackController in dialogController.pageStackControllers) {
+            if ([_sortedNewPageStackNames indexOfObject:pageStackController.name] == NSNotFound) {
+                [orderedTabNames addObject:dialogController.name];
+            }
         }
     }
     
-	// Now add the names of new pageStacks that are not yet in the resulting array:
-	for(NSString *name in _sortedNewDialogNames) {
-		if([orderedTabNames indexOfObject:name] == NSNotFound) [orderedTabNames addObject:name];
+	// Now add the names of new dialogs that are not yet in the resulting array:
+	for(NSString *pageStackName in _sortedNewPageStackNames) {
+        MBDialogDefinition *dialogDef = [[MBMetadataService sharedInstance] dialogDefinitionForPageStackName:pageStackName];
+        MBDialogController *dialogController = [self dialogWithName:dialogDef.name];
+		if([orderedTabNames indexOfObject:dialogController.name] == NSNotFound)  {
+            [orderedTabNames addObject:dialogController.name];
+        }
 	}
-	// Now rebuild the _pageStackControllersOrdered array; using the order of the orderedTabNames
-	
+    
+	// Now rebuild the _dialogControllersOrdered array; using the order of the orderedTabNames
 	[_dialogControllersOrdered removeAllObjects];
 	for(NSString *name in orderedTabNames) {
 		MBDialogController *dlgCtrl = [_dialogControllers valueForKey:name];
@@ -549,8 +555,8 @@
 
 - (void) notifyPageStackUsage:(NSString*) pageStackName {
 	if(pageStackName != nil) {
-		if(![_sortedNewDialogNames containsObject:pageStackName]) {
-			[_sortedNewDialogNames addObject:pageStackName];
+		if(![_sortedNewPageStackNames containsObject:pageStackName]) {
+			[_sortedNewPageStackNames addObject:pageStackName];
         }
         
         // TODO: This looks wrong. Figure out what is happening here
@@ -587,23 +593,13 @@
 }
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-	
+    // Set active dialog name
     for (MBDialogController *dialogController in [_dialogControllers allValues]) {
         if (viewController == dialogController.rootViewController) {
             self.activeDialogName = dialogController.name;
+            break;
         }
     }
-    
-//	// Set the actievPageStackName and activeDialogName
-//	for (MBPageStackController *pageStackController in [_pageStackControllers allValues]) {
-//		if (pageStackController.rootController == viewController) {
-//			self.activePageStackName = pageStackController.name;
-//            self.activeDialogName = [[pageStackController dialogController] name];
-//			break;
-//		}
-//	}
-	
-
 }
 
 -(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {

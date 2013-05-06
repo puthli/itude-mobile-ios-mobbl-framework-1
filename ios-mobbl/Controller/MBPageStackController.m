@@ -54,7 +54,7 @@
     
 	[_name release];
     [_title release];
-    [_navigationController release];
+    //[_navigationController release];
 	[super dealloc];
 }
 
@@ -63,7 +63,6 @@
 		self.name = definition.name;
 		self.title = definition.title;
 		self.navigationController = [[UINavigationController new] autorelease];
-        self.navigationController.view.backgroundColor = [UIColor purpleColor];
 		self.activityIndicatorCount = 0;
 		[self showActivityIndicator];
         [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.navigationController.navigationBar];
@@ -171,7 +170,7 @@
     UITabBarController *tabBarController = [self determineTabBarController];
 	if(tabBarController) {
 		int idx = [tabBarController.viewControllers indexOfObject:self.navigationController];
-		if(idx >= FIRST_MORE_TAB_INDEX) {
+		if(idx != NSNotFound && idx >= FIRST_MORE_TAB_INDEX) {
 			return tabBarController.moreNavigationController;
 		}
 	}
@@ -179,7 +178,7 @@
 }
 
 -(void)willActivate {
-    NSLog(@"Showing pageStack %@", [self name]);
+    DLog(@"Will show pageStackController with name %@", [self name]);
     
     UINavigationController * navigationController = [self determineNavigationController];
     
@@ -195,12 +194,11 @@
 	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
 	[viewController viewWillAppear:animated];
 
-	self.navigationController = viewController.navigationController;
     [self willActivate];
 }
 
 -(void)didActivate {
-    NSLog(@"Did show %@", [self name]);
+    DLog(@"Did show pageStackController with name %@", [self name]);
 }
 
 -(void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{

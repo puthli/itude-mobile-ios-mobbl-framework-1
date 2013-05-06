@@ -67,6 +67,12 @@
 		self.originName = definition.origin;
 		self.outcomeName = definition.name;
 		self.pageStackName = definition.pageStackName;
+        
+        // Backwards compatibility: We set the dialog in case we have no pageStackName.
+        if (!self.pageStackName) {
+            self.pageStackName = definition.dialog;
+        }
+        
 		self.displayMode = definition.displayMode;
         self.transitionStyle = definition.transitionStyle;
 		self.persist = definition.persist;
