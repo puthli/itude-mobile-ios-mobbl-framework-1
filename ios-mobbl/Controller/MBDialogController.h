@@ -17,10 +17,11 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *iconName;
 @property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *showAs;
 @property (nonatomic, retain) NSString *contentType;
 
-@property (nonatomic, retain) NSMutableArray *pageStackControllers;
 
+@property (nonatomic, retain) NSMutableArray *pageStackControllers;
 @property (nonatomic, retain) UIViewController *rootViewController;
 
 
@@ -31,5 +32,7 @@
 
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
+
+- (BOOL) showAsTab;
 
 @end

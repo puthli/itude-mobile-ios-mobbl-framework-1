@@ -11,9 +11,10 @@
 
 @interface MBDialogDefinition : MBDefinition 
 
-@property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSString* mode;
-@property (nonatomic, retain) NSString* iconName;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *mode;
+@property (nonatomic, retain) NSString *iconName;
+@property (nonatomic, retain) NSString *showAs;
 @property (nonatomic, retain) NSString *contentType;
 @property (nonatomic, retain) NSString *decorator;
 @property (nonatomic, retain) NSString *stackStrategy;

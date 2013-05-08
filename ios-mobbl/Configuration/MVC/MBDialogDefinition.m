@@ -13,6 +13,7 @@
 	NSString *_title;
 	NSString *_mode;
 	NSString *_icon;
+    NSString *_showAs;
     NSString *_contentType;
     NSString *_decorator;
     NSString *_stackStrategy;
@@ -26,6 +27,7 @@
 @synthesize title = _title;
 @synthesize mode = _mode;
 @synthesize iconName = _icon;
+@synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
 @synthesize decorator = _decorator;
 @synthesize stackStrategy = _stackStrategy;
@@ -44,6 +46,7 @@
 	[_title release];
 	[_mode release];
 	[_icon release];
+    [_showAs release];
     [_contentType release];
     [_decorator release];
     [_stackStrategy release];
@@ -52,11 +55,12 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Dialog %@%@%@%@%@%@%@/>\n", level, "", 
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Dialog %@%@%@%@%@%@%@%@/>\n", level, "", 
 							   [self attributeAsXml:@"name" withValue:self.name],
                                [self attributeAsXml:@"mode" withValue:self.mode],
 							   [self attributeAsXml:@"title" withValue:self.title],
 							   [self attributeAsXml:@"icon" withValue:self.iconName],
+                               [self attributeAsXml:@"showAs" withValue:self.showAs],
                                [self attributeAsXml:@"contentType" withValue:self.contentType],
                                [self attributeAsXml:@"decorator" withValue:self.decorator],
                                [self attributeAsXml:@"stackStrategy" withValue:self.stackStrategy]];

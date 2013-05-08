@@ -49,7 +49,7 @@
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
     self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"stack",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",nil];
     self.pageStackAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
-	self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",nil];
+	self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",@"showAs",@"contentType",@"decorator",@"stackStrategy",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
     self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"document",@"title",@"titlePath", nil];
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",@"zoomable",nil];
@@ -189,6 +189,7 @@
 		dialogDef.title = [attributeDict valueForKey:@"title"];	
 		dialogDef.mode = [attributeDict valueForKey:@"mode"];	
 		dialogDef.iconName = [attributeDict valueForKey:@"icon"];
+        dialogDef.showAs = [attributeDict valueForKey:@"showAs"];
         dialogDef.contentType = [attributeDict valueForKey:@"contentType"];
         dialogDef.decorator = [attributeDict valueForKey:@"decorator"];
         dialogDef.stackStrategy = [attributeDict valueForKey:@"stackStrategy"];

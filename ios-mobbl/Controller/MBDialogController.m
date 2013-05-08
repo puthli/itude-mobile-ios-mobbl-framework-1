@@ -12,12 +12,14 @@
 #import "MBDevice.h"
 #import "MBDialogContentTypes.h"
 #import "MBViewBuilderFactory.h"
+#import "MBConstants.h"
 
 @interface MBDialogController (){
 	
 	NSString *_name;
 	NSString *_iconName;
 	NSString *_title;
+    NSString *_showAs;
     NSString *_contentType;
     NSMutableArray *_pageStacks;
     UIViewController *_viewController;
@@ -31,6 +33,7 @@
 @synthesize name = _name;
 @synthesize iconName = _iconName;
 @synthesize title = _title;
+@synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
 @synthesize pageStackControllers = _pageStacks;
 
@@ -52,6 +55,7 @@
 		self.name = definition.name;
 		self.iconName = definition.iconName;
 		self.title = definition.title;
+        self.showAs = definition.showAs;
         self.contentType = definition.contentType;
         
 		_activityIndicatorCount = 0;
@@ -139,6 +143,8 @@
 	}
 }
 
-
+-(BOOL)showAsTab {
+    return [self.showAs isEqualToString:C_SHOW_AS_TAB];
+}
 
 @end
