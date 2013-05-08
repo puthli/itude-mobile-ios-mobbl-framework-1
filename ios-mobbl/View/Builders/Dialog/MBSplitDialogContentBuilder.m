@@ -7,12 +7,22 @@
 //
 
 #import "MBSplitDialogContentBuilder.h"
+#import "MBSplitViewController.h"
+#import "MBDialogController.h"
 
 @implementation MBSplitDialogContentBuilder
 
 -(UIViewController *)buildDialogContentViewControllerForDialog:(MBDialogController *)dialogController {
-    // TODO: Implement
-    return nil;
+    MBSplitViewController *containerViewController = [[MBSplitViewController new] autorelease];
+    if (dialogController.pageStackControllers.count > 1) {
+        MBPageStackController *leftPageStackController = [dialogController.pageStackControllers objectAtIndex:0];
+        [containerViewController setMasterViewController:leftPageStackController.navigationController];
+        MBPageStackController *rightPageStackController = [dialogController.pageStackControllers objectAtIndex:1];
+        [containerViewController setDetailViewController:rightPageStackController.navigationController];
+        
+        containerViewController.keepLeftViewControllerVisibleInPortraitMode = YES;
+    }
+    return containerViewController;
 }
 
 @end
