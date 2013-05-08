@@ -31,6 +31,5 @@
 
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
-- (void) loadView;
 
 @end

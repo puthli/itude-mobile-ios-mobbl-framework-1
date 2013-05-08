@@ -7,21 +7,18 @@
 //
 
 #import "MBSingleDialogContentBuilder.h"
+#import "MBDialogController.h"
+#import "MBPageStackController.h"
 
 @implementation MBSingleDialogContentBuilder
 
--(UIView *)buildDialogContent:(MBDialogController *)dialogController {
-    if (!dialogController.rootViewController) {
-        dialogController.rootViewController = [[[UIViewController alloc] init] autorelease];
-        
-        if (dialogController.pageStackControllers.count > 0) {
-            MBPageStackController *pageStackController = [dialogController.pageStackController objectAtIndex:0];
-            [self.rootViewController.view addSubview:pageStackController.navigationController.view]
-            
-        }
+-(UIViewController *)buildDialogContentViewControllerForDialog:(MBDialogController *)dialogController {
+    UIViewController *containerViewController = [[UIViewController new] autorelease];
+    if (dialogController.pageStackControllers.count > 0) {
+        MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
+        [containerViewController.view addSubview:pageStackController.navigationController.view];
     }
-    
-    return self.rootViewController.view;
+    return containerViewController;
 }
 
 @end

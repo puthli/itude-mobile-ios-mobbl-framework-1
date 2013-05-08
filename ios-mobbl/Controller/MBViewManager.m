@@ -471,7 +471,6 @@
 -(void) updateDisplay {
     if(_singlePageMode && [_dialogControllers count] == 1) {
         MBDialogController *dialogController = [[_dialogControllers allValues]objectAtIndex: 0];
-        [dialogController loadView];
         [self setContentViewController:dialogController.rootViewController];
     } 
     else if([_dialogControllers count] > 1 || !_singlePageMode) 
@@ -494,14 +493,8 @@
         int idx = 0;
         for (MBDialogController *dialogController in _dialogControllersOrdered) {
             
-            // Load the view
-            [dialogController loadView];
-            UIViewController *viewController = dialogController.rootViewController;
-            
-            viewController.hidesBottomBarWhenPushed = TRUE;
-            [viewController setHidesBottomBarWhenPushed: FALSE];
-
             // Create a tabbarProperties
+            UIViewController *viewController = dialogController.rootViewController;
             UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
             NSString *tabTitle = MBLocalizedString(dialogController.title);
             UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];

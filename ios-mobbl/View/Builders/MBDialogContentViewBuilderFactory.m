@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Itude Mobile. All rights reserved.
 //
 
-#import "MBDialogContentBuilderFactory.h"
+#import "MBDialogContentViewBuilderFactory.h"
 #import "MBDialogController.h"
 #import "MBMacros.h"
 
@@ -14,11 +14,11 @@
 #import "MBSingleDialogContentBuilder.h"
 #import "MBSplitDialogContentBuilder.h"
 
-@interface MBDialogContentBuilderFactory ()
+@interface MBDialogContentViewBuilderFactory ()
 @property(readonly,nonatomic, retain) NSMutableDictionary *registry;
 @end
 
-@implementation MBDialogContentBuilderFactory {
+@implementation MBDialogContentViewBuilderFactory {
     NSMutableDictionary *_registry;
 }
 
@@ -59,16 +59,14 @@
 }
 
 
--(UIView*) buildDialogContent:(MBDialogController*) dialog {
-    return nil;
-
+-(UIViewController*) buildDialogContentViewControllerForDialog:(MBDialogController*) dialog {
     id<MBDialogContentBuilder> builder = [self builderForType:dialog.contentType];
     
     if (builder) {
-        return [builder buildDialogContent:dialog];
+        return [builder buildDialogContentViewControllerForDialog:dialog];
     }
     else {
-        [NSException raise:@"DialogContentBuilderNotFound" format:@"No dialog content builder found for type %@ ", dialog.contentType];
+        [NSException raise:@"DialogContentBuilderNotFound" format:@"No dialog content builder found for contentType %@ ", dialog.contentType];
         return nil;
     }
     

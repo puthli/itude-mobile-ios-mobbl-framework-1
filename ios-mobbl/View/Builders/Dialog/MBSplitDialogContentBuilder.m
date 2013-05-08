@@ -10,7 +10,7 @@
 
 @implementation MBSplitDialogContentBuilder
 
--(UIView *)buildDialogContent:(MBDialogController *)dialogController {
+-(UIViewController *)buildDialogContentViewControllerForDialog:(MBDialogController *)dialogController {
     // TODO: Implement
     return nil;
 }

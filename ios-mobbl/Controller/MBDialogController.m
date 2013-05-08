@@ -11,6 +11,7 @@
 #import "MBActivityIndicator.h"
 #import "MBDevice.h"
 #import "MBDialogContentTypes.h"
+#import "MBViewBuilderFactory.h"
 
 @interface MBDialogController (){
 	
@@ -75,13 +76,15 @@
         }
         
         // If the user did not set a contentType we set a default one so the DialogContentBuilderFactory knows which ContentBuilder to choose
-        if (self.contentType.length == 0 && definition.pageStacks.count == 1) {
+        if (self.contentType.length == 0 && self.pageStackControllers.count == 1) {
             self.contentType = C_DIALOG_CONTENT_TYPE_SINGLE;
         }
-        else if (self.contentType.length == 0 && definition.pageStacks.count > 1) {
+        else if (self.contentType.length == 0 && self.pageStackControllers.count > 1) {
             self.contentType = C_DIALOG_CONTENT_TYPE_SPLIT;
         }
         
+        
+        [self loadView];
 	}
 	return self;	
 }
@@ -98,13 +101,7 @@
 // loadView
 - (void) loadView {
     if (!self.rootViewController) {
-        self.rootViewController = [[[UIViewController alloc] init] autorelease];
-        self.rootViewController.view.backgroundColor = [UIColor greenColor];
-        
-        // TODO: These should not be on top of each other!
-        for (MBPageStackController *pageStackController in self.pageStackControllers) {
-            [self.rootViewController.view addSubview:pageStackController.navigationController.view];
-        }
+        self.rootViewController = [[[MBViewBuilderFactory sharedInstance] dialogContentViewBuilderFactory] buildDialogContentViewControllerForDialog:self];
     }
 }
 

@@ -12,7 +12,7 @@
 @protocol MBDialogContentBuilder;
 @class MBDialogController;
 
-@interface MBDialogContentBuilderFactory : NSObject
+@interface MBDialogContentViewBuilderFactory : NSObject
 
 /// @name Registering MBDialogContentBuilder instances
 - (void)registerDialogContentBuilder:(id<MBDialogContentBuilder>)dialogContentBuilder forType:(NSString *)type;
@@ -21,6 +21,6 @@
 - (id<MBDialogContentBuilder>)builderForType:(NSString *)type;
 
 /// @name Creating Dialog content
--(UIView*) buildDialogContent:(MBDialogController*) dialog;
+-(UIViewController*) buildDialogContentViewControllerForDialog:(MBDialogController*) dialog;
 
 @end

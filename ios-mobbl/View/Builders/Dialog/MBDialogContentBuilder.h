@@ -10,6 +10,6 @@
 @class MBDialogController;
 
 @protocol MBDialogContentBuilder <NSObject>
-- (UIView*) buildDialogContent:(MBDialogController*) dialogController;
+- (UIViewController*) buildDialogContentViewControllerForDialog:(MBDialogController*) dialogController;
 
 @end
