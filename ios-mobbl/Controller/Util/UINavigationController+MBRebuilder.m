@@ -45,37 +45,39 @@
     
     @synchronized(self) {
         
-        // First call. We need to pop the navigationBar so return YES.
-        if ([self shouldPopNavigationItem]) {
-            [self setShouldPopNavigationItem:FALSE];
-
-            // Return YES to pop the navigationBar and the viewController in the second cycle
-            return YES;
-            
-        }
+        // Determine transitionStyle
+        NSString *transitionStyle = [self currentTransitionStyle];
         
-        // Second Call. We don't want to pop the navigationItem again.
-        else {
-
-            // Set the boolean for the next call
-            [self setShouldPopNavigationItem:TRUE];
-            
-            // Apply custom transition    
-            NSString *transitionStyle = nil;
-            if ([[self topViewController] isKindOfClass:[MBBasicViewController class]]) {
-                transitionStyle = [[(MBBasicViewController *) [self topViewController] page] transitionStyle];
+        // If we have a transitionStyle apply it
+        if (transitionStyle.length > 0) {
+            // First call. We need to pop the navigationBar so return YES.
+            if ([self shouldPopNavigationItem]) {
+                [self setShouldPopNavigationItem:FALSE];
+                
+                // Return YES to pop the navigationBar and the viewController in the second cycle
+                return YES;
             }
             
-            id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-            [style applyTransitionStyleToViewController:self forMovement:MBTransitionMovementPop];
-
-            // This will pop the ViewController but not the navigationBar. It will also result in a second call of this delegate method
-            [self popViewControllerAnimated:[style animated]];
-
-            // Avoid a second pop
-            return NO;
+            // Second Call. We don't want to pop the navigationItem again.
+            else {
+                
+                // Set the boolean for the next call
+                [self setShouldPopNavigationItem:TRUE];
+                
+                // Apply custom transition
+                id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+                [style applyTransitionStyleToViewController:self forMovement:MBTransitionMovementPop];
+                
+                // This will pop the ViewController but not the navigationBar. It will also result in a second call of this delegate method
+                [self popViewControllerAnimated:[style animated]];
+                
+                // Avoid a second pop
+                return NO;
+            }
         }
-
+        
+        // If we have no transitionStyle just allow the pop
+        return YES;
     }
 
 }
@@ -95,6 +97,13 @@
 - (void) setShouldPopNavigationItem:(BOOL)pop {
     NSMutableDictionary *dict = [[NSThread currentThread] threadDictionary];
     [dict setObject:[NSNumber numberWithBool:pop] forKey:C_MBshouldPopNavigationItem_KEY];
+}
+
+- (NSString *)currentTransitionStyle {
+    if ([[self topViewController] isKindOfClass:[MBBasicViewController class]]) {
+        return [[(MBBasicViewController *) [self topViewController] page] transitionStyle];
+    }
+    return nil;
 }
 
 @end
