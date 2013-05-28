@@ -80,8 +80,24 @@
 	}
 }
 
+#pragma mark -
+#pragma mark Orientation delegate calls
+
+// iOS6 and up
+- (BOOL)shouldAutorotate {
+    return [[MBOrientationManager sharedInstance] shouldAutorotate];
+}
+
+// iOS6 and up
+- (NSUInteger)supportedInterfaceOrientations {
+    return [[MBOrientationManager sharedInstance] orientationMask];
+    return UIInterfaceOrientationMaskAll;
+}
+
+// iOS5 and lower
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
 	return [[MBOrientationManager sharedInstance] supportInterfaceOrientation:toInterfaceOrientation];
 }
+
 
 @end
