@@ -366,6 +366,7 @@
 		1CC8917D171EE68B00B30461 /* FontUp_Icon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CC88F22171ED88500B30461 /* FontUp_Icon.png */; };
 		1CC8917E171EE68E00B30461 /* MBDatePicker.xib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CC88F24171ED88500B30461 /* MBDatePicker.xib */; };
 		1CC8917F171EE68F00B30461 /* MBPicker.xib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CC88F25171ED88500B30461 /* MBPicker.xib */; };
+		BDE27AB51755F3AC00018CB8 /* UINavigationController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27AB41755F3AC00018CB8 /* UINavigationController+Rotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -917,6 +918,8 @@
 		1CC89008171ED88600B30461 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		1CC89009171ED88600B30461 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
 		1CC890A5171ED9BE00B30461 /* itude-mobile-ios-mobbl-headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-ios-mobbl-headers.h"; sourceTree = "<group>"; };
+		BDE27AB31755F3AC00018CB8 /* UINavigationController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotation.h"; sourceTree = "<group>"; };
+		BDE27AB41755F3AC00018CB8 /* UINavigationController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1106,6 +1109,8 @@
 				1CC88EEC171ED88400B30461 /* MBViewControllerProtocol.h */,
 				1CC88EED171ED88400B30461 /* UINavigationController+MBRebuilder.h */,
 				1CC88EEE171ED88400B30461 /* UINavigationController+MBRebuilder.m */,
+				BDE27AB31755F3AC00018CB8 /* UINavigationController+Rotation.h */,
+				BDE27AB41755F3AC00018CB8 /* UINavigationController+Rotation.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1771,6 +1776,7 @@
 				1CC890A2171ED88600B30461 /* MBPage.m in Sources */,
 				1CC890A3171ED88600B30461 /* MBPanel.m in Sources */,
 				1CC890A4171ED88600B30461 /* MBTableViewController.m in Sources */,
+				BDE27AB51755F3AC00018CB8 /* UINavigationController+Rotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
