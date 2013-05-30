@@ -43,7 +43,7 @@
 - (void) showAlert:(MBAlert *) alert;
 - (void) activateDialogWithName:(NSString*) dialogName;
 - (void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition;
-- (void) popPage:(NSString*) dialogName;
+- (void) popPageOnDialogWithName:(NSString*) dialogName;
 - (void) showActivityIndicatorForDialog:(NSString*) dialogName;
 - (void) hideActivityIndicatorForDialog:(NSString*) dialogName;
 - (void) makeKeyAndVisible;

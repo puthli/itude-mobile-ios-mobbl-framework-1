@@ -26,6 +26,7 @@ static MBViewBuilderFactory *_instance = nil;
 @synthesize styleHandler = _styleHandler;
 @synthesize rowViewBuilderFactory = _rowViewBuilderFactory;
 @synthesize panelViewBuilderFactory = _panelViewBuilderFactory;
+@synthesize backButtonBuilderFactory = _backButtonBuilderFactory;
 
 - (id) init
 {
@@ -38,6 +39,7 @@ static MBViewBuilderFactory *_instance = nil;
 		_fieldViewBuilderFactory = [[MBFieldViewBuilderFactory alloc] init];
 		_styleHandler = [[MBStyleHandler alloc] init];
         _rowViewBuilderFactory = [[MBRowViewBuilderFactory alloc] init];
+        _backButtonBuilderFactory = [MBBackButtonBuilderFactory new];
 	}
 	return self;
 }
@@ -51,6 +53,7 @@ static MBViewBuilderFactory *_instance = nil;
 	[_forEachViewBuilder release];
 	[_fieldViewBuilderFactory release];
     [_rowViewBuilderFactory release];
+    [_backButtonBuilderFactory release];
 	[super dealloc];
 }
 

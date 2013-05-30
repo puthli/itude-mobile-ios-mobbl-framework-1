@@ -13,6 +13,7 @@
 #import "MBRowViewBuilder.h"
 #import "MBFieldViewBuilderFactory.h"
 #import "MBRowViewBuilderFactory.h"
+#import "MBBackButtonBuilderFactory.h"
 #import "MBStyleHandler.h"
 
 @interface MBViewBuilderFactory : NSObject {
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) MBStyleHandler *styleHandler;
 @property (nonatomic, retain, readonly) MBFieldViewBuilderFactory *fieldViewBuilderFactory;
 @property (nonatomic, retain, readonly) MBRowViewBuilderFactory *rowViewBuilderFactory;
+@property (nonatomic, retain, readonly) MBBackButtonBuilderFactory *backButtonBuilderFactory;
 
 /**
 * Return the default MBRowViewBuilder.

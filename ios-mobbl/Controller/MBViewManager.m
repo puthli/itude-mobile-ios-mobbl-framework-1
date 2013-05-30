@@ -317,9 +317,13 @@
 	}
 }
 
-- (void) popPage:(NSString*) dialogName {
-    MBDialogController *result = [_dialogControllers objectForKey: dialogName];
-    [result popPageWithTransitionStyle:nil animated:FALSE];
+- (void) popPageOnDialogWithName:(NSString*) dialogName {
+    MBDialogController *dialogController = [_dialogControllers objectForKey: dialogName];
+    
+    // Determine transitionStyle
+    MBBasicViewController *viewController = [dialogController.rootController.viewControllers lastObject];
+    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:viewController.page.transitionStyle];    
+    [dialogController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
 }
 
 -(void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition {

@@ -10,8 +10,7 @@
 #import "MBPage.h"
 #import "MBOrientationManager.h"
 #import "MBDialogController.h"
-
-#import "MBBasicViewController+BackButton.h"
+#import "MBViewBuilderFactory.h"
 
 @implementation MBBasicViewController
 
@@ -26,8 +25,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    // TODO: This should be optional somehow
-    //[self addCustomBackButtonWithType:MBBackButtonTypeArrow withTitle:nil];
+    [self setupBackButton];
 }
 
 -(void) handleException:(NSException *) exception{
@@ -46,6 +44,17 @@
 	[[MBApplicationController currentInstance] hideActivityIndicatorForDialog:self.page.dialogName];
 }
 
+// Setup a custom backbutton when a builder is registred
+-(void)setupBackButton {
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    if ([viewControllers count] > 1) {
+        UIViewController *previousViewController = [viewControllers objectAtIndex:[viewControllers count]-2];
+        UIBarButtonItem *backButton = [[[MBViewBuilderFactory sharedInstance] backButtonBuilderFactory] buildBackButtonWithTitle:previousViewController.title];
+        if (backButton) {
+            [self.navigationItem setLeftBarButtonItem:backButton animated:NO];
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark View lifecycle delegate methods
