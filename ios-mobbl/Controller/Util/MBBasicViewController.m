@@ -11,6 +11,8 @@
 #import "MBOrientationManager.h"
 #import "MBDialogController.h"
 
+#import "MBBasicViewController+BackButton.h"
+
 @implementation MBBasicViewController
 
 @synthesize page = _page;
@@ -20,6 +22,12 @@
 {
     [_page release];
     [super dealloc];
+}
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    // TODO: This should be optional somehow
+    //[self addCustomBackButtonWithType:MBBackButtonTypeArrow withTitle:nil];
 }
 
 -(void) handleException:(NSException *) exception{
@@ -37,6 +45,10 @@
 -(void) hideActivityIndicator {
 	[[MBApplicationController currentInstance] hideActivityIndicatorForDialog:self.page.dialogName];
 }
+
+
+#pragma mark -
+#pragma mark View lifecycle delegate methods
 
 -(void) viewDidAppear:(BOOL)animated {
 	for (id childView in [self.view subviews]){
@@ -79,6 +91,8 @@
 		}
 	}
 }
+
+
 
 #pragma mark -
 #pragma mark Orientation delegate calls
