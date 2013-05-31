@@ -367,6 +367,10 @@
 		1CC8917E171EE68E00B30461 /* MBDatePicker.xib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CC88F24171ED88500B30461 /* MBDatePicker.xib */; };
 		1CC8917F171EE68F00B30461 /* MBPicker.xib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CC88F25171ED88500B30461 /* MBPicker.xib */; };
 		BDE27AB51755F3AC00018CB8 /* UINavigationController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27AB41755F3AC00018CB8 /* UINavigationController+Rotation.m */; };
+		BDE27B2317588D2C00018CB8 /* MBArrowIconBackButtonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B1B17588D2C00018CB8 /* MBArrowIconBackButtonBuilder.m */; };
+		BDE27B2417588D2C00018CB8 /* MBBackButtonBuilderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B1E17588D2C00018CB8 /* MBBackButtonBuilderFactory.m */; };
+		BDE27B2517588D2C00018CB8 /* MBDefaultBackButtonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B2017588D2C00018CB8 /* MBDefaultBackButtonBuilder.m */; };
+		BDE27B2617588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B2217588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -920,6 +924,15 @@
 		1CC890A5171ED9BE00B30461 /* itude-mobile-ios-mobbl-headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "itude-mobile-ios-mobbl-headers.h"; sourceTree = "<group>"; };
 		BDE27AB31755F3AC00018CB8 /* UINavigationController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotation.h"; sourceTree = "<group>"; };
 		BDE27AB41755F3AC00018CB8 /* UINavigationController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotation.m"; sourceTree = "<group>"; };
+		BDE27B1A17588D2C00018CB8 /* MBArrowIconBackButtonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBArrowIconBackButtonBuilder.h; sourceTree = "<group>"; };
+		BDE27B1B17588D2C00018CB8 /* MBArrowIconBackButtonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBArrowIconBackButtonBuilder.m; sourceTree = "<group>"; };
+		BDE27B1C17588D2C00018CB8 /* MBBackButtonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBackButtonBuilder.h; sourceTree = "<group>"; };
+		BDE27B1D17588D2C00018CB8 /* MBBackButtonBuilderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBackButtonBuilderFactory.h; sourceTree = "<group>"; };
+		BDE27B1E17588D2C00018CB8 /* MBBackButtonBuilderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBBackButtonBuilderFactory.m; sourceTree = "<group>"; };
+		BDE27B1F17588D2C00018CB8 /* MBDefaultBackButtonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDefaultBackButtonBuilder.h; sourceTree = "<group>"; };
+		BDE27B2017588D2C00018CB8 /* MBDefaultBackButtonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDefaultBackButtonBuilder.m; sourceTree = "<group>"; };
+		BDE27B2117588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBWhiteArrowBackButtonBuilder.h; sourceTree = "<group>"; };
+		BDE27B2217588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBWhiteArrowBackButtonBuilder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1405,6 +1418,7 @@
 		1CC88F8A171ED88500B30461 /* Builders */ = {
 			isa = PBXGroup;
 			children = (
+				BDE27B1917588D2C00018CB8 /* BackButton */,
 				1CC88F8B171ED88500B30461 /* MBAlertViewBuilder.h */,
 				1CC88F8C171ED88500B30461 /* MBAlertViewBuilder.m */,
 				1CC88F8D171ED88500B30461 /* MBBasicPanelBuilder.h */,
@@ -1551,6 +1565,22 @@
 				1CC89009171ED88600B30461 /* MBTableViewController.m */,
 			);
 			path = Tables;
+			sourceTree = "<group>";
+		};
+		BDE27B1917588D2C00018CB8 /* BackButton */ = {
+			isa = PBXGroup;
+			children = (
+				BDE27B1A17588D2C00018CB8 /* MBArrowIconBackButtonBuilder.h */,
+				BDE27B1B17588D2C00018CB8 /* MBArrowIconBackButtonBuilder.m */,
+				BDE27B1C17588D2C00018CB8 /* MBBackButtonBuilder.h */,
+				BDE27B1D17588D2C00018CB8 /* MBBackButtonBuilderFactory.h */,
+				BDE27B1E17588D2C00018CB8 /* MBBackButtonBuilderFactory.m */,
+				BDE27B1F17588D2C00018CB8 /* MBDefaultBackButtonBuilder.h */,
+				BDE27B2017588D2C00018CB8 /* MBDefaultBackButtonBuilder.m */,
+				BDE27B2117588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.h */,
+				BDE27B2217588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m */,
+			);
+			path = BackButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1777,6 +1807,10 @@
 				1CC890A3171ED88600B30461 /* MBPanel.m in Sources */,
 				1CC890A4171ED88600B30461 /* MBTableViewController.m in Sources */,
 				BDE27AB51755F3AC00018CB8 /* UINavigationController+Rotation.m in Sources */,
+				BDE27B2317588D2C00018CB8 /* MBArrowIconBackButtonBuilder.m in Sources */,
+				BDE27B2417588D2C00018CB8 /* MBBackButtonBuilderFactory.m in Sources */,
+				BDE27B2517588D2C00018CB8 /* MBDefaultBackButtonBuilder.m in Sources */,
+				BDE27B2617588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
