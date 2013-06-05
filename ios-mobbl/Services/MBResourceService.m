@@ -17,6 +17,9 @@
 #import "MBBundleDefinition.h"
 #import "MBMetadataService.h"
 
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+
 static MBResourceService *_instance = nil;
 
 @implementation MBResourceService
@@ -66,7 +69,7 @@ static MBResourceService *_instance = nil;
     
     UIImage *result = nil;
     
-    // Images can have high resolution versions, which are not fetched when the image is retrieved with NSData 
+    // Images can have high resolution versions, which are not fetched when the image is retrieved with NSData
     // The iOS framework automaticly returns high res images when it needs to when an image is created trough [UIImage imageNamed:@"..."]
     // That's the reason we try that first. IF it fails, we try the framework way
     MBResourceDefinition *def = [self resourceDefinitionByID:resourceId];
@@ -79,8 +82,8 @@ static MBResourceService *_instance = nil;
     // If fetching the image trough the regular way failed, return the resourceId
     if (result == nil) {
         NSData *bytes = [self resourceByID:resourceId];
-        if(bytes == nil) { 
-            WLog(@"Unable to locate resource for image with id=%@", resourceId);	
+        if(bytes == nil) {
+            WLog(@"Unable to locate resource for image with id=%@", resourceId);
             return nil;
         }
         result = [UIImage imageWithData:bytes];
@@ -88,6 +91,18 @@ static MBResourceService *_instance = nil;
     }
     return result;
     
+}
+
+// Plays a audiofile from a resourceId
+- (void)playAudioByID:(NSString*) resourceId {
+    MBResourceDefinition *def = [self resourceDefinitionByID:resourceId];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [def.url substringFromIndex:7]]];
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    [player play];
+}
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [player release];
 }
 
 - (NSData*) doGetResourceByURL:(NSString*) urlString {

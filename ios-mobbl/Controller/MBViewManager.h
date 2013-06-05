@@ -25,7 +25,7 @@
 - (void) showAlert:(MBAlert *) alert;
 - (void) activatePageStackWithName:(NSString*) pageStackName; // Called using selectors. 
 - (void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition;
-- (void) popPage:(NSString*) pageStackName;
+- (void) popPageOnPageStackWithName:(NSString*) pageStackName;
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
 - (void) makeKeyAndVisible;

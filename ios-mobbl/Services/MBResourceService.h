@@ -38,6 +38,11 @@
  */
 - (UIImage *) imageByID:(NSString*) resourceId;
 
+/** Plays an audio file for a file based resource
+ * @param resourceId the ID for the resource
+ */
+- (void)playAudioByID:(NSString*) resourceId;
+
 /** Returns a NSData object ath the location of the urlString without caching. This can be a network or a local resource.
  * @param urlString The url to the resource (e.g. "https://athena.itude.com/imageGallery.xml" or "file://image.jpg")
  */

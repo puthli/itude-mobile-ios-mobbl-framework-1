@@ -236,7 +236,7 @@
                 pickerController.field = field;
                 [field setViewData:pickerController
                             forKey:@"pickerController"]; // let the page retain the picker controller
-                UIView *superview = [tableView window];
+                UIView *superview = [[[tableView window] rootViewController] view];
                 [pickerController presentWithSuperview:superview];
             }
 
@@ -269,7 +269,7 @@
                 dateTimePickerController.maximumDate = [NSDate date];
             }
 
-            UIView *superView = [tableView window];
+            UIView *superView = [[[tableView window] rootViewController] view];
             [dateTimePickerController presentWithSuperview:superView];
 
 

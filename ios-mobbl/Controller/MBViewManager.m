@@ -344,9 +344,13 @@
 	}
 }
 
-- (void) popPage:(NSString*) pageStackName {
-    MBPageStackController *result = [self pageStackControllerWithName:pageStackName];
-    [result popPageWithTransitionStyle:nil animated:FALSE];
+- (void) popPageOnPageStackWithName:(NSString*) pageStackName {
+    MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
+    
+    // Determine transitionStyle
+    MBBasicViewController *viewController = [pageStackController.navigationController.viewControllers lastObject];
+    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:viewController.page.transitionStyle];
+    [pageStackController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
 }
 
 -(void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition {

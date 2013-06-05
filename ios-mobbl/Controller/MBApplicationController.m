@@ -210,7 +210,7 @@ static MBApplicationController *_instance = nil;
 				}
 				else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {
 					// TODO: This causes a bug when the user desides to pop the rootViewController
-					[_viewManager popPage: outcomeToProcess.pageStackName];   
+					[_viewManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];   
 				}
 				else if([@"POPALL" isEqualToString: outcomeToProcess.displayMode]) {
 					[_viewManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];   

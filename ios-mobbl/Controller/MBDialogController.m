@@ -9,9 +9,15 @@
 #import "MBDialogController.h"
 #import "MBMetadataService.h"
 #import "MBActivityIndicator.h"
+#import "MBSpinner.h"
+#import "MBStyleHandler.h"
+#import "MBViewBuilderFactory.h" 
+#import "MBBasicViewController.h"
+#import "MBViewManager.h"
+#import "MBTransitionStyle.h"
+#import "UINavigationController+MBRebuilder.h"
+#import "UINavigationController+Rotation.h"
 #import "MBDevice.h"
-#import "MBDialogContentTypes.h"
-#import "MBViewBuilderFactory.h"
 #import "MBConstants.h"
 
 @interface MBDialogController (){
