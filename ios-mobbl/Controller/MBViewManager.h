@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSString *activePageStackName;
 @property (nonatomic, retain) NSString *activeDialogName;
 @property (nonatomic, retain) UIAlertView *currentAlert;
-@property (nonatomic, assign) BOOL singlePageMode;
 
 - (id) init;
 - (void) showPage:(MBPage*) page displayMode:(NSString*) mode;

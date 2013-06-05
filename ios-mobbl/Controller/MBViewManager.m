@@ -6,6 +6,7 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
+#import "MBOrderedMutableDictionary.h"
 #import "MBMacros.h"
 #import "MBViewManager.h"
 #import "MBPageStackDefinition.h"
@@ -35,19 +36,19 @@
 @interface MBViewManager() {
 	UIWindow *_window;
 	UITabBarController *_tabController;
+    MBOrderedMutableDictionary *_dialogControllers;
 	NSMutableDictionary *_pageStackControllers;
-	NSMutableDictionary *_dialogControllers;
 	NSMutableDictionary *_activityIndicatorCounts;
 	NSMutableArray *_pageStackControllersOrdered;
-	NSMutableArray *_dialogControllersOrdered;
 	NSMutableArray *_sortedNewPageStackNames;
 	NSString *_activePageStackName;
 	NSString *_activeDialogName;
 	UIAlertView *_currentAlert;
 	UINavigationController *_modalController;
 	int _activityIndicatorCount;
-	BOOL _singlePageMode;
 }
+
+@property (nonatomic, retain) MBOrderedMutableDictionary *dialogControllers;
 
 -(MBPageStackController*) pageStackControllerWithName:(NSString*) name;
 - (void) clearWindow;
@@ -64,7 +65,7 @@
 @synthesize activePageStackName = _activePageStackName;
 @synthesize activeDialogName = _activeDialogName;
 @synthesize currentAlert = _currentAlert;
-@synthesize singlePageMode = _singlePageMode;
+@synthesize dialogControllers = _dialogControllers;
 
 - (id) init {
 	self = [super init];
@@ -72,7 +73,7 @@
 		_activityIndicatorCounts = [NSMutableDictionary new];
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
 		_sortedNewPageStackNames = [NSMutableArray new];
-		self.singlePageMode = FALSE;
+        self.dialogControllers = [[MBOrderedMutableDictionary new] autorelease];
         [self resetView];
 	}
 	return self;
@@ -80,7 +81,7 @@
 
 - (void) dealloc {
 	[_pageStackControllers release];
-	[_dialogControllers release];
+    [_dialogControllers release];
 	[_window release];
 	[_tabController release];
 	[_sortedNewPageStackNames release];
@@ -164,7 +165,7 @@
                     page.transitionStyle = transitionStyle;
                     [self presentViewController:_modalController fromViewController:_tabController animated:YES];
                 }
-                else if (_singlePageMode){
+                else if ([self.dialogControllers count] == 1){
                     MBPageStackController *pageStackController = [[_pageStackControllers allValues] objectAtIndex:0];
                     [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
                     page.transitionStyle = transitionStyle;
@@ -227,8 +228,7 @@
     
     if (dialogController == nil) {
         dialogController = [[MBApplicationFactory sharedInstance] createDialogController:definition];
-        
-        [_dialogControllers setValue:dialogController forKey:dialogController.name];
+        [self.dialogControllers setValue:dialogController forKey:dialogController.name];
         for (MBPageStackController *stack in dialogController.pageStackControllers) {
             [_pageStackControllers setObject:stack forKey:stack.name];
             [_pageStackControllersOrdered addObject:stack.name];
@@ -287,8 +287,8 @@
 	[self.window makeKeyAndVisible];
 	
 	// ensure first Dialog is selected.
-	if (_dialogControllersOrdered.count >0) {
-		_activeDialogName = (NSString*)[_dialogControllersOrdered objectAtIndex:0];
+	if (self.dialogControllers.count >0) {
+		_activeDialogName = (NSString*)[self.dialogControllers objectAtIndex:0];
 	}
 }
 
@@ -333,7 +333,7 @@
         if (self.tabController) {
             [self dismisViewController:self.tabController animated:TRUE];
         }
-        else if (_singlePageMode){
+        else if ([self.dialogControllers count] == 1){
             MBPageStackController *pageStackController = [[_pageStackControllers allValues] objectAtIndex:0];
             [self dismisViewController:pageStackController.navigationController animated:YES];
         }
@@ -389,16 +389,15 @@
     [_tabController release];
     [_pageStackControllers release];
     [_pageStackControllersOrdered release];
-	[_dialogControllers release];
-	[_dialogControllersOrdered release];
+
 	[_modalController release];
     
     _tabController = nil;
 	_modalController = nil;
     _pageStackControllers = [NSMutableDictionary new];
     _pageStackControllersOrdered = [NSMutableArray new];
-	_dialogControllers = [NSMutableDictionary new];
-	_dialogControllersOrdered = [NSMutableArray new];
+
+    self.dialogControllers = [MBOrderedMutableDictionary new];
     [self clearWindow];
 }
 
@@ -418,43 +417,8 @@
 }
 
 -(MBDialogController*) dialogWithName:(NSString*) name {
-	
-	MBDialogController *result = [_dialogControllers objectForKey: name];
-	return result;
+	return [self.dialogControllers objectForKey: name];
 }
-
-- (void) sortTabs {
-	NSMutableArray *orderedTabNames = [NSMutableArray new];
-	
-	// First add the names of the dialogs that are NOT new; the order is already OK
-    for (MBDialogController *dialogController in _dialogControllersOrdered) {
-        for (MBPageStackController *pageStackController in dialogController.pageStackControllers) {
-            if ([_sortedNewPageStackNames indexOfObject:pageStackController.name] == NSNotFound) {
-                [orderedTabNames addObject:dialogController.name];
-            }
-        }
-    }
-    
-	// Now add the names of new dialogs that are not yet in the resulting array:
-	for(NSString *pageStackName in _sortedNewPageStackNames) {
-        MBDialogDefinition *dialogDef = [[MBMetadataService sharedInstance] dialogDefinitionForPageStackName:pageStackName];
-        MBDialogController *dialogController = [self dialogWithName:dialogDef.name];
-		if([orderedTabNames indexOfObject:dialogController.name] == NSNotFound)  {
-            [orderedTabNames addObject:dialogController.name];
-        }
-	}
-    
-	// Now rebuild the _dialogControllersOrdered array; using the order of the orderedTabNames
-	[_dialogControllersOrdered removeAllObjects];
-	for(NSString *name in orderedTabNames) {
-		MBDialogController *dlgCtrl = [_dialogControllers valueForKey:name];
-		// dlgCtrl might be nil! This is because the application controller may have started processing
-		// and already has notified us; but the processing (in the background) has not yet completed.
-		// Inthis case; the name of the pageStack is already known but it is not yet created
-		if(dlgCtrl != nil) [_dialogControllersOrdered addObject: dlgCtrl];
-	}
-	[orderedTabNames release];
-}	
 
 // Remove every view that is not the activityIndicatorView
 -(void) clearWindow {
@@ -468,17 +432,30 @@
     [self.window setRootViewController:viewController];
 }
 
+/** 
+ * Returns TRUE if two or more DialogControllers have defined 'showAs="TAB"'
+ */
+- (BOOL)shouldCreateTabBar {
+    NSInteger numberOfShowAsTabs = 0;
+    for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
+        if ([dialogController showAsTab]) {
+            numberOfShowAsTabs ++;
+            if (numberOfShowAsTabs > 1) {
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
 -(void) updateDisplay {
-    if(_singlePageMode && [_dialogControllers count] == 1) {
-        MBDialogController *dialogController = [[_dialogControllers allValues]objectAtIndex: 0];
-        [self setContentViewController:dialogController.rootViewController];
-    } 
-    else if([_dialogControllers count] > 1 || !_singlePageMode) 
+
+    BOOL shouldCreateTabBar = [self shouldCreateTabBar];
+    // Should create tabbar
+    if([self.dialogControllers count] > 1 && shouldCreateTabBar)
 	{
+
 		if(_tabController == nil) {
-			
-			///////////////// CREATE THE TAB CONTROLLER
-			///////////////////////////////////////////
 			
 			_tabController = [[UITabBarController alloc] init];
 			_tabController.delegate = self;
@@ -487,23 +464,22 @@
 			[[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:_tabController];
             [self setContentViewController:_tabController];
 		}		
-		[self sortTabs];
 		
         NSMutableArray *tabs = [NSMutableArray new];
         int idx = 0;
-        for (MBDialogController *dialogController in _dialogControllersOrdered) {
-            
-            // Create a tabbarProperties
-            UIViewController *viewController = dialogController.rootViewController;
-            UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
-            NSString *tabTitle = MBLocalizedString(dialogController.title);
-            UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
-            viewController.tabBarItem = tabBarItem;
-            
-            [tabs addObject:viewController];
-            
-            idx ++;
-    
+        for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
+            if ([dialogController showAsTab]) {
+                // Create a tabbarProperties
+                UIViewController *viewController = dialogController.rootViewController;
+                UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
+                NSString *tabTitle = MBLocalizedString(dialogController.title);
+                UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
+                viewController.tabBarItem = tabBarItem;
+                
+                [tabs addObject:viewController];
+                
+                idx ++;
+            }
         }
         
         [_tabController setViewControllers: tabs animated: YES];
@@ -511,6 +487,26 @@
         _tabController.moreNavigationController.delegate = self;
         _tabController.customizableViewControllers = nil;
         [tabs release];
+    }
+    
+    // Single page mode
+    else if([self.dialogControllers count] > 0) {
+        
+        // Search for the only dialogController with attribute 'showAs="TAB"'.
+        MBDialogController *dialogController = nil;
+        for (MBDialogController *currentDialogContoller in [self.dialogControllers allValues]) {
+            if ([currentDialogContoller showAsTab]) {
+                dialogController = currentDialogContoller;
+                break;
+            }
+        }
+        
+        // Take the first dialogController if no dialogController with attribute 'showAs="TAB"' is found.
+        if (!dialogController) {
+            dialogController = [self.dialogControllers objectAtIndex:0];
+        }
+        
+        [self setContentViewController:dialogController.rootViewController];
     }
 }
 
@@ -551,18 +547,6 @@
 		if(![_sortedNewPageStackNames containsObject:pageStackName]) {
 			[_sortedNewPageStackNames addObject:pageStackName];
         }
-        
-        // TODO: This looks wrong. Figure out what is happening here
-		// Create a temporary pageStack controller
-//		MBPageStackController *pageStackController = [self pageStackControllerWithName: pageStackName];
-//		if(pageStackController == nil) {
-//			MBPageStackDefinition *pageStackDefinition = [[MBMetadataService sharedInstance] definitionForPageStackName: pageStackName];
-//			pageStackController = [[MBPageStackController alloc] initWithDefinition: pageStackDefinition];
-//			
-//			[_pageStackControllers setValue: pageStackController forKey: pageStackName];
-//			[pageStackController release];
-//			[self updateDisplay];
-//		}
 	}
 }
 
@@ -587,7 +571,7 @@
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     // Set active dialog name
-    for (MBDialogController *dialogController in [_dialogControllers allValues]) {
+    for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
         if (viewController == dialogController.rootViewController) {
             self.activeDialogName = dialogController.name;
             break;

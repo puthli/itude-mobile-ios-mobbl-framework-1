@@ -68,7 +68,7 @@
             [stackController release];
         }
         
-        // Create at least one pageStack for backwards compatibility
+        // Create at least one pageStack if none are declared in XML (for backwards compatibility)
         if (definition.pageStacks.count == 0) {
             MBPageStackDefinition *stackDefinition = [[MBPageStackDefinition alloc] init];
             stackDefinition.name = self.name;
@@ -144,7 +144,7 @@
 }
 
 -(BOOL)showAsTab {
-    return [self.showAs isEqualToString:C_SHOW_AS_TAB];
+    return [self.showAs isEqualToString:C_DIALOG_SHOW_AS_TAB];
 }
 
 @end

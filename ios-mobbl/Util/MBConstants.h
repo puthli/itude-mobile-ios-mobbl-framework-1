@@ -6,9 +6,24 @@
 //  Copyright (c) 2013 Itude Mobile. All rights reserved.
 //
 
+#import <MBConstantsUtilities.h>
+//// Dialogs
+//@interface MBDialogConstants : NSObject
+//@property (nonatomic, assign) NSString *C_SHOW_AS_TAB;
+//
+//
+////FOUNDATION_EXPORT NSString *const C_SHOW_AS_TAB;
+//
+//@end
 
-// Information about constants in OBJC
-// http://stackoverflow.com/questions/538996/constants-in-objective-c
+//@interface MBConstants : NSObject
+////extern MBDialogConstants *dialog;
+//
+//
+//
+//
+//@end
 
-// Dialogs
-NSString *const C_SHOW_AS_TAB = @"TAB";
+// Dialog Constants
+DEFINE_CONSTANT(C_DIALOG_SHOW_AS_TAB, @"TAB");
+
