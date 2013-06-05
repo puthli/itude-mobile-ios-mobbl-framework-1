@@ -165,8 +165,8 @@
                     page.transitionStyle = transitionStyle;
                     [self presentViewController:_modalController fromViewController:_tabController animated:YES];
                 }
-                else if ([self.dialogControllers count] == 1){
-                    MBPageStackController *pageStackController = [[_pageStackControllers allValues] objectAtIndex:0];
+                else {
+                    MBPageStackController *pageStackController = [self pageStackControllerWithName:[self activePageStackName]];
                     [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
                     page.transitionStyle = transitionStyle;
                     [self presentViewController:_modalController fromViewController:pageStackController.navigationController animated:YES];
@@ -333,8 +333,9 @@
         if (self.tabController) {
             [self dismisViewController:self.tabController animated:TRUE];
         }
-        else if ([self.dialogControllers count] == 1){
-            MBPageStackController *pageStackController = [[_pageStackControllers allValues] objectAtIndex:0];
+        else {
+            MBPageStackController *pageStackController = [self pageStackControllerWithName:[self activePageStackName]];
+            // TODO: TransitionStyle!!!
             [self dismisViewController:pageStackController.navigationController animated:YES];
         }
         
