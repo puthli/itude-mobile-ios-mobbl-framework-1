@@ -16,7 +16,7 @@
 
 - (UIBarButtonItem *)buildBackButtonWithTitle:(NSString *)title {
     UIImage *iconImage = [UIImage imageNamed:@"backButtonIconArrowWhite.png"];
-    return [[UIBarButtonItem alloc] initWithImage:iconImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed:)];
+    return [[[UIBarButtonItem alloc] initWithImage:iconImage style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonPressed:)] autorelease];
 }
 
 @end

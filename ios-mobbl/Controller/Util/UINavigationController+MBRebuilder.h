@@ -11,4 +11,5 @@
 @interface UINavigationController (MBRebuilder)<UINavigationBarDelegate>
 -(void) rebuild;
 -(void)setRootViewController:(UIViewController *)rootViewController;
+-(void)replaceLastViewController:(UIViewController *)viewController;
 @end

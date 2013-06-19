@@ -101,31 +101,20 @@
     
 	UINavigationController *nav = [self determineNavigationController];
 	
-	if([displayMode isEqualToString:@"REPLACE"]) {
-
-        // Replace page controller on the stack
-		if (nav.visibleViewController == nav.topViewController) {
-            
-            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:nav];
-			[nav popViewControllerAnimated:NO];
-			[nav setRootViewController:page.viewController];
-		}
-        // Replace the last page on the stack
-		else {
-            [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:nav];
-			[nav popViewControllerAnimated:NO];
-			[nav pushViewController:page.viewController animated:NO];
-		}
-
-		return;
-	}
-
     // Apply transitionStyle for a regular page navigation
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
     [style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
     
+    // Replace the last page on the stack
+	if([displayMode isEqualToString:@"REPLACE"]) {
+        [nav replaceLastViewController:page.viewController];
+		return;
+	}
+    
     // Regular navigation to new page
-	[nav pushViewController:page.viewController animated:[style animated]];
+    else {
+       [nav pushViewController:page.viewController animated:[style animated]]; 
+    }
 	
 }
 

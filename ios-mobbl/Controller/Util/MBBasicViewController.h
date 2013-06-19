@@ -17,11 +17,7 @@
 
 
 /** Template for custom MBViewController classes. Coupled to exactly one MBPage */
-@interface MBBasicViewController : UIViewController<MBViewControllerProtocol> {
-	MBPage *_page;
-    MBDialogController *_dialogController;
-}
-
+@interface MBBasicViewController : UIViewController<MBViewControllerProtocol> 
 @property (nonatomic, retain) MBPage *page;
 @property (nonatomic, retain) MBDialogController *dialogController;
 

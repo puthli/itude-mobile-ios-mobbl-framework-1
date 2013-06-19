@@ -12,6 +12,13 @@
 #import "MBDialogController.h"
 #import "MBViewBuilderFactory.h"
 
+@interface MBPage () {
+	MBPage *_page;
+    MBDialogController *_dialogController;
+}
+
+@end
+
 @implementation MBBasicViewController
 
 @synthesize page = _page;
@@ -20,6 +27,7 @@
 - (void) dealloc
 {
     [_page release];
+    [_dialogController release];
     [super dealloc];
 }
 
