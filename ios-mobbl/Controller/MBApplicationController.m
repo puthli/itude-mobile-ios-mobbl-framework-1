@@ -339,8 +339,7 @@ static MBApplicationController *_instance = nil;
         MBPageDefinition *pageDefinition = [args objectAtIndex:1];
         MBDocument *document = [args objectAtIndex:2];
         NSString *selectPageInPageStack = [args objectAtIndex:3];
-        
-        CGRect bounds = [[UIScreen mainScreen] applicationFrame];
+        CGRect bounds = self.viewManager.bounds;
         
         MBPage *page = [_applicationFactory createPage:pageDefinition 
 											  document: document 

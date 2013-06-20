@@ -521,11 +521,7 @@
 
 - (void)showActivityIndicator {
 	if(_activityIndicatorCount == 0) {
-		// determine the maximum bounds of the screen
-		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
-		
-		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-
+		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:self.window.bounds] autorelease];
 		[self.window addSubview:blocker];
 	}
 	_activityIndicatorCount ++;
