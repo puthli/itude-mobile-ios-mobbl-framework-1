@@ -28,6 +28,7 @@
 - (void) dealloc
 {
     [_page release];
+    [_pageStackController release];
     [super dealloc];
 }
 
