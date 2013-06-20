@@ -61,8 +61,8 @@
 #pragma mark Button Handeling
 
 - (void)backButtonPressed:(id)sender {
-    NSString *activeDialogName = [[[MBApplicationController currentInstance] viewManager] activeDialogName];
-    [[[MBApplicationController currentInstance] viewManager] popPageOnDialogWithName:activeDialogName];
+    NSString *activePageStackName = [[[MBApplicationController currentInstance] viewManager] activePageStackName];
+    [[[MBApplicationController currentInstance] viewManager] popPageOnPageStackWithName:activePageStackName];
 }
 
 

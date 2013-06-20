@@ -28,8 +28,29 @@
 }
 
 -(void)setRootViewController:(UIViewController *)rootViewController {
-    rootViewController.navigationItem.hidesBackButton = YES;
-    [self pushViewController:rootViewController animated:NO];
+    if (self.viewControllers.count == 0) {
+        rootViewController.navigationItem.hidesBackButton = YES;
+        [self pushViewController:rootViewController animated:NO];
+    }
+    else {
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
+        [viewControllers removeObjectAtIndex:0];
+        [viewControllers insertObject:rootViewController atIndex:0];
+        [self setViewControllers:viewControllers];
+    }
+    
+}
+
+-(void)replaceLastViewController:(UIViewController *)viewController {
+    if (self.viewControllers.count > 1) {
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
+        [viewControllers removeLastObject];
+        [viewControllers addObject:viewController];
+        [self setViewControllers:viewControllers animated:NO];
+    }
+    else {
+        [self setRootViewController:viewController];
+    }
 }
 
 @end

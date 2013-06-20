@@ -23,16 +23,70 @@
 #import "MBValueChangeListenerProtocol.h"
 #import "MBSession.h"
 
+@interface MBPage () {
+    // Public properties
+	NSString *_pageName;
+	NSString *_rootPath;
+	NSString *_dialogName;
+    MBDocument *_document;
+	MBApplicationController *_controller;
+    UIViewController<MBViewControllerProtocol> *_viewController;
+    NSMutableArray *_childViewControllers;
+	MBDocumentDiff *_documentDiff;
+    MBPageType _pageType;
+    NSString *_transitionStyle;
+    
+	NSMutableDictionary *_valueChangedListeners;
+	NSMutableArray *_outcomeListeners;
+	CGRect _maxBounds;
+	MBViewState _viewState;
+}
+@property (nonatomic, retain) NSMutableDictionary *valueChangedListeners;
+@property (nonatomic, retain) NSMutableArray *outcomeListeners;
+@property (nonatomic, assign) CGRect maxBounds;
+@property (nonatomic, assign) MBViewState viewState;
+@end
+
 @implementation MBPage
 
+// Public properties
 @synthesize pageName = _pageName;
-@synthesize pageStackName = _pageStackName;
+@synthesize rootPath = _rootPath;
+@synthesize dialogName = _dialogName;
 @synthesize document = _document;
 @synthesize controller = _controller;
+@synthesize viewController = _viewController;
 @synthesize childViewControllers = _childViewControllers;
 @synthesize documentDiff = _documentDiff;
 @synthesize pageType = _pageType;
 @synthesize transitionStyle = _transitionStyle;
+
+//Private properties
+@synthesize valueChangedListeners = _valueChangedListeners;
+@synthesize outcomeListeners = _outcomeListeners;
+@synthesize maxBounds = _maxBounds;
+@synthesize viewState = _viewState;
+
+
+-(void) dealloc {
+	// Public properties
+	[_pageName release];
+	[_rootPath release];
+    [_dialogName release];
+    [_document release];
+    [_controller release];
+    [_viewController release];
+    [_childViewControllers release];
+	[_documentDiff release];
+    [_transitionStyle release];
+    
+    // Private properties
+	[_valueChangedListeners release];
+	[_outcomeListeners release];
+	[super dealloc];
+}
+
+
 
 -(id) initWithDefinition:(MBPageDefinition*) definition 
       withViewController:(UIViewController<MBViewControllerProtocol>*) viewController 
@@ -45,10 +99,11 @@
         self.rootPath = rootPath;
         self.pageName = definition.name;
 		self.document = document;
-		_valueChangedListeners = [NSMutableDictionary new];
-		_outcomeListeners = [NSMutableArray new];
-		_pageType = definition.pageType;
-		_viewState = viewState;
+		self.valueChangedListeners = [NSMutableDictionary dictionary];
+		self.outcomeListeners = [NSMutableArray array];
+        self.pageType = definition.pageType;
+		self.viewState = viewState;
+
 
 		self.viewController = viewController;
 		[self.viewController  setPage: self];
@@ -74,11 +129,11 @@
         self.rootPath = rootPath;
         self.document = document;
         self.pageName = definition.name;
-		_maxBounds = bounds;
-		_viewState = viewState;
-		_valueChangedListeners = [NSMutableDictionary new];
-		_outcomeListeners = [NSMutableArray new];
-		_pageType = definition.pageType;
+        self.maxBounds = bounds;
+		self.viewState = viewState;
+		self.valueChangedListeners = [NSMutableDictionary dictionary];
+		self.outcomeListeners = [NSMutableArray array];
+		self.pageType = definition.pageType;
 
         // Ok; now we can build the children:
         for(MBDefinition *def in definition.children) {
@@ -93,18 +148,6 @@
 	return self;
 }
 
--(void) dealloc {
-	[_document release];
-	[_pageName release];
-    [_pageStackName release];
-	[_rootPath release];
-    [_childViewControllers release];
-	[_documentDiff release];
-	[_valueChangedListeners release];
-	[_outcomeListeners release];
-    [_transitionStyle release];
-	[super dealloc];
-}
 
 -(void) rebuild {
 	[self.document clearAllCaches];
@@ -114,13 +157,13 @@
 -(void) rebuildView {
 	// Make sure we clear the cache of all related documents:
 	[self rebuild];
-	CGRect bounds = [UIScreen mainScreen].applicationFrame;	
-	self.viewController.view = [self buildViewWithMaxBounds: bounds forParent:nil viewState: _viewState];
+	CGRect bounds = [UIScreen mainScreen].applicationFrame;
+	self.viewController.view = [self buildViewWithMaxBounds: bounds forParent:nil viewState: self.viewState];
 }
 
 // This is a method required by component so any component can find the page
 -(MBPage*) page {
-	return self;	
+	return self;
 }
 
 -(void) hideKeyboard: (id) msg {
@@ -132,9 +175,9 @@
 }
 
 -(void) handleException:(NSException *)exception {
-	MBOutcome *outcome = [[MBOutcome alloc] initWithOutcomeName: self.pageName document:_document];
-	[_controller handleException:exception outcome:outcome];
-	[outcome release];	
+	MBOutcome *outcome = [[MBOutcome alloc] initWithOutcomeName: self.pageName document:self.document];
+	[self.controller handleException:exception outcome:outcome];
+	[outcome release];
 }
 
 -(void) handleOutcome:(NSString *)outcomeName {
@@ -146,14 +189,14 @@
 	outcome.originName = self.pageName;
 	outcome.outcomeName = outcomeName;
 	outcome.document = [self document];
-	outcome.pageStackName = [self pageStackName];
+    outcome.pageStackName = [self pageStackName];
 	outcome.path = path;
-
-	for(id<MBOutcomeListenerProtocol> lsnr in _outcomeListeners) {
-		[lsnr outcomeProduced:outcome];	
+    
+	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+		[lsnr outcomeProduced:outcome];
 	}
 	
-	[_controller handleOutcome:outcome];
+	[self.controller handleOutcome:outcome];
 	[outcome release];
 }
 
@@ -162,11 +205,11 @@
 }
 
 -(NSString *) description {
-    return [NSString stringWithFormat:@"<%@: %p; pageID: %@>", [self class], self, _pageName];
+    return [NSString stringWithFormat:@"<%@: %p; pageID: %@>", [self class], self, self.pageName];
 }
 
 -(void) setRootPath:(NSString *) path {
-
+    
 	BOOL ignorePath = FALSE;
 	
 	if(path == nil) path = @"";
@@ -178,14 +221,14 @@
 		
 		// If the last character is not a slash (/), add one.
 		if (![stripped hasSuffix:@"/"]) {
-			stripped = [NSString stringWithFormat:@"%@/", stripped]; 
+			stripped = [NSString stringWithFormat:@"%@/", stripped];
 		}
 		
 		
 		
 		NSString *mustBe = pd.rootPath;
 		if(mustBe == nil || [mustBe isEqualToString:@""]) mustBe = @"/";
-		 
+        
 		if(![stripped isEqualToString:mustBe]) {
 			if([mustBe isEqualToString:@"/"]) {
 				WLog(@"Ignoring path %@ because the document definition used root path %@", stripped, mustBe);
@@ -198,33 +241,20 @@
 		}
 	}
 	
-    if(!ignorePath && _rootPath != path) {   
-   	  [_rootPath release];
-	  _rootPath = path;
-	  [_rootPath retain];
+    if(!ignorePath && _rootPath != path) {
+        [_rootPath release];
+        _rootPath = path;
+        [_rootPath retain];
     }
 }
 
--(NSString*) rootPath {
-	return _rootPath;
-}
 
 -(UIView*) view {
     return self.viewController.view;
 }
 
--(void) setViewController:(UIViewController<MBViewControllerProtocol>*) viewController {
-    [_viewController release];
-    _viewController = viewController;
-    [_viewController retain];
-}
-
--(UIViewController<MBViewControllerProtocol>*) viewController {
-    return _viewController;
-}
-
 - (void) unregisterAllViewControllers {
-	self.childViewControllers = nil;	
+	self.childViewControllers = nil;
 }
 
 - (void) registerViewController:(UIViewController*) controller {
@@ -242,12 +272,12 @@
 }
 - (NSString *) asXmlWithLevel:(int)level {
 	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<MBPage%@%@%@%@>\n", level, "",
-							   [self attributeAsXml:@"pageName" withValue:_pageName],
-							   [self attributeAsXml:@"rootPath" withValue:_rootPath],
-							   [self attributeAsXml:@"pageStackName" withValue:_pageStackName],
-							   [self attributeAsXml:@"document" withValue:_document.documentName]
+							   [self attributeAsXml:@"pageName" withValue:self.name],
+							   [self attributeAsXml:@"rootPath" withValue:self.rootPath],
+							   [self attributeAsXml:@"dialogName" withValue:self.dialogName],
+							   [self attributeAsXml:@"document" withValue:self.document.documentName]
 							   ];
-
+    
     [result appendString: [self childrenAsXmlWithLevel: level+2]];
 	[result appendFormat:@"%*s</MBPage>\n", level, ""];
 	
@@ -255,7 +285,7 @@
 }
 
 -(MBDocumentDiff*) diffDocument:(MBDocument*) other {
-
+    
 	MBDocumentDiff *diff = [[MBDocumentDiff alloc]initWithDocumentA:self.document andDocumentB: other];
 	self.documentDiff = diff;
 	[diff release];
@@ -267,13 +297,13 @@
 	if(![path hasPrefix:@"/"]) path = [NSString stringWithFormat:@"/%@", path];
 	
 	path = [path normalizedPath];
-	NSMutableArray *lsnrList = [_valueChangedListeners valueForKey:path];
+	NSMutableArray *lsnrList = [self.valueChangedListeners valueForKey:path];
 	if(lsnrList == nil) {
 		lsnrList = [NSMutableArray array];
-		[_valueChangedListeners setObject:lsnrList forKey:path];
+		[self.valueChangedListeners setObject:lsnrList forKey:path];
 	}
 	return lsnrList;
-}	
+}
 
 - (void) registerValueChangeListener:(id<MBValueChangeListenerProtocol>) listener forPath:(NSString*) path {
 	// Check that the path is valid by reading the value:
@@ -288,13 +318,13 @@
 	[[self document] valueForPath:path];
 	
 	NSMutableArray *lsnrList = [self listenersForPath: path];
-	[lsnrList removeObject:listener];	
+	[lsnrList removeObject:listener];
 }
 
 - (void) unregisterValueChangeListener:(id<MBValueChangeListenerProtocol>) listener {
 	// Check that the path is valid by reading the value:
 	
-	for(NSMutableArray *list in [_valueChangedListeners allValues]) [list removeObject:listener];
+	for(NSMutableArray *list in [self.valueChangedListeners allValues]) [list removeObject:listener];
 }
 
 - (BOOL) notifyValueWillChange:(NSString*) value originalValue:(NSString*) originalValue forPath:(NSString*) path {
@@ -316,15 +346,15 @@
 }
 
 - (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
-	if(![_outcomeListeners containsObject:listener]) 	[_outcomeListeners addObject:listener];
+	if(![self.outcomeListeners containsObject:listener]) 	[self.outcomeListeners addObject:listener];
 }
 
 - (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
-	[_outcomeListeners removeObject: listener];
+	[self.outcomeListeners removeObject: listener];
 }
 
 - (MBViewState) currentViewState {
-	return _viewState;	
+	return self.viewState;
 }
 
 @end

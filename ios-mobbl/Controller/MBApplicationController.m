@@ -229,9 +229,13 @@ static MBApplicationController *_instance = nil;
                 // Action
 				MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];
 				if(actionDef != nil) {
-                    [_viewManager showActivityIndicator];
-					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
-					else [self SELECTOR_HANDLING:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
+                    if(outcomeToProcess.noBackgroundProcessing) {
+                        [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
+					}
+                    else {
+                        [_viewManager showActivityIndicator];
+                        [self SELECTOR_HANDLING:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef,  nil]];
+                    }
 				}
 				
                 // Page
