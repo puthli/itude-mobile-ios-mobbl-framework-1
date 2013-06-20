@@ -43,7 +43,7 @@
 }
 
 -(void)replaceLastViewController:(UIViewController *)viewController {
-    if (self.viewControllers.count > 0) {
+    if (self.viewControllers.count > 1) {
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:self.viewControllers];
         [viewControllers removeLastObject];
         [viewControllers addObject:viewController];

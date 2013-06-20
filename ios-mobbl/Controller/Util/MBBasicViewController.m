@@ -12,7 +12,7 @@
 #import "MBDialogController.h"
 #import "MBViewBuilderFactory.h"
 
-@interface MBPage () {
+@interface MBBasicViewController () {
 	MBPage *_page;
     MBDialogController *_dialogController;
 }
