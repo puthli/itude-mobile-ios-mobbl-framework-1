@@ -19,8 +19,6 @@
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *showAs;
 @property (nonatomic, retain) NSString *contentType;
-
-
 @property (nonatomic, retain) NSMutableArray *pageStackControllers;
 @property (nonatomic, retain) UIViewController *rootViewController;
 

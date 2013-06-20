@@ -27,8 +27,9 @@
 	NSString *_title;
     NSString *_showAs;
     NSString *_contentType;
-    NSMutableArray *_pageStacks;
-    UIViewController *_viewController;
+    NSMutableArray *_pageStackControllers;
+    UIViewController *_rootViewController;
+    
 	NSInteger _activityIndicatorCount;
 }
 
@@ -41,8 +42,8 @@
 @synthesize title = _title;
 @synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
-@synthesize pageStackControllers = _pageStacks;
-
+@synthesize rootViewController = _rootViewController;
+@synthesize pageStackControllers = _pageStackControllers;
 
 
 - (void) dealloc
@@ -50,9 +51,11 @@
 	[_name release];
 	[_iconName release];
 	[_title release];
+    [_showAs release];
     [_contentType release];
-    [_pageStacks release];
-    [_viewController release];
+    [_rootViewController release];
+    [_pageStackControllers release];
+    
 	[super dealloc];
 }
 

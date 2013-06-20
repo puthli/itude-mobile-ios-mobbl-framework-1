@@ -23,12 +23,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface MBPageStackController(){
-    
+    // Public
 	NSString *_name;
 	NSString *_title;
-
-	CGRect _bounds;
+	MBDialogController *_dialogController;
     UINavigationController *_navigationController;
+    CGRect _bounds;
+    
+    // Private
 	NSInteger _activityIndicatorCount;
 	BOOL _temporary;
 }
@@ -42,10 +44,14 @@
 
 @implementation MBPageStackController
 
+// Public
 @synthesize name = _name;
 @synthesize title = _title;
-@synthesize bounds = _bounds;
+@synthesize dialogController = _dialogController;
 @synthesize navigationController = _navigationController;
+
+// Private
+@synthesize bounds = _bounds;
 @synthesize activityIndicatorCount = _activityIndicatorCount;
 
 - (void) dealloc
@@ -54,7 +60,8 @@
     
 	[_name release];
     [_title release];
-    //[_navigationController release];
+    [_dialogController release];
+    [_navigationController release];
 	[super dealloc];
 }
 
