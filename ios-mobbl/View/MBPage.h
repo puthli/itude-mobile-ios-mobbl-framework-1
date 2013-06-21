@@ -27,9 +27,9 @@
 @property (nonatomic, retain) NSString *pageStackName;
 @property (nonatomic, retain) NSString *dialogName;
 @property (nonatomic, retain) MBDocument *document;
-@property (nonatomic, assign) MBApplicationController *controller;
-@property (nonatomic, retain) UIViewController <MBViewControllerProtocol>*viewController; // Contains the ViewControllers of potential child views (like UITableViewControllers)
-@property (nonatomic, retain) NSMutableArray *childViewControllers;
+@property (nonatomic, assign) MBApplicationController *applicationController;
+@property (nonatomic, assign) UIViewController <MBViewControllerProtocol>*viewController;
+@property (nonatomic, retain) NSMutableArray *childViewControllers; // Contains the ViewControllers of potential child views (like UITableViewControllers)
 @property (nonatomic, retain) MBDocumentDiff *documentDiff;
 @property (nonatomic, assign) MBPageType pageType;
 @property (nonatomic, retain) NSString *transitionStyle;

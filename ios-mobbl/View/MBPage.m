@@ -29,7 +29,7 @@
 	NSString *_rootPath;
 	NSString *_dialogName;
     MBDocument *_document;
-	MBApplicationController *_controller;
+	MBApplicationController *_applicationController;
     UIViewController<MBViewControllerProtocol> *_viewController;
     NSMutableArray *_childViewControllers;
 	MBDocumentDiff *_documentDiff;
@@ -54,7 +54,7 @@
 @synthesize rootPath = _rootPath;
 @synthesize dialogName = _dialogName;
 @synthesize document = _document;
-@synthesize controller = _controller;
+@synthesize applicationController = _applicationController;
 @synthesize viewController = _viewController;
 @synthesize childViewControllers = _childViewControllers;
 @synthesize documentDiff = _documentDiff;
@@ -74,7 +74,7 @@
 	[_rootPath release];
     [_dialogName release];
     [_document release];
-    [_controller release];
+    //[_controller release]; // Do not release the ApplicationController because it is not retained!
     [_viewController release];
     [_childViewControllers release];
 	[_documentDiff release];
@@ -176,7 +176,7 @@
 
 -(void) handleException:(NSException *)exception {
 	MBOutcome *outcome = [[MBOutcome alloc] initWithOutcomeName: self.pageName document:self.document];
-	[self.controller handleException:exception outcome:outcome];
+	[self.applicationController handleException:exception outcome:outcome];
 	[outcome release];
 }
 
@@ -196,7 +196,7 @@
 		[lsnr outcomeProduced:outcome];
 	}
 	
-	[self.controller handleOutcome:outcome];
+	[self.applicationController handleOutcome:outcome];
 	[outcome release];
 }
 

@@ -346,7 +346,7 @@ static MBApplicationController *_instance = nil;
 											  rootPath: causingOutcome.path  
 											 viewState: viewState 
 										 withMaxBounds: bounds];
-        page.controller = self;
+        page.applicationController = self;
         page.pageStackName = causingOutcome.pageStackName;
 		// Fallback on the lastly selected pageStack if there is no pageStack set in the outcome:
 	    if(page.pageStackName == nil) {

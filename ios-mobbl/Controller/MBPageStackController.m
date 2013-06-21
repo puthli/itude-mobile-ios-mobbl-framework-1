@@ -37,8 +37,6 @@
 @property (nonatomic, assign) NSInteger activityIndicatorCount;
 
 -(void) clearSubviews;
--(UINavigationController*) determineNavigationController;
--(UITabBarController*) determineTabBarController;
 
 @end
 
@@ -105,7 +103,7 @@
     
     page.transitionStyle = transitionStyle;
     
-    UINavigationController *nav = [self determineNavigationController];
+    UINavigationController *nav = self.navigationController;
 	
     // Apply transitionStyle for a regular page navigation
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
@@ -126,7 +124,7 @@
 
 -(void)popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL)animated
 {
-	UINavigationController *nav = [self determineNavigationController];
+	UINavigationController *nav = self.navigationController;
     
     // Apply transitionStyle for a regular page navigation
     if (transitionStyle) {
@@ -146,42 +144,12 @@
 }
 
 -(void) rebuildPage:(id) args {
-	id navigationController = [self determineNavigationController];
-    
-    [navigationController rebuild];
+    [self.navigationController rebuild];
 }
 
--(UITabBarController*)determineTabBarController {
-    return [[[MBApplicationController currentInstance] viewManager] tabController];
-}
-
-// The following code is really ugly: depending on the time of construction of the pageStack the navigation controller
-// might be nil; try a few possibilities:
--(UINavigationController*) determineNavigationController {
-
-//    return [self.rootController.visibleViewController]
-    
-//	if(_navigationController != nil) return _navigationController;
-	
-    UITabBarController *tabBarController = [self determineTabBarController];
-	if(tabBarController) {
-		int idx = [tabBarController.viewControllers indexOfObject:self.navigationController];
-		if(idx != NSNotFound && idx >= FIRST_MORE_TAB_INDEX) {
-			return tabBarController.moreNavigationController;
-		}
-	}
-    return self.navigationController;
-}
 
 -(void)willActivate {
     DLog(@"Will show pageStackController with name %@", [self name]);
-    
-    UINavigationController * navigationController = [self determineNavigationController];
-    
-	UINavigationBar *morenavbar = navigationController.navigationBar;
-    UINavigationItem *morenavitem = morenavbar.topItem;
-    // Currently we don't want Edit button in More screen; because we need to store the order then also
-	if([self determineTabBarController].moreNavigationController == navigationController) morenavitem.rightBarButtonItem = nil;
 }
 
 -(void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
