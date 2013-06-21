@@ -27,7 +27,7 @@
 @property (nonatomic, retain) NSString *dialogName;
 @property (nonatomic, retain) MBDocument *document;
 @property (nonatomic, assign) MBApplicationController *controller;
-@property (nonatomic, retain) UIViewController <MBViewControllerProtocol>*viewController;
+@property (nonatomic, assign) UIViewController <MBViewControllerProtocol>*viewController;
 @property (nonatomic, retain) NSMutableArray *childViewControllers;
 @property (nonatomic, retain) MBDocumentDiff *documentDiff;
 @property (nonatomic, assign) MBPageType pageType;

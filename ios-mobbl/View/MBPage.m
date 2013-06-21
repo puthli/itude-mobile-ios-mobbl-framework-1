@@ -74,7 +74,7 @@
 	[_rootPath release];
     [_dialogName release];
     [_document release];
-    [_controller release];
+    //[_controller release]; // Do not release the ApplicationController because it is not retained!
     [_viewController release];
     [_childViewControllers release];
 	[_documentDiff release];
