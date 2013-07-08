@@ -167,7 +167,7 @@
     NSString *argumentsString = [NSString stringWithFormat:@"%d", key];
     for (int i=0; i<[resultSetColumnNames count]; i++) {
         NSString *columnName = [[resultSetColumnNames objectAtIndex:i] valueForKey:@"name"];
-        NSString *columnValue = [@"" stringByAppendingString:[row valueForAttribute:columnName]];
+        NSString *columnValue = [NSString stringWithFormat:@"%@", [row valueForAttribute:columnName]];
         if (columnName && ![columnName isEqualToString:@"key"]) {
             [arguments addObject:columnValue];
             argumentsString = [argumentsString stringByAppendingFormat:@", %@", columnValue];
