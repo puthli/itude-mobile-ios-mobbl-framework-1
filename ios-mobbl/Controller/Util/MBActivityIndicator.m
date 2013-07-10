@@ -9,6 +9,7 @@
 #import "MBActivityIndicator.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MBStyleHandler.h"
+#import "MBLocalizationService.h"
 
 #define ACTIVITYINDICATORSIZE 35 //Original was 24
 
@@ -69,6 +70,7 @@
 #define OVERLAY_HEIGHT 150
 - (void)showWithMessage:(NSString *)message {
     
+    message = MBLocalizedString(message);
     message = [message stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
 
     CGRect innerOverlayFrame = [self getCenterOfFrame:self.frame];
@@ -98,6 +100,7 @@
 - (void)setMessage:(NSString *)message {
     if (_message != message) {
         [_message release];
+        message = [MBLocalizedString(message) stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
         _message = message;
         [_message retain];
         [self.messageLabel setText:message];
