@@ -44,7 +44,7 @@
 - (void) activateDialogWithName:(NSString*) dialogName;
 - (void) endDialog:(NSString*) dialogName keepPosition:(BOOL) keepPosition;
 - (void) popPageOnDialogWithName:(NSString*) dialogName;
-- (void) showActivityIndicatorForDialog:(NSString*) dialogName;
+- (void) showActivityIndicatorWithMessage:(NSString*) message;
 - (void) hideActivityIndicatorForDialog:(NSString*) dialogName;
 - (void) makeKeyAndVisible;
 - (void) notifyDialogUsage:(NSString*) dialogName;

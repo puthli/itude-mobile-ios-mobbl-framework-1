@@ -23,6 +23,7 @@
 	BOOL _noBackgroundProcessing;
 	MBDocument *_document;
 	NSString *_preCondition;
+    NSString *_processingMessage;
 }
 
 @property (nonatomic, retain) NSString *originName;
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) NSString *displayMode;
 @property (nonatomic, retain) NSString *transitionStyle;
 @property (nonatomic, retain) NSString *preCondition;
+@property (nonatomic, retain) NSString *processingMessage;
 @property (nonatomic, retain) MBDocument *document;
 @property (nonatomic, assign) BOOL persist;
 @property (nonatomic, assign) BOOL transferDocument;

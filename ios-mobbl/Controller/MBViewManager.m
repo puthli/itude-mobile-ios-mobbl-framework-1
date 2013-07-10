@@ -549,23 +549,35 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 	return [[self dialogWithName:dialogName] screenBoundsForDisplayMode: displayMode];	
 }
 
-- (void)showActivityIndicatorForDialog:(NSString*) dialogName {
-	[self showActivityIndicator];
-}
-
 - (void)hideActivityIndicatorForDialog:(NSString*) dialogName {
 	[self hideActivityIndicator];
 }
 
 - (void)showActivityIndicator {
+    [self showActivityIndicatorWithMessage:nil];
+}
+
+- (void)showActivityIndicatorWithMessage:(NSString *)message {
 	if(_activityIndicatorCount == 0) {
 		// determine the maximum bounds of the screen
-		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
+        MBDialogController *dc = [self dialogWithName:self.activeDialogName];
+		CGRect bounds = dc.rootController.view.bounds;//[UIScreen mainScreen].applicationFrame;
 		
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
+        if (message) {
+            [blocker showWithMessage:message];
+        }
 
-		[self.window addSubview:blocker];
-	}
+		[dc.rootController.view addSubview:blocker];
+	}else{
+        for (UIView *subview in [self dialogWithName:self.activeDialogName].rootController.view.subviews) {
+            if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+                MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
+                [indicatorView setMessage:message];
+                break;
+            }
+        }
+    }
 	_activityIndicatorCount ++;
 }
 
@@ -574,9 +586,11 @@ if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-			UIView *top = [self.window.subviews lastObject];
-			if ([top isKindOfClass:[MBActivityIndicator class]])
-				[top removeFromSuperview];
+            for (UIView *subview in [self dialogWithName:self.activeDialogName].rootController.view.subviews) {
+                if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+                    [subview removeFromSuperview];
+                }
+            }
 		}
 	}
 }

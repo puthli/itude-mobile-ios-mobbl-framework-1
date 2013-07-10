@@ -45,7 +45,7 @@
 }
 
 -(void) showActivityIndicator {
-	[[MBApplicationController currentInstance] showActivityIndicatorForDialog:self.page.dialogName];
+	[[MBApplicationController currentInstance] showActivityIndicatorWithMessage:self.page.dialogName];
 }
 
 -(void) hideActivityIndicator {

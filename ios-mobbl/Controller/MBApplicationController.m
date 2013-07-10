@@ -236,7 +236,7 @@ static MBApplicationController *_instance = nil;
                         [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
 					}
                     else {
-                        [_viewManager showActivityIndicatorForDialog:outcomeToProcess.dialogName];
+                        [_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
                         [self SELECTOR_HANDLING:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef,  nil]];
                     }
 				}
@@ -244,7 +244,7 @@ static MBApplicationController *_instance = nil;
                 // Page
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
-					[_viewManager showActivityIndicatorForDialog:outcomeToProcess.dialogName];
+					[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInDialog, nil]];
 					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInDialog, nil]];
 
@@ -458,8 +458,8 @@ static MBApplicationController *_instance = nil;
 	[_viewManager activateDialogWithName: name];
 }
 
--(void) showActivityIndicatorForDialog:(NSString*) dialogName {
-	[_viewManager showActivityIndicatorForDialog:dialogName];
+-(void) showActivityIndicatorWithMessage:(NSString*) message {
+	[_viewManager showActivityIndicatorWithMessage:message];
 }
 
 -(void) hideActivityIndicatorForDialog:(NSString*) dialogName {

@@ -12,8 +12,25 @@
 
 #define ACTIVITYINDICATORSIZE 35 //Original was 24
 
+@interface MBActivityIndicator()
+
+@property (nonatomic, retain) UIActivityIndicatorView *indicatorView;
+@property (nonatomic, retain) UILabel *messageLabel;
+
+@end
+
 @implementation MBActivityIndicator
 
+@synthesize indicatorView = _indicatorView;
+@synthesize messageLabel = _messageLabel;
+@synthesize message = _message;
+
+- (void)dealloc {
+    [_message release];
+    [_indicatorView release];
+    [_messageLabel release];
+    [super dealloc];
+}
 
 -(id) initWithFrame:(CGRect)frame{
 	if(self = [super initWithFrame:frame]){
@@ -39,13 +56,57 @@
 		
 		// Create the Activity/spinning wheel
 		CGRect activityInset = CGRectInset(frame, (frame.size.width - ACTIVITYINDICATORSIZE) / 2, (frame.size.height - ACTIVITYINDICATORSIZE) / 2);
-		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
-		[aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+		self.indicatorView = [[[UIActivityIndicatorView alloc] initWithFrame:activityInset] autorelease];
+		[self.indicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
 		//[aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
-		[self addSubview:aiv];
-		[aiv startAnimating];
+		[self addSubview:self.indicatorView];
+		[self.indicatorView startAnimating];
 	}
 	return self;
+}
+
+#define OVERLAY_WIDTH 150
+#define OVERLAY_HEIGHT 150
+- (void)showWithMessage:(NSString *)message {
+    
+    message = [message stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+
+    CGRect innerOverlayFrame = [self getCenterOfFrame:self.frame];
+    UIView *innerOverlay = [[UIView alloc] initWithFrame:innerOverlayFrame];
+    [innerOverlay setBackgroundColor:[UIColor colorWithRed:1.0/255.0 green:1.0/255.0 blue:1.0/255.0 alpha:0.8]];
+    [innerOverlay.layer setCornerRadius:15.0];
+    
+    CGRect overlayLabelFrame = CGRectMake(0, OVERLAY_HEIGHT - 75, OVERLAY_WIDTH, 75);
+    self.messageLabel = [[[UILabel alloc] initWithFrame:overlayLabelFrame] autorelease];
+    [self.messageLabel setBackgroundColor:[UIColor clearColor]];
+    [self.messageLabel setTextColor:[UIColor whiteColor]];
+    [self.messageLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.messageLabel setNumberOfLines:0];
+    [self.messageLabel setText:message];
+    [innerOverlay addSubview:self.messageLabel];
+    
+    CGRect indicatorFrame = CGRectMake(50, 40, 50, 50);
+    [self.indicatorView setFrame:indicatorFrame];
+    [self.indicatorView removeFromSuperview];
+    [innerOverlay addSubview:self.indicatorView];
+    [self.indicatorView startAnimating];
+    
+    [self addSubview:innerOverlay];
+    [innerOverlay release];
+}
+
+- (void)setMessage:(NSString *)message {
+    if (_message != message) {
+        [_message release];
+        _message = message;
+        [_message retain];
+        [self.messageLabel setText:message];
+    }
+}
+
+- (CGRect)getCenterOfFrame:(CGRect)frame {
+    CGRect newFrame = CGRectMake((frame.size.width/2) - OVERLAY_WIDTH/2, (frame.size.height/2) - OVERLAY_WIDTH/2, OVERLAY_WIDTH, OVERLAY_HEIGHT);
+    return newFrame;
 }
 
 @end

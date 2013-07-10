@@ -44,7 +44,7 @@
 -(NSString*) activeDialogName;
 -(NSString *) activeDialogGroupName;
 -(void) activateDialogWithName:(NSString*) name;
--(void) showActivityIndicatorForDialog:(NSString*) dialogName;
+-(void) showActivityIndicatorWithMessage:(NSString*) dialogName;
 -(void) hideActivityIndicatorForDialog:(NSString*) dialogName;
 -(void) resetControllerPreservingCurrentDialog;
 

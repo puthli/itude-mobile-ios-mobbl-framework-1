@@ -16,6 +16,7 @@
 @synthesize displayMode = _displayMode;
 @synthesize transitionStyle = _transitionStyle;
 @synthesize preCondition = _preCondition;
+@synthesize processingMessage = _processingMessage;
 @synthesize persist = _persist;
 @synthesize transferDocument = _transferDocument;
 @synthesize noBackgroundProcessing = _noBackgroundProcessing;
@@ -25,16 +26,18 @@
 	[_origin release];
 	[_action release];
 	[_dialog release];
+    [_processingMessage release];
 	[super dealloc];
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Outcome origin='%@' name='%@' action='%@' transferDocument='%@' persist='%@' noBackgroundProcessing='%@'%@%@%@%@/>\n", level, "", 
+	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Outcome origin='%@' name='%@' action='%@' transferDocument='%@' persist='%@' noBackgroundProcessing='%@'%@%@%@%@%@/>\n", level, "", 
 							   _origin, _name, _action, _transferDocument?@"TRUE":@"FALSE", _persist?@"TRUE":@"FALSE",_noBackgroundProcessing?@"TRUE":@"FALSE",
 							   [self attributeAsXml:@"dialog" withValue:_dialog],
                                [self attributeAsXml:@"preCondition" withValue:_preCondition],
                                [self attributeAsXml:@"displayMode" withValue:_displayMode], 
-                               [self attributeAsXml:@"transitionStyle" withValue:_transitionStyle]];
+                               [self attributeAsXml:@"transitionStyle" withValue:_transitionStyle],
+                               [self attributeAsXml:@"processingMessage" withValue:_processingMessage]];
 	return result;
 }
 

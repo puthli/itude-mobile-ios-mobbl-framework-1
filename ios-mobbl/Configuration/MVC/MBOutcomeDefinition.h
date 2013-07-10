@@ -15,6 +15,7 @@
 	NSString *_displayMode;
     NSString *_transitionStyle;
 	NSString *_preCondition;
+    NSString *_processingMessage;
 	BOOL _persist;
 	BOOL _transferDocument;
 	BOOL _noBackgroundProcessing;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) NSString *displayMode;
 @property (nonatomic, retain) NSString *transitionStyle;
 @property (nonatomic, retain) NSString *preCondition;
+@property (nonatomic, retain) NSString *processingMessage;
 @property (nonatomic, assign) BOOL persist;
 @property (nonatomic, assign) BOOL transferDocument;
 @property (nonatomic, assign) BOOL noBackgroundProcessing;
