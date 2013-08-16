@@ -41,6 +41,7 @@
 * Definitions that use this should implement MBConditionalDefinition. The default implementation
 * always returns `YES`.
 */
+- (BOOL) isPreConditionValid;
 - (BOOL) isPreConditionValid:(MBDocument*) document  currentPath:(NSString*) currentPath;
 
 /// @name Exporting to XML

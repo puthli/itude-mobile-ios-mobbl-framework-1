@@ -473,7 +473,8 @@
         NSMutableArray *tabs = [NSMutableArray new];
         int idx = 0;
         for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
-            if ([dialogController showAsTab]) {
+            MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:dialogController.name];
+            if ([dialogController showAsTab] && [dialogDefinition isPreConditionValid]) {
                 // Create a tabbarProperties
                 UIViewController *viewController = dialogController.rootViewController;
                 UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];

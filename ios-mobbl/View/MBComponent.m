@@ -146,7 +146,7 @@
 
 
 -(MBPage*) page {
-	return [_parent page];	
+	return [[self parent] page];
 }
 
 -(MBDocument*) document {

@@ -6,10 +6,10 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBDefinition.h"
+#import "MBConditionalDefinition.h"
 @class MBPageStackDefinition;
 
-@interface MBDialogDefinition : MBDefinition 
+@interface MBDialogDefinition : MBConditionalDefinition
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *mode;

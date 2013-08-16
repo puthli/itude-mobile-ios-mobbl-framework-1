@@ -179,7 +179,9 @@
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:self.pageStackAttributes];
 		MBPageStackDefinition *pageStackDef = [[MBPageStackDefinition alloc] init];
 		pageStackDef.name = [attributeDict valueForKey:@"name"];
-		pageStackDef.title = [attributeDict valueForKey:@"title"];	
+		pageStackDef.title = [attributeDict valueForKey:@"title"];
+        pageStackDef.preCondition = [attributeDict valueForKey:@"preCondition"];
+
 		[self notifyProcessed:pageStackDef usingSelector:@selector(addPageStack:)];
 		[pageStackDef release];
 	}
@@ -194,7 +196,7 @@
         dialogDef.contentType = [attributeDict valueForKey:@"contentType"];
         dialogDef.decorator = [attributeDict valueForKey:@"decorator"];
         dialogDef.stackStrategy = [attributeDict valueForKey:@"stackStrategy"];
-
+        dialogDef.preCondition = [attributeDict valueForKey:@"preCondition"];
         [self notifyProcessed:dialogDef usingSelector:@selector(addDialog:)];
 		[dialogDef release];
 	}

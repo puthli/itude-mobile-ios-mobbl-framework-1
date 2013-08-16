@@ -6,8 +6,8 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBDefinition.h"
+#import "MBConditionalDefinition.h"
 
-@interface MBPageStackDefinition : MBDefinition 
+@interface MBPageStackDefinition : MBConditionalDefinition
 @property (nonatomic, retain) NSString* title;
 @end

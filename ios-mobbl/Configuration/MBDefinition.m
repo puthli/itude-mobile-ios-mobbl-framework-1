@@ -73,6 +73,10 @@
 		@throw [NSException exceptionWithName:@"UnrecognizedSelector" reason:stringSelector userInfo:nil];
 }
 
+- (BOOL) isPreConditionValid {
+    return TRUE;
+}
+
 - (BOOL) isPreConditionValid:(MBDocument*) document  currentPath:(NSString*) currentPath {
 	return TRUE;	
 }

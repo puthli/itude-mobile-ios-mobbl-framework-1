@@ -8,6 +8,7 @@
 
 #import "MBConditionalDefinition.h"
 #import "MBDocument.h"
+#import "MBDataManagerService.h"
 
 @implementation MBConditionalDefinition
 
@@ -18,6 +19,25 @@
 	[_preCondition release];
 	[super dealloc];
 }
+
+- (BOOL) isPreConditionValid {
+    if (_preCondition == nil) {
+        return TRUE;
+    }
+    
+    MBDocument *doc = [[MBDataManagerService sharedInstance] loadDocument:@"MBEmpty"];
+    
+    NSString *result = [doc evaluateExpression:_preCondition];
+    
+    result = [result uppercaseString];
+	if([@"1" isEqualToString:result] || [@"YES" isEqualToString:result] || [@"TRUE" isEqualToString:result]) return TRUE;
+	if([@"0" isEqualToString:result] || [@"NO" isEqualToString:result]  || [@"FALSE" isEqualToString:result]) return FALSE;
+    
+    NSString *msg = [NSString stringWithFormat:@"Expression of definition with name=%@ preCondition=%@ is not boolean (%@)", self.name, _preCondition, result];
+	@throw [NSException exceptionWithName:@"ExpressionNotBoolean" reason:msg userInfo: nil];
+}
+
+
 
 - (BOOL) isPreConditionValid:(MBDocument*) document currentPath:(NSString*) currentPath {
 	if(_preCondition == nil) return TRUE;
