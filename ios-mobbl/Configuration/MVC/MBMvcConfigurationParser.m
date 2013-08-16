@@ -47,7 +47,7 @@
     self.elementAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"minOccurs",@"maxOccurs",nil];
     self.attributeAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"required",@"defaultValue",nil];
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
-    self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"stack",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",nil];
+    self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"stack",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",@"processingMessage",nil];
     self.pageStackAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
 	self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",@"showAs",@"contentType",@"decorator",@"stackStrategy",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
@@ -170,7 +170,8 @@
 		outcomeDef.preCondition = [attributeDict valueForKey:@"preCondition"];		
 		outcomeDef.persist = [[attributeDict valueForKey:@"persist"] boolValue];	 
 		outcomeDef.transferDocument = [[attributeDict valueForKey:@"transferDocument"] boolValue];	
-		outcomeDef.noBackgroundProcessing = [[attributeDict valueForKey:@"noBackgroundProcessing"] boolValue];	
+		outcomeDef.noBackgroundProcessing = [[attributeDict valueForKey:@"noBackgroundProcessing"] boolValue];
+        outcomeDef.processingMessage = [attributeDict valueForKey:@"processingMessage"];
         [self notifyProcessed:outcomeDef usingSelector:@selector(addOutcome:)];
 		[outcomeDef release];
 	}

@@ -8,7 +8,7 @@
 
 #import "MBDefinition.h"
 
-@interface MBOutcomeDefinition : MBDefinition 
+@interface MBOutcomeDefinition : MBDefinition
 
 @property (nonatomic, retain) NSString *origin;
 @property (nonatomic, retain) NSString *action;
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString *displayMode;
 @property (nonatomic, retain) NSString *transitionStyle;
 @property (nonatomic, retain) NSString *preCondition;
+@property (nonatomic, retain) NSString *processingMessage;
 @property (nonatomic, assign) BOOL persist;
 @property (nonatomic, assign) BOOL transferDocument;
 @property (nonatomic, assign) BOOL noBackgroundProcessing;

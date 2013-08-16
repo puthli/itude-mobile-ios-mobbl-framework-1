@@ -16,11 +16,11 @@
 	NSString *_displayMode;
     NSString *_transitionStyle;
 	NSString *_preCondition;
+    NSString *_processingMessage;
 	BOOL _persist;
 	BOOL _transferDocument;
 	BOOL _noBackgroundProcessing;
 }
-
 @end
 
 @implementation MBOutcomeDefinition
@@ -32,6 +32,7 @@
 @synthesize displayMode = _displayMode;
 @synthesize transitionStyle = _transitionStyle;
 @synthesize preCondition = _preCondition;
+@synthesize processingMessage = _processingMessage;
 @synthesize persist = _persist;
 @synthesize transferDocument = _transferDocument;
 @synthesize noBackgroundProcessing = _noBackgroundProcessing;
@@ -45,6 +46,7 @@
     [_displayMode release];
     [_transitionStyle release];
     [_preCondition release];
+    [_processingMessage release];
 	[super dealloc];
 }
 
@@ -55,7 +57,8 @@
                                [self attributeAsXml:@"pageStack" withValue:self.pageStackName],
                                [self attributeAsXml:@"preCondition" withValue:_preCondition],
                                [self attributeAsXml:@"displayMode" withValue:_displayMode], 
-                               [self attributeAsXml:@"transitionStyle" withValue:_transitionStyle]];
+                               [self attributeAsXml:@"transitionStyle" withValue:_transitionStyle],
+                               [self attributeAsXml:@"processingMessage" withValue:_processingMessage]];
 	return result;
 }
 

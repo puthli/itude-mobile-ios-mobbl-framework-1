@@ -44,6 +44,7 @@
 -(NSString*) activePageStackName;
 -(NSString *) activeDialogName;
 -(void) activatePageStackWithName:(NSString*) name;
+-(void) showActivityIndicatorWithMessage:(NSString*) message;
 -(void) showActivityIndicator;
 -(void) hideActivityIndicator;
 -(void) resetControllerPreservingCurrentPageStack;

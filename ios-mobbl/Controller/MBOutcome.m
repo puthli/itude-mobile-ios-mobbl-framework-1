@@ -25,6 +25,7 @@
 @synthesize transferDocument = _transferDocument;
 @synthesize preCondition = _preCondition;
 @synthesize noBackgroundProcessing = _noBackgroundProcessing;
+@synthesize processingMessage = _processingMessage;
 
 -(id) initWithOutcome:(MBOutcome*) outcome {
     if(self = [super init]) {
@@ -40,6 +41,7 @@
         self.transferDocument = outcome.transferDocument;
         self.preCondition = outcome.preCondition;
         self.noBackgroundProcessing = outcome.noBackgroundProcessing;
+        self.processingMessage = outcome.processingMessage;
     }
     return self;
 }
@@ -82,6 +84,7 @@
 		self.document = nil;
 		self.path = nil;	
         self.preCondition = definition.preCondition;
+        self.processingMessage = definition.processingMessage;
 	}
 	return self;
 }
@@ -94,6 +97,7 @@
 	[_path release];
 	[_preCondition release];
     [_transitionStyle release];
+    [_processingMessage release];
 	[super dealloc];
 }
 
@@ -113,8 +117,8 @@
 }
 
 -(NSString *) description {
-	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitionStyle=%@ preCondition=%@ noBackgroundProsessing=%@", 
-            _pageStackName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitionStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE"];
+	return [NSString stringWithFormat:@"Outcome: dialog=%@ originName=%@ outcomeName=%@ path=%@ persist=%@ displayMode=%@ transitionStyle=%@ preCondition=%@ noBackgroundProsessing=%@  processingMessage=%@", 
+            _pageStackName, _originName, _outcomeName, _path,  _persist?@"TRUE":@"FALSE", _displayMode, _transitionStyle, _preCondition, _noBackgroundProcessing?@"TRUE":@"FALSE", _processingMessage];
 }
 
 @end

@@ -16,6 +16,7 @@
 #import "MBDataManagerService.h"
 #import "MBTableViewController.h"
 #import "MBOutcome.h"
+#import "MBDialogController.h"
 #import "MBViewManager.h"
 #import "MBScriptService.h"
 #import "UncaughtExceptionHandler.h"
@@ -233,7 +234,7 @@ static MBApplicationController *_instance = nil;
                         [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
 					}
                     else {
-                        [_viewManager showActivityIndicator];
+                        [_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
                         [self SELECTOR_HANDLING:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef,  nil]];
                     }
 				}
@@ -241,7 +242,7 @@ static MBApplicationController *_instance = nil;
                 // Page
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
-                    [_viewManager showActivityIndicator];
+					[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInPageStack, nil]];
 					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInPageStack, nil]];
 
@@ -456,6 +457,10 @@ static MBApplicationController *_instance = nil;
 
 -(void) showActivityIndicator {
 	[_viewManager showActivityIndicator];
+}
+
+-(void) showActivityIndicatorWithMessage:(NSString*) message {
+	[_viewManager showActivityIndicatorWithMessage:message];
 }
 
 -(void) hideActivityIndicator {

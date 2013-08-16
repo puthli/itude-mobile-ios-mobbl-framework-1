@@ -8,8 +8,10 @@
 
 
 
-@interface MBActivityIndicator : UIView {
+@interface MBActivityIndicator : UIView
 
-}
+@property (nonatomic, retain) NSString *message;
+
+- (void)showWithMessage:(NSString *)message;
 
 @end

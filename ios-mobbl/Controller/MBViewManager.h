@@ -27,6 +27,7 @@
 - (void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition;
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName;
 - (void) showActivityIndicator;
+- (void) showActivityIndicatorWithMessage:(NSString*) message;
 - (void) hideActivityIndicator;
 - (void) makeKeyAndVisible;
 - (void) notifyPageStackUsage:(NSString*) pageStackName;

@@ -520,10 +520,31 @@
 }
 
 - (void)showActivityIndicator {
+    [self showActivityIndicatorWithMessage:nil];
+}
+
+- (void)showActivityIndicatorWithMessage:(NSString *)message {
 	if(_activityIndicatorCount == 0) {
-		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:self.window.bounds] autorelease];
-		[self.window addSubview:blocker];
-	}
+		// determine the maximum bounds of the screen
+        MBPageStackController *pageStackController = [self pageStackControllerWithName:self.activePageStackName];
+		CGRect bounds = pageStackController.view.bounds; 
+		
+		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
+        if (message) {
+            [blocker showWithMessage:message];
+        }
+
+        [pageStackController.view addSubview:blocker];
+	}else{
+        
+        for (UIView *subview in [[[self pageStackControllerWithName:self.activePageStackName] view] subviews]) {
+            if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+                MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
+                [indicatorView setMessage:message];
+                break;
+            }
+        }
+    }
 	_activityIndicatorCount ++;
 }
 
@@ -532,9 +553,11 @@
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-			UIView *top = [self.window.subviews lastObject];
-			if ([top isKindOfClass:[MBActivityIndicator class]])
-				[top removeFromSuperview];
+            for (UIView *subview in [[[self pageStackControllerWithName:self.activePageStackName] view] subviews]) {
+                if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+                    [subview removeFromSuperview];
+                }
+            }
 		}
 	}
 }
