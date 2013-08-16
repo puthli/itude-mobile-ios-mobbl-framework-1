@@ -1,0 +1,56 @@
+//
+//  MBFireInitialOutcomes.m
+//  itude-mobile-ios-chep-uld
+//
+//  Created by Frank van Eenbergen on 8/16/13.
+//  Copyright (c) 2013 Itude Mobile. All rights reserved.
+//
+
+#import "MBFireInitialOutcomes.h"
+#import "MBOutcome.h"
+#import "MBDocument.h"
+#import "MBDataManagerService.h"
+#import "MBApplicationController.h"
+
+@implementation MBFireInitialOutcomes
+
+-(NSString *)documentName {
+    return @"InitialOutcomes";
+}
+
+-(MBOutcome*) execute:(MBDocument *)document withPath:(NSString *)path {
+	NSString *firstPageStack = nil;
+	MBDocument *initialOutcomes = [[MBDataManagerService sharedInstance] loadDocument:[self documentName]];
+	for(MBElement *element in [initialOutcomes valueForPath:@"/Outcome"]) {
+        
+		MBOutcome *oc = [[[MBOutcome alloc] init] autorelease];
+		oc.outcomeName = [element valueForPath:@"@action"];
+        oc.pageStackName = [element valueForPath:@"pageStackName"];
+        
+        // For backwards compatibility
+        if (!oc.pageStackName) {
+            oc.pageStackName = [element valueForPath:@"@dialog"];
+        }
+		
+		oc.noBackgroundProcessing = TRUE;
+		oc.transferDocument = FALSE;
+		
+		if(firstPageStack == nil) firstPageStack = oc.pageStackName;
+        
+		[self performSelectorOnMainThread:@selector(handleOutcomeOnMainThread:) withObject:oc waitUntilDone:TRUE];
+	}
+    
+	[self performSelectorOnMainThread:@selector(activatePageStackWithName:) withObject:firstPageStack waitUntilDone:TRUE];
+    
+	return nil;
+}
+
+-(void) handleOutcomeOnMainThread:(MBOutcome*) outcome {
+	[[MBApplicationController currentInstance] handleOutcome:outcome];
+}
+
+-(void) activatePageStackWithName:(NSString*) name {
+    [[MBApplicationController currentInstance] activatePageStackWithName:name];
+}
+
+@end

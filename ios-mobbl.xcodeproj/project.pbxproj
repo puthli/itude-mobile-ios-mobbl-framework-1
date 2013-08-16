@@ -371,6 +371,7 @@
 		BDE27B2417588D2C00018CB8 /* MBBackButtonBuilderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B1E17588D2C00018CB8 /* MBBackButtonBuilderFactory.m */; };
 		BDE27B2517588D2C00018CB8 /* MBDefaultBackButtonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B2017588D2C00018CB8 /* MBDefaultBackButtonBuilder.m */; };
 		BDE27B2617588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B2217588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m */; };
+		BDFC8E7417BE386100F5278A /* MBFireInitialOutcomes.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFC8E7317BE386100F5278A /* MBFireInitialOutcomes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -933,6 +934,8 @@
 		BDE27B2017588D2C00018CB8 /* MBDefaultBackButtonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDefaultBackButtonBuilder.m; sourceTree = "<group>"; };
 		BDE27B2117588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBWhiteArrowBackButtonBuilder.h; sourceTree = "<group>"; };
 		BDE27B2217588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBWhiteArrowBackButtonBuilder.m; sourceTree = "<group>"; };
+		BDFC8E7217BE386100F5278A /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
+		BDFC8E7317BE386100F5278A /* MBFireInitialOutcomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFireInitialOutcomes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -976,6 +979,7 @@
 			isa = PBXGroup;
 			children = (
 				1CC890A5171ED9BE00B30461 /* itude-mobile-ios-mobbl-headers.h */,
+				BDFC8E7117BE386100F5278A /* Actions */,
 				1CC88E96171ED88400B30461 /* Configuration */,
 				1CC88ED3171ED88400B30461 /* Controller */,
 				1CC88EEF171ED88400B30461 /* External */,
@@ -1583,6 +1587,15 @@
 			path = BackButton;
 			sourceTree = "<group>";
 		};
+		BDFC8E7117BE386100F5278A /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				BDFC8E7217BE386100F5278A /* MBFireInitialOutcomes.h */,
+				BDFC8E7317BE386100F5278A /* MBFireInitialOutcomes.m */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1811,6 +1824,7 @@
 				BDE27B2417588D2C00018CB8 /* MBBackButtonBuilderFactory.m in Sources */,
 				BDE27B2517588D2C00018CB8 /* MBDefaultBackButtonBuilder.m in Sources */,
 				BDE27B2617588D2C00018CB8 /* MBWhiteArrowBackButtonBuilder.m in Sources */,
+				BDFC8E7417BE386100F5278A /* MBFireInitialOutcomes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
