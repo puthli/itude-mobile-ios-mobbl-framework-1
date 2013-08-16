@@ -9,6 +9,10 @@
 #import "MBViewBuilder.h"
 #import "MBPanelViewBuilder.h"
 
+@class MBMatrixViewController;
+
 @interface MBMatrixBuilder : MBViewBuilder <MBPanelViewBuilder>
+
+-(MBMatrixViewController *) createMatrixViewController:(MBPanel *) panel;
 
 @end

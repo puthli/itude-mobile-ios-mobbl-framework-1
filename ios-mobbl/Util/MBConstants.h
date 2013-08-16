@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Itude Mobile. All rights reserved.
 //
 
-#import <MBConstantsUtilities.h>
+#import "MBConstantsUtilities.h"
 //// Dialogs
 //@interface MBDialogConstants : NSObject
 //@property (nonatomic, assign) NSString *C_SHOW_AS_TAB;

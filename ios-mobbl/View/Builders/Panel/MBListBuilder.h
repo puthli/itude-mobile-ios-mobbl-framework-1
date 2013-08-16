@@ -9,6 +9,10 @@
 #import "MBViewBuilder.h"
 #import "MBPanelViewBuilder.h"
 
+@class MBTableViewController;
+
 @interface MBListBuilder : MBViewBuilder <MBPanelViewBuilder>
+
+-(MBTableViewController *) createTableViewController:(MBPanel *) panel;
 
 @end
