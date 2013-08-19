@@ -15,10 +15,11 @@
 #import "MBBasicViewController.h"
 #import "MBViewManager.h"
 #import "MBTransitionStyle.h"
-#import "UINavigationController+MBRebuilder.h"
-#import "UINavigationController+Rotation.h"
 #import "MBDevice.h"
 #import "MBConstants.h"
+
+#import "UIViewController+Rotation.h"
+#import "UINavigationController+MBRebuilder.h"
 
 @interface MBDialogController (){
 	
@@ -155,5 +156,6 @@
 -(BOOL)showAsTab {
     return [self.showAs isEqualToString:C_DIALOG_SHOW_AS_TAB];
 }
+
 
 @end

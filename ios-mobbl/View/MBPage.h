@@ -16,6 +16,8 @@
 #import "MBOutcomeListenerProtocol.h"
 #import "MBTypes.h"
 
+#import "UIViewController+Rotation.h"
+
 @class MBApplicationController;
 @class MBApplicationFactory;
 

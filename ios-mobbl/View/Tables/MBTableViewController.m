@@ -27,6 +27,9 @@
 #import "MBFieldTypes.h"
 #import "MBRowTypes.h"
 
+// Orientation support
+#import "UIViewController+Rotation.h"
+
 #define C_CELL_Y_MARGIN 4
 
 // TODO: Get the font size and name from the styleHandler
