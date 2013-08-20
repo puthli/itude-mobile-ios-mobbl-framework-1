@@ -257,11 +257,12 @@
 	// Possibly handle CGRectZero for bounds
 	// TODO: possibly make a difference here for the field.type = LABEL | TEXTFIELD
     // The Label of a inputField is in a container that has half the width
-    if ([field.type isEqualToString:C_FIELD_INPUT]) {
+    if ([field.type isEqualToString:C_FIELD_INPUT] ||
+        [field.type isEqualToString:C_FIELD_PASSWORD]) {
         CGFloat margin = 10.0;
         CGFloat width = (bounds.size.width/2);
-        CGFloat height = bounds.size.height;
-        return CGRectMake(width, 0.0, width-margin, height);
+        CGFloat height = 25;
+        return CGRectMake(width, (bounds.size.height/2)-(height/2), width-margin, height);
     }
     
     return CGRectMake(150.0, 0.0, 140.0, 25.0);

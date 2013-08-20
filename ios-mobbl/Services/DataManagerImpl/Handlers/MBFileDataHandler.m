@@ -65,7 +65,7 @@
 		NSData *plainTextData = [xml dataUsingEncoding:NSUTF8StringEncoding];
 		xml = [plainTextData base64EncodedString];
 		
-		DLog(@"Encoding document");
+		//DLog(@"Encoding document");
 		
 		BOOL success = [xml writeToFile:absPath atomically:NO encoding:NSStringEncodingConversionAllowLossy error:&error];
 		if(!success) WLog(@"Error writing document %@ to %@: %i %@", [document name], absPath, [error code], [error domain]);

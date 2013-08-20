@@ -14,12 +14,13 @@
 -(UIView*)buildFieldView:(MBField*)field forTableCell:(UITableViewCell *)cell withMaxBounds:(CGRect) bounds {
     UIView *child = [self buildFieldView:field withMaxBounds:bounds] ;
     
+    CGFloat margin = 10;
     CGFloat width = child.frame.size.width;
     
     // Move all other child views to the left to make room on the right for the new child 
     for (UIView *subview in cell.contentView.subviews) {
         CGRect frame = subview.frame;
-        frame.origin.x -= width;
+        frame.origin.x -= width+margin;
         subview.frame = frame;
     }
     

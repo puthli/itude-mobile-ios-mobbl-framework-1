@@ -83,7 +83,7 @@ static NSString *_localeCode = nil;
 }
 
 -(NSString*) textForKey:(NSString*) key {
-	return [self textForKey:key logWarnings:YES];
+	return [self textForKey:key logWarnings:NO];
 }
 
 -(NSString*) textForKey:(NSString*) key logWarnings:(BOOL)logWarnings {

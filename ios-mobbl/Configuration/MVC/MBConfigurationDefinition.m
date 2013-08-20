@@ -101,21 +101,21 @@
 
 - (void) addDomain:(MBDomainDefinition*)domain {
     if([_domainTypes valueForKey:domain.name] != nil) {
-		WLog(@"Domain definition overridden: multiple definitions for domain with name %@", domain.name);
+        [self logDefinitionOverriddenWarningForDefinitionType:@"Domain" withName:domain.name];
 	}
 	[_domainTypes setValue:domain forKey:domain.name];
 }
 
 - (void) addDocument:(MBDocumentDefinition*)document {
     if([_documentTypes valueForKey:document.name] != nil && ![document.name isEqualToString:DOC_SYSTEM_EXCEPTION]) {
-		WLog(@"Document definition overridden: multiple definitions for document with name %@", document.name);
+        [self logDefinitionOverriddenWarningForDefinitionType:@"Document" withName:document.name];
 	}
 	[_documentTypes setValue:document forKey:document.name];
 }
 
 - (void) addAction:(MBActionDefinition*)action {
     if([_actionTypes valueForKey:action.name] != nil) {
-		WLog(@"Action definition overridden: multiple definitions for action with name %@", action.name);
+        [self logDefinitionOverriddenWarningForDefinitionType:@"Action" withName:action.name];
 	}
 	[_actionTypes setValue:action forKey:action.name];
 }
@@ -126,21 +126,21 @@
 
 - (void) addDialog:(MBDialogDefinition*)dialog {
     if([_dialogs valueForKey:dialog.name] != nil) {
-		WLog(@"Dialog definition overridden: multiple definitions for dialog with name %@", dialog.name);
+        [self logDefinitionOverriddenWarningForDefinitionType:@"Dialog" withName:dialog.name];
 	}
 	[_dialogs setObject:dialog forKey:dialog.name];
 }
 
 - (void) addPage:(MBPageDefinition*)page {
     if([_pageTypes valueForKey:page.name] != nil) {
-		WLog(@"Page definition overridden: multiple definitions for page with name %@", page.name);
+        [self logDefinitionOverriddenWarningForDefinitionType:@"Page" withName:page.name];
 	}
 	[_pageTypes setValue:page forKey:page.name];
 }
 
 - (void)addAlert:(MBAlertDefinition *)alert {
     if ([_alerts valueForKey:alert.name] != nil) {
-        WLog(@"Alert definition overridden: multiple definitions for alert with name %@",alert.name);
+        [self logDefinitionOverriddenWarningForDefinitionType:@"Alert" withName:alert.name];
     }
     [_alerts setValue:alert forKey:alert.name];
 }
@@ -225,6 +225,13 @@
 
 -(NSMutableDictionary*)alerts {
     return _alerts;
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (void)logDefinitionOverriddenWarningForDefinitionType:(NSString *)definitionType withName:(NSString *)name {
+    WLog(@"%@ definition overridden: multiple definitions for %@ with name %@",definitionType, definitionType, name);
 }
 
 @end

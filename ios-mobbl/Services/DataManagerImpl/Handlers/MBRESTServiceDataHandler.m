@@ -45,7 +45,7 @@
 - (MBDocument *) loadDocument:(NSString *)documentName withArguments:(MBDocument *)args {
 
 	MBEndPointDefinition *endPoint = [self getEndPointForDocument:documentName];
-	DLog(@"MBRESTServiceDataHandler:loadDocument %@ from %@", documentName, endPoint.endPointUri);
+	DLog(@"loadDocument %@ from %@", documentName, endPoint.endPointUri);
 	
 	if (endPoint != nil)
 	{
@@ -183,7 +183,7 @@
     
 
 	MBEndPointDefinition *endPoint = [self getEndPointForDocument:[document.definition name]];
-	DLog(@"MBRESTServiceDataHandler:storeDocument %@ from %@", [document.definition name], endPoint.endPointUri);
+	DLog(@"storeDocument %@ from %@", [document.definition name], endPoint.endPointUri);
 	
 	if (endPoint != nil)
 	{	
