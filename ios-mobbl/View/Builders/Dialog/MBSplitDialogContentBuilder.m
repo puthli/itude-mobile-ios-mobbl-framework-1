@@ -13,14 +13,12 @@
 @implementation MBSplitDialogContentBuilder
 
 -(UIViewController *)buildDialogContentViewControllerForDialog:(MBDialogController *)dialogController {
-    MBSplitViewController *containerViewController = [[MBSplitViewController new] autorelease];
+    MBSplitViewController *containerViewController = [[[MBSplitViewController alloc] initWithLeftViewControllerVisibleInPortraitMode:YES] autorelease];
     if (dialogController.pageStackControllers.count > 1) {
         MBPageStackController *leftPageStackController = [dialogController.pageStackControllers objectAtIndex:0];
         [containerViewController setMasterViewController:leftPageStackController.navigationController];
         MBPageStackController *rightPageStackController = [dialogController.pageStackControllers objectAtIndex:1];
         [containerViewController setDetailViewController:rightPageStackController.navigationController];
-        
-        containerViewController.keepLeftViewControllerVisibleInPortraitMode = YES;
     }
     return containerViewController;
 }
