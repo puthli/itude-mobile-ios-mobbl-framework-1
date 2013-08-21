@@ -21,5 +21,19 @@
     return result;
 }
 
+- (UIView *)firstSuperviewOfClass:(Class)clazz
+{
+    UIView *superView = [self superview];
+    while (superView) {
+        if ([superView isKindOfClass:clazz]) {
+            return superView;
+        }
+        else {
+            superView = [superView superview];
+        }
+    }
+
+    return nil;
+}
 
 @end

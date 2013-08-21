@@ -594,6 +594,27 @@
 	return MBViewStatePlain;
 }
 
+- (UIViewController *)topMostVisibleViewController {
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    // On iOS 5 and later: search for the topViewController
+    if ([topController respondsToSelector:@selector(presentedViewController)]) {
+        while (topController.presentedViewController) {
+            topController = topController.presentedViewController;
+        }
+        return topController;
+    }
+    
+    // Fallback scenario for iOS 4.3 and earlier
+    else if (self.window.rootViewController.modalViewController) {
+        return self.window.rootViewController.modalViewController;
+    }
+    
+    // If all else fails, return the rootViewcontroller of the Window
+    return self.window.rootViewController;
+    
+}
+
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     // Set active dialog name
     for (MBDialogController *dialogController in [self.dialogControllers allValues]) {

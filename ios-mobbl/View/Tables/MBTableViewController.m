@@ -239,7 +239,7 @@
                 pickerController.field = field;
                 [field setViewData:pickerController
                             forKey:@"pickerController"]; // let the page retain the picker controller
-                UIView *superview = [[[tableView window] rootViewController] view];
+                UIView *superview = [[[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController] view];
                 [pickerController presentWithSuperview:superview];
             }
 

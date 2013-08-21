@@ -37,4 +37,10 @@
 - (void) resetViewPreservingCurrentPageStack;
 - (void) endModalPageStack;
 - (MBViewState) currentViewState;
+
+/**
+ * Returns the top most visibile viewController. In most cases this will be the rootViewController of the UIWindow or the modalViewController of the UIWindow.
+ */
+- (UIViewController *)topMostVisibleViewController;
+
 @end

@@ -271,9 +271,10 @@
 - (CGRect) sizeForLabel:(MBField*) field withMaxBounds:(CGRect) bounds {
 
     // The Label of a inputField is in a container that has half the width
-    if ([field.type isEqualToString:C_FIELD_INPUT]) {
+    if ([field.type isEqualToString:C_FIELD_INPUT] ||
+        [field.type isEqualToString:C_FIELD_CHECKBOX]) {
         CGFloat margin = 10.0;
-        CGFloat width = bounds.size.width/2;
+        CGFloat width = [field.type isEqualToString:C_FIELD_CHECKBOX] ? bounds.size.width : bounds.size.width/2;
         CGFloat height = bounds.size.height;
         return CGRectMake(margin, 0.0, width, height);
     }

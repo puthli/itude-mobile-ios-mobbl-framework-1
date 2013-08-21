@@ -15,4 +15,10 @@
 */
 - (NSArray *)subviewsOfClass:(Class)clazz;
 
+/**
+ * @return the first superview of the given class. Returns nil if no
+ * superview of the given class is found.
+ */
+- (UIView *)firstSuperviewOfClass:(Class)clazz;
+
 @end
