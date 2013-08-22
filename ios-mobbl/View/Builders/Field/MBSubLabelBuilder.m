@@ -26,8 +26,7 @@
 
 -(void)configureView:(UIView *)view forField:(MBField *)field {
     UILabel *label = (UILabel*)view;
-    if(field.path != nil) label.text = [field value];
-	else label.text = field.label;
+    label.text = [field formattedValue];
 	label.backgroundColor = [UIColor clearColor];
     label.autoresizingMask =   UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.styleHandler applyStyle:field forView: label viewState:0];

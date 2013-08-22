@@ -27,10 +27,8 @@
 
 -(void)configureView:(UIView *)view forField:(MBField *)field {
     UILabel *label = (UILabel*)view;
-    if(field.path != nil) label.text = [field value];
-	else label.text = field.label;
+    label.text = [field formattedValue];
     
-
     label.numberOfLines = 0;
     label.lineBreakMode = NSLineBreakByWordWrapping; //UILineBreakModeWordWrap;
     label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
