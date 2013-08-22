@@ -527,15 +527,14 @@
 - (void)showActivityIndicatorWithMessage:(NSString *)message {
 	if(_activityIndicatorCount == 0) {
 		// determine the maximum bounds of the screen
-        MBPageStackController *pageStackController = [self pageStackControllerWithName:self.activePageStackName];
-		CGRect bounds = pageStackController.view.bounds; 
-		
+        UIViewController *topMostVisibleViewController = [self topMostVisibleViewController];
+        CGRect bounds = topMostVisibleViewController.view.bounds;
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
         if (message) {
             [blocker showWithMessage:message];
         }
 
-        [pageStackController.view addSubview:blocker];
+        [topMostVisibleViewController.view addSubview:blocker];
 	}else{
         
         for (UIView *subview in [[[self pageStackControllerWithName:self.activePageStackName] view] subviews]) {
@@ -554,7 +553,8 @@
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-            for (UIView *subview in [[[self pageStackControllerWithName:self.activePageStackName] view] subviews]) {
+            UIViewController *topMostVisibleViewController = [self topMostVisibleViewController];
+            for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
                 if ([subview isKindOfClass:[MBActivityIndicator class]]) {
                     [subview removeFromSuperview];
                 }
