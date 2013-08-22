@@ -63,7 +63,7 @@
         switchView.on = YES;
     }
     [switchView addTarget:field action:@selector(switchToggled:) forControlEvents:UIControlEventValueChanged];
-    
+    switchView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
     switchView.isAccessibilityElement = YES;
     switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", field.label];
 }
