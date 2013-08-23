@@ -38,7 +38,6 @@
     // Center new child horizontally
     frame.origin.y = (cell.frame.size.height - frame.size.height) / 2; 
     child.frame = frame;
-    child.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
     
     [cell.contentView addSubview:child];
     
