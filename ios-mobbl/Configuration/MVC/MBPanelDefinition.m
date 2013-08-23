@@ -44,7 +44,7 @@
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"titlePath" withValue:_titlePath],
 							   [self attributeAsXml:@"style" withValue:_style],
-                               [self attributeAsXml:@"zoomable" withValue:_zoomable],
+                               [self booleanAsXml:@"zoomable" withValue:_zoomable],
                                [self attributeAsXml:@"outcomeName" withValue:_outcomeName], 
                                [self attributeAsXml:@"path" withValue:_path]];
 

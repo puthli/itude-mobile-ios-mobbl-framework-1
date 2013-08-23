@@ -58,6 +58,7 @@
 - (NSString*) evaluateExpression:(NSString*) variableName;
 - (NSString *) asXmlWithLevel:(int)level;
 - (NSString*) attributeAsXml:(NSString*)name withValue:(id) attrValue;
+- (NSString*) booleanAsXml:(NSString*)name withValue:(BOOL) attrValue;
 - (void) translatePath;
 - (void) registerViewController:(UIViewController*) controller;
 - (NSMutableArray*) descendantsOfKind:(Class) clazz;

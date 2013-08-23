@@ -8,6 +8,7 @@
 
 #import "MBFontCustomizer.h"
 #import "MBFontCustomizerToolbar.h"
+#import "MBViewBuilderFactory.h"
 
 @implementation MBFontCustomizer
 
@@ -31,10 +32,7 @@
 
 - (void) addToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
-    // Give the toolbar the same appearance
-    UIColor *tintColor = viewController.navigationController.navigationBar.tintColor;
-    _toolBar.tintColor = tintColor;
-    
+    [[[MBViewBuilderFactory sharedInstance] styleHandler] styleToolbar:self.toolBar];
 
     // Add existing buttons
     UIBarButtonItem *item = viewController.navigationItem.rightBarButtonItem;
@@ -50,12 +48,12 @@
         }
         
         if (itemCopy != nil) {
-            [_toolBar addBarButtonItem:itemCopy animated:YES];
+            [self.toolBar addBarButtonItem:itemCopy animated:YES];
         }
         
         // If all else fails, try to add the original button.
         else {
-            [_toolBar addBarButtonItem:item animated:YES];
+            [self.toolBar addBarButtonItem:item animated:YES];
         }
         
     }
@@ -69,7 +67,7 @@
         _buttonsDelegate = buttonsDelegate;
         [_buttonsDelegate retain];
         
-        [_toolBar setButtonsDelegate:_buttonsDelegate];
+        [self.toolBar setButtonsDelegate:_buttonsDelegate];
     }
 }
 
@@ -79,7 +77,7 @@
         _sender = sender;
         [_sender retain];
         
-        [_toolBar setSender:_sender];
+        [self.toolBar setSender:_sender];
     }
     
 }

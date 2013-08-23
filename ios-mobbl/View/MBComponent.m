@@ -196,6 +196,10 @@
 	return attrValue == nil?@"": [NSString stringWithFormat:@" %@='%@'", name, attrValue];
 }
 
+-(NSString*) booleanAsXml:(NSString*)name withValue:(BOOL) attrValue {
+    return [NSString stringWithFormat:@" %@='%@'", name, attrValue?@"TRUE":@"FALSE"];
+}
+
 - (NSString *) asXmlWithLevel:(int)level {
 	return @"";
 }
