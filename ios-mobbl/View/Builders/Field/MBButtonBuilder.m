@@ -23,6 +23,7 @@
 	UIButton *button = [[self styleHandler] createStyledButton:field];
 	if (button == nil) button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	button.frame = [self sizeForButton:field withMaxBounds:bounds];
+    button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin;
     button.titleLabel.adjustsFontSizeToFitWidth = YES;
 	
 	NSString *text = field.label;

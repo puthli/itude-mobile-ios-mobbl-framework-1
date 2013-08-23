@@ -52,7 +52,6 @@
 
 -(MBPageStackController*) pageStackControllerWithName:(NSString*) name;
 - (void) clearWindow;
-- (void) updateDisplay;
 - (void) resetView;
 - (void) showAlertView:(MBPage*) page;
 - (void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle selectPageStack:(BOOL) shouldSelectPageStack;
@@ -288,8 +287,9 @@
 	
 	// ensure first Dialog is selected.
 	if (self.dialogControllers.count >0) {
-		_activeDialogName = (NSString*)[self.dialogControllers objectAtIndex:0];
-	}
+        MBDialogController *dc = [self.dialogControllers objectAtIndex:0];
+		_activeDialogName = dc.name;
+    }
 }
 
 - (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
