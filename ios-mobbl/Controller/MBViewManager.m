@@ -375,13 +375,13 @@
 	
 	
 	// Only set the selected tab if realy necessary; because it messes up the more navigation controller
-	int idx = _tabController.selectedIndex;
-	int shouldBe = [_tabController.viewControllers indexOfObject:dialogController.rootViewController];
+	NSInteger idx = _tabController.selectedIndex;
+	NSInteger shouldBe = [_tabController.viewControllers indexOfObject:dialogController.rootViewController];
 	
 	// Apparently we need to select the tab. Only now we cannot do this for tabs that are on the more tab
 	// because it destroys the navigation controller for some reason
 	// TODO: Make selecting a pageStack work; even if it is nested within the more tab
-    if(idx != shouldBe/* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
+    if(idx != shouldBe && shouldBe!=NSNotFound /* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
 		UIViewController *ctrl = [_tabController selectedViewController];
 		[ctrl viewWillDisappear:FALSE];
 		[_tabController setSelectedViewController: dialogController.rootViewController];
