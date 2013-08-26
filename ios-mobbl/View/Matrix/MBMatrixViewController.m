@@ -236,10 +236,18 @@
 
     
     // Determine if a cell can be selected or not
+    NSString *fieldstyle = [row viewDataForKey:ROW_NAVIGATION_STYLE];
 	BOOL navigable = [[row viewDataForKey:ROW_NAVIGABLE] boolValue];
-    if (!navigable) {
+    if (navigable && [C_FIELD_STYLE_NAVIGATION isEqualToString:fieldstyle]) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+    }
+	else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+
     
     cell.isAccessibilityElement = YES;
     cell.accessibilityLabel = rowTitle;
@@ -257,24 +265,7 @@
 		[field handleOutcome:[field outcomeName] withPathArgument: [field absoluteDataPath]];
 	}
 }
-////////// 
-// http://dev.itude.com/jira/browse/BINCKAPPS-500 Only works on iPad
--(UITableViewCellAccessoryType) tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
-	MBPanel *row = [_rows objectAtIndex:indexPath.row];
-	NSString *fieldstyle = [row viewDataForKey:ROW_NAVIGATION_STYLE];
-	BOOL navigable = [[row viewDataForKey:ROW_NAVIGABLE] boolValue];
-	if (navigable && [C_FIELD_STYLE_NAVIGATION isEqualToString:fieldstyle]) return UITableViewCellAccessoryDisclosureIndicator;
-	else return UITableViewCellAccessoryNone;
-}
-/* This can also be used
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	MBPanel *row = [_rows objectAtIndex:indexPath.row];
-	NSString *fieldstyle = [row viewDataForKey:ROW_NAVIGATION_STYLE];
-	BOOL navigable = [[row viewDataForKey:ROW_NAVIGABLE] boolValue];
-	if (navigable && [C_FIELD_STYLE_NAVIGATION isEqualToString:fieldstyle]) cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	else cell.accessoryType = UITableViewCellAccessoryNone;
-}*/
-//////////
+
 
 // Delegate method that listens to the selection of a row
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
