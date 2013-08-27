@@ -18,27 +18,22 @@
  * - Retrieve definitions for programmatically creating MBDocument, MBDomain, MBDomainValidator objects.
  * 
  */
-@interface MBMetadataService : NSObject {
-	MBConfigurationDefinition* _cfg;
-}
+@interface MBMetadataService : NSObject 
 
-/// @name setting which configuration files are used
-/** set the master configuration file */
-+(void) setConfigName:(NSString*) name;
-/** the filename for webservice endpoints 
- * @param name The filename of the endpoints file without extension 
- */
-+(void) setEndpointsName:(NSString*) name;
-
-/** Returns the filename of the endpoints file
- * @return The filename of the endpoints file
- */
-+(NSString *) getEndpointsName;
-	
 /// @name Getting a service instance
 /** The shared instance */
 +(MBMetadataService *) sharedInstance;
 
+/// @name Configuration
+
+/** The master configuration file */
+@property (nonatomic, retain) NSString *configName;
+
+/** The filename for webservice endpoints file without extension */
+@property (nonatomic, retain) NSString *endpointsName;
+
+/** Master configuration */
+@property (nonatomic, readonly) MBConfigurationDefinition *configuration;
 
 /// @name (data) model layer definitions
 /** Returns a MBDomainDefinition for a domainName
@@ -87,6 +82,43 @@
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *)originName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName throwIfInvalid:(BOOL) doThrow;
-/// @name Master configuration
--(MBConfigurationDefinition *) configuration;
+
+@end
+
+
+#pragma mark -
+#pragma mark Deprecated methods
+
+#include <AvailabilityMacros.h>
+
+
+@interface MBMetadataService (Deprecated)
+/**
+ * DEPRECATED!!!
+ * Please use [[MBMetadataService sharedInstance] setConfigName:...];
+ *
+ * set the master configuration file 
+ */
++(void) setConfigName:(NSString*) name DEPRECATED_ATTRIBUTE;
+
+
+/**
+ * DEPRECATED!!!
+ * Please use [[MBMetadataService sharedInstance] setEndpointsName:...];
+ *
+ * the filename for webservice endpoints
+ * @param name The filename of the endpoints file without extension
+ */
++(void) setEndpointsName:(NSString*) name DEPRECATED_ATTRIBUTE;
+
+
+/**
+ * DEPRECATED!!!
+ * Please use [[MBMetadataService sharedInstance] endpointsName];
+ *
+ * Returns the filename of the endpoints file
+ * @return The filename of the endpoints file
+ */
++(NSString *) getEndpointsName DEPRECATED_ATTRIBUTE;
+
 @end

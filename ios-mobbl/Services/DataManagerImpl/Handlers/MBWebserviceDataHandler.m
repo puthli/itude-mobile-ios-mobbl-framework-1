@@ -16,7 +16,7 @@
 	self = [super init];
 	if (self != nil) {
         MBWebservicesConfigurationParser *parser = [[MBWebservicesConfigurationParser alloc] init];
-		NSString *documentName = [MBMetadataService getEndpointsName];
+		NSString *documentName = [[MBMetadataService sharedInstance] endpointsName];
 		NSData *data = [NSData dataWithEncodedContentsOfMainBundle: documentName];
 		_webServiceConfiguration = [[parser parseData:data ofDocument: documentName] retain];
         [parser release];
