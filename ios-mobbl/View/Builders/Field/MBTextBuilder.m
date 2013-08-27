@@ -51,8 +51,8 @@
 -(MBWebView*)buildWebView:(MBField *)field text:(NSString*)text withMaxBounds:(CGRect)bounds {
     CGFloat margin = 6;
     MBWebView *webView = [[[MBWebView alloc] initWithFrame:CGRectMake(margin, margin, bounds.size.width-(margin*2), 36)] autorelease];
-    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    [webView.scrollView setScrollEnabled:NO];
     webView.backgroundColor = [self.styleHandler backgroundColorField:field];
     webView.textColor = [self.styleHandler textColorForField:field];
     [webView setText:text withFont:[self.styleHandler fontForField:field]];
