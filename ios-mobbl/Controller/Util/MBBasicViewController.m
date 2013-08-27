@@ -38,6 +38,11 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self setupBackButton];
+    
+    // iOS7 (make sure we don't draw underneath the navigation bar)
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+        [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    }
 }
 
 -(void) handleException:(NSException *) exception{

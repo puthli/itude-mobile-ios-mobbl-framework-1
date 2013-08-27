@@ -108,8 +108,20 @@
         if (![text hasHTML]) {
             // calculate bounding box
             CGSize constraint = CGSizeMake(tableView.frame.size.width - 20, 50000); // TODO -- shouldn't hard code the -20 for the label size here
-            CGSize size = [text sizeWithFont:[self fontForField:field] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
-            height = size.height + 22; // inset
+            
+            // iOS 7
+            if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+                NSMutableDictionary *atts = [NSMutableDictionary dictionary];
+                //[atts setObject:font forKey:NSFontAttributeName];
+                CGRect textViewSize = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:atts context:nil];
+                height = textViewSize.size.height + 22;
+            }
+            // iOS6 and earlier
+            else {
+                CGSize size = [text sizeWithFont:[self fontForField:field] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+                height = size.height + 22; // inset
+            }
+
         }
     }
         
