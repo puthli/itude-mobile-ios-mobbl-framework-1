@@ -75,11 +75,13 @@
 	self.finishedLoadingWebviews = NO;
 	self.webViews = [NSMutableDictionary dictionary];
 	[self tableView].backgroundColor = [UIColor clearColor];
-    [self showFontCustomizer:self.zoomable];
     self.fontCustomizerFontSizeDifference = 0;
 }
 
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self showFontCustomizer:self.zoomable];
+}
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
 	return [self.sections count];

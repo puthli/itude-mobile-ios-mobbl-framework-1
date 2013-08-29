@@ -26,6 +26,8 @@
 #import "MBBasicViewController.h"
 #import "MBTransitionStyle.h"
 
+#import "MBFontCustomizer.h"
+
 // Used to get a stylehandler to style navigationBar
 #import "MBStyleHandler.h"
 #import "MBViewBuilderFactory.h"
@@ -124,11 +126,9 @@
 			 [@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode] || 
 			 [@"MODALCURRENTCONTEXT" isEqualToString:displayMode] ||
 			 [@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode])) {
-                // TODO: support nested modal pageStacks
-                _modalController = [[UINavigationController alloc] initWithRootViewController:[page viewController]];
-                [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
                 
                 BOOL addCloseButton = NO;
+                UIModalPresentationStyle modalPresentationStyle = UIModalPresentationFormSheet;
                 if ([@"MODALFORMSHEET" isEqualToString:displayMode])			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
                 else if ([@"MODALPAGESHEET" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationPageSheet];
                 else if ([@"MODALFULLSCREEN" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
@@ -136,21 +136,25 @@
                 else if ([@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode]) addCloseButton = YES;
                 else if ([@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
                     addCloseButton = YES;
-                    [_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                    modalPresentationStyle = UIModalPresentationFormSheet;
                 }
                 else if ([@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
                     addCloseButton = YES;
-                    [_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                    modalPresentationStyle = UIModalPresentationPageSheet;
                 }
                 else if ([@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode]) {
                     addCloseButton = YES;
-                    //[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-                    [_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
+                    modalPresentationStyle = UIModalPresentationFullScreen;
                 }
                 else if ([@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
                     addCloseButton = YES;
-                    [_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+                    modalPresentationStyle = UIModalPresentationCurrentContext;
                 }
+                
+                // TODO: support nested modal pageStacks
+                _modalController = [[UINavigationController alloc] initWithRootViewController:[page viewController]];
+                _modalController.modalPresentationStyle = modalPresentationStyle;
+                [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
                 
                 if (addCloseButton) {
                     NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
@@ -185,10 +189,11 @@
 		
 		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
 		UIViewController *rootViewController = [_modalController.viewControllers objectAtIndex:0];		
-		UIBarButtonItem *rightBarButtonItem = rootViewController.navigationItem.rightBarButtonItem;
+		UIBarButtonItem *rootViewCtrlRightBarButtonItem = rootViewController.navigationItem.rightBarButtonItem;
+        UIBarButtonItem *currentViewCtrlBarButtonItem = currentViewController.navigationItem.rightBarButtonItem;
 		NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
-		if (rightBarButtonItem != nil && [rightBarButtonItem.title isEqualToString:closeButtonTitle] && 
-			currentViewController.navigationItem.rightBarButtonItem == nil) {
+		if ([rootViewCtrlRightBarButtonItem.title isEqualToString:closeButtonTitle] && (!currentViewCtrlBarButtonItem
+            || [currentViewCtrlBarButtonItem isKindOfClass:[MBFontCustomizer class]])) {
             UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalPageStack)] autorelease];
             [currentViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
 		}
