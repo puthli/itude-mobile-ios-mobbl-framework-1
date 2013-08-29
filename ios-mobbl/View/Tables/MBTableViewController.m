@@ -29,6 +29,7 @@
 
 // Orientation support
 #import "UIViewController+Rotation.h"
+#import "UIViewController+Layout.h"
 
 #define C_CELL_Y_MARGIN 4
 
@@ -76,6 +77,8 @@
 	self.webViews = [NSMutableDictionary dictionary];
 	[self tableView].backgroundColor = [UIColor clearColor];
     self.fontCustomizerFontSizeDifference = 0;
+    
+    [self setupLayoutForIOS7];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

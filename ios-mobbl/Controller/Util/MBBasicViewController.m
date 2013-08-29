@@ -15,6 +15,7 @@
 
 // Adds rotation support
 #import "UIViewController+Rotation.h"
+#import "UIViewController+Layout.h"
 
 @interface MBBasicViewController () {
     MBPage *_page;
@@ -39,10 +40,7 @@
     [super viewDidLoad];
     [self setupBackButton];
     
-    // iOS7 (make sure we don't draw underneath the navigation bar)
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    }
+    [self setupLayoutForIOS7];
 }
 
 -(void) handleException:(NSException *) exception{
@@ -117,5 +115,6 @@
 		}
 	}
 }
+
 
 @end

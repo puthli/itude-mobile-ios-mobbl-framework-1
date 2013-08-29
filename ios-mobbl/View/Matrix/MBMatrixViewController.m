@@ -17,6 +17,8 @@
 
 #import "MBDocumentDiff.h"
 
+#import "UIViewController+Layout.h"
+
 // This is the width that is used for the accessoryView. It is taken into account when a view is navigatable
 #define ACCESSORYVIEWWIDTH 15
 #define ROW_CELLS @"row_cells"
@@ -75,6 +77,10 @@
 - (void) styleMatrixCell:(MBMatrixCell*) cell{}
 - (void) initializeTableViewCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{}
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupLayoutForIOS7];
+}
 
 -(void) viewDidAppear:(BOOL)animated{
 	// for landscape mode, make sure table columns are recalculated

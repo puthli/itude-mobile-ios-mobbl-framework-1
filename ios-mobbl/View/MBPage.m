@@ -23,6 +23,8 @@
 #import "MBValueChangeListenerProtocol.h"
 #import "MBSession.h"
 
+#import "UIViewController+Layout.h"
+
 @interface MBPage () {
     // Public properties
 	NSString *_pageName;
@@ -94,6 +96,9 @@
                 rootPath:(NSString*) rootPath 
 			   viewState:(MBViewState) viewState {
 
+    // Make sure that the Panel does not start building the view based on the children OF THIS PAGE because that is too early
+    // The children need the additional information that is set after the constructor of super. So pass buildViewStructure: FALSE
+    // and build the children ourselves here
 	if(self = [super initWithDefinition:definition document: document parent: nil buildViewStructure: FALSE]) {
         self.definition = definition;
         self.rootPath = rootPath;
@@ -103,7 +108,7 @@
 		self.outcomeListeners = [NSMutableArray array];
         self.pageType = definition.pageType;
 		self.viewState = viewState;
-
+        self.maxBounds = [UIScreen mainScreen].applicationFrame;
 
 		self.viewController = viewController;
 		[self.viewController  setPage: self];
@@ -111,7 +116,7 @@
 		// Ok; now we can build the children:
         for(MBDefinition *def in definition.children) {
 			if([def isPreConditionValid:document currentPath:[self absoluteDataPath]]) [self addChild: [MBComponentFactory componentFromDefinition: def document: document parent: self]];
-		}		
+		}
 	}
 	return self;
 }
@@ -122,29 +127,14 @@
 			   viewState:(MBViewState) viewState 
 		   withMaxBounds:(CGRect) bounds {
 	
-    // Make sure that the Panel does not start building the view based on the children OF THIS PAGE because that is too early
-    // The children need the additional information that is set after the constructor of super. So pass buildViewStructure: FALSE
-    // and build the children ourselves here
-	if(self = [super initWithDefinition:definition document: document parent: nil buildViewStructure: FALSE]) {
-        self.rootPath = rootPath;
-        self.document = document;
-        self.pageName = definition.name;
+    if(self = [self initWithDefinition:definition withViewController:nil document:document rootPath:rootPath viewState:viewState]) {
         self.maxBounds = bounds;
-		self.viewState = viewState;
-		self.valueChangedListeners = [NSMutableDictionary dictionary];
-		self.outcomeListeners = [NSMutableArray array];
-		self.pageType = definition.pageType;
-
-        // Ok; now we can build the children:
-        for(MBDefinition *def in definition.children) {
-			if([def isPreConditionValid:document currentPath:[[self parent] absoluteDataPath]]) [self addChild: [MBComponentFactory componentFromDefinition: def document: document parent: self]];
-		}
-
         self.viewController = (UIViewController<MBViewControllerProtocol>*)[[MBApplicationFactory sharedInstance]createViewController:self];
         self.viewController.title = [self title];
-        self.viewController.view = [self buildViewWithMaxBounds: bounds forParent: nil viewState: viewState];
-        [self.viewController  setPage: self];
+        [self.viewController setPage:self];
+        [self rebuildView];
     }
+    
 	return self;
 }
 
@@ -157,8 +147,8 @@
 -(void) rebuildView {
 	// Make sure we clear the cache of all related documents:
 	[self rebuild];
-	CGRect bounds = [UIScreen mainScreen].applicationFrame;
-	self.viewController.view = [self buildViewWithMaxBounds: bounds forParent:nil viewState: self.viewState];
+    self.viewController.view = [self buildViewWithMaxBounds: self.maxBounds forParent:nil viewState: self.viewState];
+    [self.viewController setupLayoutForIOS7];
 }
 
 // This is a method required by component so any component can find the page
