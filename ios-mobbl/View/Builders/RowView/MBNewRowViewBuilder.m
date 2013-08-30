@@ -89,10 +89,7 @@
             
             // #BINCKMOBILE-19
             if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
-                
-               /* MBTableViewCellConfigurator *cellConfigurator = [self.tableViewCellConfiguratorFactory configuratorForFieldType:field.type];
-                [cellConfigurator configureCell:cell withField:field];*/
-                [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView:field forParent:cell.contentView withMaxBounds:cell.contentView.bounds];
+                [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView:field forParent:cell withMaxBounds:cell.bounds];
             }
         }
     }

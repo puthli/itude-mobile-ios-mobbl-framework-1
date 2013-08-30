@@ -46,17 +46,10 @@
 
 -(UIView *)buildFieldView:(MBField *)field forParent:(UIView *)parent withMaxBounds:(CGRect)bounds {
     
-    
     if ([parent isKindOfClass:[UITableViewCell class]]) {
         UITableViewCell *cell = (UITableViewCell*)parent;
-        return [self buildFieldView:field forTableCell:cell withMaxBounds:bounds];
+        return [self buildFieldView:field forTableCell:cell withMaxBounds:cell.contentView.bounds];
     }
-    
-    else if ([parent.superview isKindOfClass:[UITableViewCell class]]) {
-        UITableViewCell *cell = (UITableViewCell *)parent.superview;
-        return [self buildFieldView:field forTableCell:cell withMaxBounds:bounds];
-    }
-    
     else {
         UIView *result = [self buildFieldView:field withMaxBounds:bounds];
         [parent addSubview: result];
