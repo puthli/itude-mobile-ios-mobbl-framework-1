@@ -138,7 +138,7 @@
     }
     
     // Default height
-    return 22;
+    return 0;
 }
 
 // Need to call to pad the footer height otherwise the footer collapses

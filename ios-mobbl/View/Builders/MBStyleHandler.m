@@ -308,16 +308,8 @@
 }
 
 - (void) applyInsetsForComponent:(MBComponent *) component{
-	// http://dev.itude.com/jira/browse/MOBBL-145
-	if ([component isKindOfClass:[MBPanel class]]) {
-		if ([[(MBPanel *) component type] isEqualToString:@"MATRIX"]||
-			[[(MBPanel *) component type] isEqualToString:@"LIST"]) {
-			component.leftInset = 10;
-			component.rightInset = 10;
-			component.bottomInset = 10;
-			component.topInset = 0;
-		}
-	}
+    // Override in superclass to set a inset on the component
+    // For example: component.leftInset = 10;
 }
 
 @end
