@@ -286,17 +286,6 @@
     [alert.alertView show];
 }
 
-- (void) makeKeyAndVisible {
-	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
-	[self.window makeKeyAndVisible];
-	
-	// ensure first Dialog is selected.
-	if (self.dialogControllers.count >0) {
-        MBDialogController *dc = [self.dialogControllers objectAtIndex:0];
-		_activeDialogName = dc.name;
-    }
-}
-
 - (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
     // iOS 6.0 and up
     if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
@@ -464,40 +453,53 @@
     // Should create tabbar
     if([self.dialogControllers count] > 1 && shouldCreateTabBar)
 	{
-
-		if(_tabController == nil) {
-			
-			_tabController = [[UITabBarController alloc] init];
-			_tabController.delegate = self;
-			
-			// Apply style to the tabbarController
-			[[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:_tabController];
-            [self setContentViewController:_tabController];
+        // Build the tabbar
+		if(!self.tabController) {
+			self.tabController = [[UITabBarController alloc] init];
+			self.tabController.delegate = self;
+			[[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:self.tabController];
+            [self setContentViewController:self.tabController];
 		}		
 		
-        NSMutableArray *tabs = [NSMutableArray new];
+        // Build the tabs
         int idx = 0;
-        for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
-            MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:dialogController.name];
-            if ([dialogController showAsTab] && [dialogDefinition isPreConditionValid]) {
-                // Create a tabbarProperties
-                UIViewController *viewController = dialogController.rootViewController;
-                UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
-                NSString *tabTitle = MBLocalizedString(dialogController.title);
-                UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
-                viewController.tabBarItem = tabBarItem;
+        NSMutableArray *tabs = [NSMutableArray new];
+        BOOL activeDialogNameStillVisible = FALSE;
+        NSArray *visibleDialogControllers = [self visibleDialogControllers];
+        for (MBDialogController *dialogController in visibleDialogControllers) {
+            // Create a tabbarProperties
+            UIViewController *viewController = dialogController.rootViewController;
+            UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
+            NSString *tabTitle = MBLocalizedString(dialogController.title);
+            UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
+            viewController.tabBarItem = tabBarItem;
+            
+            [tabs addObject:viewController];
+            
+            idx ++;
                 
-                [tabs addObject:viewController];
-                
-                idx ++;
+
+            if (self.activeDialogName.length > 0 && [self.activeDialogName isEqualToString:dialogController.name]) {
+                activeDialogNameStillVisible = YES;
             }
         }
         
-        [_tabController setViewControllers: tabs animated: YES];
-		[[_tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
-        _tabController.moreNavigationController.delegate = self;
-        _tabController.customizableViewControllers = nil;
+        // Set the tabs to the tabbar
+        [self.tabController setViewControllers: tabs animated: YES];
+		[[self.tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
+        self.tabController.moreNavigationController.delegate = self;
+        self.tabController.customizableViewControllers = nil;
         [tabs release];
+        
+        // Ensure we select a pageStack when none is selected OR when the previous one is not visible anymore
+        if (!activeDialogNameStillVisible && visibleDialogControllers.count > 0) {
+            MBDialogController *firstVisibleDialogController = [visibleDialogControllers objectAtIndex:0];
+            if (firstVisibleDialogController.pageStackControllers.count > 0) {
+                MBPageStackController *pageStackController = [firstVisibleDialogController.pageStackControllers objectAtIndex:0];
+                [self activatePageStackWithName:pageStackController.name];
+            }
+        }
+        
     }
     
     // Single page mode
@@ -519,6 +521,18 @@
         
         [self setContentViewController:dialogController.rootViewController];
     }
+}
+
+- (NSArray *)visibleDialogControllers {
+    NSMutableArray *visibleDialogControllers = [NSMutableArray array];
+    for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
+        MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:dialogController.name];
+        if ([dialogController showAsTab] && [dialogDefinition isPreConditionValid]) {
+            [visibleDialogControllers addObject:dialogController];
+        }
+        
+    }
+    return visibleDialogControllers;
 }
 
 -(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
@@ -646,5 +660,14 @@
         
     }
 }
+
+#pragma mark -
+#pragma mark UIWindow delegate methods
+
+- (void) makeKeyAndVisible {
+	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
+	[self.window makeKeyAndVisible];
+}
+
 
 @end

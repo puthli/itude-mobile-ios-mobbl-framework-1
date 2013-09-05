@@ -19,7 +19,6 @@
 }
 
 -(MBOutcome*) execute:(MBDocument *)document withPath:(NSString *)path {
-	NSString *firstPageStack = nil;
 	MBDocument *initialOutcomes = [[MBDataManagerService sharedInstance] loadDocument:[self documentName]];
 	for(MBElement *element in [initialOutcomes valueForPath:@"/Outcome"]) {
         
@@ -34,14 +33,10 @@
 		
 		oc.noBackgroundProcessing = TRUE;
 		oc.transferDocument = FALSE;
-		
-		if(firstPageStack == nil) firstPageStack = oc.pageStackName;
-        
+
 		[self performSelectorOnMainThread:@selector(handleOutcomeOnMainThread:) withObject:oc waitUntilDone:TRUE];
 	}
-    
-	[self performSelectorOnMainThread:@selector(activatePageStackWithName:) withObject:firstPageStack waitUntilDone:TRUE];
-    
+
 	return nil;
 }
 
