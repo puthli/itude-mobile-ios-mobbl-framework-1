@@ -391,20 +391,34 @@
 	
 	if([expression rangeOfString:@"{"].length == 0) return expression;
 	
+    //  Test case for our new implementation
+    //[self substituteExpression:@"!${AccountTypes:AccountType[type=${./@Rekeningsoortnummer}]/@supported}"];
+    
 	NSScanner *scanner = [NSScanner scannerWithString:expression];
 	NSString *subPart = @"";
 	NSString *singleExpression;
 	NSMutableString *result = [NSMutableString stringWithString:@""];
 	
+    // Search for opening tag
 	while([scanner scanUpToString:@"${" intoString:&subPart] || ![scanner isAtEnd]) {
 		[result appendString:subPart];
+        
+        // Put every character from opening tag into subpart
 		[scanner scanString:@"${" intoString:&subPart];
+        
+        // Search for close tag and put the expression in the singleExpression variable
 		BOOL hasExpression = [scanner scanUpToString:@"}" intoString:&singleExpression];
 		if(hasExpression) {
+            
+            // Create subPart from start to close tag
 			[scanner scanString:@"}" intoString:&subPart];
+            
+            // Concatinate the currentPath with the singleExpression
 			if([singleExpression hasPrefix:@"."] && currentPath != nil && [currentPath length]>0) {
 				singleExpression = [NSString stringWithFormat:@"%@/%@", currentPath, singleExpression];
 			}
+            
+            // Put the value in the result
 			NSString *value = [self valueForPath: singleExpression];
 			if(value != nil) [result appendString:value];
 			else [result appendString:nilMarker];
@@ -413,6 +427,48 @@
 	}
 	[result appendString:subPart];
 	return result;	
+}
+
+// preCondition="!${AccountTypes:AccountType[type=${./@Rekeningsoortnummer}]/@supported}"
+- (NSArray*)substituteExpression:(NSString *)expression {
+    
+    if(expression == nil) return nil;
+    
+    // Keep a list of indexes with startpoints of an expression
+    NSMutableArray *stack = [NSMutableArray array];
+    
+    unsigned int len = [expression length];
+    char buffer[len + 1];
+    [expression getCString:buffer maxLength:(len + 1) encoding:NSUTF8StringEncoding ];
+    
+    // Loop trough all characters in the sting
+    for(int i = 1; i < len; ++i) {
+    
+        char currentChar = buffer[i];
+
+        // Store the character's location if it is a opening tag '${'
+        if (currentChar == '{' && buffer[i-1] == '$') {
+            [stack addObject:[NSNumber numberWithInt:i+1]];
+        }
+        
+        // If we found the closing tag, that means we have found the next (sub)expression
+        else if (currentChar == '}') {
+            // Get the location of the last opening tag
+            NSNumber *lastNumber = [stack lastObject];
+            int lastOpeningTagPosition = [lastNumber intValue];
+            [stack removeLastObject];
+            
+            // Get the (sub) expression
+            NSRange range ;
+            range.length = i-lastOpeningTagPosition;
+            range.location = lastOpeningTagPosition;
+        
+            NSString *subExpression = [expression substringWithRange:range];
+            DLog(@"range %@",subExpression);
+            
+        }
+    }
+    return nil;
 }
 
 - (NSString*) evaluateExpression:(NSString*) expression currentPath:(NSString*) currentPath {
