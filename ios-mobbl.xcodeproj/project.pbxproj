@@ -192,6 +192,7 @@
 		BDEEA05117C240010020BF1B /* MBPageStack.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE9FA417C240010020BF1B /* MBPageStack.m */; };
 		BDEEA05217C240010020BF1B /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE9FA617C240010020BF1B /* MBPanel.m */; };
 		BDEEA05317C240010020BF1B /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE9FAA17C240010020BF1B /* MBTableViewController.m */; };
+		BDF1835317DF663D00249BB6 /* MBElementContainer+Preconditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF1835217DF663D00249BB6 /* MBElementContainer+Preconditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -594,6 +595,8 @@
 		BDEE9FA717C240010020BF1B /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		BDEE9FA917C240010020BF1B /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		BDEE9FAA17C240010020BF1B /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		BDF1835117DF663D00249BB6 /* MBElementContainer+Preconditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBElementContainer+Preconditions.h"; sourceTree = "<group>"; };
+		BDF1835217DF663D00249BB6 /* MBElementContainer+Preconditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBElementContainer+Preconditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -862,6 +865,8 @@
 				BDEE9E8F17C240010020BF1B /* MBElement.m */,
 				BDEE9E9017C240010020BF1B /* MBElementContainer.h */,
 				BDEE9E9117C240010020BF1B /* MBElementContainer.m */,
+				BDF1835117DF663D00249BB6 /* MBElementContainer+Preconditions.h */,
+				BDF1835217DF663D00249BB6 /* MBElementContainer+Preconditions.m */,
 				BDEE9E9217C240010020BF1B /* MBJsonDocumentParser.h */,
 				BDEE9E9317C240010020BF1B /* MBJsonDocumentParser.m */,
 				BDEE9E9417C240010020BF1B /* MBMobbl1DocumentParser.h */,
@@ -1551,6 +1556,7 @@
 				BDEEA05217C240010020BF1B /* MBPanel.m in Sources */,
 				BDEEA05317C240010020BF1B /* MBTableViewController.m in Sources */,
 				BD074F6817C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m in Sources */,
+				BDF1835317DF663D00249BB6 /* MBElementContainer+Preconditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
