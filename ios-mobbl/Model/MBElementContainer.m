@@ -7,6 +7,7 @@
 //
 
 #import "MBElementContainer.h"
+#import "MBElementContainer+Preconditions.h"
 #import "MBElement.h"
 #import "MBDocument.h"
 #import "MBDocumentDefinition.h"
@@ -18,7 +19,6 @@
 
 @interface MBElementContainer()
 	- (void) addAllPathsTo:(NSMutableSet*) set currentPath:(NSString*) currentPath;
-	-(NSString*) substituteExpressions:(NSString*) expression usingNilMarker:(NSString*) nilMarker currentPath:(NSString*) currentPath;
 @end
 
 
@@ -76,43 +76,6 @@
 	}
 }
 
-- (int) evaluateIndexExpression:(NSMutableString*) combinedExpression forElementName:(NSString*) elementName {
-	NSMutableArray *matchAttributes = [[NSMutableArray new] autorelease];
-	NSMutableArray *matchValues = [[NSMutableArray new] autorelease];
-
-	NSArray *expressions = [combinedExpression componentsSeparatedByString:@" and "];
-	
-	for(NSString *expression in expressions) {
-
-		int eqPos = [expression rangeOfString:@"="].location;
-		NSString *attrName = [[expression substringToIndex:eqPos] stripCharacters:@" "];
-		NSMutableString *valueExpression = [NSMutableString stringWithString:[expression substringFromIndex:eqPos+1]];
-		
-		attrName = [self substituteExpressions:attrName usingNilMarker:attrName currentPath:nil];
-		[valueExpression replaceOccurrencesOfString:@"'" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [valueExpression length])];
-		[valueExpression replaceOccurrencesOfString:@"\"" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [valueExpression length])];
-		NSString *value = [self substituteExpressions:valueExpression usingNilMarker:valueExpression currentPath:nil];
-
-		[matchAttributes addObject:attrName];
-		[matchValues addObject:value];
-	}
-	
-
-	NSMutableArray *elements = [self elementsWithName:elementName];
-	for(int i = 0; i< elements.count; i++) {
-		BOOL match = TRUE;
-		for(int j=0; match && j<[matchAttributes count]; j++) {
-			NSString *attrName = [matchAttributes objectAtIndex:j];
-			NSString *value = [matchValues objectAtIndex:j];
-			match &= [[[elements objectAtIndex:i] valueForAttribute: attrName] isEqualToString:value];
-		}
-		if(match) return i;
-	}
-	
-	// Return an index that exceeds the size of the elements array; this will be handled by if([rootList count] <= idx) below
-	// i.e. if nillIfMissing is TRUE then a not matching expression will also return nil because of this:
-	return elements.count;
-}
 
 - (id) valueForPathComponents:(NSMutableArray*)pathComponents withPath: (NSString*) originalPath nillIfMissing:(BOOL) nillIfMissing translatedPathComponents:(NSMutableArray*) translatedPathComponents {
 	if([pathComponents count] > 0) {
@@ -385,38 +348,8 @@
 	[[self sharedContext] setObject:document forKey: document.name];
 }
 
--(NSString*) substituteExpressions:(NSString*) expression usingNilMarker:(NSString*) nilMarker currentPath:(NSString*) currentPath {
-	
-	if(expression == nil) return nil;
-	
-	if([expression rangeOfString:@"{"].length == 0) return expression;
-	
-	NSScanner *scanner = [NSScanner scannerWithString:expression];
-	NSString *subPart = @"";
-	NSString *singleExpression;
-	NSMutableString *result = [NSMutableString stringWithString:@""];
-	
-	while([scanner scanUpToString:@"${" intoString:&subPart] || ![scanner isAtEnd]) {
-		[result appendString:subPart];
-		[scanner scanString:@"${" intoString:&subPart];
-		BOOL hasExpression = [scanner scanUpToString:@"}" intoString:&singleExpression];
-		if(hasExpression) {
-			[scanner scanString:@"}" intoString:&subPart];
-			if([singleExpression hasPrefix:@"."] && currentPath != nil && [currentPath length]>0) {
-				singleExpression = [NSString stringWithFormat:@"%@/%@", currentPath, singleExpression];
-			}
-			NSString *value = [self valueForPath: singleExpression];
-			if(value != nil) [result appendString:value];
-			else [result appendString:nilMarker];
-		}
-		subPart = @"";
-	}
-	[result appendString:subPart];
-	return result;	
-}
 
 - (NSString*) evaluateExpression:(NSString*) expression currentPath:(NSString*) currentPath {
-	
 	NSString *translated = [self substituteExpressions:expression usingNilMarker:@"null" currentPath: currentPath];
 	return [[MBScriptService sharedInstance] evaluate:translated];
 }
@@ -451,5 +384,6 @@
 	[elements sortUsingDescriptors: sortDescriptors];	
 	// All indices of cached paths might have become invalid if the ordering has changed (which is likely; duh)
 	[[self document] clearPathCache];
-}	
+}
+
 @end
