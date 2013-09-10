@@ -12,6 +12,7 @@
 #import "MBField.h"
 #import "MBFieldTypes.h"
 #import "MBMacros.h"
+#import "MBLocalizationService.h"
 
 @implementation MBAlertViewBuilder
 
@@ -72,7 +73,8 @@
     }
     
     // Now build the actual AlertView
-    MBAlertView *alertView = [[[MBAlertView alloc] initWithTitle:[alert title] message:message delegate:alertViewDelegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil] autorelease];
+    NSString *title = MBLocalizedString(alert.title);
+    MBAlertView *alertView = [[[MBAlertView alloc] initWithTitle:title message:message delegate:alertViewDelegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil] autorelease];
     for (NSString *title in otherButtonTitles) {
         [alertView addButtonWithTitle:title];
     }
