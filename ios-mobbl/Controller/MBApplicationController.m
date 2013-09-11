@@ -285,7 +285,7 @@ static MBApplicationController *_instance = nil;
 		
 		if(causingOutcome.transferDocument) {
 			if(causingOutcome.document == nil)  {
-				NSString *msg = [NSString stringWithFormat:@"No document provided (nil) in outcome by action/page=%@ but transferDocument='TRUE' in outcome definition", causingOutcome.originName];
+				NSString *msg = [NSString stringWithFormat:@"No document provided (nil) in outcome '%@' by action/page '%@' but transferDocument='TRUE' in outcome definition",causingOutcome.outcomeName , causingOutcome.originName];
 				@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
 			}
 			NSString *actualType =  [[causingOutcome.document definition] name];
