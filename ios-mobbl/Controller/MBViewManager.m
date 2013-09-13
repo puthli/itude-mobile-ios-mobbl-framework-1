@@ -520,6 +520,10 @@
         }
         
         [self setContentViewController:dialogController.rootViewController];
+        
+        // Ensure we select a pageStack when none is selected OR when the previous one is not visible anymore
+        MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
+        [self activatePageStackWithName:pageStackController.name];
     }
 }
 
