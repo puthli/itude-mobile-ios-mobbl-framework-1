@@ -12,7 +12,7 @@
 @implementation MBButtonBuilder
 
 - (CGRect) sizeForButton:(MBField*) field withMaxBounds:(CGRect) bounds  {
-    CGRect frame = CGRectMake(0, 0, 100, 29);
+    CGRect frame = CGRectMake(0, 0, 100, 30); // 36 px h?
     frame.origin.y = (bounds.size.height/2)-(frame.size.height/2);
     frame.origin.x = bounds.size.width-frame.size.width-10; // 10 px margin
     return frame;
@@ -29,7 +29,7 @@
 	NSString *text = field.label;
 	
 	[button setTitle:text forState:UIControlStateNormal];
-	[button addTarget:field action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchDown];
+    [button addTarget:field action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[[self styleHandler] styleButton:button component:field];
 	return button;
 
