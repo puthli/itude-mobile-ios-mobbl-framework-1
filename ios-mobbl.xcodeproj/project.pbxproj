@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		1CC88E89171ED84200B30461 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC88E88171ED84200B30461 /* Foundation.framework */; };
 		BD074F6817C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BD074F6717C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m */; };
+		BD7D6AB317E3119C00463AE5 /* UITextField+ResizableBackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D6AB217E3119C00463AE5 /* UITextField+ResizableBackgroundImage.m */; };
 		BDEE9FAB17C240010020BF1B /* MBFireInitialOutcomes.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE9E0A17C240010020BF1B /* MBFireInitialOutcomes.m */; };
 		BDEE9FAC17C240010020BF1B /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE9E0D17C240010020BF1B /* MBConditionalDefinition.m */; };
 		BDEE9FAD17C240010020BF1B /* MBConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE9E0F17C240010020BF1B /* MBConfigurationParser.m */; };
@@ -212,6 +213,8 @@
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD074F6617C7B90F00D17789 /* UIButton+ResizableBackgroundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ResizableBackgroundImage.h"; sourceTree = "<group>"; };
 		BD074F6717C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ResizableBackgroundImage.m"; sourceTree = "<group>"; };
+		BD7D6AB117E3119C00463AE5 /* UITextField+ResizableBackgroundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ResizableBackgroundImage.h"; sourceTree = "<group>"; };
+		BD7D6AB217E3119C00463AE5 /* UITextField+ResizableBackgroundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ResizableBackgroundImage.m"; sourceTree = "<group>"; };
 		BDEE9E0917C240010020BF1B /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
 		BDEE9E0A17C240010020BF1B /* MBFireInitialOutcomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFireInitialOutcomes.m; sourceTree = "<group>"; };
 		BDEE9E0C17C240010020BF1B /* MBConditionalDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConditionalDefinition.h; sourceTree = "<group>"; };
@@ -989,6 +992,8 @@
 		BDEE9ECF17C240010020BF1B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				BD7D6AB117E3119C00463AE5 /* UITextField+ResizableBackgroundImage.h */,
+				BD7D6AB217E3119C00463AE5 /* UITextField+ResizableBackgroundImage.m */,
 				BD074F6617C7B90F00D17789 /* UIButton+ResizableBackgroundImage.h */,
 				BD074F6717C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m */,
 				BDEE9ED017C240010020BF1B /* BinckUtilities.h */,
@@ -1557,6 +1562,7 @@
 				BDEEA05317C240010020BF1B /* MBTableViewController.m in Sources */,
 				BD074F6817C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m in Sources */,
 				BDF1835317DF663D00249BB6 /* MBElementContainer+Preconditions.m in Sources */,
+				BD7D6AB317E3119C00463AE5 /* UITextField+ResizableBackgroundImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
