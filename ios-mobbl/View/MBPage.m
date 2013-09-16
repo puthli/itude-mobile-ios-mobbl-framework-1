@@ -77,7 +77,7 @@
     [_dialogName release];
     [_document release];
     //[_controller release]; // Do not release the ApplicationController because it is not retained!
-    [_viewController release];
+    //[_viewController release]; // Do not release the ViewController because it is not retained!
     [_childViewControllers release];
 	[_documentDiff release];
     [_transitionStyle release];
