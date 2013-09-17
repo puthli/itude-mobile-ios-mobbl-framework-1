@@ -12,7 +12,9 @@
 @implementation MBButtonBuilder
 
 - (CGRect) sizeForButton:(MBField*) field withMaxBounds:(CGRect) bounds  {
-    CGRect frame = CGRectMake(0, 0, 100, 30); // 36 px h?
+    CGFloat width = field.width > 0 ? field.width : 100; // 100 px is the default width
+    CGFloat height = field.height > 0 ? field.height : 30; // 30 px is the default height
+    CGRect frame = CGRectMake(0, 0, width, height);
     frame.origin.y = (bounds.size.height/2)-(frame.size.height/2);
     frame.origin.x = bounds.size.width-frame.size.width-10; // 10 px margin
     return frame;
