@@ -29,14 +29,11 @@
 	UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
     
-    UIImage *increaseIcon = [UIImage imageNamed:@"FontUp_Icon.png"];
-    UIImage *decreaseIcon = [UIImage imageNamed:@"FontDown_Icon.png"];
+    UIImage *increaseIcon = [UIImage imageNamed:@"icon_font_up.png"];
+    UIImage *decreaseIcon = [UIImage imageNamed:@"icon_font_down.png"];
     
     _decreaseFontSizeButton = [[UIBarButtonItem alloc] initWithImage:decreaseIcon style:UIBarButtonItemStyleBordered target:self action:@selector(handleDecreaseButtonPressed:)];
-    
     _increaseFontSizeButton = [[UIBarButtonItem alloc] initWithImage:increaseIcon style:UIBarButtonItemStyleBordered target:self action:@selector(handleIncreaseButtonPressed:)];
-    
-    
     
     [toolbarItems addObject:flexibleSpace];
     [toolbarItems addObject:_decreaseFontSizeButton];
