@@ -213,6 +213,10 @@
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD074F6617C7B90F00D17789 /* UIButton+ResizableBackgroundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ResizableBackgroundImage.h"; sourceTree = "<group>"; };
 		BD074F6717C7B90F00D17789 /* UIButton+ResizableBackgroundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ResizableBackgroundImage.m"; sourceTree = "<group>"; };
+		BD5011E317E9C8CA00CE967F /* icon_font_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_font_down.png; sourceTree = "<group>"; };
+		BD5011E417E9C8CA00CE967F /* icon_font_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_font_down@2x.png"; sourceTree = "<group>"; };
+		BD5011E517E9C8CA00CE967F /* icon_font_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_font_up.png; sourceTree = "<group>"; };
+		BD5011E617E9C8CA00CE967F /* icon_font_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_font_up@2x.png"; sourceTree = "<group>"; };
 		BD7D6AB117E3119C00463AE5 /* UITextField+ResizableBackgroundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+ResizableBackgroundImage.h"; sourceTree = "<group>"; };
 		BD7D6AB217E3119C00463AE5 /* UITextField+ResizableBackgroundImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+ResizableBackgroundImage.m"; sourceTree = "<group>"; };
 		BDEE9E0917C240010020BF1B /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
@@ -356,8 +360,6 @@
 		BDEE9EA217C240010020BF1B /* backButtonDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButtonDefault@2x.png"; sourceTree = "<group>"; };
 		BDEE9EA317C240010020BF1B /* backButtonIconArrowWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButtonIconArrowWhite.png; sourceTree = "<group>"; };
 		BDEE9EA417C240010020BF1B /* backButtonIconArrowWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButtonIconArrowWhite@2x.png"; sourceTree = "<group>"; };
-		BDEE9EA517C240010020BF1B /* FontDown_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FontDown_Icon.png; sourceTree = "<group>"; };
-		BDEE9EA617C240010020BF1B /* FontUp_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FontUp_Icon.png; sourceTree = "<group>"; };
 		BDEE9EA817C240010020BF1B /* MBDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBDatePicker.xib; sourceTree = "<group>"; };
 		BDEE9EA917C240010020BF1B /* MBPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBPicker.xib; sourceTree = "<group>"; };
 		BDEE9EAD17C240010020BF1B /* MBDocumentOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentOperation.h; sourceTree = "<group>"; };
@@ -903,9 +905,11 @@
 		BDEE9E9D17C240010020BF1B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD5011E317E9C8CA00CE967F /* icon_font_down.png */,
+				BD5011E417E9C8CA00CE967F /* icon_font_down@2x.png */,
+				BD5011E517E9C8CA00CE967F /* icon_font_up.png */,
+				BD5011E617E9C8CA00CE967F /* icon_font_up@2x.png */,
 				BDEE9E9E17C240010020BF1B /* BackButtons */,
-				BDEE9EA517C240010020BF1B /* FontDown_Icon.png */,
-				BDEE9EA617C240010020BF1B /* FontUp_Icon.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
