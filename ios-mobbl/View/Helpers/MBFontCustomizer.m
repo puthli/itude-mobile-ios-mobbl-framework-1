@@ -7,79 +7,86 @@
 //
 
 #import "MBFontCustomizer.h"
-#import "MBFontCustomizerToolbar.h"
-#import "MBViewBuilderFactory.h"
+#import "MBLocalizationService.h"
+#import "MBMacros.h"
+
+#define C_BUTTON_TAG_FONT_INCREASE 991
+#define C_BUTTON_TAG_FONT_DECREASE 992
+
+@interface MBFontCustomizer () {
+    id _viewController;
+
+    UIBarButtonItem *_increaseFontSizeButton;
+    UIBarButtonItem *_decreaseFontSizeButton;
+}
+@property(nonatomic, assign) id<MBFontCustomizerDelegate> viewController;
+@property(nonatomic,retain) UIBarButtonItem *increaseFontSizeButton;
+@property(nonatomic,retain) UIBarButtonItem *decreaseFontSizeButton;
+
+@end
 
 @implementation MBFontCustomizer
 
-@synthesize toolBar = _toolBar;
-@synthesize buttonsDelegate = _buttonsDelegate;
-@synthesize sender = _sender;
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        _toolBar = [MBFontCustomizerToolbar new];
-        [self setCustomView:_toolBar];
-    }
-    return self;
-}
+@synthesize viewController = _viewController;
+
+@synthesize increaseFontSizeButton = _increaseFontSizeButton;
+@synthesize decreaseFontSizeButton = _decreaseFontSizeButton;
 
 - (void)dealloc {
-    [_toolBar release];
+    [_increaseFontSizeButton release];
+    [_decreaseFontSizeButton release];
     [super dealloc];
 }
 
-- (void) addToViewController:(UIViewController *)viewController animated:(BOOL)animated {
+- (void) addToViewController:(UIViewController<MBFontCustomizerDelegate> *)viewController animated:(BOOL)animated {
     
-    [[[MBViewBuilderFactory sharedInstance] styleHandler] styleToolbar:self.toolBar];
-
-    // Add existing buttons
-    UIBarButtonItem *item = viewController.navigationItem.rightBarButtonItem;
-    if (item != nil) {
-        // Workaround. Adding the original BarbuttonItem fails somehow! A empty spot will show in most cases. So therefor we copy everything from the original Button (added by the framework, which can be a refresh or close button)
-        // IMPORTANT NOTE: This ONLY supports buttons with icons or titles. Not any system Item!
-        UIBarButtonItem *itemCopy = nil;
-        if (item.image != nil) {
-            itemCopy = [[[UIBarButtonItem alloc] initWithImage:item.image style:item.style target:item.target action:item.action] autorelease];
-        }
-        else {
-            itemCopy = [[[UIBarButtonItem alloc] initWithTitle:item.title style:item.style target:item.target action:item.action] autorelease];
-        }
-        
-        if (itemCopy != nil) {
-            [self.toolBar addBarButtonItem:itemCopy animated:YES];
-        }
-        
-        // If all else fails, try to add the original button.
-        else {
-            [self.toolBar addBarButtonItem:item animated:YES];
-        }
-        
-    }
-      
-    [viewController.navigationItem setRightBarButtonItem:self animated:animated];
-}
-
-- (void)setButtonsDelegate:(id)buttonsDelegate {
-    if (_buttonsDelegate != buttonsDelegate) {
-        [_buttonsDelegate release];
-        _buttonsDelegate = buttonsDelegate;
-        [_buttonsDelegate retain];
-        
-        [self.toolBar setButtonsDelegate:_buttonsDelegate];
-    }
-}
-
-- (void)setSender:(id)sender {
-    if (_sender != sender) {
-        [_sender release];
-        _sender = sender;
-        [_sender retain];
-        
-        [self.toolBar setSender:_sender];
+    self.viewController = viewController;
+    if (!self.viewController) {
+        WLog(@"WARNING! no buttonsDelegate set in the MBFontCustomizer");
     }
     
+    // Add existing buttons (This functionality is only supported from iOS 5 and up)
+    if ([viewController.navigationItem respondsToSelector:@selector(rightBarButtonItems)]) {
+        NSMutableArray *items = [NSMutableArray arrayWithArray:viewController.navigationItem.rightBarButtonItems];
+        
+        // Prevent the adding of several one set of FontResizeItems (in case a developer tries to add multiple copies)
+        if (![self itemsContainFontResizeButtons:items]) {
+            [self setupButtons];
+            [items addObject:self.decreaseFontSizeButton];
+            [items addObject:self.increaseFontSizeButton];
+            [viewController.navigationItem setRightBarButtonItems:items animated:animated];
+        }
+    }
 }
+
+
+#pragma mark -
+#pragma mark Util
+
+- (void)setupButtons {
+    if (!self.increaseFontSizeButton && !self.decreaseFontSizeButton) {
+        UIImage *increaseIcon = [UIImage imageNamed:@"icon_font_up.png"];
+        UIImage *decreaseIcon = [UIImage imageNamed:@"icon_font_down.png"];
+
+        self.decreaseFontSizeButton = [[[UIBarButtonItem alloc] initWithImage:decreaseIcon style:UIBarButtonItemStyleBordered target:self.viewController action:@selector(fontsizeDecreased:)] autorelease];
+        self.increaseFontSizeButton = [[[UIBarButtonItem alloc] initWithImage:increaseIcon style:UIBarButtonItemStyleBordered target:self.viewController action:@selector(fontsizeIncreased:)] autorelease];
+        
+        self.decreaseFontSizeButton.tag = C_BUTTON_TAG_FONT_DECREASE;
+        self.increaseFontSizeButton.tag = C_BUTTON_TAG_FONT_INCREASE;
+    }
+}
+
+- (BOOL)itemsContainFontResizeButtons:(NSArray *)items {
+    for (UIBarButtonItem *item in items) {
+        if (item.tag == C_BUTTON_TAG_FONT_INCREASE || item.tag == C_BUTTON_TAG_FONT_DECREASE) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 
 @end
+
+
