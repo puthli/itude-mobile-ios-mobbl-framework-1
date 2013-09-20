@@ -274,11 +274,10 @@
 							 cancelButtonTitle:@"OK"
 							 otherButtonTitles:nil];
 		
-        // There seem to be timing issues with displaying the alert 
-        // while the screen is being redrawn due to becoming active after sleep or background
-        // The alert was shown, but the background was blank / white.
-        // #BINCKAPPS-357 is solved by scheduling the alert to be displayed after all UI stuff has been finished
-		[self.currentAlert performSelector:@selector(show) withObject:nil afterDelay:0.1];
+        // Show a alert on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.currentAlert show];
+        });
 	}
 }
 
