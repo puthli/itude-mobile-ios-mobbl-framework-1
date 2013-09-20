@@ -7,22 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "MBFontChangeListenerProtocol.h"
-//#import "MBFontCustomizerToolbar.m"
 
-@class MBFontCustomizerToolbar;
+#pragma mark -
+#pragma mark MBFontCustomizerDelegate
 
-@interface MBFontCustomizer : UIBarButtonItem {
-    MBFontCustomizerToolbar *_toolBar;
-    id _buttonsDelegate;
-    id _sender;
-}
+@protocol MBFontCustomizerDelegate <NSObject>
+@required
+-(void)fontsizeIncreased:(id)sender;
+-(void)fontsizeDecreased:(id)sender;
+@end
 
-@property(nonatomic, retain) MBFontCustomizerToolbar *toolBar;
-@property(nonatomic, retain) id buttonsDelegate;
-@property(nonatomic, retain) id sender;
 
-- (void) addToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+#pragma mark -
+#pragma mark MBFontCustomizer interface
+
+@interface MBFontCustomizer : NSObject
+
+- (void) addToViewController:(UIViewController<MBFontCustomizerDelegate> *)viewController animated:(BOOL)animated;
 
 @end
 
