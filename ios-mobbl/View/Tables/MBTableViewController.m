@@ -34,7 +34,7 @@
 #define C_CELL_Y_MARGIN 4
 
 // TODO: Get the font size and name from the styleHandler
-@interface MBTableViewController()<MBFontCustomizerDelegate>
+@interface MBTableViewController()
 
 @property (nonatomic, retain) NSMutableDictionary *rowsByIndexPath;
 @property (nonatomic, assign) NSInteger fontCustomizerFontSizeDifference;
@@ -351,7 +351,8 @@
         
         if (item == nil || ![item isKindOfClass:[MBFontCustomizer class]]) {
             MBFontCustomizer *fontCustomizer = [[MBFontCustomizer new] autorelease];
-            [fontCustomizer addToViewController:self animated:YES];
+            [fontCustomizer setButtonsDelegate:self];
+            [fontCustomizer addToViewController:parentViewcontroller animated:YES];
         }
     }
 }
