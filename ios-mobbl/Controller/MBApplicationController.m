@@ -180,9 +180,7 @@ static MBApplicationController *_instance = nil;
 			
 			outcomeToProcess.path = outcome.path;
 			outcomeToProcess.document = outcome.document;
-            if (!outcomeToProcess.pageStackName) {
-                outcomeToProcess.pageStackName = outcome.pageStackName;
-            }
+            if (!outcomeToProcess.pageStackName) outcomeToProcess.pageStackName = outcome.pageStackName;
 			if (outcome.displayMode != nil) outcomeToProcess.displayMode = outcome.displayMode;
 			outcomeToProcess.noBackgroundProcessing = outcome.noBackgroundProcessing || outcomeDef.noBackgroundProcessing;
 
@@ -190,7 +188,7 @@ static MBApplicationController *_instance = nil;
 			
 				// Update a possible switch of pageStack/display mode set by the outcome definition
 				if(outcomeDef.pageStackName != nil) outcomeToProcess.pageStackName = outcomeDef.pageStackName;
-				if(outcomeDef.displayMode != nil) outcomeToProcess.displayMode = outcomeDef.displayMode;
+                if(outcomeToProcess.displayMode.length == 0) outcomeToProcess.displayMode = outcomeDef.displayMode;
 				if(outcomeToProcess.originPageStackName == nil) outcomeToProcess.originPageStackName = outcomeToProcess.pageStackName;
 				
 				if(outcomeToProcess.pageStackName != nil) [pageStacks addObject: outcomeToProcess.pageStackName];
