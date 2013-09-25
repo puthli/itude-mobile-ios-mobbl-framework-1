@@ -23,11 +23,11 @@
 	for(MBElement *element in [initialOutcomes valueForPath:@"/Outcome"]) {
         
 		MBOutcome *oc = [[[MBOutcome alloc] init] autorelease];
-		oc.outcomeName = [element valueForPath:@"@action"];
-        oc.pageStackName = [element valueForPath:@"pageStackName"];
+		oc.outcomeName = [element valueForAttribute:@"action"];
+        oc.pageStackName = [element valueForAttribute:@"pageStack"];
         
         // For backwards compatibility
-        if (!oc.pageStackName) {
+        if (oc.pageStackName.length == 0) {
             oc.pageStackName = [element valueForPath:@"@dialog"];
         }
 		
