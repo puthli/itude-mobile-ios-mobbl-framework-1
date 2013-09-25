@@ -211,20 +211,20 @@ static MBApplicationController *_instance = nil;
 				}
 				else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {
 					// TODO: This causes a bug when the user desides to pop the rootViewController
-					[_viewManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];   
+					[_viewManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];
 				}
 				else if([@"POPALL" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];   
+					[_viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];
 				}
 				else if([@"CLEAR" isEqualToString: outcomeToProcess.displayMode]) {
 					[_viewManager resetView];   
 				}
 				else if([@"END" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];   
+					[_viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];
 					[pageStacks removeObject:outcomeToProcess.pageStackName];
 				}
 				else {
-					[_viewManager notifyPageStackUsage: outcomeToProcess.pageStackName];	
+					[_viewManager.dialogManager notifyPageStackUsage: outcomeToProcess.pageStackName];
 				}
 				
                 // Action
@@ -436,7 +436,7 @@ static MBApplicationController *_instance = nil;
 - (NSString*) activePageStackName {
 	NSString *result = nil;
 	if(_viewManager != nil) {
-	  	result = _viewManager.activePageStackName;
+	  	result = _viewManager.dialogManager.activePageStackName;
 	}
 	return result;
 }
@@ -446,13 +446,13 @@ static MBApplicationController *_instance = nil;
 	NSString *result = nil;
 	if (_viewManager != nil) {
 		
-		result = _viewManager.activeDialogName;
+		result = _viewManager.dialogManager.activeDialogName;
 	}
 	return result;
 }
 
 -(void) activatePageStackWithName:(NSString*) name {
-	[_viewManager activatePageStackWithName: name];
+	[_viewManager.dialogManager activatePageStackWithName: name];
 }
 
 -(void) showActivityIndicator {

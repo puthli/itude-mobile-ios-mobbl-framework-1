@@ -6,27 +6,33 @@
 //  Copyright 2010 Itude Mobile BV. All rights reserved.
 //
 
-#import "MBOrderedMutableDictionary.h"
-#import "MBMacros.h"
 #import "MBViewManager.h"
-#import "MBPageStackDefinition.h"
+
 #import "MBDialogDefinition.h"
-#import "MBPageStackController.h"
 #import "MBDialogController.h"
+#import "MBPageStackDefinition.h"
+#import "MBPageStackController.h"
+
 #import "MBOutcomeDefinition.h"
 #import "MBOutcome.h"
-#import "MBMetadataService.h"
+
 #import "MBPage.h"
 #import "MBAlert.h"
-#import "MBResourceService.h"
-#import "MBActivityIndicator.h"
+
 #import "MBConfigurationDefinition.h"
+#import "MBMetadataService.h"
+#import "MBResourceService.h"
+
+#import "MBActivityIndicator.h"
 #import "MBSpinner.h"
+
 #import "MBLocalizationService.h"
 #import "MBBasicViewController.h"
 #import "MBTransitionStyle.h"
 
 #import "MBFontCustomizer.h"
+
+#import "MBMacros.h"
 
 // Used to get a stylehandler to style navigationBar
 #import "MBStyleHandler.h"
@@ -38,59 +44,48 @@
 @interface MBViewManager() {
 	UIWindow *_window;
 	UITabBarController *_tabController;
-    MBOrderedMutableDictionary *_dialogControllers;
-	NSMutableDictionary *_pageStackControllers;
-	NSMutableDictionary *_activityIndicatorCounts;
-	NSMutableArray *_pageStackControllersOrdered;
-	NSMutableArray *_sortedNewPageStackNames;
-	NSString *_activePageStackName;
-	NSString *_activeDialogName;
-	UIAlertView *_currentAlert;
-	UINavigationController *_modalController;
+    
+	MBDialogManager *_dialogManager;
+    
+	UIAlertView *_currentAlert; // TODO: I don't see why we need the currentAlert??
+	UINavigationController *_modalController; // TODO: Get rid of this modalController thingy
+    
+    NSMutableDictionary *_activityIndicatorCounts;
 	int _activityIndicatorCount;
 }
 
-@property (nonatomic, retain) MBOrderedMutableDictionary *dialogControllers;
-
--(MBPageStackController*) pageStackControllerWithName:(NSString*) name;
 - (void) clearWindow;
 - (void) resetView;
 - (void) showAlertView:(MBPage*) page;
-- (void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle selectPageStack:(BOOL) shouldSelectPageStack;
+
 @end
 
 @implementation MBViewManager
 
 @synthesize window = _window;
 @synthesize tabController = _tabController;
-@synthesize activePageStackName = _activePageStackName;
-@synthesize activeDialogName = _activeDialogName;
+@synthesize dialogManager = _dialogManager;
 @synthesize currentAlert = _currentAlert;
-@synthesize dialogControllers = _dialogControllers;
 
 - (id) init {
 	self = [super init];
 	if (self != nil) {
 		_activityIndicatorCounts = [NSMutableDictionary new];
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
-		_sortedNewPageStackNames = [NSMutableArray new];
-        self.dialogControllers = [[MBOrderedMutableDictionary new] autorelease];
+		self.dialogManager = [[MBDialogManager new] autorelease];
+        self.dialogManager.delegate = self;
         [self resetView];
 	}
 	return self;
 }
 
 - (void) dealloc {
-	[_pageStackControllers release];
-    [_dialogControllers release];
 	[_window release];
 	[_tabController release];
-	[_sortedNewPageStackNames release];
-	[_activityIndicatorCounts release];
-	[_activePageStackName release];
-	[_activeDialogName release];
+	[_dialogManager release];
 	[_currentAlert release];
 	[_modalController release];
+    [_activityIndicatorCounts release];
 	[super dealloc];
 }
 
@@ -169,7 +164,7 @@
                     [self presentViewController:_modalController fromViewController:_tabController animated:YES];
                 }
                 else {
-                    MBPageStackController *pageStackController = [self pageStackControllerWithName:[self activePageStackName]];
+                    MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
                     [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
                     page.transitionStyle = transitionStyle;
                     [self presentViewController:_modalController fromViewController:pageStackController.navigationController animated:YES];
@@ -203,43 +198,9 @@
 		[currentViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:0]; 
 	}
     else {
-		[self addPageToPageStack:page displayMode:displayMode transitionStyle:transitionStyle selectPageStack:shouldSelectPageStack];
+		[self.dialogManager addPageToPageStack:page displayMode:displayMode transitionStyle:transitionStyle selectPageStack:shouldSelectPageStack];
 	}
 }	
-
--(void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle selectPageStack:(BOOL) shouldSelectPageStack {
-    
-    
-    MBDialogDefinition *dialogDef = [[MBMetadataService sharedInstance] dialogDefinitionForPageStackName:page.pageStackName];
-    MBDialogController *dialogController = [self dialogWithName:dialogDef.name];
-    
-    if (dialogController == nil) {
-        dialogController = [self createDialogController:dialogDef];
-        [self updateDisplay];
-    }
-    
-    MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
-    [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
-
-	
-	if(shouldSelectPageStack ) {
-        [self activatePageStackWithName:page.pageStackName];
-    }
-}
-
-- (MBDialogController *)createDialogController:(MBDialogDefinition *)definition {
-    MBDialogController *dialogController = [self dialogWithName:definition.name];
-    
-    if (dialogController == nil) {
-        dialogController = [[MBApplicationFactory sharedInstance] createDialogController:definition];
-        [self.dialogControllers setValue:dialogController forKey:dialogController.name];
-        for (MBPageStackController *stack in dialogController.pageStackControllers) {
-            [_pageStackControllers setObject:stack forKey:stack.name];
-            [_pageStackControllersOrdered addObject:stack.name];
-        }
-    }
-    return dialogController;
-}
 
 -(void) showAlertView:(MBPage*) page {
 	
@@ -327,7 +288,7 @@
             [self dismisViewController:self.tabController animated:TRUE];
         }
         else {
-            MBPageStackController *pageStackController = [self pageStackControllerWithName:[self activePageStackName]];
+            MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
             // TODO: TransitionStyle!!!
             [self dismisViewController:pageStackController.navigationController animated:YES];
         }
@@ -339,7 +300,7 @@
 }
 
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName {
-    MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
+    MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:pageStackName];
     
     // Determine transitionStyle
     MBBasicViewController *viewController = [pageStackController.navigationController.viewControllers lastObject];
@@ -347,55 +308,17 @@
     [pageStackController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
 }
 
--(void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition {
-    MBPageStackController *result = [self pageStackControllerWithName:pageStackName]; 
-    if(result != nil) {
-        [_pageStackControllersOrdered removeObject:result];
-        [_pageStackControllers removeObjectForKey: pageStackName];
-        [self updateDisplay];
-    }
-	if(!keepPosition) [_sortedNewPageStackNames removeObject:pageStackName];
-}
 
--(void) activatePageStackWithName:(NSString*) pageStackName {
-	
-	self.activePageStackName = pageStackName;
-    
-    MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
-    MBDialogController *dialogController = [self dialogWithName:[pageStackController dialogName]];
-    
-	self.activeDialogName = [dialogController name];
-	
-	
-	// Only set the selected tab if realy necessary; because it messes up the more navigation controller
-	NSInteger idx = _tabController.selectedIndex;
-	NSInteger shouldBe = [_tabController.viewControllers indexOfObject:dialogController.rootViewController];
-	
-	// Apparently we need to select the tab. Only now we cannot do this for tabs that are on the more tab
-	// because it destroys the navigation controller for some reason
-	// TODO: Make selecting a pageStack work; even if it is nested within the more tab
-    if(idx != shouldBe && shouldBe!=NSNotFound /* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
-		UIViewController *ctrl = [_tabController selectedViewController];
-		[ctrl viewWillDisappear:FALSE];
-		[_tabController setSelectedViewController: dialogController.rootViewController];
-		[ctrl viewDidDisappear:FALSE];
-	}
-}
+
+
 
 - (void) resetView {
-    
     [_tabController release];
-    [_pageStackControllers release];
-    [_pageStackControllersOrdered release];
-
 	[_modalController release];
     
     _tabController = nil;
 	_modalController = nil;
-    _pageStackControllers = [NSMutableDictionary new];
-    _pageStackControllersOrdered = [NSMutableArray new];
-
-    self.dialogControllers = [MBOrderedMutableDictionary new];
+    
     [self clearWindow];
 }
 
@@ -410,13 +333,6 @@
 	
 }
 
--(MBPageStackController*) pageStackControllerWithName:(NSString*) name {
-	return [_pageStackControllers objectForKey: name];
-}
-
--(MBDialogController*) dialogWithName:(NSString*) name {
-	return [self.dialogControllers objectForKey: name];
-}
 
 // Remove every view that is not the activityIndicatorView
 -(void) clearWindow {
@@ -435,7 +351,7 @@
  */
 - (BOOL)shouldCreateTabBar {
     NSInteger numberOfShowAsTabs = 0;
-    for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
+    for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
         if ([dialogController showAsTab]) {
             numberOfShowAsTabs ++;
             if (numberOfShowAsTabs > 1) {
@@ -450,7 +366,7 @@
 
     BOOL shouldCreateTabBar = [self shouldCreateTabBar];
     // Should create tabbar
-    if([self.dialogControllers count] > 1 && shouldCreateTabBar)
+    if([self.dialogManager.dialogControllers count] > 1 && shouldCreateTabBar)
 	{
         // Build the tabbar
 		if(!self.tabController) {
@@ -464,7 +380,7 @@
         int idx = 0;
         NSMutableArray *tabs = [NSMutableArray new];
         BOOL activeDialogNameStillVisible = FALSE;
-        NSArray *visibleDialogControllers = [self visibleDialogControllers];
+        NSArray *visibleDialogControllers = [self.dialogManager visibleDialogControllers];
         for (MBDialogController *dialogController in visibleDialogControllers) {
             // Create a tabbarProperties
             UIViewController *viewController = dialogController.rootViewController;
@@ -478,7 +394,7 @@
             idx ++;
                 
 
-            if (self.activeDialogName.length > 0 && [self.activeDialogName isEqualToString:dialogController.name]) {
+            if (self.dialogManager.activeDialogName.length > 0 && [self.dialogManager.activeDialogName isEqualToString:dialogController.name]) {
                 activeDialogNameStillVisible = YES;
             }
         }
@@ -495,18 +411,18 @@
             MBDialogController *firstVisibleDialogController = [visibleDialogControllers objectAtIndex:0];
             if (firstVisibleDialogController.pageStackControllers.count > 0) {
                 MBPageStackController *pageStackController = [firstVisibleDialogController.pageStackControllers objectAtIndex:0];
-                [self activatePageStackWithName:pageStackController.name];
+                [self.dialogManager activatePageStackWithName:pageStackController.name];
             }
         }
         
     }
     
     // Single page mode
-    else if([self.dialogControllers count] > 0) {
+    else if([self.dialogManager.dialogControllers count] > 0) {
         
         // Search for the only dialogController with attribute 'showAs="TAB"'.
         MBDialogController *dialogController = nil;
-        for (MBDialogController *currentDialogContoller in [self.dialogControllers allValues]) {
+        for (MBDialogController *currentDialogContoller in [self.dialogManager.dialogControllers allValues]) {
             if ([currentDialogContoller showAsTab]) {
                 dialogController = currentDialogContoller;
                 break;
@@ -515,28 +431,17 @@
         
         // Take the first dialogController if no dialogController with attribute 'showAs="TAB"' is found.
         if (!dialogController) {
-            dialogController = [self.dialogControllers objectAtIndex:0];
+            dialogController = [self.dialogManager.dialogControllers objectAtIndex:0];
         }
         
         [self setContentViewController:dialogController.rootViewController];
         
         // Ensure we select a pageStack when none is selected OR when the previous one is not visible anymore
         MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
-        [self activatePageStackWithName:pageStackController.name];
+        [self.dialogManager activatePageStackWithName:pageStackController.name];
     }
 }
 
-- (NSArray *)visibleDialogControllers {
-    NSMutableArray *visibleDialogControllers = [NSMutableArray array];
-    for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
-        MBDialogDefinition *dialogDefinition = [[MBMetadataService sharedInstance] definitionForDialogName:dialogController.name];
-        if ([dialogController showAsTab] && [dialogDefinition isPreConditionValid]) {
-            [visibleDialogControllers addObject:dialogController];
-        }
-        
-    }
-    return visibleDialogControllers;
-}
 
 -(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
 	return YES;
@@ -559,7 +464,7 @@
         [topMostVisibleViewController.view addSubview:blocker];
 	}else{
         
-        for (UIView *subview in [[[self pageStackControllerWithName:self.activePageStackName] view] subviews]) {
+        for (UIView *subview in [[[self.dialogManager pageStackControllerWithName:self.dialogManager.activePageStackName] view] subviews]) {
             if ([subview isKindOfClass:[MBActivityIndicator class]]) {
                 MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
                 [indicatorView setMessage:message];
@@ -589,13 +494,7 @@
     return [self.window bounds];
 }
 
-- (void) notifyPageStackUsage:(NSString*) pageStackName {
-	if(pageStackName != nil) {
-		if(![_sortedNewPageStackNames containsObject:pageStackName]) {
-			[_sortedNewPageStackNames addObject:pageStackName];
-        }
-	}
-}
+
 
 // Method is called when the tabBar will be edited by the user (when the user presses the edid-button on the more-page). 
 // It is used to update the style of the "Edit" navigationBar behind the Edit-button
@@ -639,9 +538,9 @@
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     // Set active dialog name
-    for (MBDialogController *dialogController in [self.dialogControllers allValues]) {
+    for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
         if (viewController == dialogController.rootViewController) {
-            self.activeDialogName = dialogController.name;
+            self.dialogManager.activeDialogName = dialogController.name;
             break;
         }
     }
@@ -670,6 +569,35 @@
 - (void) makeKeyAndVisible {
 	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
 	[self.window makeKeyAndVisible];
+}
+
+
+#pragma mark -
+#pragma mark MBDialogManagerDelegate
+
+- (void)didCreateDialogController:(MBDialogController *)dialogController {
+    [self updateDisplay];
+}
+
+- (void)didEndPageStackWithName:(NSString*) pageStackName {
+    [self updateDisplay];
+}
+
+- (void)didActivatePageStack:(MBPageStackController *)pageStackController inDialog:(MBDialogController *)dialogController {
+    
+	// Only set the selected tab if realy necessary; because it messes up the more navigation controller
+	NSInteger idx = _tabController.selectedIndex;
+	NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
+	
+	// Apparently we need to select the tab. Only now we cannot do this for tabs that are on the more tab
+	// because it destroys the navigation controller for some reason
+	// TODO: Make selecting a pageStack work; even if it is nested within the more tab
+    if(idx != shouldBe && shouldBe!=NSNotFound /* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
+		UIViewController *ctrl = [_tabController selectedViewController];
+		[ctrl viewWillDisappear:FALSE];
+		[_tabController setSelectedViewController: dialogController.rootViewController];
+		[ctrl viewDidDisappear:FALSE];
+	}
 }
 
 
