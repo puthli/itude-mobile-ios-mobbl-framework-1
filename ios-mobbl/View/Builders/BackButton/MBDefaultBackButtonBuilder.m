@@ -62,7 +62,7 @@
 
 - (void)backButtonPressed:(id)sender {
     NSString *activePageStackName = [[[[MBApplicationController currentInstance] viewManager] dialogManager] activePageStackName];
-    [[[MBApplicationController currentInstance] viewManager] popPageOnPageStackWithName:activePageStackName];
+    [[[[MBApplicationController currentInstance] viewManager] dialogManager] popPageOnPageStackWithName:activePageStackName];
 }
 
 

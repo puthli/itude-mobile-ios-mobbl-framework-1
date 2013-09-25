@@ -104,7 +104,6 @@
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle selectPageStack:(BOOL) shouldSelectPageStack {
     
-    
     DLog(@"ViewManager: showPage name=%@ pageStack=%@ mode=%@ type=%i", page.pageName, page.pageStackName, displayMode, page.pageType);
 
 	if(page.pageType == MBPageTypesErrorPage || [@"POPUP" isEqualToString:displayMode]) {
@@ -202,165 +201,6 @@
 	}
 }	
 
--(void) showAlertView:(MBPage*) page {
-	
-	
-	if(self.currentAlert == nil) {
-		//			[self.currentAlert dismissWithClickedButtonIndex:0 animated: FALSE];
-		
-		NSString *title;
-		NSString *message;
-        MBDocument *document = page.document;
-		
-        if([document.name isEqualToString:DOC_SYSTEM_EXCEPTION] &&
-           [[document valueForPath:PATH_SYSTEM_EXCEPTION_TYPE] isEqualToString:DOC_SYSTEM_EXCEPTION_TYPE_SERVER]) {
-			title = [document valueForPath:PATH_SYSTEM_EXCEPTION_NAME];
-			message = [document valueForPath:PATH_SYSTEM_EXCEPTION_DESCRIPTION];
-		}
-		
-        else if([document.name isEqualToString:DOC_SYSTEM_EXCEPTION]) {
-			title = MBLocalizedString(@"Application error");
-			message = MBLocalizedString(@"Unknown error");
-		}
-		else {
-			title = page.title;
-			message = MBLocalizedString([document valueForPath:@"/message[0]/@text"]);
-			if(message == nil) message = MBLocalizedString([document valueForPath:@"/message[0]/@text()"]);
-		}
-		
-		_currentAlert = [[UIAlertView alloc]
-							 initWithTitle: title
-							 message: message
-							 delegate:self
-							 cancelButtonTitle:@"OK"
-							 otherButtonTitles:nil];
-		
-        // Show a alert on the main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.currentAlert show];
-        });
-	}
-}
-
-- (void)showAlert:(MBAlert *)alert {
-    [alert.alertView show];
-}
-
-- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
-    // iOS 6.0 and up
-    if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-        [fromViewController presentViewController:controller animated:animated completion:nil];
-    }
-    // iOS 5.x and lower
-    else {
-        // Suppress the deprecation warning
-        #pragma clang diagnostic push
-        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        [fromViewController presentModalViewController:controller animated:animated];
-        #pragma clang diagnostic pop
-    }
-    
-}
-
-- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated {
-    // iOS 6.0 and up
-    if ([controller respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-        [controller dismissViewControllerAnimated:animated completion:nil];
-    }
-    // iOS 5.x and lower
-    else {
-        
-        // Suppress the deprecation warning
-        #pragma clang diagnostic push
-        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        [controller dismissModalViewControllerAnimated:animated];
-        #pragma clang diagnostic pop
-    }
-}
-
-- (void) endModalPageStack {
-	if(_modalController != nil) {
-		// Hide any activity indicator for the modal stuff:
-		while(_activityIndicatorCount >0) [self hideActivityIndicator];
-		
-        // If tabController is nil, there is only one viewController
-        if (self.tabController) {
-            [self dismisViewController:self.tabController animated:TRUE];
-        }
-        else {
-            MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
-            // TODO: TransitionStyle!!!
-            [self dismisViewController:pageStackController.navigationController animated:YES];
-        }
-        
-		[[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_DISMISSED object:self];
-		[_modalController release];	
-		_modalController = nil;
-	}
-}
-
-- (void) popPageOnPageStackWithName:(NSString*) pageStackName {
-    MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:pageStackName];
-    
-    // Determine transitionStyle
-    MBBasicViewController *viewController = [pageStackController.navigationController.viewControllers lastObject];
-    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:viewController.page.transitionStyle];
-    [pageStackController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
-}
-
-
-
-
-
-- (void) resetView {
-    [_tabController release];
-	[_modalController release];
-    
-    _tabController = nil;
-	_modalController = nil;
-    
-    [self clearWindow];
-}
-
-
-- (void) resetViewPreservingCurrentPageStack {
-    // TODO: This will probably fail because Dialogs (ViewControllers) have nested PageStacks (NavigationControllers)
-	for (UIViewController *controller in [_tabController viewControllers]){
-		if ([controller isKindOfClass:[UINavigationController class]]) {
-			[(UINavigationController *) controller popToRootViewControllerAnimated:YES];
-		}
-	}
-	
-}
-
-
-// Remove every view that is not the activityIndicatorView
--(void) clearWindow {
-    for(UIView *view in [self.window subviews]) {
-		if(![view isKindOfClass:[MBActivityIndicator class]]) [view removeFromSuperview];
-	}
-}
-
-- (void)setContentViewController:(UIViewController *)viewController {
-    [self clearWindow];
-    [self.window setRootViewController:viewController];
-}
-
-/** 
- * Returns TRUE if two or more DialogControllers have defined 'showAs="TAB"'
- */
-- (BOOL)shouldCreateTabBar {
-    NSInteger numberOfShowAsTabs = 0;
-    for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
-        if ([dialogController showAsTab]) {
-            numberOfShowAsTabs ++;
-            if (numberOfShowAsTabs > 1) {
-                return YES;
-            }
-        }
-    }
-    return NO;
-}
 
 -(void) updateDisplay {
 
@@ -443,9 +283,148 @@
 }
 
 
--(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-	return YES;
+- (void) endModalPageStack {
+	if(_modalController != nil) {
+		// Hide any activity indicator for the modal stuff:
+		while(_activityIndicatorCount >0) [self hideActivityIndicator];
+		
+        // If tabController is nil, there is only one viewController
+        if (self.tabController) {
+            [self dismisViewController:self.tabController animated:TRUE];
+        }
+        else {
+            MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
+            // TODO: TransitionStyle!!!
+            [self dismisViewController:pageStackController.navigationController animated:YES];
+        }
+        
+		[[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_DISMISSED object:self];
+		[_modalController release];
+		_modalController = nil;
+	}
 }
+
+
+#pragma mark -
+#pragma mark MBAlert and UIAlertView management
+
+-(void) showAlertView:(MBPage*) page {
+	
+	if(self.currentAlert == nil) {
+//			[self.currentAlert dismissWithClickedButtonIndex:0 animated: FALSE];
+		
+		NSString *title;
+		NSString *message;
+        MBDocument *document = page.document;
+		
+        if([document.name isEqualToString:DOC_SYSTEM_EXCEPTION] &&
+           [[document valueForPath:PATH_SYSTEM_EXCEPTION_TYPE] isEqualToString:DOC_SYSTEM_EXCEPTION_TYPE_SERVER]) {
+			title = [document valueForPath:PATH_SYSTEM_EXCEPTION_NAME];
+			message = [document valueForPath:PATH_SYSTEM_EXCEPTION_DESCRIPTION];
+		}
+		
+        else if([document.name isEqualToString:DOC_SYSTEM_EXCEPTION]) {
+			title = MBLocalizedString(@"Application error");
+			message = MBLocalizedString(@"Unknown error");
+		}
+		else {
+			title = page.title;
+			message = MBLocalizedString([document valueForPath:@"/message[0]/@text"]);
+			if(message == nil) message = MBLocalizedString([document valueForPath:@"/message[0]/@text()"]);
+		}
+		
+		_currentAlert = [[UIAlertView alloc]
+                         initWithTitle: title
+                         message: message
+                         delegate:self
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil];
+		
+        // Show a alert on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.currentAlert show];
+        });
+	}
+}
+
+- (void)showAlert:(MBAlert *)alert {
+    // Show a alert on the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert.alertView show];
+    });
+}
+
+#pragma mark -
+#pragma mark Presenting and Dismissing ViewControllers
+
+- (void) resetView {
+    [_tabController release];
+	[_modalController release];
+    
+    _tabController = nil;
+	_modalController = nil;
+    
+    [self clearWindow];
+}
+
+
+- (void) resetViewPreservingCurrentPageStack {
+    // TODO: This will probably fail because Dialogs (ViewControllers) have nested PageStacks (NavigationControllers)
+	for (UIViewController *controller in [_tabController viewControllers]){
+		if ([controller isKindOfClass:[UINavigationController class]]) {
+			[(UINavigationController *) controller popToRootViewControllerAnimated:YES];
+		}
+	}
+}
+
+
+// Remove every view that is not the activityIndicatorView
+-(void) clearWindow {
+    for(UIView *view in [self.window subviews]) {
+		if(![view isKindOfClass:[MBActivityIndicator class]]) [view removeFromSuperview];
+	}
+}
+
+- (void)setContentViewController:(UIViewController *)viewController {
+    [self clearWindow];
+    [self.window setRootViewController:viewController];
+}
+
+- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
+    // iOS 6.0 and up
+    if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
+        [fromViewController presentViewController:controller animated:animated completion:nil];
+    }
+    // iOS 5.x and lower
+    else {
+        // Suppress the deprecation warning
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [fromViewController presentModalViewController:controller animated:animated];
+#pragma clang diagnostic pop
+    }
+    
+}
+
+- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated {
+    // iOS 6.0 and up
+    if ([controller respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
+        [controller dismissViewControllerAnimated:animated completion:nil];
+    }
+    // iOS 5.x and lower
+    else {
+        
+        // Suppress the deprecation warning
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [controller dismissModalViewControllerAnimated:animated];
+#pragma clang diagnostic pop
+    }
+}
+
+
+#pragma mark -
+#pragma mark Activity Indicator management
 
 - (void)showActivityIndicator {
     [self showActivityIndicatorWithMessage:nil];
@@ -460,7 +439,7 @@
         if (message) {
             [blocker showWithMessage:message];
         }
-
+        
         [topMostVisibleViewController.view addSubview:blocker];
 	}else{
         
@@ -490,23 +469,14 @@
 	}
 }
 
+
+#pragma mark -
+#pragma mark Util
+
 -(CGRect) bounds {
     return [self.window bounds];
 }
 
-
-
-// Method is called when the tabBar will be edited by the user (when the user presses the edid-button on the more-page). 
-// It is used to update the style of the "Edit" navigationBar behind the Edit-button
-- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)viewControllers {	
-	// Get the navigationBar from the edit-view behind the more-tab and apply style to it. 
-    UINavigationBar *navBar = [[[tabBarController.view.subviews objectAtIndex:1] subviews] objectAtIndex:0];
-	[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:navBar];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	self.currentAlert = nil;
-}
 
 - (MBViewState) currentViewState {
 	// Currently fullscreen is not implemented
@@ -536,15 +506,32 @@
     
 }
 
--(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    // Set active dialog name
+/**
+ * Returns TRUE if two or more DialogControllers have defined 'showAs="TAB"'
+ */
+- (BOOL)shouldCreateTabBar {
+    NSInteger numberOfShowAsTabs = 0;
     for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
-        if (viewController == dialogController.rootViewController) {
-            self.dialogManager.activeDialogName = dialogController.name;
-            break;
+        if ([dialogController showAsTab]) {
+            numberOfShowAsTabs ++;
+            if (numberOfShowAsTabs > 1) {
+                return YES;
+            }
         }
     }
+    return NO;
 }
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	self.currentAlert = nil;
+}
+
+
+#pragma mark -
+#pragma mark UINavigationControllerDelegate
 
 -(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([viewController isKindOfClass:[MBBasicViewController class]])
@@ -555,13 +542,40 @@
 }
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
- if ([viewController isKindOfClass:[MBBasicViewController class]])
+    if ([viewController isKindOfClass:[MBBasicViewController class]])
     {
         MBBasicViewController* controller = (MBBasicViewController*) viewController;
         [controller.pageStackController willActivate];
         
     }
 }
+
+
+#pragma mark -
+#pragma mark UITabBarControllerDelegate
+
+-(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+	return YES;
+}
+
+// Method is called when the tabBar will be edited by the user (when the user presses the edid-button on the more-page).
+// It is used to update the style of the "Edit" navigationBar behind the Edit-button
+- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)viewControllers {
+	// Get the navigationBar from the edit-view behind the more-tab and apply style to it.
+    UINavigationBar *navBar = [[[tabBarController.view.subviews objectAtIndex:1] subviews] objectAtIndex:0];
+	[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:navBar];
+}
+
+-(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    // Set active dialog name
+    for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
+        if (viewController == dialogController.rootViewController) {
+            self.dialogManager.activeDialogName = dialogController.name;
+            break;
+        }
+    }
+}
+
 
 #pragma mark -
 #pragma mark UIWindow delegate methods

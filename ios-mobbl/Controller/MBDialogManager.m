@@ -9,6 +9,8 @@
 #import "MBDialogManager.h"
 #import "MBDialogController.h"
 #import "MBMetadataService.h"
+#import "MBPage.h"
+#import "MBBasicViewController.h"
 
 @interface MBDialogManager () {
     MBOrderedMutableDictionary *_dialogControllers;
@@ -100,6 +102,15 @@
 	if(shouldSelectPageStack ) {
         [self activatePageStackWithName:page.pageStackName];
     }
+}
+
+- (void) popPageOnPageStackWithName:(NSString*) pageStackName {
+    MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
+    
+    // Determine transitionStyle
+    MBBasicViewController *viewController = [pageStackController.navigationController.viewControllers lastObject];
+    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:viewController.page.transitionStyle];
+    [pageStackController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
 }
 
 

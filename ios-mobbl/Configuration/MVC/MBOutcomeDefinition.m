@@ -51,7 +51,7 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Outcome origin='%@' name='%@' action='%@' transferDocument='%@' persist='%@' noBackgroundProcessing='%@'%@%@%@%@%@/>\n", level, "", 
+	NSMutableString *result = [NSMutableString stringWithFormat:@"%*s<Outcome origin='%@' name='%@' action='%@' transferDocument='%@' persist='%@' noBackgroundProcessing='%@'%@%@%@%@%@%@/>\n", level, "", 
 							   _origin, _name, _action, _transferDocument?@"TRUE":@"FALSE", _persist?@"TRUE":@"FALSE",_noBackgroundProcessing?@"TRUE":@"FALSE",
 							   [self attributeAsXml:@"dialog" withValue:self.dialog],
                                [self attributeAsXml:@"pageStack" withValue:self.pageStackName],

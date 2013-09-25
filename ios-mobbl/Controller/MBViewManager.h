@@ -25,7 +25,6 @@
 - (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style selectPageStack:(BOOL) shouldSelectPageStack;
 - (void) showAlert:(MBAlert *) alert;
 
-- (void) popPageOnPageStackWithName:(NSString*) pageStackName;
 - (void) showActivityIndicator;
 - (void) showActivityIndicatorWithMessage:(NSString*) message;
 - (void) hideActivityIndicator;
