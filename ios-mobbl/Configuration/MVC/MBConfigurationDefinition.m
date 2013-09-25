@@ -17,7 +17,7 @@
 		_documentTypes = [NSMutableDictionary new];
 		_actionTypes = [NSMutableDictionary new];
 		_outcomeTypes = [NSMutableArray new];
-		_dialogs = [NSMutableDictionary new];
+		_dialogs = [MBOrderedMutableDictionary new];
 		_pageTypes = [NSMutableDictionary new];
         _alerts = [NSMutableDictionary new];
 	}
@@ -215,7 +215,7 @@
 	return _outcomeTypes;	
 }
 
--(NSMutableDictionary*) dialogs {
+-(MBOrderedMutableDictionary*) dialogs {
 	return _dialogs;	
 }
 

@@ -93,6 +93,7 @@ static MBApplicationController *_instance = nil;
 	[StringUtilitiesHelper createInstance]; // Added for optimization
 	
     [self fireInitialOutcomes];
+    
 	[_viewManager makeKeyAndVisible];
 }
 
@@ -223,9 +224,7 @@ static MBApplicationController *_instance = nil;
 					[_viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];
 					[pageStacks removeObject:outcomeToProcess.pageStackName];
 				}
-				else {
-					[_viewManager.dialogManager notifyPageStackUsage: outcomeToProcess.pageStackName];
-				}
+				
 				
                 // Action
 				MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];

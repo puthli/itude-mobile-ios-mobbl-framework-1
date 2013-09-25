@@ -54,6 +54,8 @@
 	int _activityIndicatorCount;
 }
 
+@property (nonatomic, retain) NSMutableDictionary *activityIndicatorCounts;
+
 - (void) clearWindow;
 - (void) resetView;
 - (void) showAlertView:(MBPage*) page;
@@ -66,15 +68,14 @@
 @synthesize tabController = _tabController;
 @synthesize dialogManager = _dialogManager;
 @synthesize currentAlert = _currentAlert;
+@synthesize activityIndicatorCounts = _activityIndicatorCounts;
 
 - (id) init {
 	self = [super init];
 	if (self != nil) {
-		_activityIndicatorCounts = [NSMutableDictionary new];
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
-		self.dialogManager = [[MBDialogManager new] autorelease];
-        self.dialogManager.delegate = self;
-        [self resetView];
+        self.activityIndicatorCounts = [NSMutableDictionary new];
+		self.dialogManager = [[[MBDialogManager alloc] initWithDelegate:self] autorelease];
 	}
 	return self;
 }
@@ -201,27 +202,24 @@
 	}
 }	
 
-
--(void) updateDisplay {
-
-    BOOL shouldCreateTabBar = [self shouldCreateTabBar];
+// After delegate didloaddialogs
+- (void)createTabbarForDialogControllers:(NSArray *)dialogControllers {
+    
+    
+    MBDialogController *firstDialogController = nil;
     // Should create tabbar
-    if([self.dialogManager.dialogControllers count] > 1 && shouldCreateTabBar)
+    if([dialogControllers count] > 1 && [self shouldCreateTabBarForDialogsControllers:dialogControllers])
 	{
         // Build the tabbar
-		if(!self.tabController) {
-			self.tabController = [[UITabBarController alloc] init];
-			self.tabController.delegate = self;
-			[[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:self.tabController];
-            [self setContentViewController:self.tabController];
-		}		
-		
+        self.tabController = [[UITabBarController alloc] init];
+        self.tabController.delegate = self;
+        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:self.tabController];
+        [self setContentViewController:self.tabController];
+        
         // Build the tabs
         int idx = 0;
         NSMutableArray *tabs = [NSMutableArray new];
-        BOOL activeDialogNameStillVisible = FALSE;
-        NSArray *visibleDialogControllers = [self.dialogManager visibleDialogControllers];
-        for (MBDialogController *dialogController in visibleDialogControllers) {
+        for (MBDialogController *dialogController in dialogControllers) {
             // Create a tabbarProperties
             UIViewController *viewController = dialogController.rootViewController;
             UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
@@ -231,38 +229,27 @@
             
             [tabs addObject:viewController];
             
-            idx ++;
-                
-
-            if (self.dialogManager.activeDialogName.length > 0 && [self.dialogManager.activeDialogName isEqualToString:dialogController.name]) {
-                activeDialogNameStillVisible = YES;
+            if (idx == 0) {
+                firstDialogController = dialogController;
             }
+            
+            idx ++;
         }
         
         // Set the tabs to the tabbar
         [self.tabController setViewControllers: tabs animated: YES];
-		[[self.tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
+        [[self.tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
         self.tabController.moreNavigationController.delegate = self;
         self.tabController.customizableViewControllers = nil;
         [tabs release];
-        
-        // Ensure we select a pageStack when none is selected OR when the previous one is not visible anymore
-        if (!activeDialogNameStillVisible && visibleDialogControllers.count > 0) {
-            MBDialogController *firstVisibleDialogController = [visibleDialogControllers objectAtIndex:0];
-            if (firstVisibleDialogController.pageStackControllers.count > 0) {
-                MBPageStackController *pageStackController = [firstVisibleDialogController.pageStackControllers objectAtIndex:0];
-                [self.dialogManager activatePageStackWithName:pageStackController.name];
-            }
-        }
-        
     }
     
     // Single page mode
-    else if([self.dialogManager.dialogControllers count] > 0) {
+    else if([dialogControllers count] > 0) {
         
         // Search for the only dialogController with attribute 'showAs="TAB"'.
         MBDialogController *dialogController = nil;
-        for (MBDialogController *currentDialogContoller in [self.dialogManager.dialogControllers allValues]) {
+        for (MBDialogController *currentDialogContoller in dialogControllers) {
             if ([currentDialogContoller showAsTab]) {
                 dialogController = currentDialogContoller;
                 break;
@@ -271,13 +258,17 @@
         
         // Take the first dialogController if no dialogController with attribute 'showAs="TAB"' is found.
         if (!dialogController) {
-            dialogController = [self.dialogManager.dialogControllers objectAtIndex:0];
+            dialogController = [dialogControllers objectAtIndex:0];
         }
         
         [self setContentViewController:dialogController.rootViewController];
-        
-        // Ensure we select a pageStack when none is selected OR when the previous one is not visible anymore
-        MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
+        firstDialogController = dialogController;
+    }
+    
+    
+    // Ensure we select a pageStack
+    if (firstDialogController) {
+        MBPageStackController *pageStackController = [firstDialogController.pageStackControllers objectAtIndex:0];
         [self.dialogManager activatePageStackWithName:pageStackController.name];
     }
 }
@@ -509,9 +500,9 @@
 /**
  * Returns TRUE if two or more DialogControllers have defined 'showAs="TAB"'
  */
-- (BOOL)shouldCreateTabBar {
+- (BOOL)shouldCreateTabBarForDialogsControllers:(NSArray *)dialogControllers {
     NSInteger numberOfShowAsTabs = 0;
-    for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
+    for (MBDialogController *dialogController in dialogControllers) {
         if ([dialogController showAsTab]) {
             numberOfShowAsTabs ++;
             if (numberOfShowAsTabs > 1) {
@@ -589,29 +580,27 @@
 #pragma mark -
 #pragma mark MBDialogManagerDelegate
 
-- (void)didCreateDialogController:(MBDialogController *)dialogController {
-    [self updateDisplay];
+- (void)didLoadDialogControllers:(NSArray *)dialogControllers {
+    [self createTabbarForDialogControllers:dialogControllers];
 }
 
 - (void)didEndPageStackWithName:(NSString*) pageStackName {
-    [self updateDisplay];
+    // TODO: Remove???
 }
 
 - (void)didActivatePageStack:(MBPageStackController *)pageStackController inDialog:(MBDialogController *)dialogController {
     
-	// Only set the selected tab if realy necessary; because it messes up the more navigation controller
-	NSInteger idx = _tabController.selectedIndex;
-	NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
-	
-	// Apparently we need to select the tab. Only now we cannot do this for tabs that are on the more tab
-	// because it destroys the navigation controller for some reason
-	// TODO: Make selecting a pageStack work; even if it is nested within the more tab
-    if(idx != shouldBe && shouldBe!=NSNotFound /* && shouldBe < FIRST_MORE_TAB_INDEX*/) {
-		UIViewController *ctrl = [_tabController selectedViewController];
-		[ctrl viewWillDisappear:FALSE];
-		[_tabController setSelectedViewController: dialogController.rootViewController];
-		[ctrl viewDidDisappear:FALSE];
-	}
+    // If we have more than one viewController visible
+    if (self.tabController) {
+        // Only set the selected tab if realy necessary; because it messes up the more navigation controller
+        NSInteger idx = _tabController.selectedIndex;
+        NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
+        
+        if(idx != shouldBe && shouldBe!=NSNotFound) {
+            [self.tabController setSelectedIndex:shouldBe];
+        }
+    }
+
 }
 
 

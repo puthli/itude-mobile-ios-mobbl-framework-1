@@ -18,7 +18,7 @@
 
 @protocol MBDialogManagerDelegate <NSObject>
 @required
-- (void)didCreateDialogController:(MBDialogController *)dialogController;
+- (void)didLoadDialogControllers:(NSArray *)dialogControllers;
 - (void)didEndPageStackWithName:(NSString*) pageStackName;
 - (void)didActivatePageStack:(MBPageStackController*) pageStackController inDialog:(MBDialogController *)dialogController;
 @end
@@ -30,17 +30,11 @@
 @property (nonatomic, retain) NSString *activePageStackName;
 @property (nonatomic, retain) NSString *activeDialogName;
 
-/**
- * @name Creating Dialogs
- */
-- (MBDialogController *)createDialogController:(MBDialogDefinition *)definition;
-
+- (id)initWithDelegate:(id<MBDialogManagerDelegate>) delegate;
 
 /**
  * @name Gettings Dialogs and PageStacks
  */
-- (NSArray *)visibleDialogControllers;
-
 - (MBDialogController *)dialogWithName:(NSString*) name;
 - (MBPageStackController *)pageStackControllerWithName:(NSString*) name;
 
@@ -51,13 +45,6 @@
 - (void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle selectPageStack:(BOOL) shouldSelectPageStack;
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName;
 - (void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition;
-- (void) notifyPageStackUsage:(NSString*) pageStackName;
 - (void) activatePageStackWithName:(NSString*) pageStackName;
-
-/**
- * @name Resetting Dialogs and PageStacks
- */
-- (void)resetDialogs;
-- (void)resetPageStacks;
 
 @end
