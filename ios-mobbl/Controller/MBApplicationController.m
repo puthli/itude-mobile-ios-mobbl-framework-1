@@ -161,7 +161,6 @@ static MBApplicationController *_instance = nil;
 	}
     
     NSMutableArray *pageStacks = [NSMutableArray array];
-    NSString *selectPageInPageStack = @"yes";
 	
 	// We need to make sure that the order of the dialog tabs conforms to the order of the outcomes
 	// This is not necessarily the case because preparing of page A might take longer in the background than page B
@@ -242,10 +241,8 @@ static MBApplicationController *_instance = nil;
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
 					[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
-					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInPageStack, nil]];
-					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInPageStack, nil]];
-
-					selectPageInPageStack = @"no";
+					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, nil]];
+					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, nil]];
 				}
                 
                 // Alert
@@ -272,7 +269,6 @@ static MBApplicationController *_instance = nil;
     @try {
 	
         NSString *pageName = [args objectAtIndex:1];
-        NSString *selectPageInPageStack = [args objectAtIndex:2];
         
         // construct the page
         MBPageDefinition *pageDefinition = [[MBMetadataService sharedInstance] definitionForPageName:pageName];
@@ -304,9 +300,9 @@ static MBApplicationController *_instance = nil;
 		}
 				  
 		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingPage:) 
-															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInPageStack, nil]];
+															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]];
 		else [self performSelectorOnMainThread:@selector(showResultingPage:) 
-									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInPageStack, nil]
+									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]
 								 waitUntilDone:YES];
         
     }
@@ -338,7 +334,6 @@ static MBApplicationController *_instance = nil;
 		
         MBPageDefinition *pageDefinition = [args objectAtIndex:1];
         MBDocument *document = [args objectAtIndex:2];
-        NSString *selectPageInPageStack = [args objectAtIndex:3];
         CGRect bounds = self.viewManager.bounds;
         
         MBPage *page = [_applicationFactory createPage:pageDefinition 
@@ -352,8 +347,8 @@ static MBApplicationController *_instance = nil;
 	    if(page.pageStackName == nil) {
 			page.pageStackName = [self activePageStackName];
 		}
-        BOOL doSelect = [@"yes" isEqualToString:selectPageInPageStack] && !_suppressPageSelection;
-        [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle selectPageStack:doSelect];
+
+        [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle];
     }
     @catch (NSException *e) {
         [self handleException: e outcome: causingOutcome];

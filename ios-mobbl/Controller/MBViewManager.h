@@ -19,10 +19,8 @@
 @property (nonatomic, retain) UIAlertView *currentAlert;
 
 - (id) init;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) mode;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) mode transitionStyle:(NSString *) style;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectPageStack:(BOOL) shouldSelectPageStack;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style selectPageStack:(BOOL) shouldSelectPageStack;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style;
 - (void) showAlert:(MBAlert *) alert;
 
 - (void) showActivityIndicator;

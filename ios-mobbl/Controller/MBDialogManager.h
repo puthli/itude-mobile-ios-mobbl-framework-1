@@ -42,7 +42,7 @@
 /**
  * @name Managing PageStacks
  */
-- (void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle selectPageStack:(BOOL) shouldSelectPageStack;
+- (void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle;
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName;
 - (void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition;
 - (void) activatePageStackWithName:(NSString*) pageStackName;

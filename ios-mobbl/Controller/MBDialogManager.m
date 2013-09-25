@@ -78,7 +78,7 @@
 #pragma mark -
 #pragma mark Managing PageStacks
 
--(void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle selectPageStack:(BOOL) shouldSelectPageStack {
+-(void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle {
     
     // The page can get a pageStackName from an outcome but if this is not the case we set the activePageStackName
     if (page.pageStackName.length == 0) {
@@ -91,7 +91,8 @@
     MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
     [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
     
-	if(shouldSelectPageStack ) {
+    
+    if (![page.pageStackName isEqualToString:self.activePageStackName]) {
         [self activatePageStackWithName:page.pageStackName];
     }
 }

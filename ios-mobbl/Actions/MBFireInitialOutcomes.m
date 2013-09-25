@@ -19,6 +19,7 @@
 }
 
 -(MBOutcome*) execute:(MBDocument *)document withPath:(NSString *)path {
+    NSString *firstPageStackName = nil;
 	MBDocument *initialOutcomes = [[MBDataManagerService sharedInstance] loadDocument:[self documentName]];
 	for(MBElement *element in [initialOutcomes valueForPath:@"/Outcome"]) {
         
@@ -33,10 +34,17 @@
 		
 		oc.noBackgroundProcessing = TRUE;
 		oc.transferDocument = FALSE;
-
+    
 		[self performSelectorOnMainThread:@selector(handleOutcomeOnMainThread:) withObject:oc waitUntilDone:TRUE];
+        
+        if (firstPageStackName.length == 0) {
+            firstPageStackName = oc.pageStackName;
+        }
 	}
 
+    // Make sure the first tab is selected
+    [self activatePageStackWithName:firstPageStackName];
+    
 	return nil;
 }
 

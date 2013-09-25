@@ -91,19 +91,10 @@
 }
 
 -(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode {
-    [self showPage:page displayMode:displayMode transitionStyle:nil selectPageStack:TRUE];
+    [self showPage:page displayMode:displayMode transitionStyle:nil];
 }
 
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle {
-    [self showPage:page displayMode:displayMode transitionStyle:transitionStyle selectPageStack:TRUE];
-}
-
--(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectPageStack:(BOOL) shouldSelectPageStack {
-    [self showPage:page displayMode:displayMode transitionStyle:nil selectPageStack:shouldSelectPageStack];
-}
-
-
--(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle selectPageStack:(BOOL) shouldSelectPageStack {
+-(void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) transitionStyle  {
     
     DLog(@"ViewManager: showPage name=%@ pageStack=%@ mode=%@ type=%i", page.pageName, page.pageStackName, displayMode, page.pageType);
 
@@ -198,7 +189,7 @@
 		[currentViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:0]; 
 	}
     else {
-		[self.dialogManager addPageToPageStack:page displayMode:displayMode transitionStyle:transitionStyle selectPageStack:shouldSelectPageStack];
+		[self.dialogManager addPageToPageStack:page displayMode:displayMode transitionStyle:transitionStyle];
 	}
 }	
 
