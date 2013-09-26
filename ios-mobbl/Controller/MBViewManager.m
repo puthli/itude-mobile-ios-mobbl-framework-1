@@ -204,7 +204,6 @@
         // Build the tabbar
         self.tabController = [[UITabBarController alloc] init];
         self.tabController.delegate = self;
-        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:self.tabController];
         [self setContentViewController:self.tabController];
         
         // Build the tabs
@@ -233,6 +232,8 @@
         self.tabController.moreNavigationController.delegate = self;
         self.tabController.customizableViewControllers = nil;
         [tabs release];
+        
+        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:self.tabController];
     }
     
     // Single page mode
