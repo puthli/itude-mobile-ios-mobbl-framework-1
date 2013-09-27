@@ -209,7 +209,7 @@
     [_navigationController release];
     _navigationController = [navigationController retain];
     _navigationController.delegate = self;
-    _navigationController.title = self.title;
+    _navigationController.navigationItem.title = self.title;
 }
 
 - (void)showActivityIndicator {

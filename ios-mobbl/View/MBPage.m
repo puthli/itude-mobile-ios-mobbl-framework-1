@@ -130,7 +130,7 @@
     if(self = [self initWithDefinition:definition withViewController:nil document:document rootPath:rootPath viewState:viewState]) {
         self.maxBounds = bounds;
         self.viewController = (UIViewController<MBViewControllerProtocol>*)[[MBApplicationFactory sharedInstance]createViewController:self];
-        self.viewController.title = [self title];
+        self.viewController.navigationItem.title = [self title];
         [self.viewController setPage:self];
         [self rebuildView];
     }
