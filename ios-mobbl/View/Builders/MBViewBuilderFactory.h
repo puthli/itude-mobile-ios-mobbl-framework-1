@@ -14,6 +14,7 @@
 #import "MBFieldViewBuilderFactory.h"
 #import "MBRowViewBuilderFactory.h"
 #import "MBDialogContentViewBuilderFactory.h"
+#import "MBDialogDecoratorFactory.h"
 #import "MBBackButtonBuilderFactory.h"
 #import "MBStyleHandler.h"
 
@@ -33,6 +34,7 @@
 @property (nonatomic, retain, readonly) MBFieldViewBuilderFactory *fieldViewBuilderFactory;
 @property (nonatomic, retain, readonly) MBRowViewBuilderFactory *rowViewBuilderFactory;
 @property (nonatomic, retain) MBDialogContentViewBuilderFactory *dialogContentViewBuilderFactory;
+@property (nonatomic, retain, readonly) MBDialogDecoratorFactory *dialogDecoratorFactory;
 @property (nonatomic, retain, readonly) MBBackButtonBuilderFactory *backButtonBuilderFactory;
 
 /**

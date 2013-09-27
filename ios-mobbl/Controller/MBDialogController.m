@@ -28,6 +28,7 @@
 	NSString *_title;
     NSString *_showAs;
     NSString *_contentType;
+    NSString *_decorator;
     NSMutableArray *_pageStackControllers;
     UIViewController *_rootViewController;
     
@@ -43,6 +44,7 @@
 @synthesize title = _title;
 @synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
+@synthesize decorator = _decorator;
 @synthesize rootViewController = _rootViewController;
 @synthesize pageStackControllers = _pageStackControllers;
 
@@ -54,6 +56,7 @@
 	[_title release];
     [_showAs release];
     [_contentType release];
+    [_decorator release];
     [_rootViewController release];
     [_pageStackControllers release];
     
@@ -67,6 +70,7 @@
 		self.title = definition.title;
         self.showAs = definition.showAs;
         self.contentType = definition.contentType;
+        self.decorator = definition.decorator;
         
 		_activityIndicatorCount = 0;
 		
@@ -116,6 +120,7 @@
 - (void) loadView {
     if (!self.rootViewController) {
         self.rootViewController = [[[MBViewBuilderFactory sharedInstance] dialogContentViewBuilderFactory] buildDialogContentViewControllerForDialog:self];
+        [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] decorateDialog:self];
     }
 }
 

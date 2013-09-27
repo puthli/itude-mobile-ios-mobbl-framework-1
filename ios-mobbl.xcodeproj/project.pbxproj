@@ -369,6 +369,9 @@
 		BD50228F17EC9A5700CE967F /* MBPageStack.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5021DE17EC9A5600CE967F /* MBPageStack.m */; };
 		BD50229017EC9A5700CE967F /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5021E017EC9A5600CE967F /* MBPanel.m */; };
 		BD50229117EC9A5700CE967F /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5021E417EC9A5600CE967F /* MBTableViewController.m */; };
+		BDC16FB117F5E2DA002FFEE4 /* MBDialogDecoratorFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC16FB017F5E2DA002FFEE4 /* MBDialogDecoratorFactory.m */; };
+		BDC16FB817F5E2EE002FFEE4 /* MBDefaultDialogDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC16FB317F5E2EE002FFEE4 /* MBDefaultDialogDecorator.m */; };
+		BDC16FB917F5E2EE002FFEE4 /* MBModalDialogDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC16FB717F5E2EE002FFEE4 /* MBModalDialogDecorator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -781,6 +784,14 @@
 		BD5021E117EC9A5600CE967F /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		BD5021E317EC9A5600CE967F /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		BD5021E417EC9A5600CE967F /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		BDC16FAF17F5E2DA002FFEE4 /* MBDialogDecoratorFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogDecoratorFactory.h; sourceTree = "<group>"; };
+		BDC16FB017F5E2DA002FFEE4 /* MBDialogDecoratorFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDialogDecoratorFactory.m; sourceTree = "<group>"; };
+		BDC16FB217F5E2EE002FFEE4 /* MBDefaultDialogDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDefaultDialogDecorator.h; sourceTree = "<group>"; };
+		BDC16FB317F5E2EE002FFEE4 /* MBDefaultDialogDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDefaultDialogDecorator.m; sourceTree = "<group>"; };
+		BDC16FB417F5E2EE002FFEE4 /* MBDialogDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogDecorator.h; sourceTree = "<group>"; };
+		BDC16FB517F5E2EE002FFEE4 /* MBDialogDecoratorTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDialogDecoratorTypes.h; sourceTree = "<group>"; };
+		BDC16FB617F5E2EE002FFEE4 /* MBModalDialogDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBModalDialogDecorator.h; sourceTree = "<group>"; };
+		BDC16FB717F5E2EE002FFEE4 /* MBModalDialogDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBModalDialogDecorator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1312,6 +1323,8 @@
 				BD50217717EC9A5600CE967F /* MBAlertViewBuilder.m */,
 				BD50217817EC9A5600CE967F /* MBDialogContentViewBuilderFactory.h */,
 				BD50217917EC9A5600CE967F /* MBDialogContentViewBuilderFactory.m */,
+				BDC16FAF17F5E2DA002FFEE4 /* MBDialogDecoratorFactory.h */,
+				BDC16FB017F5E2DA002FFEE4 /* MBDialogDecoratorFactory.m */,
 				BD50217A17EC9A5600CE967F /* MBFieldViewBuilderFactory.h */,
 				BD50217B17EC9A5600CE967F /* MBFieldViewBuilderFactory.m */,
 				BD50217C17EC9A5600CE967F /* MBForEachViewBuilder.h */,
@@ -1355,8 +1368,14 @@
 		BD50215A17EC9A5600CE967F /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				BDC16FB217F5E2EE002FFEE4 /* MBDefaultDialogDecorator.h */,
+				BDC16FB317F5E2EE002FFEE4 /* MBDefaultDialogDecorator.m */,
 				BD50215B17EC9A5600CE967F /* MBDialogContentBuilder.h */,
 				BD50215C17EC9A5600CE967F /* MBDialogContentTypes.h */,
+				BDC16FB417F5E2EE002FFEE4 /* MBDialogDecorator.h */,
+				BDC16FB517F5E2EE002FFEE4 /* MBDialogDecoratorTypes.h */,
+				BDC16FB617F5E2EE002FFEE4 /* MBModalDialogDecorator.h */,
+				BDC16FB717F5E2EE002FFEE4 /* MBModalDialogDecorator.m */,
 				BD50215D17EC9A5600CE967F /* MBSingleDialogContentBuilder.h */,
 				BD50215E17EC9A5600CE967F /* MBSingleDialogContentBuilder.m */,
 				BD50215F17EC9A5600CE967F /* MBSplitDialogContentBuilder.h */,
@@ -1586,6 +1605,7 @@
 				BD399BA017E3142E00531743 /* (null) in Sources */,
 				BD50226C17EC9A5700CE967F /* MBPageViewBuilder.m in Sources */,
 				BD50224B17EC9A5700CE967F /* Reachability.m in Sources */,
+				BDC16FB917F5E2EE002FFEE4 /* MBModalDialogDecorator.m in Sources */,
 				BD399C0817E3142E00531743 /* (null) in Sources */,
 				BD399BC117E3142E00531743 /* (null) in Sources */,
 				BD399BA417E3142E00531743 /* (null) in Sources */,
@@ -1801,6 +1821,7 @@
 				BD399C3117E3142E00531743 /* (null) in Sources */,
 				BD5021F517EC9A5600CE967F /* MBOutcomeDefinition.m in Sources */,
 				BD399BBE17E3142E00531743 /* (null) in Sources */,
+				BDC16FB117F5E2DA002FFEE4 /* MBDialogDecoratorFactory.m in Sources */,
 				BD399BA817E3142E00531743 /* (null) in Sources */,
 				BD5021EB17EC9A5600CE967F /* MBAttributeDefinition.m in Sources */,
 				BD50227917EC9A5700CE967F /* MBFadeTransitionStyle.m in Sources */,
@@ -1922,6 +1943,7 @@
 				BD399BA317E3142E00531743 /* (null) in Sources */,
 				BD399B9B17E3142E00531743 /* (null) in Sources */,
 				BD399BDE17E3142E00531743 /* (null) in Sources */,
+				BDC16FB817F5E2EE002FFEE4 /* MBDefaultDialogDecorator.m in Sources */,
 				BD399C3917E3142E00531743 /* (null) in Sources */,
 				BD399C3317E3142E00531743 /* (null) in Sources */,
 				BD50229117EC9A5700CE967F /* MBTableViewController.m in Sources */,

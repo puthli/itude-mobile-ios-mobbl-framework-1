@@ -101,96 +101,118 @@
 	if(page.pageType == MBPageTypesErrorPage || [@"POPUP" isEqualToString:displayMode]) {
 		[self showAlertView: page];
 	}
-	else if(_modalController == nil &&
-			([@"MODAL" isEqualToString:displayMode] || 
-			 [@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode] || 
-			 [@"MODALFORMSHEET" isEqualToString:displayMode] ||
-			 [@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode] || 
-			 [@"MODALPAGESHEET" isEqualToString:displayMode] ||
-			 [@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode] ||
-			 [@"MODALFULLSCREEN" isEqualToString:displayMode] ||
-			 [@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode] || 
-			 [@"MODALCURRENTCONTEXT" isEqualToString:displayMode] ||
-			 [@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode])) {
-                
-                BOOL addCloseButton = NO;
-                UIModalPresentationStyle modalPresentationStyle = UIModalPresentationFormSheet;
-                if ([@"MODALFORMSHEET" isEqualToString:displayMode])			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
-                else if ([@"MODALPAGESHEET" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationPageSheet];
-                else if ([@"MODALFULLSCREEN" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
-                else if ([@"MODALCURRENTCONTEXT" isEqualToString:displayMode])	[_modalController setModalPresentationStyle:UIModalPresentationCurrentContext];
-                else if ([@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode]) addCloseButton = YES;
-                else if ([@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-                    addCloseButton = YES;
-                    modalPresentationStyle = UIModalPresentationFormSheet;
-                }
-                else if ([@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-                    addCloseButton = YES;
-                    modalPresentationStyle = UIModalPresentationPageSheet;
-                }
-                else if ([@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-                    addCloseButton = YES;
-                    modalPresentationStyle = UIModalPresentationFullScreen;
-                }
-                else if ([@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-                    addCloseButton = YES;
-                    modalPresentationStyle = UIModalPresentationCurrentContext;
-                }
-                
-                // TODO: support nested modal pageStacks
-                _modalController = [[UINavigationController alloc] initWithRootViewController:[page viewController]];
-                _modalController.modalPresentationStyle = modalPresentationStyle;
-                [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
-                
-                if (addCloseButton) {
-                    NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
-                    UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalPageStack)] autorelease];
-                    [_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
-                }
-                                                
-                // If tabController is nil, there is only one viewController
-                if (_tabController) {
-                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_tabController];
-                    page.transitionStyle = transitionStyle;
-                    [self presentViewController:_modalController fromViewController:_tabController animated:YES];
-                }
-                else {
-                    MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
-                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
-                    page.transitionStyle = transitionStyle;
-                    [self presentViewController:_modalController fromViewController:pageStackController.navigationController animated:YES];
-                }
-                // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
-                NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_PRESENTED object:self userInfo:dict];
-            }
-	else if(_modalController != nil) {
-		UIViewController *currentViewController = [page viewController];
-        
-        // Apply transition. Pushing on the navigation stack
-        id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-        [transition applyTransitionStyleToViewController:_modalController forMovement:MBTransitionMovementPush];
-        page.transitionStyle = transitionStyle;
-		[_modalController pushViewController:currentViewController animated:[transition animated]];
-		
-		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
-		UIViewController *rootViewController = [_modalController.viewControllers objectAtIndex:0];		
-		UIBarButtonItem *rootViewCtrlRightBarButtonItem = rootViewController.navigationItem.rightBarButtonItem;
-        UIBarButtonItem *currentViewCtrlBarButtonItem = currentViewController.navigationItem.rightBarButtonItem;
-		NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
-		if ([rootViewCtrlRightBarButtonItem.title isEqualToString:closeButtonTitle] && (!currentViewCtrlBarButtonItem
-            || [currentViewCtrlBarButtonItem isKindOfClass:[MBFontCustomizer class]])) {
-            UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalPageStack)] autorelease];
-            [currentViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
-		}
-		
-		// Workaround for view delegate method calls in modal views Controller (BINCKAPPS-426 and MOBBL-150)
-		[currentViewController performSelector:@selector(viewWillAppear:) withObject:nil afterDelay:0];
-		[currentViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:0]; 
-	}
+//	else if(_modalController == nil &&
+//			([@"MODAL" isEqualToString:displayMode] || 
+//			 [@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode] || 
+//			 [@"MODALFORMSHEET" isEqualToString:displayMode] ||
+//			 [@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode] || 
+//			 [@"MODALPAGESHEET" isEqualToString:displayMode] ||
+//			 [@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode] ||
+//			 [@"MODALFULLSCREEN" isEqualToString:displayMode] ||
+//			 [@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode] || 
+//			 [@"MODALCURRENTCONTEXT" isEqualToString:displayMode] ||
+//			 [@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode])) {
+//                
+//                BOOL addCloseButton = NO;
+//                UIModalPresentationStyle modalPresentationStyle = UIModalPresentationFormSheet;
+//                if ([@"MODALFORMSHEET" isEqualToString:displayMode])			[_modalController setModalPresentationStyle:UIModalPresentationFormSheet];
+//                else if ([@"MODALPAGESHEET" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationPageSheet];
+//                else if ([@"MODALFULLSCREEN" isEqualToString:displayMode])		[_modalController setModalPresentationStyle:UIModalPresentationFullScreen];
+//                else if ([@"MODALCURRENTCONTEXT" isEqualToString:displayMode])	[_modalController setModalPresentationStyle:UIModalPresentationCurrentContext];
+//                else if ([@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode]) addCloseButton = YES;
+//                else if ([@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+//                    addCloseButton = YES;
+//                    modalPresentationStyle = UIModalPresentationFormSheet;
+//                }
+//                else if ([@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+//                    addCloseButton = YES;
+//                    modalPresentationStyle = UIModalPresentationPageSheet;
+//                }
+//                else if ([@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+//                    addCloseButton = YES;
+//                    modalPresentationStyle = UIModalPresentationFullScreen;
+//                }
+//                else if ([@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
+//                    addCloseButton = YES;
+//                    modalPresentationStyle = UIModalPresentationCurrentContext;
+//                }
+//                
+//                // TODO: support nested modal pageStacks
+//                _modalController = [[UINavigationController alloc] initWithRootViewController:[page viewController]];
+//                _modalController.modalPresentationStyle = modalPresentationStyle;
+//                [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:_modalController.navigationBar];
+//                
+//                if (addCloseButton) {
+//                    NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
+//                    UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalPageStack)] autorelease];
+//                    [_modalController.topViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
+//                }
+//                                                
+//                // If tabController is nil, there is only one viewController
+//                if (_tabController) {
+//                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_tabController];
+//                    page.transitionStyle = transitionStyle;
+//                    [self presentViewController:_modalController fromViewController:_tabController animated:YES];
+//                }
+//                else {
+//                    MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
+//                    [[[MBApplicationFactory sharedInstance] transitionStyleFactory] applyTransitionStyle:transitionStyle withMovement:MBTransitionMovementPush forViewController:_modalController];
+//                    page.transitionStyle = transitionStyle;
+//                    [self presentViewController:_modalController fromViewController:pageStackController.navigationController animated:YES];
+//                }
+//                // tell other view controllers that they have been dimmed (and auto-refresh controllers may need to stop refreshing)
+//                NSDictionary * dict = [NSDictionary dictionaryWithObject:_modalController forKey:@"modalViewController"];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_PRESENTED object:self userInfo:dict];
+//            }
+//	else if(_modalController != nil) {
+//		UIViewController *currentViewController = [page viewController];
+//        
+//        // Apply transition. Pushing on the navigation stack
+//        id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+//        [transition applyTransitionStyleToViewController:_modalController forMovement:MBTransitionMovementPush];
+//        page.transitionStyle = transitionStyle;
+//		[_modalController pushViewController:currentViewController animated:[transition animated]];
+//		
+//		// See if the first viewController has a barButtonItem that can close the controller. If so, add it to the new controller
+//		UIViewController *rootViewController = [_modalController.viewControllers objectAtIndex:0];		
+//		UIBarButtonItem *rootViewCtrlRightBarButtonItem = rootViewController.navigationItem.rightBarButtonItem;
+//        UIBarButtonItem *currentViewCtrlBarButtonItem = currentViewController.navigationItem.rightBarButtonItem;
+//		NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
+//		if ([rootViewCtrlRightBarButtonItem.title isEqualToString:closeButtonTitle] && (!currentViewCtrlBarButtonItem
+//            || [currentViewCtrlBarButtonItem isKindOfClass:[MBFontCustomizer class]])) {
+//            UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(endModalPageStack)] autorelease];
+//            [currentViewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
+//		}
+//		
+//		// Workaround for view delegate method calls in modal views Controller (BINCKAPPS-426 and MOBBL-150)
+//		[currentViewController performSelector:@selector(viewWillAppear:) withObject:nil afterDelay:0];
+//		[currentViewController performSelector:@selector(viewDidAppear:) withObject:nil afterDelay:0]; 
+//	}
     else {
-		[self.dialogManager addPageToPageStack:page displayMode:displayMode transitionStyle:transitionStyle];
+        
+        
+        // Is the dialogController currently Visble?
+        MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:page.pageStackName];
+        
+        // Show or Hide it if needed
+        
+
+        // The page can get a pageStackName from an outcome but if this is not the case we set the activePageStackName
+        if (page.pageStackName.length == 0) {
+            page.pageStackName = self.dialogManager.activePageStackName;
+        }
+        
+        // Do we need to make the dialog visible? (modal or tab or nothing)
+        if (![page.pageStackName isEqualToString:self.dialogManager.activePageStackName]) {
+            [self.dialogManager activatePageStackWithName:page.pageStackName];
+        }
+        
+        // Show page on pageStack
+        MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
+        [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
+        
 	}
+    
 }	
 
 // After delegate didloaddialogs
@@ -210,20 +232,22 @@
         int idx = 0;
         NSMutableArray *tabs = [NSMutableArray new];
         for (MBDialogController *dialogController in dialogControllers) {
-            // Create a tabbarProperties
-            UIViewController *viewController = dialogController.rootViewController;
-            UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
-            NSString *tabTitle = MBLocalizedString(dialogController.title);
-            UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
-            viewController.tabBarItem = tabBarItem;
-            
-            [tabs addObject:viewController];
-            
-            if (idx == 0) {
-                firstDialogController = dialogController;
+            if ([dialogController showAsTab]) {
+                // Create a tabbarProperties
+                UIViewController *viewController = dialogController.rootViewController;
+                UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
+                NSString *tabTitle = MBLocalizedString(dialogController.title);
+                UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
+                viewController.tabBarItem = tabBarItem;
+                
+                [tabs addObject:viewController];
+                
+                if (idx == 0) {
+                    firstDialogController = dialogController;
+                }
+                
+                idx ++;
             }
-            
-            idx ++;
         }
         
         // Set the tabs to the tabbar
@@ -550,10 +574,17 @@
 }
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    // Set active dialog name
+    
+    // Set active dialog/pageStack name
     for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
         if (viewController == dialogController.rootViewController) {
-            self.dialogManager.activeDialogName = dialogController.name;
+            if ([viewController isKindOfClass:[MBBasicViewController class]]) {
+                MBBasicViewController *basicViewController = (MBBasicViewController*)viewController;
+                [self.dialogManager activatePageStackWithName:basicViewController.pageStackController.name];
+            }
+            else {
+                [self.dialogManager activateDialogWithName:dialogController.name];
+            }
             break;
         }
     }

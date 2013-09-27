@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MBOrderedMutableDictionary.h"
 
-@class MBPage;
-@class MBDialogDefinition;
 @class MBDialogController;
-@class MBPageStackDefinition;
 @class MBPageStackController;
 
 
@@ -27,8 +24,8 @@
 @interface MBDialogManager : NSObject
 @property (nonatomic, assign) id<MBDialogManagerDelegate>delegate;
 @property (nonatomic, retain) MBOrderedMutableDictionary *dialogControllers;
-@property (nonatomic, retain) NSString *activePageStackName;
-@property (nonatomic, retain) NSString *activeDialogName;
+@property (nonatomic, retain, readonly) NSString *activePageStackName;
+@property (nonatomic, retain, readonly) NSString *activeDialogName;
 
 - (id)initWithDelegate:(id<MBDialogManagerDelegate>) delegate;
 
@@ -36,15 +33,16 @@
  * @name Gettings Dialogs and PageStacks
  */
 - (MBDialogController *)dialogWithName:(NSString*) name;
+- (MBDialogController *)dialogForPageStackName:(NSString *)name;
 - (MBPageStackController *)pageStackControllerWithName:(NSString*) name;
 
 
 /**
  * @name Managing PageStacks
  */
-- (void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:(NSString *)transitionStyle;
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName;
 - (void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition;
 - (void) activatePageStackWithName:(NSString*) pageStackName;
+- (void) activateDialogWithName:(NSString*) dialogName;
 
 @end

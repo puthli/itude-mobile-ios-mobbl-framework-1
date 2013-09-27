@@ -70,6 +70,12 @@
 	return [self.dialogControllers objectForKey: name];
 }
 
+- (MBDialogController *)dialogForPageStackName:(NSString *)name {
+    
+    MBPageStackController *pageStackController = [self pageStackControllerWithName:name];
+    return [self dialogWithName:[pageStackController dialogName]];
+}
+
 -(MBPageStackController*) pageStackControllerWithName:(NSString*) name {
 	return [_pageStackControllers objectForKey: name];
 }
@@ -77,25 +83,6 @@
 
 #pragma mark -
 #pragma mark Managing PageStacks
-
--(void) addPageToPageStack:(MBPage *) page displayMode:(NSString*) displayMode transitionStyle:transitionStyle {
-    
-    // The page can get a pageStackName from an outcome but if this is not the case we set the activePageStackName
-    if (page.pageStackName.length == 0) {
-        page.pageStackName = self.activePageStackName;
-    }
-    
-    MBDialogDefinition *dialogDef = [[MBMetadataService sharedInstance] dialogDefinitionForPageStackName:page.pageStackName];
-    MBDialogController *dialogController = [self dialogWithName:dialogDef.name];
-
-    MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
-    [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
-    
-    
-    if (![page.pageStackName isEqualToString:self.activePageStackName]) {
-        [self activatePageStackWithName:page.pageStackName];
-    }
-}
 
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName {
     MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
@@ -116,13 +103,36 @@
 }
 
 -(void) activatePageStackWithName:(NSString*) pageStackName {
-    self.activePageStackName = pageStackName;
     
-    MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
-    MBDialogController *dialogController = [self dialogWithName:[pageStackController dialogName]];
+    if (![pageStackName isEqualToString:self.activePageStackName]) {
+        // Set the activePageStackName
+        [_activePageStackName release];
+        _activePageStackName = [pageStackName retain];
+        
+        // Notify the delegate
+        MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
+        MBDialogController *dialogController = [self dialogForPageStackName:pageStackName];
+        [self.delegate didActivatePageStack:pageStackController inDialog:dialogController];
+    }
     
-	self.activeDialogName = [dialogController name];
-    [self.delegate didActivatePageStack:pageStackController inDialog:dialogController];
+}
+
+-(void)activateDialogWithName:(NSString *)dialogName {
+    MBDialogController *dialogController = [self dialogWithName:dialogName];
+    for (MBPageStackController *pageStackController in dialogController.pageStackControllers) {
+        if ([pageStackController.name isEqualToString:self.activePageStackName]) {
+            return;
+        }
+    }
+    
+}
+
+#pragma mark -
+#pragma mark Getters and Setters
+
+- (NSString *)activeDialogName {
+    MBDialogController *dialogController = [self dialogForPageStackName:self.activePageStackName];
+    return dialogController.name;
 }
 
 @end
