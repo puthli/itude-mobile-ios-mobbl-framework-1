@@ -12,4 +12,6 @@
 
 @interface MBInputBuilder : MBFieldViewBuilder
 
+-(void)configureView:(UIView *)view forField:(MBField *)field;
+
 @end
