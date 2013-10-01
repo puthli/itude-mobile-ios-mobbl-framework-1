@@ -64,7 +64,7 @@
     NSArray *viewControllers = self.navigationController.viewControllers;
     if ([viewControllers count] > 1) {
         UIViewController *previousViewController = [viewControllers objectAtIndex:[viewControllers count]-2];
-        UIBarButtonItem *backButton = [[[MBViewBuilderFactory sharedInstance] backButtonBuilderFactory] buildBackButtonWithTitle:previousViewController.title];
+        UIBarButtonItem *backButton = [[[MBViewBuilderFactory sharedInstance] backButtonBuilderFactory] buildBackButtonWithTitle:previousViewController.navigationItem.title];
         if (backButton) {
             [self.navigationItem setLeftBarButtonItem:backButton animated:NO];
         }
