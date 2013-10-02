@@ -118,7 +118,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     MBPanel *panel = (MBPanel *)[self.sections objectAtIndex:section];
-    id<MBPanelViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] builderForType:C_PANEL_SECTION withStyle:panel.style];
+    id<MBPanelViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] builderForType:panel.type withStyle:panel.style];
     CGFloat height = [builder heightForPanel:panel];
     if (height > 0) {
         return height;
