@@ -260,6 +260,10 @@
     // Override in overridden styleHandler
 }
 
+- (void)styleSwitch:(UISwitch *)switchView component:(MBField *)field {
+    // Override in overridden styleHandler
+}
+
 - (CGSize) sizeForSplitViewController:(MBSplitViewController *) splitViewcontroller {
 	// Override in overridden styleHandler
 	return splitViewcontroller.view.frame.size;

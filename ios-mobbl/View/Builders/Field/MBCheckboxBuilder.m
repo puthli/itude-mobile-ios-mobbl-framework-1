@@ -66,6 +66,7 @@
     switchView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
     switchView.isAccessibilityElement = YES;
     switchView.accessibilityLabel = [NSString stringWithFormat:@"switch_%@", field.label];
+    [[self styleHandler] styleSwitch:switchView component:field];
 }
 
 
