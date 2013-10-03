@@ -1,10 +1,18 @@
-//
-//  MBApplicationController.h
-//  Core
-//
-//  Created by Robin Puthli on 4/26/10.
-//  Copyright 2010 Itude Mobile. All rights reserved.
-//
+/*
+ * (C) Copyright ItudeMobile.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "MBApplicationFactory.h"
 
@@ -13,7 +21,8 @@
 @class MBOutcome;
 @class MBViewManager;
 
-/** Application Controller. Facade for all navigation control and logic sequencing.
+/** 
+ * Application Controller. Facade for all navigation control and logic sequencing.
  * The MBApplicationController is responsible for determining which MBPage or MBAction should be constructed when an MBOutcome is triggered.
  * The handleOutcome method is the main usage. The MBOutcomes are defined in the application configuration which is typically the config.xmlx file. Alternatively config.xmlx may reference a file using the <Include ...> directive in which case outcomes.xmlx is an often used convention. 
  * 
