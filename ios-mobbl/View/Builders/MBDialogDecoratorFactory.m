@@ -78,4 +78,15 @@
     
 }
 
+-(void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
+    id<MBDialogDecorator> builder = [self builderForType:dialog.decorator];
+    
+    if (builder) {
+        [builder presentViewController:dialog.rootViewController withTransitionStyle:transitionStyle];
+    }
+    else {
+        [NSException raise:@"DialogDecoratorNotFound" format:@"No dialog decorator found for contentType %@ ", dialog.decorator];
+    }
+}
+
 @end

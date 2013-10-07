@@ -64,5 +64,15 @@
 
 }
 
+- (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+
+    id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+    [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
+    BOOL animated = [transition animated];
+
+    UIViewController *topMostVisibleViewController = [[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController];
+    [[[MBApplicationController currentInstance] viewManager] presentViewController:viewController fromViewController:topMostVisibleViewController animated:animated];
+}
+
 
 @end

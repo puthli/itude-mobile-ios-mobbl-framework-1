@@ -124,6 +124,7 @@
     }
 }
 
+
 #pragma mark -
 #pragma mark ActivityIndicator managment
 
@@ -160,6 +161,15 @@
 
 -(BOOL)showAsTab {
     return [self.showAs isEqualToString:C_DIALOG_SHOW_AS_TAB];
+}
+
+
+#pragma mark -
+#pragma mark Util
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; name = %@; title = %@; showAs = %@; contentType = %@; decorator = %@; rootViewController = %@; pageStackControllers = %@>", [self class], self, self.name, self.title, self.showAs, self.contentType, self.decorator, self.rootViewController, self.pageStackControllers];
 }
 
 

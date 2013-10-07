@@ -14,4 +14,8 @@
     // Default: Do nothing. 
 }
 
+- (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+    // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
+}
+
 @end

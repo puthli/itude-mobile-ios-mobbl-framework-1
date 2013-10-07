@@ -83,18 +83,13 @@ static MBApplicationController *_instance = nil;
 	DLog(@"MBApplicationController:startApplication");
 	
     self.alertController = [[MBAlertController new] autorelease];
-    
-	_applicationFactory = applicationFactory;
-	[_applicationFactory retain];
-	
-	_viewManager = [[MBViewManager alloc] init];
+    self.applicationFactory = applicationFactory;
+
 	
 	// Added for optimization: Make sure the stringUtilitiesHelper is created. The createInstance methods instantiate variables that only need to be gathered once in the application lifecycle 
 	[StringUtilitiesHelper createInstance]; // Added for optimization
-	
+	   
     [self fireInitialOutcomes];
-    
-	[_viewManager makeKeyAndVisible];
 }
 
 -(void) resetController {
@@ -534,5 +529,16 @@ static MBApplicationController *_instance = nil;
 	}
 }
 
+
+#pragma mark -
+#pragma mark Private Setters and Getters
+
+- (void)setApplicationFactory:(MBApplicationFactory *)applicationFactory {
+    if (_applicationFactory != applicationFactory) {
+        [_applicationFactory release];
+        _applicationFactory = applicationFactory;
+        [applicationFactory retain];
+    }
+}
 
 @end

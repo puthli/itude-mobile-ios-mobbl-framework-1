@@ -11,7 +11,6 @@
 #import "MBSplitViewController.h"
 #import "MBPageStackController.h"
 
-
 @interface MBDialogController : NSObject 
 
 @property (nonatomic, retain) NSString *name;
@@ -31,6 +30,7 @@
 
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
+
 
 - (BOOL) showAsTab;
 

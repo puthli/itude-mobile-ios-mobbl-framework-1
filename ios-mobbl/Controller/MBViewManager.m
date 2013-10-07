@@ -194,13 +194,17 @@
         // Is the dialogController currently Visble?
         MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:page.pageStackName];
         
-        // Show or Hide it if needed
+        
         
 
         // The page can get a pageStackName from an outcome but if this is not the case we set the activePageStackName
         if (page.pageStackName.length == 0) {
             page.pageStackName = self.dialogManager.activePageStackName;
         }
+        
+        
+        // Show or Hide it if needed
+        [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] presentDialog:dialogController withTransitionStyle:transitionStyle];
         
         // Do we need to make the dialog visible? (modal or tab or nothing)
         if (![page.pageStackName isEqualToString:self.dialogManager.activePageStackName]) {
@@ -286,6 +290,11 @@
     if (firstDialogController) {
         MBPageStackController *pageStackController = [firstDialogController.pageStackControllers objectAtIndex:0];
         [self.dialogManager activatePageStackWithName:pageStackController.name];
+    }
+    
+    // Make sure we activate ourselve when we have something to show (initially)
+    if (!self.window.isKeyWindow) {
+        [self makeKeyAndVisible];
     }
 }
 
@@ -397,7 +406,14 @@
     [self.window setRootViewController:viewController];
 }
 
-- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
+- (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
+
+//- (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController withTransitionStyle:(NSString *)transitionStyle {
+//    
+//    id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+//    [transition applyTransitionStyleToViewController:_modalController forMovement:MBTransitionMovementPush];
+//    BOOL animated = [transition animated];
+    
     // iOS 6.0 and up
     if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
         [fromViewController presentViewController:controller animated:animated completion:nil];

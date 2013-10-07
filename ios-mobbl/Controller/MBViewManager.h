@@ -36,6 +36,12 @@
 - (MBViewState) currentViewState;
 
 /**
+ * Used to present and dismiss a (modal) viewController
+ */
+- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated;
+- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated;
+
+/**
  * Returns the top most visibile viewController. In most cases this will be the rootViewController of the UIWindow or the modalViewController of the UIWindow.
  */
 - (UIViewController *)topMostVisibleViewController;
