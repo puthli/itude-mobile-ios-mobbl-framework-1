@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSString *decorator;
 @property (nonatomic, retain) NSMutableArray *pageStackControllers;
 @property (nonatomic, retain) UIViewController *rootViewController;
-
+@property (nonatomic, assign) BOOL visible;
 
 - (id) initWithDefinition:(MBDialogDefinition*)definition;
 

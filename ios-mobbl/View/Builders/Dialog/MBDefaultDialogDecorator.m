@@ -10,11 +10,15 @@
 
 @implementation MBDefaultDialogDecorator
 
-- (void)decorateViewController:(UIViewController *)viewController displayMode:(NSString *)displayMode {
+- (void)decorateDialog:(MBDialogController *)dialog {
     // Default: Do nothing. 
 }
 
 - (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+    // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
+}
+
+- (void)dismissViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
     // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
 }
 

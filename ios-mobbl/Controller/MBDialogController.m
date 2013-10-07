@@ -31,7 +31,7 @@
     NSString *_decorator;
     NSMutableArray *_pageStackControllers;
     UIViewController *_rootViewController;
-    
+    BOOL _visible;
 	NSInteger _activityIndicatorCount;
 }
 
@@ -45,8 +45,10 @@
 @synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
 @synthesize decorator = _decorator;
-@synthesize rootViewController = _rootViewController;
 @synthesize pageStackControllers = _pageStackControllers;
+@synthesize rootViewController = _rootViewController;
+@synthesize visible = _visible;
+
 
 
 - (void) dealloc
@@ -103,6 +105,7 @@
         
         
         [self loadView];
+        
 	}
 	return self;	
 }

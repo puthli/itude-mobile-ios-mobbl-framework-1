@@ -69,8 +69,7 @@
     id<MBDialogDecorator> builder = [self builderForType:dialog.decorator];
     
     if (builder) {
-        // TODO: DisplayMode is @"MODAL" for testing. Should be different????
-        [builder decorateViewController:dialog.rootViewController displayMode:dialog.decorator];
+        [builder decorateDialog:dialog];
     }
     else {
         [NSException raise:@"DialogDecoratorNotFound" format:@"No dialog decorator found for contentType %@ ", dialog.decorator];
@@ -85,8 +84,27 @@
         [builder presentViewController:dialog.rootViewController withTransitionStyle:transitionStyle];
     }
     else {
-        [NSException raise:@"DialogDecoratorNotFound" format:@"No dialog decorator found for contentType %@ ", dialog.decorator];
+        [self throwDialogDecoratorNotFoundExceptionForDialog:dialog];
     }
+}
+
+-(void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
+    id<MBDialogDecorator> builder = [self builderForType:dialog.decorator];
+    
+    if (builder) {
+        [builder dismissViewController:dialog.rootViewController withTransitionStyle:transitionStyle];
+    }
+    else {
+        [self throwDialogDecoratorNotFoundExceptionForDialog:dialog];
+    }
+}
+
+
+#pragma mark -
+#pragma mark Util
+
+- (void)throwDialogDecoratorNotFoundExceptionForDialog:(MBDialogController *)dialog {
+    [NSException raise:@"DialogDecoratorNotFound" format:@"No dialog decorator found for contentType %@ ", dialog.decorator];
 }
 
 @end

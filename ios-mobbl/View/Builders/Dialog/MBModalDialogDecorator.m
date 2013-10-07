@@ -13,7 +13,12 @@
 
 @implementation MBModalDialogDecorator
 
-- (void)decorateViewController:(UIViewController *)viewController displayMode:(NSString *)displayMode {
+- (void)decorateDialog:(MBDialogController *)dialog {
+    
+    // TODO: displayMode is set to the decorator for now (which is @"MODAL"). Should be different (different decorators for different modal types).
+    NSString *displayMode = dialog.decorator;
+    UIViewController *viewController = dialog.rootViewController;
+
     if([@"MODAL" isEqualToString:displayMode] ||
         [@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode] ||
         [@"MODALFORMSHEET" isEqualToString:displayMode] ||
@@ -74,5 +79,12 @@
     [[[MBApplicationController currentInstance] viewManager] presentViewController:viewController fromViewController:topMostVisibleViewController animated:animated];
 }
 
+- (void)dismissViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+    id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+    [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
+    BOOL animated = [transition animated];
+    
+    [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
+}
 
 @end

@@ -203,8 +203,13 @@
         }
         
         
-        // Show or Hide it if needed
-        [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] presentDialog:dialogController withTransitionStyle:transitionStyle];
+        // Show (or Hide) it if needed
+        // TODO: Comparing the activeDialogName does not work for initialOutcomes, because the MBFireInitialOutcomes activates the first pageStack by default
+        if (![[self.dialogManager activeDialogName] isEqualToString:dialogController.name]) {
+            [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] presentDialog:dialogController withTransitionStyle:transitionStyle];
+        }
+        
+        
         
         // Do we need to make the dialog visible? (modal or tab or nothing)
         if (![page.pageStackName isEqualToString:self.dialogManager.activePageStackName]) {

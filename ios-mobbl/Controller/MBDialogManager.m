@@ -119,12 +119,8 @@
 
 -(void)activateDialogWithName:(NSString *)dialogName {
     MBDialogController *dialogController = [self dialogWithName:dialogName];
-    for (MBPageStackController *pageStackController in dialogController.pageStackControllers) {
-        if ([pageStackController.name isEqualToString:self.activePageStackName]) {
-            return;
-        }
-    }
-    
+    MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
+    [self activatePageStackWithName:pageStackController.name];
 }
 
 #pragma mark -

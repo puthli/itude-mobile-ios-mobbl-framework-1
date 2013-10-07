@@ -25,7 +25,8 @@
 /// @name Decorating Dialogs
 -(void) decorateDialog:(MBDialogController*) dialog;
 
-/// @name Presenting (modal) Dialogs
+/// @name Presenting and hiding (modal) Dialogs
 -(void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle;
+-(void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle;
 
 @end

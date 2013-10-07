@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class MBDialogController;
 @protocol MBDialogDecorator <NSObject>
 @required
-- (void)decorateViewController:(UIViewController *)viewController displayMode:(NSString*) displayMode;
+- (void)decorateDialog:(MBDialogController *)dialog;
 - (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle;
+- (void)dismissViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle;
 @end
