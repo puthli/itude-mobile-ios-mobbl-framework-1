@@ -19,9 +19,7 @@
 @implementation MBNewRowViewBuilder
 
 
-- (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType
-                                style:(UITableViewCellStyle)cellstyle
-{
+- (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType style:(UITableViewCellStyle)cellstyle panel:(MBPanel *)panel {
     // First build the cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellType];
     
@@ -40,16 +38,16 @@
     return cell;
 }
 
-- (UITableViewCell *)buildCellForRow:(MBComponentContainer *)row forTableView:(UITableView *)tableView {
+- (UITableViewCell *)buildCellForRow:(MBPanel *)panel forTableView:(UITableView *)tableView {
     NSString *type = C_REGULARCELL;
     UITableViewCellStyle style = UITableViewCellStyleDefault;
     
     // Loop through the fields in the row to determine the type and style of the cell
-    for(MBComponent *child in [row children]){
+    for(MBComponent *child in [panel children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             // #BINCKMOBILE-19
-            if ([field.definition isPreConditionValid:row.document currentPath:[field absoluteDataPath]]) {
+            if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
                 
                 if ([C_FIELD_LABEL isEqualToString:field.type] ||
                     [C_FIELD_TEXT isEqualToString:field.type]){
@@ -73,7 +71,7 @@
             }
         }
     }
-    UITableViewCell *cell = [self cellForTableView:tableView withType:type style:style];
+    UITableViewCell *cell = [self cellForTableView:tableView withType:type style:style panel:panel];
     return cell;
 }
 
