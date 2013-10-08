@@ -23,17 +23,12 @@
 - (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style;
 - (void) showAlert:(MBAlert *) alert;
 
-- (void) showActivityIndicator;
-- (void) showActivityIndicatorWithMessage:(NSString*) message;
-- (void) hideActivityIndicator;
-- (void) makeKeyAndVisible;
-
-- (CGRect) bounds;
-
+/**
+ * Managing the view of the viewManager
+ */
 - (void) resetView;
 - (void) resetViewPreservingCurrentPageStack;
-- (void) endModalPageStack;
-- (MBViewState) currentViewState;
+- (void) makeKeyAndVisible;
 
 /**
  * Used to present and dismiss a (modal) viewController
@@ -42,8 +37,26 @@
 - (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated;
 
 /**
+ * Managing the activity indicator
+ */
+- (void) showActivityIndicator;
+- (void) showActivityIndicatorWithMessage:(NSString*) message;
+- (void) hideActivityIndicator;
+
+/**
+ * Returns the bounds of the UIWindow
+ */
+- (CGRect) bounds;
+
+/**
  * Returns the top most visibile viewController. In most cases this will be the rootViewController of the UIWindow or the modalViewController of the UIWindow.
  */
 - (UIViewController *)topMostVisibleViewController;
+
+/**
+ * Other methods
+ */
+- (void) dismisDialog:(MBDialogController *)dialog transitionStyle:(NSString *)transitionStyle;
+- (MBViewState) currentViewState; // TODO: Refacor the viewState away
 
 @end

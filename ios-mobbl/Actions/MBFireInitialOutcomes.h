@@ -15,4 +15,15 @@
  */
 -(NSString *)documentName;
 
+/**
+ * Handles all initial outcomes in the initial outcomes document
+ */
+- (void)handleInitialOutcomes;
+
+/**
+ * This method activates the first pagestach in the initial outcomes document and ensures that the first tab is selected. 
+ * Override this method to change this behaviour
+ */
+- (void)activateFirstPageStack;
+
 @end

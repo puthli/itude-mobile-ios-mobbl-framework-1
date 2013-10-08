@@ -38,8 +38,6 @@ static MBApplicationController *_instance = nil;
 - (void) doHandleOutcome:(MBOutcome *)outcome;
 - (void) handleException:(NSException*) exception outcome:(MBOutcome*) outcome;
 - (void) fireInitialOutcomes;
-- (MBOutcome*) outcomeWhichCausedModal;
-- (void) setOutcomeWhichCausedModal:(MBOutcome*) outcome;
 @end
 
 @implementation MBApplicationController
@@ -70,7 +68,6 @@ static MBApplicationController *_instance = nil;
 -(void) dealloc {
     [_alertController release];
 	[_applicationFactory release];
-	[_outcomeWhichCausedModal release];
     [_viewManager release];
 	[super dealloc];
 }
@@ -188,22 +185,11 @@ static MBApplicationController *_instance = nil;
 				
 				if(outcomeToProcess.pageStackName != nil) [pageStacks addObject: outcomeToProcess.pageStackName];
 				
-				if([@"MODAL" isEqualToString: outcomeToProcess.displayMode] || 
-				   [@"MODALFORMSHEET" isEqualToString: outcomeToProcess.displayMode] || 
-				   [@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:outcomeToProcess.displayMode] ||
-				   [@"MODALPAGESHEET" isEqualToString:	outcomeToProcess.displayMode] ||		
-				   [@"MODALFULLSCREEN" isEqualToString:	outcomeToProcess.displayMode] ||		
-				   [@"MODALCURRENTCONTEXT" isEqualToString:	outcomeToProcess.displayMode])	{
-					self.outcomeWhichCausedModal = outcomeToProcess;   
+                if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
+                    MBDialogController *dialog = [self.viewManager.dialogManager dialogForPageStackName:outcomeToProcess.pageStackName];
+                    [self.viewManager dismisDialog:dialog transitionStyle:outcomeToProcess.transitionStyle];
 				}
-				else if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endModalPageStack];   
-				}
-				else if([@"ENDMODAL_CONTINUE" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endModalPageStack];
-					[self performSelector:@selector(handleOutcome:) withObject:self.outcomeWhichCausedModal afterDelay:0];
-					self.outcomeWhichCausedModal = nil;
-				}
+
 				else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {
 					// TODO: This causes a bug when the user desides to pop the rootViewController
 					[_viewManager.dialogManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];
@@ -402,25 +388,6 @@ static MBApplicationController *_instance = nil;
 }
 
 //////// END OF ACTION HANDLING
-
-- (MBOutcome*) outcomeWhichCausedModal {
-	
-	MBOutcome * result = nil;
-	@synchronized(self) {
-		result = _outcomeWhichCausedModal;
-	}
-	return result;
-}
-
-- (void) setOutcomeWhichCausedModal:(MBOutcome*) outcome {
-	@synchronized(self) {
-		if(_outcomeWhichCausedModal != outcome) {
-			[_outcomeWhichCausedModal release];
-			_outcomeWhichCausedModal = outcome;
-			[_outcomeWhichCausedModal retain];
-		}
-	}
-}
 
 - (NSString*) activePageStackName {
 	NSString *result = nil;

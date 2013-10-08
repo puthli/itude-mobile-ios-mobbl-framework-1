@@ -60,6 +60,7 @@
            
            if (addCloseButton) {
                NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
+               // TODO: We need to use dismissDialog: transitionStyle: instead of endModalPageStack
                id delegate = [[MBApplicationController currentInstance] viewManager];
                UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:delegate action:@selector(endModalPageStack)] autorelease];
                [viewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
@@ -70,7 +71,6 @@
 }
 
 - (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
-
     id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
     [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
     BOOL animated = [transition animated];

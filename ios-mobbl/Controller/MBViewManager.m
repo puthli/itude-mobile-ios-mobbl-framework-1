@@ -190,28 +190,21 @@
 //	}
     else {
         
-        
-        // Is the dialogController currently Visble?
-        MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:page.pageStackName];
-        
-        
-        
-
         // The page can get a pageStackName from an outcome but if this is not the case we set the activePageStackName
         if (page.pageStackName.length == 0) {
             page.pageStackName = self.dialogManager.activePageStackName;
         }
         
-        
-        // Show (or Hide) it if needed
-        // TODO: Comparing the activeDialogName does not work for initialOutcomes, because the MBFireInitialOutcomes activates the first pageStack by default
+        MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:page.pageStackName];
+
+        /** Show/present the dialogController if it is unvisible
+         * NOTE: Comparing the activeDialogName does not work for initialOutcomes, because the MBFireInitialOutcomes activates the first pageStack by default.
+         * Solution: Activate the first tab, and after that activate the modal (if it is the first controller to be activated */
         if (![[self.dialogManager activeDialogName] isEqualToString:dialogController.name]) {
             [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] presentDialog:dialogController withTransitionStyle:transitionStyle];
         }
         
-        
-        
-        // Do we need to make the dialog visible? (modal or tab or nothing)
+        // Activate the pageStack if it is not the active one
         if (![page.pageStackName isEqualToString:self.dialogManager.activePageStackName]) {
             [self.dialogManager activatePageStackWithName:page.pageStackName];
         }
@@ -221,7 +214,6 @@
         [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
         
 	}
-    
 }	
 
 // After delegate didloaddialogs
@@ -303,26 +295,10 @@
     }
 }
 
-
-- (void) endModalPageStack {
-	if(_modalController != nil) {
-		// Hide any activity indicator for the modal stuff:
-		while(_activityIndicatorCount >0) [self hideActivityIndicator];
-		
-        // If tabController is nil, there is only one viewController
-        if (self.tabController) {
-            [self dismisViewController:self.tabController animated:TRUE];
-        }
-        else {
-            MBPageStackController *pageStackController = [self.dialogManager pageStackControllerWithName:[self.dialogManager activePageStackName]];
-            // TODO: TransitionStyle!!!
-            [self dismisViewController:pageStackController.navigationController animated:YES];
-        }
-        
-		[[NSNotificationCenter defaultCenter] postNotificationName:MODAL_VIEW_CONTROLLER_DISMISSED object:self];
-		[_modalController release];
-		_modalController = nil;
-	}
+-(void)dismisDialog:(MBDialogController *)dialog transitionStyle:(NSString *)transitionStyle {
+    //MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:self.dialogManager.activePageStackName];
+    [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] dismissDialog:dialog withTransitionStyle:transitionStyle];
+    
 }
 
 
@@ -375,8 +351,7 @@
     });
 }
 
-#pragma mark -
-#pragma mark Presenting and Dismissing ViewControllers
+
 
 - (void) resetView {
     [_tabController release];
@@ -389,6 +364,9 @@
 }
 
 
+#pragma mark -
+#pragma mark View managing
+
 - (void) resetViewPreservingCurrentPageStack {
     // TODO: This will probably fail because Dialogs (ViewControllers) have nested PageStacks (NavigationControllers)
 	for (UIViewController *controller in [_tabController viewControllers]){
@@ -398,6 +376,15 @@
 	}
 }
 
+- (void) makeKeyAndVisible {
+	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
+	[self.window makeKeyAndVisible];
+}
+
+- (void)setContentViewController:(UIViewController *)viewController {
+    [self clearWindow];
+    [self.window setRootViewController:viewController];
+}
 
 // Remove every view that is not the activityIndicatorView
 -(void) clearWindow {
@@ -406,19 +393,11 @@
 	}
 }
 
-- (void)setContentViewController:(UIViewController *)viewController {
-    [self clearWindow];
-    [self.window setRootViewController:viewController];
-}
+
+#pragma mark -
+#pragma mark Presenting and Dismissing (modal) ViewControllers
 
 - (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
-
-//- (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController withTransitionStyle:(NSString *)transitionStyle {
-//    
-//    id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-//    [transition applyTransitionStyleToViewController:_modalController forMovement:MBTransitionMovementPush];
-//    BOOL animated = [transition animated];
-    
     // iOS 6.0 and up
     if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
         [fromViewController presentViewController:controller animated:animated completion:nil];
@@ -609,15 +588,6 @@
             break;
         }
     }
-}
-
-
-#pragma mark -
-#pragma mark UIWindow delegate methods
-
-- (void) makeKeyAndVisible {
-	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
-	[self.window makeKeyAndVisible];
 }
 
 
