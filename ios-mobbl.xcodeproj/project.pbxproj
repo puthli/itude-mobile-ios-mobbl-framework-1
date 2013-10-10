@@ -384,6 +384,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00ED5E0F1806EF2900C01186 /* Layers-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Layers-template.txt"; sourceTree = "<group>"; };
+		00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Writing Documentation-template.txt"; sourceTree = "<group>"; };
 		1CC88E85171ED84200B30461 /* libios-mobbl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libios-mobbl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD50203717EC9A5600CE967F /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
@@ -795,12 +797,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00ED5E0E1806EF2900C01186 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				00ED5E0F1806EF2900C01186 /* Layers-template.txt */,
+				00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
 		1CC88E7C171ED84200B30461 = {
 			isa = PBXGroup;
 			children = (
 				BD3999DC17E3142E00531743 /* ios-mobbl */,
 				1CC88E87171ED84200B30461 /* Frameworks */,
 				1CC88E86171ED84200B30461 /* Products */,
+				00ED5E0E1806EF2900C01186 /* docs */,
 			);
 			sourceTree = "<group>";
 		};
