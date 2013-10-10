@@ -244,12 +244,6 @@
     }
 }
 
--(void)dismisDialog:(MBDialogController *)dialog transitionStyle:(NSString *)transitionStyle {
-    //MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:self.dialogManager.activePageStackName];
-    [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] dismissDialog:dialog withTransitionStyle:transitionStyle];
-    
-}
-
 
 #pragma mark -
 #pragma mark MBAlert and UIAlertView management

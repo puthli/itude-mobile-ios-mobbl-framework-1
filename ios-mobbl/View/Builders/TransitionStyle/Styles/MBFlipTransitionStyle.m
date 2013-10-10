@@ -18,7 +18,7 @@
 - (void)applyTransitionStyleToViewController:(UIViewController *)viewController forMovement:(MBTransitionMovement)transitionMovement {
 
     // Modal Flips
-    //viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     // Flip for regular pushes on the navigationStack
     [UIView beginAnimations:@"MBFlipAnimation" context:nil];

@@ -25,6 +25,7 @@
 #import "MBLocalizationService.h"
 #import "StringUtilitiesHelper.h"
 #import "MBDevice.h"
+#import "MBViewBuilderFactory.h"
 
 //#define SELECTOR_HANDLING performSelector
 #define SELECTOR_HANDLING performSelectorInBackground
@@ -188,7 +189,7 @@ static MBApplicationController *_instance = nil;
 				
                 if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
                     MBDialogController *dialog = [self.viewManager.dialogManager dialogForPageStackName:outcomeToProcess.pageStackName];
-                    [self.viewManager dismisDialog:dialog transitionStyle:outcomeToProcess.transitionStyle];
+                    [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] dismissDialog:dialog withTransitionStyle:outcomeToProcess.transitionStyle];
 				}
 
 				else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {

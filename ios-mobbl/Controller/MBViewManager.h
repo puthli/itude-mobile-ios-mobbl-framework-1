@@ -56,7 +56,6 @@
 /**
  * Other methods
  */
-- (void) dismisDialog:(MBDialogController *)dialog transitionStyle:(NSString *)transitionStyle;
 - (MBViewState) currentViewState; // TODO: Refacor the viewState away
 
 @end

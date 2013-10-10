@@ -54,7 +54,7 @@
 -(void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
     UIViewController *viewController = dialog.rootViewController;
     id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
+    [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPop];
     BOOL animated = [transition animated];
     
     [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
