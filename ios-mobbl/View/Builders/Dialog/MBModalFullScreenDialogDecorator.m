@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#import "MBSingleDialogContentBuilder.h"
+
+#import "MBModalFullScreenDialogDecorator.h"
 #import "MBDialogController.h"
-#import "MBPageStackController.h"
 
-@implementation MBSingleDialogContentBuilder
+@implementation MBModalFullScreenDialogDecorator
 
--(UIViewController *)buildDialogContentViewControllerForDialog:(MBDialogController *)dialogController {
-    if (dialogController.pageStackControllers.count > 0) {
-        MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
-        return pageStackController.navigationController;
-    }
-    
-    return nil;
+- (void)decorateDialog:(MBDialogController *)dialog {
+    [super decorateDialog:dialog];
+    dialog.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 }
 
 @end

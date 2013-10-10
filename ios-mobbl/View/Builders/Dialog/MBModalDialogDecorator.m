@@ -1,10 +1,18 @@
-//
-//  MBModalDialogContentBuilder.m
-//  itude-mobile-ios-chep-uld
-//
-//  Created by Frank van Eenbergen on 9/27/13.
-//  Copyright (c) 2013 Itude Mobile. All rights reserved.
-//
+/*
+ * (C) Copyright ItudeMobile.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "MBModalDialogDecorator.h"
 #import "MBDialogController.h"
@@ -14,60 +22,10 @@
 @implementation MBModalDialogDecorator
 
 - (void)decorateDialog:(MBDialogController *)dialog {
+   if (dialog.addCloseButton) {
+       [self addCloseButtonToDialog:dialog];
+   }
     
-    // TODO: displayMode is set to the decorator for now (which is @"MODAL"). Should be different (different decorators for different modal types).
-    NSString *displayMode = dialog.decorator;
-    UIViewController *viewController = dialog.rootViewController;
-
-    if([@"MODAL" isEqualToString:displayMode] ||
-        [@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode] ||
-        [@"MODALFORMSHEET" isEqualToString:displayMode] ||
-        [@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode] ||
-        [@"MODALPAGESHEET" isEqualToString:displayMode] ||
-        [@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode] ||
-        [@"MODALFULLSCREEN" isEqualToString:displayMode] ||
-        [@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode] ||
-        [@"MODALCURRENTCONTEXT" isEqualToString:displayMode] ||
-        [@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-           
-           BOOL addCloseButton = NO;
-           UIModalPresentationStyle modalPresentationStyle = UIModalPresentationFormSheet;
-           if ([@"MODALFORMSHEET" isEqualToString:displayMode])			modalPresentationStyle = UIModalPresentationFormSheet;
-           else if ([@"MODALPAGESHEET" isEqualToString:displayMode])		modalPresentationStyle = UIModalPresentationPageSheet;
-           else if ([@"MODALFULLSCREEN" isEqualToString:displayMode])		modalPresentationStyle = UIModalPresentationFullScreen;
-           else if ([@"MODALCURRENTCONTEXT" isEqualToString:displayMode])	modalPresentationStyle = UIModalPresentationCurrentContext;
-           else if ([@"MODALWITHCLOSEBUTTON" isEqualToString:displayMode]) addCloseButton = YES;
-           else if ([@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-               addCloseButton = YES;
-               modalPresentationStyle = UIModalPresentationFormSheet;
-           }
-           else if ([@"MODALPAGESHEETWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-               addCloseButton = YES;
-               modalPresentationStyle = UIModalPresentationPageSheet;
-           }
-           else if ([@"MODALFULLSCREENWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-               addCloseButton = YES;
-               modalPresentationStyle = UIModalPresentationFullScreen;
-           }
-           else if ([@"MODALCURRENTCONTEXTWITHCLOSEBUTTON" isEqualToString:displayMode]) {
-               addCloseButton = YES;
-               modalPresentationStyle = UIModalPresentationCurrentContext;
-           }
-           
-
-           viewController.modalPresentationStyle = modalPresentationStyle;
-        
-           
-           if (addCloseButton) {
-               NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
-               // TODO: We need to use dismissDialog: transitionStyle: instead of endModalPageStack
-               id delegate = [[MBApplicationController currentInstance] viewManager];
-               UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:delegate action:@selector(endModalPageStack)] autorelease];
-               [viewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
-           }
-        
-       }
-
 }
 
 - (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
@@ -85,6 +43,15 @@
     BOOL animated = [transition animated];
     
     [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
+}
+
+- (void)addCloseButtonToDialog:(MBDialogController *)dialog {
+    UIViewController *viewController = dialog.rootViewController;
+    NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
+    // TODO: We need to use dismissDialog: transitionStyle: instead of endModalPageStack
+    id delegate = [[MBApplicationController currentInstance] viewManager];
+    UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:delegate action:@selector(endModalPageStack)] autorelease];
+    [viewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
 }
 
 @end

@@ -1,10 +1,18 @@
-//
-//  MBDialogDecorationBuilderFactory.m
-//  itude-mobile-ios-chep-uld
-//
-//  Created by Frank van Eenbergen on 9/27/13.
-//  Copyright (c) 2013 Itude Mobile. All rights reserved.
-//
+/*
+ * (C) Copyright ItudeMobile.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "MBDialogDecoratorFactory.h"
 #import "MBDialogController.h"
@@ -13,6 +21,11 @@
 // Decorators
 #import "MBDefaultDialogDecorator.h"
 #import "MBModalDialogDecorator.h"
+#import "MBModalCurrentContextDialogDecorator.h"
+#import "MBModalFormSheetDialogDecorator.h"
+#import "MBModalFullScreenDialogDecorator.h"
+#import "MBModalPageSheetDialogDecorator.h"
+
 
 @interface MBDialogDecoratorFactory ()
 @property(readonly,nonatomic, retain) NSMutableDictionary *registry;
@@ -34,6 +47,15 @@
         _registry = [[NSMutableDictionary dictionary] retain];
         _defaultDecorator = [MBDefaultDialogDecorator new];
         [self registerDialogDecorationBuilder:[[MBModalDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODAL];
+        [self registerDialogDecorationBuilder:[[MBModalDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODAL_CLOSABLE];
+        [self registerDialogDecorationBuilder:[[MBModalCurrentContextDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALCURRENTCONTEXT];
+        [self registerDialogDecorationBuilder:[[MBModalCurrentContextDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALCURRENTCONTEXT_CLOSABLE];
+        [self registerDialogDecorationBuilder:[[MBModalFormSheetDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALFORMSHEET];
+        [self registerDialogDecorationBuilder:[[MBModalFormSheetDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALFORMSHEET_CLOSABLE];
+        [self registerDialogDecorationBuilder:[[MBModalFullScreenDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALFULLSCREEN];
+        [self registerDialogDecorationBuilder:[[MBModalFullScreenDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALFULLSCREEN_CLOSABLE];
+        [self registerDialogDecorationBuilder:[[MBModalPageSheetDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALPAGESHEET];
+        [self registerDialogDecorationBuilder:[[MBModalPageSheetDialogDecorator new] autorelease] forType:C_DIALOG_DECORATOR_TYPE_MODALPAGESHEET_CLOSABLE];
     }
     
     return self;

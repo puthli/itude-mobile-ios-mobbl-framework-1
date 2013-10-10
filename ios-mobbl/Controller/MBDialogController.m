@@ -73,6 +73,7 @@
         self.showAs = definition.showAs;
         self.contentType = definition.contentType;
         self.decorator = definition.decorator;
+        self.addCloseButton = definition.addCloseButton;
         
 		_activityIndicatorCount = 0;
 		

@@ -13,19 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#import "MBSingleDialogContentBuilder.h"
-#import "MBDialogController.h"
-#import "MBPageStackController.h"
 
-@implementation MBSingleDialogContentBuilder
+#import "MBModalDialogDecorator.h"
 
--(UIViewController *)buildDialogContentViewControllerForDialog:(MBDialogController *)dialogController {
-    if (dialogController.pageStackControllers.count > 0) {
-        MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
-        return pageStackController.navigationController;
-    }
-    
-    return nil;
-}
+@interface MBModalPageSheetDialogDecorator : MBModalDialogDecorator
 
 @end

@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString *showAs;
 @property (nonatomic, retain) NSString *contentType;
 @property (nonatomic, retain) NSString *decorator;
+@property (nonatomic, assign) BOOL addCloseButton;
 @property (nonatomic, retain) NSMutableArray *pageStackControllers;
 @property (nonatomic, retain) UIViewController *rootViewController;
 @property (nonatomic, assign) BOOL visible;
