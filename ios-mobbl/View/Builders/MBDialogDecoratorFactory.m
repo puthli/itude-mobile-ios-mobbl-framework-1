@@ -103,7 +103,7 @@
     id<MBDialogDecorator> builder = [self builderForType:dialog.decorator];
     
     if (builder) {
-        [builder presentViewController:dialog.rootViewController withTransitionStyle:transitionStyle];
+        [builder presentDialog:dialog withTransitionStyle:transitionStyle];
     }
     else {
         [self throwDialogDecoratorNotFoundExceptionForDialog:dialog];
@@ -114,7 +114,7 @@
     id<MBDialogDecorator> builder = [self builderForType:dialog.decorator];
     
     if (builder) {
-        [builder dismissViewController:dialog.rootViewController withTransitionStyle:transitionStyle];
+        [builder dismissDialog:dialog withTransitionStyle:transitionStyle];
     }
     else {
         [self throwDialogDecoratorNotFoundExceptionForDialog:dialog];

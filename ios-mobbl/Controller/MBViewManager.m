@@ -48,7 +48,6 @@
 	MBDialogManager *_dialogManager;
     
 	UIAlertView *_currentAlert; // TODO: I don't see why we need the currentAlert??
-	UINavigationController *_modalController; // TODO: Get rid of this modalController thingy
     
     NSMutableDictionary *_activityIndicatorCounts;
 	int _activityIndicatorCount;
@@ -85,7 +84,6 @@
 	[_tabController release];
 	[_dialogManager release];
 	[_currentAlert release];
-	[_modalController release];
     [_activityIndicatorCounts release];
 	[super dealloc];
 }
@@ -103,9 +101,9 @@
 	}
     else {
         
-        // Backwards compatibility:
-        // If there is no pageStackName set but there is a displaymode, we can assume that the developer want's to show the dialog in a modal presentation.
-        if (page.pageStackName.length == 0 &&  displayMode.length > 0) {
+        // Backwards compatibility: If the pageStackName of the page is the same as the active one AND there is a displaymode,
+        // we can assume that the developer want's to show the dialog in a modal presentation.
+        if (displayMode.length > 0 && [page.pageStackName isEqualToString:self.dialogManager.activePageStackName]) {
             if([C_DIALOG_DECORATOR_TYPE_MODAL isEqualToString:displayMode]) {
                 page.pageStackName = @"PAGESTACK-modal";
             }
@@ -305,12 +303,7 @@
 
 
 - (void) resetView {
-    [_tabController release];
-	[_modalController release];
-    
-    _tabController = nil;
-	_modalController = nil;
-    
+    self.tabController = nil;
     [self clearWindow];
 }
 
@@ -371,7 +364,6 @@
     }
     // iOS 5.x and lower
     else {
-        
         // Suppress the deprecation warning
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -438,7 +430,6 @@
 
 - (MBViewState) currentViewState {
 	// Currently fullscreen is not implemented
-	if(_modalController != nil) return MBViewStateModal;
 	if(_tabController != nil) return MBViewStateTabbed;
 	return MBViewStatePlain;
 }

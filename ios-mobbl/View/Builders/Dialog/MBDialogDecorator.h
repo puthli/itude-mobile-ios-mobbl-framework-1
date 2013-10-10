@@ -19,6 +19,6 @@
 @protocol MBDialogDecorator <NSObject>
 @required
 - (void)decorateDialog:(MBDialogController *)dialog;
-- (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle;
-- (void)dismissViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle;
+- (void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle;
+- (void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle;
 @end

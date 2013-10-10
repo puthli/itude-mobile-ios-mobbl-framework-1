@@ -173,6 +173,7 @@ static MBApplicationController *_instance = nil;
 			outcomeToProcess.path = outcome.path;
 			outcomeToProcess.document = outcome.document;
             if (!outcomeToProcess.pageStackName) outcomeToProcess.pageStackName = outcome.pageStackName;
+            if (!outcomeToProcess.pageStackName) outcomeToProcess.pageStackName = outcome.originPageStackName;
 			if (outcome.displayMode != nil) outcomeToProcess.displayMode = outcome.displayMode;
 			outcomeToProcess.noBackgroundProcessing = outcome.noBackgroundProcessing || outcomeDef.noBackgroundProcessing;
 
@@ -324,10 +325,6 @@ static MBApplicationController *_instance = nil;
 										 withMaxBounds: bounds];
         page.applicationController = self;
         page.pageStackName = causingOutcome.pageStackName;
-		// Fallback on the lastly selected pageStack if there is no pageStack set in the outcome:
-	    if(page.pageStackName == nil) {
-			page.pageStackName = [self activePageStackName];
-		}
 
         [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle];
     }

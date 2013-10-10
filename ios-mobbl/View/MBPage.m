@@ -54,6 +54,7 @@
 // Public properties
 @synthesize pageName = _pageName;
 @synthesize rootPath = _rootPath;
+@synthesize pageStackName = _pageStackName;
 @synthesize dialogName = _dialogName;
 @synthesize document = _document;
 @synthesize applicationController = _applicationController;
@@ -74,6 +75,7 @@
 	// Public properties
 	[_pageName release];
 	[_rootPath release];
+    [_pageStackName release];
     [_dialogName release];
     [_document release];
     //[_controller release]; // Do not release the ApplicationController because it is not retained!
@@ -345,6 +347,17 @@
 
 - (MBViewState) currentViewState {
 	return self.viewState;
+}
+
+- (NSString *)pageStackName {
+    return _pageStackName;
+}
+
+- (void)setPageStackName:(NSString *)pageStackName {
+    if (_pageStackName != pageStackName) {
+        [_pageStackName release];
+        _pageStackName = [pageStackName retain];
+    }
 }
 
 @end

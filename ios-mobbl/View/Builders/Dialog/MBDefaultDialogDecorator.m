@@ -22,11 +22,11 @@
     // Default: Do nothing. 
 }
 
-- (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+- (void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
     // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
 }
 
-- (void)dismissViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+- (void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
     // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
 }
 

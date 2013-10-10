@@ -19,7 +19,17 @@
 #import "MBPageStackController.h"
 #import "MBLocalizationService.h"
 
+@interface MBModalDialogDecorator ()
+@property (nonatomic, retain) NSString *originPageStackName;
+@end
+
 @implementation MBModalDialogDecorator
+
+- (void)dealloc
+{
+    [_originPageStackName release];
+    [super dealloc];
+}
 
 - (void)decorateDialog:(MBDialogController *)dialog {
    if (dialog.addCloseButton) {
@@ -28,21 +38,29 @@
     
 }
 
-- (void)presentViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+-(void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle{
+    UIViewController *viewController = dialog.rootViewController;
     id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
     [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
     BOOL animated = [transition animated];
 
     UIViewController *topMostVisibleViewController = [[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController];
     [[[MBApplicationController currentInstance] viewManager] presentViewController:viewController fromViewController:topMostVisibleViewController animated:animated];
+    
+    // Store the pageStackName of tge pageStack that was visible before this modal is presented
+    self.originPageStackName =  [[[[MBApplicationController currentInstance] viewManager] dialogManager] activePageStackName];
 }
 
-- (void)dismissViewController:(UIViewController *)viewController withTransitionStyle:(NSString *)transitionStyle {
+-(void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
+    UIViewController *viewController = dialog.rootViewController;
     id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
     [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
     BOOL animated = [transition animated];
     
     [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
+    
+    // We want to activate the pageStack that was visible before the modal was presented
+    [[[[MBApplicationController currentInstance] viewManager] dialogManager] activatePageStackWithName:self.originPageStackName];
 }
 
 - (void)addCloseButtonToDialog:(MBDialogController *)dialog {
