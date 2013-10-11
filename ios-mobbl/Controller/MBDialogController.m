@@ -29,6 +29,7 @@
     NSString *_showAs;
     NSString *_contentType;
     NSString *_decorator;
+    BOOL _closable;
     NSMutableArray *_pageStackControllers;
     UIViewController *_rootViewController;
     BOOL _visible;
@@ -45,6 +46,7 @@
 @synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
 @synthesize decorator = _decorator;
+@synthesize closable = _closable;
 @synthesize pageStackControllers = _pageStackControllers;
 @synthesize rootViewController = _rootViewController;
 @synthesize visible = _visible;
@@ -73,7 +75,7 @@
         self.showAs = definition.showAs;
         self.contentType = definition.contentType;
         self.decorator = definition.decorator;
-        self.addCloseButton = definition.addCloseButton;
+        self.closable = definition.closable;
         
 		_activityIndicatorCount = 0;
 		
@@ -127,7 +129,6 @@
         [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] decorateDialog:self];
     }
 }
-
 
 #pragma mark -
 #pragma mark ActivityIndicator managment

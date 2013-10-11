@@ -32,10 +32,7 @@
 }
 
 - (void)decorateDialog:(MBDialogController *)dialog {
-   if (dialog.addCloseButton) {
-       [self addCloseButtonToDialog:dialog];
-   }
-    
+    // Default modal behaviour
 }
 
 -(void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle{
@@ -58,18 +55,9 @@
     BOOL animated = [transition animated];
     
     [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
-    
+        
     // We want to activate the pageStack that was visible before the modal was presented
     [[[[MBApplicationController currentInstance] viewManager] dialogManager] activatePageStackWithName:self.originPageStackName];
-}
-
-- (void)addCloseButtonToDialog:(MBDialogController *)dialog {
-    UIViewController *viewController = dialog.rootViewController;
-    NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
-    // TODO: We need to use dismissDialog: transitionStyle: instead of endModalPageStack
-    id delegate = [[MBApplicationController currentInstance] viewManager];
-    UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:delegate action:@selector(endModalPageStack)] autorelease];
-    [viewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
 }
 
 @end

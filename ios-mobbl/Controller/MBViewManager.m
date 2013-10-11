@@ -107,9 +107,6 @@
             if([C_DIALOG_DECORATOR_TYPE_MODAL isEqualToString:displayMode]) {
                 page.pageStackName = @"PAGESTACK-modal";
             }
-            else if([C_DIALOG_DECORATOR_TYPE_MODAL isEqualToString:displayMode]) {
-                page.pageStackName = @"PAGESTACK-modal";
-            }
             else if([C_DIALOG_DECORATOR_TYPE_MODAL_CLOSABLE isEqualToString:displayMode]) {
                 page.pageStackName = @"PAGESTACK-modal-closable";
             }

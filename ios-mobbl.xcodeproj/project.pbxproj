@@ -389,6 +389,7 @@
 /* Begin PBXFileReference section */
 		1CC88E85171ED84200B30461 /* libios-mobbl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libios-mobbl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BD0B3D6718083025006089F8 /* dialogs_mobbl.xmlx */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; name = dialogs_mobbl.xmlx; path = Config/dialogs_mobbl.xmlx; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xml; };
 		BD50203717EC9A5600CE967F /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
 		BD50203817EC9A5600CE967F /* MBFireInitialOutcomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFireInitialOutcomes.m; sourceTree = "<group>"; };
 		BD50203A17EC9A5600CE967F /* MBConditionalDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConditionalDefinition.h; sourceTree = "<group>"; };
@@ -831,6 +832,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BD0B3D681808302C006089F8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				BD0B3D6718083025006089F8 /* dialogs_mobbl.xmlx */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		BD3999DC17E3142E00531743 /* ios-mobbl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1079,6 +1088,7 @@
 		BD5020CC17EC9A5600CE967F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD0B3D681808302C006089F8 /* Config */,
 				BD5020CD17EC9A5600CE967F /* Data */,
 				BD5020CF17EC9A5600CE967F /* Images */,
 				BD5020DD17EC9A5600CE967F /* Xibs */,

@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSString *showAs;
 @property (nonatomic, retain) NSString *contentType;
 @property (nonatomic, retain) NSString *decorator;
-@property (nonatomic, assign) BOOL addCloseButton;
+@property (nonatomic, assign) BOOL closable;
 @property (nonatomic, retain) NSMutableArray *pageStackControllers;
 @property (nonatomic, retain) UIViewController *rootViewController;
 @property (nonatomic, assign) BOOL visible;
@@ -28,10 +28,8 @@
 
 - (MBPageStackController *)pageStackControllerWithName:(NSString *)name;
 
-
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
-
 
 - (BOOL) showAsTab;
 

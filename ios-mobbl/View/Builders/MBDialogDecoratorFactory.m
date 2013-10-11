@@ -81,9 +81,6 @@
     }
     
     return self.defaultDecorator;
-
-    
-    return nil;
 }
 
 
@@ -94,7 +91,7 @@
         [builder decorateDialog:dialog];
     }
     else {
-        [NSException raise:@"DialogDecoratorNotFound" format:@"No dialog decorator found for contentType %@ ", dialog.decorator];
+        [self throwDialogDecoratorNotFoundExceptionForDialog:dialog];
     }
     
 }
