@@ -384,6 +384,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00ED5E0F1806EF2900C01186 /* Layers-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Layers-template.txt"; sourceTree = "<group>"; };
+		00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Writing Documentation-template.txt"; sourceTree = "<group>"; };
 		1CC88E85171ED84200B30461 /* libios-mobbl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libios-mobbl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD50203717EC9A5600CE967F /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
@@ -795,12 +797,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00ED5E0E1806EF2900C01186 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				00ED5E0F1806EF2900C01186 /* Layers-template.txt */,
+				00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
 		1CC88E7C171ED84200B30461 = {
 			isa = PBXGroup;
 			children = (
 				BD3999DC17E3142E00531743 /* ios-mobbl */,
 				1CC88E87171ED84200B30461 /* Frameworks */,
 				1CC88E86171ED84200B30461 /* Products */,
+				00ED5E0E1806EF2900C01186 /* docs */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1536,7 +1548,7 @@
 		1CC88E7D171ED84200B30461 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Itude Mobile";
 			};
 			buildConfigurationList = 1CC88E80171ED84200B30461 /* Build configuration list for PBXProject "ios-mobbl" */;
@@ -1985,7 +1997,6 @@
 		1CC88E94171ED84200B30461 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/ios_mobbl.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ios-mobbl/ios-mobbl-Prefix.pch";
@@ -2001,7 +2012,6 @@
 		1CC88E95171ED84200B30461 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/ios_mobbl.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ios-mobbl/ios-mobbl-Prefix.pch";
@@ -2017,12 +2027,7 @@
 		1CC89195171FF02C00B30461 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-					armv7s,
-					i386,
-				);
+				GCC_THUMB_SUPPORT = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s i386";
 			};
@@ -2031,12 +2036,7 @@
 		1CC89196171FF02C00B30461 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-					armv7s,
-					i386,
-				);
+				GCC_THUMB_SUPPORT = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s i386";
 			};

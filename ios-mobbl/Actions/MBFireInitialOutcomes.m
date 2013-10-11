@@ -1,10 +1,18 @@
-//
-//  MBFireInitialOutcomes.m
-//  itude-mobile-ios-chep-uld
-//
-//  Created by Frank van Eenbergen on 8/16/13.
-//  Copyright (c) 2013 Itude Mobile. All rights reserved.
-//
+/*
+ * (C) Copyright ItudeMobile.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "MBFireInitialOutcomes.h"
 #import "MBOutcome.h"
@@ -23,11 +31,11 @@
 	for(MBElement *element in [initialOutcomes valueForPath:@"/Outcome"]) {
         
 		MBOutcome *oc = [[[MBOutcome alloc] init] autorelease];
-		oc.outcomeName = [element valueForPath:@"@action"];
-        oc.pageStackName = [element valueForPath:@"pageStackName"];
+		oc.outcomeName = [element valueForAttribute:@"action"];
+        oc.pageStackName = [element valueForAttribute:@"pageStack"];
         
         // For backwards compatibility
-        if (!oc.pageStackName) {
+        if (oc.pageStackName.length == 0) {
             oc.pageStackName = [element valueForPath:@"@dialog"];
         }
 		
