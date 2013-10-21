@@ -56,7 +56,7 @@
 	        <extensions>true</extensions>
 			<configuration>
 				<configurations>
-					<configuration>Debug</configuration>
+					<configuration>Release</configuration>
 				</configurations>
 				<skipVersionUpdate>true</skipVersionUpdate>
 				<target>ios-mobbl</target>
