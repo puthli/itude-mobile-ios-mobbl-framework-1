@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.itude.mobile.ios.mobbl</groupId>
+	<artifactId>ios-mobbl</artifactId>
+	<version>0.0.1.0-SNAPSHOT</version>
+	<packaging>xcode-lib</packaging>
+	<name>iOS Mobbl Core Lib</name>
+	<description>iOS Mobbl Core Library</description>
+	<url>http://www.itude.com</url>
+	<inceptionYear>2013</inceptionYear>
+	<developers>
+		<developer>
+			<name>Coen Houtman</name>
+			<id>c.houtman</id>
+			<roles>
+				<role>Contributor</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Wiebe Elsinga</name>
+			<id>w.elsinga</id>
+			<roles>
+				<role>Contributor</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.apple.ios</groupId>
+			<artifactId>Foundation.framework</artifactId>
+			<version>${ios.version}</version>
+			<type>xcode-framework</type>
+		</dependency>
+	</dependencies>
+	
+	<issueManagement>
+		<url>https://github.com/ItudeMobile/itude-mobile-ios-mobbl/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+	
+	<scm>
+		<url>https://github.com/ItudeMobile/itude-mobile-ios-mobbl</url>
+		<connection>scm:git:git://github.com/ItudeMobile/itude-mobile-ios-mobbl.git</connection>
+		<developerConnection>scm:git:git@github.com:ItudeMobile/itude-mobile-ios-mobbl.git</developerConnection>
+	</scm>
+	
+	<build>
+	    <plugins>
+	      <plugin>
+	        <groupId>com.sap.prd.mobile.ios.mios</groupId>
+	        <artifactId>xcode-maven-plugin</artifactId>
+	        <version>1.13.0</version>
+	        <extensions>true</extensions>
+			<configuration>
+				<configurations>
+					<configuration>Debug</configuration>
+				</configurations>
+				<skipVersionUpdate>true</skipVersionUpdate>
+				<target>ios-mobbl</target>
+				<preferFatLibs>true</preferFatLibs>
+			</configuration>
+	      </plugin>
+	    </plugins>
+	  </build>
+	  
+	<properties>
+        <ios.version>7.0</ios.version>
+    </properties>  
+	  
+	  <repositories>
+		<repository>
+			<id>itudemobile-github-repository</id>
+			<name>ItudeMobile Github repository</name>
+			<url>http://itudemobile.github.io/maven-repository/releases</url>
+		</repository>
+	</repositories>
+	  
+</project>
+
+
+          
