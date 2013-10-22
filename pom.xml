@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.itude.mobile.ios.mobbl</groupId>
-	<artifactId>ios-mobbl</artifactId>
+	<artifactId>mobbl-core-lib</artifactId>
 	<version>0.0.1.0-SNAPSHOT</version>
 	<packaging>xcode-lib</packaging>
 	<name>iOS Mobbl Core Lib</name>
@@ -59,7 +59,7 @@
 					<configuration>Release</configuration>
 				</configurations>
 				<skipVersionUpdate>true</skipVersionUpdate>
-				<target>ios-mobbl</target>
+				<target>mobbl-core-lib</target>
 				<preferFatLibs>true</preferFatLibs>
 			</configuration>
 	      </plugin>

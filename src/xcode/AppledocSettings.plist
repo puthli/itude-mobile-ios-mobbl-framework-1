@@ -13,7 +13,7 @@
 	<key>--create-docset</key>
 	<true/>
 	<key>--project-name</key>
-	<string>itude-mobile-iphone-core</string>
+	<string>itude-mobile-ios-mobbl</string>
 	<key>--output</key>
 	<string>~/help</string>
 	<key>--input</key>
@@ -27,7 +27,7 @@
 	<key>--ignore</key>
 	<array>
 		<string>*.m</string>
-		<string>itude-mobile-iphone-coreLogicTests</string>
+		<string>itude-mobile-ios-mobbl-coreLogicTests</string>
 		<string>External</string>
 	</array>
 </dict>
