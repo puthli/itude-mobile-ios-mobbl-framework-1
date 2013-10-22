@@ -55,12 +55,7 @@
 	        <version>1.13.0</version>
 	        <extensions>true</extensions>
 			<configuration>
-				<configurations>
-					<configuration>Release</configuration>
-				</configurations>
 				<skipVersionUpdate>true</skipVersionUpdate>
-				<target>mobbl-core-lib</target>
-				<preferFatLibs>true</preferFatLibs>
 			</configuration>
 	      </plugin>
 	    </plugins>
