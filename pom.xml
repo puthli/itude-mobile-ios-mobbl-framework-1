@@ -49,20 +49,22 @@
 	
 	<build>
 	    <plugins>
-	      <plugin>
-	        <groupId>com.sap.prd.mobile.ios.mios</groupId>
-	        <artifactId>xcode-maven-plugin</artifactId>
-	        <version>1.13.0</version>
-	        <extensions>true</extensions>
-			<configuration>
-				<skipVersionUpdate>true</skipVersionUpdate>
-			</configuration>
-	      </plugin>
+	    	<plugin>
+	        	<groupId>com.sap.prd.mobile.ios.mios</groupId>
+		        <artifactId>xcode-maven-plugin</artifactId>
+		        <version>1.13.0</version>
+	    	    <extensions>true</extensions>
+				<configuration>
+					<skipVersionUpdate>true</skipVersionUpdate>
+					<target>mobbl-core-lib</target>
+				</configuration>
+    	  </plugin>
 	    </plugins>
 	  </build>
 	  
 	<properties>
         <ios.version>7.0</ios.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>  
 	  
 	  <repositories>

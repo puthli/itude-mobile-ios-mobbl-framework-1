@@ -396,6 +396,8 @@
 		C79E82511816AA1500FACE71 /* MBPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5021DF17EC9A5600CE967F /* MBPanel.h */; };
 		C79E82521816AA1500FACE71 /* MBValueChangeListenerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5021E117EC9A5600CE967F /* MBValueChangeListenerProtocol.h */; };
 		C79E82531816AA1500FACE71 /* MBTableViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD5021E317EC9A5600CE967F /* MBTableViewController.h */; };
+		C7A1D7E5181E7A0C00777CF9 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5021E417EC9A5600CE967F /* MBTableViewController.m */; };
+		C7A1D7E7181E7A3600777CF9 /* MBElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5020BF17EC9A5600CE967F /* MBElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1822,7 +1824,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\nSCHEME=Release\n\n$XCODEBUILD -project ios-mobbl.xcodeproj -target \"ios-mobbl\" -sdk \"iphonesimulator\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphonesimulator\n$XCODEBUILD -project ios-mobbl.xcodeproj -target \"ios-mobbl\" -sdk \"iphoneos\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphoneos\n\ncp -Rf build/iphoneos/$SCHEME-iphoneos/include build/universal/\nlipo -create -output \"build/universal/ios-mobbl-universal.a\" \"build/iphoneos/$SCHEME-iphoneos/libios-mobbl.a\" \"build/iphonesimulator/$SCHEME-iphonesimulator/libios-mobbl.a\"";
+			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\nSCHEME=Release\n\n$XCODEBUILD -project mobbl-core-lib.xcodeproj -target \"mobbl-core-lib\" -sdk \"iphonesimulator\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphonesimulator\n$XCODEBUILD -project mobbl-core-lib.xcodeproj -target \"mobbl-core-lib\" -sdk \"iphoneos\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphoneos\n\ncp -Rf build/iphoneos/$SCHEME-iphoneos/include build/universal/\nlipo -create -output \"build/universal/mobbl-core-lib-universal.a\" \"build/iphoneos/$SCHEME-iphoneos/libmobbl-core-lib.a\" \"build/iphonesimulator/$SCHEME-iphonesimulator/libmobbl-core-lib.a\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1862,6 +1864,7 @@
 				BD50228A17EC9A5700CE967F /* MBConditionalPage.m in Sources */,
 				BD50226817EC9A5700CE967F /* MBRowViewBuilderFactory.m in Sources */,
 				BD50223D17EC9A5700CE967F /* SBJsonParser.m in Sources */,
+				C7A1D7E7181E7A3600777CF9 /* MBElement.m in Sources */,
 				BD50221217EC9A5600CE967F /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				BD50226217EC9A5700CE967F /* MBTextBuilder.m in Sources */,
 				BD50228F17EC9A5700CE967F /* MBPageStack.m in Sources */,
@@ -1871,6 +1874,7 @@
 				BD50224917EC9A5700CE967F /* MBWebView.m in Sources */,
 				BD50227217EC9A5700CE967F /* MBSectionPanelViewBuilder.m in Sources */,
 				BD50221D17EC9A5600CE967F /* MBDocumentDiff.m in Sources */,
+				C7A1D7E5181E7A0C00777CF9 /* MBTableViewController.m in Sources */,
 				BD50227617EC9A5700CE967F /* MBTransitionStyleFactory.m in Sources */,
 				BD50221E17EC9A5600CE967F /* MBDocumentFactory.m in Sources */,
 				BD50228217EC9A5700CE967F /* MBMatrixCell.m in Sources */,
