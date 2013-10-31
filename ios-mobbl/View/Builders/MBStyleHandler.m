@@ -112,9 +112,9 @@
             
             // iOS 7
             if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
-                NSMutableDictionary *atts = [NSMutableDictionary dictionary];
-                //[atts setObject:font forKey:NSFontAttributeName];
-                CGRect textViewSize = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:atts context:nil];
+                CGRect textViewSize = [text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                      attributes:[NSDictionary dictionaryWithObjectsAndKeys:[self fontForField:field],NSFontAttributeName, nil] context:nil];
+
                 height = textViewSize.size.height + 22;
             }
             // iOS6 and earlier

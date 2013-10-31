@@ -173,8 +173,8 @@ static MBApplicationController *_instance = nil;
 			
 			outcomeToProcess.path = outcome.path;
 			outcomeToProcess.document = outcome.document;
-            if (!outcomeToProcess.pageStackName) outcomeToProcess.pageStackName = outcome.pageStackName;
-            if (!outcomeToProcess.pageStackName) outcomeToProcess.pageStackName = outcome.originPageStackName;
+            if (outcomeToProcess.pageStackName.length == 0) outcomeToProcess.pageStackName = outcome.pageStackName;
+            if (outcomeToProcess.pageStackName.length == 0) outcomeToProcess.pageStackName = outcome.originPageStackName;
 			if (outcome.displayMode != nil) outcomeToProcess.displayMode = outcome.displayMode;
 			outcomeToProcess.noBackgroundProcessing = outcome.noBackgroundProcessing || outcomeDef.noBackgroundProcessing;
 
