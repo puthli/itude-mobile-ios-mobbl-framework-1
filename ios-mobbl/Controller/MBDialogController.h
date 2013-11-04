@@ -28,6 +28,8 @@
 
 - (MBPageStackController *)pageStackControllerWithName:(NSString *)name;
 
+- (void) resetView;
+
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
 

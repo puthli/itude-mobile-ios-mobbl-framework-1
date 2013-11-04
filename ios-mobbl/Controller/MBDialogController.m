@@ -130,6 +130,12 @@
     }
 }
 
+- (void) resetView {
+    for (MBPageStackController *pageStackController in self.pageStackControllers) {
+        [pageStackController resetView];
+    }
+}
+
 #pragma mark -
 #pragma mark ActivityIndicator managment
 

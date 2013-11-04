@@ -38,4 +38,6 @@
 
 - (NSString *)dialogName;
 
+- (void) resetView;
+
 @end

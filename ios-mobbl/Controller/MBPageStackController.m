@@ -210,10 +210,12 @@
 }
 
 -(void)setNavigationController:(UINavigationController *)navigationController {
-    [_navigationController release];
-    _navigationController = [navigationController retain];
-    _navigationController.delegate = self;
-    _navigationController.navigationItem.title = self.title;
+    if (_navigationController != navigationController) {
+        [_navigationController release];
+        _navigationController = [navigationController retain];
+        _navigationController.delegate = self;
+        _navigationController.navigationItem.title = self.title;
+    }
 }
 
 - (void)showActivityIndicator {
@@ -243,6 +245,11 @@
 
 - (NSString *)dialogName {
     return self.dialogController.name;
+}
+
+- (void)resetView {
+    // Manually reset the viewControllers array because that's the only way to remove the rootViewController
+    self.navigationController.viewControllers = [NSArray array];
 }
 
 // This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
