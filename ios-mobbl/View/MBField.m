@@ -393,7 +393,7 @@
 								   ];
 	}
 	@catch (NSException *e) {
-		result = [NSString stringWithFormat:@"<MBField errorInDefinition='%@, %@'/>\n", e.name, e.reason];
+		result = [NSMutableString stringWithFormat:@"<MBField errorInDefinition='%@, %@'/>\n", e.name, e.reason];
 	}
 	
 	return result;

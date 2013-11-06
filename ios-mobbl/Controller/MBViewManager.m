@@ -437,9 +437,13 @@
     }
     
     // Fallback scenario for iOS 4.3 and earlier
+    // Suppress the deprecation warning
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     else if (self.window.rootViewController.modalViewController) {
         return self.window.rootViewController.modalViewController;
     }
+#pragma clang diagnostic pop
     
     // If all else fails, return the rootViewcontroller of the Window
     return self.window.rootViewController;
