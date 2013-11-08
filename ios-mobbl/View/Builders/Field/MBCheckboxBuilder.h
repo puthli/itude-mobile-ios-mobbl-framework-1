@@ -11,4 +11,15 @@
 
 @interface MBCheckboxBuilder : MBFieldViewBuilder
 
+/// @name UILabel
+-(UILabel *)buildLabelForField:(MBField *)field withMaxBounds:(CGRect)bounds;
+- (void)configureLabel:(UILabel *)label forField:(MBField *)field;
+
+/// @name UISwitch
+- (UISwitch *)buildSwitchForField:(MBField *)field withMaxBounds:(CGRect)bounds;
+- (void)configureSwitch:(UISwitch *)switchView forField:(MBField *)field ;
+
+// Apple Developer documentation states: The size components of the switch frame (rectangle) are ignored.
+- (CGRect)frameForSwitch:(UISwitch *)switchView withMaxBounds:(CGRect)bounds;
+
 @end
