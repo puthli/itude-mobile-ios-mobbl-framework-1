@@ -277,7 +277,7 @@
                 dateTimePickerController.maximumDate = [NSDate date];
             }
 
-            UIView *superView = [[[tableView window] rootViewController] view];
+            UIView *superView = [[[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController] view];
             [dateTimePickerController presentWithSuperview:superView];
 
 
