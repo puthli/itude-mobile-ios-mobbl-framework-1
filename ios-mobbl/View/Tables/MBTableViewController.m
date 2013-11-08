@@ -206,11 +206,8 @@
         [panel handleOutcome:[panel outcomeName] withPathArgument:path];
     }
     
-	// use the first field we come across to trigger keyboard dismissal
-//	for(MBField *field in [self.cellReferences allValues]){
-//		[[field page] resignFirstResponder];
-//		break;
-//	}
+    //Dismiss keyboard
+    [self.view endEditing:YES];
 
     [self.page resignFirstResponder];
 
