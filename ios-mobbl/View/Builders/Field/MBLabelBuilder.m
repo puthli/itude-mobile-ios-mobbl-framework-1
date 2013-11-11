@@ -15,18 +15,17 @@
 -(UIView *)buildFieldView:(MBField *)field withMaxBounds:(CGRect)bounds {
  	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, [UIScreen mainScreen].applicationFrame.size.width, 25.0)];
 
-    [self configureView:label forField:field];
+    [self configureLabel:label forField:field];
 	return [label autorelease];
 }
 
 -(UIView*)buildFieldView:(MBField*)field forTableCell:(UITableViewCell *)cell withMaxBounds:(CGRect) bounds {
-    UIView *view = cell.textLabel;
-    [self configureView: view forField: field];
-    return view;
+    UILabel *label = cell.textLabel;
+    [self configureLabel:label forField: field];
+    return label;
 }
 
--(void)configureView:(UIView *)view forField:(MBField *)field {
-    UILabel *label = (UILabel*)view;
+-(void)configureLabel:(UILabel *)label forField:(MBField *)field {
     label.text = [field formattedValue];
     
     label.numberOfLines = 0;

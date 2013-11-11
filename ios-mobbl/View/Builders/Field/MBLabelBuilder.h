@@ -11,4 +11,6 @@
 
 @interface MBLabelBuilder : MBFieldViewBuilder
 
+-(void)configureLabel:(UILabel *)label forField:(MBField *)field;
+
 @end
