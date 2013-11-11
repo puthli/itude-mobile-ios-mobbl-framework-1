@@ -28,6 +28,7 @@
 #import "MBPickerPopoverController.h"
 #import "MBDevice.h"
 #import "MBDatePickerController.h"
+#import "MBDatePickerPopoverController.h"
 #import "MBWebView.h"
 #import "UIView+TreeWalker.h"
 #import "MBFontCustomizer.h"
@@ -126,7 +127,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     MBPanel *panel = (MBPanel *)[self.sections objectAtIndex:section];
-    id<MBPanelViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] builderForType:C_PANEL_SECTION withStyle:panel.style];
+    id<MBPanelViewBuilder> builder = [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] builderForType:panel.type withStyle:panel.style];
     CGFloat height = [builder heightForPanel:panel];
     if (height > 0) {
         return height;
@@ -214,11 +215,8 @@
         [panel handleOutcome:[panel outcomeName] withPathArgument:path];
     }
     
-	// use the first field we come across to trigger keyboard dismissal
-//	for(MBField *field in [self.cellReferences allValues]){
-//		[[field page] resignFirstResponder];
-//		break;
-//	}
+    //Dismiss keyboard
+    [self.view endEditing:YES];
 
     [self.page resignFirstResponder];
 
@@ -265,28 +263,29 @@
             [self fieldWasSelected:field];
             [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
 
-            MBDatePickerController *dateTimePickerController = [[[MBDatePickerController alloc]
-                                                                                         initWithNibName:@"MBDatePicker"
-                                                                                                  bundle:nil]
-                                                                                         autorelease];
-            dateTimePickerController.field = field;
-            [field setViewData:dateTimePickerController forKey:@"datePickerController"];
+            if ([MBDevice isPad]) {
+                MBDatePickerPopoverController *pickerController = [[[MBDatePickerPopoverController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
+                [self setupDateTimePicker:pickerController forField:field];
+                
+                //picker.field = field;
+                UIView *cell = [tableView cellForRowAtIndexPath:indexPath];
+                UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
 
-            // Determine the datePickerModeStyle
-            UIDatePickerMode datePickerMode = UIDatePickerModeDateAndTime;
-            if ([C_FIELD_DATESELECTOR isEqualToString:field.type] || [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
-                datePickerMode = UIDatePickerModeDate;
-            } else if ([C_FIELD_TIMESELECTOR isEqualToString:field.type]) {
-                datePickerMode = UIDatePickerModeTime;
+                [popover presentPopoverFromRect:cell.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                pickerController.popover = popover;
+                [popover release];
             }
-            dateTimePickerController.datePickerMode = datePickerMode;
-
-            if ([C_FIELD_BIRTHDATE isEqualToString:field.type]) {
-                dateTimePickerController.maximumDate = [NSDate date];
+            
+            else {
+                MBDatePickerController *dateTimePickerController = [[[MBDatePickerController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
+                [self setupDateTimePicker:dateTimePickerController forField:field];
+                
+                UIView *superView = [[[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController] view];
+                [dateTimePickerController presentWithSuperview:superView];
+                
             }
-
-            UIView *superView = [[[tableView window] rootViewController] view];
-            [dateTimePickerController presentWithSuperview:superView];
+            
+            
 
 
         } else if (field && [field outcomeName]) {
@@ -389,5 +388,26 @@
     }
 }
 
+
+#pragma mark -
+#pragma mark Helpers
+
+- (void)setupDateTimePicker:(MBDatePickerController *)dateTimePickerController forField:(MBField *)field {
+    dateTimePickerController.field = field;
+    [field setViewData:dateTimePickerController forKey:@"datePickerController"];
+    
+    // Determine the datePickerModeStyle
+    UIDatePickerMode datePickerMode = UIDatePickerModeDateAndTime;
+    if ([C_FIELD_DATESELECTOR isEqualToString:field.type] || [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
+        datePickerMode = UIDatePickerModeDate;
+    } else if ([C_FIELD_TIMESELECTOR isEqualToString:field.type]) {
+        datePickerMode = UIDatePickerModeTime;
+    }
+    dateTimePickerController.datePickerMode = datePickerMode;
+    
+    if ([C_FIELD_BIRTHDATE isEqualToString:field.type]) {
+        dateTimePickerController.maximumDate = [NSDate date];
+    }
+}
 
 @end

@@ -33,6 +33,7 @@
 #import "MBLocalizationService.h"
 #import "StringUtilitiesHelper.h"
 #import "MBDevice.h"
+#import "MBViewBuilderFactory.h"
 
 //#define SELECTOR_HANDLING performSelector
 #define SELECTOR_HANDLING performSelectorInBackground
@@ -46,8 +47,6 @@ static MBApplicationController *_instance = nil;
 - (void) doHandleOutcome:(MBOutcome *)outcome;
 - (void) handleException:(NSException*) exception outcome:(MBOutcome*) outcome;
 - (void) fireInitialOutcomes;
-- (MBOutcome*) outcomeWhichCausedModal;
-- (void) setOutcomeWhichCausedModal:(MBOutcome*) outcome;
 @end
 
 @implementation MBApplicationController
@@ -78,7 +77,6 @@ static MBApplicationController *_instance = nil;
 -(void) dealloc {
     [_alertController release];
 	[_applicationFactory release];
-	[_outcomeWhichCausedModal release];
     [_viewManager release];
 	[super dealloc];
 }
@@ -91,17 +89,13 @@ static MBApplicationController *_instance = nil;
 	DLog(@"MBApplicationController:startApplication");
 	
     self.alertController = [[MBAlertController new] autorelease];
-    
-	_applicationFactory = applicationFactory;
-	[_applicationFactory retain];
-	
-	_viewManager = [[MBViewManager alloc] init];
+    self.applicationFactory = applicationFactory;
+
 	
 	// Added for optimization: Make sure the stringUtilitiesHelper is created. The createInstance methods instantiate variables that only need to be gathered once in the application lifecycle 
 	[StringUtilitiesHelper createInstance]; // Added for optimization
-	
+	   
     [self fireInitialOutcomes];
-	[_viewManager makeKeyAndVisible];
 }
 
 -(void) resetController {
@@ -168,7 +162,6 @@ static MBApplicationController *_instance = nil;
 	}
     
     NSMutableArray *pageStacks = [NSMutableArray array];
-    NSString *selectPageInPageStack = @"yes";
 	
 	// We need to make sure that the order of the dialog tabs conforms to the order of the outcomes
 	// This is not necessarily the case because preparing of page A might take longer in the background than page B
@@ -188,7 +181,8 @@ static MBApplicationController *_instance = nil;
 			
 			outcomeToProcess.path = outcome.path;
 			outcomeToProcess.document = outcome.document;
-            if (!outcomeToProcess.pageStackName) outcomeToProcess.pageStackName = outcome.pageStackName;
+            if (outcomeToProcess.pageStackName.length == 0) outcomeToProcess.pageStackName = outcome.pageStackName;
+            if (outcomeToProcess.pageStackName.length == 0) outcomeToProcess.pageStackName = outcome.originPageStackName;
 			if (outcome.displayMode != nil) outcomeToProcess.displayMode = outcome.displayMode;
 			outcomeToProcess.noBackgroundProcessing = outcome.noBackgroundProcessing || outcomeDef.noBackgroundProcessing;
 
@@ -201,39 +195,26 @@ static MBApplicationController *_instance = nil;
 				
 				if(outcomeToProcess.pageStackName != nil) [pageStacks addObject: outcomeToProcess.pageStackName];
 				
-				if([@"MODAL" isEqualToString: outcomeToProcess.displayMode] || 
-				   [@"MODALFORMSHEET" isEqualToString: outcomeToProcess.displayMode] || 
-				   [@"MODALFORMSHEETWITHCLOSEBUTTON" isEqualToString:outcomeToProcess.displayMode] ||
-				   [@"MODALPAGESHEET" isEqualToString:	outcomeToProcess.displayMode] ||		
-				   [@"MODALFULLSCREEN" isEqualToString:	outcomeToProcess.displayMode] ||		
-				   [@"MODALCURRENTCONTEXT" isEqualToString:	outcomeToProcess.displayMode])	{
-					self.outcomeWhichCausedModal = outcomeToProcess;   
+                if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
+                    MBDialogController *dialog = [self.viewManager.dialogManager dialogForPageStackName:outcomeToProcess.pageStackName];
+                    [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] dismissDialog:dialog withTransitionStyle:outcomeToProcess.transitionStyle];
 				}
-				else if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endModalPageStack];   
-				}
-				else if([@"ENDMODAL_CONTINUE" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endModalPageStack];
-					[self performSelector:@selector(handleOutcome:) withObject:self.outcomeWhichCausedModal afterDelay:0];
-					self.outcomeWhichCausedModal = nil;
-				}
+
 				else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {
 					// TODO: This causes a bug when the user desides to pop the rootViewController
-					[_viewManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];   
+					[_viewManager.dialogManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];
 				}
 				else if([@"POPALL" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];   
+					[_viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];
 				}
 				else if([@"CLEAR" isEqualToString: outcomeToProcess.displayMode]) {
 					[_viewManager resetView];   
 				}
 				else if([@"END" isEqualToString: outcomeToProcess.displayMode]) {
-					[_viewManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];   
+					[_viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];
 					[pageStacks removeObject:outcomeToProcess.pageStackName];
 				}
-				else {
-					[_viewManager notifyPageStackUsage: outcomeToProcess.pageStackName];	
-				}
+				
 				
                 // Action
 				MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];
@@ -251,10 +232,8 @@ static MBApplicationController *_instance = nil;
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
 					[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
-					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, selectPageInPageStack, nil]];
-					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, selectPageInPageStack, nil]];
-
-					selectPageInPageStack = @"no";
+					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, nil]];
+					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, nil]];
 				}
                 
                 // Alert
@@ -281,7 +260,6 @@ static MBApplicationController *_instance = nil;
     @try {
 	
         NSString *pageName = [args objectAtIndex:1];
-        NSString *selectPageInPageStack = [args objectAtIndex:2];
         
         // construct the page
         MBPageDefinition *pageDefinition = [[MBMetadataService sharedInstance] definitionForPageName:pageName];
@@ -313,9 +291,9 @@ static MBApplicationController *_instance = nil;
 		}
 				  
 		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingPage:) 
-															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInPageStack, nil]];
+															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]];
 		else [self performSelectorOnMainThread:@selector(showResultingPage:) 
-									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, selectPageInPageStack, nil]
+									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]
 								 waitUntilDone:YES];
         
     }
@@ -347,7 +325,6 @@ static MBApplicationController *_instance = nil;
 		
         MBPageDefinition *pageDefinition = [args objectAtIndex:1];
         MBDocument *document = [args objectAtIndex:2];
-        NSString *selectPageInPageStack = [args objectAtIndex:3];
         CGRect bounds = self.viewManager.bounds;
         
         MBPage *page = [_applicationFactory createPage:pageDefinition 
@@ -357,12 +334,8 @@ static MBApplicationController *_instance = nil;
 										 withMaxBounds: bounds];
         page.applicationController = self;
         page.pageStackName = causingOutcome.pageStackName;
-		// Fallback on the lastly selected pageStack if there is no pageStack set in the outcome:
-	    if(page.pageStackName == nil) {
-			page.pageStackName = [self activePageStackName];
-		}
-        BOOL doSelect = [@"yes" isEqualToString:selectPageInPageStack] && !_suppressPageSelection;
-        [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle selectPageStack:doSelect];
+
+        [_viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle];
     }
     @catch (NSException *e) {
         [self handleException: e outcome: causingOutcome];
@@ -422,29 +395,10 @@ static MBApplicationController *_instance = nil;
 
 //////// END OF ACTION HANDLING
 
-- (MBOutcome*) outcomeWhichCausedModal {
-	
-	MBOutcome * result = nil;
-	@synchronized(self) {
-		result = _outcomeWhichCausedModal;
-	}
-	return result;
-}
-
-- (void) setOutcomeWhichCausedModal:(MBOutcome*) outcome {
-	@synchronized(self) {
-		if(_outcomeWhichCausedModal != outcome) {
-			[_outcomeWhichCausedModal release];
-			_outcomeWhichCausedModal = outcome;
-			[_outcomeWhichCausedModal retain];
-		}
-	}
-}
-
 - (NSString*) activePageStackName {
 	NSString *result = nil;
 	if(_viewManager != nil) {
-	  	result = _viewManager.activePageStackName;
+	  	result = _viewManager.dialogManager.activePageStackName;
 	}
 	return result;
 }
@@ -454,13 +408,13 @@ static MBApplicationController *_instance = nil;
 	NSString *result = nil;
 	if (_viewManager != nil) {
 		
-		result = _viewManager.activeDialogName;
+		result = _viewManager.dialogManager.activeDialogName;
 	}
 	return result;
 }
 
 -(void) activatePageStackWithName:(NSString*) name {
-	[_viewManager activatePageStackWithName: name];
+	[_viewManager.dialogManager activatePageStackWithName: name];
 }
 
 -(void) showActivityIndicator {
@@ -548,5 +502,16 @@ static MBApplicationController *_instance = nil;
 	}
 }
 
+
+#pragma mark -
+#pragma mark Private Setters and Getters
+
+- (void)setApplicationFactory:(MBApplicationFactory *)applicationFactory {
+    if (_applicationFactory != applicationFactory) {
+        [_applicationFactory release];
+        _applicationFactory = applicationFactory;
+        [applicationFactory retain];
+    }
+}
 
 @end

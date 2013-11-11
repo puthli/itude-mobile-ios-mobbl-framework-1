@@ -125,6 +125,14 @@ static MBMetadataService *_instance = nil;
 	return actionDef;
 }
 
+
+#pragma mark -
+#pragma mark Dialog Definitions
+
+- (NSArray *)dialogDefinitions {
+    return [[self.configuration dialogs] allValues];
+}
+
 -(MBDialogDefinition *)definitionForDialogName:(NSString *)dialogName {
 	return [self definitionForDialogName:dialogName throwIfInvalid:TRUE];
 }
@@ -163,10 +171,9 @@ static MBMetadataService *_instance = nil;
 	return nil;
 }
 
-- (NSArray *)dialogs {
-    return [[self.configuration dialogs] allValues];
-}
 
+#pragma mark -
+#pragma mark Alert Definitions
 
 - (MBAlertDefinition *)definitionForAlertName:(NSString *)alertName {
     return [self definitionForAlertName:alertName throwIfInvalid:TRUE];

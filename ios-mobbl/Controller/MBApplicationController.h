@@ -33,7 +33,6 @@
 	MBApplicationFactory *_applicationFactory;
 	MBViewManager *_viewManager;
 	BOOL _suppressPageSelection;
-	MBOutcome *_outcomeWhichCausedModal;
     BOOL _applicationActive;
 }
 

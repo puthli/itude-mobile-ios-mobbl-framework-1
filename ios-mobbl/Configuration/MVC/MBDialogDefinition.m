@@ -25,6 +25,7 @@
     NSString *_contentType;
     NSString *_decorator;
     NSString *_stackStrategy;
+    BOOL _closable;
     NSMutableArray *_pageStacks;
 }
 
@@ -40,6 +41,7 @@
 @synthesize decorator = _decorator;
 @synthesize stackStrategy = _stackStrategy;
 @synthesize pageStacks = _pageStacks;
+@synthesize closable = _closable;
 
 
 - (id) init {
@@ -63,7 +65,7 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Dialog %@%@%@%@%@%@%@%@/>\n", level, "", 
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Dialog %@%@%@%@%@%@%@%@%@/>\n", level, "",
 							   [self attributeAsXml:@"name" withValue:self.name],
                                [self attributeAsXml:@"mode" withValue:self.mode],
 							   [self attributeAsXml:@"title" withValue:self.title],
@@ -71,7 +73,8 @@
                                [self attributeAsXml:@"showAs" withValue:self.showAs],
                                [self attributeAsXml:@"contentType" withValue:self.contentType],
                                [self attributeAsXml:@"decorator" withValue:self.decorator],
-                               [self attributeAsXml:@"stackStrategy" withValue:self.stackStrategy]];
+                               [self attributeAsXml:@"stackStrategy" withValue:self.stackStrategy],
+                               [self booleanAsXml:@"closable" withValue:self.closable]];
 	
 	for (MBPageStackDefinition *definition in self.pageStacks) {
 		[result appendString:[definition asXmlWithLevel:level+2]];

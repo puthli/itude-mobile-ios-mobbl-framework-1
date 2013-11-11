@@ -75,6 +75,10 @@ static MBResourceService *_instance = nil;
 // Returns an UIImage for a resourceId
 - (UIImage *) imageByID:(NSString*) resourceId {
     
+    if (resourceId.length == 0) {
+        return nil;
+    }
+    
     UIImage *result = nil;
     
     // Images can have high resolution versions, which are not fetched when the image is retrieved with NSData

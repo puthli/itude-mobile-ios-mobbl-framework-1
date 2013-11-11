@@ -71,4 +71,8 @@
 
 }
 
+- (CGFloat)heightForPanel:(MBPanel *)panel {
+    return 0.0f;
+}
+
 @end

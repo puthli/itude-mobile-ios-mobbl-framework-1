@@ -25,6 +25,7 @@
 #import "MBViewManager.h"
 #import "MBTransitionStyle.h"
 #import "MBDialogController.h"
+#import "MBLocalizationService.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -129,6 +130,9 @@
         [nav pushViewController:page.viewController animated:[style animated]];
     }
 	
+    // This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
+    [self setupCloseButtonForPage:page];
+
 }
 
 -(void)popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL)animated
@@ -214,10 +218,12 @@
 }
 
 -(void)setNavigationController:(UINavigationController *)navigationController {
-    [_navigationController release];
-    _navigationController = [navigationController retain];
-    _navigationController.delegate = self;
-    _navigationController.title = self.title;
+    if (_navigationController != navigationController) {
+        [_navigationController release];
+        _navigationController = [navigationController retain];
+        _navigationController.delegate = self;
+        _navigationController.navigationItem.title = self.title;
+    }
 }
 
 - (void)showActivityIndicator {
@@ -247,6 +253,26 @@
 
 - (NSString *)dialogName {
     return self.dialogController.name;
+}
+
+- (void)resetView {
+    // Manually reset the viewControllers array because that's the only way to remove the rootViewController
+    self.navigationController.viewControllers = [NSArray array];
+}
+
+// This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
+- (void)setupCloseButtonForPage:(MBPage *)page {
+    if (self.dialogController.closable) {
+        NSString *closeButtonTitle = MBLocalizedString(@"closeButtonTitle");
+        UIBarButtonItem *closeButton = [[[UIBarButtonItem alloc] initWithTitle:closeButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(closeButtonPressed:)] autorelease];
+        [page.viewController.navigationItem setRightBarButtonItem:closeButton animated:YES];
+    }
+}
+
+- (void)closeButtonPressed:(id)sender {
+    NSString *outcomeName = @"OUTCOME-end_modal";
+    MBOutcome *outcome = [[[MBOutcome alloc] initWithOutcomeName:outcomeName document:nil pageStackName:self.name] autorelease];
+    [[MBApplicationController currentInstance] handleOutcome:outcome];
 }
 
 @end

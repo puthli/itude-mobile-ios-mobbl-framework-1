@@ -36,9 +36,11 @@
 	NSString *_title;
     NSString *_showAs;
     NSString *_contentType;
+    NSString *_decorator;
+    BOOL _closable;
     NSMutableArray *_pageStackControllers;
     UIViewController *_rootViewController;
-    
+    BOOL _visible;
 	NSInteger _activityIndicatorCount;
 }
 
@@ -51,8 +53,12 @@
 @synthesize title = _title;
 @synthesize showAs = _showAs;
 @synthesize contentType = _contentType;
-@synthesize rootViewController = _rootViewController;
+@synthesize decorator = _decorator;
+@synthesize closable = _closable;
 @synthesize pageStackControllers = _pageStackControllers;
+@synthesize rootViewController = _rootViewController;
+@synthesize visible = _visible;
+
 
 
 - (void) dealloc
@@ -62,6 +68,7 @@
 	[_title release];
     [_showAs release];
     [_contentType release];
+    [_decorator release];
     [_rootViewController release];
     [_pageStackControllers release];
     
@@ -75,6 +82,8 @@
 		self.title = definition.title;
         self.showAs = definition.showAs;
         self.contentType = definition.contentType;
+        self.decorator = definition.decorator;
+        self.closable = definition.closable;
         
 		_activityIndicatorCount = 0;
 		
@@ -107,6 +116,7 @@
         
         
         [self loadView];
+        
 	}
 	return self;	
 }
@@ -124,6 +134,13 @@
 - (void) loadView {
     if (!self.rootViewController) {
         self.rootViewController = [[[MBViewBuilderFactory sharedInstance] dialogContentViewBuilderFactory] buildDialogContentViewControllerForDialog:self];
+        [[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] decorateDialog:self];
+    }
+}
+
+- (void) resetView {
+    for (MBPageStackController *pageStackController in self.pageStackControllers) {
+        [pageStackController resetView];
     }
 }
 
@@ -163,6 +180,15 @@
 
 -(BOOL)showAsTab {
     return [self.showAs isEqualToString:C_DIALOG_SHOW_AS_TAB];
+}
+
+
+#pragma mark -
+#pragma mark Util
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; name = %@; title = %@; showAs = %@; contentType = %@; decorator = %@; rootViewController = %@; pageStackControllers = %@>", [self class], self, self.name, self.title, self.showAs, self.contentType, self.decorator, self.rootViewController, self.pageStackControllers];
 }
 
 

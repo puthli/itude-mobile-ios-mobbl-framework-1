@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-#import "MBAction.h"
+#import "MBModalFullScreenDialogDecorator.h"
+#import "MBDialogController.h"
 
-@interface MBFireInitialOutcomes : NSObject <MBAction>
+@implementation MBModalFullScreenDialogDecorator
 
-/**
- * @return the documentname that contains the initial outcomes. The default name is "InitialOutcomes"
- */
--(NSString *)documentName;
-
-/**
- * Handles all initial outcomes in the initial outcomes document
- */
-- (void)handleInitialOutcomes;
-
-/**
- * This method activates the first pagestach in the initial outcomes document and ensures that the first tab is selected. 
- * Override this method to change this behaviour
- */
-- (void)activateFirstPageStack;
+- (void)decorateDialog:(MBDialogController *)dialog {
+    [super decorateDialog:dialog];
+    dialog.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+}
 
 @end

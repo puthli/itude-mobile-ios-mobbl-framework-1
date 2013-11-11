@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-#import "MBAction.h"
+#import "MBDefaultDialogDecorator.h"
 
-@interface MBFireInitialOutcomes : NSObject <MBAction>
+@implementation MBDefaultDialogDecorator
 
-/**
- * @return the documentname that contains the initial outcomes. The default name is "InitialOutcomes"
- */
--(NSString *)documentName;
+- (void)decorateDialog:(MBDialogController *)dialog {
+    // Default: Do nothing. 
+}
 
-/**
- * Handles all initial outcomes in the initial outcomes document
- */
-- (void)handleInitialOutcomes;
+- (void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
+    // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
+}
 
-/**
- * This method activates the first pagestach in the initial outcomes document and ensures that the first tab is selected. 
- * Override this method to change this behaviour
- */
-- (void)activateFirstPageStack;
+- (void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
+    // Default: Do nothing. The Viewmanager is responsible for default DialogDecorators
+}
 
 @end

@@ -20,4 +20,7 @@
 
 @interface MBInputBuilder : MBFieldViewBuilder
 
+-(void)configureLabel:(UILabel *)label forField:(MBField *)field;
+-(void)configureTextField:(UITextField *)textField forField:(MBField *)field;
+
 @end

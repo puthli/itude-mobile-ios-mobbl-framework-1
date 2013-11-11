@@ -24,6 +24,7 @@
 #import "MBPageDefinition.h"
 #import "MBAlertDefinition.h"
 #import "MBDefinition.h"
+#import "MBOrderedMutableDictionary.h"
 
 #define DOC_SYSTEM_EMPTY                  @"MBEmpty"
 #define DOC_SYSTEM_LANGUAGE               @"MBBundle" 
@@ -44,7 +45,7 @@
 	NSMutableDictionary *_actionTypes;
 	NSMutableArray *_outcomeTypes;
 	NSMutableDictionary *_pageTypes;
-	NSMutableDictionary *_dialogs;
+	MBOrderedMutableDictionary *_dialogs;
     NSMutableDictionary *_alerts;
 }
 
@@ -65,7 +66,7 @@
 - (MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *)originName;
 - (NSArray*) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
-- (NSMutableDictionary*) dialogs;
+- (MBOrderedMutableDictionary*) dialogs;
 - (NSMutableDictionary*) domains;
 - (NSMutableDictionary*) actions;
 - (NSMutableArray*) outcomes;

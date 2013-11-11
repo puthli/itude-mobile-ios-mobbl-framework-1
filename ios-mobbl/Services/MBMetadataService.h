@@ -74,11 +74,11 @@
 -(MBDocumentDefinition *) definitionForDocumentName:(NSString *)documentName throwIfInvalid:(BOOL) doThrow;
 
 /// @name Getting dialog definitions
+-(NSArray *) dialogDefinitions;
 -(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName;
 -(MBDialogDefinition *) definitionForDialogName:(NSString *)dialogName throwIfInvalid:(BOOL) doThrow;
 -(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName;
 -(MBDialogDefinition *) dialogDefinitionForPageStackName:(NSString *)pageStackName throwIfInvalid:(BOOL) doThrow;
-- (NSArray *)dialogs;
 
 /// @name Gettings alert definitions
 -(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName;

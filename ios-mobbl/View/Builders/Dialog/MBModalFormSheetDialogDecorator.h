@@ -13,25 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#import "MBModalDialogDecorator.h"
 
-#import "MBAction.h"
-
-@interface MBFireInitialOutcomes : NSObject <MBAction>
-
-/**
- * @return the documentname that contains the initial outcomes. The default name is "InitialOutcomes"
- */
--(NSString *)documentName;
-
-/**
- * Handles all initial outcomes in the initial outcomes document
- */
-- (void)handleInitialOutcomes;
-
-/**
- * This method activates the first pagestach in the initial outcomes document and ensures that the first tab is selected. 
- * Override this method to change this behaviour
- */
-- (void)activateFirstPageStack;
+@interface MBModalFormSheetDialogDecorator : MBModalDialogDecorator
 
 @end

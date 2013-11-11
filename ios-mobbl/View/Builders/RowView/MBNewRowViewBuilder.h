@@ -19,4 +19,6 @@
 
 @interface MBNewRowViewBuilder : MBViewBuilder <MBRowViewBuilder>
 
+- (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType style:(UITableViewCellStyle)cellstyle panel:(MBPanel *)panel;
+
 @end
