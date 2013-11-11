@@ -374,7 +374,8 @@
 - (void)showActivityIndicatorWithMessage:(NSString *)message {
 	if(_activityIndicatorCount == 0) {
 		// determine the maximum bounds of the screen
-        UIViewController *topMostVisibleViewController = [self topMostVisibleViewController];
+        MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
+        UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
         CGRect bounds = topMostVisibleViewController.view.bounds;
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
         if (message) {
@@ -400,7 +401,8 @@
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-            UIViewController *topMostVisibleViewController = [self topMostVisibleViewController];
+            MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
+            UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
             for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
                 if ([subview isKindOfClass:[MBActivityIndicator class]]) {
                     [subview removeFromSuperview];

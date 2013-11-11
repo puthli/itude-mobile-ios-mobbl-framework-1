@@ -1,6 +1,6 @@
 //
 //  MBFireInitialOutcomes.h
-//  itude-mobile-ios-chep-uld
+//  itude-mobile-ios-core
 //
 //  Created by Frank van Eenbergen on 8/16/13.
 //  Copyright (c) 2013 Itude Mobile. All rights reserved.

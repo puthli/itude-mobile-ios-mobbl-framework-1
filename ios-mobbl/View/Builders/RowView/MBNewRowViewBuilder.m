@@ -39,7 +39,7 @@
 }
 
 - (UITableViewCell *)buildCellForRow:(MBPanel *)panel forTableView:(UITableView *)tableView {
-    NSString *type = C_REGULARCELL;
+    NSString *type = panel.type;
     UITableViewCellStyle style = UITableViewCellStyleDefault;
     
     // Loop through the fields in the row to determine the type and style of the cell
