@@ -49,7 +49,7 @@
 
 
 - (id) parseData:(NSData *)data ofDocument:(NSString*) documentName {
-
+    
     self.configAttributes = [NSArray arrayWithObjects:@"xmlns",nil];
     self.documentAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"dataManager",@"rootElement",@"autoCreate",nil];
     self.elementAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"minOccurs",@"maxOccurs",nil];
@@ -57,7 +57,7 @@
     self.actionAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"className",nil];
     self.outcomeAttributes = [NSArray arrayWithObjects:@"xmlns",@"origin",@"name",@"action",@"dialog",@"stack",@"displayMode",@"transitionStyle",@"persist",@"transferDocument",@"preCondition",@"noBackgroundProcessing",@"processingMessage",nil];
     self.pageStackAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"mode",@"icon",@"groupName",@"position",nil];
-	self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",@"showAs",@"contentType",@"decorator",@"stackStrategy",nil];
+	self.dialogAttributes = [NSArray arrayWithObjects:@"xmlns",@"title",@"name",@"icon",@"mode",@"showAs",@"contentType",@"decorator",@"closable",@"stackStrategy",nil];
     self.pageAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"document",@"title",@"titlePath",@"width",@"height",@"preCondition",@"style",nil];
     self.alertAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"document",@"title",@"titlePath", nil];
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",@"zoomable",nil];
@@ -105,7 +105,7 @@
 }
 
 - (BOOL) processElement:(NSString *)elementName attributes:(NSDictionary *)attributeDict {
-
+    
 	if ([elementName isEqualToString:@"Configuration"]) { // start config file
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_configAttributes];
         
@@ -125,39 +125,39 @@
 	}
 	else if ([elementName isEqualToString:@"Document"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_documentAttributes];
-
+        
 		MBDocumentDefinition *docDef = [[MBDocumentDefinition alloc] init];
 		docDef.name = [attributeDict valueForKey:@"name"];
 		docDef.dataManager = [attributeDict valueForKey:@"dataManager"];
         docDef.rootElement = [attributeDict valueForKey:@"rootElement"];
-		docDef.autoCreate = [[attributeDict valueForKey:@"autoCreate"] boolValue];	
+		docDef.autoCreate = [[attributeDict valueForKey:@"autoCreate"] boolValue];
         [self notifyProcessed:docDef usingSelector:@selector(addDocument:)];
 		[docDef release];
 	}
 	else if ([elementName isEqualToString:@"Element"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_elementAttributes];
-
+        
 		MBElementDefinition *elementDef = [[MBElementDefinition alloc] init];
 		elementDef.name = [attributeDict valueForKey:@"name"];
 		elementDef.minOccurs = [[attributeDict valueForKey:@"minOccurs"] intValue];
 		elementDef.maxOccurs = [[attributeDict valueForKey:@"maxOccurs"] intValue];
         [self notifyProcessed:elementDef usingSelector:@selector(addElement:)];
-		[elementDef release];		
+		[elementDef release];
 	}
 	else if ([elementName isEqualToString:@"Attribute"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_attributeAttributes];
-
+        
 		MBAttributeDefinition *attributeDef = [[MBAttributeDefinition alloc] init];
 		attributeDef.name = [attributeDict valueForKey:@"name"];
 		attributeDef.type = [attributeDict valueForKey:@"type"];
 		attributeDef.defaultValue = [attributeDict valueForKey:@"defaultValue"];
-		attributeDef.required = [[attributeDict valueForKey:@"required"] boolValue];	
+		attributeDef.required = [[attributeDict valueForKey:@"required"] boolValue];
         [self notifyProcessed:attributeDef usingSelector:@selector(addAttribute:)];
 		[attributeDef release];
 	}
 	else if ([elementName isEqualToString:@"Action"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_actionAttributes];
-
+        
 		MBActionDefinition *actionDef = [[MBActionDefinition alloc] init];
 		actionDef.name = [attributeDict valueForKey:@"name"];
 		actionDef.className = [attributeDict valueForKey:@"className"];
@@ -166,18 +166,18 @@
 	}
 	else if ([elementName isEqualToString:@"Outcome"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_outcomeAttributes];
-
+        
 		MBOutcomeDefinition *outcomeDef = [[MBOutcomeDefinition alloc] init];
 		outcomeDef.origin = [attributeDict valueForKey:@"origin"];
 		outcomeDef.name = [attributeDict valueForKey:@"name"];
-		outcomeDef.action = [attributeDict valueForKey:@"action"];		
+		outcomeDef.action = [attributeDict valueForKey:@"action"];
 		outcomeDef.dialog = [attributeDict valueForKey:@"dialog"];
         outcomeDef.pageStackName = [attributeDict valueForKey:@"stack"];
-		outcomeDef.displayMode = [attributeDict valueForKey:@"displayMode"];	
+		outcomeDef.displayMode = [attributeDict valueForKey:@"displayMode"];
         outcomeDef.transitionStyle = [attributeDict valueForKey:@"transitionStyle"];
-		outcomeDef.preCondition = [attributeDict valueForKey:@"preCondition"];		
-		outcomeDef.persist = [[attributeDict valueForKey:@"persist"] boolValue];	 
-		outcomeDef.transferDocument = [[attributeDict valueForKey:@"transferDocument"] boolValue];	
+		outcomeDef.preCondition = [attributeDict valueForKey:@"preCondition"];
+		outcomeDef.persist = [[attributeDict valueForKey:@"persist"] boolValue];
+		outcomeDef.transferDocument = [[attributeDict valueForKey:@"transferDocument"] boolValue];
 		outcomeDef.noBackgroundProcessing = [[attributeDict valueForKey:@"noBackgroundProcessing"] boolValue];
         outcomeDef.processingMessage = [attributeDict valueForKey:@"processingMessage"];
         [self notifyProcessed:outcomeDef usingSelector:@selector(addOutcome:)];
@@ -189,7 +189,7 @@
 		pageStackDef.name = [attributeDict valueForKey:@"name"];
 		pageStackDef.title = [attributeDict valueForKey:@"title"];
         pageStackDef.preCondition = [attributeDict valueForKey:@"preCondition"];
-
+        
 		[self notifyProcessed:pageStackDef usingSelector:@selector(addPageStack:)];
 		[pageStackDef release];
 	}
@@ -197,28 +197,29 @@
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:self.dialogAttributes];
 		MBDialogDefinition *dialogDef = [[MBDialogDefinition alloc] init];
 		dialogDef.name = [attributeDict valueForKey:@"name"];
-		dialogDef.title = [attributeDict valueForKey:@"title"];	
-		dialogDef.mode = [attributeDict valueForKey:@"mode"];	
+		dialogDef.title = [attributeDict valueForKey:@"title"];
+		dialogDef.mode = [attributeDict valueForKey:@"mode"];
 		dialogDef.iconName = [attributeDict valueForKey:@"icon"];
         dialogDef.showAs = [attributeDict valueForKey:@"showAs"];
         dialogDef.contentType = [attributeDict valueForKey:@"contentType"];
         dialogDef.decorator = [attributeDict valueForKey:@"decorator"];
         dialogDef.stackStrategy = [attributeDict valueForKey:@"stackStrategy"];
+        dialogDef.closable = [[attributeDict valueForKey:@"closable"] boolValue];
         dialogDef.preCondition = [attributeDict valueForKey:@"preCondition"];
         [self notifyProcessed:dialogDef usingSelector:@selector(addDialog:)];
 		[dialogDef release];
 	}
 	else if ([elementName isEqualToString:@"Page"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_pageAttributes];
-
+        
 		MBPageDefinition *pageDef = [[MBPageDefinition alloc] init];
 		pageDef.name = [attributeDict valueForKey:@"name"];
-		pageDef.documentName = [attributeDict valueForKey:@"document"];	
-		pageDef.title = [attributeDict valueForKey:@"title"];	
-		pageDef.titlePath = [attributeDict valueForKey:@"titlePath"];	
-		pageDef.width = [[attributeDict valueForKey:@"width"] intValue];	
-		pageDef.height = [[attributeDict valueForKey:@"height"] intValue];	
-		pageDef.preCondition = [attributeDict valueForKey:@"preCondition"];	
+		pageDef.documentName = [attributeDict valueForKey:@"document"];
+		pageDef.title = [attributeDict valueForKey:@"title"];
+		pageDef.titlePath = [attributeDict valueForKey:@"titlePath"];
+		pageDef.width = [[attributeDict valueForKey:@"width"] intValue];
+		pageDef.height = [[attributeDict valueForKey:@"height"] intValue];
+		pageDef.preCondition = [attributeDict valueForKey:@"preCondition"];
 		pageDef.style = [attributeDict valueForKey:@"style"];
 		
 		NSString *type = [attributeDict valueForKey:@"type"];
@@ -231,7 +232,7 @@
                 @throw [NSException exceptionWithName:@"InvalidPageType" reason:type userInfo:nil];
             }
 		}
-			
+        
         [self notifyProcessed:pageDef usingSelector:@selector(addPage:)];
 		[pageDef release];
 	}
@@ -241,7 +242,7 @@
         
         MBAlertDefinition *alertDefinition = [[MBAlertDefinition alloc] init];
         alertDefinition.type = [attributeDict valueForKey:@"type"];
-        alertDefinition.documentName = [attributeDict valueForKey:@"document"];	
+        alertDefinition.documentName = [attributeDict valueForKey:@"document"];
         alertDefinition.name = [attributeDict valueForKey:@"name"];
         alertDefinition.style = [attributeDict valueForKey:@"style"];
         alertDefinition.title = [attributeDict valueForKey:@"title"];
@@ -252,14 +253,14 @@
     
 	else if ([elementName isEqualToString:@"Panel"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_panelAttributes];
-
+        
 		MBPanelDefinition *panelDef = [[MBPanelDefinition alloc] init];
 		panelDef.type = [attributeDict valueForKey:@"type"];
 		panelDef.name = [attributeDict valueForKey:@"name"];
 		panelDef.style = [attributeDict valueForKey:@"style"];
-		panelDef.title = [attributeDict valueForKey:@"title"];	
+		panelDef.title = [attributeDict valueForKey:@"title"];
 		panelDef.titlePath = [attributeDict valueForKey:@"titlePath"];
-		panelDef.width = [[attributeDict valueForKey:@"width"] intValue];	
+		panelDef.width = [[attributeDict valueForKey:@"width"] intValue];
 		panelDef.height = [[attributeDict valueForKey:@"height"] intValue];
         panelDef.outcomeName = [attributeDict valueForKey:@"outcome"];
         panelDef.path = [attributeDict valueForKey:@"path"];
@@ -267,17 +268,17 @@
 		panelDef.preCondition = [attributeDict valueForKey:@"preCondition"];
         [self notifyProcessed:panelDef usingSelector:@selector(addChild:)];
 		[panelDef release];
-	}	
+	}
 	else if ([elementName isEqualToString:@"ForEach"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_forEachAttributes];
 		
 		MBForEachDefinition *forEachDef = [[MBForEachDefinition alloc] init];
 		forEachDef.value = [attributeDict valueForKey:@"value"];
 		forEachDef.suppressRowComponent = [[attributeDict valueForKey:@"suppressRowComponent"] boolValue];
-		forEachDef.preCondition = [attributeDict valueForKey:@"preCondition"];		
+		forEachDef.preCondition = [attributeDict valueForKey:@"preCondition"];
         [self notifyProcessed:forEachDef usingSelector:@selector(addChild:)];
 		[forEachDef release];
-	}	
+	}
 	else if ([elementName isEqualToString:@"Variable"]) {
 		[self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_variableAttributes];
 		
@@ -286,36 +287,36 @@
 		variableDef.expression = [attributeDict valueForKey:@"expression"];
         [self notifyProcessed:variableDef usingSelector:@selector(addVariable:)];
 		[variableDef release];
-	}	
+	}
 	else if ([elementName isEqualToString:@"Field"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_fieldAttributes];
-
+        
 		MBFieldDefinition *fieldDef = [[MBFieldDefinition alloc] init];
 		fieldDef.name = [attributeDict valueForKey:@"name"];
 		fieldDef.label = [attributeDict valueForKey:@"label"];
 		fieldDef.path = [attributeDict valueForKey:@"path"];
-		fieldDef.displayType = [attributeDict valueForKey:@"type"];	
+		fieldDef.displayType = [attributeDict valueForKey:@"type"];
 		fieldDef.dataType = [attributeDict valueForKey:@"dataType"];
         fieldDef.hint = [attributeDict valueForKey:@"hint"];
-		fieldDef.style = [attributeDict valueForKey:@"style"];	
-		fieldDef.required = [attributeDict valueForKey:@"required"];	
-		fieldDef.outcomeName = [attributeDict valueForKey:@"outcome"];	
-		fieldDef.width = [attributeDict valueForKey:@"width"];	
-		fieldDef.height = [attributeDict valueForKey:@"height"];	
+		fieldDef.style = [attributeDict valueForKey:@"style"];
+		fieldDef.required = [attributeDict valueForKey:@"required"];
+		fieldDef.outcomeName = [attributeDict valueForKey:@"outcome"];
+		fieldDef.width = [attributeDict valueForKey:@"width"];
+		fieldDef.height = [attributeDict valueForKey:@"height"];
 		fieldDef.formatMask = [attributeDict valueForKey:@"formatMask"];
 		fieldDef.alignment = [attributeDict valueForKey:@"alignment"];
 		fieldDef.valueIfNil = [attributeDict valueForKey:@"valueIfNil"];
 		fieldDef.hidden = [attributeDict valueForKey:@"hidden"];
-		fieldDef.preCondition = [attributeDict valueForKey:@"preCondition"];		
-		fieldDef.custom1 = [attributeDict valueForKey:@"custom1"];	
-		fieldDef.custom2 = [attributeDict valueForKey:@"custom2"];	
-		fieldDef.custom3 = [attributeDict valueForKey:@"custom3"];	
+		fieldDef.preCondition = [attributeDict valueForKey:@"preCondition"];
+		fieldDef.custom1 = [attributeDict valueForKey:@"custom1"];
+		fieldDef.custom2 = [attributeDict valueForKey:@"custom2"];
+		fieldDef.custom3 = [attributeDict valueForKey:@"custom3"];
         [self notifyProcessed:fieldDef usingSelector:@selector(addChild:)];
 		[fieldDef release];
 	}
 	else if ([elementName isEqualToString:@"Domain"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_domainAttributes];
-
+        
 		MBDomainDefinition *domainDef = [[MBDomainDefinition alloc] init];
 		domainDef.name = [attributeDict valueForKey:@"name"];
 		domainDef.type = [attributeDict valueForKey:@"type"];
@@ -325,7 +326,7 @@
 	}
 	else if ([elementName isEqualToString:@"DomainValidator"]) {
         [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_domainValidatorAttributes];
-
+        
 		MBDomainValidatorDefinition *validatorDef = [[MBDomainValidatorDefinition alloc] init];
 		validatorDef.name = [attributeDict valueForKey:@"name"];
 		validatorDef.title = [attributeDict valueForKey:@"title"];
@@ -345,21 +346,21 @@
 	if([elementName isEqualToString:@"Field"])
 		[[_stack lastObject] performSelector:@selector(setText:) withObject:_characters];
 	
-//	else if ([elementName isEqualToString:@"DialogGroup"]) {
-//        // TODO: This is going to need refactoring
-//		// On iPad, we can have a UISplitViewController in a tab. In XML they are defined as two pageStacks in a Dialog.
-//		// This means that the dialogs are automaticly added to a dialogGroup. 
-//		// That is why we need to make sure that the pageStacks are also kept loccaly, like on the iPhone, because the local references are used to adress the pageStacks
-//		// Thats why we copy them here afther the group has been added.
-//		MBDefinition *previousDef = [_stack objectAtIndex:([_stack count]-2)];
-//		MBDialogDefinition *dialogDef = [_stack lastObject];
-//		for (MBDefinition *def in [dialogDef children]) {
-//            [previousDef performSelector:@selector(addPageStack:) withObject:def];
-//        }
-//	}
+    //	else if ([elementName isEqualToString:@"DialogGroup"]) {
+    //        // TODO: This is going to need refactoring
+    //		// On iPad, we can have a UISplitViewController in a tab. In XML they are defined as two pageStacks in a Dialog.
+    //		// This means that the dialogs are automaticly added to a dialogGroup.
+    //		// That is why we need to make sure that the pageStacks are also kept loccaly, like on the iPhone, because the local references are used to adress the pageStacks
+    //		// Thats why we copy them here afther the group has been added.
+    //		MBDefinition *previousDef = [_stack objectAtIndex:([_stack count]-2)];
+    //		MBDialogDefinition *dialogDef = [_stack lastObject];
+    //		for (MBDefinition *def in [dialogDef children]) {
+    //            [previousDef performSelector:@selector(addPageStack:) withObject:def];
+    //        }
+    //	}
 	
 	if (![elementName isEqualToString:@"Configuration"] && ![elementName isEqualToString:@"Include"]) { // end config file or special case for Include
-		[_stack removeLastObject];	
+		[_stack removeLastObject];
     }
 }
 

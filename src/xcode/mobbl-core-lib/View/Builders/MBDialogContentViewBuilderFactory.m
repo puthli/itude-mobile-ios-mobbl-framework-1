@@ -21,6 +21,7 @@
 // Builders
 #import "MBSingleDialogContentBuilder.h"
 #import "MBSplitDialogContentBuilder.h"
+#import "MBModalDialogDecorator.h"
 
 @interface MBDialogContentViewBuilderFactory ()
 @property(readonly,nonatomic, retain) NSMutableDictionary *registry;

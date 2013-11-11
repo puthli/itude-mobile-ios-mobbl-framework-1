@@ -26,9 +26,7 @@
     
     CGRect labelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
     UILabel *label = [[[UILabel alloc] initWithFrame:labelBounds] autorelease];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin;
-    label.text = field.label;
-    [[self styleHandler] styleLabel:label component:field];
+    [self configureLabel:label forField:field];
     return label;
 }
 
@@ -39,7 +37,7 @@
     
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
     textField.placeholder = field.hint;
-    [self configureView:textField forField:field];
+    [self configureTextField:textField forField:field];
     return textField;
 }
 
@@ -62,8 +60,19 @@
 
 }
 
--(void)configureView:(UIView *)view forField:(MBField *)field {
-    UITextField *textField = (UITextField*)view;
+-(void)configureLabel:(UILabel *)label forField:(MBField *)field {
+    label.text = field.label;
+    
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByWordWrapping; //UILineBreakModeWordWrap;
+    label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+    
+    label.autoresizingMask =   UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [[self styleHandler] styleLabel:label component:field];
+}
+
+
+-(void)configureTextField:(UITextField *)textField forField:(MBField *)field {
     
 	if ([C_FIELD_PASSWORD isEqualToString:field.type]) {
 		textField.secureTextEntry = YES;

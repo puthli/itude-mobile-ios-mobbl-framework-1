@@ -24,7 +24,8 @@
 }
 
 - (void)applyTransitionStyleToViewController:(UIViewController *)viewController forMovement:(MBTransitionMovement)transitionMovement {
-    // default implementation, normal transition
+    // default implementation, normal transition, no custom animation
+    viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
 }
 

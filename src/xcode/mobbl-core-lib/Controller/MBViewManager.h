@@ -15,40 +15,55 @@
  */
 
 #import "MBTypes.h"
+#import "MBDialogManager.h"
+
 @class MBPage;
 @class MBAlert;
 
-@interface MBViewManager : NSObject<UITabBarControllerDelegate, UINavigationControllerDelegate> 
+@interface MBViewManager : NSObject<UITabBarControllerDelegate, UINavigationControllerDelegate, MBDialogManagerDelegate>
 @property (nonatomic, readonly) UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabController;
-@property (nonatomic, retain) NSString *activePageStackName;
-@property (nonatomic, retain) NSString *activeDialogName;
+@property (nonatomic, retain) MBDialogManager *dialogManager;
 @property (nonatomic, retain) UIAlertView *currentAlert;
 
 - (id) init;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) mode;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) mode transitionStyle:(NSString *) style;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode selectPageStack:(BOOL) shouldSelectPageStack;
-- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style selectPageStack:(BOOL) shouldSelectPageStack;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode;
+- (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode transitionStyle:(NSString *) style;
 - (void) showAlert:(MBAlert *) alert;
-- (void) activatePageStackWithName:(NSString*) pageStackName; // Called using selectors. 
-- (void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition;
-- (void) popPageOnPageStackWithName:(NSString*) pageStackName;
+
+/**
+ * Managing the view of the viewManager
+ */
+- (void) resetView;
+- (void) resetViewPreservingCurrentPageStack;
+- (void) makeKeyAndVisible;
+
+/**
+ * Used to present and dismiss a (modal) viewController
+ */
+- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated;
+- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated;
+
+/**
+ * Managing the activity indicator
+ */
 - (void) showActivityIndicator;
 - (void) showActivityIndicatorWithMessage:(NSString*) message;
 - (void) hideActivityIndicator;
-- (void) makeKeyAndVisible;
-- (void) notifyPageStackUsage:(NSString*) pageStackName;
+
+/**
+ * Returns the bounds of the UIWindow
+ */
 - (CGRect) bounds;
-- (NSString*) activePageStackName;
-- (void) resetView;
-- (void) resetViewPreservingCurrentPageStack;
-- (void) endModalPageStack;
-- (MBViewState) currentViewState;
-- (void) updateDisplay;
+
 /**
  * Returns the top most visibile viewController. In most cases this will be the rootViewController of the UIWindow or the modalViewController of the UIWindow.
  */
 - (UIViewController *)topMostVisibleViewController;
+
+/**
+ * Other methods
+ */
+- (MBViewState) currentViewState; // TODO: Refacor the viewState away
 
 @end

@@ -20,9 +20,7 @@
 
 @class MBDialogController;
 
-#define FIRST_MORE_TAB_INDEX 4
-
-@interface MBPageStackController : NSObject <UINavigationControllerDelegate> 
+@interface MBPageStackController : NSObject <UINavigationControllerDelegate>
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *title;
@@ -47,5 +45,8 @@
 - (void) didActivate;
 
 - (NSString *)dialogName;
+
+- (void) resetView;
+
 
 @end

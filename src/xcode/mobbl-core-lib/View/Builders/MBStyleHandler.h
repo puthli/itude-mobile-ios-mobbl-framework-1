@@ -41,6 +41,9 @@
 - (void) styleTabBarController:(UITabBarController *) tabBarController;
 - (void) styleToolbar:(UIToolbar *)toolbar;
 - (void) styleDatePicker:(UIDatePicker *)datePicker component:(MBField *)field;
+- (void) styleSwitch:(UISwitch *)switchView component:(MBField *)field;
+- (void) styleSubLabel:(UIView*) view component:(MBField*) field;
+
 
 - (CGSize) sizeForSplitViewController:(MBSplitViewController *) splitViewcontroller;
 - (CGRect) sizeForTextField:(MBField*) field withMaxBounds:(CGRect) bounds ;

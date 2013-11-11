@@ -26,6 +26,7 @@
 @property (nonatomic, retain) NSString *contentType;
 @property (nonatomic, retain) NSString *decorator;
 @property (nonatomic, retain) NSString *stackStrategy;
+@property (nonatomic, assign) BOOL closable;
 @property (nonatomic, retain) NSMutableArray *pageStacks;
 
 - (void) addPageStack:(MBPageStackDefinition*)child;

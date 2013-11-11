@@ -34,6 +34,7 @@ static MBViewBuilderFactory *_instance = nil;
 @synthesize rowViewBuilderFactory = _rowViewBuilderFactory;
 @synthesize panelViewBuilderFactory = _panelViewBuilderFactory;
 @synthesize dialogContentViewBuilderFactory = _dialogContentViewBuilderFactory;
+@synthesize dialogDecoratorFactory = _dialogDecoratorFactory;
 @synthesize backButtonBuilderFactory = _backButtonBuilderFactory;
 
 - (id) init
@@ -48,6 +49,7 @@ static MBViewBuilderFactory *_instance = nil;
 		_styleHandler = [[MBStyleHandler alloc] init];
         _rowViewBuilderFactory = [[MBRowViewBuilderFactory alloc] init];
         _dialogContentViewBuilderFactory = [MBDialogContentViewBuilderFactory new];
+        _dialogDecoratorFactory = [MBDialogDecoratorFactory new];
         _backButtonBuilderFactory = [MBBackButtonBuilderFactory new];
 	}
 	return self;
@@ -63,6 +65,7 @@ static MBViewBuilderFactory *_instance = nil;
 	[_fieldViewBuilderFactory release];
     [_rowViewBuilderFactory release];
     [_dialogContentViewBuilderFactory release];
+    [_dialogDecoratorFactory release];
     [_backButtonBuilderFactory release];
 	[super dealloc];
 }
