@@ -45,6 +45,8 @@
     CGRect labelBounds = [[self styleHandler] sizeForLabel:field withMaxBounds:bounds];
     UILabel *label = [[[UILabel alloc] initWithFrame:labelBounds] autorelease];
     [self configureLabel:label forField:field];
+    return label;
+
 }
 
 -(void)configureLabel:(UILabel *)label forField:(MBField *)field {
@@ -52,7 +54,6 @@
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin;
     label.text = field.label;
     [[self styleHandler] styleLabel:label component:field];
-    return label;
 }
 
 
