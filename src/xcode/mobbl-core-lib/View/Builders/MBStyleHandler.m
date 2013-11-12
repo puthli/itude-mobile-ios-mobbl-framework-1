@@ -27,14 +27,14 @@
 #import "MBDevice.h"
 #import "StringUtilities.h"
 
-@interface MBStyleHandler(hidden) 
+@interface MBStyleHandler(hidden)
 - (void) alignLabel:(UILabel *)label forAlignMent:(NSString *)alignment;
 @end
 
 @implementation MBStyleHandler
 
 -(void) applyStyle:(id) component forView:(UIView*) view viewState:(MBViewState) viewState {
-
+    
 	if([component isKindOfClass:[MBField class]]) {
 		[self applyStyle: view field: component viewState: viewState];
 	}
@@ -53,7 +53,7 @@
 }
 
 -(void) applyStyle:(UIView *)contentView page:(MBPage *)page viewState:(MBViewState)viewState {
-
+    
 }
 
 - (void) applyStyle:(UIView *)view panel:(MBPanel *)panel viewState:(MBViewState) viewState {
@@ -64,7 +64,7 @@
 }
 
 - (void) applyStyle:(UIView*) view field:(MBField*) field viewState:(MBViewState) viewState {
-
+    
 	if([field.type isEqualToString: C_FIELD_LABEL]) [self styleLabel: view component: field];
     else if([field.type isEqualToString: C_FIELD_SUBLABEL]) [self styleSubLabel: view component: field];
 	else if([field.type isEqualToString: C_FIELD_BUTTON]) [self styleButton: view component: field];
@@ -77,9 +77,9 @@
 		label.backgroundColor = [UIColor clearColor];
         
 		/*
-        CGFloat size =[UIFont labelFontSize];
-        label.font = [label.font fontWithSize:size];
-*/        
+         CGFloat size =[UIFont labelFontSize];
+         label.font = [label.font fontWithSize:size];
+         */
 		[self alignLabel:label forAlignMent:field.alignment];
 	}
 }
@@ -89,9 +89,9 @@
 		UILabel *label = (UILabel*) view;
 		label.backgroundColor = [UIColor clearColor];
 		/*
-        CGFloat size =[UIFont smallSystemFontSize];
-        label.font = [label.font fontWithSize:size];
-        */
+         CGFloat size =[UIFont smallSystemFontSize];
+         label.font = [label.font fontWithSize:size];
+         */
 		[self alignLabel:label forAlignMent:field.alignment];
 	}
 }
@@ -129,10 +129,10 @@
                 CGSize size = [text sizeWithFont:[self fontForField:field] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
                 height = size.height + 22; // inset
             }
-
+            
         }
     }
-        
+    
     return height;
 }
 
@@ -151,7 +151,7 @@
 
 - (void) styleTextfield:(UIView*) view component:(MBField*) field {
 	if([view isKindOfClass:[UITextField class]]) {
-
+        
 		UITextField *textField = (UITextField*) view;
 		textField.textAlignment = NSTextAlignmentLeft;
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -173,7 +173,7 @@
 		UIButton *button = (UIButton *) view;
 		[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
 		[button setBackgroundColor:[UIColor lightGrayColor]];
-
+        
 	}
 }
 
@@ -187,7 +187,7 @@
 	if ([view isKindOfClass:[UILabel class]]) {
 		
 		// Set a default font
-		// TODO: Maybe we want to change this. We can't let it be the default values that the Iphone decides, 
+		// TODO: Maybe we want to change this. We can't let it be the default values that the Iphone decides,
 		// because everything will be way to big to fit in the matrixCells
 		UIFont *defaultFont = [UIFont fontWithName:@"Helvetica" size:16];
 		
@@ -203,7 +203,7 @@
 	if ([view isKindOfClass:[UILabel class]]) {
 		
 		// Set a default font
-		// TODO: Maybe we want to change this. We can't let it be the default values that the Iphone decides, 
+		// TODO: Maybe we want to change this. We can't let it be the default values that the Iphone decides,
 		// because everything will be way to big to fit in the matrixCells
 		UIFont *defaultFont = [UIFont fontWithName:@"Helvetica" size:11];
 		
@@ -221,14 +221,14 @@
 	if ([view isKindOfClass:[UILabel class]]) {
 		
 		// Set a default font
-		// TODO: Maybe we want to change this. We can't let it be the default values that the Iphone decides, 
+		// TODO: Maybe we want to change this. We can't let it be the default values that the Iphone decides,
 		// because everything will be way to big to fit in the matrixCells
 		UIFont *defaultFont = [UIFont fontWithName:@"Helvetica" size:16];
 		
 		UILabel *label = (UILabel *)view;
 		label.backgroundColor = [UIColor clearColor];
 		label.font = defaultFont;
-
+        
 	}
 }
 
@@ -236,7 +236,7 @@
 - (void) styleMatrixRowCell:(UIView *)view component:(MBMatrixCell *)cell {
 	if ([view isKindOfClass:[UILabel class]]) {
 		
-		// Set a default so the layout is correct. 
+		// Set a default so the layout is correct.
 		// TODO: Maybe we want to change this. We can't let it be the default for Iphone, because everything will be way to big to fit in the matrixCells
 		UIFont *defaultFont = [UIFont fontWithName:@"Helvetica" size:11];
 		
@@ -245,7 +245,7 @@
 		label.font = defaultFont;
 		
 		// Align the label
-		[self alignLabel:label forAlignMent:cell.alignment];		
+		[self alignLabel:label forAlignMent:cell.alignment];
 		
 	}
 }
@@ -265,6 +265,10 @@
 
 - (void) styleDatePicker:(UIDatePicker *)datePicker component:(MBField *)field {
     // Override in overridden styleHandler
+}
+
+- (void) styleSwitch:(UISwitch *)switchView component:(MBField *)field {
+    // Override in superclass
 }
 
 - (CGSize) sizeForSplitViewController:(MBSplitViewController *) splitViewcontroller {
@@ -289,7 +293,7 @@
 }
 
 - (CGRect) sizeForLabel:(MBField*) field withMaxBounds:(CGRect) bounds {
-
+    
     // The Label of a inputField is in a container that has half the width
     if ([field.type isEqualToString:C_FIELD_INPUT] ||
         [field.type isEqualToString:C_FIELD_CHECKBOX]) {

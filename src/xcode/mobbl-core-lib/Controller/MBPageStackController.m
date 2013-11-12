@@ -20,13 +20,12 @@
 #import "MBActivityIndicator.h"
 #import "MBSpinner.h"
 #import "MBStyleHandler.h"
-#import "MBViewBuilderFactory.h" 
+#import "MBViewBuilderFactory.h"
 #import "MBBasicViewController.h"
 #import "MBViewManager.h"
 #import "MBTransitionStyle.h"
 #import "MBDialogController.h"
 #import "MBLocalizationService.h"
-
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -130,10 +129,10 @@
     else {
         [nav pushViewController:page.viewController animated:[style animated]];
     }
-    
+	
     // This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
     [self setupCloseButtonForPage:page];
-	
+    
 }
 
 -(void)popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL)animated
@@ -167,11 +166,6 @@
 }
 
 -(void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    
-	// Read issue MOBBL-150 before changing this. 
-	// Notify the viewController after the UINavigationControllerDelegate is done loading the view
-	[viewController viewWillAppear:animated];
-
     [self willActivate];
 }
 
@@ -180,18 +174,14 @@
 }
 
 -(void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-	// Read issue MOBBL-150 before changing this. 
-	// Notify the viewController after the UINavigationControllerDelegate has shown the view
-	[viewController viewDidAppear:animated];
 	_navigationController = viewController.navigationController;
-    
     [self didActivate];
 }
 
 -(void) clearSubviews {
     for(UIView *vw in [self.navigationController.view subviews]) {
-      [vw removeFromSuperview];  
-    } 
+        [vw removeFromSuperview];
+    }
 }
 
 -(UIView*) view {
@@ -203,9 +193,9 @@
 }
 
 - (CGRect) screenBoundsForDisplayMode:(NSString*) displayMode {
-
+    
     CGRect bounds = _bounds;
-
+    
     if([displayMode isEqualToString:@"PUSH"]) {
         bounds.size.height -= 44;
     } else if([displayMode isEqualToString:@"REPLACE"] && [self.navigationController.viewControllers count] > 1) {
@@ -214,7 +204,7 @@
     } else if([[self.navigationController viewControllers] count] == 1 && [displayMode isEqualToString:@"POP"]) {
         // full screen when page will show
         bounds.size.height += 44;
-    } 
+    }
 	return bounds;
 }
 
@@ -228,15 +218,15 @@
 }
 
 - (void)showActivityIndicator {
-
+    
 	if(self.activityIndicatorCount == 0) {
 		// determine the maximum bounds of the screen
-		CGRect bounds = [UIScreen mainScreen].applicationFrame;	
+		CGRect bounds = [UIScreen mainScreen].applicationFrame;
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
 		[_navigationController.parentViewController.view addSubview:blocker];
 	}
 	self.activityIndicatorCount ++;
-
+    
 }
 
 - (void)hideActivityIndicator {
@@ -249,7 +239,7 @@
 				[top removeFromSuperview];
 		}
 	}
-
+    
 }
 
 - (NSString *)dialogName {
@@ -275,7 +265,5 @@
     MBOutcome *outcome = [[[MBOutcome alloc] initWithOutcomeName:outcomeName document:nil pageStackName:self.name] autorelease];
     [[MBApplicationController currentInstance] handleOutcome:outcome];
 }
-
-
 
 @end
