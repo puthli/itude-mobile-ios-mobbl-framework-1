@@ -22,6 +22,212 @@
 
 /* Begin PBXBuildFile section */
 		1CC88E89171ED84200B30461 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC88E88171ED84200B30461 /* Foundation.framework */; };
+		C7A99319183509D400C63904 /* MBFireInitialOutcomes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EAFF18312A3F007D2F08 /* MBFireInitialOutcomes.h */; };
+		C7A9931A183509D400C63904 /* MBConditionalDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0218312A3F007D2F08 /* MBConditionalDefinition.h */; };
+		C7A9931B183509D400C63904 /* MBConfigurationParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0418312A3F007D2F08 /* MBConfigurationParser.h */; };
+		C7A9931C183509D400C63904 /* MBConfigurationParserProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0618312A3F007D2F08 /* MBConfigurationParserProtocol.h */; };
+		C7A9931D183509D400C63904 /* MBDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0718312A3F007D2F08 /* MBDefinition.h */; };
+		C7A9931E183509D400C63904 /* MBActionDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0A18312A3F007D2F08 /* MBActionDefinition.h */; };
+		C7A9931F183509D400C63904 /* MBAlertDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0C18312A3F007D2F08 /* MBAlertDefinition.h */; };
+		C7A99320183509D400C63904 /* MBAttributeDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0E18312A3F007D2F08 /* MBAttributeDefinition.h */; };
+		C7A99321183509D400C63904 /* MBConfigurationDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1018312A3F007D2F08 /* MBConfigurationDefinition.h */; };
+		C7A99322183509D400C63904 /* MBDialogDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1218312A3F007D2F08 /* MBDialogDefinition.h */; };
+		C7A99323183509D400C63904 /* MBDocumentDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1418312A3F007D2F08 /* MBDocumentDefinition.h */; };
+		C7A99324183509D400C63904 /* MBDomainDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1618312A3F007D2F08 /* MBDomainDefinition.h */; };
+		C7A99325183509D400C63904 /* MBDomainValidatorDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1818312A3F007D2F08 /* MBDomainValidatorDefinition.h */; };
+		C7A99326183509D400C63904 /* MBElementDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1A18312A3F007D2F08 /* MBElementDefinition.h */; };
+		C7A99327183509D400C63904 /* MBFieldDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1C18312A3F007D2F08 /* MBFieldDefinition.h */; };
+		C7A99328183509D400C63904 /* MBForEachDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB1E18312A3F007D2F08 /* MBForEachDefinition.h */; };
+		C7A99329183509D400C63904 /* MBMvcConfigurationParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2018312A3F007D2F08 /* MBMvcConfigurationParser.h */; };
+		C7A9932A183509D400C63904 /* MBOutcomeDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2218312A3F007D2F08 /* MBOutcomeDefinition.h */; };
+		C7A9932B183509D400C63904 /* MBPageDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2418312A3F007D2F08 /* MBPageDefinition.h */; };
+		C7A9932C183509D400C63904 /* MBPageStackDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2618312A3F007D2F08 /* MBPageStackDefinition.h */; };
+		C7A9932D183509D400C63904 /* MBPanelDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2818312A3F007D2F08 /* MBPanelDefinition.h */; };
+		C7A9932E183509D400C63904 /* MBVariableDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2A18312A3F007D2F08 /* MBVariableDefinition.h */; };
+		C7A9932F183509D400C63904 /* MBBundleDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2D18312A3F007D2F08 /* MBBundleDefinition.h */; };
+		C7A99330183509D400C63904 /* MBResourceConfiguration.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB2F18312A3F007D2F08 /* MBResourceConfiguration.h */; };
+		C7A99331183509D400C63904 /* MBResourceConfigurationParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3118312A3F007D2F08 /* MBResourceConfigurationParser.h */; };
+		C7A99332183509D400C63904 /* MBResourceDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3318312A3F007D2F08 /* MBResourceDefinition.h */; };
+		C7A99333183509D400C63904 /* MBEndPointDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3618312A3F007D2F08 /* MBEndPointDefinition.h */; };
+		C7A99334183509D400C63904 /* MBResultListenerDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3818312A3F007D2F08 /* MBResultListenerDefinition.h */; };
+		C7A99335183509D400C63904 /* MBWebservicesConfiguration.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3A18312A3F007D2F08 /* MBWebservicesConfiguration.h */; };
+		C7A99336183509D400C63904 /* MBWebservicesConfigurationParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3C18312A3F007D2F08 /* MBWebservicesConfigurationParser.h */; };
+		C7A99337183509D400C63904 /* MBAction.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB3F18312A3F007D2F08 /* MBAction.h */; };
+		C7A99338183509D400C63904 /* MBAlertController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4018312A3F007D2F08 /* MBAlertController.h */; };
+		C7A99339183509D400C63904 /* MBApplicationController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4218312A3F007D2F08 /* MBApplicationController.h */; };
+		C7A9933A183509D400C63904 /* MBApplicationFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4418312A3F007D2F08 /* MBApplicationFactory.h */; };
+		C7A9933B183509D400C63904 /* MBDialogController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4618312A3F007D2F08 /* MBDialogController.h */; };
+		C7A9933C183509D400C63904 /* MBDialogManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4818312A3F007D2F08 /* MBDialogManager.h */; };
+		C7A9933D183509D400C63904 /* MBOutcome.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4A18312A3F007D2F08 /* MBOutcome.h */; };
+		C7A9933E183509D400C63904 /* MBPageStackController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4C18312A3F007D2F08 /* MBPageStackController.h */; };
+		C7A9933F183509D400C63904 /* MBViewManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB4E18312A3F007D2F08 /* MBViewManager.h */; };
+		C7A99340183509D400C63904 /* MBActivityIndicator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5118312A3F007D2F08 /* MBActivityIndicator.h */; };
+		C7A99341183509D400C63904 /* MBBasicViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5318312A3F007D2F08 /* MBBasicViewController.h */; };
+		C7A99342183509D400C63904 /* MBFormSubmission.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5518312A3F007D2F08 /* MBFormSubmission.h */; };
+		C7A99343183509D400C63904 /* MBSplitViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5718312A3F007D2F08 /* MBSplitViewController.h */; };
+		C7A99344183509D400C63904 /* MBViewControllerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5918312A3F007D2F08 /* MBViewControllerProtocol.h */; };
+		C7A99345183509D400C63904 /* UINavigationController+MBRebuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5A18312A3F007D2F08 /* UINavigationController+MBRebuilder.h */; };
+		C7A99346183509D400C63904 /* UINavigationController+Rotation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5C18312A3F007D2F08 /* UINavigationController+Rotation.h */; };
+		C7A99347183509D400C63904 /* UITabBarController+Rotation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB5E18312A3F007D2F08 /* UITabBarController+Rotation.h */; };
+		C7A99348183509D400C63904 /* UIViewController+Layout.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB6018312A3F007D2F08 /* UIViewController+Layout.h */; };
+		C7A99349183509D400C63904 /* UIViewController+Rotation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB6218312A3F007D2F08 /* UIViewController+Rotation.h */; };
+		C7A9934A183509D400C63904 /* mobbl-core-lib-headers.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB7E18312A3F007D2F08 /* mobbl-core-lib-headers.h */; };
+		C7A9934B183509D400C63904 /* MBDocument.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8118312A3F007D2F08 /* MBDocument.h */; };
+		C7A9934C183509D400C63904 /* MBDocumentDiff.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8318312A3F007D2F08 /* MBDocumentDiff.h */; };
+		C7A9934D183509D400C63904 /* MBDocumentFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8518312A3F007D2F08 /* MBDocumentFactory.h */; };
+		C7A9934E183509D400C63904 /* MBDocumentParserProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8718312A3F007D2F08 /* MBDocumentParserProtocol.h */; };
+		C7A9934F183509D400C63904 /* MBElement.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8818312A3F007D2F08 /* MBElement.h */; };
+		C7A99350183509D400C63904 /* MBElementContainer+Preconditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8A18312A3F007D2F08 /* MBElementContainer+Preconditions.h */; };
+		C7A99351183509D400C63904 /* MBElementContainer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8C18312A3F007D2F08 /* MBElementContainer.h */; };
+		C7A99352183509D400C63904 /* MBJsonDocumentParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB8E18312A3F007D2F08 /* MBJsonDocumentParser.h */; };
+		C7A99353183509D400C63904 /* MBMobbl1DocumentParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB9018312A3F007D2F08 /* MBMobbl1DocumentParser.h */; };
+		C7A99354183509D400C63904 /* MBSession.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB9218312A3F007D2F08 /* MBSession.h */; };
+		C7A99355183509D400C63904 /* MBXmlDocumentParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB9418312A3F007D2F08 /* MBXmlDocumentParser.h */; };
+		C7A99356183509D400C63904 /* MBDocumentOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBAF18312A3F007D2F08 /* MBDocumentOperation.h */; };
+		C7A99357183509D400C63904 /* MBFileDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB118312A3F007D2F08 /* MBFileDataHandler.h */; };
+		C7A99358183509D400C63904 /* MBMemoryDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB318312A3F007D2F08 /* MBMemoryDataHandler.h */; };
+		C7A99359183509D400C63904 /* MBMobbl1ServerDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB518312A3F007D2F08 /* MBMobbl1ServerDataHandler.h */; };
+		C7A9935A183509D400C63904 /* MBRESTGetServiceDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB718312A3F007D2F08 /* MBRESTGetServiceDataHandler.h */; };
+		C7A9935B183509D400C63904 /* MBRESTServiceDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB918312A3F007D2F08 /* MBRESTServiceDataHandler.h */; };
+		C7A9935C183509D400C63904 /* MBSQLDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBBB18312A3F007D2F08 /* MBSQLDataHandler.h */; };
+		C7A9935D183509D400C63904 /* MBSystemDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBBD18312A3F007D2F08 /* MBSystemDataHandler.h */; };
+		C7A9935E183509D400C63904 /* MBURLConnectionDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBBF18312A3F007D2F08 /* MBURLConnectionDataHandler.h */; };
+		C7A9935F183509D400C63904 /* MBWebserviceDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC118312A3F007D2F08 /* MBWebserviceDataHandler.h */; };
+		C7A99360183509D400C63904 /* MBDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC318312A3F007D2F08 /* MBDataHandler.h */; };
+		C7A99361183509D400C63904 /* MBDataHandlerBase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC418312A3F007D2F08 /* MBDataHandlerBase.h */; };
+		C7A99362183509D400C63904 /* MBDataManagerService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC618312A3F007D2F08 /* MBDataManagerService.h */; };
+		C7A99363183509D400C63904 /* MBLocalizationService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC818312A3F007D2F08 /* MBLocalizationService.h */; };
+		C7A99364183509D400C63904 /* MBMetadataService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCA18312A3F007D2F08 /* MBMetadataService.h */; };
+		C7A99365183509D400C63904 /* MBResourceService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCC18312A3F007D2F08 /* MBResourceService.h */; };
+		C7A99366183509D400C63904 /* MBResultListener.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCE18312A3F007D2F08 /* MBResultListener.h */; };
+		C7A99367183509D400C63904 /* MBScriptService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCF18312A3F007D2F08 /* MBScriptService.h */; };
+		C7A99368183509D400C63904 /* BinckUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD218312A3F007D2F08 /* BinckUtilities.h */; };
+		C7A99369183509D400C63904 /* ColorUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD418312A3F007D2F08 /* ColorUtilities.h */; };
+		C7A9936A183509D400C63904 /* DataUtilites.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD618312A3F007D2F08 /* DataUtilites.h */; };
+		C7A9936B183509D400C63904 /* BuildInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD918312A3F007D2F08 /* BuildInfo.h */; };
+		C7A9936C183509D400C63904 /* MBMacros.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBDA18312A3F007D2F08 /* MBMacros.h */; };
+		C7A9936D183509D400C63904 /* MBNotificationTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBDB18312A3F007D2F08 /* MBNotificationTypes.h */; };
+		C7A9936E183509D400C63904 /* MBTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBDC18312A3F007D2F08 /* MBTypes.h */; };
+		C7A9936F183509D400C63904 /* GTMStackTrace.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBDD18312A3F007D2F08 /* GTMStackTrace.h */; };
+		C7A99370183509D400C63904 /* JSON.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBE018312A3F007D2F08 /* JSON.h */; };
+		C7A99371183509D400C63904 /* NSObject+SBJSON.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBE118312A3F007D2F08 /* NSObject+SBJSON.h */; };
+		C7A99372183509D400C63904 /* NSString+SBJSON.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBE218312A3F007D2F08 /* NSString+SBJSON.h */; };
+		C7A99373183509D400C63904 /* SBJSON.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBE418312A3F007D2F08 /* SBJSON.h */; };
+		C7A99374183509D500C63904 /* SBJsonBase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBE618312A3F007D2F08 /* SBJsonBase.h */; };
+		C7A99375183509D500C63904 /* SBJsonParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBE818312A3F007D2F08 /* SBJsonParser.h */; };
+		C7A99376183509D500C63904 /* SBJsonWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBEA18312A3F007D2F08 /* SBJsonWriter.h */; };
+		C7A99377183509D500C63904 /* LocaleUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBEC18312A3F007D2F08 /* LocaleUtilities.h */; };
+		C7A99378183509D500C63904 /* MBCacheManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBEE18312A3F007D2F08 /* MBCacheManager.h */; };
+		C7A99379183509D500C63904 /* MBCacheWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBF018312A3F007D2F08 /* MBCacheWriter.h */; };
+		C7A9937A183509D500C63904 /* MBConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBF218312A3F007D2F08 /* MBConstants.h */; };
+		C7A9937B183509D500C63904 /* MBConstantsUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBF418312A3F007D2F08 /* MBConstantsUtilities.h */; };
+		C7A9937C183509D500C63904 /* MBDevice.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBF518312A3F007D2F08 /* MBDevice.h */; };
+		C7A9937D183509D500C63904 /* MBDeviceType.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBF718312A3F007D2F08 /* MBDeviceType.h */; };
+		C7A9937E183509D500C63904 /* MBOrderedMutableDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBF918312A3F007D2F08 /* MBOrderedMutableDictionary.h */; };
+		C7A9937F183509D500C63904 /* MBOrientationManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBFB18312A3F007D2F08 /* MBOrientationManager.h */; };
+		C7A99380183509D500C63904 /* MBProperties.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBFD18312A3F007D2F08 /* MBProperties.h */; };
+		C7A99381183509D500C63904 /* MBPropertiesConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBFF18312A3F007D2F08 /* MBPropertiesConstants.h */; };
+		C7A99382183509D500C63904 /* MBServerException.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0018312A3F007D2F08 /* MBServerException.h */; };
+		C7A99383183509D500C63904 /* MBUtil.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0218312A3F007D2F08 /* MBUtil.h */; };
+		C7A99384183509D500C63904 /* MBWebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0318312A3F007D2F08 /* MBWebView.h */; };
+		C7A99385183509D500C63904 /* NSData+Base64.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0518312A3F007D2F08 /* NSData+Base64.h */; };
+		C7A99386183509D500C63904 /* Reachability.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0718312A3F007D2F08 /* Reachability.h */; };
+		C7A99387183509D500C63904 /* StringUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0918312A3F007D2F08 /* StringUtilities.h */; };
+		C7A99388183509D500C63904 /* StringUtilitiesHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0B18312A3F007D2F08 /* StringUtilitiesHelper.h */; };
+		C7A99389183509D500C63904 /* UIButton+ResizableBackgroundImage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0D18312A3F007D2F08 /* UIButton+ResizableBackgroundImage.h */; };
+		C7A9938A183509D500C63904 /* UITextField+ResizableBackgroundImage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC0F18312A3F007D2F08 /* UITextField+ResizableBackgroundImage.h */; };
+		C7A9938B183509D500C63904 /* UIView+HierarchyLogging.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1118312A3F007D2F08 /* UIView+HierarchyLogging.h */; };
+		C7A9938C183509D500C63904 /* UIView+TreeWalker.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1218312A3F007D2F08 /* UIView+TreeWalker.h */; };
+		C7A9938D183509D500C63904 /* UncaughtExceptionHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1418312A3F007D2F08 /* UncaughtExceptionHandler.h */; };
+		C7A9938E183509D500C63904 /* ViewUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1618312A3F007D2F08 /* ViewUtilities.h */; };
+		C7A9938F183509D500C63904 /* MBArrowIconBackButtonBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1B18312A3F007D2F08 /* MBArrowIconBackButtonBuilder.h */; };
+		C7A99390183509D500C63904 /* MBBackButtonBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1D18312A3F007D2F08 /* MBBackButtonBuilder.h */; };
+		C7A99391183509D500C63904 /* MBBackButtonBuilderFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC1E18312A3F007D2F08 /* MBBackButtonBuilderFactory.h */; };
+		C7A99392183509D500C63904 /* MBCheveronBackButtonBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2018312A3F007D2F08 /* MBCheveronBackButtonBuilder.h */; };
+		C7A99393183509D500C63904 /* MBDefaultBackButtonBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2218312A3F007D2F08 /* MBDefaultBackButtonBuilder.h */; };
+		C7A99394183509D500C63904 /* MBWhiteArrowBackButtonBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2418312A3F007D2F08 /* MBWhiteArrowBackButtonBuilder.h */; };
+		C7A99395183509D500C63904 /* MBDefaultDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2718312A3F007D2F08 /* MBDefaultDialogDecorator.h */; };
+		C7A99396183509D500C63904 /* MBDialogContentBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2918312A3F007D2F08 /* MBDialogContentBuilder.h */; };
+		C7A99397183509D500C63904 /* MBDialogContentTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2A18312A3F007D2F08 /* MBDialogContentTypes.h */; };
+		C7A99398183509D500C63904 /* MBDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2B18312A3F007D2F08 /* MBDialogDecorator.h */; };
+		C7A99399183509D500C63904 /* MBDialogDecoratorTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2C18312A3F007D2F08 /* MBDialogDecoratorTypes.h */; };
+		C7A9939A183509D500C63904 /* MBModalCurrentContextDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2D18312A3F007D2F08 /* MBModalCurrentContextDialogDecorator.h */; };
+		C7A9939B183509D500C63904 /* MBModalDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC2F18312A3F007D2F08 /* MBModalDialogDecorator.h */; };
+		C7A9939C183509D500C63904 /* MBModalFormSheetDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3118312A3F007D2F08 /* MBModalFormSheetDialogDecorator.h */; };
+		C7A9939D183509D500C63904 /* MBModalFullScreenDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3318312A3F007D2F08 /* MBModalFullScreenDialogDecorator.h */; };
+		C7A9939E183509D500C63904 /* MBModalPageSheetDialogDecorator.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3518312A3F007D2F08 /* MBModalPageSheetDialogDecorator.h */; };
+		C7A9939F183509D500C63904 /* MBSingleDialogContentBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3718312A3F007D2F08 /* MBSingleDialogContentBuilder.h */; };
+		C7A993A0183509D500C63904 /* MBSplitDialogContentBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3918312A3F007D2F08 /* MBSplitDialogContentBuilder.h */; };
+		C7A993A1183509D500C63904 /* MBButtonBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3C18312A3F007D2F08 /* MBButtonBuilder.h */; };
+		C7A993A2183509D500C63904 /* MBCheckboxBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC3E18312A3F007D2F08 /* MBCheckboxBuilder.h */; };
+		C7A993A3183509D500C63904 /* MBDateBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4018312A3F007D2F08 /* MBDateBuilder.h */; };
+		C7A993A4183509D500C63904 /* MBDropDownBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4218312A3F007D2F08 /* MBDropDownBuilder.h */; };
+		C7A993A5183509D500C63904 /* MBFieldAlignmentTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4418312A3F007D2F08 /* MBFieldAlignmentTypes.h */; };
+		C7A993A6183509D500C63904 /* MBFieldTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4518312A3F007D2F08 /* MBFieldTypes.h */; };
+		C7A993A7183509D500C63904 /* MBFieldViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4618312A3F007D2F08 /* MBFieldViewBuilder.h */; };
+		C7A993A8183509D500C63904 /* MBInputBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4818312A3F007D2F08 /* MBInputBuilder.h */; };
+		C7A993A9183509D500C63904 /* MBLabelBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4A18312A3F007D2F08 /* MBLabelBuilder.h */; };
+		C7A993AA183509D500C63904 /* MBSubLabelBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4C18312A40007D2F08 /* MBSubLabelBuilder.h */; };
+		C7A993AB183509D500C63904 /* MBTextBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC4E18312A40007D2F08 /* MBTextBuilder.h */; };
+		C7A993AC183509D500C63904 /* MBAlertViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5018312A40007D2F08 /* MBAlertViewBuilder.h */; };
+		C7A993AD183509D500C63904 /* MBDialogContentViewBuilderFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5218312A40007D2F08 /* MBDialogContentViewBuilderFactory.h */; };
+		C7A993AE183509D500C63904 /* MBFieldViewBuilderFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5418312A40007D2F08 /* MBFieldViewBuilderFactory.h */; };
+		C7A993AF183509D500C63904 /* MBForEachViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5618312A40007D2F08 /* MBForEachViewBuilder.h */; };
+		C7A993B0183509D500C63904 /* MBPanelViewBuilderFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5818312A40007D2F08 /* MBPanelViewBuilderFactory.h */; };
+		C7A993B1183509D500C63904 /* MBRowViewBuilderFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5A18312A40007D2F08 /* MBRowViewBuilderFactory.h */; };
+		C7A993B2183509D500C63904 /* MBStyleHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5C18312A40007D2F08 /* MBStyleHandler.h */; };
+		C7A993B3183509D500C63904 /* MBViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC5E18312A40007D2F08 /* MBViewBuilder.h */; };
+		C7A993B4183509D500C63904 /* MBViewBuilderFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6018312A40007D2F08 /* MBViewBuilderFactory.h */; };
+		C7A993B5183509D500C63904 /* MBPageViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6318312A40007D2F08 /* MBPageViewBuilder.h */; };
+		C7A993B6183509D500C63904 /* MBBasicPanelBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6618312A40007D2F08 /* MBBasicPanelBuilder.h */; };
+		C7A993B7183509D500C63904 /* MBListBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6818312A40007D2F08 /* MBListBuilder.h */; };
+		C7A993B8183509D500C63904 /* MBMatrixBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6A18312A40007D2F08 /* MBMatrixBuilder.h */; };
+		C7A993B9183509D500C63904 /* MBMatrixViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6C18312A40007D2F08 /* MBMatrixViewBuilder.h */; };
+		C7A993BA183509D500C63904 /* MBPanelTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6E18312A40007D2F08 /* MBPanelTypes.h */; };
+		C7A993BB183509D500C63904 /* MBPanelViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC6F18312A40007D2F08 /* MBPanelViewBuilder.h */; };
+		C7A993BC183509D500C63904 /* MBPlainPanelBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7018312A40007D2F08 /* MBPlainPanelBuilder.h */; };
+		C7A993BD183509D500C63904 /* MBSectionPanelViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7218312A40007D2F08 /* MBSectionPanelViewBuilder.h */; };
+		C7A993BE183509D500C63904 /* MBViewBuilder+PanelHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7418312A40007D2F08 /* MBViewBuilder+PanelHelper.h */; };
+		C7A993BF183509D500C63904 /* MBNewRowViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7718312A40007D2F08 /* MBNewRowViewBuilder.h */; };
+		C7A993C0183509D500C63904 /* MBRowTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7918312A40007D2F08 /* MBRowTypes.h */; };
+		C7A993C1183509D500C63904 /* MBRowViewBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7A18312A40007D2F08 /* MBRowViewBuilder.h */; };
+		C7A993C2183509D500C63904 /* MBTransition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7C18312A40007D2F08 /* MBTransition.h */; };
+		C7A993C3183509D500C63904 /* MBTransitionStyle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7E18312A40007D2F08 /* MBTransitionStyle.h */; };
+		C7A993C4183509D500C63904 /* MBTransitionStyleFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC7F18312A40007D2F08 /* MBTransitionStyleFactory.h */; };
+		C7A993C5183509D500C63904 /* MBTransitionStyles.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8118312A40007D2F08 /* MBTransitionStyles.h */; };
+		C7A993C6183509D500C63904 /* MBCurlTransitionStyle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8318312A40007D2F08 /* MBCurlTransitionStyle.h */; };
+		C7A993C7183509D500C63904 /* MBDefaultTransitionStyle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8518312A40007D2F08 /* MBDefaultTransitionStyle.h */; };
+		C7A993C8183509D500C63904 /* MBFadeTransitionStyle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8718312A40007D2F08 /* MBFadeTransitionStyle.h */; };
+		C7A993C9183509D500C63904 /* MBFlipTransitionStyle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8918312A40007D2F08 /* MBFlipTransitionStyle.h */; };
+		C7A993CA183509D500C63904 /* MBNoTransitionStyle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8B18312A40007D2F08 /* MBNoTransitionStyle.h */; };
+		C7A993CB183509D500C63904 /* MBAlertView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC8E18312A40007D2F08 /* MBAlertView.h */; };
+		C7A993CC183509D500C63904 /* MBDatePickerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9018312A40007D2F08 /* MBDatePickerController.h */; };
+		C7A993CD183509D500C63904 /* MBDatePickerPopoverController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9218312A40007D2F08 /* MBDatePickerPopoverController.h */; };
+		C7A993CE183509D500C63904 /* MBFontChangeListenerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9418312A40007D2F08 /* MBFontChangeListenerProtocol.h */; };
+		C7A993CF183509D500C63904 /* MBFontCustomizer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9518312A40007D2F08 /* MBFontCustomizer.h */; };
+		C7A993D0183509D500C63904 /* MBPickerController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9718312A40007D2F08 /* MBPickerController.h */; };
+		C7A993D1183509D500C63904 /* MBPickerPopoverController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9918312A40007D2F08 /* MBPickerPopoverController.h */; };
+		C7A993D2183509D500C63904 /* MBSpinner.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9B18312A40007D2F08 /* MBSpinner.h */; };
+		C7A993D3183509D500C63904 /* MBMatrixCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EC9E18312A40007D2F08 /* MBMatrixCell.h */; };
+		C7A993D4183509D500C63904 /* MBMatrixHeaderView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECA018312A40007D2F08 /* MBMatrixHeaderView.h */; };
+		C7A993D5183509D500C63904 /* MBMatrixRowView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECA218312A40007D2F08 /* MBMatrixRowView.h */; };
+		C7A993D6183509D500C63904 /* MBMatrixViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECA418312A40007D2F08 /* MBMatrixViewController.h */; };
+		C7A993D7183509D500C63904 /* MBAlert.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECA618312A40007D2F08 /* MBAlert.h */; };
+		C7A993D8183509D500C63904 /* MBComponent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECA818312A40007D2F08 /* MBComponent.h */; };
+		C7A993D9183509D500C63904 /* MBComponentContainer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECAA18312A40007D2F08 /* MBComponentContainer.h */; };
+		C7A993DA183509D500C63904 /* MBComponentFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECAC18312A40007D2F08 /* MBComponentFactory.h */; };
+		C7A993DB183509D500C63904 /* MBConditionalPage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECAE18312A40007D2F08 /* MBConditionalPage.h */; };
+		C7A993DC183509D500C63904 /* MBDialogDecoratorFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECB018312A40007D2F08 /* MBDialogDecoratorFactory.h */; };
+		C7A993DD183509D500C63904 /* MBField.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECB218312A40007D2F08 /* MBField.h */; };
+		C7A993DE183509D500C63904 /* MBForEach.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECB418312A40007D2F08 /* MBForEach.h */; };
+		C7A993DF183509D500C63904 /* MBForEachItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECB618312A40007D2F08 /* MBForEachItem.h */; };
+		C7A993E0183509D500C63904 /* MBOutcomeListenerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECB818312A40007D2F08 /* MBOutcomeListenerProtocol.h */; };
+		C7A993E1183509D500C63904 /* MBPage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECB918312A40007D2F08 /* MBPage.h */; };
+		C7A993E2183509D500C63904 /* MBPageStack.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECBB18312A40007D2F08 /* MBPageStack.h */; };
+		C7A993E3183509D500C63904 /* MBPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECBD18312A40007D2F08 /* MBPanel.h */; };
+		C7A993E4183509D500C63904 /* MBValueChangeListenerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECBF18312A40007D2F08 /* MBValueChangeListenerProtocol.h */; };
+		C7A993E5183509D500C63904 /* MBTableViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECC118312A40007D2F08 /* MBTableViewController.h */; };
+		C7A993E61835107B00C63904 /* MGSplitViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB7C18312A3F007D2F08 /* MGSplitViewController.h */; };
 		C7E0ECC318312A40007D2F08 /* MBFireInitialOutcomes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EB0018312A3F007D2F08 /* MBFireInitialOutcomes.m */; };
 		C7E0ECC418312A40007D2F08 /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EB0318312A3F007D2F08 /* MBConditionalDefinition.m */; };
 		C7E0ECC518312A40007D2F08 /* MBConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EB0518312A3F007D2F08 /* MBConfigurationParser.m */; };
@@ -210,9 +416,215 @@
 		1CC88E83171ED84200B30461 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
+			dstPath = headers;
 			dstSubfolderSpec = 16;
 			files = (
+				C7A993E61835107B00C63904 /* MGSplitViewController.h in CopyFiles */,
+				C7A99319183509D400C63904 /* MBFireInitialOutcomes.h in CopyFiles */,
+				C7A9931A183509D400C63904 /* MBConditionalDefinition.h in CopyFiles */,
+				C7A9931B183509D400C63904 /* MBConfigurationParser.h in CopyFiles */,
+				C7A9931C183509D400C63904 /* MBConfigurationParserProtocol.h in CopyFiles */,
+				C7A9931D183509D400C63904 /* MBDefinition.h in CopyFiles */,
+				C7A9931E183509D400C63904 /* MBActionDefinition.h in CopyFiles */,
+				C7A9931F183509D400C63904 /* MBAlertDefinition.h in CopyFiles */,
+				C7A99320183509D400C63904 /* MBAttributeDefinition.h in CopyFiles */,
+				C7A99321183509D400C63904 /* MBConfigurationDefinition.h in CopyFiles */,
+				C7A99322183509D400C63904 /* MBDialogDefinition.h in CopyFiles */,
+				C7A99323183509D400C63904 /* MBDocumentDefinition.h in CopyFiles */,
+				C7A99324183509D400C63904 /* MBDomainDefinition.h in CopyFiles */,
+				C7A99325183509D400C63904 /* MBDomainValidatorDefinition.h in CopyFiles */,
+				C7A99326183509D400C63904 /* MBElementDefinition.h in CopyFiles */,
+				C7A99327183509D400C63904 /* MBFieldDefinition.h in CopyFiles */,
+				C7A99328183509D400C63904 /* MBForEachDefinition.h in CopyFiles */,
+				C7A99329183509D400C63904 /* MBMvcConfigurationParser.h in CopyFiles */,
+				C7A9932A183509D400C63904 /* MBOutcomeDefinition.h in CopyFiles */,
+				C7A9932B183509D400C63904 /* MBPageDefinition.h in CopyFiles */,
+				C7A9932C183509D400C63904 /* MBPageStackDefinition.h in CopyFiles */,
+				C7A9932D183509D400C63904 /* MBPanelDefinition.h in CopyFiles */,
+				C7A9932E183509D400C63904 /* MBVariableDefinition.h in CopyFiles */,
+				C7A9932F183509D400C63904 /* MBBundleDefinition.h in CopyFiles */,
+				C7A99330183509D400C63904 /* MBResourceConfiguration.h in CopyFiles */,
+				C7A99331183509D400C63904 /* MBResourceConfigurationParser.h in CopyFiles */,
+				C7A99332183509D400C63904 /* MBResourceDefinition.h in CopyFiles */,
+				C7A99333183509D400C63904 /* MBEndPointDefinition.h in CopyFiles */,
+				C7A99334183509D400C63904 /* MBResultListenerDefinition.h in CopyFiles */,
+				C7A99335183509D400C63904 /* MBWebservicesConfiguration.h in CopyFiles */,
+				C7A99336183509D400C63904 /* MBWebservicesConfigurationParser.h in CopyFiles */,
+				C7A99337183509D400C63904 /* MBAction.h in CopyFiles */,
+				C7A99338183509D400C63904 /* MBAlertController.h in CopyFiles */,
+				C7A99339183509D400C63904 /* MBApplicationController.h in CopyFiles */,
+				C7A9933A183509D400C63904 /* MBApplicationFactory.h in CopyFiles */,
+				C7A9933B183509D400C63904 /* MBDialogController.h in CopyFiles */,
+				C7A9933C183509D400C63904 /* MBDialogManager.h in CopyFiles */,
+				C7A9933D183509D400C63904 /* MBOutcome.h in CopyFiles */,
+				C7A9933E183509D400C63904 /* MBPageStackController.h in CopyFiles */,
+				C7A9933F183509D400C63904 /* MBViewManager.h in CopyFiles */,
+				C7A99340183509D400C63904 /* MBActivityIndicator.h in CopyFiles */,
+				C7A99341183509D400C63904 /* MBBasicViewController.h in CopyFiles */,
+				C7A99342183509D400C63904 /* MBFormSubmission.h in CopyFiles */,
+				C7A99343183509D400C63904 /* MBSplitViewController.h in CopyFiles */,
+				C7A99344183509D400C63904 /* MBViewControllerProtocol.h in CopyFiles */,
+				C7A99345183509D400C63904 /* UINavigationController+MBRebuilder.h in CopyFiles */,
+				C7A99346183509D400C63904 /* UINavigationController+Rotation.h in CopyFiles */,
+				C7A99347183509D400C63904 /* UITabBarController+Rotation.h in CopyFiles */,
+				C7A99348183509D400C63904 /* UIViewController+Layout.h in CopyFiles */,
+				C7A99349183509D400C63904 /* UIViewController+Rotation.h in CopyFiles */,
+				C7A9934A183509D400C63904 /* mobbl-core-lib-headers.h in CopyFiles */,
+				C7A9934B183509D400C63904 /* MBDocument.h in CopyFiles */,
+				C7A9934C183509D400C63904 /* MBDocumentDiff.h in CopyFiles */,
+				C7A9934D183509D400C63904 /* MBDocumentFactory.h in CopyFiles */,
+				C7A9934E183509D400C63904 /* MBDocumentParserProtocol.h in CopyFiles */,
+				C7A9934F183509D400C63904 /* MBElement.h in CopyFiles */,
+				C7A99350183509D400C63904 /* MBElementContainer+Preconditions.h in CopyFiles */,
+				C7A99351183509D400C63904 /* MBElementContainer.h in CopyFiles */,
+				C7A99352183509D400C63904 /* MBJsonDocumentParser.h in CopyFiles */,
+				C7A99353183509D400C63904 /* MBMobbl1DocumentParser.h in CopyFiles */,
+				C7A99354183509D400C63904 /* MBSession.h in CopyFiles */,
+				C7A99355183509D400C63904 /* MBXmlDocumentParser.h in CopyFiles */,
+				C7A99356183509D400C63904 /* MBDocumentOperation.h in CopyFiles */,
+				C7A99357183509D400C63904 /* MBFileDataHandler.h in CopyFiles */,
+				C7A99358183509D400C63904 /* MBMemoryDataHandler.h in CopyFiles */,
+				C7A99359183509D400C63904 /* MBMobbl1ServerDataHandler.h in CopyFiles */,
+				C7A9935A183509D400C63904 /* MBRESTGetServiceDataHandler.h in CopyFiles */,
+				C7A9935B183509D400C63904 /* MBRESTServiceDataHandler.h in CopyFiles */,
+				C7A9935C183509D400C63904 /* MBSQLDataHandler.h in CopyFiles */,
+				C7A9935D183509D400C63904 /* MBSystemDataHandler.h in CopyFiles */,
+				C7A9935E183509D400C63904 /* MBURLConnectionDataHandler.h in CopyFiles */,
+				C7A9935F183509D400C63904 /* MBWebserviceDataHandler.h in CopyFiles */,
+				C7A99360183509D400C63904 /* MBDataHandler.h in CopyFiles */,
+				C7A99361183509D400C63904 /* MBDataHandlerBase.h in CopyFiles */,
+				C7A99362183509D400C63904 /* MBDataManagerService.h in CopyFiles */,
+				C7A99363183509D400C63904 /* MBLocalizationService.h in CopyFiles */,
+				C7A99364183509D400C63904 /* MBMetadataService.h in CopyFiles */,
+				C7A99365183509D400C63904 /* MBResourceService.h in CopyFiles */,
+				C7A99366183509D400C63904 /* MBResultListener.h in CopyFiles */,
+				C7A99367183509D400C63904 /* MBScriptService.h in CopyFiles */,
+				C7A99368183509D400C63904 /* BinckUtilities.h in CopyFiles */,
+				C7A99369183509D400C63904 /* ColorUtilities.h in CopyFiles */,
+				C7A9936A183509D400C63904 /* DataUtilites.h in CopyFiles */,
+				C7A9936B183509D400C63904 /* BuildInfo.h in CopyFiles */,
+				C7A9936C183509D400C63904 /* MBMacros.h in CopyFiles */,
+				C7A9936D183509D400C63904 /* MBNotificationTypes.h in CopyFiles */,
+				C7A9936E183509D400C63904 /* MBTypes.h in CopyFiles */,
+				C7A9936F183509D400C63904 /* GTMStackTrace.h in CopyFiles */,
+				C7A99370183509D400C63904 /* JSON.h in CopyFiles */,
+				C7A99371183509D400C63904 /* NSObject+SBJSON.h in CopyFiles */,
+				C7A99372183509D400C63904 /* NSString+SBJSON.h in CopyFiles */,
+				C7A99373183509D400C63904 /* SBJSON.h in CopyFiles */,
+				C7A99374183509D500C63904 /* SBJsonBase.h in CopyFiles */,
+				C7A99375183509D500C63904 /* SBJsonParser.h in CopyFiles */,
+				C7A99376183509D500C63904 /* SBJsonWriter.h in CopyFiles */,
+				C7A99377183509D500C63904 /* LocaleUtilities.h in CopyFiles */,
+				C7A99378183509D500C63904 /* MBCacheManager.h in CopyFiles */,
+				C7A99379183509D500C63904 /* MBCacheWriter.h in CopyFiles */,
+				C7A9937A183509D500C63904 /* MBConstants.h in CopyFiles */,
+				C7A9937B183509D500C63904 /* MBConstantsUtilities.h in CopyFiles */,
+				C7A9937C183509D500C63904 /* MBDevice.h in CopyFiles */,
+				C7A9937D183509D500C63904 /* MBDeviceType.h in CopyFiles */,
+				C7A9937E183509D500C63904 /* MBOrderedMutableDictionary.h in CopyFiles */,
+				C7A9937F183509D500C63904 /* MBOrientationManager.h in CopyFiles */,
+				C7A99380183509D500C63904 /* MBProperties.h in CopyFiles */,
+				C7A99381183509D500C63904 /* MBPropertiesConstants.h in CopyFiles */,
+				C7A99382183509D500C63904 /* MBServerException.h in CopyFiles */,
+				C7A99383183509D500C63904 /* MBUtil.h in CopyFiles */,
+				C7A99384183509D500C63904 /* MBWebView.h in CopyFiles */,
+				C7A99385183509D500C63904 /* NSData+Base64.h in CopyFiles */,
+				C7A99386183509D500C63904 /* Reachability.h in CopyFiles */,
+				C7A99387183509D500C63904 /* StringUtilities.h in CopyFiles */,
+				C7A99388183509D500C63904 /* StringUtilitiesHelper.h in CopyFiles */,
+				C7A99389183509D500C63904 /* UIButton+ResizableBackgroundImage.h in CopyFiles */,
+				C7A9938A183509D500C63904 /* UITextField+ResizableBackgroundImage.h in CopyFiles */,
+				C7A9938B183509D500C63904 /* UIView+HierarchyLogging.h in CopyFiles */,
+				C7A9938C183509D500C63904 /* UIView+TreeWalker.h in CopyFiles */,
+				C7A9938D183509D500C63904 /* UncaughtExceptionHandler.h in CopyFiles */,
+				C7A9938E183509D500C63904 /* ViewUtilities.h in CopyFiles */,
+				C7A9938F183509D500C63904 /* MBArrowIconBackButtonBuilder.h in CopyFiles */,
+				C7A99390183509D500C63904 /* MBBackButtonBuilder.h in CopyFiles */,
+				C7A99391183509D500C63904 /* MBBackButtonBuilderFactory.h in CopyFiles */,
+				C7A99392183509D500C63904 /* MBCheveronBackButtonBuilder.h in CopyFiles */,
+				C7A99393183509D500C63904 /* MBDefaultBackButtonBuilder.h in CopyFiles */,
+				C7A99394183509D500C63904 /* MBWhiteArrowBackButtonBuilder.h in CopyFiles */,
+				C7A99395183509D500C63904 /* MBDefaultDialogDecorator.h in CopyFiles */,
+				C7A99396183509D500C63904 /* MBDialogContentBuilder.h in CopyFiles */,
+				C7A99397183509D500C63904 /* MBDialogContentTypes.h in CopyFiles */,
+				C7A99398183509D500C63904 /* MBDialogDecorator.h in CopyFiles */,
+				C7A99399183509D500C63904 /* MBDialogDecoratorTypes.h in CopyFiles */,
+				C7A9939A183509D500C63904 /* MBModalCurrentContextDialogDecorator.h in CopyFiles */,
+				C7A9939B183509D500C63904 /* MBModalDialogDecorator.h in CopyFiles */,
+				C7A9939C183509D500C63904 /* MBModalFormSheetDialogDecorator.h in CopyFiles */,
+				C7A9939D183509D500C63904 /* MBModalFullScreenDialogDecorator.h in CopyFiles */,
+				C7A9939E183509D500C63904 /* MBModalPageSheetDialogDecorator.h in CopyFiles */,
+				C7A9939F183509D500C63904 /* MBSingleDialogContentBuilder.h in CopyFiles */,
+				C7A993A0183509D500C63904 /* MBSplitDialogContentBuilder.h in CopyFiles */,
+				C7A993A1183509D500C63904 /* MBButtonBuilder.h in CopyFiles */,
+				C7A993A2183509D500C63904 /* MBCheckboxBuilder.h in CopyFiles */,
+				C7A993A3183509D500C63904 /* MBDateBuilder.h in CopyFiles */,
+				C7A993A4183509D500C63904 /* MBDropDownBuilder.h in CopyFiles */,
+				C7A993A5183509D500C63904 /* MBFieldAlignmentTypes.h in CopyFiles */,
+				C7A993A6183509D500C63904 /* MBFieldTypes.h in CopyFiles */,
+				C7A993A7183509D500C63904 /* MBFieldViewBuilder.h in CopyFiles */,
+				C7A993A8183509D500C63904 /* MBInputBuilder.h in CopyFiles */,
+				C7A993A9183509D500C63904 /* MBLabelBuilder.h in CopyFiles */,
+				C7A993AA183509D500C63904 /* MBSubLabelBuilder.h in CopyFiles */,
+				C7A993AB183509D500C63904 /* MBTextBuilder.h in CopyFiles */,
+				C7A993AC183509D500C63904 /* MBAlertViewBuilder.h in CopyFiles */,
+				C7A993AD183509D500C63904 /* MBDialogContentViewBuilderFactory.h in CopyFiles */,
+				C7A993AE183509D500C63904 /* MBFieldViewBuilderFactory.h in CopyFiles */,
+				C7A993AF183509D500C63904 /* MBForEachViewBuilder.h in CopyFiles */,
+				C7A993B0183509D500C63904 /* MBPanelViewBuilderFactory.h in CopyFiles */,
+				C7A993B1183509D500C63904 /* MBRowViewBuilderFactory.h in CopyFiles */,
+				C7A993B2183509D500C63904 /* MBStyleHandler.h in CopyFiles */,
+				C7A993B3183509D500C63904 /* MBViewBuilder.h in CopyFiles */,
+				C7A993B4183509D500C63904 /* MBViewBuilderFactory.h in CopyFiles */,
+				C7A993B5183509D500C63904 /* MBPageViewBuilder.h in CopyFiles */,
+				C7A993B6183509D500C63904 /* MBBasicPanelBuilder.h in CopyFiles */,
+				C7A993B7183509D500C63904 /* MBListBuilder.h in CopyFiles */,
+				C7A993B8183509D500C63904 /* MBMatrixBuilder.h in CopyFiles */,
+				C7A993B9183509D500C63904 /* MBMatrixViewBuilder.h in CopyFiles */,
+				C7A993BA183509D500C63904 /* MBPanelTypes.h in CopyFiles */,
+				C7A993BB183509D500C63904 /* MBPanelViewBuilder.h in CopyFiles */,
+				C7A993BC183509D500C63904 /* MBPlainPanelBuilder.h in CopyFiles */,
+				C7A993BD183509D500C63904 /* MBSectionPanelViewBuilder.h in CopyFiles */,
+				C7A993BE183509D500C63904 /* MBViewBuilder+PanelHelper.h in CopyFiles */,
+				C7A993BF183509D500C63904 /* MBNewRowViewBuilder.h in CopyFiles */,
+				C7A993C0183509D500C63904 /* MBRowTypes.h in CopyFiles */,
+				C7A993C1183509D500C63904 /* MBRowViewBuilder.h in CopyFiles */,
+				C7A993C2183509D500C63904 /* MBTransition.h in CopyFiles */,
+				C7A993C3183509D500C63904 /* MBTransitionStyle.h in CopyFiles */,
+				C7A993C4183509D500C63904 /* MBTransitionStyleFactory.h in CopyFiles */,
+				C7A993C5183509D500C63904 /* MBTransitionStyles.h in CopyFiles */,
+				C7A993C6183509D500C63904 /* MBCurlTransitionStyle.h in CopyFiles */,
+				C7A993C7183509D500C63904 /* MBDefaultTransitionStyle.h in CopyFiles */,
+				C7A993C8183509D500C63904 /* MBFadeTransitionStyle.h in CopyFiles */,
+				C7A993C9183509D500C63904 /* MBFlipTransitionStyle.h in CopyFiles */,
+				C7A993CA183509D500C63904 /* MBNoTransitionStyle.h in CopyFiles */,
+				C7A993CB183509D500C63904 /* MBAlertView.h in CopyFiles */,
+				C7A993CC183509D500C63904 /* MBDatePickerController.h in CopyFiles */,
+				C7A993CD183509D500C63904 /* MBDatePickerPopoverController.h in CopyFiles */,
+				C7A993CE183509D500C63904 /* MBFontChangeListenerProtocol.h in CopyFiles */,
+				C7A993CF183509D500C63904 /* MBFontCustomizer.h in CopyFiles */,
+				C7A993D0183509D500C63904 /* MBPickerController.h in CopyFiles */,
+				C7A993D1183509D500C63904 /* MBPickerPopoverController.h in CopyFiles */,
+				C7A993D2183509D500C63904 /* MBSpinner.h in CopyFiles */,
+				C7A993D3183509D500C63904 /* MBMatrixCell.h in CopyFiles */,
+				C7A993D4183509D500C63904 /* MBMatrixHeaderView.h in CopyFiles */,
+				C7A993D5183509D500C63904 /* MBMatrixRowView.h in CopyFiles */,
+				C7A993D6183509D500C63904 /* MBMatrixViewController.h in CopyFiles */,
+				C7A993D7183509D500C63904 /* MBAlert.h in CopyFiles */,
+				C7A993D8183509D500C63904 /* MBComponent.h in CopyFiles */,
+				C7A993D9183509D500C63904 /* MBComponentContainer.h in CopyFiles */,
+				C7A993DA183509D500C63904 /* MBComponentFactory.h in CopyFiles */,
+				C7A993DB183509D500C63904 /* MBConditionalPage.h in CopyFiles */,
+				C7A993DC183509D500C63904 /* MBDialogDecoratorFactory.h in CopyFiles */,
+				C7A993DD183509D500C63904 /* MBField.h in CopyFiles */,
+				C7A993DE183509D500C63904 /* MBForEach.h in CopyFiles */,
+				C7A993DF183509D500C63904 /* MBForEachItem.h in CopyFiles */,
+				C7A993E0183509D500C63904 /* MBOutcomeListenerProtocol.h in CopyFiles */,
+				C7A993E1183509D500C63904 /* MBPage.h in CopyFiles */,
+				C7A993E2183509D500C63904 /* MBPageStack.h in CopyFiles */,
+				C7A993E3183509D500C63904 /* MBPanel.h in CopyFiles */,
+				C7A993E4183509D500C63904 /* MBValueChangeListenerProtocol.h in CopyFiles */,
+				C7A993E5183509D500C63904 /* MBTableViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1466,7 +1878,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\nSCHEME=Release\n\n$XCODEBUILD -project mobbl-core-lib.xcodeproj -target \"mobbl-core-lib\" -sdk \"iphonesimulator\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphonesimulator\n$XCODEBUILD -project mobbl-core-lib.xcodeproj -target \"mobbl-core-lib\" -sdk \"iphoneos\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphoneos\n\ncp -Rf build/iphoneos/$SCHEME-iphoneos/include build/universal/\nlipo -create -output \"build/universal/mobbl-core-lib-universal.a\" \"build/iphoneos/$SCHEME-iphoneos/libmobbl-core-lib.a\" \"build/iphonesimulator/$SCHEME-iphonesimulator/libmobbl-core-lib.a\"";
+			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\nSCHEME=Release\n\n$XCODEBUILD -project mobbl-core-lib.xcodeproj -target \"mobbl-core-lib\" -sdk \"iphonesimulator\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphonesimulator\n$XCODEBUILD -project mobbl-core-lib.xcodeproj -target \"mobbl-core-lib\" -sdk \"iphoneos\" -configuration \"$SCHEME\" clean build SYMROOT=build/iphoneos\n\ncp -Rf build/iphoneos/$SCHEME-iphoneos/include build/universal/\nlipo -create -output \"build/universal/mobbl-core-lib-universal.a\" \"build/iphoneos/$SCHEME-iphoneos/libmobbl-core-lib.a\" \"build/iphoneos/$SCHEME-iphonesimulator/libmobbl-core-lib.a\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1688,7 +2100,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1711,6 +2123,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1723,11 +2136,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mobbl-core-lib/mobbl-core-lib-Prefix.pch";
 				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = /include;
+				PUBLIC_HEADERS_FOLDER_PATH = /headers;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "armv6 armv7 armv7s i386";
 			};
@@ -1740,11 +2159,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mobbl-core-lib/mobbl-core-lib-Prefix.pch";
 				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = /include;
+				PUBLIC_HEADERS_FOLDER_PATH = /headers;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "armv6 armv7 armv7s i386";
 			};
