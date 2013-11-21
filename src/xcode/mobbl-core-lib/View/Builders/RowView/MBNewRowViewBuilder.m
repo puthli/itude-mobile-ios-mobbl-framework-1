@@ -26,15 +26,18 @@
 
 @implementation MBNewRowViewBuilder
 
-
-- (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellType style:(UITableViewCellStyle)cellstyle panel:(MBPanel *)panel {
-    // First build the cell
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellType];
+- (UITableViewCell *)cellForTableView:(UITableView *)tableView withType:(NSString *)cellReuseIdentifier style:(UITableViewCellStyle)cellstyle panel:(MBPanel *)panel {
     
+    // Try to acquire an already allocated cell, in lieu of allocating a new one.
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellReuseIdentifier];
+    
+    // Build a cell is none was available
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:cellstyle reuseIdentifier:cellType] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:cellstyle reuseIdentifier:cellReuseIdentifier] autorelease];
         cell.contentView.autoresizingMask= UIViewAutoresizingFlexibleWidth;
     }
+    
+    // Reset some properties if a already allocated cell is reused
     else {
         cell.accessoryView = nil;
         for(UIView *vw in cell.contentView.subviews) [vw removeFromSuperview];
@@ -47,76 +50,36 @@
 }
 
 - (UITableViewCell *)buildCellForRow:(MBPanel *)panel forTableView:(UITableView *)tableView {
-    NSString *type = panel.type;
-
-    UITableViewCellStyle style = UITableViewCellStyleDefault;
-    
-    // Loop through the fields in the row to determine the type and style of the cell
-    for(MBComponent *child in [panel children]){
-        if ([child isKindOfClass:[MBField class]]) {
-            MBField *field = (MBField *)child;
-            // #BINCKMOBILE-19
-            if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
-                
-                if ([C_FIELD_LABEL isEqualToString:field.type] ||
-                    [C_FIELD_TEXT isEqualToString:field.type]){
-                    // Default
-                }
-                
-                if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type] ||
-                    [C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
-                    [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
-                    [C_FIELD_TIMESELECTOR isEqualToString:field.type] ||
-                    [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
-                    type = C_DROPDOWNLISTCELL;
-                    style = UITableViewCellStyleValue1;
-                }
-                
-                if ([C_FIELD_SUBLABEL isEqualToString:field.type]){
-                    type = C_SUBTITLECELL;
-                    style = UITableViewCellStyleSubtitle;
-                }
-             
-            }
-        }
-    }
-    UITableViewCell *cell = [self cellForTableView:tableView withType:type style:style panel:panel];
-    return cell;
+    NSString *cellReuseIdentifier = [self cellReuseIdentifierForRow:panel];
+    UITableViewCellStyle style = [self tableViewCellStyleForRow:panel];
+    return [self cellForTableView:tableView withType:cellReuseIdentifier style:style panel:panel];
 }
 
 - (UITableViewCell *)buildTableViewCellFor:(MBPanel *)panel forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState forTableView:(UITableView *)tableView
 {
     UITableViewCell *cell = [self buildCellForRow:panel forTableView:tableView];
     
-    // Loop through the fields in the row to determine the content of the cell
+    // Loop through the fields in the row to build the content of the cell
     for(MBComponent *child in [panel children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
             field.responder = nil;
-            
-            // #BINCKMOBILE-19
             if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
                 [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] buildFieldView:field forParent:cell withMaxBounds:cell.bounds];
             }
         }
     }
     
-//    [self addButtonsToCell:cell forRow:component];
-    
-    CGRect bounds = cell.bounds;
     // If the bounds are set for a field with buttons, then the view get's all messed up.
     if (![MBDevice isPad]) {
+        CGRect bounds = cell.bounds;
         bounds.size.width = tableView.frame.size.width;
+        cell.bounds = bounds;
     }
-    cell.bounds = bounds;
     
+    cell.selectionStyle = [self cellSelectionStyleForRow:panel];
+    cell.accessoryType = [self cellAccesoryTypeForRow:panel];
     
-    if (![panel outcomeName]) {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else  {
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
     return cell;
 }
 
@@ -138,6 +101,95 @@
     }
     
     return height;
+}
+
+- (UITableViewCellStyle) tableViewCellStyleForRow:(MBPanel *)panel {
+    UITableViewCellStyle style = UITableViewCellStyleDefault;
+    
+    // Loop through the fields in the row to determine the type and style of the cell
+    for(MBComponent *child in [panel children]){
+        if ([child isKindOfClass:[MBField class]]) {
+            MBField *field = (MBField *)child;
+            if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
+                
+                if ([C_FIELD_LABEL isEqualToString:field.type] ||
+                    [C_FIELD_TEXT isEqualToString:field.type]){
+                    // Default
+                }
+                
+                if ([self fieldIsDropdownListType:field]) {
+                    style = UITableViewCellStyleValue1;
+                }
+                
+                if ([C_FIELD_SUBLABEL isEqualToString:field.type]){
+                    style = UITableViewCellStyleSubtitle;
+                }
+            }
+        }
+    }
+    
+    return style;
+}
+
+- (NSString *) cellReuseIdentifierForRow:(MBPanel *)panel {
+    NSString *type = panel.type;
+    
+    // Loop through the fields in the row to determine the type
+    for(MBComponent *child in [panel children]){
+        if ([child isKindOfClass:[MBField class]]) {
+            MBField *field = (MBField *)child;
+            if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]]) {
+                
+                if ([self fieldIsDropdownListType:field]) {
+                    type = C_DROPDOWNLISTCELL;
+                }
+                
+                if ([C_FIELD_SUBLABEL isEqualToString:field.type]){
+                    type = C_SUBTITLECELL;
+                }
+                
+            }
+        }
+    }
+    
+    return type;
+}
+
+- (UITableViewCellSelectionStyle)cellSelectionStyleForRow:(MBPanel *)panel {
+    return ([panel outcomeName]) ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
+}
+
+- (UITableViewCellAccessoryType)cellAccesoryTypeForRow:(MBPanel *)panel {
+    
+    // Always show an disclosureIndicator if a cell is clickable/navigatable
+    if ([panel outcomeName]) {
+        return UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    // Loop through the fields in the row to determine the accessoryType
+    for(MBComponent *child in [panel children]){
+        if ([child isKindOfClass:[MBField class]]) {
+            MBField *field = (MBField *)child;
+            if ([field.definition isPreConditionValid:panel.document currentPath:[field absoluteDataPath]] && [self fieldIsDropdownListType:field]) {
+                return UITableViewCellAccessoryDisclosureIndicator;
+            }
+        }
+    }
+    
+    // Default is no accessoryIndicator
+    return UITableViewCellAccessoryNone;
+}
+
+
+#pragma mark -
+#pragma mark Util
+
+- (BOOL)fieldIsDropdownListType:(MBField *)field {
+    return ([C_FIELD_DROPDOWNLIST isEqualToString:field.type] ||
+            [C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
+            [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
+            [C_FIELD_TIMESELECTOR isEqualToString:field.type] ||
+            [C_FIELD_BIRTHDATE isEqualToString:field.type]);
 }
 
 @end
