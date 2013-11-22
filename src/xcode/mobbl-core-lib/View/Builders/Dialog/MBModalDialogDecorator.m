@@ -54,11 +54,13 @@
     [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPop];
     BOOL animated = [transition animated];
     
-    [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
-    
-    // Reset the dialog
-    [dialog resetView];
-    
+    [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated completion:
+     ^{
+         // Reset the dialog after we've dismissed the viewController and the animation is finished.
+         [dialog resetView];
+     }
+     ];
+
     // We want to activate the pageStack that was visible before the modal was presented
     [[[[MBApplicationController currentInstance] viewManager] dialogManager] activatePageStackWithName:self.originPageStackName];
 }

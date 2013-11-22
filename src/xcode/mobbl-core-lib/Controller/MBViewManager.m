@@ -341,9 +341,13 @@
 #pragma mark Presenting and Dismissing (modal) ViewControllers
 
 - (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
+    [self presentViewController:controller fromViewController:fromViewController animated:animated completion:nil];
+}
+
+- (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated completion:(void (^)(void))completion {
     // iOS 6.0 and up
     if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-        [fromViewController presentViewController:controller animated:animated completion:nil];
+        [fromViewController presentViewController:controller animated:animated completion:completion];
     }
     // iOS 5.x and lower
     else {
@@ -357,9 +361,13 @@
 }
 
 - (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [self dismisViewController:controller animated:animated completion:nil];
+}
+
+- (void)dismisViewController:(UIViewController *)controller animated:(BOOL)animated completion:(void (^)(void))completion {
     // iOS 6.0 and up
     if ([controller respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-        [controller dismissViewControllerAnimated:animated completion:nil];
+        [controller dismissViewControllerAnimated:animated completion:completion];
     }
     // iOS 5.x and lower
     else {

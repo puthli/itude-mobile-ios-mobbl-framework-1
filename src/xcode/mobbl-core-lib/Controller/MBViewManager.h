@@ -42,7 +42,9 @@
  * Used to present and dismiss a (modal) viewController
  */
 - (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated;
+- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated completion:(void (^)(void))completion;
 - (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated;
+- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated completion:(void (^)(void))completion;
 
 /**
  * Managing the activity indicator
