@@ -16,6 +16,7 @@
 
 #import "MBTypes.h"
 #import "MBDialogManager.h"
+#import "MBContentViewWrapper.h"
 
 @class MBPage;
 @class MBAlert;
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) UITabBarController *tabController;
 @property (nonatomic, retain) MBDialogManager *dialogManager;
 @property (nonatomic, retain) UIAlertView *currentAlert;
+@property (nonatomic, retain) id<MBContentViewWrapper> contentViewWrapper;
 
 - (id) init;
 - (void) showPage:(MBPage*) page displayMode:(NSString*) displayMode;

@@ -1,0 +1,169 @@
+/*
+ * (C) Copyright Itude Mobile B.V., The Netherlands.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+//  MBSlidingMenuContentViewWrapper.m
+//  kitchensink-app
+//  Created by Pjotter Tommassen on 2013/25/11.
+
+#import "MBSlidingMenuContentViewWrapper.h"
+#import "MBViewManager.h"
+
+#define SHADOW_SIZE 4
+#define SHADOW_OFFSET -2
+
+#define SLIDING_TIME 0.25f
+#define PANEL_WIDTH 60
+
+@interface MBSlidingMenuContentViewWrapper  () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, retain) UIViewController *mainController;
+@property (nonatomic, assign) BOOL menuVisible;
+@property (nonatomic, assign) BOOL shouldShowMenu;
+@property (nonatomic, retain) UIViewController *menuController;
+
+@end
+
+@implementation MBSlidingMenuContentViewWrapper
+
+-(UIViewController *)wrapController:(UIViewController *)controller {
+	if (self.mainController) {
+		if (self.mainController == controller) return self;
+
+		[self.mainController removeFromParentViewController ];
+		[self.mainController.view removeFromSuperview ];
+		self.mainController = nil;
+	}
+
+	self.mainController = controller;
+
+
+	self.view.backgroundColor = [UIColor greenColor];
+	[self.view addSubview:self.mainController.view];
+    [self addChildViewController:self.mainController];
+
+    [controller didMoveToParentViewController:self];
+
+	[self setupGestures];
+	return self;
+}
+
+
+
+- (void)setupGestures
+{
+	UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(movePanel:)];
+	[panRecognizer setMinimumNumberOfTouches:1];
+	[panRecognizer setMaximumNumberOfTouches:1];
+	[panRecognizer setDelegate:self];
+
+	[self.mainController.view addGestureRecognizer:panRecognizer];
+}
+
+
+-(void)movePanel:(id)sender
+{
+	[[[(UITapGestureRecognizer*)sender view] layer] removeAllAnimations];
+
+	CGPoint translatedPoint = [(UIPanGestureRecognizer*) sender translationInView:self.view];
+	CGPoint velocity = [(UIPanGestureRecognizer*)sender velocityInView:[sender view]];
+
+	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateBegan) {
+		UIView *child = nil;
+
+		if (velocity.x > 0) {
+			child = [self getMenuView];
+			[self.view sendSubviewToBack:child];
+			[[sender view] bringSubviewToFront:[(UIPanGestureRecognizer *)sender view]];
+		}
+	}
+
+	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateEnded) {
+		if (!_shouldShowMenu) {
+			[self closeMenu];
+		} else if (_menuVisible) {
+			[self openMenu];
+		}
+	}
+
+	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateChanged) {
+		if (velocity.x < 0 && !_menuVisible) return;
+
+		_shouldShowMenu = abs([sender view].center.x - [self mainController].view.frame.size.width / 2) > [self mainController].view.frame.size.width / 2;
+
+		[sender view].center = CGPointMake([sender view].center.x + translatedPoint.x,	[sender view].center.y);
+		[(UIPanGestureRecognizer*)sender setTranslation:CGPointMake(0, 0) inView:self.view];
+
+
+	}
+}
+
+-(void)closeMenu {
+	[UIView animateWithDuration:SLIDING_TIME delay:0 options:UIViewAnimationOptionBeginFromCurrentState
+					 animations:^{
+						 self.mainController.view.frame = CGRectMake(0, 0, self.mainController.view.frame.size.width, self.mainController.view.frame.size.height);
+					 }
+					 completion:^(BOOL finished){
+						 [self resetMainView];
+					 }];
+
+}
+
+-(void) openMenu {
+
+    UIView *child = [self getMenuView];
+    [self.view sendSubviewToBack:child];
+
+    [UIView animateWithDuration:SLIDING_TIME delay:0 options:UIViewAnimationOptionBeginFromCurrentState
+					 animations:^{
+						 self.mainController.view.frame = CGRectMake(self.view.frame.size.width - PANEL_WIDTH, 0, self.mainController.view.frame.size.width, self.mainController.view.frame.size.height);
+					 }
+					 completion:^(BOOL finished){
+						 if (finished) {
+							 // TODO: open delegate	 self.menuController.leftButton.tag = 0;
+						 }
+					 }];
+}
+
+-(void)resetMainView {
+	if (_menuController) {
+		[self.menuController removeFromParentViewController];
+		[self.menuController.view removeFromSuperview];
+		self.menuController = nil;
+
+		self.menuVisible = NO;
+	}
+
+	// TODO: close delegate
+}
+
+-(UIView*) getMenuView {
+	if (!_menuController) {
+        self.menuController = [[UIViewController alloc]init];
+		self.menuController.view = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height)];
+		self.menuController.view.backgroundColor = [UIColor redColor];
+
+        [self.view addSubview:self.menuController.view];
+        [self addChildViewController:self.menuController];
+
+        [self.menuController didMoveToParentViewController:self];
+	}
+
+    self.menuVisible = YES;
+
+    return self.menuController.view;
+}
+
+@end
