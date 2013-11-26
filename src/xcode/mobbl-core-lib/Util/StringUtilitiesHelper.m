@@ -93,7 +93,7 @@ static StringUtilitiesHelper *_instance = nil;
 		// Number with original number of decimals
 		self.numberWithOriginalNumberOfDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 		[self.numberWithOriginalNumberOfDecimalsNumberFormatter setMinimumIntegerDigits:1];
-		[self.numberWithOriginalNumberOfDecimalsNumberFormatter setNumberStyle:kCFNumberDoubleType];
+        [self.numberWithOriginalNumberOfDecimalsNumberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 		[self.numberWithOriginalNumberOfDecimalsNumberFormatter setGeneratesDecimalNumbers:YES];
 		//[self.numberWithOriginalNumberOfDecimalsNumberFormatter setMinimumFractionDigits:3];
 		//[self.numberWithOriginalNumberOfDecimalsNumberFormatter setMaximumFractionDigits:3];

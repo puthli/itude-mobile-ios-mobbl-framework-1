@@ -35,7 +35,9 @@
 }
 
 -(UIView*) buildViewWithMaxBounds:(CGRect) bounds forParent:(UIView*) parent viewState:(MBViewState) viewState {
-	return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildRowView: self forParent: parent withMaxBounds: bounds viewState: viewState];
+	return nil;
+    // TODO: Return the correct builder type
+    //return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildRowView: self forParent: parent withMaxBounds: bounds viewState: viewState];
 }
 
 -(NSString*) evaluateExpression:(NSString*) variableName {

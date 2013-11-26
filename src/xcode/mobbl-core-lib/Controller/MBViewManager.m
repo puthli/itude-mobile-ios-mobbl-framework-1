@@ -81,7 +81,7 @@
 	self = [super init];
 	if (self != nil) {
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
-        self.activityIndicatorCounts = [NSMutableDictionary new];
+        self.activityIndicatorCounts = [[NSMutableDictionary new] autorelease];
 		self.dialogManager = [[[MBDialogManager alloc] initWithDelegate:self] autorelease];
 	}
 	return self;
@@ -179,7 +179,7 @@
     if([dialogControllers count] > 1 && [self shouldCreateTabBarForDialogsControllers:dialogControllers])
 	{
         // Build the tabbar
-        self.tabController = [[UITabBarController alloc] init];
+        self.tabController = [[[UITabBarController alloc] init] autorelease];
         self.tabController.delegate = self;
         [self setContentViewController:self.tabController];
         

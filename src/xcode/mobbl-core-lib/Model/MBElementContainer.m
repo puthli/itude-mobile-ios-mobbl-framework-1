@@ -353,7 +353,9 @@
 
 - (void) registerDocumentWithSharedContext:(MBDocument*) document {
 	[document setSharedContext: [self sharedContext]];
-	[[self sharedContext] setObject:document forKey: document.name];
+    if (document.name.length > 0) {
+        [[self sharedContext] setObject:document forKey: document.name];
+    }
 }
 
 
