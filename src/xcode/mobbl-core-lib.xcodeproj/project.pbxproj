@@ -635,6 +635,7 @@
 		00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Writing Documentation-template.txt"; sourceTree = "<group>"; };
 		1CC88E85171ED84200B30461 /* libmobbl-core-lib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmobbl-core-lib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BDFF80C018450696009EBA49 /* MBPickerControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPickerControllerDelegate.h; sourceTree = "<group>"; };
 		C7E0EAFF18312A3F007D2F08 /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
 		C7E0EB0018312A3F007D2F08 /* MBFireInitialOutcomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFireInitialOutcomes.m; sourceTree = "<group>"; };
 		C7E0EB0218312A3F007D2F08 /* MBConditionalDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConditionalDefinition.h; sourceTree = "<group>"; };
@@ -1787,6 +1788,7 @@
 				C7E0EC9618312A40007D2F08 /* MBFontCustomizer.m */,
 				C7E0EC9718312A40007D2F08 /* MBPickerController.h */,
 				C7E0EC9818312A40007D2F08 /* MBPickerController.m */,
+				BDFF80C018450696009EBA49 /* MBPickerControllerDelegate.h */,
 				C7E0EC9918312A40007D2F08 /* MBPickerPopoverController.h */,
 				C7E0EC9A18312A40007D2F08 /* MBPickerPopoverController.m */,
 				C7E0EC9B18312A40007D2F08 /* MBSpinner.h */,

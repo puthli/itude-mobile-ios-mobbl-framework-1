@@ -193,18 +193,6 @@
     return cell;
 }
 
-// callback when pickerView value changes
--(void)observeValueForKeyPath:(NSString *)keyPath
-					 ofObject:(id)object
-					   change:(NSDictionary *)change
-					  context:(void *)context
-{
-	
-    if ([keyPath isEqual:@"value"]) {
-		[self.tableView reloadData];
-	}
-}
-
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MBPanel *panel = [self.rowsByIndexPath objectForKey:indexPath];
@@ -224,33 +212,27 @@
     for (MBField *field in [panel childrenOfKind:[MBField class]]) {
         
         
-        if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]) { //ds
+        if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]) {
             [self fieldWasSelected:field];
-            [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
             
             // iPad supports popovers, which are a nicer and better way to let the user make a choice from a dropdown list
             if ([MBDevice isPad]) {
-                MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc]
-                                                      initWithField:field]
-                                                     autorelease];
-                //picker.field = field;
+                MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc] initWithField:field] autorelease];
+                picker.field = field;
+                picker.delegate = self;
                 UIView *cell = [tableView cellForRowAtIndexPath:indexPath];
                 UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:picker];
-                // We permit all arrow directions, except up and down because in 99 percent of all cases the apple framework will place the popover on a weird and ugly location with arrowDirectionUp
-                [popover presentPopoverFromRect:cell.frame inView:self.view
-                       permittedArrowDirections:UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight
-                                       animated:YES];
+                [popover presentPopoverFromRect:cell.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 picker.popover = popover;
                 [popover release];
             }
+            
             // On devices with a smaller screensize it's better to use a scrollWheel
             else {
-                MBPickerController *pickerController = [[[MBPickerController alloc]
-                                                         initWithNibName:@"MBPicker" bundle:nil]
-                                                        autorelease];
+                MBPickerController *pickerController = [[[MBPickerController alloc] initWithNibName:@"MBPicker" bundle:nil] autorelease];
                 pickerController.field = field;
-                [field setViewData:pickerController
-                            forKey:@"pickerController"]; // let the page retain the picker controller
+                pickerController.delegate = self;
+                [field setViewData:pickerController forKey:@"pickerController"]; // let the page retain the picker controller
                 UIView *superview = [[[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController] view];
                 [pickerController presentWithSuperview:superview];
             }
@@ -262,7 +244,6 @@
                    [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
             
             [self fieldWasSelected:field];
-            [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
             
             if ([MBDevice isPad]) {
                 MBDatePickerPopoverController *pickerController = [[[MBDatePickerPopoverController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
@@ -346,8 +327,16 @@
 
 
 #pragma mark -
-#pragma mark MBFontChangeListenerProtocol methods
+#pragma mark MBPickerControllerDelegate
 
+// callback when pickerView value changes
+- (void)fieldValueChanged:(MBField *)field {
+    [self.tableView reloadData];
+}
+
+
+#pragma mark -
+#pragma mark MBFontChangeListenerProtocol methods
 
 -(void)showFontCustomizer:(BOOL)show {
     if (show) {
@@ -393,7 +382,9 @@
 
 - (void)configureDateTimePicker:(MBDatePickerController *)dateTimePickerController forField:(MBField *)field {
     dateTimePickerController.field = field;
-    [field setViewData:dateTimePickerController forKey:@"datePickerController"];
+    dateTimePickerController.delegate = self;
+    
+    [field setViewData:dateTimePickerController forKey:@"datePickerController"]; // let the page retain the pickerController
     
     // Determine the datePickerModeStyle
     UIDatePickerMode datePickerMode = UIDatePickerModeDateAndTime;
