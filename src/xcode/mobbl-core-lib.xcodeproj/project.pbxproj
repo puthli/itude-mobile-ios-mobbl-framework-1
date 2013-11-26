@@ -410,6 +410,8 @@
 		C7E0ED7618312A40007D2F08 /* MBPageStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECBC18312A40007D2F08 /* MBPageStack.m */; };
 		C7E0ED7718312A40007D2F08 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECBE18312A40007D2F08 /* MBPanel.m */; };
 		C7E0ED7818312A40007D2F08 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECC218312A40007D2F08 /* MBTableViewController.m */; };
+		E21890BE18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BA18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m */; };
+		E21890BF18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1051,6 +1053,11 @@
 		C7E0ECBF18312A40007D2F08 /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		C7E0ECC118312A40007D2F08 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		C7E0ECC218312A40007D2F08 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		E21890B918450A0800DD5AD4 /* MBEmptyContentViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEmptyContentViewWrapper.h; sourceTree = "<group>"; };
+		E21890BA18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEmptyContentViewWrapper.m; sourceTree = "<group>"; };
+		E21890BB18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSlidingMenuContentViewWrapper.h; sourceTree = "<group>"; };
+		E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSlidingMenuContentViewWrapper.m; sourceTree = "<group>"; };
+		E21890BD18450A0800DD5AD4 /* MBContentViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBContentViewWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1218,6 +1225,8 @@
 		C7E0EB3E18312A3F007D2F08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E21890B818450A0800DD5AD4 /* ContentViewWrappers */,
+				E21890BD18450A0800DD5AD4 /* MBContentViewWrapper.h */,
 				C7E0EB3F18312A3F007D2F08 /* MBAction.h */,
 				C7E0EB4018312A3F007D2F08 /* MBAlertController.h */,
 				C7E0EB4118312A3F007D2F08 /* MBAlertController.m */,
@@ -1819,6 +1828,17 @@
 			path = Tables;
 			sourceTree = "<group>";
 		};
+		E21890B818450A0800DD5AD4 /* ContentViewWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				E21890B918450A0800DD5AD4 /* MBEmptyContentViewWrapper.h */,
+				E21890BA18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m */,
+				E21890BB18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.h */,
+				E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */,
+			);
+			path = ContentViewWrappers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1950,6 +1970,7 @@
 				C7E0ED5118312A40007D2F08 /* MBPageViewBuilder.m in Sources */,
 				C7E0ED2C18312A40007D2F08 /* StringUtilitiesHelper.m in Sources */,
 				C7E0ED4218312A40007D2F08 /* MBDropDownBuilder.m in Sources */,
+				E21890BE18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m in Sources */,
 				C7E0ECED18312A40007D2F08 /* UINavigationController+Rotation.m in Sources */,
 				C7E0ED5D18312A40007D2F08 /* MBDefaultTransitionStyle.m in Sources */,
 				C7E0ED1B18312A40007D2F08 /* SBJsonBase.m in Sources */,
@@ -1993,6 +2014,7 @@
 				C7E0ED5718312A40007D2F08 /* MBSectionPanelViewBuilder.m in Sources */,
 				C7E0ED3018312A40007D2F08 /* UncaughtExceptionHandler.m in Sources */,
 				C7E0ED0C18312A40007D2F08 /* MBSystemDataHandler.m in Sources */,
+				E21890BF18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m in Sources */,
 				C7E0ED6B18312A40007D2F08 /* MBMatrixViewController.m in Sources */,
 				C7E0ED2818312A40007D2F08 /* MBWebView.m in Sources */,
 				C7E0ED0818312A40007D2F08 /* MBMobbl1ServerDataHandler.m in Sources */,
