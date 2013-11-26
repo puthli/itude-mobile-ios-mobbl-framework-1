@@ -21,6 +21,18 @@
 #import <Foundation/Foundation.h>
 #import "MBContentViewWrapper.h"
 
+@protocol MBSlidingMenuDelegate <NSObject>
+
+@optional
+-(void)menuOpened;
+-(void)menuClosed;
+
+@end
+
 @interface MBSlidingMenuContentViewWrapper : UIViewController <MBContentViewWrapper>
+@property (nonatomic, retain) UIViewController *menuController;
+
+-(void)addDelegate:(id<MBSlidingMenuDelegate>)delegate;
+-(void)removeDelegate:(id<MBSlidingMenuDelegate>)delegate;
 
 @end

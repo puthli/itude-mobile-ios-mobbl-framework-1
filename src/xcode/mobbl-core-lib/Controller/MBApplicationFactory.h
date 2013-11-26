@@ -22,6 +22,7 @@
 #import "MBAction.h"
 #import "MBResultListener.h"
 #import "MBTransitionStyleFactory.h"
+#import "MBContentViewWrapper.h"
 
 @class MBApplicationController;
 @class MBPage;
@@ -67,4 +68,5 @@
 -(id<MBResultListener>) createResultListener:(NSString *)listenerClassName;
 -(UIViewController *) createViewController:(MBPage*) page;
 
+-(id<MBContentViewWrapper>) createContentViewWrapper;
 @end

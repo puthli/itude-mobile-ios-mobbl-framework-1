@@ -84,7 +84,7 @@
 	self = [super init];
 	if (self != nil) {
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
-		_contentViewWrapper = [[MBSlidingMenuContentViewWrapper alloc]init];
+		_contentViewWrapper = [[[MBApplicationFactory sharedInstance] createContentViewWrapper] retain];
         self.activityIndicatorCounts = [NSMutableDictionary new];
 		self.dialogManager = [[[MBDialogManager alloc] initWithDelegate:self] autorelease];
 	}

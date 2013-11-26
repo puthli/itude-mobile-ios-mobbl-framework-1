@@ -32,11 +32,26 @@
 @property (nonatomic, retain) UIViewController *mainController;
 @property (nonatomic, assign) BOOL menuVisible;
 @property (nonatomic, assign) BOOL shouldShowMenu;
-@property (nonatomic, retain) UIViewController *menuController;
+@property (nonatomic, retain) NSMutableArray *delegates;
 
 @end
 
 @implementation MBSlidingMenuContentViewWrapper
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _delegates = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [_delegates release];
+	[super dealloc];
+}
 
 -(UIViewController *)wrapController:(UIViewController *)controller {
 	if (self.mainController) {
@@ -132,7 +147,10 @@
 					 }
 					 completion:^(BOOL finished){
 						 if (finished) {
-							 // TODO: open delegate	 self.menuController.leftButton.tag = 0;
+							 for (id<MBSlidingMenuDelegate> delegate in self.delegates) {
+								 if ([delegate respondsToSelector:@selector(menuOpened)]) [delegate menuOpened];
+							 }
+
 						 }
 					 }];
 }
@@ -146,7 +164,9 @@
 		self.menuVisible = NO;
 	}
 
-	// TODO: close delegate
+	for (id<MBSlidingMenuDelegate> delegate in self.delegates) {
+		if ([delegate respondsToSelector:@selector(menuClosed)]) [delegate menuClosed];
+	}
 }
 
 -(UIView*) getMenuView {
@@ -164,6 +184,14 @@
     self.menuVisible = YES;
 
     return self.menuController.view;
+}
+
+-(void)addDelegate:(id<MBSlidingMenuDelegate>)delegate {
+	[self.delegates addObject:delegate];
+}
+
+-(void)removeDelegate:(id<MBSlidingMenuDelegate>)delegate {
+	[self.delegates removeObject:delegate];
 }
 
 @end

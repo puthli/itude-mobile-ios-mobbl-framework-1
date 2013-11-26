@@ -24,6 +24,7 @@
 #import "MBPageDefinition.h"
 #import "MBBasicViewController.h"
 #import "MBTypes.h"
+#import "MBEmptyContentViewWrapper.h"
 #import <objc/runtime.h>
 
 @interface MBApplicationFactory () {
@@ -120,6 +121,10 @@ static MBApplicationFactory *_instance = nil;
 {
     const char* className = class_getName([self class]);
     return [NSString stringWithFormat:@"<%@: %p; className: %s>", [self class], self, className];
+}
+
+-(id<MBContentViewWrapper>)createContentViewWrapper {
+	return [[[MBEmptyContentViewWrapper alloc] init] autorelease];
 }
 
 @end
