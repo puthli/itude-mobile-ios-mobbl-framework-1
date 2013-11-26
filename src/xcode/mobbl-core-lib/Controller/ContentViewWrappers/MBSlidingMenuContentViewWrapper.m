@@ -33,6 +33,7 @@
 @property (nonatomic, assign) BOOL menuVisible;
 @property (nonatomic, assign) BOOL shouldShowMenu;
 @property (nonatomic, retain) NSMutableArray *delegates;
+@property (nonatomic, retain) UIViewController *menuController;
 
 @end
 
@@ -171,9 +172,8 @@
 
 -(UIView*) getMenuView {
 	if (!_menuController) {
-        self.menuController = [[UIViewController alloc]init];
-		self.menuController.view = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height)];
-		self.menuController.view.backgroundColor = [UIColor redColor];
+        self.menuController = [self createMenuController];
+		self.menuController.view.frame = CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height);
 
         [self.view addSubview:self.menuController.view];
         [self addChildViewController:self.menuController];
@@ -192,6 +192,13 @@
 
 -(void)removeDelegate:(id<MBSlidingMenuDelegate>)delegate {
 	[self.delegates removeObject:delegate];
+}
+
+-(UIViewController*)createMenuController {
+	UIViewController *menu = [[[UIViewController alloc]init] autorelease];
+	menu.view = [[UIView alloc] init];
+	menu.view.backgroundColor = [UIColor redColor];
+	return menu;
 }
 
 @end

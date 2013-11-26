@@ -30,7 +30,7 @@
 @end
 
 @interface MBSlidingMenuContentViewWrapper : UIViewController <MBContentViewWrapper>
-@property (nonatomic, retain) UIViewController *menuController;
+
 
 -(void)addDelegate:(id<MBSlidingMenuDelegate>)delegate;
 -(void)removeDelegate:(id<MBSlidingMenuDelegate>)delegate;
