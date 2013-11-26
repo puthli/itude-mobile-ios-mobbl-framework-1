@@ -51,7 +51,11 @@
  */
 - (void) showActivityIndicator;
 - (void) showActivityIndicatorWithMessage:(NSString*) message;
+- (void) showActivityIndicatorOnDialog:(MBDialogController *)dialogController;
+- (void) showActivityIndicatorOnDialog:(MBDialogController *)dialogController withMessage:(NSString*) message;
+
 - (void) hideActivityIndicator;
+- (void) hideActivityIndicatorOnDialog:(MBDialogController *)dialogController;
 
 /**
  * Returns the bounds of the UIWindow

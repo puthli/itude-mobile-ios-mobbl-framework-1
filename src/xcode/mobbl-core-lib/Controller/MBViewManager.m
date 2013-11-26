@@ -384,14 +384,20 @@
 #pragma mark Activity Indicator management
 
 - (void)showActivityIndicator {
-    [self showActivityIndicatorWithMessage:nil];
+    [self showActivityIndicatorOnDialog:nil withMessage:nil];
 }
 
 - (void)showActivityIndicatorWithMessage:(NSString *)message {
+    [self showActivityIndicatorOnDialog:nil withMessage:message];
+}
+
+- (void)showActivityIndicatorOnDialog:(MBDialogController *)dialogController {
+    [self showActivityIndicatorOnDialog:dialogController withMessage:nil];
+}
+
+- (void)showActivityIndicatorOnDialog:(MBDialogController *)dialogController withMessage:(NSString *)message {
+    UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
 	if(_activityIndicatorCount == 0) {
-		// determine the maximum bounds of the screen
-        MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
-        UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
         CGRect bounds = topMostVisibleViewController.view.bounds;
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
         if (message) {
@@ -400,8 +406,7 @@
         
         [topMostVisibleViewController.view addSubview:blocker];
 	}else{
-        
-        for (UIView *subview in [[[self.dialogManager pageStackControllerWithName:self.dialogManager.activePageStackName] view] subviews]) {
+        for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
             if ([subview isKindOfClass:[MBActivityIndicator class]]) {
                 MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
                 [indicatorView setMessage:message];
@@ -413,12 +418,15 @@
 }
 
 - (void)hideActivityIndicator {
+    [self hideActivityIndicatorOnDialog:nil];
+}
+
+- (void)hideActivityIndicatorOnDialog:(MBDialogController *)dialogController {
 	if(_activityIndicatorCount > 0) {
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-            MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
-            UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
+            UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
             for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
                 if ([subview isKindOfClass:[MBActivityIndicator class]]) {
                     [subview removeFromSuperview];
