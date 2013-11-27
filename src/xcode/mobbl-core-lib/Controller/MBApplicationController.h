@@ -20,6 +20,7 @@
 @class MBApplicationFactory;
 @class MBOutcome;
 @class MBViewManager;
+@protocol MBOutcomeListenerProtocol;
 
 /** Application Controller. Facade for all navigation control and logic sequencing.
  * The MBApplicationController is responsible for determining which MBPage or MBAction should be constructed when an MBOutcome is triggered.
@@ -55,5 +56,7 @@
 -(void) showActivityIndicator;
 -(void) hideActivityIndicator;
 -(void) resetControllerPreservingCurrentPageStack;
+-(void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
+-(void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
 
 @end

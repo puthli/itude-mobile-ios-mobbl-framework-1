@@ -396,6 +396,7 @@
         }
         
         [topMostVisibleViewController.view addSubview:blocker];
+		NSLog (@"Added loader");
 	}else{
         
         for (UIView *subview in [[[self.dialogManager pageStackControllerWithName:self.dialogManager.activePageStackName] view] subviews]) {
@@ -418,7 +419,10 @@
             UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
             for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
                 if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+					dispatch_async(dispatch_get_main_queue(), ^{
                     [subview removeFromSuperview];
+					NSLog (@"Removed loader");
+					});
                 }
             }
 		}

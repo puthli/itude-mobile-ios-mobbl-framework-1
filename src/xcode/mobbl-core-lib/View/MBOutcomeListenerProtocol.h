@@ -17,9 +17,10 @@
 #import <UIKit/UIKit.h>
 #import "MBOutcome.h"
 
-@protocol MBOutcomeListenerProtocol
+@protocol MBOutcomeListenerProtocol <NSObject>
 
-@required
+@optional
 - (void) outcomeProduced:(MBOutcome*) outcome;
+- (void) outcomeHandled:(MBOutcome*) outcome;
 
 @end

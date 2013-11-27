@@ -47,12 +47,10 @@
     NSString *_transitionStyle;
     
 	NSMutableDictionary *_valueChangedListeners;
-	NSMutableArray *_outcomeListeners;
 	CGRect _maxBounds;
 	MBViewState _viewState;
 }
 @property (nonatomic, retain) NSMutableDictionary *valueChangedListeners;
-@property (nonatomic, retain) NSMutableArray *outcomeListeners;
 @property (nonatomic, assign) CGRect maxBounds;
 @property (nonatomic, assign) MBViewState viewState;
 @end
@@ -74,7 +72,6 @@
 
 //Private properties
 @synthesize valueChangedListeners = _valueChangedListeners;
-@synthesize outcomeListeners = _outcomeListeners;
 @synthesize maxBounds = _maxBounds;
 @synthesize viewState = _viewState;
 
@@ -94,7 +91,6 @@
     
     // Private properties
 	[_valueChangedListeners release];
-	[_outcomeListeners release];
 	[super dealloc];
 }
 
@@ -115,7 +111,6 @@
         self.pageName = definition.name;
 		self.document = document;
 		self.valueChangedListeners = [NSMutableDictionary dictionary];
-		self.outcomeListeners = [NSMutableArray array];
         self.pageType = definition.pageType;
 		self.viewState = viewState;
         self.maxBounds = [UIScreen mainScreen].applicationFrame;
@@ -191,11 +186,7 @@
 	outcome.document = [self document];
     outcome.pageStackName = [self pageStackName];
 	outcome.path = path;
-    
-	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
-		[lsnr outcomeProduced:outcome];
-	}
-	
+
 	[self.applicationController handleOutcome:outcome];
 	[outcome release];
 }
@@ -343,14 +334,6 @@
 		if([lsnr respondsToSelector:@selector(valueChanged:originalValue:forPath:)])
 			[lsnr valueChanged:value originalValue:originalValue forPath:path];
 	}
-}
-
-- (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
-	if(![self.outcomeListeners containsObject:listener]) 	[self.outcomeListeners addObject:listener];
-}
-
-- (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
-	[self.outcomeListeners removeObject: listener];
 }
 
 - (MBViewState) currentViewState {

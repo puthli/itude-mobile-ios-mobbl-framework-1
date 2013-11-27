@@ -30,6 +30,8 @@
     MBPageStackController *_pageStackController;
 }
 
+@property (nonatomic, retain) NSMutableArray *outcomeListeners;
+
 @end
 
 @implementation MBBasicViewController
@@ -37,18 +39,54 @@
 @synthesize page = _page;
 @synthesize pageStackController = _pageStackController;
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+		_outcomeListeners = [[NSMutableArray array] retain];
+    }
+    return self;
+}
+
 - (void) dealloc
 {
+	NSLog(@"deallocing");
+
     [_page release];
     [_pageStackController release];
+	[_outcomeListeners release];
     [super dealloc];
 }
+
+-(oneway void)release
+{
+	NSLog(@"releasing %i - 1 = %i", [self retainCount], [self retainCount]-1);
+	[super release];
+}
+
+-(id)retain {
+	NSLog(@"retaining %i + 1 = %i", [self retainCount], [self retainCount]+1);
+	return [super retain];
+}
+
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self setupBackButton];
     
     [self setupLayoutForIOS7];
+}
+
+-(void)didMoveToParentViewController:(UIViewController *)parent {
+	NSLog(@"Moving");
+	[super didMoveToParentViewController:parent];
+
+	if (!parent) {
+	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+		[[MBApplicationController currentInstance] unregisterOutcomeListener:lsnr];
+	}
+	self.outcomeListeners = nil;
+}
 }
 
 -(void) handleException:(NSException *) exception{
@@ -83,6 +121,13 @@
 #pragma mark View lifecycle delegate methods
 
 -(void) viewDidAppear:(BOOL)animated {
+	// register all outcome listeners with the application controller; this view controller just became
+	// visible, so it is interested in outcomes
+	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+		[[MBApplicationController currentInstance] registerOutcomeListener:lsnr];
+	}
+
+
 	for (id childView in [self.view subviews]){
 		if ([childView respondsToSelector:@selector(delegate)]) {
 			id delegate = [childView delegate];
@@ -114,6 +159,13 @@
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
+	// remove all outcome listeners from the application controller; this view controller
+	// is going to disappear, so it isn't interested in them anumore
+	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+		[[MBApplicationController currentInstance] unregisterOutcomeListener:lsnr];
+	}
+
+	NSLog(@"Hiding..");
 	for (id childView in [self.view subviews]){
 		if ([childView respondsToSelector:@selector(delegate)]) {
 			id delegate = [childView delegate];
@@ -123,6 +175,23 @@
 		}
 	}
 }
+
+#pragma mark -
+#pragma mark Outcome listeners
+
+- (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
+	if(![self.outcomeListeners containsObject:listener]) {
+		[self.outcomeListeners addObject:listener];
+		[[MBApplicationController currentInstance] registerOutcomeListener:listener];
+	}
+}
+
+- (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
+	[[MBApplicationController currentInstance] unregisterOutcomeListener:listener];
+	[self.outcomeListeners removeObject: listener];
+}
+
+
 
 
 @end
