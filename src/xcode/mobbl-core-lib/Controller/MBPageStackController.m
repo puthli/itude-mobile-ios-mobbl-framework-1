@@ -153,7 +153,9 @@
 
 -(void) doRebuild {
 	// Make sure we do this on the foreground! So:
-	[self performSelectorOnMainThread:@selector(rebuildPage:) withObject:nil waitUntilDone:NO];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self rebuildPage:nil];
+	});
 }
 
 -(void) rebuildPage:(id) args {

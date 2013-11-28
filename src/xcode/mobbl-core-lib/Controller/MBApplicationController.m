@@ -243,7 +243,8 @@ static MBApplicationController *_instance = nil;
                 // Page
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
-					[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
+                    if(!outcomeToProcess.noBackgroundProcessing)
+						[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 					if(outcomeToProcess.noBackgroundProcessing) [self preparePageInBackground:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, nil]];
 					else dispatch_async(self.queue, ^{
 						[self preparePageInBackground:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, nil]];

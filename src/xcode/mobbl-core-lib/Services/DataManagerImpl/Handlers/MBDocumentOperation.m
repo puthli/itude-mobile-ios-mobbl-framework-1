@@ -101,24 +101,29 @@
 
 - (void) main {
 
-	NSAutoreleasePool *pool = [NSAutoreleasePool new];
-
-	@try {
-		if(_document == nil) {
-			MBDocument *document = [self load];
-			if(_resultCallback != nil) [_delegate performSelectorOnMainThread:_resultCallback withObject:document waitUntilDone:YES];
+	@autoreleasepool {
+		@try {
+			if (_document == nil) {
+				MBDocument *document = [self load];
+				if(_resultCallback != nil)
+					dispatch_async(dispatch_get_main_queue(), ^{
+						[_delegate performSelector:_resultCallback withObject:document];
+					});
+			} else {
+				[self store];
+				if(_resultCallback != nil)
+					dispatch_async(dispatch_get_main_queue(), ^{
+						[_delegate performSelector:_resultCallback withObject:nil];
+					});
+			}
 		}
-		else {
-			[self store];
-			if(_resultCallback != nil) [_delegate performSelectorOnMainThread:_resultCallback withObject:nil waitUntilDone:YES];
+		@catch (NSException *e) {
+			WLog(@"Exception during Document Operation: %@, %@", e.name, e.reason);
+			if(_errorCallback != nil)
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[_delegate performSelector:_errorCallback withObject:e];
+				});
 		}
-	}
-	@catch (NSException *e) {
-		WLog(@"Exception during Document Operation: %@, %@", e.name, e.reason);
-		if(_errorCallback != nil) [_delegate performSelectorOnMainThread:_errorCallback withObject:e waitUntilDone:YES];
-	}
-	@finally {
-		[pool release];
 	}
 }
 
