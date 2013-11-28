@@ -1,12 +1,12 @@
 /*
  * (C) Copyright Itude Mobile B.V., The Netherlands.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-#import <UIKit/UIKit.h>
-#import "MBOutcome.h"
+//  MBEmptyContentViewWrapper.h
+//  kitchensink-app
+//  Created by Pjotter Tommassen on 2013/25/11.
 
-@protocol MBOutcomeListenerProtocol <NSObject>
+#import <Foundation/Foundation.h>
+#import "MBContentViewWrapper.h"
 
-@optional
-- (void) outcomeProduced:(MBOutcome*) outcome;
-- (void) outcomeHandled:(MBOutcome*) outcome;
+@interface MBEmptyContentViewWrapper : NSObject<MBContentViewWrapper>
 
 @end

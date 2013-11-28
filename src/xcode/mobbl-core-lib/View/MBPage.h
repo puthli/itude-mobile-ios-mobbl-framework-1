@@ -63,8 +63,6 @@
 - (void) handleOutcome:(NSString *)outcomeName;
 - (void) handleOutcome:(NSString *)outcomeName withPathArgument:(NSString*) path;
 - (void) handleException:(NSException *)exception;
-- (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
-- (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
 
 // View
 - (UIView*) view;

@@ -34,16 +34,17 @@
 #import "StringUtilitiesHelper.h"
 #import "MBDevice.h"
 #import "MBViewBuilderFactory.h"
-
-//#define SELECTOR_HANDLING performSelector
-#define SELECTOR_HANDLING performSelectorInBackground
+#import "MBOutcomeListenerProtocol.h"
 
 static MBApplicationController *_instance = nil;
 
 @interface MBApplicationController() {
     MBAlertController *_alertController;
 }
+
+@property (nonatomic, retain) NSMutableArray *outcomeListeners;
 @property (nonatomic, retain) MBAlertController *alertController;
+@property (nonatomic, assign, readonly) dispatch_queue_t queue;
 - (void) doHandleOutcome:(MBOutcome *)outcome;
 - (void) handleException:(NSException*) exception outcome:(MBOutcome*) outcome;
 - (void) fireInitialOutcomes;
@@ -61,6 +62,8 @@ static MBApplicationController *_instance = nil;
 	self = [super init];
 	if (self != nil) {
         _instance = self;
+		_outcomeListeners = [[NSMutableArray array] retain];
+		_queue = dispatch_queue_create("OutcomeQueue", NULL);
 		// Added for optimization: Make sure the MBDevice is created at startup. The createInstance method instantiate variables that only need to be gathered once in the application lifecycle
 		[MBDevice createInstance];
 	}
@@ -75,6 +78,7 @@ static MBApplicationController *_instance = nil;
 }
 
 -(void) dealloc {
+	[_outcomeListeners release];
     [_alertController release];
 	[_applicationFactory release];
     [_viewManager release];
@@ -135,7 +139,13 @@ static MBApplicationController *_instance = nil;
 
 - (void) doHandleOutcome:(MBOutcome *)outcome {
 	DLog(@"MBApplicationController:handleOutcome: %@", outcome);
-    
+
+	// notify all outcome listeners
+	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+		if ([lsnr respondsToSelector:@selector(outcomeProduced:)])
+			[lsnr outcomeProduced:outcome];
+	}
+
 	// Make sure that the (external) document cache of the document itself is cleared since this
 	// might interfere with the preconditions that are evaluated later on. Also: if the document is transferred
 	// the next page / action will also have fresh copies
@@ -220,11 +230,13 @@ static MBApplicationController *_instance = nil;
 				MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];
 				if(actionDef != nil) {
                     if(outcomeToProcess.noBackgroundProcessing) {
-                        [self performSelector:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
+                        [self performActionInBackground:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef, nil]];
 					}
                     else {
                         [_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
-                        [self SELECTOR_HANDLING:@selector(performActionInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef,  nil]];
+						dispatch_async(self.queue, ^{
+	                        [self performActionInBackground:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef,  nil]];
+						});
                     }
 				}
 				
@@ -232,8 +244,10 @@ static MBApplicationController *_instance = nil;
 				MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 				if(pageDef != nil) {
 					[_viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
-					if(outcomeToProcess.noBackgroundProcessing) [self performSelector:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, nil]];
-					else [self SELECTOR_HANDLING:@selector(preparePageInBackground:) withObject:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, nil]];
+					if(outcomeToProcess.noBackgroundProcessing) [self preparePageInBackground:[NSArray arrayWithObjects: [[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], pageDef.name, nil]];
+					else dispatch_async(self.queue, ^{
+						[self preparePageInBackground:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, nil]];
+					});
 				}
                 
                 // Alert
@@ -249,7 +263,18 @@ static MBApplicationController *_instance = nil;
 			}
 		}
 	}
+
+	dispatch_async(self.queue, ^{
+		dispatch_async(dispatch_get_main_queue(), ^{
+		// notify all outcome listeners
+		for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+			if ([lsnr respondsToSelector:@selector(outcomeHandled:)])
+				[lsnr outcomeHandled:outcome];
+		}});
+	});
 }
+
+
 
 //////// PAGE HANDLING
 
@@ -290,11 +315,12 @@ static MBApplicationController *_instance = nil;
 			}
 		}
         
-		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingPage:)
-															 withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]];
-		else [self performSelectorOnMainThread:@selector(showResultingPage:)
-									withObject:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]
-								 waitUntilDone:YES];
+		if(causingOutcome.noBackgroundProcessing) [self showResultingPage:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]];
+		else
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self showResultingPage:[NSArray arrayWithObjects:causingOutcome, pageDefinition, document, nil]];
+			});
+
         
     }
     @catch (NSException *e) {
@@ -362,8 +388,12 @@ static MBApplicationController *_instance = nil;
             DLog(@"No outcome produced by action %@ (outcome == nil); no further procesing.", actionDef.name);
         }
         else {
-			if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(handleActionResult:) withObject:[NSArray arrayWithObjects:causingOutcome, actionDef, actionOutcome, nil]];
-            else [self performSelectorOnMainThread:@selector(handleActionResult:) withObject:[NSArray arrayWithObjects:causingOutcome, actionDef, actionOutcome, nil] waitUntilDone:YES];
+			if(causingOutcome.noBackgroundProcessing) [self handleActionResult:[NSArray arrayWithObjects:causingOutcome, actionDef, actionOutcome, nil]];
+            else {
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[self handleActionResult:[NSArray arrayWithObjects:causingOutcome, actionDef, actionOutcome, nil]];
+				});
+			}
         }
     }
     @catch (NSException *e) {
@@ -513,5 +543,18 @@ static MBApplicationController *_instance = nil;
         [applicationFactory retain];
     }
 }
+
+
+#pragma mark -
+#pragma mark Outcome listeners
+
+- (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
+	if(![self.outcomeListeners containsObject:listener]) [self.outcomeListeners addObject:listener];
+}
+
+- (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
+	[self.outcomeListeners removeObject: listener];
+}
+
 
 @end

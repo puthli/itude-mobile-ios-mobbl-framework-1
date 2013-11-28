@@ -18,6 +18,7 @@
 
 @class MBPage;
 @class MBPageStackController;
+@protocol MBOutcomeListenerProtocol;
 
 // This class is the ROOT of the MEMORY ALLOCATION STRUCTURE; the root of all retains.
 // This class is pushed on UINavigationControllers or other controllers; when released it should trigger
@@ -35,5 +36,7 @@
 - (void) handleException:(NSException *) exception;
 - (void) showActivityIndicator;
 - (void) hideActivityIndicator;
+- (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
+- (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener;
 
 @end

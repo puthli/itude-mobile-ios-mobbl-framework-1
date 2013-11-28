@@ -46,6 +46,9 @@
 #import "MBStyleHandler.h"
 #import "MBViewBuilderFactory.h"
 
+#import "MBEmptyContentViewWrapper.h"
+#import "MBSlidingMenuContentViewWrapper.h"
+
 #import <objc/runtime.h>
 #import <objc/message.h>
 
@@ -81,6 +84,7 @@
 	self = [super init];
 	if (self != nil) {
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
+		_contentViewWrapper = [[[MBApplicationFactory sharedInstance] createContentViewWrapper] retain];
         self.activityIndicatorCounts = [NSMutableDictionary new];
 		self.dialogManager = [[[MBDialogManager alloc] initWithDelegate:self] autorelease];
 	}
@@ -88,6 +92,7 @@
 }
 
 - (void) dealloc {
+	[_contentViewWrapper release];
 	[_window release];
 	[_tabController release];
 	[_dialogManager release];
@@ -326,7 +331,7 @@
 
 - (void)setContentViewController:(UIViewController *)viewController {
     [self clearWindow];
-    [self.window setRootViewController:viewController];
+    [self.window setRootViewController:[self.contentViewWrapper wrapController:viewController]];
 }
 
 // Remove every view that is not the activityIndicatorView
@@ -413,7 +418,9 @@
             UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
             for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
                 if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+					dispatch_async(dispatch_get_main_queue(), ^{
                     [subview removeFromSuperview];
+					});
                 }
             }
 		}
