@@ -52,7 +52,7 @@
     if (self != nil)
     {
         self.dictionary = [[[NSMutableDictionary alloc] initWithObjects:objects forKeys:keys] autorelease];
-        self.array = [[NSMutableArray alloc] initWithArray:objects];
+        self.array = [[[NSMutableArray alloc] initWithArray:objects] autorelease];
     }
     return self;
 }

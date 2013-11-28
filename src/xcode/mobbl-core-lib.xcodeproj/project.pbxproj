@@ -22,6 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		1CC88E89171ED84200B30461 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC88E88171ED84200B30461 /* Foundation.framework */; };
+		C7493B8918479A0100928FF0 /* MBPickerControllerDelegate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7493B88184799BE00928FF0 /* MBPickerControllerDelegate.h */; };
+		C780655B1847A18F00A66076 /* MBEmptyContentViewWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E21890B918450A0800DD5AD4 /* MBEmptyContentViewWrapper.h */; };
+		C78E873B18479C0F00094E17 /* MBContentViewWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E21890BD18450A0800DD5AD4 /* MBContentViewWrapper.h */; };
 		C7A99319183509D400C63904 /* MBFireInitialOutcomes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EAFF18312A3F007D2F08 /* MBFireInitialOutcomes.h */; };
 		C7A9931A183509D400C63904 /* MBConditionalDefinition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0218312A3F007D2F08 /* MBConditionalDefinition.h */; };
 		C7A9931B183509D400C63904 /* MBConfigurationParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB0418312A3F007D2F08 /* MBConfigurationParser.h */; };
@@ -228,6 +231,7 @@
 		C7A993E4183509D500C63904 /* MBValueChangeListenerProtocol.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECBF18312A40007D2F08 /* MBValueChangeListenerProtocol.h */; };
 		C7A993E5183509D500C63904 /* MBTableViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0ECC118312A40007D2F08 /* MBTableViewController.h */; };
 		C7A993E61835107B00C63904 /* MGSplitViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EB7C18312A3F007D2F08 /* MGSplitViewController.h */; };
+		C7C6B7AC1847A06100EE2357 /* MBSlidingMenuContentViewWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E21890BB18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.h */; };
 		C7E0ECC318312A40007D2F08 /* MBFireInitialOutcomes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EB0018312A3F007D2F08 /* MBFireInitialOutcomes.m */; };
 		C7E0ECC418312A40007D2F08 /* MBConditionalDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EB0318312A3F007D2F08 /* MBConditionalDefinition.m */; };
 		C7E0ECC518312A40007D2F08 /* MBConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EB0518312A3F007D2F08 /* MBConfigurationParser.m */; };
@@ -410,8 +414,8 @@
 		C7E0ED7618312A40007D2F08 /* MBPageStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECBC18312A40007D2F08 /* MBPageStack.m */; };
 		C7E0ED7718312A40007D2F08 /* MBPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECBE18312A40007D2F08 /* MBPanel.m */; };
 		C7E0ED7818312A40007D2F08 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECC218312A40007D2F08 /* MBTableViewController.m */; };
+		C7E4F3761847A1C40063FD67 /* MBSlidingMenuContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */; };
 		E21890BE18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BA18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m */; };
-		E21890BF18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -421,6 +425,10 @@
 			dstPath = headers;
 			dstSubfolderSpec = 16;
 			files = (
+				C780655B1847A18F00A66076 /* MBEmptyContentViewWrapper.h in CopyFiles */,
+				C7C6B7AC1847A06100EE2357 /* MBSlidingMenuContentViewWrapper.h in CopyFiles */,
+				C78E873B18479C0F00094E17 /* MBContentViewWrapper.h in CopyFiles */,
+				C7493B8918479A0100928FF0 /* MBPickerControllerDelegate.h in CopyFiles */,
 				C7A993E61835107B00C63904 /* MGSplitViewController.h in CopyFiles */,
 				C7A99319183509D400C63904 /* MBFireInitialOutcomes.h in CopyFiles */,
 				C7A9931A183509D400C63904 /* MBConditionalDefinition.h in CopyFiles */,
@@ -637,6 +645,7 @@
 		00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Writing Documentation-template.txt"; sourceTree = "<group>"; };
 		1CC88E85171ED84200B30461 /* libmobbl-core-lib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmobbl-core-lib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC88E88171ED84200B30461 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C7493B88184799BE00928FF0 /* MBPickerControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPickerControllerDelegate.h; sourceTree = "<group>"; };
 		C7E0EAFF18312A3F007D2F08 /* MBFireInitialOutcomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFireInitialOutcomes.h; sourceTree = "<group>"; };
 		C7E0EB0018312A3F007D2F08 /* MBFireInitialOutcomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFireInitialOutcomes.m; sourceTree = "<group>"; };
 		C7E0EB0218312A3F007D2F08 /* MBConditionalDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBConditionalDefinition.h; sourceTree = "<group>"; };
@@ -1785,6 +1794,7 @@
 		C7E0EC8D18312A40007D2F08 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C7493B88184799BE00928FF0 /* MBPickerControllerDelegate.h */,
 				C7E0EC8E18312A40007D2F08 /* MBAlertView.h */,
 				C7E0EC8F18312A40007D2F08 /* MBAlertView.m */,
 				C7E0EC9018312A40007D2F08 /* MBDatePickerController.h */,
@@ -1907,6 +1917,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E4F3761847A1C40063FD67 /* MBSlidingMenuContentViewWrapper.m in Sources */,
 				C7E0ED2F18312A40007D2F08 /* UIView+TreeWalker.m in Sources */,
 				C7E0ECE718312A40007D2F08 /* MBViewManager.m in Sources */,
 				C7E0ECFA18312A40007D2F08 /* MGSplitViewController.m in Sources */,
@@ -2014,7 +2025,6 @@
 				C7E0ED5718312A40007D2F08 /* MBSectionPanelViewBuilder.m in Sources */,
 				C7E0ED3018312A40007D2F08 /* UncaughtExceptionHandler.m in Sources */,
 				C7E0ED0C18312A40007D2F08 /* MBSystemDataHandler.m in Sources */,
-				E21890BF18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m in Sources */,
 				C7E0ED6B18312A40007D2F08 /* MBMatrixViewController.m in Sources */,
 				C7E0ED2818312A40007D2F08 /* MBWebView.m in Sources */,
 				C7E0ED0818312A40007D2F08 /* MBMobbl1ServerDataHandler.m in Sources */,
@@ -2120,7 +2130,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
@@ -2143,7 +2153,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;

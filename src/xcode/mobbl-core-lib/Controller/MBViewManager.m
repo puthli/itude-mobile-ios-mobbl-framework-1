@@ -85,7 +85,7 @@
 	if (self != nil) {
         _window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen]bounds]];
 		_contentViewWrapper = [[[MBApplicationFactory sharedInstance] createContentViewWrapper] retain];
-        self.activityIndicatorCounts = [NSMutableDictionary new];
+        self.activityIndicatorCounts = [[NSMutableDictionary new] autorelease];
 		self.dialogManager = [[[MBDialogManager alloc] initWithDelegate:self] autorelease];
 	}
 	return self;
@@ -184,7 +184,7 @@
     if([dialogControllers count] > 1 && [self shouldCreateTabBarForDialogsControllers:dialogControllers])
 	{
         // Build the tabbar
-        self.tabController = [[UITabBarController alloc] init];
+        self.tabController = [[[UITabBarController alloc] init] autorelease];
         self.tabController.delegate = self;
         [self setContentViewController:self.tabController];
         
@@ -346,9 +346,13 @@
 #pragma mark Presenting and Dismissing (modal) ViewControllers
 
 - (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated {
+    [self presentViewController:controller fromViewController:fromViewController animated:animated completion:nil];
+}
+
+- (void)presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated completion:(void (^)(void))completion {
     // iOS 6.0 and up
     if ([fromViewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
-        [fromViewController presentViewController:controller animated:animated completion:nil];
+        [fromViewController presentViewController:controller animated:animated completion:completion];
     }
     // iOS 5.x and lower
     else {
@@ -362,9 +366,13 @@
 }
 
 - (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [self dismisViewController:controller animated:animated completion:nil];
+}
+
+- (void)dismisViewController:(UIViewController *)controller animated:(BOOL)animated completion:(void (^)(void))completion {
     // iOS 6.0 and up
     if ([controller respondsToSelector:@selector(dismissViewControllerAnimated:completion:)]) {
-        [controller dismissViewControllerAnimated:animated completion:nil];
+        [controller dismissViewControllerAnimated:animated completion:completion];
     }
     // iOS 5.x and lower
     else {
@@ -381,14 +389,20 @@
 #pragma mark Activity Indicator management
 
 - (void)showActivityIndicator {
-    [self showActivityIndicatorWithMessage:nil];
+    [self showActivityIndicatorOnDialog:nil withMessage:nil];
 }
 
 - (void)showActivityIndicatorWithMessage:(NSString *)message {
+    [self showActivityIndicatorOnDialog:nil withMessage:message];
+}
+
+- (void)showActivityIndicatorOnDialog:(MBDialogController *)dialogController {
+    [self showActivityIndicatorOnDialog:dialogController withMessage:nil];
+}
+
+- (void)showActivityIndicatorOnDialog:(MBDialogController *)dialogController withMessage:(NSString *)message {
+    UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
 	if(_activityIndicatorCount == 0) {
-		// determine the maximum bounds of the screen
-        MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
-        UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
         CGRect bounds = topMostVisibleViewController.view.bounds;
 		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
         if (message) {
@@ -397,8 +411,7 @@
         
         [topMostVisibleViewController.view addSubview:blocker];
 	}else{
-        
-        for (UIView *subview in [[[self.dialogManager pageStackControllerWithName:self.dialogManager.activePageStackName] view] subviews]) {
+        for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
             if ([subview isKindOfClass:[MBActivityIndicator class]]) {
                 MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
                 [indicatorView setMessage:message];
@@ -410,12 +423,15 @@
 }
 
 - (void)hideActivityIndicator {
+    [self hideActivityIndicatorOnDialog:nil];
+}
+
+- (void)hideActivityIndicatorOnDialog:(MBDialogController *)dialogController {
 	if(_activityIndicatorCount > 0) {
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-            MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
-            UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
+            UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
             for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
                 if ([subview isKindOfClass:[MBActivityIndicator class]]) {
 					dispatch_async(dispatch_get_main_queue(), ^{

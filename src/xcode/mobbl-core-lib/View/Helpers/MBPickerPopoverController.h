@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 #import "MBField.h"
+#import "MBPickerControllerDelegate.h"
 
-@interface MBPickerPopoverController : UITableViewController<UITableViewDelegate> {
-	MBField *_field;
-	UIPopoverController *_popover;
-}
+@interface MBPickerPopoverController : UITableViewController<UITableViewDelegate>
 
-@property (nonatomic, retain) MBField *field;
+@property (nonatomic, assign) MBField *field;
 @property (nonatomic, retain) UIPopoverController *popover;
+@property (nonatomic, assign) id<MBPickerControllerDelegate> delegate;
 
 - (id) initWithField:(MBField *)field;
 

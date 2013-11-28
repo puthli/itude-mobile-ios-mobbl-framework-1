@@ -74,7 +74,7 @@
     [_webViews release];
     [_sections release];
     [_rowsByIndexPath release];
-
+    
     [super dealloc];
 }
 
@@ -116,13 +116,13 @@
 // Register your own SectionPanelViewBuilder in the MBPanelViewBuilderFactory and return a custom view to override that,
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MBPanel *panel = (MBPanel *)[self.sections objectAtIndex:section];
-    CGRect bounds = CGRectMake(0, 0, tableView.frame.size.width, 0); 
+    CGRect bounds = CGRectMake(0, 0, tableView.frame.size.width, 0);
     return [[[MBViewBuilderFactory sharedInstance] panelViewBuilderFactory] buildPanelView:panel forParent:self.tableView withMaxBounds:bounds viewState: self.page.currentViewState];
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	// The height is set below
-	return [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)] autorelease];	
+	return [[[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)] autorelease];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -161,16 +161,16 @@
         NSString *heightString = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
         return [heightString floatValue] + C_CELL_Y_MARGIN * 2;
     }
-
+    
     MBPanel *panel = [self getRowForIndexPath:indexPath];
     return [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] heightForPanel:panel atIndexPath:indexPath forTableView:tableView];
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     MBPanel *panel = [self getRowForIndexPath:indexPath];
     UITableViewCell *cell = [[[MBViewBuilderFactory sharedInstance] rowViewBuilderFactory] buildTableViewCellFor:panel forIndexPath:indexPath viewState:self.page.currentViewState forTableView:tableView];
-
+    
     // Register any webViews in the cell
     [self.webViews removeObjectForKey:indexPath]; // Make sure no old webViews are retained
     for (UIView *subview in [cell subviewsOfClass:[MBWebView class]]) {
@@ -184,26 +184,14 @@
             [webview setFont:newFont];
             [webview refreshFont];
         }
-
+        
         [self.webViews setObject:subview forKey:indexPath];
     }
-
+    
     [self.rowsByIndexPath setObject:panel forKey:indexPath];
-
+    
     return cell;
 }
-
-// callback when pickerView value changes
--(void)observeValueForKeyPath:(NSString *)keyPath
-					 ofObject:(id)object
-					   change:(NSDictionary *)change
-					  context:(void *)context
-{
-	
-    if ([keyPath isEqual:@"value"]) {
-		[self.tableView reloadData];
-	}
-}	
 
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -217,78 +205,69 @@
     
     //Dismiss keyboard
     [self.view endEditing:YES];
-
-
+    
+    
     [self.page resignFirstResponder];
-
+    
     for (MBField *field in [panel childrenOfKind:[MBField class]]) {
-
-
-        if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]) { //ds
+        
+        
+        if ([C_FIELD_DROPDOWNLIST isEqualToString:field.type]) {
             [self fieldWasSelected:field];
-            [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
-
+            
             // iPad supports popovers, which are a nicer and better way to let the user make a choice from a dropdown list
             if ([MBDevice isPad]) {
-                MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc]
-                                                                                 initWithField:field]
-                                                                                 autorelease];
-                //picker.field = field;
+                MBPickerPopoverController *picker = [[[MBPickerPopoverController alloc] initWithField:field] autorelease];
+                picker.field = field;
+                picker.delegate = self;
                 UIView *cell = [tableView cellForRowAtIndexPath:indexPath];
                 UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:picker];
-                // We permit all arrow directions, except up and down because in 99 percent of all cases the apple framework will place the popover on a weird and ugly location with arrowDirectionUp
-                [popover presentPopoverFromRect:cell.frame inView:self.view
-                       permittedArrowDirections:UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight
-                                       animated:YES];
+                [popover presentPopoverFromRect:cell.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 picker.popover = popover;
                 [popover release];
             }
-                    // On devices with a smaller screensize it's better to use a scrollWheel
+            
+            // On devices with a smaller screensize it's better to use a scrollWheel
             else {
-                MBPickerController *pickerController = [[[MBPickerController alloc]
-                                                                             initWithNibName:@"MBPicker" bundle:nil]
-                                                                             autorelease];
+                MBPickerController *pickerController = [[[MBPickerController alloc] initWithNibName:@"MBPicker" bundle:nil] autorelease];
                 pickerController.field = field;
-                [field setViewData:pickerController
-                            forKey:@"pickerController"]; // let the page retain the picker controller
+                pickerController.delegate = self;
+                [field setViewData:pickerController forKey:@"pickerController"]; // let the page retain the picker controller
                 UIView *superview = [[[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController] view];
                 [pickerController presentWithSuperview:superview];
             }
-
-
+            
+            
         } else if ([C_FIELD_DATETIMESELECTOR isEqualToString:field.type] ||
-                [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
-                [C_FIELD_TIMESELECTOR isEqualToString:field.type] ||
-                [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
-
+                   [C_FIELD_DATESELECTOR isEqualToString:field.type] ||
+                   [C_FIELD_TIMESELECTOR isEqualToString:field.type] ||
+                   [C_FIELD_BIRTHDATE isEqualToString:field.type]) {
+            
             [self fieldWasSelected:field];
-            [field addObserver:self forKeyPath:@"value" options:NSKeyValueObservingOptionNew context:nil];
-
+            
             if ([MBDevice isPad]) {
                 MBDatePickerPopoverController *pickerController = [[[MBDatePickerPopoverController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
-                [self setupDateTimePicker:pickerController forField:field];
+                [self configureDateTimePicker:pickerController forField:field];
                 
-                //picker.field = field;
                 UIView *cell = [tableView cellForRowAtIndexPath:indexPath];
                 UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:pickerController];
-
                 
                 [popover presentPopoverFromRect:cell.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 pickerController.popover = popover;
                 [popover release];
-
+                
             }
-
+            
             else {
                 MBDatePickerController *dateTimePickerController = [[[MBDatePickerController alloc] initWithNibName:@"MBDatePicker" bundle:nil] autorelease];
-                [self setupDateTimePicker:dateTimePickerController forField:field];
+                [self configureDateTimePicker:dateTimePickerController forField:field];
                 
                 UIView *superView = [[[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController] view];
                 [dateTimePickerController presentWithSuperview:superView];
                 
             }
-
-
+            
+            
         } else if (field && [field outcomeName]) {
             [self fieldWasSelected:field];
             
@@ -297,7 +276,7 @@
                 // this covers the case when field path has an indexed expressions while the commented one does not
                 [field handleOutcome:[field outcomeName] withPathArgument:[field evaluatedDataPath]];
             }
-
+            
         }
     }
 }
@@ -316,11 +295,11 @@
 // UIWebViewDelegate methods
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
 	BOOL done = YES;
-
+    
     // reset the frame to something small, somehow this triggers UIKit to recalculate the height
     webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, 1);
     [webView sizeToFit];
-
+    
 	for (MBWebView *w in [self.webViews allValues]){
 		if (w.loading) {
 			done=NO;
@@ -348,8 +327,16 @@
 
 
 #pragma mark -
-#pragma mark MBFontChangeListenerProtocol methods
+#pragma mark MBPickerControllerDelegate
 
+// callback when pickerView value changes
+- (void)fieldValueChanged:(MBField *)field {
+    [self.tableView reloadData];
+}
+
+
+#pragma mark -
+#pragma mark MBFontChangeListenerProtocol methods
 
 -(void)showFontCustomizer:(BOOL)show {
     if (show) {
@@ -389,12 +376,15 @@
     }
 }
 
-#pragma mark -
-#pragma mark Helpers
 
-- (void)setupDateTimePicker:(MBDatePickerController *)dateTimePickerController forField:(MBField *)field {
+#pragma mark -
+#pragma mark Util
+
+- (void)configureDateTimePicker:(MBDatePickerController *)dateTimePickerController forField:(MBField *)field {
     dateTimePickerController.field = field;
-    [field setViewData:dateTimePickerController forKey:@"datePickerController"];
+    dateTimePickerController.delegate = self;
+    
+    [field setViewData:dateTimePickerController forKey:@"datePickerController"]; // let the page retain the pickerController
     
     // Determine the datePickerModeStyle
     UIDatePickerMode datePickerMode = UIDatePickerModeDateAndTime;
@@ -409,7 +399,6 @@
         dateTimePickerController.maximumDate = [NSDate date];
     }
 }
-
 
 
 @end

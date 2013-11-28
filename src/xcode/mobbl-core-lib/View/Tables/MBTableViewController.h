@@ -16,16 +16,20 @@
 
 #import "MBViewControllerProtocol.h"
 #import "MBFontChangeListenerProtocol.h"
+#import "MBPickerControllerDelegate.h"
 
 @class MBStyleHandler;
 @class MBPage;
 @class MBField;
 @class MBForEachItem;
+@class MBDatePickerController;
 
-/** Extends a convenience class in UIKit to create a TableView / List type screen based on an MBPage definition. The page definition is generally stored in the file config.xmlx or in a file referenced by config.xmlx using the <Include ... /> directive. 
+/**
+ * Extends a convenience class in UIKit to create a TableView / List type screen based on an MBPanel of type "LIST" in a MBPage definition.
+ * The page definition is generally stored in the file config.xmlx or in a file referenced by config.xmlx using the <Include ... /> directive.
  */
-@interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>{
-
+@interface MBTableViewController : UITableViewController <UIWebViewDelegate, UIGestureRecognizerDelegate, MBPickerControllerDelegate, MBViewControllerProtocol, MBFontChangeListenerProtocol>{
+    
     NSMutableArray *_sections;
     NSMutableDictionary *_webViews;
     MBStyleHandler *_styleHandler;
@@ -35,7 +39,6 @@
 }
 
 @property (nonatomic, assign) MBStyleHandler *styleHandler;
-//@property (nonatomic, retain) NSMutableDictionary *cellReferences;
 @property (nonatomic, retain) NSMutableDictionary *webViews;
 @property (nonatomic, assign) BOOL finishedLoadingWebviews;
 @property (nonatomic, assign) BOOL zoomable;
@@ -48,5 +51,13 @@
 
 @property (nonatomic, retain) NSMutableArray *sections;
 @property (nonatomic, assign) MBPage *page;
+
+/**
+ * This method is called just before the picker is shown. It configures the MBDatePickerController for the specific field types
+ * Override this method in your own TableViewController to modifiy or add aditional behaviour. Don't forget to call super.
+ * @param dateTimePickerController = The MBDatePickerController to configure.
+ * @param field = The MBField that corresponds to the dateTimePickerController
+ */
+- (void)configureDateTimePicker:(MBDatePickerController *)dateTimePickerController forField:(MBField *)field;
 
 @end

@@ -144,7 +144,7 @@ static NSString *_localeCode = nil;
 	
 	NSMutableArray *args = [NSMutableArray array];
 	
-	id eachObject;
+	id eachObject = nil;
 	va_list argumentList;
 	if (argument)                      // The first argument isn't part of the varargs list,
 	{                                   // so we'll handle it separately.

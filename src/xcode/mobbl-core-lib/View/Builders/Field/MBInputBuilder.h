@@ -20,6 +20,9 @@
 
 @interface MBInputBuilder : MBFieldViewBuilder
 
+-(UILabel *)buildLabelForField:(MBField *)field withMaxBounds:(CGRect)bounds;
+-(UITextField *)buildTextFieldForField:(MBField *)field withMaxBounds:(CGRect)bounds;
+
 -(void)configureLabel:(UILabel *)label forField:(MBField *)field;
 -(void)configureTextField:(UITextField *)textField forField:(MBField *)field;
 

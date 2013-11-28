@@ -34,9 +34,6 @@
     
     CGRect fieldBounds = [[self styleHandler] sizeForTextField:field withMaxBounds:bounds];
 	UITextField *textField = [[[UITextField alloc]initWithFrame: fieldBounds] autorelease];
-    
-    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
-    textField.placeholder = field.hint;
     [self configureTextField:textField forField:field];
     return textField;
 }
@@ -55,9 +52,9 @@
     // Create the textField
 	UITextField *textField = [self buildTextFieldForField:field withMaxBounds:CGRectMake(0.0, 0.0, bounds.size.width, bounds.size.height)];
     [fieldContainer addSubview:textField];
-
+    
 	return fieldContainer;
-
+    
 }
 
 -(void)configureLabel:(UILabel *)label forField:(MBField *)field {
@@ -80,6 +77,8 @@
 		textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	}
     
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
+    textField.placeholder = field.hint;
 	textField.text = [field value];
 	textField.delegate = field;
 	textField.enabled = TRUE;
