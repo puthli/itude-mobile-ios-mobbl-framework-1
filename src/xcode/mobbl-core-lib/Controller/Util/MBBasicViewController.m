@@ -50,25 +50,11 @@
 
 - (void) dealloc
 {
-	NSLog(@"deallocing");
-
     [_page release];
     [_pageStackController release];
 	[_outcomeListeners release];
     [super dealloc];
 }
-
--(oneway void)release
-{
-	NSLog(@"releasing %i - 1 = %i", [self retainCount], [self retainCount]-1);
-	[super release];
-}
-
--(id)retain {
-	NSLog(@"retaining %i + 1 = %i", [self retainCount], [self retainCount]+1);
-	return [super retain];
-}
-
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -78,7 +64,6 @@
 }
 
 -(void)didMoveToParentViewController:(UIViewController *)parent {
-	NSLog(@"Moving");
 	[super didMoveToParentViewController:parent];
 
 	if (!parent) {
@@ -165,7 +150,6 @@
 		[[MBApplicationController currentInstance] unregisterOutcomeListener:lsnr];
 	}
 
-	NSLog(@"Hiding..");
 	for (id childView in [self.view subviews]){
 		if ([childView respondsToSelector:@selector(delegate)]) {
 			id delegate = [childView delegate];
