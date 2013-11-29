@@ -148,14 +148,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSDateFormatter *dateFormatter = [threadDictionary objectForKey: @"DateFromXmlDateFormatter"];
     if (dateFormatter == nil)
     {
-		@synchronized(self){
-			dateFormatter = [[[_instance dateFormatterToFormatDateFromXml] copy] autorelease];
-			[threadDictionary setObject: dateFormatter forKey: @"DateFromXmlDateFormatter"];
-		}
+		dateFormatter = [[[_instance dateFormatterToFormatDateFromXml] copy] autorelease];
+		[threadDictionary setObject: dateFormatter forKey: @"DateFromXmlDateFormatter"];
     }
     return dateFormatter;
-	
-	// return [_instance dateFormatterToFormatDateFromXml]; // This is NOT threadsafe!!!
 }
 
 + (NSDateFormatter *)dateFormatterToFormatDateDependingOnCurrentDate{
@@ -165,14 +161,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSDateFormatter *dateFormatter = [threadDictionary objectForKey: @"DateDependingOnDateDateFormatter"];
     if (dateFormatter == nil)
     {
-		@synchronized(self){
-			dateFormatter = [[[_instance dateFormatterToFormatDateDependingOnCurrentDate] copy] autorelease];
-			[threadDictionary setObject: dateFormatter forKey: @"DateDependingOnDateDateFormatter"];
-		}
+		dateFormatter = [[[_instance dateFormatterToFormatDateDependingOnCurrentDate] copy] autorelease];
+		[threadDictionary setObject: dateFormatter forKey: @"DateDependingOnDateDateFormatter"];
     }
     return dateFormatter;
-	
-	//return [_instance dateFormatterToFormatDateDependingOnCurrentDate]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatPriceWithMinimalDecimals {
@@ -182,14 +174,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"priceWithMinimalDecimalsNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance priceWithMinimalDecimalsNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"priceWithMinimalDecimalsNumberFormatter"];
-		}
+		numberFormatter = [[[_instance priceWithMinimalDecimalsNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"priceWithMinimalDecimalsNumberFormatter"];
     }
     return numberFormatter;
-	
-	//return [_instance priceWithMinimalDecimalsNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatPriceWithTwoDecimals {
@@ -199,14 +187,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"priceWithTwoDecimalsNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance priceWithTwoDecimalsNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"priceWithTwoDecimalsNumberFormatter"];
-		}
+		numberFormatter = [[[_instance priceWithTwoDecimalsNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"priceWithTwoDecimalsNumberFormatter"];
     }
     return numberFormatter;
-	
-	//return [_instance priceWithTwoDecimalsNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatPriceWithThreeDecimals {
@@ -216,14 +200,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"priceWithThreeDecimalsNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance priceWithThreeDecimalsNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"priceWithThreeDecimalsNumberFormatter"];
-		}
+		numberFormatter = [[[_instance priceWithThreeDecimalsNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"priceWithThreeDecimalsNumberFormatter"];
     }
     return numberFormatter;
-	
-	//return [_instance priceWithThreeDecimalsNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatVolume {
@@ -233,14 +213,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"volumeNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance volumeNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"volumeNumberFormatter"];
-		}
+		numberFormatter = [[[_instance volumeNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"volumeNumberFormatter"];
     }
     return numberFormatter;
-	
-	//return [_instance volumeNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatNumberWithOriginalNumberOfDecimals {
@@ -250,14 +226,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"numberWithOriginalNumberOfDecimalsNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance numberWithOriginalNumberOfDecimalsNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"numberWithOriginalNumberOfDecimalsNumberFormatter"];
-		}
-    }
+		numberFormatter = [[[_instance numberWithOriginalNumberOfDecimalsNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"numberWithOriginalNumberOfDecimalsNumberFormatter"];
+	}
     return numberFormatter;
-	
-	//return [_instance numberWithOriginalNumberOfDecimalsNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatNumberWithTwoDecimals {
@@ -267,14 +239,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"numberWithTwoDecimalsNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance numberWithTwoDecimalsNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"numberWithTwoDecimalsNumberFormatter"];
-		}
+		numberFormatter = [[[_instance numberWithTwoDecimalsNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"numberWithTwoDecimalsNumberFormatter"];
     }
     return numberFormatter;
-	
-	// return [_instance numberWithTwoDecimalsNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 + (NSNumberFormatter *)numberFormatterToFormatNumberWithThreeDecimals {
@@ -284,14 +252,10 @@ static StringUtilitiesHelper *_instance = nil;
     NSNumberFormatter *numberFormatter = [threadDictionary objectForKey: @"numberWithThreeDecimalsNumberFormatter"];
     if (numberFormatter == nil)
     {
-		@synchronized(self){
-			numberFormatter = [[[_instance numberWithThreeDecimalsNumberFormatter] copy] autorelease];
-			[threadDictionary setObject: numberFormatter forKey: @"numberWithThreeDecimalsNumberFormatter"];
-		}
+		numberFormatter = [[[_instance numberWithThreeDecimalsNumberFormatter] copy] autorelease];
+		[threadDictionary setObject: numberFormatter forKey: @"numberWithThreeDecimalsNumberFormatter"];
     }
     return numberFormatter;
-	
-	// return [_instance numberWithThreeDecimalsNumberFormatter]; // This is NOT threadsafe!!!
 }
 
 @end
