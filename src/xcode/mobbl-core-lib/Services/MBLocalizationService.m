@@ -144,13 +144,13 @@ static NSString *_localeCode = nil;
 	
 	NSMutableArray *args = [NSMutableArray array];
 	
-	id eachObject;
+	id eachObject = nil;
 	va_list argumentList;
 	if (argument)                      // The first argument isn't part of the varargs list,
 	{                                   // so we'll handle it separately.
 		[args addObject: argument];
 		va_start(argumentList, argument);          // Start scanning for arguments after argument.
-		while (eachObject == va_arg(argumentList, id)) // As many times as we can get an argument of type "id"
+		while ((eachObject = va_arg(argumentList, id))) // As many times as we can get an argument of type "id"
 			[args addObject: eachObject];             // that isn't nil, add it to self's contents.
 		va_end(argumentList);
 	}

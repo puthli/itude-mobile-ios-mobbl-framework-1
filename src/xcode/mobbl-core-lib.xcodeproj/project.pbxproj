@@ -412,6 +412,7 @@
 		C7E0ED7818312A40007D2F08 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0ECC218312A40007D2F08 /* MBTableViewController.m */; };
 		E21890BE18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BA18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m */; };
 		E21890BF18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */; };
+		E2189DAA1848A94600DD5AD4 /* MBOutcomeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E2189DA91848A94600DD5AD4 /* MBOutcomeManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1058,6 +1059,8 @@
 		E21890BB18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSlidingMenuContentViewWrapper.h; sourceTree = "<group>"; };
 		E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSlidingMenuContentViewWrapper.m; sourceTree = "<group>"; };
 		E21890BD18450A0800DD5AD4 /* MBContentViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBContentViewWrapper.h; sourceTree = "<group>"; };
+		E2189DA81848A94600DD5AD4 /* MBOutcomeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOutcomeManager.h; sourceTree = "<group>"; };
+		E2189DA91848A94600DD5AD4 /* MBOutcomeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOutcomeManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1240,6 +1243,8 @@
 				C7E0EB4918312A3F007D2F08 /* MBDialogManager.m */,
 				C7E0EB4A18312A3F007D2F08 /* MBOutcome.h */,
 				C7E0EB4B18312A3F007D2F08 /* MBOutcome.m */,
+				E2189DA81848A94600DD5AD4 /* MBOutcomeManager.h */,
+				E2189DA91848A94600DD5AD4 /* MBOutcomeManager.m */,
 				C7E0EB4C18312A3F007D2F08 /* MBPageStackController.h */,
 				C7E0EB4D18312A3F007D2F08 /* MBPageStackController.m */,
 				C7E0EB4E18312A3F007D2F08 /* MBViewManager.h */,
@@ -1936,6 +1941,7 @@
 				C7E0ECC718312A40007D2F08 /* MBActionDefinition.m in Sources */,
 				C7E0ED6718312A40007D2F08 /* MBSpinner.m in Sources */,
 				C7E0ED0218312A40007D2F08 /* MBMobbl1DocumentParser.m in Sources */,
+				E2189DAA1848A94600DD5AD4 /* MBOutcomeManager.m in Sources */,
 				C7E0ED4F18312A40007D2F08 /* MBViewBuilder.m in Sources */,
 				C7E0ECFD18312A40007D2F08 /* MBDocumentFactory.m in Sources */,
 				C7E0ED0918312A40007D2F08 /* MBRESTGetServiceDataHandler.m in Sources */,

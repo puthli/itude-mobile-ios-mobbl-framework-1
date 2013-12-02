@@ -414,15 +414,16 @@
 		_activityIndicatorCount--;
 		
 		if(_activityIndicatorCount == 0) {
-            MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
-            UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
-            for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
-                if ([subview isKindOfClass:[MBActivityIndicator class]]) {
-					dispatch_async(dispatch_get_main_queue(), ^{
-                    [subview removeFromSuperview];
-					});
-                }
-            }
+			dispatch_async(dispatch_get_main_queue(), ^{
+
+				MBDialogController *activeDialog = [[self dialogManager] dialogWithName:[[self dialogManager] activeDialogName]];
+				UIViewController *topMostVisibleViewController = activeDialog.rootViewController;
+				for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
+					if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+						[subview removeFromSuperview];
+					}
+				}
+			});
 		}
 	}
 }
@@ -560,13 +561,15 @@
     
     // If we have more than one viewController visible
     if (self.tabController) {
-        // Only set the selected tab if realy necessary; because it messes up the more navigation controller
-        NSInteger idx = _tabController.selectedIndex;
-        NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
-        
-        if(idx != shouldBe && shouldBe!=NSNotFound) {
-            [self.tabController setSelectedIndex:shouldBe];
-        }
+		dispatch_async(dispatch_get_main_queue(), ^{
+			// Only set the selected tab if realy necessary; because it messes up the more navigation controller
+			NSInteger idx = _tabController.selectedIndex;
+			NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
+			
+			if(idx != shouldBe && shouldBe!=NSNotFound) {
+				[self.tabController setSelectedIndex:shouldBe];
+			}
+		});
     }
     
 }

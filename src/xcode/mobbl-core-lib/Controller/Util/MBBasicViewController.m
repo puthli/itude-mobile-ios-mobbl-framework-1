@@ -68,7 +68,7 @@
 
 	if (!parent) {
 	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
-		[[MBApplicationController currentInstance] unregisterOutcomeListener:lsnr];
+		[[MBApplicationController currentInstance].outcomeManager unregisterOutcomeListener:lsnr];
 	}
 	self.outcomeListeners = nil;
 }
@@ -109,7 +109,7 @@
 	// register all outcome listeners with the application controller; this view controller just became
 	// visible, so it is interested in outcomes
 	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
-		[[MBApplicationController currentInstance] registerOutcomeListener:lsnr];
+		[[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:lsnr];
 	}
 
 
@@ -147,7 +147,7 @@
 	// remove all outcome listeners from the application controller; this view controller
 	// is going to disappear, so it isn't interested in them anumore
 	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
-		[[MBApplicationController currentInstance] unregisterOutcomeListener:lsnr];
+		[[MBApplicationController currentInstance].outcomeManager unregisterOutcomeListener:lsnr];
 	}
 
 	for (id childView in [self.view subviews]){
@@ -166,12 +166,12 @@
 - (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
 	if(![self.outcomeListeners containsObject:listener]) {
 		[self.outcomeListeners addObject:listener];
-		[[MBApplicationController currentInstance] registerOutcomeListener:listener];
+		[[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:listener];
 	}
 }
 
 - (void) unregisterOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
-	[[MBApplicationController currentInstance] unregisterOutcomeListener:listener];
+	[[MBApplicationController currentInstance].outcomeManager unregisterOutcomeListener:listener];
 	[self.outcomeListeners removeObject: listener];
 }
 

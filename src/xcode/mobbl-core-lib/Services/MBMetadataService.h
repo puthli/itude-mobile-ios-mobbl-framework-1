@@ -85,8 +85,6 @@
 -(MBAlertDefinition *) definitionForAlertName:(NSString *)alertName throwIfInvalid:(BOOL) doThrow;
 
 /// @name Controller layer definitions
--(MBActionDefinition *) definitionForActionName:(NSString *)actionName;
--(MBActionDefinition *) definitionForActionName:(NSString *)actionName throwIfInvalid:(BOOL) doThrow;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *)originName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName;
 -(NSArray *) outcomeDefinitionsForOrigin:(NSString *) originName outcomeName:(NSString*) outcomeName throwIfInvalid:(BOOL) doThrow;
