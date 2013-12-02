@@ -78,6 +78,12 @@
 	THREAD_RELEASE
 }
 
+void runOnMain(void (^block)(void)) {
+	if ([NSThread isMainThread])
+		block ();
+	else dispatch_sync(dispatch_get_main_queue(), block);
+}
+
 - (void) doHandleOutcome:(MBOutcome *)outcome {
 	THREAD_DUMP("doHandleOutcome");
 	NSLog(@"MBApplicationController:handleOutcome: %@", outcome);
@@ -149,25 +155,27 @@
 
 					if(outcomeToProcess.pageStackName != nil) [pageStacks addObject: outcomeToProcess.pageStackName];
 
-					if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
-						MBDialogController *dialog = [[MBApplicationController currentInstance].viewManager.dialogManager dialogForPageStackName:outcomeToProcess.pageStackName];
-						[[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] dismissDialog:dialog withTransitionStyle:outcomeToProcess.transitionStyle];
-					}
+					runOnMain(^{
+						if([@"ENDMODAL" isEqualToString: outcomeToProcess.displayMode]) {
+							MBDialogController *dialog = [[MBApplicationController currentInstance].viewManager.dialogManager dialogForPageStackName:outcomeToProcess.pageStackName];
+							[[[MBViewBuilderFactory sharedInstance] dialogDecoratorFactory] dismissDialog:dialog withTransitionStyle:outcomeToProcess.transitionStyle];
+						}
 
-					else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {
-						// TODO: This causes a bug when the user desides to pop the rootViewController
-						[[MBApplicationController currentInstance].viewManager.dialogManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];
-					}
-					else if([@"POPALL" isEqualToString: outcomeToProcess.displayMode]) {
-						[[MBApplicationController currentInstance].viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];
-					}
-					else if([@"CLEAR" isEqualToString: outcomeToProcess.displayMode]) {
-						[[MBApplicationController currentInstance].viewManager resetView];
-					}
-					else if([@"END" isEqualToString: outcomeToProcess.displayMode]) {
-						[[MBApplicationController currentInstance].viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];
-						[pageStacks removeObject:outcomeToProcess.pageStackName];
-					}
+						else if([@"POP" isEqualToString: outcomeToProcess.displayMode]) {
+							// TODO: This causes a bug when the user desides to pop the rootViewController
+							[[MBApplicationController currentInstance].viewManager.dialogManager popPageOnPageStackWithName: outcomeToProcess.pageStackName];
+						}
+						else if([@"POPALL" isEqualToString: outcomeToProcess.displayMode]) {
+							[[MBApplicationController currentInstance].viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition:TRUE];
+						}
+						else if([@"CLEAR" isEqualToString: outcomeToProcess.displayMode]) {
+							[[MBApplicationController currentInstance].viewManager resetView];
+						}
+						else if([@"END" isEqualToString: outcomeToProcess.displayMode]) {
+							[[MBApplicationController currentInstance].viewManager.dialogManager endPageStackWithName: outcomeToProcess.pageStackName keepPosition: FALSE];
+							[pageStacks removeObject:outcomeToProcess.pageStackName];
+						}
+					});
 
 
 					// Action
@@ -201,7 +209,7 @@
 				}
 			};
 
-			if (outcome.noBackgroundProcessing) {
+			if (outcomeToProcess.noBackgroundProcessing) {
 				if (dispatch_get_current_queue() == self.queue) actuallyProcessOutcome();
 				else dispatch_sync(self.queue, actuallyProcessOutcome);
 			} else {
@@ -210,13 +218,14 @@
 		}
 	}
 
-
+	dispatch_async(self.queue, ^{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		// notify all outcome listeners
 		for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
 			if ([lsnr respondsToSelector:@selector(outcomeHandled:)])
 				[lsnr outcomeHandled:outcome];
 		}});
+	});
 	THREAD_RELEASE
 }
 
@@ -292,7 +301,7 @@
 			viewState = MBViewStateModal;
 		}
 
-		dispatch_sync(dispatch_get_main_queue(), ^{
+		runOnMain(^{
 			THREAD_DUMP("showResultingPage (inner block)")
         MBPageDefinition *pageDefinition = [args objectAtIndex:1];
         MBDocument *document = [args objectAtIndex:2];

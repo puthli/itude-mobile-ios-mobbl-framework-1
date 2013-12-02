@@ -66,7 +66,6 @@
 	self.mainController = controller;
 
 
-	self.view.backgroundColor = [UIColor greenColor];
 	[self.view addSubview:self.mainController.view];
     [self addChildViewController:self.mainController];
 
