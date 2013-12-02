@@ -51,7 +51,7 @@
 	self = [super init];
 	if (self != nil) {
 		_outcomeListeners = [[NSMutableArray array] retain];
-		_queue = dispatch_queue_create("com.itude.mobbl.OutcomeQueue", NULL);
+		_queue = dispatch_queue_create("com.itude.mobbl.OutcomeQueue", DISPATCH_QUEUE_SERIAL);
 	}
 	return self;
 }
@@ -193,7 +193,7 @@ void runOnMain(void (^block)(void)) {
 						if(!outcomeToProcess.noBackgroundProcessing)
 							[[MBApplicationController currentInstance].viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 
-							[self preparePageInBackground:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name, nil]];
+							[self preparePageInBackground:@[[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name]];
 					}
 
 					// Alert
@@ -209,7 +209,7 @@ void runOnMain(void (^block)(void)) {
 				}
 			};
 
-			if (outcomeToProcess.noBackgroundProcessing) {
+			if ( outcomeToProcess.noBackgroundProcessing) {
 				if (dispatch_get_current_queue() == self.queue) actuallyProcessOutcome();
 				else dispatch_sync(self.queue, actuallyProcessOutcome);
 			} else {
@@ -303,18 +303,17 @@ void runOnMain(void (^block)(void)) {
 
 		runOnMain(^{
 			THREAD_DUMP("showResultingPage (inner block)")
-        MBPageDefinition *pageDefinition = [args objectAtIndex:1];
-        MBDocument *document = [args objectAtIndex:2];
-        CGRect bounds = [MBApplicationController currentInstance].viewManager.bounds;
+			MBPageDefinition *pageDefinition = [args objectAtIndex:1];
+			MBDocument *document = [args objectAtIndex:2];
+			CGRect bounds = [MBApplicationController currentInstance].viewManager.bounds;
 
-        MBPage *page = [[MBApplicationController currentInstance].applicationFactory createPage:pageDefinition
-											  document: document
-											  rootPath: causingOutcome.path
-											 viewState: viewState
-										 withMaxBounds: bounds];
-        page.applicationController = [MBApplicationController currentInstance];
-        page.pageStackName = causingOutcome.pageStackName;
-
+			MBPage *page = [[MBApplicationController currentInstance].applicationFactory createPage:pageDefinition
+												  document: document
+												  rootPath: causingOutcome.path
+												 viewState: viewState
+											 withMaxBounds: bounds];
+			page.applicationController = [MBApplicationController currentInstance];
+			page.pageStackName = causingOutcome.pageStackName;
 
 	        [[MBApplicationController currentInstance].viewManager showPage: page displayMode: displayMode transitionStyle: transitionStyle];
 			THREAD_RELEASE

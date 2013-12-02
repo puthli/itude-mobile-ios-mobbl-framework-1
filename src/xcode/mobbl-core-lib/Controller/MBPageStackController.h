@@ -19,6 +19,7 @@
 #import "MBNotificationTypes.h"
 
 @class MBDialogController;
+@class MBBasicViewController;
 
 @interface MBPageStackController : NSObject <UINavigationControllerDelegate>
 
@@ -47,6 +48,5 @@
 - (NSString *)dialogName;
 
 - (void) resetView;
-
 
 @end
