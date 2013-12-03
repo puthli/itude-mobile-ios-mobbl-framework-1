@@ -31,10 +31,14 @@
 #import <CoreFoundation/CoreFoundation.h>
 
 
+#ifdef DEBUG
 #define THREAD_DUMP(n) CFAbsoluteTime time = CFAbsoluteTimeGetCurrent (); const char *method = n; NSLog(@"Method: %s Thread: %s Queue: %s", n, [[NSThread currentThread] isMainThread] ? "main" : "other", dispatch_queue_get_label (dispatch_get_current_queue ()));
 
 #define THREAD_RELEASE NSLog (@"Leaving %s Time: %f", method, (CFAbsoluteTimeGetCurrent () - time));
-
+#else
+#define THREAD_DUMP(n)
+#define THREAD_RELEASE
+#endif
 
 
 @interface MBOutcomeManager ()
