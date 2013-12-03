@@ -118,17 +118,17 @@
 	}
     
     page.transitionStyle = transitionStyle;
-	((MBBasicViewController*)page.viewController).pageStackController = self;
-    
-    __block UINavigationController *nav = self.navigationController;
-	__block MBBasicViewController *viewController = [page.viewController retain];
+
+	UINavigationController *nav = self.navigationController;
+	MBBasicViewController *viewController = (MBBasicViewController*)[page.viewController retain];
+
+	viewController.pageStackController = self;
 	
     // Apply transitionStyle for a regular page navigation
     id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
     [style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		NSLog(@"WAIT");
 		dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[viewController autorelease];
@@ -197,7 +197,6 @@
 	_navigationController = viewController.navigationController;
     [self didActivate];
 	if (self.needsRelease) {
-		NSLog (@"RELEASE");
 		self.needsRelease = false;
 		dispatch_semaphore_signal(self.navigationSemaphore);
 	}
