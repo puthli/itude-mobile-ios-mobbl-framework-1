@@ -165,8 +165,14 @@
         // Regular navigation to new page
         animated = [style animated];
     }
-    
-	[nav popViewControllerAnimated:animated];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
+		dispatch_async(dispatch_get_main_queue(), ^{
+			self.needsRelease = true;
+
+			[nav popViewControllerAnimated:animated];
+		});
+	});
 }
 
 -(void) doRebuild {

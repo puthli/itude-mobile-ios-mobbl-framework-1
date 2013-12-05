@@ -39,9 +39,8 @@
 @synthesize page = _page;
 @synthesize pageStackController = _pageStackController;
 
-- (id)init
-{
-    self = [super init];
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 		_outcomeListeners = [[NSMutableArray array] retain];
     }
@@ -106,13 +105,6 @@
 #pragma mark View lifecycle delegate methods
 
 -(void) viewDidAppear:(BOOL)animated {
-	// register all outcome listeners with the application controller; this view controller just became
-	// visible, so it is interested in outcomes
-	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
-		[[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:lsnr];
-	}
-
-
 	for (id childView in [self.view subviews]){
 		if ([childView respondsToSelector:@selector(delegate)]) {
 			id delegate = [childView delegate];
@@ -122,6 +114,12 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+	// register all outcome listeners with the application controller; this view controller just became
+	// visible, so it is interested in outcomes
+	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+		[[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:lsnr];
+	}
+
 	for (id childView in [self.view subviews]){
 		if ([childView respondsToSelector:@selector(delegate)]) {
 			id delegate = [childView delegate];
