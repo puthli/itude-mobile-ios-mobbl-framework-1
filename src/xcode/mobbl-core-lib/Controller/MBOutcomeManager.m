@@ -197,7 +197,7 @@ void runOnMain(void (^block)(void)) {
 						if(!outcomeToProcess.noBackgroundProcessing)
 							[[MBApplicationController currentInstance].viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 
-							[self preparePageInBackground:@[[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name]];
+						[self preparePageInBackground:@[[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name]];
 					}
 
 					// Alert
