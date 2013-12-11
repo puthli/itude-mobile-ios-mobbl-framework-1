@@ -1,0 +1,39 @@
+<Configuration xmlns="http://itude.com/schemas/MB/2.0">
+    <View>	
+        <Dialogs>
+
+            <!-- Modal -->
+            <Dialog name="DIALOG-modal" decorator="MODAL" contentType="SINGLE" >
+                <PageStack name="PAGESTACK-modal" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modal-closable" decorator="MODALWITHCLOSEBUTTON" contentType="SINGLE" closable="TRUE" >
+                <PageStack name="PAGESTACK-modal-closable" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalformsheet" decorator="MODALFORMSHEET" contentType="SINGLE" >
+                <PageStack name="PAGESTACK-modalformsheet" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalformsheet-closable" decorator="MODALFORMSHEETWITHCLOSEBUTTON" contentType="SINGLE" closable="TRUE" >
+                <PageStack name="PAGESTACK-modalformsheet-closable" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalpagesheet" decorator="MODALPAGESHEET" contentType="SINGLE" >
+                <PageStack name="PAGESTACK-modalpagesheet" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalpagesheet-closable" decorator="MODALPAGESHEETWITHCLOSEBUTTON" contentType="SINGLE" closable="TRUE" >
+                <PageStack name="PAGESTACK-modalpagesheet-closable" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalfullscreen" decorator="MODALFULLSCREEN" contentType="SINGLE" >
+                <PageStack name="PAGESTACK-modalfullscreen" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalfullscreen-closable" decorator="MODALFULLSCREENWITHCLOSEBUTTON" contentType="SINGLE" closable="TRUE" >
+                <PageStack name="PAGESTACK-modalfullscreen-closable" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalcurrentcontext" decorator="MODALCURRENTCONTEXT" contentType="SINGLE" >
+                <PageStack name="PAGESTACK-modalcurrentcontext" title="Modal"/>
+            </Dialog>
+            <Dialog name="DIALOG-modalcurrentcontext-closable" decorator="MODALCURRENTCONTEXTWITHCLOSEBUTTON" contentType="SINGLE" closable="TRUE" >
+                <PageStack name="PAGESTACK-modalcurrentcontext-closable" title="Modal"/>
+            </Dialog>
+            
+        </Dialogs>
+	</View>
+</Configuration>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.itude.mobile.ios.mobbl</groupId>
+	<artifactId>mobbl-core-framework</artifactId>
+	<version>0.0.1.3-SNAPSHOT</version>
+	<packaging>xcode-framework</packaging>
+	<name>iOS Mobbl Core Framework</name>
+	<description>iOS Mobbl Core Framework</description>
+	<url>http://www.itude.com</url>
+	<inceptionYear>2013</inceptionYear>
+	<developers>
+		<developer>
+			<name>Ricardo de Wilde</name>
+			<id>r.dewilde</id>
+			<roles>
+				<role>Contributor</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Wiebe Elsinga</name>
+			<id>w.elsinga</id>
+			<roles>
+				<role>Contributor</role>
+			</roles>
+		</developer>
+	</developers>
+	
+	<issueManagement>
+		<url>https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+	
+	<scm>
+		<url>https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework</url>
+		<connection>scm:git:git://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework.git</connection>
+		<developerConnection>scm:git:git@github.com:ItudeMobile/itude-mobile-ios-mobbl-framework.git</developerConnection>
+	</scm>
+	
+	<build>
+	    <plugins>
+	    	<plugin>
+	        	<groupId>com.sap.prd.mobile.ios.mios</groupId>
+		        <artifactId>xcode-maven-plugin</artifactId>
+		        <version>1.13.0</version>
+	    	    <extensions>true</extensions>
+        		<!-- optional configurations, e.g.-->
+          		<configuration>
+             		<!-- Earlier versions of the xcode-maven-plugin created only one
+                  		framework. The configuration for that the framework should
+                  		be built was specified with property below. For backward
+                  		compatibility the corresponding artifact is still deployed and
+                  		it is still possible to provide the configuration below.
+                  		Since version 1.9.3 the frameworks are created by default for the
+                  		configurations "Debug" and "Release". In case frameworks should be built
+                  		for other configurations these configurations needs to be specified
+                  		by the configurations sections mentioned below.
+               		-->
+               		<primaryFmwkConfiguration>Release</primaryFmwkConfiguration>
+	         		<!-- Note that the framework project will be built by default
+	         		for both Release and Debug configurations. If you want not to built
+	         		for both, you should specify the desired configuration here -->
+	 	            <configurations>
+	 	            	<configuration>Debug</configuration>
+	 	            	<configuration>Release</configuration>
+	 	            </configurations>
+	 	        </configuration>
+	 	    </plugin>
+	 	</plugins>
+	 </build>
+	  
+	<properties>
+        <ios.version>7.0</ios.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>  
+	  
+	  <repositories>
+		<repository>
+			<id>itudemobile-github-repository</id>
+			<name>ItudeMobile Github repository</name>
+			<url>http://itudemobile.github.io/maven-repository/releases</url>
+		</repository>
+	</repositories>
+	  
+</project>
+
+
+          

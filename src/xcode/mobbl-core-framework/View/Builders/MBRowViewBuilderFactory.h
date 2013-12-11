@@ -1,0 +1,43 @@
+/*
+ * (C) Copyright Itude Mobile B.V., The Netherlands.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#import <Foundation/Foundation.h>
+#import "MBTypes.h"
+#import "MBRowTypes.h"
+
+@protocol MBRowViewBuilder;
+@class MBPanel;
+
+/**
+* Factory for MBRowViewBuilder instances.
+*/
+@interface MBRowViewBuilderFactory : NSObject
+
+/// @name Registering MBRowViewBuilder instances
+- (void)registerRowViewBuilder:(id<MBRowViewBuilder>)rowViewBuilder forRowType:(NSString*)type forRowStyle:(NSString *)style;
+- (void)registerRowViewBuilder:(id<MBRowViewBuilder>)rowViewBuilder forRowType:(NSString*)type;
+
+
+
+/// @name Getting a MBRowViewBuilder instance
+@property (nonatomic, retain) id<MBRowViewBuilder> defaultBuilder;
+- (id<MBRowViewBuilder>)builderForType:(NSString *)type withStyle:(NSString*)style;
+
+/// @name Implementation of MBRowViewBuilder protocol
+-(UITableViewCell *)buildTableViewCellFor:(MBPanel *)panel forIndexPath:(NSIndexPath *)indexPath viewState:(MBViewState)viewState forTableView:(UITableView *)tableView;
+- (CGFloat)heightForPanel:(MBPanel *)panel atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView;
+
+@end
