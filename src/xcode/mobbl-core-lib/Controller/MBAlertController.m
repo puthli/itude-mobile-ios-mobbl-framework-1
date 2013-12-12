@@ -52,55 +52,51 @@
 - (void)prepareAlertInBackground:(NSArray *)args {
     
     MBOutcome *causingOutcome = [args objectAtIndex:0];
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    @try {
-        
-        
-        NSString *alertName = [args objectAtIndex:1];
-        
-        // construct the alert
-        MBAlertDefinition *alertDefinition = [[MBMetadataService sharedInstance] definitionForAlertName:alertName];
-        
-		// Load the document from the store
-		MBDocument *document = nil;
-		if(causingOutcome.transferDocument) {
-			if(causingOutcome.document == nil)  {
-				NSString *msg = [NSString stringWithFormat:@"No document provided (nil) in outcome by action/alert=%@ but transferDocument='TRUE' in outcome definition", causingOutcome.originName];
-				@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
+	@autoreleasepool {
+		@try {
+			
+			
+			NSString *alertName = [args objectAtIndex:1];
+			
+			// construct the alert
+			MBAlertDefinition *alertDefinition = [[MBMetadataService sharedInstance] definitionForAlertName:alertName];
+			
+			// Load the document from the store
+			MBDocument *document = nil;
+			if(causingOutcome.transferDocument) {
+				if(causingOutcome.document == nil)  {
+					NSString *msg = [NSString stringWithFormat:@"No document provided (nil) in outcome by action/alert=%@ but transferDocument='TRUE' in outcome definition", causingOutcome.originName];
+					@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
+				}
+				NSString *actualType =  [[causingOutcome.document definition] name];
+				if(![actualType isEqualToString: [alertDefinition documentName]]) {
+					NSString *msg = [NSString stringWithFormat:@"Document provided via outcome by action/alert=%@ (transferDocument='TRUE') is of type %@ but must be of type %@",
+									 causingOutcome.originName, actualType, [alertDefinition documentName]];
+					@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
+				}
+				document = causingOutcome.document;
 			}
-			NSString *actualType =  [[causingOutcome.document definition] name];
-			if(![actualType isEqualToString: [alertDefinition documentName]]) {
-				NSString *msg = [NSString stringWithFormat:@"Document provided via outcome by action/alert=%@ (transferDocument='TRUE') is of type %@ but must be of type %@",
-								 causingOutcome.originName, actualType, [alertDefinition documentName]];
-				@throw [NSException exceptionWithName:@"InvalidOutcome" reason:msg userInfo:nil];
-			}
-			document = causingOutcome.document;
-		}
-		else {
-			document = [[MBDataManagerService sharedInstance] loadDocument:[alertDefinition documentName]];
-            
-			if(document == nil) {
+			else {
 				document = [[MBDataManagerService sharedInstance] loadDocument:[alertDefinition documentName]];
-				NSString *msg = [NSString stringWithFormat:@"Document with name %@ not found (check filesystem/webservice)", [alertDefinition documentName]];
-				@throw [NSException exceptionWithName:@"NoDocument" reason:msg userInfo:nil];
+				
+				if(document == nil) {
+					document = [[MBDataManagerService sharedInstance] loadDocument:[alertDefinition documentName]];
+					NSString *msg = [NSString stringWithFormat:@"Document with name %@ not found (check filesystem/webservice)", [alertDefinition documentName]];
+					@throw [NSException exceptionWithName:@"NoDocument" reason:msg userInfo:nil];
+				}
 			}
+			
+			// Show the alert
+			if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingAlert:)
+																 withObject:[NSArray arrayWithObjects:causingOutcome, alertDefinition, document, nil]];
+			else dispatch_async(dispatch_get_main_queue(), ^{
+				[self showResultingAlert:[NSArray arrayWithObjects:causingOutcome, alertDefinition, document, nil]];
+			});
 		}
-        
-        // Show the alert
-		if(causingOutcome.noBackgroundProcessing) [self performSelector:@selector(showResultingAlert:)
-															 withObject:[NSArray arrayWithObjects:causingOutcome, alertDefinition, document, nil]];
-		else [self performSelectorOnMainThread:@selector(showResultingAlert:)
-									withObject:[NSArray arrayWithObjects:causingOutcome, alertDefinition, document, nil]
-								 waitUntilDone:YES];
-        
-    }
-    @catch (NSException *e) {
-        [[MBApplicationController currentInstance] handleException:e outcome:causingOutcome];
-    }
-    @finally {
-        [pool release];
-    }
-    
+		@catch (NSException *e) {
+			[[MBApplicationController currentInstance] handleException:e outcome:causingOutcome];
+		}
+	}
 }
 
 - (void)showResultingAlert:(NSArray *)args {

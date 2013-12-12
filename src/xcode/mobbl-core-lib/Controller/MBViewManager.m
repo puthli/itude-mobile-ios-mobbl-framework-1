@@ -418,8 +418,8 @@
                 break;
             }
         }
+       	_activityIndicatorCount ++;
     }
-	_activityIndicatorCount ++;
 }
 
 - (void)hideActivityIndicator {

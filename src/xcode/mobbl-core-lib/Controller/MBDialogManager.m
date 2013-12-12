@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic, retain) MBOrderedMutableDictionary *pageStackControllers;
+@property (nonatomic, assign, readonly) dispatch_queue_t queue;
 @end
 
 @implementation MBDialogManager
@@ -30,6 +31,8 @@
 
 - (void)dealloc
 {
+	dispatch_release(_queue);
+
     [_dialogControllers release];
     [_pageStackControllers release];
 
@@ -45,7 +48,9 @@
         
         self.dialogControllers = [[MBOrderedMutableDictionary new] autorelease];
         self.pageStackControllers = [[MBOrderedMutableDictionary new] autorelease];
-        
+		_queue = dispatch_queue_create("com.itude.mobbl.DialogQueue", NULL);
+
+
         [self createAllDialogControllers];
     }
     return self;
@@ -85,42 +90,49 @@
 #pragma mark Managing PageStacks
 
 - (void) popPageOnPageStackWithName:(NSString*) pageStackName {
-    MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
-    
-    // Determine transitionStyle
-    MBBasicViewController *viewController = [pageStackController.navigationController.viewControllers lastObject];
-    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:viewController.page.transitionStyle];
-    [pageStackController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
+	dispatch_async(self.queue, ^{
+		MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
+		
+		// Determine transitionStyle
+		MBBasicViewController *viewController = [pageStackController.navigationController.viewControllers lastObject];
+		id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:viewController.page.transitionStyle];
+		[pageStackController popPageWithTransitionStyle:viewController.page.transitionStyle animated:[style animated]];
+	});
 }
 
 // TODO: keepPosition should remember the old position of the pageStack somehow (probably came from dialog/dialoggroup refactoring)
 -(void) endPageStackWithName:(NSString*) pageStackName keepPosition:(BOOL) keepPosition {
-    MBPageStackController *result = [self pageStackControllerWithName:pageStackName];
-    if(result != nil) {
-        [self.pageStackControllers removeObjectForKey: pageStackName];
-        [self.delegate didEndPageStackWithName:pageStackName];
-    }
+	dispatch_async(self.queue, ^{
+		MBPageStackController *result = [self pageStackControllerWithName:pageStackName];
+		if(result != nil) {
+			[self.pageStackControllers removeObjectForKey: pageStackName];
+			[self.delegate didEndPageStackWithName:pageStackName];
+		}
+	});
 }
 
 -(void) activatePageStackWithName:(NSString*) pageStackName {
-    
-    if (![pageStackName isEqualToString:self.activePageStackName]) {
-        // Set the activePageStackName
-        [_activePageStackName release];
-        _activePageStackName = [pageStackName retain];
-        
-        // Notify the delegate
-        MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
-        MBDialogController *dialogController = [self dialogForPageStackName:pageStackName];
-        [self.delegate didActivatePageStack:pageStackController inDialog:dialogController];
-    }
+	dispatch_async(self.queue, ^{
+		if (![pageStackName isEqualToString:self.activePageStackName]) {
+			// Set the activePageStackName
+			[_activePageStackName release];
+			_activePageStackName = [pageStackName retain];
+			
+			// Notify the delegate
+			MBPageStackController *pageStackController = [self pageStackControllerWithName:pageStackName];
+			MBDialogController *dialogController = [self dialogForPageStackName:pageStackName];
+			[self.delegate didActivatePageStack:pageStackController inDialog:dialogController];
+		}
+	});
     
 }
 
 -(void)activateDialogWithName:(NSString *)dialogName {
-    MBDialogController *dialogController = [self dialogWithName:dialogName];
-    MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
-    [self activatePageStackWithName:pageStackController.name];
+	dispatch_async(self.queue, ^{
+	    MBDialogController *dialogController = [self dialogWithName:dialogName];
+    	MBPageStackController *pageStackController = [dialogController.pageStackControllers objectAtIndex:0];
+	    [self activatePageStackWithName:pageStackController.name];
+	});
 }
 
 #pragma mark -

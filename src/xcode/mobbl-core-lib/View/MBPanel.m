@@ -126,7 +126,7 @@
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"width" withValue:[NSString stringWithFormat:@"%i", _width]],
 							   [self attributeAsXml:@"height" withValue:[NSString stringWithFormat:@"%i", _height]],
-                               [self attributeAsXml:@"zoomable" withValue:_zoomable],
+                               [self attributeAsXml:@"zoomable" withValue:@(_zoomable)],
                                [self attributeAsXml:@"outcome" withValue:_outcomeName],
                                [self attributeAsXml:@"style" withValue:self.style]
 							   ];
