@@ -413,6 +413,7 @@
 		E21890BE18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BA18450A0800DD5AD4 /* MBEmptyContentViewWrapper.m */; };
 		E21890BF18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */; };
 		E2189DAA1848A94600DD5AD4 /* MBOutcomeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E2189DA91848A94600DD5AD4 /* MBOutcomeManager.m */; };
+		E2C216AB1859E3F90028766D /* MBDefaultContentViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C216AA1859E3F90028766D /* MBDefaultContentViewFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1061,6 +1062,10 @@
 		E21890BD18450A0800DD5AD4 /* MBContentViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBContentViewWrapper.h; sourceTree = "<group>"; };
 		E2189DA81848A94600DD5AD4 /* MBOutcomeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOutcomeManager.h; sourceTree = "<group>"; };
 		E2189DA91848A94600DD5AD4 /* MBOutcomeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOutcomeManager.m; sourceTree = "<group>"; };
+		E2C216A81859E1180028766D /* MBContentViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBContentViewFactory.h; path = ContentViewFactories/MBContentViewFactory.h; sourceTree = "<group>"; };
+		E2C216A91859E3F90028766D /* MBDefaultContentViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBDefaultContentViewFactory.h; path = ContentViewFactories/MBDefaultContentViewFactory.h; sourceTree = "<group>"; };
+		E2C216AA1859E3F90028766D /* MBDefaultContentViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBDefaultContentViewFactory.m; path = ContentViewFactories/MBDefaultContentViewFactory.m; sourceTree = "<group>"; };
+		E2C216B51859E9E90028766D /* MBPickerControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBPickerControllerDelegate.h; path = "mobbl-core-lib/View/Helpers/MBPickerControllerDelegate.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1228,6 +1233,7 @@
 		C7E0EB3E18312A3F007D2F08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E2C216A71859E0EB0028766D /* ContentViewFactories */,
 				E21890B818450A0800DD5AD4 /* ContentViewWrappers */,
 				E21890BD18450A0800DD5AD4 /* MBContentViewWrapper.h */,
 				C7E0EB3F18312A3F007D2F08 /* MBAction.h */,
@@ -1801,6 +1807,7 @@
 				C7E0EC9618312A40007D2F08 /* MBFontCustomizer.m */,
 				C7E0EC9718312A40007D2F08 /* MBPickerController.h */,
 				C7E0EC9818312A40007D2F08 /* MBPickerController.m */,
+				E2C216B51859E9E90028766D /* MBPickerControllerDelegate.h */,
 				C7E0EC9918312A40007D2F08 /* MBPickerPopoverController.h */,
 				C7E0EC9A18312A40007D2F08 /* MBPickerPopoverController.m */,
 				C7E0EC9B18312A40007D2F08 /* MBSpinner.h */,
@@ -1842,6 +1849,16 @@
 				E21890BC18450A0800DD5AD4 /* MBSlidingMenuContentViewWrapper.m */,
 			);
 			path = ContentViewWrappers;
+			sourceTree = "<group>";
+		};
+		E2C216A71859E0EB0028766D /* ContentViewFactories */ = {
+			isa = PBXGroup;
+			children = (
+				E2C216A81859E1180028766D /* MBContentViewFactory.h */,
+				E2C216A91859E3F90028766D /* MBDefaultContentViewFactory.h */,
+				E2C216AA1859E3F90028766D /* MBDefaultContentViewFactory.m */,
+			);
+			name = ContentViewFactories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2036,6 +2053,7 @@
 				C7E0ECEF18312A40007D2F08 /* UIViewController+Layout.m in Sources */,
 				C7E0ED5B18312A40007D2F08 /* MBTransitionStyleFactory.m in Sources */,
 				C7E0ECFF18312A40007D2F08 /* MBElementContainer+Preconditions.m in Sources */,
+				E2C216AB1859E3F90028766D /* MBDefaultContentViewFactory.m in Sources */,
 				C7E0ED0E18312A40007D2F08 /* MBWebserviceDataHandler.m in Sources */,
 				C7E0ED7318312A40007D2F08 /* MBForEach.m in Sources */,
 				C7E0ED1318312A40007D2F08 /* MBResourceService.m in Sources */,

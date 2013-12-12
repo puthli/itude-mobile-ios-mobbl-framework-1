@@ -49,6 +49,8 @@
 #import "MBEmptyContentViewWrapper.h"
 #import "MBSlidingMenuContentViewWrapper.h"
 
+#import "MBContentViewFactory.h"
+
 #import <objc/runtime.h>
 #import <objc/message.h>
 
@@ -178,70 +180,22 @@
 // After delegate didloaddialogs
 - (void)createTabbarForDialogControllers:(NSArray *)dialogControllers {
     
-    
+
+	// TODO: make this pluggable as well?
     MBDialogController *firstDialogController = nil;
-    // Should create tabbar
-    if([dialogControllers count] > 1 && [self shouldCreateTabBarForDialogsControllers:dialogControllers])
-	{
-        // Build the tabbar
-        self.tabController = [[[UITabBarController alloc] init] autorelease];
-        self.tabController.delegate = self;
-        [self setContentViewController:self.tabController];
-        
-        // Build the tabs
-        int idx = 0;
-        NSMutableArray *tabs = [NSMutableArray new];
-        for (MBDialogController *dialogController in dialogControllers) {
-            if ([dialogController showAsTab]) {
-                // Create a tabbarProperties
-                UIViewController *viewController = dialogController.rootViewController;
-                UIImage *tabImage = [[MBResourceService sharedInstance] imageByID: dialogController.iconName];
-                NSString *tabTitle = MBLocalizedString(dialogController.title);
-                UITabBarItem *tabBarItem = [[[UITabBarItem alloc] initWithTitle:tabTitle image:tabImage tag:idx] autorelease];
-                viewController.tabBarItem = tabBarItem;
-                
-                [tabs addObject:viewController];
-                
-                if (idx == 0) {
-                    firstDialogController = dialogController;
-                }
-                
-                idx ++;
-            }
-        }
-        
-        // Set the tabs to the tabbar
-        [self.tabController setViewControllers: tabs animated: YES];
-        [[self.tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
-        self.tabController.moreNavigationController.delegate = self;
-        self.tabController.customizableViewControllers = nil;
-        [tabs release];
-        
-        [[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:self.tabController];
-    }
-    
-    // Single page mode
-    else if([dialogControllers count] > 0) {
-        
-        // Search for the only dialogController with attribute 'showAs="TAB"'.
-        MBDialogController *dialogController = nil;
-        for (MBDialogController *currentDialogContoller in dialogControllers) {
-            if ([currentDialogContoller showAsTab]) {
-                dialogController = currentDialogContoller;
-                break;
-            }
-        }
-        
-        // Take the first dialogController if no dialogController with attribute 'showAs="TAB"' is found.
-        if (!dialogController) {
-            dialogController = [dialogControllers objectAtIndex:0];
-        }
-        
-        [self setContentViewController:dialogController.rootViewController];
-        firstDialogController = dialogController;
-    }
-    
-    
+	for (MBDialogController *currentDialogContoller in dialogControllers) {
+		if ([currentDialogContoller showAsTab]) {
+			firstDialogController = currentDialogContoller;
+			break;
+		}
+	}
+	if (!firstDialogController) firstDialogController = [dialogControllers objectAtIndex:0];
+
+	UIViewController *contentView = nil;
+	id<MBContentViewFactory> factory = [[MBApplicationFactory sharedInstance] createContentViewFactory];
+	contentView = [factory createContentView:dialogControllers forViewManager:self];
+	[self setContentViewController:contentView];
+
     // Ensure we select a pageStack
     if (firstDialogController) {
         MBPageStackController *pageStackController = [firstDialogController.pageStackControllers objectAtIndex:0];
@@ -482,22 +436,6 @@
     // If all else fails, return the rootViewcontroller of the Window
     return self.window.rootViewController;
     
-}
-
-/**
- * Returns TRUE if two or more DialogControllers have defined 'showAs="TAB"'
- */
-- (BOOL)shouldCreateTabBarForDialogsControllers:(NSArray *)dialogControllers {
-    NSInteger numberOfShowAsTabs = 0;
-    for (MBDialogController *dialogController in dialogControllers) {
-        if ([dialogController showAsTab]) {
-            numberOfShowAsTabs ++;
-            if (numberOfShowAsTabs > 1) {
-                return YES;
-            }
-        }
-    }
-    return NO;
 }
 
 #pragma mark -

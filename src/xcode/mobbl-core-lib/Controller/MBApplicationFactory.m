@@ -25,6 +25,7 @@
 #import "MBBasicViewController.h"
 #import "MBTypes.h"
 #import "MBEmptyContentViewWrapper.h"
+#import "MBDefaultContentViewFactory.h"
 #import <objc/runtime.h>
 
 @interface MBApplicationFactory () {
@@ -125,6 +126,10 @@ static MBApplicationFactory *_instance = nil;
 
 -(id<MBContentViewWrapper>)createContentViewWrapper {
 	return [[[MBEmptyContentViewWrapper alloc] init] autorelease];
+}
+
+-(id<MBContentViewFactory>)createContentViewFactory {
+	return [[[MBDefaultContentViewFactory alloc] init] autorelease];
 }
 
 @end

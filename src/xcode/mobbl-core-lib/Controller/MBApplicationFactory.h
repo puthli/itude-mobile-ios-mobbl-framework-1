@@ -30,8 +30,9 @@
 @class MBOutcome;
 @class MBDocument;
 @class MBDialogController;
+@protocol MBContentViewFactory;
 
-/** Factory class for creating custom UIViewControllers, MBResultListeners and MBActions 
+/** Factory class for creating custom UIViewControllers, MBResultListeners and MBActions
  * In short there are three steps to using custom code with MOBBL framework:
 
  1. Create Pages, Actions and ResultListeners in the application definition files  (config.xmlx and endpoints.xmlx).
@@ -69,4 +70,5 @@
 -(UIViewController *) createViewController:(MBPage*) page;
 
 -(id<MBContentViewWrapper>) createContentViewWrapper;
+-(id<MBContentViewFactory>) createContentViewFactory;
 @end
