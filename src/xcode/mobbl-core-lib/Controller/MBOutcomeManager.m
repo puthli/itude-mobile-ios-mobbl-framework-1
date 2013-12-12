@@ -194,7 +194,7 @@ void runOnMain(void (^block)(void)) {
 					// Page
 					MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 					if(pageDef != nil) {
-						if(!outcomeToProcess.noBackgroundProcessing)
+						if(outcomeToProcess.noBackgroundProcessing)
 							[[MBApplicationController currentInstance].viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 
 						[self preparePageInBackground:@[[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name]];
