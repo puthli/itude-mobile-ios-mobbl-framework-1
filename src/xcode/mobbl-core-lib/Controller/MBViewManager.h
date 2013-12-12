@@ -44,14 +44,20 @@
  * Used to present and dismiss a (modal) viewController
  */
 - (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated;
+- (void) presentViewController:(UIViewController *)controller fromViewController:(UIViewController *)fromViewController animated:(BOOL)animated completion:(void (^)(void))completion;
 - (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated;
+- (void) dismisViewController:(UIViewController *)controller animated:(BOOL)animated completion:(void (^)(void))completion;
 
 /**
  * Managing the activity indicator
  */
 - (void) showActivityIndicator;
 - (void) showActivityIndicatorWithMessage:(NSString*) message;
+- (void) showActivityIndicatorOnDialog:(MBDialogController *)dialogController;
+- (void) showActivityIndicatorOnDialog:(MBDialogController *)dialogController withMessage:(NSString*) message;
+
 - (void) hideActivityIndicator;
+- (void) hideActivityIndicatorOnDialog:(MBDialogController *)dialogController;
 
 /**
  * Returns the bounds of the UIWindow

@@ -21,10 +21,25 @@
 
 #define ROWHEIGHT 44
 
+@interface MBPickerPopoverController () {
+	MBField *_field;
+	UIPopoverController *_popover;
+    id _delegate;
+}
+@end
+
 @implementation MBPickerPopoverController
 
 @synthesize field = _field;
-@synthesize popover = _popover; 
+@synthesize popover = _popover;
+@synthesize delegate = _delegate;
+
+
+- (void)dealloc
+{
+    [_popover release];
+    [super dealloc];
+}
 
 #pragma mark -
 #pragma mark Initializers
@@ -101,8 +116,9 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	MBDomainDefinition * domain = _field.domain;
-	[_field setValue:[(MBDomainValidatorDefinition*)[domain.domainValidators objectAtIndex:indexPath.row] value]];
-	if (_popover != nil) [_popover dismissPopoverAnimated:YES];
+	[self.field setValue:[(MBDomainValidatorDefinition*)[domain.domainValidators objectAtIndex:indexPath.row] value]];
+	if (self.popover != nil) [_popover dismissPopoverAnimated:YES];
+    [self.delegate fieldValueChanged:self.field];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -110,7 +126,7 @@
 }
 
 -(NSInteger) tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
-	MBDomainDefinition *domain = _field.domain;
+	MBDomainDefinition *domain = self.field.domain;
 	return [domain.domainValidators count];
 }
 

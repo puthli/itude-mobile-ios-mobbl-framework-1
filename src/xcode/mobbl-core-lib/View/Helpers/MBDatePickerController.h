@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-#import "MBField.h"
+#import <Foundation/Foundation.h>
+#import "MBPickerControllerDelegate.h"
 
+@class MBField;
 
-
-@interface MBDatePickerController : UIViewController {
-	IBOutlet UIDatePicker * _datePickerView;
-	IBOutlet UIToolbar * _toolbar;
-    IBOutlet UIBarButtonItem *_cancelButton;
-    IBOutlet UIBarButtonItem *_doneButton;
-	MBField * _field;
-    
-    UIDatePickerMode _datePickerMode;
-    NSDate *_minimumDate;
-    NSDate *_maximumDate;
-}
-
+@interface MBDatePickerController : UIViewController
 @property (nonatomic, retain) UIDatePicker * datePickerView;
-@property (nonatomic, retain) MBField * field;
+@property (nonatomic, assign) MBField * field;
+@property (nonatomic, assign) id<MBPickerControllerDelegate> delegate;
 
 @property (nonatomic, assign) UIDatePickerMode datePickerMode;
 @property (nonatomic, retain) NSDate *minimumDate;
@@ -42,4 +33,5 @@
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
+
 @end

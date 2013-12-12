@@ -22,10 +22,31 @@
 #import "MBLocalizationService.h"
 #import "StringUtilities.h"
 
+#define C_ANIMATION_ID_PRESENT @"presentWithSuperview"
+#define C_ANIMATION_ID_REMOVE @"removeFromSuperviewWithAnimation"
+
+@interface MBDatePickerController ()  {
+	IBOutlet UIDatePicker * _datePickerView;
+	IBOutlet UIToolbar * _toolbar;
+    IBOutlet UIBarButtonItem *_cancelButton;
+    IBOutlet UIBarButtonItem *_doneButton;
+	
+    MBField * _field;
+    id _delegate;
+    
+    UIDatePickerMode _datePickerMode;
+    NSDate *_minimumDate;
+    NSDate *_maximumDate;
+    
+}
+
+@end
+
 @implementation MBDatePickerController
 
 @synthesize datePickerView = _datePickerView;
 @synthesize field = _field;
+@synthesize delegate = _delegate;
 @synthesize datePickerMode = _datePickerMode;
 @synthesize minimumDate = _minimumDate;
 @synthesize maximumDate = _maximumDate;
@@ -33,6 +54,23 @@
 // XML date format
 #define XMLDATEFORMAT @"yyyy-MM-dd'T'HH:mm:ss"
 
+- (void)dealloc
+{
+    [_datePickerView release];
+    [_minimumDate release];
+    [_maximumDate release];
+    [super dealloc];
+}
+-(id)retain {
+    [super retain];
+    NSLog(@"retainCount: %i",[self retainCount]);
+    return self;
+}
+
+-(oneway void)release {
+    NSLog(@"releaseCount: %i -1",[self retainCount]);
+    [super release];
+}
 
 #pragma mark -
 #pragma mark Initializers
@@ -105,7 +143,7 @@
 - (IBAction)done:(id)sender
 {
     
-    NSDate *date = _datePickerView.date;
+    NSDate *date = self.datePickerView.date;
 	
     [self removeFromSuperviewWithAnimation];
 	
@@ -119,7 +157,12 @@
     [dateFormatter setDateFormat:XMLDATEFORMAT];
     
     NSString *fieldValue = [dateFormatter stringFromDate:date];
-	[_field setValue: fieldValue];
+	[self.field setValue: fieldValue];
+    
+    // Notify the delegate
+    if ([self.delegate respondsToSelector:@selector(fieldValueChanged:)]) {
+        [self.delegate fieldValueChanged:self.field];
+    }
 }
 
 #pragma mark -
@@ -140,7 +183,7 @@
 	[superview addSubview:self.view];
 	
     // animate to new location
-    [UIView beginAnimations:@"presentWithSuperview" context:nil];
+    [UIView beginAnimations:C_ANIMATION_ID_PRESENT context:nil];
     r.origin = CGPointZero;
     self.view.frame = r;
     [UIView commitAnimations];
@@ -151,7 +194,7 @@
 - (void)animationDidStop:(NSString *)animationID
                 finished:(NSNumber *)finished
                  context:(void *)context {
-    if ([animationID isEqualToString:@"removeFromSuperviewWithAnimation"]) {
+    if ([animationID isEqualToString:C_ANIMATION_ID_REMOVE]) {
         [self.view removeFromSuperview];
     }
 }
@@ -159,7 +202,7 @@
 // slide this view to bottom of superview, then remove from superview
 - (void)removeFromSuperviewWithAnimation {
 	
-    [UIView beginAnimations:@"removeFromSuperviewWithAnimation" context:nil];
+    [UIView beginAnimations:C_ANIMATION_ID_REMOVE context:nil];
 	
     // set delegate and selector to remove from superview when animation completes
     [UIView setAnimationDelegate:self];
@@ -170,7 +213,8 @@
     r.origin = CGPointMake(0.0, self.view.superview.bounds.size.height);
     self.view.frame = r;
 	
-    [UIView commitAnimations];    
+    [UIView commitAnimations];
+    
 }
 
 

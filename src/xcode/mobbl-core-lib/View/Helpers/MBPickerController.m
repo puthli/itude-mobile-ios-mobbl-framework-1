@@ -21,11 +21,30 @@
 #import "MBStyleHandler.h"
 #import "MBLocalizationService.h"
 
+@interface MBPickerController () {
+    
+	IBOutlet UIPickerView * _pickerView;
+	IBOutlet UIToolbar * _toolbar;
+    IBOutlet UIBarButtonItem *_cancelButton;
+    IBOutlet UIBarButtonItem *_doneButton;
+	MBField * _field;
+    id _delegate;
+}
+
+@end
+
 @implementation MBPickerController
 
 @synthesize pickerView = _pickerView;
 @synthesize field = _field;
+@synthesize delegate = _delegate;
 
+
+- (void)dealloc
+{
+    [_pickerView release];
+    [super dealloc];
+}
 
 #pragma mark -
 #pragma mark Initializers
@@ -104,16 +123,17 @@
 
 - (IBAction)done:(id)sender
 {
-	NSUInteger row = [_pickerView selectedRowInComponent:0];
+	NSUInteger row = [self.pickerView selectedRowInComponent:0];
 	
 	[self removeFromSuperviewWithAnimation];
 	
 	MBDomainDefinition * domain = _field.domain;
-    
     MBDomainValidatorDefinition *def = [domain.domainValidators objectAtIndex:row];
     NSString *value = [def value];
     
-	[_field setValue:value];
+	[self.field setValue:value];
+    [self.delegate fieldValueChanged:self.field];
+    
 }
 
 #pragma mark -
