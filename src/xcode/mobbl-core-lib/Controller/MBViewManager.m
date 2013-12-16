@@ -374,8 +374,8 @@
 				}
 			}
 		}
+		_activityIndicatorCount ++;
 	});
-	_activityIndicatorCount ++;
 }
 
 - (void)hideActivityIndicator {

@@ -185,7 +185,7 @@ void runOnMain(void (^block)(void)) {
 					// Action
 					MBActionDefinition *actionDef = [metadataService definitionForActionName:outcomeDef.action throwIfInvalid: FALSE];
 					if(actionDef != nil) {
-						if(outcomeToProcess.noBackgroundProcessing)
+						if(!outcomeToProcess.noBackgroundProcessing)
 							[[MBApplicationController currentInstance].viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 
 							[self performActionInBackground:[NSArray arrayWithObjects:[[[MBOutcome alloc] initWithOutcome:outcomeToProcess] autorelease], actionDef,  nil]];
@@ -194,7 +194,7 @@ void runOnMain(void (^block)(void)) {
 					// Page
 					MBPageDefinition *pageDef = [metadataService definitionForPageName:outcomeDef.action throwIfInvalid: FALSE];
 					if(pageDef != nil) {
-						if(outcomeToProcess.noBackgroundProcessing)
+						if(!outcomeToProcess.noBackgroundProcessing)
 							[[MBApplicationController currentInstance].viewManager showActivityIndicatorWithMessage:outcomeToProcess.processingMessage];
 
 						[self preparePageInBackground:@[[[[MBOutcome alloc] initWithOutcome:outcomeToProcess]autorelease], pageDef.name]];
