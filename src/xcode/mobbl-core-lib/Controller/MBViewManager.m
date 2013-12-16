@@ -284,6 +284,9 @@
 }
 
 - (void)setContentViewController:(UIViewController *)viewController {
+	if ([[viewController class] isSubclassOfClass:[UITabBarController class]] )
+		self.tabController = (UITabBarController*) viewController;
+	
     [self clearWindow];
     [self.window setRootViewController:[self.contentViewWrapper wrapController:viewController]];
 }
