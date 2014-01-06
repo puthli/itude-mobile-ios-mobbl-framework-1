@@ -77,7 +77,7 @@
 @implementation MBViewManager
 
 @synthesize window = _window;
-@synthesize tabController = _tabController;
+@synthesize tabBarController = _tabBarController;
 @synthesize dialogManager = _dialogManager;
 @synthesize currentAlert = _currentAlert;
 @synthesize activityIndicatorCounts = _activityIndicatorCounts;
@@ -261,7 +261,7 @@
 
 
 - (void) resetView {
-    self.tabController = nil;
+    self.tabBarController = nil;
     [self clearWindow];
 }
 
@@ -279,14 +279,15 @@
 }
 
 - (void) makeKeyAndVisible {
-	[self.tabController.moreNavigationController popToRootViewControllerAnimated:NO];
+    [self.tabBarController makeKeyAndVisible];
 	[self.window makeKeyAndVisible];
 }
 
 - (void)setContentViewController:(UIViewController *)viewController {
-	if ([[viewController class] isSubclassOfClass:[UITabBarController class]] )
-		self.tabController = (UITabBarController*) viewController;
-	
+    if ([viewController conformsToProtocol:@protocol(MBTabBarControllerDelegate)]) {
+        self.tabBarController = (UIViewController<MBTabBarControllerDelegate>*)viewController;
+    }
+
     [self clearWindow];
     [self.window setRootViewController:[self.contentViewWrapper wrapController:viewController]];
 }
@@ -471,40 +472,6 @@
     }
 }
 
-
-#pragma mark -
-#pragma mark UITabBarControllerDelegate
-
--(BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-	return YES;
-}
-
-// Method is called when the tabBar will be edited by the user (when the user presses the edid-button on the more-page).
-// It is used to update the style of the "Edit" navigationBar behind the Edit-button
-- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)viewControllers {
-	// Get the navigationBar from the edit-view behind the more-tab and apply style to it.
-    UINavigationBar *navBar = [[[tabBarController.view.subviews objectAtIndex:1] subviews] objectAtIndex:0];
-	[[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:navBar];
-}
-
--(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    
-    // Set active dialog/pageStack name
-    for (MBDialogController *dialogController in [self.dialogManager.dialogControllers allValues]) {
-        if (viewController == dialogController.rootViewController) {
-            if ([viewController isKindOfClass:[MBBasicViewController class]]) {
-                MBBasicViewController *basicViewController = (MBBasicViewController*)viewController;
-                [self.dialogManager activatePageStackWithName:basicViewController.pageStackController.name];
-            }
-            else {
-                [self.dialogManager activateDialogWithName:dialogController.name];
-            }
-            break;
-        }
-    }
-}
-
-
 #pragma mark -
 #pragma mark MBDialogManagerDelegate
 
@@ -517,20 +484,7 @@
 }
 
 - (void)didActivatePageStack:(MBPageStackController *)pageStackController inDialog:(MBDialogController *)dialogController {
-    
-    // If we have more than one viewController visible
-    if (self.tabController) {
-		dispatch_async(dispatch_get_main_queue(), ^{
-			// Only set the selected tab if realy necessary; because it messes up the more navigation controller
-			NSInteger idx = _tabController.selectedIndex;
-			NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
-			
-			if(idx != shouldBe && shouldBe!=NSNotFound) {
-				[self.tabController setSelectedIndex:shouldBe];
-			}
-		});
-    }
-    
+    [self.tabBarController didActivatePageStack:pageStackController inDialog:dialogController];
 }
 
 

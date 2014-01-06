@@ -19,6 +19,7 @@
 //  Created by Pjotter Tommassen on 2013/12/12.
 
 #import "MBDefaultContentViewFactory.h"
+#import "MBTabBarController.h"
 #import "MBDialogController.h"
 #import "MBResourceService.h"
 #import "MBLocalizationService.h"
@@ -32,7 +33,8 @@
     // Should create tabbar
     if([dialogControllers count] > 1 && [self shouldCreateTabBarForDialogsControllers:dialogControllers])
 	{
-		UITabBarController *tabController = [[[UITabBarController alloc] init] autorelease];
+        
+		MBTabBarController *tabController = [[MBTabBarController new] autorelease];
 
         // Build the tabs
         int idx = 0;
@@ -59,14 +61,13 @@
         // Set the tabs to the tabbar
         [tabController setViewControllers: tabs animated: YES];
         [[tabController moreNavigationController] setHidesBottomBarWhenPushed:FALSE];
-		tabController.delegate = viewManager;
+        tabController.delegate = tabController;
         tabController.moreNavigationController.delegate = viewManager;
         tabController.customizableViewControllers = nil;
         [tabs release];
 
         [[[MBViewBuilderFactory sharedInstance] styleHandler] styleTabBarController:tabController];
-
-		result = tabController;
+        result = tabController;
     }
 
     // Single page mode

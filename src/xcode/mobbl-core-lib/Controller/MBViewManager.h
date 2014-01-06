@@ -17,13 +17,14 @@
 #import "MBTypes.h"
 #import "MBDialogManager.h"
 #import "MBContentViewWrapper.h"
+#import "MBTabBarControllerDelegate.h"
 
 @class MBPage;
 @class MBAlert;
 
-@interface MBViewManager : NSObject<UITabBarControllerDelegate, UINavigationControllerDelegate, MBDialogManagerDelegate>
+@interface MBViewManager : NSObject<UINavigationControllerDelegate, MBDialogManagerDelegate>
 @property (nonatomic, readonly) UIWindow *window;
-@property (nonatomic, retain) UITabBarController *tabController;
+@property (nonatomic, retain) UIViewController <MBTabBarControllerDelegate>*tabBarController;
 @property (nonatomic, retain) MBDialogManager *dialogManager;
 @property (nonatomic, retain) UIAlertView *currentAlert;
 @property (nonatomic, retain) id<MBContentViewWrapper> contentViewWrapper;
