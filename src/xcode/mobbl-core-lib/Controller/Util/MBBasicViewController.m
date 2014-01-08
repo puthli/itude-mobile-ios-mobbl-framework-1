@@ -31,6 +31,7 @@
 }
 
 @property (nonatomic, retain) NSMutableArray *outcomeListeners;
+@property (atomic) BOOL shouldRegisterOutcomeListeners;
 
 @end
 
@@ -116,6 +117,8 @@
 -(void) viewWillAppear:(BOOL)animated {
 	// register all outcome listeners with the application controller; this view controller just became
 	// visible, so it is interested in outcomes
+    self.shouldRegisterOutcomeListeners = YES;
+    
 	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
 		[[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:lsnr];
 	}
@@ -144,6 +147,8 @@
 -(void) viewWillDisappear:(BOOL)animated {
 	// remove all outcome listeners from the application controller; this view controller
 	// is going to disappear, so it isn't interested in them anumore
+    self.shouldRegisterOutcomeListeners = NO;
+    
 	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
 		[[MBApplicationController currentInstance].outcomeManager unregisterOutcomeListener:lsnr];
 	}
@@ -164,7 +169,8 @@
 - (void) registerOutcomeListener:(id<MBOutcomeListenerProtocol>) listener {
 	if(![self.outcomeListeners containsObject:listener]) {
 		[self.outcomeListeners addObject:listener];
-		[[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:listener];
+        if(self.shouldRegisterOutcomeListeners)
+            [[MBApplicationController currentInstance].outcomeManager registerOutcomeListener:listener];
 	}
 }
 
