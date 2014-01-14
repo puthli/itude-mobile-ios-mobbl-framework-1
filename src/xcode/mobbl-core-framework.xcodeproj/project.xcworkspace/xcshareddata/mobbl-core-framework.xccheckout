@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>86208CD4-D4EC-4A0C-85F0-003D6464B4D4</string>
+	<string>A568513C-8F74-4DA9-805E-441F386B47DF</string>
 	<key>IDESourceControlProjectName</key>
 	<string>mobbl-core-framework</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>src/xcode/mobbl-core-framework.xcodeproj/project.xcworkspace</string>
+	<string>src/xcode/mobbl-core-framework/mobbl-core-framework.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>ECDD89D1-F7FD-49EA-BDF9-FFAC1C96403A</key>
-		<string>../../../..</string>
+		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework.git</string>

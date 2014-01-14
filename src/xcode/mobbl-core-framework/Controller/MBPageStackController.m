@@ -45,6 +45,8 @@
 	BOOL _temporary;
 }
 @property (nonatomic, assign) NSInteger activityIndicatorCount;
+@property (nonatomic, assign, readonly) dispatch_semaphore_t navigationSemaphore;
+@property (nonatomic, assign) BOOL needsRelease;
 
 -(void) clearSubviews;
 
@@ -65,7 +67,9 @@
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+
+	dispatch_release(_navigationSemaphore);
+
 	[_name release];
     [_title release];
     [_dialogController release];
@@ -80,6 +84,8 @@
 		self.navigationController = [[UINavigationController new] autorelease];
 		self.activityIndicatorCount = 0;
 		[self showActivityIndicator];
+		_navigationSemaphore = dispatch_semaphore_create(1);
+		self.needsRelease = false;
         [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.navigationController.navigationBar];
 	}
 	return self;
@@ -112,26 +118,38 @@
 	}
     
     page.transitionStyle = transitionStyle;
-    
-    UINavigationController *nav = self.navigationController;
-	
-    // Apply transitionStyle for a regular page navigation
-    id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
-    
-    // Replace the last page on the stack
-	if([displayMode isEqualToString:@"REPLACE"]) {
-        [nav replaceLastViewController:page.viewController];
-		return;
-	}
-    
-    // Regular navigation to new page
-    else {
-        [nav pushViewController:page.viewController animated:[style animated]];
-    }
-	
-    // This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
-    [self setupCloseButtonForPage:page];
+
+	UINavigationController *nav = self.navigationController;
+	MBBasicViewController *viewController = (MBBasicViewController*)[page.viewController retain];
+
+	viewController.pageStackController = self;
+
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
+		dispatch_async(dispatch_get_main_queue(), ^{
+			// Apply transitionStyle for a regular page navigation
+			id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+			[style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
+
+			[viewController autorelease];
+			self.needsRelease = true;
+
+			// Replace the last page on the stack
+			if([displayMode isEqualToString:@"REPLACE"]) {
+				[nav replaceLastViewController:viewController];
+				return;
+			}
+			
+			// Regular navigation to new page
+			else {
+				[nav pushViewController:viewController animated:[style animated]];
+			}
+			
+			// This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
+			[self setupCloseButtonForPage:page];
+		});
+		});
+
     
 }
 
@@ -147,13 +165,21 @@
         // Regular navigation to new page
         animated = [style animated];
     }
-    
-	[nav popViewControllerAnimated:animated];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
+		dispatch_async(dispatch_get_main_queue(), ^{
+			self.needsRelease = true;
+
+			[nav popViewControllerAnimated:animated];
+		});
+	});
 }
 
 -(void) doRebuild {
 	// Make sure we do this on the foreground! So:
-	[self performSelectorOnMainThread:@selector(rebuildPage:) withObject:nil waitUntilDone:NO];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self rebuildPage:nil];
+	});
 }
 
 -(void) rebuildPage:(id) args {
@@ -176,6 +202,10 @@
 -(void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
 	_navigationController = viewController.navigationController;
     [self didActivate];
+	if (self.needsRelease) {
+		self.needsRelease = false;
+		dispatch_semaphore_signal(self.navigationSemaphore);
+	}
 }
 
 -(void) clearSubviews {

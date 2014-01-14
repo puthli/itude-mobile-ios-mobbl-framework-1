@@ -61,16 +61,6 @@
     [_maximumDate release];
     [super dealloc];
 }
--(id)retain {
-    [super retain];
-    NSLog(@"retainCount: %i",[self retainCount]);
-    return self;
-}
-
--(oneway void)release {
-    NSLog(@"releaseCount: %i -1",[self retainCount]);
-    [super release];
-}
 
 #pragma mark -
 #pragma mark Initializers

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F235CD918574B010079AEA9"
+               BlueprintIdentifier = "1FECD9FE1885C1B300C881C5"
                BuildableName = "mobbl-core-framework.framework"
                BlueprintName = "mobbl-core-framework"
                ReferencedContainer = "container:mobbl-core-framework.xcodeproj">
@@ -53,7 +53,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

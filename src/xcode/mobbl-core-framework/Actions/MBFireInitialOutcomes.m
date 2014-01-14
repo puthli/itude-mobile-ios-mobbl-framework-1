@@ -30,7 +30,8 @@
 	MBDocument *initialOutcomes = [[MBDataManagerService sharedInstance] loadDocument:[self documentName]];
 	for(MBElement *element in [initialOutcomes valueForPath:@"/Outcome"]) {
         MBOutcome *outcome = [self outcomeForElement:element];
-		[self performSelectorOnMainThread:@selector(handleOutcomeOnMainThread:) withObject:outcome waitUntilDone:TRUE];
+
+		[self handleOutcomeOnMainThread:outcome];
 	}
 }
 
