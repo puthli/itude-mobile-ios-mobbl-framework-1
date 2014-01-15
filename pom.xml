@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.itude.mobile.ios.mobbl</groupId>
 	<artifactId>mobbl-core-framework</artifactId>
-	<version>0.0.1.3-SNAPSHOT</version>
+	<version>0.0.1.0-SNAPSHOT</version>
 	<packaging>xcode-framework</packaging>
 	<name>iOS Mobbl Core Framework</name>
 	<description>iOS Mobbl Core Framework</description>
@@ -26,6 +26,15 @@
 			</roles>
 		</developer>
 	</developers>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.apple.ios</groupId>
+			<artifactId>Foundation.framework</artifactId>
+			<version>${ios.version}</version>
+			<type>xcode-framework</type>
+		</dependency>
+	</dependencies>
 	
 	<issueManagement>
 		<url>https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework/issues</url>
