@@ -27,15 +27,6 @@
 		</developer>
 	</developers>
 	
-	<dependencies>
-		<dependency>
-			<groupId>com.apple.ios</groupId>
-			<artifactId>Foundation.framework</artifactId>
-			<version>${ios.version}</version>
-			<type>xcode-framework</type>
-		</dependency>
-	</dependencies>
-	
 	<issueManagement>
 		<url>https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework/issues</url>
 		<system>GitHub Issues</system>
@@ -59,7 +50,6 @@
 	 </build>
 	  
 	<properties>
-        <ios.version>7.0</ios.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>  
 	  
