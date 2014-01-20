@@ -35,17 +35,23 @@
     // Default modal behaviour
 }
 
--(void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle{
-    UIViewController *viewController = dialog.rootViewController;
-    id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-    [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
-    BOOL animated = [transition animated];
 
-    UIViewController *topMostVisibleViewController = [[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController];
-    [[[MBApplicationController currentInstance] viewManager] presentViewController:viewController fromViewController:topMostVisibleViewController animated:animated];
-    
-    // Store the pageStackName of tge pageStack that was visible before this modal is presented
-    self.originPageStackName =  [[[[MBApplicationController currentInstance] viewManager] dialogManager] activePageStackName];
+-(void)presentDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle{
+
+	// Store the pageStackName of tge pageStack that was visible before this modal is presented
+	self.originPageStackName =  [[[[MBApplicationController currentInstance] viewManager] dialogManager] activePageStackName];
+
+	UIViewController *viewController = dialog.rootViewController;
+	id<MBTransitionStyle> transition = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+	[transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPush];
+	BOOL animated = [transition animated];
+	UIViewController *topMostVisibleViewController = [[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController];
+
+	// Pjotter: I have absolutely no idea why this needs to be dispatched async when queue starting this is the main queue.. O_o
+	//  Works perfectly fine without the dispatch if called from a different queue (even if it is the main thread), or when running iOS 6 instead of 7
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[[[MBApplicationController currentInstance] viewManager] presentViewController:viewController fromViewController:topMostVisibleViewController animated:animated ];
+	});
 }
 
 -(void)dismissDialog:(MBDialogController *)dialog withTransitionStyle:(NSString *)transitionStyle {
@@ -56,11 +62,10 @@
     
     [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
 
-	dispatch_async(dispatch_get_main_queue(),
-	^{
-         // Reset the dialog after we've dismissed the viewController and the animation is finished.
-         [dialog resetView];
-     });
+
+    [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated completion:^{
+		[dialog resetView];
+	}];
 
     // We want to activate the pageStack that was visible before the modal was presented
     [[[[MBApplicationController currentInstance] viewManager] dialogManager] activatePageStackWithName:self.originPageStackName];
