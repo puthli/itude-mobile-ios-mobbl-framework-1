@@ -35,9 +35,6 @@
 @synthesize alignment = _alignment;
 @synthesize valueIfNil = _valueIfNil;
 @synthesize hidden = _hidden;
-@synthesize custom1 = _custom1;
-@synthesize custom2 = _custom2;
-@synthesize custom3 = _custom3;
 
 - (id) init
 {
@@ -64,9 +61,6 @@
 	[_formatMask release];
 	[_alignment release];
 	[_valueIfNil release];
-	[_custom1 release];
-	[_custom2 release];
-	[_custom3 release];
 	[super dealloc];
 }
 
@@ -89,6 +83,12 @@
 							   [self attributeAsXml:@"height" withValue:_height],
 							   [self attributeAsXml:@"hidden" withValue:_hidden],
 							   [self attributeAsXml:@"required" withValue:_required]];
+
+	if (self.customAttributes) {
+		for(NSString* attrName in [self.customAttributes allKeys]) {
+			[result appendString:[self attributeAsXml:attrName withValue:[self.customAttributes valueForKey:attrName]]];
+		}
+	}
 
 	if(bodyText != nil) 
 	{

@@ -83,4 +83,5 @@
 - (BOOL) notifyValueWillChange:(NSString*) value originalValue:(NSString*) currentValue forPath:(NSString*) path;
 - (void) notifyValueChanged:(NSString*) value originalValue:(NSString*) currentValue forPath:(NSString*) path;
 - (NSString*) name;
+- (NSString*) customAttributeForKey:(NSString*) key;
 @end

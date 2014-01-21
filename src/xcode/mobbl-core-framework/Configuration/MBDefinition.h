@@ -31,6 +31,8 @@
 /** Value of the `name` property of the XML element in the configuration. */
 @property (nonatomic, retain) NSString *name;
 
+@property (nonatomic, retain) NSDictionary *customAttributes;
+
 /// @name Checking definition validity
 /** Checks the validity of the configuration.
 *

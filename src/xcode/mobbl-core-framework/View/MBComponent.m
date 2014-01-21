@@ -307,4 +307,8 @@
 	return self.definition.name;	
 }
 
+-(NSString *) customAttributeForKey:(NSString *)key {
+	return [self.definition.customAttributes objectForKey:key];
+}
+
 @end

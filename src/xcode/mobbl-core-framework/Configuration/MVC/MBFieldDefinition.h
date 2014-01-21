@@ -34,9 +34,6 @@
 	NSString *_alignment;
 	NSString *_valueIfNil;
 	NSString *_hidden;
-	NSString *_custom1;
-	NSString *_custom2;
-	NSString *_custom3;
 }
 
 @property (nonatomic, retain) NSString *outcomeName;
@@ -54,9 +51,6 @@
 @property (nonatomic, retain) NSString *alignment;
 @property (nonatomic, retain) NSString *valueIfNil;
 @property (nonatomic, retain) NSString *hidden;
-@property (nonatomic, retain) NSString *custom1;
-@property (nonatomic, retain) NSString *custom2;
-@property (nonatomic, retain) NSString *custom3;
 
 
 @end

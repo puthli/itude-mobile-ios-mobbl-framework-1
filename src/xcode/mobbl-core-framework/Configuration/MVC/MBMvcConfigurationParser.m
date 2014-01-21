@@ -63,7 +63,7 @@
     self.panelAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"style",@"title",@"titlePath",@"width",@"height",@"outcome",@"path",@"preCondition",@"zoomable",nil];
     self.forEachAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"value",@"suppressRowComponent",@"preCondition",nil];
     self.variableAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"expression",nil];
-    self.fieldAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"label",@"path",@"type",@"dataType",@"hint",@"required",@"outcome", @"style",@"width",@"height",@"formatMask",@"alignment",@"valueIfNil",@"hidden",@"preCondition",@"custom1",@"custom2",@"custom3",nil];
+    self.fieldAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"label",@"path",@"type",@"dataType",@"hint",@"required",@"outcome", @"style",@"width",@"height",@"formatMask",@"alignment",@"valueIfNil",@"hidden",@"preCondition",nil];
     self.domainAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"type",@"maxLength",nil];
     self.domainValidatorAttributes = [NSArray arrayWithObjects:@"xmlns",@"name",@"title",@"value",@"lowerBound",@"upperBound",nil];
     
@@ -252,8 +252,8 @@
 	}
     
 	else if ([elementName isEqualToString:@"Panel"]) {
-        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_panelAttributes];
-        
+		NSDictionary *custom = [self extractCustomAttributesFrom:attributeDict withValids:_fieldAttributes];
+
 		MBPanelDefinition *panelDef = [[MBPanelDefinition alloc] init];
 		panelDef.type = [attributeDict valueForKey:@"type"];
 		panelDef.name = [attributeDict valueForKey:@"name"];
@@ -266,6 +266,8 @@
         panelDef.path = [attributeDict valueForKey:@"path"];
         panelDef.zoomable = [[attributeDict valueForKey:@"zoomable"] boolValue];
 		panelDef.preCondition = [attributeDict valueForKey:@"preCondition"];
+		panelDef.customAttributes = custom;
+
         [self notifyProcessed:panelDef usingSelector:@selector(addChild:)];
 		[panelDef release];
 	}
@@ -289,8 +291,8 @@
 		[variableDef release];
 	}
 	else if ([elementName isEqualToString:@"Field"]) {
-        [self checkAttributesForElement: elementName withAttributes:attributeDict withValids:_fieldAttributes];
-        
+		NSDictionary *custom = [self extractCustomAttributesFrom:attributeDict withValids:_fieldAttributes];
+
 		MBFieldDefinition *fieldDef = [[MBFieldDefinition alloc] init];
 		fieldDef.name = [attributeDict valueForKey:@"name"];
 		fieldDef.label = [attributeDict valueForKey:@"label"];
@@ -308,9 +310,7 @@
 		fieldDef.valueIfNil = [attributeDict valueForKey:@"valueIfNil"];
 		fieldDef.hidden = [attributeDict valueForKey:@"hidden"];
 		fieldDef.preCondition = [attributeDict valueForKey:@"preCondition"];
-		fieldDef.custom1 = [attributeDict valueForKey:@"custom1"];
-		fieldDef.custom2 = [attributeDict valueForKey:@"custom2"];
-		fieldDef.custom3 = [attributeDict valueForKey:@"custom3"];
+		fieldDef.customAttributes = custom;
         [self notifyProcessed:fieldDef usingSelector:@selector(addChild:)];
 		[fieldDef release];
 	}
@@ -424,6 +424,15 @@
 	
     [conf addDocument: docDef];
 }
+
+
+-(NSDictionary*) extractCustomAttributesFrom:(NSDictionary*) attributes withValids:(NSArray*) valids {
+	NSMutableDictionary *dict = [[attributes mutableCopy] autorelease];
+	[dict addEntriesFromDictionary: attributes ];
+	[dict removeObjectsForKeys: valids];
+	return dict;
+}
+
 
 -(void) addEmptyDocument:(MBConfigurationDefinition*) conf {
 	MBDocumentDefinition *docDef = [[MBDocumentDefinition new] autorelease];

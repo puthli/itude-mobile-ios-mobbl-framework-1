@@ -37,9 +37,6 @@
 @synthesize valueIfNil = _valueIfNil;
 @synthesize hidden = _hidden;
 @synthesize required = _required;
-@synthesize custom1 = _custom1;
-@synthesize custom2 = _custom2;
-@synthesize custom3 = _custom3;
 
 -(id) initWithDefinition:(id)definition document:(MBDocument*) document parent:(MBComponentContainer *) parent {
 	self = [super initWithDefinition:definition document: document parent: parent];
@@ -81,14 +78,6 @@
 		spec = [(MBFieldDefinition*)[self definition] required];	
 		self.required = [[self substituteExpressions: spec] boolValue];
 
-		spec = [(MBFieldDefinition*)[self definition] custom1];	
-		self.custom1 = [self substituteExpressions: spec];
-
-		spec = [(MBFieldDefinition*)[self definition] custom2];	
-		self.custom2 = [self substituteExpressions: spec];
-		
-		spec = [(MBFieldDefinition*)[self definition] custom3];	
-		self.custom3 = [self substituteExpressions: spec];
 	}
 	return self;
 }
@@ -103,9 +92,6 @@
 	[_formatMask release];
 	[_alignment release];
 	[_valueIfNil release];
-	[_custom1 release];
-	[_custom2 release];
-	[_custom3 release];
 	[super dealloc];
 }
 

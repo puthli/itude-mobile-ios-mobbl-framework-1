@@ -47,13 +47,21 @@
 }
 
 - (NSString *) asXmlWithLevel:(int)level {
-	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Panel width='%i' height='%i' type='%@'%@%@%@%@%@%@>\n", level, "", _width, _height, _type,
+	NSMutableString *result = [NSMutableString stringWithFormat: @"%*s<Panel width='%i' height='%i' type='%@'%@%@%@%@%@%@", level, "", _width, _height, _type,
 							   [self attributeAsXml:@"title" withValue:_title],
 							   [self attributeAsXml:@"titlePath" withValue:_titlePath],
 							   [self attributeAsXml:@"style" withValue:_style],
                                [self booleanAsXml:@"zoomable" withValue:_zoomable],
                                [self attributeAsXml:@"outcomeName" withValue:_outcomeName], 
                                [self attributeAsXml:@"path" withValue:_path]];
+
+	if (self.customAttributes) {
+		for(NSString* attrName in [self.customAttributes allKeys]) {
+			[result appendString:[self attributeAsXml:attrName withValue:[self.customAttributes valueForKey:attrName]]];
+		}
+	}
+
+	[result appendString:@">\n"];
 
 	for (MBDefinition* child in _children)
 		[result appendString:[child asXmlWithLevel:level+2]];
