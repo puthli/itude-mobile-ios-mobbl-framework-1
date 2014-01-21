@@ -60,9 +60,6 @@
     [transition applyTransitionStyleToViewController:viewController forMovement:MBTransitionMovementPop];
     BOOL animated = [transition animated];
     
-    [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated];
-
-
     [[[MBApplicationController currentInstance] viewManager] dismisViewController:viewController animated:animated completion:^{
 		[dialog resetView];
 	}];
