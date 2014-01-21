@@ -116,7 +116,7 @@
     if(displayMode != nil){
         DLog(@"PageStackController: showPage name=%@ pageStack=%@ mode=%@", page.pageName, _name, displayMode);
 	}
-    
+
     page.transitionStyle = transitionStyle;
 
 	UINavigationController *nav = self.navigationController;

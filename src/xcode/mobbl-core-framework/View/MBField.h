@@ -38,9 +38,6 @@
 	BOOL _required;
 	int _width;
 	int _height;
-	NSString *_custom1;
-	NSString *_custom2;
-	NSString *_custom3;
 }
 
 @property (nonatomic, retain) UIView *responder;
@@ -55,9 +52,6 @@
 @property (nonatomic, retain) NSString *valueIfNil;
 @property (nonatomic, assign) BOOL hidden;
 @property (nonatomic, assign) BOOL required;
-@property (nonatomic, retain) NSString *custom1;
-@property (nonatomic, retain) NSString *custom2;
-@property (nonatomic, retain) NSString *custom3;
 
 -(NSString*) value;
 -(NSString*) untranslatedValue; // Added by Frank: In some cases we want to use the untranslated value of the field (e.g. for comparing to the value of the domainValidator. JIRA IQ-70)

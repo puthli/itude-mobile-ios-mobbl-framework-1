@@ -24,6 +24,7 @@
 - (void) dealloc
 {
 	[_name release];
+	[_customAttributes release];
 	[super dealloc];
 }
 
