@@ -148,21 +148,15 @@
 		1FECDFD01885E42F00C881C5 /* MBDocumentDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE161885E42E00C881C5 /* MBDocumentDiff.m */; };
 		1FECDFD11885E42F00C881C5 /* MBDocumentFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE171885E42E00C881C5 /* MBDocumentFactory.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFD21885E42F00C881C5 /* MBDocumentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE181885E42E00C881C5 /* MBDocumentFactory.m */; };
-		1FECDFD31885E42F00C881C5 /* MBDocumentParserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE191885E42E00C881C5 /* MBDocumentParserProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		1FECDFD31885E42F00C881C5 /* MBDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE191885E42E00C881C5 /* MBDocumentParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFD41885E42F00C881C5 /* MBElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE1A1885E42E00C881C5 /* MBElement.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFD51885E42F00C881C5 /* MBElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE1B1885E42E00C881C5 /* MBElement.m */; };
 		1FECDFD61885E42F00C881C5 /* MBElementContainer+Preconditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE1C1885E42E00C881C5 /* MBElementContainer+Preconditions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFD71885E42F00C881C5 /* MBElementContainer+Preconditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE1D1885E42E00C881C5 /* MBElementContainer+Preconditions.m */; };
 		1FECDFD81885E42F00C881C5 /* MBElementContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE1E1885E42E00C881C5 /* MBElementContainer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFD91885E42F00C881C5 /* MBElementContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE1F1885E42E00C881C5 /* MBElementContainer.m */; };
-		1FECDFDA1885E42F00C881C5 /* MBJsonDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE201885E42E00C881C5 /* MBJsonDocumentParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		1FECDFDB1885E42F00C881C5 /* MBJsonDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE211885E42E00C881C5 /* MBJsonDocumentParser.m */; };
-		1FECDFDC1885E42F00C881C5 /* MBMobbl1DocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE221885E42E00C881C5 /* MBMobbl1DocumentParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		1FECDFDD1885E42F00C881C5 /* MBMobbl1DocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE231885E42E00C881C5 /* MBMobbl1DocumentParser.m */; };
 		1FECDFDE1885E42F00C881C5 /* MBSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE241885E42E00C881C5 /* MBSession.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFDF1885E42F00C881C5 /* MBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE251885E42E00C881C5 /* MBSession.m */; };
-		1FECDFE01885E42F00C881C5 /* MBXmlDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE261885E42E00C881C5 /* MBXmlDocumentParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		1FECDFE11885E42F00C881C5 /* MBXmlDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE271885E42E00C881C5 /* MBXmlDocumentParser.m */; };
 		1FECDFE21885E42F00C881C5 /* dialogs_mobbl.xmlx in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xmlx */; };
 		1FECDFE31885E42F00C881C5 /* database.db in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2C1885E42E00C881C5 /* database.db */; };
 		1FECDFE41885E42F00C881C5 /* backButtonArrowInverted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2F1885E42E00C881C5 /* backButtonArrowInverted.png */; };
@@ -185,8 +179,6 @@
 		1FECDFF51885E42F00C881C5 /* MBFileDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE441885E42E00C881C5 /* MBFileDataHandler.m */; };
 		1FECDFF61885E42F00C881C5 /* MBMemoryDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE451885E42E00C881C5 /* MBMemoryDataHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFF71885E42F00C881C5 /* MBMemoryDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE461885E42E00C881C5 /* MBMemoryDataHandler.m */; };
-		1FECDFF81885E42F00C881C5 /* MBMobbl1ServerDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE471885E42E00C881C5 /* MBMobbl1ServerDataHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		1FECDFF91885E42F00C881C5 /* MBMobbl1ServerDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE481885E42E00C881C5 /* MBMobbl1ServerDataHandler.m */; };
 		1FECDFFA1885E42F00C881C5 /* MBRESTServiceDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE491885E42E00C881C5 /* MBRESTServiceDataHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFFB1885E42F00C881C5 /* MBRESTServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE4A1885E42E00C881C5 /* MBRESTServiceDataHandler.m */; };
 		1FECDFFC1885E42F00C881C5 /* MBSQLDataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE4B1885E42E00C881C5 /* MBSQLDataHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -434,6 +426,10 @@
 		1FECE0EE1885E42F00C881C5 /* MBValueChangeListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDF4C1885E42E00C881C5 /* MBValueChangeListenerProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECE0EF1885E42F00C881C5 /* MBTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDF4E1885E42E00C881C5 /* MBTableViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECE0F01885E42F00C881C5 /* MBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDF4F1885E42E00C881C5 /* MBTableViewController.m */; };
+		C76351DC188EAC10006808DE /* MBJsonDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C76351D8188EAC10006808DE /* MBJsonDocumentParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C76351DD188EAC10006808DE /* MBJsonDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C76351D9188EAC10006808DE /* MBJsonDocumentParser.m */; };
+		C76351DE188EAC10006808DE /* MBXmlDocumentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C76351DA188EAC10006808DE /* MBXmlDocumentParser.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C76351DF188EAC10006808DE /* MBXmlDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C76351DB188EAC10006808DE /* MBXmlDocumentParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -581,21 +577,15 @@
 		1FECDE161885E42E00C881C5 /* MBDocumentDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocumentDiff.m; sourceTree = "<group>"; };
 		1FECDE171885E42E00C881C5 /* MBDocumentFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentFactory.h; sourceTree = "<group>"; };
 		1FECDE181885E42E00C881C5 /* MBDocumentFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBDocumentFactory.m; sourceTree = "<group>"; };
-		1FECDE191885E42E00C881C5 /* MBDocumentParserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDocumentParserProtocol.h; sourceTree = "<group>"; };
+		1FECDE191885E42E00C881C5 /* MBDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBDocumentParser.h; path = ../MBDocumentParser.h; sourceTree = "<group>"; };
 		1FECDE1A1885E42E00C881C5 /* MBElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBElement.h; sourceTree = "<group>"; };
 		1FECDE1B1885E42E00C881C5 /* MBElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBElement.m; sourceTree = "<group>"; };
 		1FECDE1C1885E42E00C881C5 /* MBElementContainer+Preconditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBElementContainer+Preconditions.h"; sourceTree = "<group>"; };
 		1FECDE1D1885E42E00C881C5 /* MBElementContainer+Preconditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBElementContainer+Preconditions.m"; sourceTree = "<group>"; };
 		1FECDE1E1885E42E00C881C5 /* MBElementContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBElementContainer.h; sourceTree = "<group>"; };
 		1FECDE1F1885E42E00C881C5 /* MBElementContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBElementContainer.m; sourceTree = "<group>"; };
-		1FECDE201885E42E00C881C5 /* MBJsonDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBJsonDocumentParser.h; sourceTree = "<group>"; };
-		1FECDE211885E42E00C881C5 /* MBJsonDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBJsonDocumentParser.m; sourceTree = "<group>"; };
-		1FECDE221885E42E00C881C5 /* MBMobbl1DocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMobbl1DocumentParser.h; sourceTree = "<group>"; };
-		1FECDE231885E42E00C881C5 /* MBMobbl1DocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMobbl1DocumentParser.m; sourceTree = "<group>"; };
 		1FECDE241885E42E00C881C5 /* MBSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSession.h; sourceTree = "<group>"; };
 		1FECDE251885E42E00C881C5 /* MBSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSession.m; sourceTree = "<group>"; };
-		1FECDE261885E42E00C881C5 /* MBXmlDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXmlDocumentParser.h; sourceTree = "<group>"; };
-		1FECDE271885E42E00C881C5 /* MBXmlDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXmlDocumentParser.m; sourceTree = "<group>"; };
 		1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xmlx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dialogs_mobbl.xmlx; sourceTree = "<group>"; };
 		1FECDE2C1885E42E00C881C5 /* database.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.db; sourceTree = "<group>"; };
 		1FECDE2F1885E42E00C881C5 /* backButtonArrowInverted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButtonArrowInverted.png; sourceTree = "<group>"; };
@@ -618,8 +608,6 @@
 		1FECDE441885E42E00C881C5 /* MBFileDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFileDataHandler.m; sourceTree = "<group>"; };
 		1FECDE451885E42E00C881C5 /* MBMemoryDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMemoryDataHandler.h; sourceTree = "<group>"; };
 		1FECDE461885E42E00C881C5 /* MBMemoryDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMemoryDataHandler.m; sourceTree = "<group>"; };
-		1FECDE471885E42E00C881C5 /* MBMobbl1ServerDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMobbl1ServerDataHandler.h; sourceTree = "<group>"; };
-		1FECDE481885E42E00C881C5 /* MBMobbl1ServerDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMobbl1ServerDataHandler.m; sourceTree = "<group>"; };
 		1FECDE491885E42E00C881C5 /* MBRESTServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRESTServiceDataHandler.h; sourceTree = "<group>"; };
 		1FECDE4A1885E42E00C881C5 /* MBRESTServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRESTServiceDataHandler.m; sourceTree = "<group>"; };
 		1FECDE4B1885E42E00C881C5 /* MBSQLDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSQLDataHandler.h; sourceTree = "<group>"; };
@@ -867,6 +855,10 @@
 		1FECDF4C1885E42E00C881C5 /* MBValueChangeListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBValueChangeListenerProtocol.h; sourceTree = "<group>"; };
 		1FECDF4E1885E42E00C881C5 /* MBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBTableViewController.h; sourceTree = "<group>"; };
 		1FECDF4F1885E42E00C881C5 /* MBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBTableViewController.m; sourceTree = "<group>"; };
+		C76351D8188EAC10006808DE /* MBJsonDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBJsonDocumentParser.h; sourceTree = "<group>"; };
+		C76351D9188EAC10006808DE /* MBJsonDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBJsonDocumentParser.m; sourceTree = "<group>"; };
+		C76351DA188EAC10006808DE /* MBXmlDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXmlDocumentParser.h; sourceTree = "<group>"; };
+		C76351DB188EAC10006808DE /* MBXmlDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXmlDocumentParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1167,27 +1159,21 @@
 		1FECDE121885E42E00C881C5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C76351D7188EAC10006808DE /* Parser */,
 				1FECDE131885E42E00C881C5 /* MBDocument.h */,
 				1FECDE141885E42E00C881C5 /* MBDocument.m */,
 				1FECDE151885E42E00C881C5 /* MBDocumentDiff.h */,
 				1FECDE161885E42E00C881C5 /* MBDocumentDiff.m */,
 				1FECDE171885E42E00C881C5 /* MBDocumentFactory.h */,
 				1FECDE181885E42E00C881C5 /* MBDocumentFactory.m */,
-				1FECDE191885E42E00C881C5 /* MBDocumentParserProtocol.h */,
 				1FECDE1A1885E42E00C881C5 /* MBElement.h */,
 				1FECDE1B1885E42E00C881C5 /* MBElement.m */,
 				1FECDE1C1885E42E00C881C5 /* MBElementContainer+Preconditions.h */,
 				1FECDE1D1885E42E00C881C5 /* MBElementContainer+Preconditions.m */,
 				1FECDE1E1885E42E00C881C5 /* MBElementContainer.h */,
 				1FECDE1F1885E42E00C881C5 /* MBElementContainer.m */,
-				1FECDE201885E42E00C881C5 /* MBJsonDocumentParser.h */,
-				1FECDE211885E42E00C881C5 /* MBJsonDocumentParser.m */,
-				1FECDE221885E42E00C881C5 /* MBMobbl1DocumentParser.h */,
-				1FECDE231885E42E00C881C5 /* MBMobbl1DocumentParser.m */,
 				1FECDE241885E42E00C881C5 /* MBSession.h */,
 				1FECDE251885E42E00C881C5 /* MBSession.m */,
-				1FECDE261885E42E00C881C5 /* MBXmlDocumentParser.h */,
-				1FECDE271885E42E00C881C5 /* MBXmlDocumentParser.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1294,8 +1280,6 @@
 				1FECDE441885E42E00C881C5 /* MBFileDataHandler.m */,
 				1FECDE451885E42E00C881C5 /* MBMemoryDataHandler.h */,
 				1FECDE461885E42E00C881C5 /* MBMemoryDataHandler.m */,
-				1FECDE471885E42E00C881C5 /* MBMobbl1ServerDataHandler.h */,
-				1FECDE481885E42E00C881C5 /* MBMobbl1ServerDataHandler.m */,
 				1FECDE491885E42E00C881C5 /* MBRESTServiceDataHandler.h */,
 				1FECDE4A1885E42E00C881C5 /* MBRESTServiceDataHandler.m */,
 				1FECDE4B1885E42E00C881C5 /* MBSQLDataHandler.h */,
@@ -1659,6 +1643,18 @@
 			path = Tables;
 			sourceTree = "<group>";
 		};
+		C76351D7188EAC10006808DE /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				1FECDE191885E42E00C881C5 /* MBDocumentParser.h */,
+				C76351D8188EAC10006808DE /* MBJsonDocumentParser.h */,
+				C76351D9188EAC10006808DE /* MBJsonDocumentParser.m */,
+				C76351DA188EAC10006808DE /* MBXmlDocumentParser.h */,
+				C76351DB188EAC10006808DE /* MBXmlDocumentParser.m */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1683,7 +1679,6 @@
 				1FECE0B71885E42F00C881C5 /* MBFadeTransitionStyle.h in Headers */,
 				1FECDF5D1885E42E00C881C5 /* MBAttributeDefinition.h in Headers */,
 				1FECE0EC1885E42F00C881C5 /* MBPanel.h in Headers */,
-				1FECDFDA1885E42F00C881C5 /* MBJsonDocumentParser.h in Headers */,
 				1FECDF961885E42F00C881C5 /* MBContentViewWrapper.h in Headers */,
 				1FECE0671885E42F00C881C5 /* MBModalFormSheetDialogDecorator.h in Headers */,
 				1FECDF5B1885E42E00C881C5 /* MBAlertDefinition.h in Headers */,
@@ -1712,7 +1707,6 @@
 				1FECE0351885E42F00C881C5 /* MBOrientationManager.h in Headers */,
 				1FECDFC01885E42F00C881C5 /* FMResultSet.h in Headers */,
 				1FECE0311885E42F00C881C5 /* MBDeviceType.h in Headers */,
-				1FECDFF81885E42F00C881C5 /* MBMobbl1ServerDataHandler.h in Headers */,
 				1FECE0391885E42F00C881C5 /* MBPropertiesConstants.h in Headers */,
 				1FECDF591885E42E00C881C5 /* MBActionDefinition.h in Headers */,
 				1FECDF8B1885E42F00C881C5 /* MBEmptyContentViewWrapper.h in Headers */,
@@ -1779,7 +1773,6 @@
 				1FECE0EE1885E42F00C881C5 /* MBValueChangeListenerProtocol.h in Headers */,
 				1FECE02C1885E42F00C881C5 /* MBConstants.h in Headers */,
 				1FECE0241885E42F00C881C5 /* SBJsonWriter.h in Headers */,
-				1FECDFDC1885E42F00C881C5 /* MBMobbl1DocumentParser.h in Headers */,
 				1FECDF9D1885E42F00C881C5 /* MBOutcomeManager.h in Headers */,
 				1FECDF811885E42F00C881C5 /* MBResourceDefinition.h in Headers */,
 				1FECE0021885E42F00C881C5 /* MBDataHandler.h in Headers */,
@@ -1826,7 +1819,7 @@
 				1FECDFA51885E42F00C881C5 /* MBBasicViewController.h in Headers */,
 				1FECE0261885E42F00C881C5 /* LocaleUtilities.h in Headers */,
 				1FECE0991885E42F00C881C5 /* MBBasicPanelBuilder.h in Headers */,
-				1FECDFD31885E42F00C881C5 /* MBDocumentParserProtocol.h in Headers */,
+				1FECDFD31885E42F00C881C5 /* MBDocumentParser.h in Headers */,
 				1FECDFC61885E42F00C881C5 /* MGSplitCornersView.h in Headers */,
 				1FECE0711885E42F00C881C5 /* MBButtonBuilder.h in Headers */,
 				1FECDF651885E42E00C881C5 /* MBDomainDefinition.h in Headers */,
@@ -1863,7 +1856,6 @@
 				1FECE0D51885E42F00C881C5 /* MBAlert.h in Headers */,
 				1FECE03A1885E42F00C881C5 /* MBServerException.h in Headers */,
 				1FECE09D1885E42F00C881C5 /* MBMatrixBuilder.h in Headers */,
-				1FECDFE01885E42F00C881C5 /* MBXmlDocumentParser.h in Headers */,
 				1FECE0181885E42F00C881C5 /* GTMStackTrace.h in Headers */,
 				1FECDFBE1885E42F00C881C5 /* FMDatabaseQueue.h in Headers */,
 				1FECE0D11885E42F00C881C5 /* MBMatrixRowView.h in Headers */,
@@ -1876,7 +1868,9 @@
 				1FECDF8D1885E42F00C881C5 /* MBSlidingMenuContentViewWrapper.h in Headers */,
 				1FECDFAE1885E42F00C881C5 /* UINavigationController+Rotation.h in Headers */,
 				1FECDFCA1885E42F00C881C5 /* MGSplitViewController.h in Headers */,
+				C76351DC188EAC10006808DE /* MBJsonDocumentParser.h in Headers */,
 				1FECE00E1885E42F00C881C5 /* MBScriptService.h in Headers */,
+				C76351DE188EAC10006808DE /* MBXmlDocumentParser.h in Headers */,
 				1FECDFD81885E42F00C881C5 /* MBElementContainer.h in Headers */,
 				1FECE04B1885E42F00C881C5 /* UIView+HierarchyLogging.h in Headers */,
 				1FECE0A91885E42F00C881C5 /* MBNewRowViewBuilder.h in Headers */,
@@ -2023,6 +2017,7 @@
 				1FECDF861885E42F00C881C5 /* MBResultListenerDefinition.m in Sources */,
 				1FECDF6E1885E42F00C881C5 /* MBForEachDefinition.m in Sources */,
 				1FECDF881885E42F00C881C5 /* MBWebservicesConfiguration.m in Sources */,
+				C76351DD188EAC10006808DE /* MBJsonDocumentParser.m in Sources */,
 				1FECE0211885E42F00C881C5 /* SBJsonBase.m in Sources */,
 				1FECDF9A1885E42F00C881C5 /* MBDialogManager.m in Sources */,
 				1FECDF951885E42F00C881C5 /* MBApplicationFactory.m in Sources */,
@@ -2059,7 +2054,6 @@
 				1FECE0561885E42F00C881C5 /* MBBackButtonBuilderFactory.m in Sources */,
 				1FECDFF31885E42F00C881C5 /* MBDocumentOperation.m in Sources */,
 				1FECE0DE1885E42F00C881C5 /* MBConditionalPage.m in Sources */,
-				1FECDFDB1885E42F00C881C5 /* MBJsonDocumentParser.m in Sources */,
 				1FECDF741885E42F00C881C5 /* MBPageDefinition.m in Sources */,
 				1FECE0D81885E42F00C881C5 /* MBComponent.m in Sources */,
 				1FECE0341885E42F00C881C5 /* MBOrderedMutableDictionary.m in Sources */,
@@ -2104,7 +2098,6 @@
 				1FECE05A1885E42F00C881C5 /* MBDefaultBackButtonBuilder.m in Sources */,
 				1FECDF911885E42F00C881C5 /* MBAlertController.m in Sources */,
 				1FECE0C71885E42F00C881C5 /* MBPickerController.m in Sources */,
-				1FECDFDD1885E42F00C881C5 /* MBMobbl1DocumentParser.m in Sources */,
 				1FECE02D1885E42F00C881C5 /* MBConstants.m in Sources */,
 				1FECE0C51885E42F00C881C5 /* MBFontCustomizer.m in Sources */,
 				1FECDFC11885E42F00C881C5 /* FMResultSet.m in Sources */,
@@ -2129,10 +2122,10 @@
 				1FECE0CA1885E42F00C881C5 /* MBPickerPopoverController.m in Sources */,
 				1FECE0DC1885E42F00C881C5 /* MBComponentFactory.m in Sources */,
 				1FECE0741885E42F00C881C5 /* MBCheckboxBuilder.m in Sources */,
+				C76351DF188EAC10006808DE /* MBXmlDocumentParser.m in Sources */,
 				1FECE0321885E42F00C881C5 /* MBDeviceType.m in Sources */,
 				1FECE0291885E42F00C881C5 /* MBCacheManager.m in Sources */,
 				1FECE0C01885E42F00C881C5 /* MBDatePickerController.m in Sources */,
-				1FECDFF91885E42F00C881C5 /* MBMobbl1ServerDataHandler.m in Sources */,
 				1FECE0BE1885E42F00C881C5 /* MBAlertView.m in Sources */,
 				1FECE0E61885E42F00C881C5 /* MBForEachItem.m in Sources */,
 				1FECDF601885E42E00C881C5 /* MBConfigurationDefinition.m in Sources */,
@@ -2185,7 +2178,6 @@
 				1FECE08E1885E42F00C881C5 /* MBPanelViewBuilderFactory.m in Sources */,
 				1FECE0BA1885E42F00C881C5 /* MBFlipTransitionStyle.m in Sources */,
 				1FECE0941885E42F00C881C5 /* MBViewBuilder.m in Sources */,
-				1FECDFE11885E42F00C881C5 /* MBXmlDocumentParser.m in Sources */,
 				1FECE0781885E42F00C881C5 /* MBDropDownBuilder.m in Sources */,
 				1FECDC631885C2E300C881C5 /* mobbl_core_framework.m in Sources */,
 				1FECE0111885E42F00C881C5 /* ColorUtilities.m in Sources */,

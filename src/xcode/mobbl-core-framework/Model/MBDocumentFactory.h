@@ -19,10 +19,10 @@
 
 #define PARSER_XML @"XML"
 #define PARSER_JSON @"JSON"
-#define PARSER_MOBBL1 @"MOBBL1" // mixed xml with json inside
 
 
 @interface MBDocumentFactory : NSObject {
+    NSMutableDictionary *_registeredDocumentParsers;
 }
 
 + (MBDocumentFactory *) sharedInstance;

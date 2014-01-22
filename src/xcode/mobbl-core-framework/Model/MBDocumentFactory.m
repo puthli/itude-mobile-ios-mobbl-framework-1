@@ -15,11 +15,11 @@
  */
 
 #import "MBDocumentFactory.h"
+#import "MBDocumentParser.h"
 #import "MBDocument.h"
 #import "MBDocumentDefinition.h"
 #import "MBXmlDocumentParser.h"
 #import "MBJsonDocumentParser.h"
-#import "MBMobbl1DocumentParser.h"
 
 static MBDocumentFactory *_instance = nil;
 
@@ -34,20 +34,35 @@ static MBDocumentFactory *_instance = nil;
 	return _instance;
 }
 
-- (MBDocument*) documentWithData:(NSData *)data withType:(NSString*)type andDefinition: (MBDocumentDefinition*) definition {
-
-	if ([PARSER_XML isEqualToString:type]) {
-		return [MBXmlDocumentParser documentWithData:data andDefinition:definition];
-	}
-	else
-	if ([PARSER_MOBBL1 isEqualToString:type]) {
-		return [MBMobbl1DocumentParser documentWithData:data andDefinition:definition];
-	}
-    else
-    if ([PARSER_JSON isEqualToString:type]) {
-        return [MBJsonDocumentParser documentWithData:data andDefinition:definition];
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _registeredDocumentParsers = [NSMutableDictionary new];
+        [self registerDocumentParser:[[MBJsonDocumentParser new] autorelease] withName: PARSER_JSON];
+        [self registerDocumentParser:[[MBXmlDocumentParser new] autorelease] withName: PARSER_XML];
+        
     }
-	else @throw [NSException exceptionWithName:@"UnknownDataType" reason:type userInfo:nil];
+    return self;
+}
+
+
+- (void) registerDocumentParser:(id<MBDocumentParser>) parser withName:(NSString*) name {
+    [_registeredDocumentParsers setObject: parser forKey: name];
+}
+
+- (id <MBDocumentParser>)  parserForType:(NSString *)type {
+	   
+	id parser = [_registeredDocumentParsers objectForKey: type];
+	if(parser == nil) {
+        @throw [NSException exceptionWithName:@"UnknownDataType" reason:type userInfo:nil];
+	}
+	return parser;
+}
+
+
+- (MBDocument*) documentWithData:(NSData *)data withType:(NSString*)type andDefinition: (MBDocumentDefinition*) definition {
+    return [[self parserForType:type] documentWithData:data andDefinition:definition];
 }
 
 @end

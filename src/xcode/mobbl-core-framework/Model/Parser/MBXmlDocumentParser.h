@@ -14,15 +14,26 @@
  * limitations under the License.
  */
 
-#import "MBXmlDocumentParser.h"
+#import "MBDocument.h"
+#import "MBDocumentDefinition.h"
+#import "MBDocumentParser.h"
 
-@interface MBMobbl1DocumentParser : NSObject <MBDocumentParserProtocol, NSXMLParserDelegate> {
+@interface MBXmlDocumentParser : NSObject <MBDocumentParser, NSXMLParserDelegate>{
 	NSMutableArray *_stack;
+	NSMutableArray *_pathStack;
 	MBDocumentDefinition *_definition;
 	NSMutableString *_characters;
-	
+	NSString *_rootElementName;
+	MBElementContainer *_rootElement;
+    BOOL _copyRootAttributes;
 }
 
++ (MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition;
++ (void) parseFragment:(NSData *)data intoDocument:(MBDocument*) document rootPath:(NSString*) rootPath copyRootAttributes:(BOOL) copyRootAttributes;
 - (MBDocument*) parse:(NSData *)data usingDefinition: (MBDocumentDefinition*) definition;
+- (NSString*) currentPath;
+
+
+
 
 @end

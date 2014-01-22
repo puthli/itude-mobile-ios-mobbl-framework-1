@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-//	Parses Mobbl1 ServerResponse Documents
+@class MBDocumentDefinition;
+@class MBDocument;
 
-#import "MBDocumentParserProtocol.h"
-@class MBElement;
-@class MBDefinition;
-@class MBElementContainer;
-@class MBElementDefinition;
-
-@interface MBJsonDocumentParser : NSObject <MBDocumentParserProtocol>{
-
-}
+@protocol MBDocumentParser
 
 + (MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition;
-+ (MBDocument*) documentWithString:(NSString *)string andDefinition: (MBDocumentDefinition*) definition;
 
--(MBDocument *) parseJsonString:(NSString *)jsonString usingDefinition:(MBDocumentDefinition *)definition;
--(void) parseJsonValue:(id) jsonValue usingDefinition:(MBDefinition *)definition withElement:(MBElementContainer *) element;
 
 @end

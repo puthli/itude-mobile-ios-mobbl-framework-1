@@ -1,10 +1,18 @@
-//
-//  mobbl_core_framework.h
-//  mobbl-core-framework
-//
-//  Created by Ricardo de Wilde on 10/12/13.
-//  Copyright (c) 2013 Itude Mobile B.V., The Netherlands. All rights reserved.
-//
+/*
+ * (C) Copyright Itude Mobile B.V., The Netherlands.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include <mobbl-core-framework/MBFireInitialOutcomes.h>
 #include <mobbl-core-framework/MBConditionalDefinition.h>
@@ -73,18 +81,16 @@
 #include <mobbl-core-framework/MBDocument.h>
 #include <mobbl-core-framework/MBDocumentDiff.h>
 #include <mobbl-core-framework/MBDocumentFactory.h>
-#include <mobbl-core-framework/MBDocumentParserProtocol.h>
+#include <mobbl-core-framework/MBDocumentParser.h>
 #include <mobbl-core-framework/MBElement.h>
 #include <mobbl-core-framework/MBElementContainer+Preconditions.h>
 #include <mobbl-core-framework/MBElementContainer.h>
 #include <mobbl-core-framework/MBJsonDocumentParser.h>
-#include <mobbl-core-framework/MBMobbl1DocumentParser.h>
 #include <mobbl-core-framework/MBSession.h>
 #include <mobbl-core-framework/MBXmlDocumentParser.h>
 #include <mobbl-core-framework/MBDocumentOperation.h>
 #include <mobbl-core-framework/MBFileDataHandler.h>
 #include <mobbl-core-framework/MBMemoryDataHandler.h>
-#include <mobbl-core-framework/MBMobbl1ServerDataHandler.h>
 #include <mobbl-core-framework/MBRESTServiceDataHandler.h>
 #include <mobbl-core-framework/MBSQLDataHandler.h>
 #include <mobbl-core-framework/MBSystemDataHandler.h>
