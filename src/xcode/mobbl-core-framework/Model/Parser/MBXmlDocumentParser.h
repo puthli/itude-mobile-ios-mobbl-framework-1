@@ -27,8 +27,6 @@
 	MBElementContainer *_rootElement;
     BOOL _copyRootAttributes;
 }
-
-+ (MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition;
 + (void) parseFragment:(NSData *)data intoDocument:(MBDocument*) document rootPath:(NSString*) rootPath copyRootAttributes:(BOOL) copyRootAttributes;
 - (MBDocument*) parse:(NSData *)data usingDefinition: (MBDocumentDefinition*) definition;
 - (NSString*) currentPath;

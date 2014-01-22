@@ -26,8 +26,6 @@
 @interface MBJsonDocumentParser : NSObject <MBDocumentParser>{
 
 }
-
-+ (MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition;
 + (MBDocument*) documentWithString:(NSString *)string andDefinition: (MBDocumentDefinition*) definition;
 
 -(MBDocument *) parseJsonString:(NSString *)jsonString usingDefinition:(MBDocumentDefinition *)definition;

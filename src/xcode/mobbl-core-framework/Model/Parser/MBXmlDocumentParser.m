@@ -27,7 +27,7 @@
 
 @implementation MBXmlDocumentParser
 
-+(MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition {
+-(MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition {
     MBXmlDocumentParser *documentParser = [[MBXmlDocumentParser alloc]init];
     MBDocument *result = [documentParser parse: data usingDefinition: definition];
     [documentParser release];

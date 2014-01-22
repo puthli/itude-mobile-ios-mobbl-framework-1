@@ -19,7 +19,7 @@
 
 @protocol MBDocumentParser
 
-+ (MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition;
+- (MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition;
 
 
 @end

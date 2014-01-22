@@ -26,7 +26,8 @@
 
 @implementation MBJsonDocumentParser
 
-+(MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition {
+
+-(MBDocument*) documentWithData:(NSData *)data andDefinition: (MBDocumentDefinition*) definition {
 	NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     MBDocument *result = [MBJsonDocumentParser documentWithString: string andDefinition:definition];
 	[string release];
