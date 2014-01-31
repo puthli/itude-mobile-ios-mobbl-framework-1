@@ -1,6 +1,6 @@
 # iOS MOBBL
 
-A development framework for data centric mobile web apps.
+A development framework for data centric mobile iOS apps.
 
 ## Overview
 
