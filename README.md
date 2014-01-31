@@ -10,6 +10,7 @@ Most current app development is about connecting consumers and employees to back
 
 Generic documentation can be found at [Mobbl.org](http://mobbl.org/doc.html).
 Documentation about how to get started can be [here](http://mobbl.org/ios.html).
+For Api documentation, see the [iOS API Reference](http://mobbl.org/apis/ios/index.html).
 
 ## [Changelog](https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework/wiki/Changelog)
 Current version: 0.0.2.3
