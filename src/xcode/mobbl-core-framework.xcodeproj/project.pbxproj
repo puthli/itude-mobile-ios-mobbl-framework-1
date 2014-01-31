@@ -2288,6 +2288,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mobbl-core-framework/mobbl-core-framework-Prefix.pch";
+				IBC_FLATTEN_NIBS = NO;
 				INFOPLIST_FILE = "mobbl-core-framework/mobbl-core-framework-Info.plist";
 				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -2314,6 +2315,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mobbl-core-framework/mobbl-core-framework-Prefix.pch";
+				IBC_FLATTEN_NIBS = NO;
 				INFOPLIST_FILE = "mobbl-core-framework/mobbl-core-framework-Info.plist";
 				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
