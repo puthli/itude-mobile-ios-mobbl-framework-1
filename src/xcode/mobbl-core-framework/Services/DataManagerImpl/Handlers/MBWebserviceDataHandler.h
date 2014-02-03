@@ -20,10 +20,10 @@
 /** retrieves and sends MBDocument instances to and from a webservice.
  
  * The MBWebserviceDataHandler is the top level in the DataHandlers for HTTP network communication.
- Default behaviour is to process an MBDocument, add the result to the request body and perform an HTTP POST.
+ * Default behavior is to process an MBDocument, add the result to the request body and perform an HTTP operation (POST/GET).
  * The endpoints.xmlx file maps Document names to Webservice URL's together with caching and timeout information. The response body is parsed with an XML parser by default, with JSON configurable. Parsing is validated against the Document Definition.
  * The response can be handled by a ResultListener, also defined in the endpoints.xmlx file. Matching is by regex, so errors can be flexibly handled.
- * Override this class to influence behaviour. There are a bunch of template methods for easily changing HTTP headers, HTTP method etc.
+ * Override this class to influence behavior. There are a bunch of template methods for easily changing HTTP headers, HTTP method etc.
  * For testing with Self Signed Certificates, set the ALLOW_SELFSIGNED_SSL_CERTS flag in the build settings.
  * Caching is configurable and automatic. The cache key is based on the document name and arguments. For REST webservices the operation name is one of the arguments.
  

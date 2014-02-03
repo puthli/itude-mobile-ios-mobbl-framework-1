@@ -13,7 +13,7 @@
 	<key>--create-docset</key>
 	<true/>
 	<key>--project-name</key>
-	<string>itude-mobile-ios-mobbl</string>
+	<string>ios-mobbl-framework</string>
 	<key>--output</key>
 	<string>~/help</string>
 	<key>--input</key>
@@ -21,14 +21,8 @@
 		<string>.</string>
 	</array>
 	<key>--company-id</key>
-	<string>com.itude</string>
+	<string>com.itude.mobile</string>
 	<key>--project-company</key>
 	<string>Itude Mobile</string>
-	<key>--ignore</key>
-	<array>
-		<string>*.m</string>
-		<string>itude-mobile-ios-mobbl-coreLogicTests</string>
-		<string>External</string>
-	</array>
 </dict>
 </plist>

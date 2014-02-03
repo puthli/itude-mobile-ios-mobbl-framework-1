@@ -23,7 +23,7 @@
  This is a generic data structure containing application data. Its structure
  is made specific by a MBDocumentDefinition. Any data that is contained in MBDocuments can be drag'n'drop' ported to other platforms.
  The document definition is specified in the application configuration file which is typically named config.xmlx file. If config.xmlx becomes large, the configuration is often split into a bunch of file which are references using an <Include .../> statement in config.xmlx.
- MBDocuments are retrieved and stored using the MBDataManagerService. The document definition specifies where an MBDocument should be retrieved from (Webservice, Filesystem etc) and whether new MBDocuments shoul be auto-created. 
+ MBDocuments are retrieved and stored using the MBDataManagerService. The document definition specifies where an MBDocument should be retrieved from (Webservice, Filesystem etc) and whether new MBDocuments should be auto-created.
  Once a definition is in place (in the application configuration file) an MBDocument can be created in code using the MBMetadataService. 
  
  */

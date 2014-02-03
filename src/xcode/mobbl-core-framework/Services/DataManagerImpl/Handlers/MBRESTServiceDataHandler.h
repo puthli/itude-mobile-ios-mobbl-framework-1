@@ -16,7 +16,7 @@
 
 #import "MBWebserviceDataHandler.h"
 
-/** retrieves and sends MBDocument instances to and from a webservice using HTTP POST. */
+/** retrieves and sends MBDocument instances to and from a webservice using HTTP operations. */
 @interface MBRESTServiceDataHandler : MBWebserviceDataHandler;
 
 @end

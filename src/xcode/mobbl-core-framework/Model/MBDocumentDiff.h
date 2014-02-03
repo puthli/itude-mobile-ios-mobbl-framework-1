@@ -65,7 +65,7 @@
 /**
  * Returns the value for path in document B
  * @param path = The path to the element or attribute in document B
- * @return Returns a string with the value of an attribute or element on the path in document A
+ * @return Returns a string with the value of an attribute or element on the path in document B
  */
 - (NSString*) valueOfBForPath:(NSString*) path;
 
