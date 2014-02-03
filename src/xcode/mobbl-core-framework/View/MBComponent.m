@@ -181,10 +181,7 @@
 	@synchronized(self) {
 		if(_viewData == nil) _viewData = [[NSMutableDictionary alloc] init];	
 	}
-    NSObject *thingy = [_viewData valueForKey:key];
-    NSLog(@"count: %i",[thingy retainCount]);
 	[_viewData setValue:value forKey:key];
-  //  NSLog(@"count: %i",[thingy retainCount]);
 }
 
 -(id) viewDataForKey:(NSString*) key {
