@@ -17,6 +17,7 @@
 #import "MBMemoryDataHandler.h"
 #import "MBMetadataService.h"
 #import "MBDocumentFactory.h"
+#import "MBResourceService.h"
 
 @implementation MBMemoryDataHandler
 
@@ -37,9 +38,7 @@
 	if(doc == nil)
 	{
 		// Not yet in the store; handle default construction of the document using a file as template
-		NSString *fileName = [NSString stringWithFormat:@"%@.xmlx", documentName];
-		NSString *absFile = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent: fileName];
-		NSData *data = [NSData dataWithContentsOfFile: absFile];
+		NSData *data = [[MBResourceService sharedInstance].fileManager dataWithContentsOfMainBundle: documentName];
 		MBDocumentDefinition *docDef = [[MBMetadataService sharedInstance] definitionForDocumentName: documentName];
 		return [[MBDocumentFactory sharedInstance] documentWithData: data withType:PARSER_XML andDefinition:docDef];
 	}
@@ -52,7 +51,7 @@
 }
 
 - (void) storeDocument:(MBDocument *)document {
-	[_dictionary setValue:document forKey:[document name]];	
+	[_dictionary setValue:document forKey:[document name]];
 }
 
 @end

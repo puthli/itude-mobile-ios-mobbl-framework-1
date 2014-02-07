@@ -19,84 +19,6 @@
 #import "MBMacros.h"
 #import "NSData+Base64.h"
 
-@implementation NSData (BundleAdditions)
-
-+ (NSData*) dataWithContentsOfMainBundle:(NSString*)path {
-	
-	return [self dataWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:path]];
-}
-
-+ (NSData*) dataWithEncodedContentsOfMainBundle:(NSString*)path {
-	
-	NSString *fileName = [NSData determineFileName:path];
-	DLog(@"Reading file: %@", fileName);
-	NSData *data = nil;
-	if ([NSData encryptionNeeded:fileName]==YES) {
-		NSData *encodedData = [NSData dataWithContentsOfFile:fileName];
-		if (encodedData == nil || [encodedData length] == 0) 
-		{
-			@throw [NSException exceptionWithName:@"FileNotFoundException" reason:fileName userInfo:nil];
-		}
-		DLog(@"Encoded file has length: %d", [encodedData length]);
-		NSString *base64String = [[[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding] autorelease];
-		data = [NSData dataFromBase64String:base64String];
-	}
-	else{
-		data = [NSData dataWithContentsOfFile:fileName];
-		if (data == nil || [data length] ==0) 
-		{
-			@throw [NSException exceptionWithName:@"FileNotFoundException" reason:fileName userInfo:nil];
-		}
-	}
-	
-	return data;
-}
-
-+(NSString*) determineFileName:(NSString*) name {
-	NSString *fileName = [NSString stringWithFormat:@"%@.xmlx", name];
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	
-	// Check for .xmlx file in documents directory
-	NSString *absPath = [documentsDirectory stringByAppendingPathComponent: fileName];
-	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:absPath];
-	if(fileExists) return absPath;
-	else {
-		// check for .gla file in documents directory
-		NSString *glaFileName = [NSString stringWithFormat:@"%@.gla", name];
-		absPath = [documentsDirectory stringByAppendingPathComponent: glaFileName];
-		
-		fileExists = [[NSFileManager defaultManager] fileExistsAtPath:absPath];
-		if(fileExists) return absPath;
-		
-		// check for .xmlx file in bundle
-		NSString *absPathInBundle = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent: fileName];
-		fileExists = [[NSFileManager defaultManager] fileExistsAtPath:absPathInBundle];
-		if (fileExists) {
-			return absPathInBundle;
-		}
-		
-		// check for .gla file in bundle
-		fileName = glaFileName;
-		absPathInBundle = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent: fileName];
-		fileExists = [[NSFileManager defaultManager]  fileExistsAtPath:absPathInBundle];
-		if (fileExists) {
-			return[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent: fileName];			
-		}
-	}
-	return [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent: name];
-}
-
-+(BOOL) encryptionNeeded:(NSString*)absPath{
-	if ([absPath hasSuffix:@".gla"]) {
-		return YES;
-	}
-	return NO;
-}
-
-@end
-
-
 @implementation NSData (NSDataExtension)
 
 // Returns range [start, null byte), or (NSNotFound, 0).
@@ -411,7 +333,7 @@
 		strm.next_out = [compressed mutableBytes] + strm.total_out;
 		strm.avail_out = [compressed length] - strm.total_out;
 		
-		deflate(&strm, Z_FINISH);  
+		deflate(&strm, Z_FINISH);
 		
 	} while (strm.avail_out == 0);
 	
@@ -495,7 +417,7 @@
 		strm.next_out = [compressed mutableBytes] + strm.total_out;
 		strm.avail_out = [compressed length] - strm.total_out;
 		
-		deflate(&strm, Z_FINISH);  
+		deflate(&strm, Z_FINISH);
 		
 	} while (strm.avail_out == 0);
 	

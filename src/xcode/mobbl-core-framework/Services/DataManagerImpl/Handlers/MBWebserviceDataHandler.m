@@ -24,12 +24,13 @@
 #import "Reachability.h"
 #import "MBApplicationFactory.h"
 #import "MBDocumentFactory.h"
+#import "MBResourceService.h"
 
 
 
 
 @interface MBWebserviceDataHandler(hidden)
-    -(NSString*) convertDataToString:(NSData*) data;
+-(NSString*) convertDataToString:(NSData*) data;
 @end
 
 @implementation MBWebserviceDataHandler
@@ -39,7 +40,7 @@
 	if (self != nil) {
         MBWebservicesConfigurationParser *parser = [[MBWebservicesConfigurationParser alloc] init];
 		NSString *documentName = [[MBMetadataService sharedInstance] endpointsName];
-		NSData *data = [NSData dataWithEncodedContentsOfMainBundle: documentName];
+		NSData *data = [[MBResourceService sharedInstance].fileManager dataWithContentsOfMainBundle: documentName];
 		_webServiceConfiguration = [[parser parseData:data ofDocument: documentName] retain];
         [parser release];
 	}
@@ -56,7 +57,7 @@
 }
 
 - (MBEndPointDefinition *) getEndPointForDocument:(NSString*)name {
-	return [_webServiceConfiguration getEndPointForDocumentName:name];	
+	return [_webServiceConfiguration getEndPointForDocumentName:name];
 }
 
 - (MBDocument *) loadDocument:(NSString *)documentName {
@@ -162,7 +163,7 @@
     // MIME type application/x-www-form-encoded is the default
     [request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
-
+    
 }
 -(void) setHTTPRequestBody:(NSMutableURLRequest *)request withArguments:(MBDocument*) args{
     NSString *body = [[args valueForPath:@"/*[0]"] asXmlWithLevel:0];
@@ -171,7 +172,7 @@
 
 -(NSData *) dataFromRequest:(NSURLRequest *)request withDocumentName:(NSString*) documentName andEndpoint:(MBEndPointDefinition*)endPoint{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-
+    
     MBRequestDelegate *delegate = [MBRequestDelegate new];
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:endPoint.timeout target:(delegate) selector:@selector(cancel) userInfo:nil repeats:NO];
     @try {
@@ -257,7 +258,7 @@
         [delegate.connection cancel];
         @throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"Server unreachable") userInfo:nil];
     }
-
+    
 }
 
 -(NSString*) convertDataToString:(NSData*) data{
@@ -307,7 +308,7 @@
 
 - (void) dealloc {
 	[_webServiceConfiguration release];
-	[super dealloc];	
+	[super dealloc];
 }
 
 
