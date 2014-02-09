@@ -174,7 +174,7 @@ static MBResourceService *_instance = nil;
 - (NSArray*) bundlesForLanguageCode:(NSString*) languageCode {
 	NSMutableArray *result = [NSMutableArray array];
 	
-	NSArray *bundleDefs = [_config bundlesForLanguageCode:languageCode];
+	NSArray *bundleDefs = [self.config bundlesForLanguageCode:languageCode];
 	if(bundleDefs == nil) {
 		NSString *msg = [NSString stringWithFormat: @"No bundles defined for language with code %@", languageCode];
 		@throw [NSException exceptionWithName:@"BundleNotFound" reason:msg userInfo:nil];
