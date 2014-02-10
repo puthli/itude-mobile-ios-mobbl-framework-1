@@ -22,6 +22,7 @@
 #import "MBDataManagerService.h"
 #import "MBVariableDefinition.h"
 #import "DataUtilites.h"
+#import "MBResourceService.h"
 
 @interface MBMvcConfigurationParser()
 - (void) addSystemDocuments:(MBConfigurationDefinition*) conf;
@@ -118,7 +119,7 @@
         NSString *name = [attributeDict valueForKey:@"name"];
         
         MBMvcConfigurationParser *parser = [[MBMvcConfigurationParser new] autorelease];
-		NSData *data = [NSData dataWithEncodedContentsOfMainBundle: name];
+        NSData *data = [[MBResourceService sharedInstance].fileManager dataWithContentsOfMainBundle:name];
         if(data == nil) @throw [NSException exceptionWithName:@"FileNotFound" reason: name userInfo: nil];
         MBConfigurationDefinition *include = [parser parseData:data ofDocument: name];
         [_rootConfig addAll: include];
@@ -253,7 +254,7 @@
     
 	else if ([elementName isEqualToString:@"Panel"]) {
 		NSDictionary *custom = [self extractCustomAttributesFrom:attributeDict withValids:_fieldAttributes];
-
+        
 		MBPanelDefinition *panelDef = [[MBPanelDefinition alloc] init];
 		panelDef.type = [attributeDict valueForKey:@"type"];
 		panelDef.name = [attributeDict valueForKey:@"name"];
@@ -267,7 +268,7 @@
         panelDef.zoomable = [[attributeDict valueForKey:@"zoomable"] boolValue];
 		panelDef.preCondition = [attributeDict valueForKey:@"preCondition"];
 		panelDef.customAttributes = custom;
-
+        
         [self notifyProcessed:panelDef usingSelector:@selector(addChild:)];
 		[panelDef release];
 	}
@@ -292,7 +293,7 @@
 	}
 	else if ([elementName isEqualToString:@"Field"]) {
 		NSDictionary *custom = [self extractCustomAttributesFrom:attributeDict withValids:_fieldAttributes];
-
+        
 		MBFieldDefinition *fieldDef = [[MBFieldDefinition alloc] init];
 		fieldDef.name = [attributeDict valueForKey:@"name"];
 		fieldDef.label = [attributeDict valueForKey:@"label"];

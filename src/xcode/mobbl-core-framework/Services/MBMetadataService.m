@@ -18,6 +18,7 @@
 #import "MBMetadataService.h"
 #import "MBMvcConfigurationParser.h"
 #import "DataUtilites.h"
+#import "MBResourceService.h"
 
 
 #define C_CONFIGURATION_CONFIG_NAME @"config"
@@ -57,7 +58,7 @@ static MBMetadataService *_instance = nil;
 }
 
 
-#pragma mark - 
+#pragma mark -
 #pragma mark Instance
 
 +(MBMetadataService *) sharedInstance {
@@ -192,7 +193,7 @@ static MBMetadataService *_instance = nil;
 	
 	NSArray *lst = [self.configuration outcomeDefinitionsForOrigin: originName];
 	if(lst == nil || [lst count] == 0) WLog(@"WARNING No outcomes defined for origin %@ ", originName);
-
+    
 	return lst;
 }
 
@@ -229,7 +230,7 @@ static MBMetadataService *_instance = nil;
 - (MBConfigurationDefinition *)configuration {
     if (!_configuration) {
         MBMvcConfigurationParser *parser = [MBMvcConfigurationParser new];
-        NSData *data = [NSData dataWithEncodedContentsOfMainBundle:self.configName];
+        NSData *data = [[MBResourceService sharedInstance].fileManager dataWithContentsOfMainBundle:self.configName];
         _configuration = [[parser parseData:data ofDocument:self.configName] retain];
         [parser release];
     }

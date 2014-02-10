@@ -15,6 +15,7 @@
  */
 
 #import "MBResourceConfiguration.h"
+#import "MBFileManager.h"
 
 #define RESOURCE_CONFIG_FILE_NAME @"resources"
 /** Service for accessing resources over the network or on the file system.
@@ -22,21 +23,25 @@
  * retrieves images or files and caches them
  */
 @interface MBResourceService : NSObject {
-
+    
 	MBResourceConfiguration *_config;
-	
+    MBFileManager *_fileManager;
 }
 
 @property (nonatomic, retain) MBResourceConfiguration *config;
+@property (nonatomic, retain) MBFileManager *fileManager;
 
-/// @name Getting a service instance
+
+
+
+/// @name Gets a service instance
 /** The shared instance */
 + (MBResourceService *) sharedInstance;
 
 
-/// @name Getting resources 
+/// @name Getting resources
 
-/** Returns a NSData object for a file based resource 
+/** Returns a NSData object for a file based resource
  * @param resourceId the ID for the resource
  */
 - (NSData*) resourceByID:(NSString*) resourceId;
@@ -65,7 +70,7 @@
 
 /** The text files (texts_nl.xmlx etc) containing localization strings
  * @return Returns an NSArray of NSDictionaries containing the localized values that are stored the language files (e.g. 'texts-en.xmlx')
- * @param languageCode used to determine the localized values 
+ * @param languageCode used to determine the localized values
  */
 - (NSArray*) bundlesForLanguageCode:(NSString*) languageCode;
 

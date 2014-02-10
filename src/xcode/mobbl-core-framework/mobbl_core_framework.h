@@ -229,6 +229,7 @@
 #include <mobbl-core-framework/MBPanel.h>
 #include <mobbl-core-framework/MBValueChangeListenerProtocol.h>
 #include <mobbl-core-framework/MBTableViewController.h>
+#include <mobbl-core-framework/MBFileManager.h>
 
 @interface mobbl_core_framework : NSObject
 
