@@ -22,6 +22,7 @@
 #import "MBMetadataService.h"
 #import "MBXmlDocumentParser.h"
 #import "DataUtilites.h"
+#import "MBDocumentFactory.h"
 
 static MBCacheManager *_instance = nil;
 
@@ -169,7 +170,7 @@ static MBCacheManager *_instance = nil;
 	
 	NSString *documentName = [_documentTypes valueForKey:key];
 	MBDocumentDefinition *def = [[MBMetadataService sharedInstance] definitionForDocumentName:documentName];
-	return [MBXmlDocumentParser documentWithData:data andDefinition:def];
+    return [[MBDocumentFactory sharedInstance] documentWithData: data withType:PARSER_XML andDefinition:def];
 }
 
 -(void) doSetDocument:(MBDocument*) document forKey:(NSString*) key timeToLive:(int) ttl {
