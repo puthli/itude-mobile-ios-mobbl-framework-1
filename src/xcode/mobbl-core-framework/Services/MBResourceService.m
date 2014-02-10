@@ -33,48 +33,57 @@ static MBResourceService *_instance = nil;
 @implementation MBResourceService
 
 @synthesize config = _config;
+@synthesize fileManager = _fileManager;
 
 +(MBResourceService *) sharedInstance {
 	@synchronized(self) {
 		if(_instance == nil) {
 			_instance = [[self alloc] init];
-			
-			MBResourceConfigurationParser *parser = [[MBResourceConfigurationParser alloc]init];
-			NSData *data = [NSData dataWithEncodedContentsOfMainBundle: RESOURCE_CONFIG_FILE_NAME];
-			
-			// Never read??
-			//NSString *resourceXml = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-			
-			_instance.config = [parser parseData:data ofDocument: RESOURCE_CONFIG_FILE_NAME];
-			[parser release];
-		}
+            _instance.fileManager  = [[MBFileManager alloc] init];
+            _instance.config = nil;
+        }
 	}
 	return _instance;
+}
+
+-(MBResourceConfiguration*) config{
+    if (_config == nil){
+        MBResourceConfigurationParser *parser = [[MBResourceConfigurationParser alloc]init];
+        NSData *data = [_instance.fileManager dataWithContentsOfMainBundle: RESOURCE_CONFIG_FILE_NAME];
+        _config = [parser parseData:data ofDocument: RESOURCE_CONFIG_FILE_NAME];
+        [parser release];
+    }
+    return _config;
+}
+
+-(void)setConfig:(MBResourceConfiguration *)config{
+    [_config release];
+    _config = [config retain];
 }
 
 - (void) dealloc
 {
 	[_config release];
+    [_fileManager release];
 	[super dealloc];
 }
 
-
 // Returns the resourceDefinition for a resourceId
 - (MBResourceDefinition *)resourceDefinitionByID:(NSString *) resourceId {
-    MBResourceDefinition *def = [_config getResourceWithID:resourceId];
+    MBResourceDefinition *def = [self.config getResourceWithID:resourceId];
 	if(def == nil) @throw [NSException exceptionWithName:@"ResourceNotDefined" reason:resourceId userInfo:nil];
     return def;
 }
 
 // Returns a NSData object for the resourceId
 - (NSData*) resourceByID:(NSString*) resourceId {
-    MBResourceDefinition *def = [self resourceDefinitionByID:resourceId];    
+    MBResourceDefinition *def = [self resourceDefinitionByID:resourceId];
 	return [self resourceByURL: def.url cacheable: def.cacheable timeToLive: def.ttl];
 }
 
 // Returns an UIImage for a resourceId
 - (UIImage *) imageByID:(NSString*) resourceId {
-
+    
     if (resourceId.length == 0) {
         return nil;
     }
@@ -141,7 +150,7 @@ static MBResourceService *_instance = nil;
     
 	if([urlString hasPrefix:@"file://"]) {
 		NSString *fileName = [urlString substringFromIndex:7];
-		NSData *data = [NSData dataWithEncodedContentsOfMainBundle:fileName];
+		NSData *data = [_fileManager dataWithContentsOfMainBundle:fileName];
 		if(data == nil) {
 			WLog(@"Warning: could not load file=%@ based on URL=%@", fileName, urlString);
 		}
@@ -151,10 +160,10 @@ static MBResourceService *_instance = nil;
     if(cacheable) {
         NSData *data = [MBCacheManager dataForKey: urlString];
         if(data != nil) {
-          return data;  
-        } 
+            return data;
+        }
     }
-
+    
     NSData *data = [self doGetResourceByURL: urlString];
     if(data != nil && cacheable) {
         [MBCacheManager setData: data forKey: urlString timeToLive: ttl];
@@ -165,7 +174,7 @@ static MBResourceService *_instance = nil;
 - (NSArray*) bundlesForLanguageCode:(NSString*) languageCode {
 	NSMutableArray *result = [NSMutableArray array];
 	
-	NSArray *bundleDefs = [_config bundlesForLanguageCode:languageCode];	
+	NSArray *bundleDefs = [self.config bundlesForLanguageCode:languageCode];
 	if(bundleDefs == nil) {
 		NSString *msg = [NSString stringWithFormat: @"No bundles defined for language with code %@", languageCode];
 		@throw [NSException exceptionWithName:@"BundleNotFound" reason:msg userInfo:nil];
@@ -177,7 +186,7 @@ static MBResourceService *_instance = nil;
 			NSString *msg = [NSString stringWithFormat: @"Bundle with url %@ could not be loaded", def.url];
 			@throw [NSException exceptionWithName:@"BundleNotFound" reason:msg userInfo:nil];
 		}
-		MBDocument *bundleDoc =  [[MBDocumentFactory sharedInstance] documentWithData: data 
+		MBDocument *bundleDoc =  [[MBDocumentFactory sharedInstance] documentWithData: data
 																			 withType: PARSER_XML
 																		andDefinition:[[MBMetadataService sharedInstance] definitionForDocumentName: DOC_SYSTEM_LANGUAGE]];
 		NSMutableDictionary *dict = [[NSMutableDictionary new] autorelease];

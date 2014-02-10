@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00CD911818A5350300ACA235 /* MBFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CD911618A5350300ACA235 /* MBFileManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		00CD911918A5350300ACA235 /* MBFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD911718A5350300ACA235 /* MBFileManager.m */; };
 		1FECDA031885C1B300C881C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECDA021885C1B300C881C5 /* Foundation.framework */; };
 		1FECDA091885C1B300C881C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDA071885C1B300C881C5 /* InfoPlist.strings */; };
 		1FECDA111885C25800C881C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECDA101885C25800C881C5 /* UIKit.framework */; };
@@ -157,7 +159,7 @@
 		1FECDFD91885E42F00C881C5 /* MBElementContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE1F1885E42E00C881C5 /* MBElementContainer.m */; };
 		1FECDFDE1885E42F00C881C5 /* MBSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FECDE241885E42E00C881C5 /* MBSession.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1FECDFDF1885E42F00C881C5 /* MBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FECDE251885E42E00C881C5 /* MBSession.m */; };
-		1FECDFE21885E42F00C881C5 /* dialogs_mobbl.xmlx in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xmlx */; };
+		1FECDFE21885E42F00C881C5 /* dialogs_mobbl.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xml */; };
 		1FECDFE31885E42F00C881C5 /* database.db in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2C1885E42E00C881C5 /* database.db */; };
 		1FECDFE41885E42F00C881C5 /* backButtonArrowInverted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE2F1885E42E00C881C5 /* backButtonArrowInverted.png */; };
 		1FECDFE51885E42F00C881C5 /* backButtonArrowInverted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FECDE301885E42E00C881C5 /* backButtonArrowInverted@2x.png */; };
@@ -433,6 +435,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00CD911618A5350300ACA235 /* MBFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFileManager.h; sourceTree = "<group>"; };
+		00CD911718A5350300ACA235 /* MBFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFileManager.m; sourceTree = "<group>"; };
 		1FECD9FF1885C1B300C881C5 /* mobbl-core-framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = "mobbl-core-framework.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FECDA021885C1B300C881C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FECDA061885C1B300C881C5 /* mobbl-core-framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mobbl-core-framework-Info.plist"; sourceTree = "<group>"; };
@@ -586,7 +590,7 @@
 		1FECDE1F1885E42E00C881C5 /* MBElementContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBElementContainer.m; sourceTree = "<group>"; };
 		1FECDE241885E42E00C881C5 /* MBSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSession.h; sourceTree = "<group>"; };
 		1FECDE251885E42E00C881C5 /* MBSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSession.m; sourceTree = "<group>"; };
-		1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xmlx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dialogs_mobbl.xmlx; sourceTree = "<group>"; };
+		1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dialogs_mobbl.xml; sourceTree = "<group>"; };
 		1FECDE2C1885E42E00C881C5 /* database.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.db; sourceTree = "<group>"; };
 		1FECDE2F1885E42E00C881C5 /* backButtonArrowInverted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButtonArrowInverted.png; sourceTree = "<group>"; };
 		1FECDE301885E42E00C881C5 /* backButtonArrowInverted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButtonArrowInverted@2x.png"; sourceTree = "<group>"; };
@@ -1192,7 +1196,7 @@
 		1FECDE291885E42E00C881C5 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xmlx */,
+				1FECDE2A1885E42E00C881C5 /* dialogs_mobbl.xml */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1256,6 +1260,8 @@
 				1FECDE5C1885E42E00C881C5 /* MBResultListener.h */,
 				1FECDE5D1885E42E00C881C5 /* MBScriptService.h */,
 				1FECDE5E1885E42E00C881C5 /* MBScriptService.m */,
+				00CD911618A5350300ACA235 /* MBFileManager.h */,
+				00CD911718A5350300ACA235 /* MBFileManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1877,6 +1883,7 @@
 				1FECDF671885E42E00C881C5 /* MBDomainValidatorDefinition.h in Headers */,
 				1FECE0631885E42F00C881C5 /* MBModalCurrentContextDialogDecorator.h in Headers */,
 				1FECDFFA1885E42F00C881C5 /* MBRESTServiceDataHandler.h in Headers */,
+				00CD911818A5350300ACA235 /* MBFileManager.h in Headers */,
 				1FECE0611885E42F00C881C5 /* MBDialogDecorator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1952,7 +1959,7 @@
 				1FECDFEC1885E42F00C881C5 /* icon_font_down.png in Resources */,
 				1FECDA091885C1B300C881C5 /* InfoPlist.strings in Resources */,
 				1FECDFE91885E42F00C881C5 /* backButtonDefault@2x.png in Resources */,
-				1FECDFE21885E42F00C881C5 /* dialogs_mobbl.xmlx in Resources */,
+				1FECDFE21885E42F00C881C5 /* dialogs_mobbl.xml in Resources */,
 				1FECDFF01885E42F00C881C5 /* MBDatePicker.xib in Resources */,
 				1FECDFEB1885E42F00C881C5 /* backButtonIconArrowWhite@2x.png in Resources */,
 			);
@@ -2073,6 +2080,7 @@
 				1FECE0361885E42F00C881C5 /* MBOrientationManager.m in Sources */,
 				1FECE06C1885E42F00C881C5 /* MBModalPageSheetDialogDecorator.m in Sources */,
 				1FECE0401885E42F00C881C5 /* NSData+Base64.m in Sources */,
+				00CD911918A5350300ACA235 /* MBFileManager.m in Sources */,
 				1FECDFD71885E42F00C881C5 /* MBElementContainer+Preconditions.m in Sources */,
 				1FECDFD21885E42F00C881C5 /* MBDocumentFactory.m in Sources */,
 				1FECDF5A1885E42E00C881C5 /* MBActionDefinition.m in Sources */,
