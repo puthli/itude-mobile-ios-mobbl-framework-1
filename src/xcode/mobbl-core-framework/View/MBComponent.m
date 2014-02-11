@@ -19,6 +19,7 @@
 
 @interface MBComponent () {
     MBDocument *_document;
+	NSMutableDictionary *_customAttributes;
 }
 
 @end
@@ -56,6 +57,7 @@
 {
 	[_style release];
 	[_viewData release];
+	[_customAttributes release];
 	[super dealloc];
 }
 
@@ -305,7 +307,14 @@
 }
 
 -(NSString *) customAttributeForKey:(NSString *)key {
-	return [self.definition.customAttributes objectForKey:key];
+	NSString *fetchedLocal = [_customAttributes valueForKey:key];
+	if (fetchedLocal) return fetchedLocal;
+	else return [self.definition.customAttributes objectForKey:key];
+}
+
+-(void)setCustomAttribute:(NSString *)value forKey:(NSString *)key {
+	if (!_customAttributes) _customAttributes = [[[NSMutableDictionary alloc] init]retain];
+	[_customAttributes setValue:value forKey:key];
 }
 
 @end
