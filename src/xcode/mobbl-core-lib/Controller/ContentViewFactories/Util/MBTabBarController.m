@@ -49,11 +49,11 @@
     if (self) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			// Only set the selected tab if realy necessary; because it messes up the more navigation controller
-			NSInteger idx = self.tabBarController.selectedIndex;
-			NSInteger shouldBe = [self.tabBarController.viewControllers indexOfObject: dialogController.rootViewController];
+			NSInteger idx = self.selectedIndex;
+			NSInteger shouldBe = [self.viewControllers indexOfObject: dialogController.rootViewController];
 			
 			if(idx != shouldBe && shouldBe!=NSNotFound) {
-				[self.tabBarController setSelectedIndex:shouldBe];
+				[self setSelectedIndex:shouldBe];
 			}
 		});
     }
