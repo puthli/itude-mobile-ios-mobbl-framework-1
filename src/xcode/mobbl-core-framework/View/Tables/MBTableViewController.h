@@ -53,6 +53,12 @@
 @property (nonatomic, assign) MBPage *page;
 
 /**
+ * Call this method to get the MBPanel at a specific indexPath.
+ * @param indexPath = The index path locating the MBPanel in tableView.
+ */
+-(MBPanel *)getRowForIndexPath:(NSIndexPath *) indexPath;
+
+/**
  * This method is called just before the picker is shown. It configures the MBDatePickerController for the specific field types
  * Override this method in your own TableViewController to modifiy or add aditional behaviour. Don't forget to call super.
  * @param dateTimePickerController = The MBDatePickerController to configure.
