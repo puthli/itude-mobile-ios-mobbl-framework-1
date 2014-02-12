@@ -53,8 +53,9 @@
 @property (nonatomic, assign) MBPage *page;
 
 /**
- * Call this method to get the MBPanel at a specific indexPath.
+ * Use this method to get the MBPanel at a specific indexPath.
  * @param indexPath = The index path locating the MBPanel in tableView.
+ * @return The MBPanel at the given index path.
  */
 -(MBPanel *)getRowForIndexPath:(NSIndexPath *) indexPath;
 
