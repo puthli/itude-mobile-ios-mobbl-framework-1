@@ -84,4 +84,5 @@
 - (void) notifyValueChanged:(NSString*) value originalValue:(NSString*) currentValue forPath:(NSString*) path;
 - (NSString*) name;
 - (NSString*) customAttributeForKey:(NSString*) key;
+- (void) setCustomAttribute:(NSString*)value forKey: (NSString *) key;
 @end
