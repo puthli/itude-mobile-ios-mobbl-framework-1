@@ -280,36 +280,11 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-//	[[self page] resignFirstResponder];
-//	[textField becomeFirstResponder];
 }
 
 - (void)textFieldDoneEditing:(UITextField *)textField { 
-    
-	
 	NSString *textFieldValue = textField.text;
-	
-	// For financial apps the internal representation needs to be with US decimal seperators irrespective of the users locale. The attribute is an NSString, so some extra work is need here to check this before we store the value
-	if ([[[MBLocalizationService sharedInstance] localeCode] isEqualToString:LOCALECODEDUTCH]) {
-        textFieldValue = [self forceUSDecimalSeparatorWithValue:textFieldValue];
-	}
-	
 	[self setValue: textFieldValue];
-
-}
-
-- (NSString *) forceUSDecimalSeparatorWithValue:(NSString *)inputString{
-    NSString *outputString = nil;
-    
-    NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
-    NSLocale *nl_NL = [[[NSLocale alloc] initWithLocaleIdentifier:@"nl_NL"] autorelease];
-    [numberFormatter setLocale:nl_NL];
-    if ([self.dataType isEqualToString:@"double"] || [self.dataType isEqualToString:@"float"]) {            double doubleValue = [numberFormatter numberFromString:inputString].doubleValue;
-        outputString = [NSString stringWithFormat:@"%f",doubleValue];
-    }
-    
-    return outputString;
-
 }
 
 -(BOOL) textFieldShouldBeginEditing:(UITextField *)textField {

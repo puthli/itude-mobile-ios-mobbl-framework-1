@@ -72,9 +72,7 @@
 // for UISwitch
 -(void) switchToggled:(id)sender;
 
-// for financial apps
-- (NSString *) forceUSDecimalSeparatorWithValue:(NSString *)inputString;
-
-	
+// sets value for input fields
+- (void)textFieldDoneEditing:(UITextField *)textField;
 
 @end
